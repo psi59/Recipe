@@ -57,16 +57,13 @@
 											function(e) {
 												console.log('imgobj', e)
 												var $wrapper = $(
-														'<li class="new-item"><div class="list-content"><span class="preview"></span><span class="type">'
+														'<li name="addImg" class="new-item"><div class="list-content"><span class="preview"></span><span class="type">'
 																+ imgObj.name
 																+ '<br>'
-																+ (e.target.width
-																		+ '&times;' + e.target.height)
 																+ '<br>'
-																+ sizeInKB(imgObj.size)
-																+ '<textarea rows="10pt" cols="60px" style="resize:none;"></textarea></span><span class="imagedelete" title="Remove image"></span></div></li>')
+																+ '<textarea rows="10pt" cols="60px" style="resize:none;"></textarea></span><span class="imagedelete" title="Remove image"><img class="rcp-delImg" src="img/close.png"></span></div></li>')
 														.appendTo('#output ul');
-												$('.imagedelete', $wrapper)
+												$('.rcp-delImg', $wrapper)
 														.one(
 																'click',
 																function(e) {
@@ -147,16 +144,20 @@
 	$('#appmtbtn')
 	.click(
 			function() {
-				$('#mtslot')
-						.append(
-								'<div class="col-md-4 col-md-offset-3">'
-										+ '<input class="form-control rcp-formdata" type="text" id="recipename"'+
-'placeholder="재료를 입력해주세요"></div><div class="col-md-2">'
-										+ '<input class="form-control rcp-formdata" type="text" id="recipename" placeholder="예)400g"></div>');
+				$("#appendSlot")
+						.append('<div name="addSlot">'
+								+'<div class="col-md-4 col-md-offset-3" name="addMt">'
+										+ '<input class="form-control rcp-formdata" type="text" id="recipename"'
+										+'placeholder="재료를 입력해주세요"></div><div class="col-md-1" name="addQt">'
+										+ '<input class="form-control rcp-formdata" type="text" id="recipename" placeholder="예)400g"></div>'
+										+'<div class="col-md-1 name="delMt"><button type="button" class="btn btn-default rcp-delMtSlot" id="delMtBtn" name="delMtSlot">삭제</button></div></div>');
 			})
 
-$('#delmtbtn').click(function() {
-for (var a = 0; a < 2; a++) {
-	$('#mtslot>*:last-child').remove();
-}
+$(document).on('click',"button[name='delMtSlot']",function() {
+	$(this).parent().parent().remove();
+	
+	
 })
+			
+			
+	

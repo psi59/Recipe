@@ -22,11 +22,11 @@
 		</div>
 		<div class="form-group form-group-lg">
 			<div class="col-md-5 col-md-offset-3">
-				<input class="form-control rcp-formdata" type="text" id="recipename" name="recipeName"
+				<input class="form-control rcp-formdata" type="text" id="recipename"
 					placeholder="요리 입력을 입력해주세요">
 			</div>
 			<div class="col-md-1">
-			 <input class="form-control rcp-formdata" type="text" id="portion" name="portion"
+			 <input class="form-control rcp-formdata" type="text" id="ptn"
           placeholder="예)4인분">
 			</div>
 			<div class="col-md-3"></div>
@@ -36,8 +36,8 @@
 		</div>
 		<div class="form-group form-group-lg">
 			<div class="col-md-6 col-md-offset-3">
-				<input class="form-control rcp-formdata" type="text" id="intro" name="intro"
-					placeholder="요리에 대해 간략히 소개해주세요~">
+				<input class="form-control rcp-formdata" type="text" id="recipename"
+					placeholder="요리이름을 입력해주세요">
 			</div>
 			<div class="col-md-3"></div>
 		</div>
@@ -45,18 +45,22 @@
 			<div class="col-md-9 col-md-offset-3 rcp-subtitle ">
 				<span>재료 정보</span>
 				<button type="button" class="btn btn-default" id="appmtbtn">재료추가</button>
-				<button type="button" class="btn btn-default" id="delmtbtn">재료삭제</button>
 			</div>
-			<div id="mtslot">
-				<div class="col-md-4 col-md-offset-3">
+			<span id="appendSlot">
+			<div name="addSlot">
+				<div class="col-md-4 col-md-offset-3" name="addMt">
 					<input class="form-control rcp-formdata" type="text"
-						id="recipename" name="mtsname" placeholder="재료를 입력해주세요 예)돼지고기 600g">
+						id="recipename" placeholder="재료를 입력해주세요 예)돼지고기">
 				</div>
-				<div class="col-md-2">
-					<input class="form-control rcp-formdata" type="text"
+				<div class="col-md-1" name="addQt">
+					<input class="form-control rcp-formdata" type="text" 
 						id="recipename" placeholder="예)400g">
 				</div>
+				<div class="col-md-1" name="delMt" >
+				  <button type="button" class="btn btn-default rcp-delMtSlot" id="delMtBtn" name="delMtSlot">삭제</button>
+				</div>
 			</div>
+			</span>
 
 			<div class="col-md-9 col-md-offset-3 rcp-subtitle">
 				<span>레시피 정보</span>
@@ -85,14 +89,14 @@
 			<div class="col-md-2"></div>
 			<div style="clear: both;"></div>
 			<div class="col-md-2 col-md-offset-4">
-				<button type="button" class="btn btn-success rcp-btn">저장</button>
+				<button id="addBtn" type="button" class="btn btn-success rcp-btn">저장</button>
 			</div>
 			<div class="col-md-1">
 				<button type="button" class="btn btn-info rcp-btn">임시저장</button>
 			</div>
 			<div class="col-md-1">
-			<a href="../recipemaster/index.html">
-				<button type="button" class="btn btn-danger rcp-btn">취소</button></a>
+			<a href="../index.html">
+				<button id="resetBtn" type="button" class="btn btn-danger rcp-btn">취소</button></a>
 			</div>
 			<div class="col-md-3"></div>
 		</div>
@@ -100,39 +104,14 @@
 		</div>
 </body>
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="node_modules/jquery-ui-1.12.0/jquery-ui.min.js"></script>
 <script
-	src="js/template/jquery.fancybox.min.js"></script>
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script
-	src="js/template/jquery.dragbetter.js"></script>
-<script src="js/template/imageupload.js"></script>
+	src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<script
+	src="https://dl.dropboxusercontent.com/u/2241077/jquery.dragbetter.js"></script>
+<script src="https://dl.dropboxusercontent.com/u/2241077/imageupload.js"></script>
 <script src="js/writepage.js"></script>
-
-<script type="text/javascript">
-$(function(){
-    $( "input[name='mtsname']" ).autocomplete({
-      source : function( request, response ) {
-            $.ajax({
-                url: 'recipe/materialSearch.json',
-                dataType: 'json',
-                data: {
-                  //request.term >> 이거 자체가 text박스내에 입력된 값이다.
-                  searchValue: request.term
-                },
-                success: function( result ) {
-                	console.log(result);
-                    response(result.data);
-                }
-              });
-        },
-      minLength: 1,
-      select: function( event, ui ) {
-    	  
-      }
-    });
-});
-
-</script>
-
 </html>
