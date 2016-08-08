@@ -1,3 +1,5 @@
+// 이성현
+
 $(document).ready(function(){
 	
 	// Lift card and show stats on Mouseover
@@ -97,4 +99,29 @@ $(document).ready(function(){
 	    isAnimating = true;
 		setTimeout(function(){isAnimating = false;}, 300);			
 	});
+	
+	// 쉐프카드
+	loadUsers();	
+	function loadUsers() {
+
+		var source = $('#chef-card-template').text();
+		var template = Handlebars.compile(source);
+
+		$.ajax({
+			url : 'user/list.json',
+			dataType : 'json',
+			method : 'get',
+			success : function(result) {
+				if (result.status != 'success') {
+					alert('chefCard.js 오류');
+					return;
+				}
+
+				$('#rcp-chef-rank').append(template(result));
+			},
+			error : function() {
+				alert('서버 요청 오류!...')
+			}
+		});
+	}
 });

@@ -22,9 +22,10 @@
 <link rel="stylesheet" href="css/userinfobox.css">
 <link rel="stylesheet" href="css/signup.css">
 <link href="css/mainlist.css" rel="stylesheet">
-<link rel="stylesheet" href="css/chefCard.css">
-<link rel="stylesheet" href="css/rankTabs.css">
 <link rel="stylesheet" href="css/detail.css">
+<link rel="stylesheet" href="css/chefCard.css">
+<link rel="stylesheet" href="css/rankTabs.css"> 
+<link rel="stylesheet" href="css/popup.css">
 
 <!-- --- 아이콘 CDN ----- -->
 <script src="https://use.fontawesome.com/d9e67edb08.js"></script>
@@ -149,12 +150,10 @@
 		<div class="rcp-laytop rcp-laytop2"></div>
 		<div class="rcp-innnersec">
 			<div class="rcp-mar rcp-info">
-				<input class="form-control" type="text" id="befpas"
-					placeholder="E-mail 입력"><br /> <input class="form-control"
-					type="text" id="nick" placeholder="닉네임 입력"><br /> <input
-					class="form-control" type="password" id="aftpas"
-					placeholder="비밀번호 입력"><br /> <input class="form-control"
-					type="password" id="aftpascf" placeholder="비밀번호 확인"><br />
+				<input class="form-control" type="text" id="signup-e-mail" placeholder="E-mail 입력"><br /> 
+        <input class="form-control" type="text" id="signup-userName" placeholder="닉네임 입력"><br /> 
+        <input class="form-control" type="password" id="signup-password" placeholder="비밀번호 입력"><br /> 
+        <input class="form-control" type="password" id="signup-passwordCheck" placeholder="비밀번호 확인"><br />
 			</div>
 			<div class="rcp-bottext">
 				<label class="checkbox-inline"> <input type="checkbox"
@@ -163,7 +162,7 @@
 			</div>
 		</div>
 		<div class="rcp-sign-membership">
-			<span>가입</span> <span>취소</span>
+			<span id="signup-addBtn">가입</span> <span id="signup-resetBtn">취소</span>
 		</div>
 	</div>
 
@@ -463,110 +462,24 @@
 			<div class="tab-content">
 				<!---------------- Chef Rank --------------------->
 				<div class="row tab-pane active" id="rcp-chef-rank">
-
-					<!-- 쉐프카드 -->
-					<!-- <div class="col-md-4"> -->
-					<figure class="snip1344">
-						<img src="img/food01_1.png" alt="profile-sample1"
-							class="background" />
-						<img src="img/ic_launcher.png" alt="profile-sample1"
-							class="profile" />
-
-						<img src="img/medal1.png" alt="profile-sample1" class="medal" />
-						<figcaption>
-							<h3>1번쉐프</h3>
-							<div>레시피 - 20 개</div>
-							<div>구독자수 - 20명</div>
-						</figcaption>
-					</figure>
-					<!-- </div> -->
-					<!-- 쉐프카드 끝 -->
-
-					<!-- 쉐프카드 -->
-					<!-- <div class="col-md-4"> -->
-					<figure class="snip1344 rcp-hidden-xs">
-						<img src="img/food02_1.png" alt="profile-sample1"
-							class="background" />
-						<img src="img/ic_launcher.png" alt="profile-sample1"
-							class="profile" />
-
-						<img src="img/medal2.png" alt="profile-sample1" class="medal" />
-						<figcaption>
-							<h3>2번쉐프</h3>
-							<div>레시피 - 20 개</div>
-							<div>구독자수 - 20명</div>
-						</figcaption>
-					</figure>
-					<!-- </div> -->
-					<!-- 쉐프카드 끝 -->
-
-					<!-- 쉐프카드 -->
-					<!-- <div class="col-md-4"> -->
-					<figure class="snip1344 rcp-hidden-xs rcp-hidden-sm">
-						<img src="img/food03_1.png" alt="profile-sample1"
-							class="background" />
-						<img src="img/ic_launcher.png" alt="profile-sample1"
-							class="profile" />
-
-						<img src="img/medal3.png" alt="profile-sample1" class="medal" />
-						<figcaption>
-							<h3>3번쉐프</h3>
-							<div>레시피 - 20 개</div>
-							<div>구독자수 - 20명</div>
-						</figcaption>
-					</figure>
-					<!-- </div> -->
-					<!-- 쉐프카드 끝 -->
+				
 				</div>
 				<!---------------- Recipe Rank--------------------->
 				<div class="tab-pane" id="rcp-recipe-rank">
-
-					<!-- 쉐프카드 -->
-					<!-- <div class="col-md-4"> -->
-					<figure class="snip1344 hidden-xs hidden-sm">
-						<img src="img/food03_1.png" alt="profile-sample1"
-							class="background" />
-						<img src="img/ic_launcher.png" alt="profile-sample1"
-							class="profile" />
-
-						<img src="img/medal3.png" alt="profile-sample1" class="medal" />
-						<figcaption>
-							<h3>3번쉐프</h3>
-							<div>레시피 - 20 개</div>
-							<div>구독자수 - 20명</div>
-						</figcaption>
-					</figure>
-					<!-- </div> -->
-					<!-- 쉐프카드 끝 -->
+				
 
 				</div>
-				<!-- /tab-content -->
-			</div>
-		</div>
-		<!-- /tabbable -->
+			</div><!-- /tab-content -->
+		</div><!-- /tabbable -->		
 	</section>
 
 	<!------------------------- Rank List ------------------------------>
 
 
 
-	<script src="node_modules/jquery/dist/jquery.min.js"></script>
-	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="js/template/main.js"></script>
-	<script src="js/template/wow.min.js"></script>
-	<script src="js/template/jquery-slider-rolling.js"></script>
-	<script src="js/mouseover.js"></script>
-	<script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
+	
 
-
-	<!--  사용자 js -->
-	<script src="js/jquery.bpopup.min.js"></script>
-	<script src="js/common.js"></script>
-	<script src="js/chefCard.js"></script>
-	<script src="js/rankTabs.js"></script>
-	<script src="js/detail.js"></script>
-
-<script id="tr-template" type="text/x-handlebars-template"> 
+<script id="recipe-card-template" type="text/x-handlebars-template"> 
 {{#each data}}
  
           <div
@@ -686,6 +599,22 @@
 
 {{/each}}
 </script>
+
+<script id="chef-card-template" type="text/x-handlebars-template">
+  {{#each data}}
+  <!-- 쉐프카드 -->          
+  <figure class="snip1344">
+   <img src="img/food01_1.png" alt="profile-sample1" class="background" />
+   <img src="img/ic_launcher.png" alt="profile-sample1" class="profile" />
+   <img src="img/medal1.png" alt="profile-sample1" class="medal" />
+   <figcaption>
+    <h3>{{userName}}</h3>           
+      <div>{{intro}}</div>
+      <div>{{role}}</div>
+   </figcaption>
+  </figure>
+  {{/each}}
+</script>
   
   
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
@@ -694,44 +623,46 @@
   <script src="js/template/wow.min.js"></script>
   <script src="js/template/jquery-slider-rolling.js"></script>
   <script src="js/mouseover.js"></script>
-  <script src="node_modules/jquery-ui-1.12.0/jquery-ui.min.js"></script>
+  <script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
   <script src="node_modules/handlebars/dist/handlebars.min.js"></script>
 
   <!--  사용자 js -->
   <script src="js/jquery.bpopup.min.js"></script>
   <script src="js/common.js"></script>
-  <script src="js/chefCard.js"></script>
-  <script src="js/rankTabs.js"></script>
   <script src="js/detail.js"></script>
+  <script src="js/popup.js"></script>
+  <script src="js/chefCard.js"></script>  
+  <script src="js/signup.js"></script>  
 
   <script>
 
-  var source = $('#tr-template').text();
-  var template = Handlebars.compile(source); 
-  loadBoards();
+    loadRecipes();
 
+    function loadRecipes() {
 
-  function loadBoards(){
-  $.ajax({
-    url:'recipe/list.json',
-    dataType:'json',
-    method:'get',
-    success:function(result){
-      if (result.status !='success'){
-        alert('실행중 오류 발생');
-        return;
-      }
-      var list = result.data;
-      $('.list1 > .row').append( template(result) );
-      $('.list2 > .row').append( template(result) );
- 
-    },
-    error : function(){
-      alert('서버 요청 오류');
-    }
-  });
-  }
-  
+      var source = $('#recipe-card-template').text();
+      var template = Handlebars.compile(source);
+
+      $.ajax({
+        url : 'recipe/list.json',
+        dataType : 'json',
+        method : 'get',
+        success : function(result) {
+          if (result.status != 'success') {
+            alert('실행중 오류 발생');
+            return;
+          }
+          var list = result.data;
+          $('.list1 > .row').append(template(result));
+          $('.list2 > .row').append(template(result));
+
+        },
+        error : function() {
+          alert('서버 요청 오류');
+        }
+      });
+    }   
+    
   </script>
 
 	<script>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.recipe.dao.UserDao">
+
+	<resultMap type="user" id="userMap">
+		<id column="uno" property="userNo" />
+		<result column="name" property="userName" />
+		<result column="email" property="email" />
+		<result column="pwd" property="password" />
+		<result column="img" property="image" />
+		<result column="intro" property="intro" />
+		<result column="role" property="role" />
+		<result column="join_dt" property="joinDate" />
+		<result column="rcp_url" property="recipeUrl" />		
+	</resultMap>
+
+	<select id="selectList" resultMap="userMap" parameterType="Map">
+		select uno, name, email, pwd, img, intro, role, join_dt, rcp_url
+		from users
+		order by uno desc
+		limit #{startIndex}, #{len}
+	</select>
+
+	<select id="selectOne" resultMap="userMap" parameterType="int">
+		select u.uno, u.name, u.email, u.pwd, u.img, u.intro, u.role, u.join_dt,
+		u.rcp_url, count(*) rcp_cnt
+		from users u inner join rcps r on u.uno = r.uno
+		where u.uno = #{no}
+	</select>
+	
+	<insert id="insert" parameterType="user">
+	 insert into users(name, email, pwd, role, join_dt)
+	 values ( #{userName}, #{email}, #{password}, 'user', now())
+  </insert>
+</mapper>
