@@ -1,0 +1,644 @@
+@CHARSET "UTF-8";
+
+@media(max-width:1023px){
+.rcp-1024{
+	width:1024px;
+	margin:0 auto;
+	padding:0px;
+}
+
+.rcp-container{
+  margin-top:0px;
+  margin-bottom:0px;
+  margin-left:0px;
+  margin-right:0px;
+  padding-top:0px;
+  padding-bottom:0px;
+  padding-left:0px;
+  padding-right:0px;
+}  
+
+.rcp-240{
+	width:240px;
+	margin:0 auto;
+}
+
+.rcp-margin-left{
+  margin-left:60px;
+}
+.rcp-margin-right{
+  margin-right:60px;
+}
+.rcp-margin-top{
+  margin-top:10px;
+}
+.rcp-margin-bottom{
+  margin-bottom:10px;
+}
+
+.rcp-list-margin{
+	/* margin-left:25px; */
+	padding:0px;
+}
+.rcp-list{
+	margin-top:2%;
+	margin-bottom:2%;
+}
+
+.rcp-listPosition{
+  margin-left:15%;
+  margin-right:15%;
+}
+
+.rcp-relative{
+	margin-top:5px;
+	position:relative;
+}
+.rcp-profile-position{
+	position:absolute; 
+	margin-top:105px;
+	left:30px;
+}
+
+.rcp-profile{
+  width:48px;
+  height:48px;
+	border:1px solid #aaaaaa;
+	left:7%;
+}
+
+.rcp-caption{
+	margin-top:3%;
+	
+}
+
+.rcp-images{
+	width:69px; 
+	height:69px;
+	padding-right:0.2em;
+}
+
+
+.rcp-Grade{
+  position:relative;
+  right:5%;
+}
+
+.rcp-recipeGrade{
+	position:relative;
+	text-align:right;
+	left:1em;
+	margin-bottom:5%;
+}
+
+.rcp-left-slideButton{
+	position:absolute;
+	left:5%;
+	top:50%;
+	z-index:100;
+}
+.rcp-right-slideButton{
+  position:absolute;
+  right:5%;
+  top:50%;
+  z-index:100;
+}
+
+
+.rcp-profileName{
+	top:0.8em;
+	left:5%;
+}
+
+.rcp-left_position{
+	padding-left:0.7em;
+}
+
+.rcp-comment{
+	text-align:center;
+}
+
+.rcp-right-condiment{
+
+	text-align:left;
+	padding-left:10%;
+
+}
+
+.item col-*{
+	padding-right:0px;
+	padding-left:0px;
+	
+}
+.rcp-left-condiment{
+
+  text-align:right;
+  padding-right:10%;
+
+}
+
+.rcp-buttons{
+
+	margin-bottom:0px;
+}
+
+.rcp-cookTime{
+	padding-left:0.5em; 
+	padding-right:0.5em; 
+	padding-top:1em; 
+	padding-bottom:1em; 
+	border:1px solid #dddddd;
+	font-size:0.8em;
+}
+
+.rcp-list .row{
+
+  margin:0 auto;	
+}
+
+.thumbnail{
+	width:240px;
+	padding:0px;
+	margin:0 auto;
+}
+
+.rcp-list h3{
+  font-size:1em;
+  margin-top:1em;
+  margin-bottom:0.8em;  
+}
+ 
+.rcp-list h4{
+  margin-top:2px;
+	font-size:10pt;
+}
+.rcp-list h5{
+	margin-top:6px;
+	font-size:9pt;
+}
+
+.rcp-list p{
+  font-size:8pt;
+  margin-bottom: 0.05em;
+}
+
+.rcp-list rcp-listSize{
+	width:238px;
+	margin:0 auto;
+	text-align:center;
+}
+
+@media (min-width: 1024px){
+.rcp-list .visible-lg {
+    display: block!important;
+  }
+  
+  
+}
+
+@media (min-width: 768px){
+.rcp-list .visible-md {
+    display: block!important;
+  }
+  
+.rcp-list .rcp-1024{
+
+	display:inline-block;
+	right:50px;
+  }  
+}
+
+.rcp-list{
+	margin-left:9%;
+	
+}
+
+
+@media(min-width:950px) and (max-width:1023px){
+  .rcp-list{
+  margin-left:13%;
+  }
+}
+
+@media(max-width:950px){
+  .rcp-list{
+  margin-left:8%;
+  }
+}
+
+
+@media(max-width:900px){
+  .rcp-list{
+  margin-left:6%;
+  }
+}
+
+@media(max-width:840px){
+	.rcp-list{
+	   margin-left:3%;
+	}	
+}
+
+@media(max-width:810px){
+  .rcp-list{
+     margin-left:1%;
+  } 
+}
+
+@media(min-width:770px) and (max-width:809px){
+  .rcp-list{
+     margin-left:0%;
+  } 
+}
+
+
+
+@media (min-width: 512px){
+.rcp-list .visible-sm {
+    display: block!important;
+    }
+  }
+
+}
+
+
+
+
+
+/* -------------------------rcp 1024 margin ------------------------------ */
+
+@media(min-width:1024px) and (max-width:1100px){
+  .rcp-1024{
+   margin-left:1.5%;
+   margin-right:1.5%;
+  padding:0px;
+  }
+}
+@media(min-width:1101px){
+.rcp-1024{
+  margin-left:3.5%;
+  margin-right:3.5%;
+ 
+  padding:0px;
+  }
+}
+
+
+@media(min-width:1151px){
+.rcp-1024{
+  margin-left:5.5%;
+  margin-right:5.5%;
+ 
+  padding:0px;
+  }
+}
+
+@media(min-width:1201px){
+.rcp-1024{
+  margin-left:7.5%;
+  margin-right:7.5%;
+ 
+  padding:0px;
+  }
+}
+
+@media(min-width:700px) and (max-width:767px){
+  .rcp-1024{
+   margin-left:14%;
+
+  padding:0px;
+  }
+}
+@media(min-width:630px) and (max-width:699px){
+.rcp-1024{
+  margin-left:12%;
+  padding:0px;
+  }
+}
+
+
+@media(min-width:570px)  and (max-width:629px){
+.rcp-1024{
+  margin-left:7%;
+ 
+  padding:0px;
+  }
+}
+
+
+@media(min-width:530px)  and (max-width:569px){
+.rcp-1024{
+  margin-left:2%;
+  padding:0px;
+  }
+}
+
+
+
+@media(min-width:512px)  and (max-width:529px){
+.rcp-1024{
+  margin-left:0.5%;
+  padding:0px;
+  }
+}
+
+@media(min-width:450px)  and (max-width:511px){
+.rcp-1024{
+  margin-left:20%;
+  padding:0px;
+  }
+}
+
+@media(min-width:400px)  and (max-width:450px){
+.rcp-1024{
+  margin-left:15%;
+  padding:0px;
+  }
+}
+
+/* -------------------------rcp 1024 margin end ------------------------------ */
+
+@media(min-width:1023px){
+	
+
+	
+.rcp-container{
+  margin-top:0px;
+  margin-bottom:0px;
+  margin-left:0px;
+  margin-right:0px;
+  padding-top:0px;
+  padding-bottom:0px;
+  padding-left:0px;
+  padding-right:0px;
+}  
+
+.rcp-240{
+
+  margin:0 auto;
+}
+
+.rcp-margin-left{
+  margin-left:60px;
+}
+.rcp-margin-right{
+  margin-right:60px;
+}
+.rcp-margin-top{
+  margin-top:10px;
+}
+.rcp-margin-bottom{
+  margin-bottom:10px;
+}
+
+.rcp-list-margin{
+  /* margin-left:25px; */
+  padding:0px;
+}
+
+.rcp-listPosition{
+  margin-left:15%;
+  margin-right:15%;
+}
+
+.rcp-relative{
+  position:relative;
+}
+.rcp-profile-position{
+  position:absolute; 
+  margin-top:44%;
+  left:30px;
+}
+
+.rcp-profile{
+  width:48px;
+  height:48px;
+  border:1px solid #aaaaaa;
+  left:7%;
+}
+
+.rcp-caption{
+  margin-top:10%;
+  
+}
+
+.rcp-images{
+  width:69px; 
+  height:69px;
+  padding-right:0.2em;
+}
+
+
+.rcp-Grade{
+  position:relative;
+  right:5%;
+}
+
+.rcp-recipeGrade{
+  position:relative;
+  text-align:right;
+  left:1em;
+  margin-bottom:5%;
+}
+
+.rcp-left-slideButton{
+  position:absolute;
+  left:5%;
+  top:50%;
+  z-index:100;
+}
+.rcp-right-slideButton{
+  position:absolute;
+  right:5%;
+  top:50%;
+  z-index:100;
+}
+
+
+.rcp-profileName{
+  top:0.8em;
+  left:5%;
+}
+
+.rcp-left_position{
+  padding-left:0.7em;
+}
+
+.rcp-comment{
+  text-align:center;
+}
+
+.rcp-right-condiment{
+
+  text-align:left;
+  padding-left:10%;
+
+}
+
+.item col-*{
+  padding-right:0px;
+  padding-left:0px;
+  
+}
+.rcp-left-condiment{
+
+  text-align:right;
+  padding-right:10%;
+
+}
+
+.rcp-buttons{
+
+  margin-bottom:0px;
+}
+
+.rcp-cookTime{
+  padding-left:0.5em; 
+  padding-right:0.5em; 
+  padding-top:1em; 
+  padding-bottom:1em; 
+  border:1px solid #dddddd;
+  font-size:0.8em;
+}
+
+.thumbnail{
+	margin-left:5%;
+	margin-right:5%;
+  padding:0px;
+}
+
+
+.rcp-list rcp-listSize{
+  margin:0 auto;
+  text-align:center;
+}
+	
+	
+
+.rcp-list .visible-lg {
+    display: block!important;
+  
+}
+
+.rcp-list .visible-md {
+    display: block!important;
+  
+}
+
+.rcp-list .visible-sm {
+    display: block!important;
+    
+  }
+  
+
+}
+
+
+
+
+/* ------------------ font size --------------------- */
+
+
+@media (min-width:1023px) and (max-width : 1199px){
+
+    .rcp-list h3{
+      font-size:15pt;
+      margin-top:1em;
+      margin-bottom:0.5em;  
+    }
+ 
+    .rcp-list h4{
+      font-size:10pt;
+
+    }
+    
+    .rcp-left_position{
+      padding-left:1.6em;
+    }
+    
+    
+    .rcp-list h5{
+      font-size:9pt;
+      margin-top:11px;
+      margin-bottom:5px;
+      
+    }
+    
+    .rcp-list p{
+      font-size:8pt;
+      margin-bottom: 0.05em;
+    }
+}
+
+
+
+@media (min-width:1200px) and (max-width : 1400px){
+
+		.rcp-list h3{
+		  font-size:14pt;
+		  margin-top:1em;
+		  margin-bottom:0.5em;  
+		}
+ 
+		.rcp-list h4{
+		  font-size:12pt;
+
+		}
+		
+		.rcp-left_position{
+		  padding-left:1.6em;
+		}
+		
+		
+		.rcp-list h5{
+		  font-size:10pt;
+		  margin-top:11px;
+		  margin-bottom:5px;
+		  
+		}
+		
+		.rcp-list p{
+		  font-size:9pt;
+		  margin-bottom: 0.05em;
+		}
+}
+
+/* ------------------ min 1024px defalut font size --------------- */
+@media (min-width:1401px){
+  
+  .rcp-list h3{
+    font-size:19pt;
+    margin-top:1em;
+    margin-bottom:0.5em;  
+  }
+  
+   
+  .rcp-list h4{
+    font-size:13pt;
+  }
+  .rcp-list h5{
+    font-size:pt;
+    margin-top:14px;
+    margin-bottom:5px;
+    
+  }
+  
+  .rcp-list p{
+    font-size:10pt;
+    margin-bottom: 0.05em;
+  }
+}
+
+
+/* -------------------- font size end ------------------------ */
+
+
+
+
+/* .rcp-list rcp-container{
+	width:940px;
+	margin :0 auto;
+	text-align: center;
+}
+ */
+

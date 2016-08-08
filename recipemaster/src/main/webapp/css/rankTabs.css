@@ -1,0 +1,96 @@
+/* body {
+  background-color: #ddd;
+} */
+
+/* h3 {
+  margin-top: 0;
+} */
+
+.badge {
+  background-color: #777;
+}
+
+/* .tabs-left {
+  margin-left: 4rem;
+  width: 1024px;
+  margin:0 auto;
+} */
+
+#rcp-main-rank .tabs-left{
+  width: 96.2%;
+  margin:0 auto;
+}
+
+#rcp-chef-rank > .snip1344{
+	width: 30%;
+	min-width: 19em;
+}
+
+@media (max-width: 772px) {
+  .rcp-hidden-xs {
+    display: none !important;
+  }
+}
+
+@media (min-width: 772px) and (max-width: 1023px) {
+  .rcp-hidden-sm {
+    display: none !important;
+  }
+}
+
+.nav-tabs {
+  float: left;
+  border-bottom: 0;
+}
+.nav-tabs li {
+  float: none;
+  margin: 0;
+}
+.nav-tabs li a {
+  margin-right: 0;
+  border: 0;
+  background-color: #333;
+}
+.nav-tabs li a:hover {
+  background-color: #444;
+}
+.nav-tabs .glyphicon {
+  /* color: #fff; */
+}
+.nav-tabs .active .glyphicon {
+  color: #333;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  border: 0;
+}
+
+/* .tab-content {
+  margin-left: 45px;
+} */
+
+.tab-content .tab-pane {
+  display: none;
+  background-color: #fff;
+  /* padding: 0.5rem; */  
+  overflow-y: auto;
+  /* overflow-x: auto;   */
+  /* width: 81em; */
+}
+.tab-content .active {
+  display: block;
+}
+
+.list-group {
+  width: 100%;
+}
+.list-group .list-group-item {
+  height: 50px;
+}
+.list-group .list-group-item h4, .list-group .list-group-item span {
+  line-height: 11px;
+}
+
+.rcp-rank-icon {
+	width: 3em;
+}

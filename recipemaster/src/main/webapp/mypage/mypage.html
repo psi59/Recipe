@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>박상일님의 mypage</title>
+<link rel="stylesheet"
+	href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+<style>
+.rcp-profile-img{
+  margin-top:20%;
+  width: 50%;
+}
+
+#userNickName{
+  margin-top:0.5em;
+  font-size: 2em;
+  font-weight: 2px;
+}
+
+#userLevel{
+  font-size: .8em;
+}
+
+
+#userIntroduce{
+  margin-top:0.5em;
+  font-size: 1em;
+}
+
+#postingBtn{
+  background-color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #b51515;
+  margin-left: 15%;
+  margin-top: 10px;
+  width: 70%;
+  padding: 7px;
+  border-radius: 0.3em;
+}
+
+#menus{
+  margin-top: 20px;
+  text-align: center;
+  font-size: 2em;
+}
+
+.menu{
+  color: white;
+  text-decoration: underline;
+  margin-bottom: 10px;
+}
+
+#spoonImg{
+  position: absolute;
+  bottom: 25px;
+  right: 5px;
+  width: 9em;
+}
+
+.left-box {
+	background: #b51515;
+	height: 100%;
+	width: 250px;
+	position: fixed;
+	text-align: center;
+	color: #FFFFFF;
+}
+
+.right-box {
+	background: blue;
+	float: right;
+}
+</style>
+
+</head>
+<body>
+	<div class='container-fluid'>
+	  <!-- xs 사이즈일떄 상단에 표현 -->
+		<div class=".visible-xs-12 hidden-sm hidden-md hidden-lg">		</div>
+		<!-- xs 사이즈일떄 상단에 표현 종료 -->
+		<div class='row'>
+		  <!-- 왼쪽 메뉴바 시작 -->
+			<div class="hidden-xs left-box">
+			 <div><img src="../img/profileimg.jpg" class="rcp-profile-img img-circle"></div>			 
+			 <div id="userNickName">SangIl</div>
+			 <div id="userLevel">Demi Chef</div>
+			 <div id="userIntroduce">Master Chef가 되고 싶어용~</div>
+			 <div id="postingBtn">포스팅하기</div>
+			 <div id="menus">
+			   <div id="homeLink" class="menu">HOME</div>
+	       <div id="recipeLink" class="menu">RECIPE</div>
+	       <div id="subsLink" class="menu">구독하기</div>
+	       <div id="visitorBookLink" class="menu">소통하기</div>
+			 </div>
+			 <img id="spoonImg" src="../img/whitespoon.png"/>			 
+			</div>
+      <!-- 왼쪽 메뉴바 종료 -->
+			<div class="right-box"></div>
+		</div>	
+	</div>
+</body>
+</html>
