@@ -77,5 +77,22 @@ public class RecipeController {
 
       return new Gson().toJson(result);
   }
+  
+  @RequestMapping(path="rank",produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String rank(
+      @RequestParam(defaultValue="1") int pageNo, 
+      @RequestParam(defaultValue="10") int pageSize){
+    HashMap<String,Object> result = new HashMap<>();
+    List<Recipe> list = recipeService.getRecipeList(pageNo, pageSize);
+    try{
+      result.put("status","success");
+      result.put("data", list);
+    }catch (Exception e){
+      result.put("status", "false");
+    }
+
+    return new Gson().toJson(result);
+  }
 
 }

@@ -87,4 +87,23 @@ public class UserController {
     }
     return new Gson().toJson(result);
   }
+  
+  @RequestMapping(path="rank", produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String rank(@RequestParam(defaultValue="1")int pageNo,
+                     @RequestParam(defaultValue="10")int pageSize){
+    HashMap<String, Object> result = new HashMap<>();
+    try{
+      List<User> list = userService.getUserList(pageNo, pageSize);
+
+      result.put("status", "success");
+      result.put("data", list);
+    }catch(Exception e){
+      result.put("status", "failure");
+    }
+
+    return new Gson().toJson(result);
+  }
+  
+  
 }

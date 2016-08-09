@@ -82,7 +82,7 @@
 .snip1344 a {
   text-decoration: none;
 }
-.snip1344 i:hover {
+.snip1344 i:hover { 
   opacity: 1;
   -webkit-transition: all 0.35s ease;
   transition: all 0.35s ease;
