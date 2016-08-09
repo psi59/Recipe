@@ -27,11 +27,12 @@
 		select u.uno, u.name, u.email, u.pwd, u.img, u.intro, u.role, u.join_dt,
 		u.rcp_url, count(*) rcp_cnt
 		from users u inner join rcps r on u.uno = r.uno
-		where u.uno = #{no}
+		where u.uno = #{no} 
 	</select>
 	
 	<insert id="insert" parameterType="user">
 	 insert into users(name, email, pwd, role, join_dt)
 	 values ( #{userName}, #{email}, #{password}, 'user', now())
   </insert>
+    
 </mapper>
