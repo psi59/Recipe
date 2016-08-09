@@ -426,23 +426,16 @@
 	<!-- -------------------------------recipe list-------------------------------- -->
 
 
-	<section id="rcp-custom-list1">
-    <div class="rcp-list ">
-      <div class="rcp-1024 list1">
-        <h3>오늘의 추천 레시피</h3>
-        <div class="row"></div>
-      </div>
+  <section id="main-list">
+  
+    <div>
+    
+    
     </div>
+  
+  
   </section>
 
-<section id="rcp-custom-list2">
-    <div class="rcp-list ">
-      <div class="rcp-1024 list2">
-        <h3>오늘의 인기 레시피</h3>
-        <div class="row"></div>
-      </div>
-    </div>
-  </section>
 
 	<!-------------------------------- Rank List --------------------------------->
 	<section id="rcp-main-rank">
@@ -477,24 +470,52 @@
 
 
 
-	
+<!--  Main List -->
+
+<script id="recipe-card-section" type="text/x-handlebars-template">
+
+{{#each this}}
+
+
+ <section id="rcp-custom-list{{@index}}">
+    <div class="rcp-list ">
+      <div class="rcp-1024 list{{@index}}">
+        <h3>{{@index}}</h3>
+        <div class="row"></div>
+      </div>
+    </div>
+  </section>
+
+{{/each}}
+</script>
+  
+  
+
+
+  <!------------------------- Rank List ------------------------------>
+
+
+
+  
 
 <script id="recipe-card-template" type="text/x-handlebars-template"> 
 {{#each data}}
  
+      
           <div
             class="col-xs-3 col-sm-3 col-md-3 rcp-listSize rcp-list-margin">
+      
             <div class="thumbnail row relative">
               <div class="rcp-profile-position">
-                <img src="img/profile.jpg" class="img-circle rcp-profile">
+                <img src="images/profile{{@index}}.jpg" class="img-circle rcp-profile">
               </div>
-              <img src="img/5.jpg" class="image1" class="rcp-relative">
+              <img src="images/2.jpg" class="image1" class="rcp-relative">
              
               <div class="rcp-caption">
                 <h4 class="pull-right rcp-Grade">평점</h4>
                 <h5 class="pluu-left rcp-relative rcp-profileName">
 
-                  <span class="glyphicon glyphicon-star"></span>DDu BBo KKi
+                  <span class="glyphicon glyphicon-star"></span><a href="#" title="{{user.userNo}}">{{user.userName}}</a>
                 </h5>
                 <!-- 두번째 줄 (레시피명, 점수)  -->
                 <div class="rcp-relative rcp-bottom">
@@ -507,15 +528,12 @@
               </div>
               <!--  레시피 정보 끝 -->
 
-
-
               <!--  슬라이드 start -->
               <div id="myCarousel" class="carousel slide rcp-relative">
                 <!--  왼쪽 버튼 시작  -->
                 <a href="#myCarousel" role="button" data-slide="prev"
                   class="rcp-left-slideButton"> <span
                   class="glyphicon glyphicon-chevron-left" aria-hidden="false"></span>
-
                 </a>
                 <!--  왼쪽 버튼 끝  -->
 
@@ -541,21 +559,21 @@
                   <div class="item">
                     <div class="rcp-comment col-md-offset-1 col-md-10">
                       <!--  image 크기를 잘 몰라서 일단 %로 안하고 85px로 고정해놓 -->
-                      <img src="img/view.png" class="img-rounded rcp-images">
-                      <img src="img/view.png" class="img-rounded rcp-images">
+                      <img src="images/view.png" class="img-rounded rcp-images">
+                      <img src="images/view.png" class="img-rounded rcp-images">
                     </div>
                     <div class="col-md-1"></div>
                   </div>
 
                   <div class="item">
                     <div class="rcp-comment col-md-offset-1 col-md-10">
-                      <div class="col-md-6">
+                      <div class="col-md-6 col-xs-6">
                         <p class="rcp-left-condiment">떡볶이</p>
                         <p class="rcp-left-condiment">떡볶이</p>
                         <p class="rcp-left-condiment">떡볶이</p>
                       </div>
 
-                      <div class="col-md-6">
+                      <div class="col-md-6 col-xs-6">
                         <p class="rcp-right-condiment">간장</p>
                         <p class="rcp-right-condiment">간장</p>
                         <p class="rcp-right-condiment">간장</p>
@@ -600,6 +618,7 @@
 {{/each}}
 </script>
 
+
 <script id="chef-card-template" type="text/x-handlebars-template">
   {{#each data}}
   <!-- 쉐프카드 -->          
@@ -633,37 +652,8 @@
   <script src="js/popup.js"></script>
   <script src="js/chefCard.js"></script>  
   <script src="js/signup.js"></script>  
+ <script src="js/mainListAjax.js"></script>
 
-  <script>
-
-    loadRecipes();
-
-    function loadRecipes() {
-
-      var source = $('#recipe-card-template').text();
-      var template = Handlebars.compile(source);
-
-      $.ajax({
-        url : 'recipe/list.json',
-        dataType : 'json',
-        method : 'get',
-        success : function(result) {
-          if (result.status != 'success') {
-            alert('실행중 오류 발생');
-            return;
-          }
-          var list = result.data;
-          $('.list1 > .row').append(template(result));
-          $('.list2 > .row').append(template(result));
-
-        },
-        error : function() {
-          alert('서버 요청 오류');
-        }
-      });
-    }   
-    
-  </script>
 
 	<script>
 		$(function() {

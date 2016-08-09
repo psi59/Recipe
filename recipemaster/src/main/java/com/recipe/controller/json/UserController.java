@@ -40,7 +40,6 @@ public class UserController {
   @ResponseBody
   public String add(User user){    
     HashMap<String,Object> result = new HashMap<>();
-    user.toString();
     try{      
       userService.addUser(user);
       result.put("status", "success");      
