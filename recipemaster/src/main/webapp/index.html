@@ -74,10 +74,9 @@
 									</div>
 								</div>
 								<nav class="dropdown__nav rcp-menuname rcp-back">
-									<a href="../mypage/mypage.html"><span class="rcp-back">내 레시피</span></a><a
-										href="../writerecipe.html"><span
-										class="rcp-back">레시피 쓰기</span></a><a href="#"><span
-										class="rcp-back">구독 정보</span></a>
+									<a href="../mypage/mypage.html"><span class="rcp-back">내
+											레시피</span></a><a href="../writerecipe.html"><span class="rcp-back">레시피
+											쓰기</span></a><a href="#"><span class="rcp-back">구독 정보</span></a>
 								</nav>
 							</div>
 						</div>
@@ -95,8 +94,8 @@
 					<div
 						class="col-md-4 col-sm-4 col-xs-4 signin text-right navbar-nav">
 						<a href="#" id="signUpBtn"><span class="rcp-btn-default-2">회원가입</span></a>&nbsp;
-						&nbsp;
-						<a href="#" id="loginBtn"><span class="rcp-btn-default-2">로그인</span></a>
+						&nbsp; <a href="#" id="loginBtn"><span
+							class="rcp-btn-default-2">로그인</span></a>
 					</div>
 				</div>
 
@@ -150,7 +149,7 @@
 		<div class="rcp-laytop rcp-laytop2"></div>
 		<div class="rcp-innnersec">
 			<div class="rcp-mar rcp-info">
-			
+
 				<div id="signup-e-mail-div" class="form-group has-warning has-feedback">				  
 				  <input id="signup-e-mail" type="text" class="form-control" placeholder="E-mail 입력">
 				  <span id="signup-e-mail-span" class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>		
@@ -174,7 +173,7 @@
           <span id="signup-passwordCheck-span" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>   
           <label id="signup-passwordCheck-label" class="control-label"></label>      
         </div>        
-				
+
 			</div>
 			
 			<div class="rcp-bottext">
@@ -333,9 +332,102 @@
 	<script id="recipe-detail-304-info-template"
 		type="text/x-handlebars-template">
 
-<!--  Main List -->
+<div class="detail-images">
+<img src="img/profile.jpg" class="rcp-right-profile img-circle">
+<p class="rcp-nickName">{{data.user.userName}}</p>
 
-<script id="recipe-card-section" type="text/x-handlebars-template">
+<h4 class="rcp-detail-title">{{data.recipeName}}</h4>
+<div align="center">
+  <a href="#"><img src="img/scrap.png"></a>
+</div>
+
+<div class="rcp-info-items">
+
+   <div class="rcp-icons">
+   <i class="fa fa-eye" aria-hidden="true"></i>
+   <i class="fa fa-heart" aria-hidden="true"></i>
+   <i class="fa fa-comments" aria-hidden="true"></i>
+   <i class="fa fa-external-link" aria-hidden="true"></i>
+   
+   
+   
+  </div>
+  
+  <div class="rcp-icons-names">
+  
+    <p>조회수</p>
+    <p>좋아요</p>
+    <p>댓글</p>
+    <p>스크랩</p>  
+  
+  </div>
+
+  <div class="rcp-icons-info" align="right">
+  
+    <p>{{data.hits}}</p>
+    <p>182</p>
+    <p>28</p>
+    <p>58</p>  
+  
+  </div>
+
+</div>
+
+<div class="rcp-info-filter">
+    <hr class="rcp-info-next"/>
+    <a href="#">모아보기</a>
+</div>
+
+<div class="rcp-info-images">
+
+</div>
+
+</div>
+</script>
+
+	<script id="recipe-detail-304-info-template"
+		type="text/x-handlebars-template">
+
+	<script id="recipe-detail-main-images-template"
+		type="text/x-handlebars-template">
+
+     
+
+
+    <div class="rcp-main"> 
+      <a href="#">MAIN</a>
+      <div style="float:right">
+         <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+      </div>
+    <a href="#"><img src="img/food01.jpg" class="rcp-info-images-emts"></a>
+    </div>
+  <div class="rcp-detail-step">
+
+  </div>
+
+
+</script>
+
+	<script id="recipe-detail-step-images-template"
+		type="text/x-handlebars-template">
+{{#each data}}
+
+    
+     <div class="rcp-main dd"> 
+      <a href="#">STEP {{inc @index}}</a>
+      <div style="float:right">
+         <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+      </div>
+      
+     <img src="img/food02.jpg" class="rcp-info-images-emts"> 
+    </div>
+    
+{{/each}}
+</script>
+
+	<!--  Main List -->
+
+	<script id="recipe-card-section" type="text/x-handlebars-template">
 
 {{#each this}}
 
@@ -500,10 +592,6 @@
   {{/each}}
 </script>
 
-
-
-
-	
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="js/template/main.js"></script>
@@ -519,9 +607,8 @@
 	<script src="js/detail.js"></script>
 	<script src="js/popup.js"></script>
 	<script src="js/chefCard.js"></script>
-	<script src="js/signup.js"></script>	
-	<script src="js/mainListAjax.js"></script>	
-	<script src="js/mainListAjax.js"></script>	
+	<script src="js/signup.js"></script>
+	<script src="js/mainListAjax.js"></script>
 	<script src="js/recipeDetail.js"></script>
 
 	<script>

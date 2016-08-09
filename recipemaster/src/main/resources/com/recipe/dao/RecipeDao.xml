@@ -24,6 +24,21 @@
     <result column="mtst" property="materialStatement" />
   </resultMap>
 	
+	<insert id="insert" parameterType="map">
+		 INSERT INTO rcps(uno, name, intro, ptn, rcp_pd,rcp_dt, rgst) 
+		 VALUES(#{user.userNo}, #{recipe.recipeName}, #{recipe.intro}, #{recipe.portion}, '성현이형바보',now(), 1)
+		 <selectKey keyProperty="recipeNo" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID();
+     </selectKey>		 	 
+	</insert>
+	
+	<insert id="insertMaterials" parameterType="map">
+        insert into rcp_mt(rcpno, mtno, rcpqt)
+        values <!-- (#{recipeNo}, #{materialName}, #{materialAmount}) -->
+        <foreach collection="list" item="item" separator=" , ">
+            (#{recipeNo}, #{item.materialName}, #{item.materialAmount})
+        </foreach>
+  </insert>
 	
 	
    <select id="selectList" resultMap="recipeMap" parameterType="Map">
@@ -33,6 +48,13 @@
     ORDER BY rcpno
     limit #{startIndex}, #{len}
   </select>
+  
+  
+  <select id="selectOne" resultMap="recipeMap" parameterType="INTEGER">
+   SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits, r.rgst, r.gpa, u.uno, u.name userName
+   FROM rcps r, users u
+   WHERE r.uno = u.uno and r.rcpno=#{value};
+  </select>
 	
 	<select id="selectMaterialName" resultType="string" parameterType="string">
     SELECT name 
@@ -40,6 +62,10 @@
     WHERE name LIKE '%${value}%'
     ORDER BY mtno
   </select>
+  
+  <update id="updateHits" parameterType="recipe">
+  UPDATE rcps set hits=${hits} where rcpno=${recipeNo};
+  </update>
 	
 	<!-- 
 	<select id="selectOne" resultMap="boardMap" parameterType="int">
