@@ -147,9 +147,9 @@
 				$("#appendSlot")
 						.append('<div name="addSlot">'
 								+'<div class="col-md-4 col-md-offset-3" name="addMt">'
-										+ '<input class="form-control rcp-formdata" type="text" id="recipename"'
+										+ '<input class="form-control rcp-formdata" type="text" name="materialName"'
 										+'placeholder="재료를 입력해주세요"></div><div class="col-md-1" name="addQt">'
-										+ '<input class="form-control rcp-formdata" type="text" id="recipename" placeholder="예)400g"></div>'
+										+ '<input class="form-control rcp-formdata" type="text" name="materialAmount" placeholder="예)400g"></div>'
 										+'<div class="col-md-1 name="delMt"><button type="button" class="btn btn-default rcp-delMtSlot" id="delMtBtn" name="delMtSlot">삭제</button></div></div>');
 			})
 

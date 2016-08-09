@@ -2,6 +2,7 @@ package com.recipe.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,9 @@ public class RecipeServiceImpl implements RecipeService {
 	@Autowired RecipeDao recipeDao;
 
 	@Override
-	public void addRecipe(Recipe recipe) {
-		// TODO Auto-generated method stub
-
+	public int addRecipe(Map map) {
+		recipeDao.insert(map);
+		return (int)map.get("recipeNo");
 	}
 
 	@Override
@@ -50,4 +51,14 @@ public class RecipeServiceImpl implements RecipeService {
 	public List<String> getMaterial(String materialName) {
 		return recipeDao.selectMaterialName(materialName);
 	}
+
+	@Override
+	public void addMaterials(Map map) {
+		recipeDao.insertMaterials(map);
+	}
+
+  @Override
+  public int updateHits(Recipe recipe) {
+    return recipeDao.updateHits(recipe);
+  }
 }
