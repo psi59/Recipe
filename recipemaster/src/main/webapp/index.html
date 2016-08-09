@@ -402,11 +402,9 @@
 </div>
 </script>
 
-	<script id="recipe-detail-304-info-template"
-		type="text/x-handlebars-template">
 
-	<script id="recipe-detail-main-images-template"
-		type="text/x-handlebars-template">
+  <script id="recipe-detail-main-images-template"
+    type="text/x-handlebars-template">
 
      
 
@@ -630,8 +628,6 @@
 
 	<!-- 준모 login -->
 	<script>
-		alert("userNo:" + sessionStorage.getItem('userNo') + "," + "role:"
-				+ sessionStorage.getItem('role'));
 
 		$("#userLogin")
 				.click(
@@ -667,11 +663,6 @@
 											.getItem('userNo')
 									var role = sessionStorage
 											.getItem('role')
-
-									alert("sessionStorage set data:"
-											+ userNo);
-									alert("sessionStorage set data:"
-											+ role);
 
 									location = "http://127.0.0.1:8080?userNo=&"
 											+ userNo;
