@@ -34,13 +34,5 @@
 	 insert into users(name, email, pwd, role, join_dt)
 	 values ( #{userName}, #{email}, #{password}, 'user', now())
   </insert>
-  
-  <update id="update" parameterType="user" >
-      UPDATE users
-      <set>
-      password   = #{password},
-      intro = #{intro}
-      WHERE uno = #{userNo}
-      </set>
-   </update>
+    
 </mapper>
