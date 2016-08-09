@@ -30,6 +30,18 @@
 		where u.uno = #{no}
 	</select>
 	
+	<select id="checkDuplication" resultMap="userMap" parameterType="String">
+    select uno, name, email, pwd, img, intro, role, join_dt, rcp_url   
+    from users
+    where email = #{email}
+  </select>
+  
+  <select id="checkDuplicationUserName" resultMap="userMap" parameterType="String">
+    select uno, name, email, pwd, img, intro, role, join_dt, rcp_url   
+    from users
+    where name = #{userName}
+  </select>
+	
 	<insert id="insert" parameterType="user">
 	 insert into users(name, email, pwd, role, join_dt)
 	 values ( #{userName}, #{email}, #{password}, 'user', now())

@@ -38,14 +38,46 @@ public class UserController {
   
   @RequestMapping(path="add", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
   @ResponseBody
-  public String add(User user){    
+  public String add(User user, String passwordCheck){    
     HashMap<String,Object> result = new HashMap<>();
-    try{      
-      userService.addUser(user);
-      result.put("status", "success");      
+    try{
+      // 이메일 중복 확인
+      System.out.println("Null Check : _"+user.getEmail()+"_"+user.getPassword()+"_");
+      if(userService.checkDuplication(user.getEmail()) && user.getPassword().equals(passwordCheck)){
+        userService.addUser(user);
+        result.put("status", "success");
+      }
     }catch(Exception e){
       result.put("status", "failure");
     }    
+    return new Gson().toJson(result);
+  }  
+  
+  // 이메일 중복 체크
+  @RequestMapping(path="checkDuplication", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String checkDuplication(String email){    
+    HashMap<String,Object> result = new HashMap<>();    
+    try{
+      result.put("status", "success");      
+      result.put("data", userService.checkDuplication(email));
+    }catch(Exception e){
+      result.put("status", "failure");
+    }
+    return new Gson().toJson(result);
+  }
+    
+  // 닉네임 중복 체크
+  @RequestMapping(path="checkDuplicationUserName", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String checkDuplicationUserName(String userName){    
+    HashMap<String,Object> result = new HashMap<>();     
+    try{
+      result.put("status", "success");      
+      result.put("data", userService.checkDuplicationUserName(userName));
+    }catch(Exception e){
+      result.put("status", "failure");
+    }
     return new Gson().toJson(result);
   }
 
@@ -87,4 +119,23 @@ public class UserController {
     }
     return new Gson().toJson(result);
   }
+  
+  @RequestMapping(path="rank", produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String rank(@RequestParam(defaultValue="1")int pageNo,
+                     @RequestParam(defaultValue="10")int pageSize){
+    HashMap<String, Object> result = new HashMap<>();
+    try{
+      List<User> list = userService.getUserList(pageNo, pageSize);
+
+      result.put("status", "success");
+      result.put("data", list);
+    }catch(Exception e){
+      result.put("status", "failure");
+    }
+
+    return new Gson().toJson(result);
+  }
+  
+  
 }
