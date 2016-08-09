@@ -149,13 +149,46 @@
 		<div class="rcp-laytop rcp-laytop2"></div>
 		<div class="rcp-innnersec">
 			<div class="rcp-mar rcp-info">
-				<input class="form-control" type="text" id="signup-e-mail"
-					placeholder="E-mail 입력"><br /> <input class="form-control"
-					type="text" id="signup-userName" placeholder="닉네임 입력"><br />
-				<input class="form-control" type="password" id="signup-password"
-					placeholder="비밀번호 입력"><br /> <input class="form-control"
-					type="password" id="signup-passwordCheck" placeholder="비밀번호 확인"><br />
+
+				<div id="signup-e-mail-div"
+					class="form-group has-warning has-feedback">
+					<input id="signup-e-mail" type="text" class="form-control"
+						placeholder="E-mail 입력"> <span id="signup-e-mail-span"
+						class="glyphicon glyphicon-warning-sign form-control-feedback"
+						aria-hidden="true"></span> <label id="signup-e-mail-label"
+						class="control-label"></label>
+				</div>
+
+				<div id="signup-userName-div"
+					class="form-group has-warning has-feedback">
+					<input id="signup-userName" type="text" class="form-control"
+						placeholder="닉네임 입력"> <span id="signup-userName-span"
+						class="glyphicon glyphicon-warning-sign form-control-feedback"
+						aria-hidden="true"></span> <label id="signup-userName-label"
+						class="control-label"></label>
+				</div>
+
+				<div id="signup-password-div"
+					class="form-group has-error has-feedback">
+					<input id="signup-password" type="password" class="form-control"
+						placeholder="비밀번호 입력"> <span id="signup-password-span"
+						class="glyphicon glyphicon-remove form-control-feedback"
+						aria-hidden="true"></span> <label id="signup-password-label"
+						class="control-label"></label>
+				</div>
+
+				<div id="signup-passwordCheck-div"
+					class="form-group has-error has-feedback">
+					<input id="signup-passwordCheck" type="password"
+						class="form-control" placeholder="비밀번호 확인"> <span
+						id="signup-passwordCheck-span"
+						class="glyphicon glyphicon-remove form-control-feedback"
+						aria-hidden="true"></span> <label id="signup-passwordCheck-label"
+						class="control-label"></label>
+				</div>
+
 			</div>
+
 			<div class="rcp-bottext">
 				<label class="checkbox-inline"> <input type="checkbox"
 					id="agrchk" value="option1">서비스약관과 개인정보수집이용에 동의합니다.
@@ -167,7 +200,8 @@
 		</div>
 	</div>
 
-	<!-- ------------------------------------------------------------------------------- -->
+	<!--준모_login------------------------------------------------------------------------------- -->
+
 	<div id='login-pop-up-banner'>
 		<div class="rcp-section">
 			<span>로그인</span>
@@ -175,15 +209,18 @@
 		<div class="rcp-laytop rcp-laytop2"></div>
 		<div class="rcp-innnersec">
 			<div class="rcp-mar rcp-info">
-				<input class="form-control" type="text" id="userid"
-					placeholder="아이디 입력"><br /> <input class="form-control"
-					type="text" id="userpwd" placeholder="비밀번호 입력"><br />
+				<input class="form-control" type="text" id="userEmail" name="email"
+					placeholder="아이디 입력"></input><br /> <input class="form-control"
+					type="text" id="userPassword" name="password" placeholder="비밀번호 입력"></input>
+				<br />
 			</div>
 		</div>
-		<div class="rcp-sign-membership">
+		<div class="rcp-sign-membership" id="userLogin">
 			<span>로그인</span>
 		</div>
 	</div>
+
+	<!--  -->
 
 
 	<div id='editUserInfo-pop-up-banner'>
@@ -365,6 +402,8 @@
 </div>
 </script>
 
+	<script id="recipe-detail-304-info-template"
+		type="text/x-handlebars-template">
 
 	<script id="recipe-detail-main-images-template"
 		type="text/x-handlebars-template">
@@ -570,12 +609,7 @@
   {{/each}}
 </script>
 
-
-
-
-	<<<<<<< HEAD =======
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
-	>>>>>>> branch 'master' of https://github.com/tkddlf59/Recipe.git
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="js/template/main.js"></script>
 	<script src="js/template/wow.min.js"></script>
@@ -591,44 +625,98 @@
 	<script src="js/popup.js"></script>
 	<script src="js/chefCard.js"></script>
 	<script src="js/signup.js"></script>
-	<<<<<<< HEAD
 	<script src="js/mainListAjax.js"></script>
-	=======
-	<script src="js/mainListAjax.js"></script>
-	>>>>>>> branch 'master' of https://github.com/tkddlf59/Recipe.git
 	<script src="js/recipeDetail.js"></script>
+
+	<!-- 준모 login -->
+	<script>
+		alert("userNo:" + sessionStorage.getItem('userNo') + "," + "role:"
+				+ sessionStorage.getItem('role'));
+
+		$("#userLogin")
+				.click(
+						function() {
+							$.ajax({
+								url : '/user/login.json',
+								method : 'post',
+								dataType : 'json',
+								data : {
+									email : $('#userEmail').val(),
+									password : $('#userPassword').val()
+								},
+								success : function(result) {
+									if (result.status != 'success') {
+										alert('실행중 오류 발생');
+										return;
+									}
+									alert(result.data.userName
+											+ '님 환영합니다.');
+									$('#login-pop-up-banner').bPopup()
+											.close();
+									$('#signUpBtn').hide();
+									$('#loginBtn')
+											.html(
+													'<a href="http://127.0.0.1:8080/" id="logoutBtn"><span class="rcp-btn-default-2">로그아웃</span></a>');
+
+									sessionStorage.setItem('userNo',
+											result.data.userNo);
+									sessionStorage.setItem('role',
+											result.data.role);
+
+									var userNo = sessionStorage
+											.getItem('userNo')
+									var role = sessionStorage
+											.getItem('role')
+
+									alert("sessionStorage set data:"
+											+ userNo);
+									alert("sessionStorage set data:"
+											+ role);
+
+									location = "http://127.0.0.1:8080?userNo=&"
+											+ userNo;
+
+									/*  $('#profileEmail').html('<a href="#" class="dropdown__header rcp-infobox-text" id="profileId">'+result.data.email+'</a> ');
+									 $('#profileName').html('<h6 class="rcp-nickname" id="profileName">'+result.data.userName+'</h6>');
+									 $('#profileGrade').html('<span  class="dropdown__title rcp-infobox-text" id="profileGrade"><img src="img/star.png" >'+head Chef+'</span>'); */
+
+								},
+								error : function() {
+									alert('서버 요청 오류');
+								}
+							}); /* end of ajax */
+				}); /* end of jquery */
+	</script>
 
 	<script>
 		$(function() {
 			getWeather();
 			getRealTimeRank();
-			
 
 			$('.profile-dropdown:has(.active)').bind('click', function() {
-			  
+
 			});
 
 			$(window).bind('scroll', function(e) {
-			  $('.main-nav__dropdown').removeClass('active');
+				$('.main-nav__dropdown').removeClass('active');
 			});
 
 			$('.dropdown-trigger').on('click', function() {
-			  dropdownClick('.profile-dropdown', '.mobile-menu-dropdown');
+				dropdownClick('.profile-dropdown', '.mobile-menu-dropdown');
 			});
 
 			$('.dropdown-trigger').on('scroll', function() {
-			  dropdownClick('.profile-dropdown', '.mobile-menu-dropdown');
+				dropdownClick('.profile-dropdown', '.mobile-menu-dropdown');
 			});
 
 			$('.dropdown-trigger--mobile').on('click', function() {
-			  dropdownClick('.mobile-menu-dropdown', '.profile-dropdown');
+				dropdownClick('.mobile-menu-dropdown', '.profile-dropdown');
 			});
 
-			$('#userInfoEditBtn').on('click', function(){
-			  $('#editUserInfo-pop-up-banner').bPopup();
+			$('#userInfoEditBtn').on('click', function() {
+				$('#editUserInfo-pop-up-banner').bPopup();
 			});
 		});
-		
 	</script>
 </body>
 </html>

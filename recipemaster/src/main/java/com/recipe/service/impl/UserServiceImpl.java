@@ -29,10 +29,31 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public User getUser(int no) {
-    userDao.selectOne(no);
-    return null;
+  public User getUser(int no) {    
+    return userDao.selectOne(no);
   }
+  
+  // 이메일 중복 검사
+  @Override
+  public boolean checkDuplication(String email) {  
+    boolean result = true;    
+    User user = userDao.checkDuplication(email);
+    if (user != null){      
+      result = false;
+    }    
+    return result;
+  }
+  
+  // 닉네임 중복 검사
+  @Override
+  public boolean checkDuplicationUserName(String userName) {
+    boolean result = true;    
+    User user = userDao.checkDuplicationUserName(userName);
+    if (user != null){      
+      result = false;
+    }    
+    return result;
+  } 
 
   @Override
   public int updateUser(User user) {
@@ -44,6 +65,16 @@ public class UserServiceImpl implements UserService {
   public int deleteUser(int no) {
     userDao.delete(no);
     return 0;
+  }
+
+
+  @Override
+  public User loginUser(User user) {
+    // TODO Auto-generated method stub
+    User dbUser=userDao.findUser(user.getEmail());
+    if(! dbUser.getPassword().equals(user.getPassword()))
+      System.out.println("login 실패하였습니다.");
+    return dbUser;
   }
 
 }
