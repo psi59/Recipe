@@ -15,6 +15,7 @@
 		<result column="hits" property="hits" />
 		<result column="rgst" property="regiStatus" />
 		<result column="gpa" property="gradePoint" />
+		<result column="userName" property="user.userName"/>
 	</resultMap>
 	
 	<resultMap type="material" id="materialMap">
@@ -24,12 +25,14 @@
   </resultMap>
 	
 	
-	<select id="selectList" resultMap="recipeMap" parameterType="Map">
-		SELECT *  
-		FROM rcps
-		ORDER BY rcpno
-		limit #{startIndex}, #{len}
-	</select>
+	
+   <select id="selectList" resultMap="recipeMap" parameterType="Map">
+    SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits, r.rgst, r.gpa, u.uno, u.name userName
+    FROM rcps r, users u
+    WHERE r.uno = u.uno
+    ORDER BY rcpno
+    limit #{startIndex}, #{len}
+  </select>
 	
 	<select id="selectMaterialName" resultType="string" parameterType="string">
     SELECT name 

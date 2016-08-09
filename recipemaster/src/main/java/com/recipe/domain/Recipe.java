@@ -14,6 +14,14 @@ public class Recipe {
   private int hits;
   private int regiStatus;
   private int gradePoint;
+  private User user;
+  public User getUser() {
+    return user;
+  }
+  public void setUser(User user) {
+    this.user = user;
+  }
+  
   public int getRecipeNo() {
     return recipeNo;
   }
