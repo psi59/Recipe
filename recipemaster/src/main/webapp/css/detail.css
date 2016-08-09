@@ -118,42 +118,50 @@
   height: 90px; 
   position:relative;
   border-radius: 10px;
+  z-index:10;
 }
 
 .rcp-seconde-info{
+  background-color:#dddddd;
   width:50px; 
   left:700px; 
-  color:#dddddd;
   top:80px;
   height: 90px; 
   position:relative;
   border-radius: 10px;
+  z-index:9;
 }
 .rcp-third-info{
-  color:#b2b2b2;
-  top:170px;
+  background-color:#b2b2b2;
+  top:55px;
   width:50px; 
   left:700px; 
   height: 90px; 
   position:relative;
   border-radius: 10px;
+  z-index:8;
 }
 .rcp-fourth-info{
-  color:#939393;
-  top:220px;
+  background-color:#939393;
+  top:25px;
   width:50px; 
   left:700px; 
   height: 90px; 
   position:relative;
   border-radius: 10px;
+  z-index:7;
 }
 .rcp-fifth-info{
+	background-color:black;
   width:50px; 
   left:700px; 
   height: 90px; 
+  bottom:10px;
   position:relative;
   border-radius: 10px;
+  z-index:6;
 }
+
 
 
 

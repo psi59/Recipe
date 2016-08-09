@@ -33,6 +33,13 @@
     ORDER BY rcpno
     limit #{startIndex}, #{len}
   </select>
+  
+  
+  <select id="selectOne" resultMap="recipeMap" parameterType="INTEGER">
+   SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits, r.rgst, r.gpa, u.uno, u.name userName
+   FROM rcps r, users u
+   WHERE r.uno = u.uno and r.rcpno=#{value};
+  </select>
 	
 	<select id="selectMaterialName" resultType="string" parameterType="string">
     SELECT name 
@@ -40,6 +47,10 @@
     WHERE name LIKE '%${value}%'
     ORDER BY mtno
   </select>
+  
+  <update id="updateHits" parameterType="recipe">
+  UPDATE rcps set hits=${hits} where rcpno=${recipeNo};
+  </update>
 	
 	<!-- 
 	<select id="selectOne" resultMap="boardMap" parameterType="int">

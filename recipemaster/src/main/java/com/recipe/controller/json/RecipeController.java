@@ -37,6 +37,30 @@ public class RecipeController {
     return new Gson().toJson(result);
   }
   
+  @RequestMapping(path="recipeDetail",produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String recipeDetail(@RequestParam int recipeNo){
+    System.out.println("여기왔쪄염 뿌");
+    System.out.println("레시피 남바 "+recipeNo);
+    
+    HashMap<String,Object> result = new HashMap<>();
+    Recipe recipe = recipeService.getRecipe(recipeNo);
+    recipe.setHits(recipe.getHits()+1);
+    recipeService.updateHits(recipe);
+    System.out.println("recipe : "+recipe.toString());
+    
+    System.out.println("레시피 네임 "+recipe.getRecipeName());
+    try{
+      result.put("status","success");
+      result.put("data", recipe);
+    }catch (Exception e){
+      result.put("status", "false");
+    }
+
+    return new Gson().toJson(result);
+  }
+  
+  
   
   @RequestMapping(path="materialSearch",produces="application/json;charset=UTF-8")
   @ResponseBody

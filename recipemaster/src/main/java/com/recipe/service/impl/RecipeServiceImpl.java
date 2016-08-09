@@ -29,9 +29,9 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public Recipe getRecipe(int no) {
-		// TODO Auto-generated method stub
-		return null;
+	public Recipe getRecipe(int recipeNo) {
+		
+		return recipeDao.selectOne(recipeNo);
 	}
 
 	@Override
@@ -50,4 +50,9 @@ public class RecipeServiceImpl implements RecipeService {
 	public List<String> getMaterial(String materialName) {
 		return recipeDao.selectMaterialName(materialName);
 	}
+
+  @Override
+  public int updateHits(Recipe recipe) {
+    return recipeDao.updateHits(recipe);
+  }
 }
