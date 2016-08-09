@@ -13,38 +13,52 @@
 		<result column="intro" property="intro" />
 		<result column="role" property="role" />
 		<result column="join_dt" property="joinDate" />
-		<result column="rcp_url" property="recipeUrl" />		
+		<result column="rcp_url" property="recipeUrl" />
 	</resultMap>
+
+	<select id="findUser" resultMap="userMap" parameterType="String">
+		SELECT * 
+		FROM users	
+		WHERE email=#{value}
+	</select>
 
 	<select id="selectList" resultMap="userMap" parameterType="Map">
 		select uno, name, email, pwd, img, intro, role, join_dt, rcp_url
-		from users
+		from
+		users
 		order by uno desc
 		limit #{startIndex}, #{len}
 	</select>
 
 	<select id="selectOne" resultMap="userMap" parameterType="int">
-		select u.uno, u.name, u.email, u.pwd, u.img, u.intro, u.role, u.join_dt,
+		select
+		u.uno, u.name, u.email, u.pwd, u.img, u.intro, u.role, u.join_dt,
 		u.rcp_url, count(*) rcp_cnt
-		from users u inner join rcps r on u.uno = r.uno
-		where u.uno = #{no} 
+		from users u inner join rcps r on u.uno =
+		r.uno
+		where u.uno = #{no}
 	</select>
-	
+
 	<select id="checkDuplication" resultMap="userMap" parameterType="String">
-    select uno, name, email, pwd, img, intro, role, join_dt, rcp_url   
-    from users
-    where email = #{email}
-  </select>
-  
-  <select id="checkDuplicationUserName" resultMap="userMap" parameterType="String">
-    select uno, name, email, pwd, img, intro, role, join_dt, rcp_url   
-    from users
-    where name = #{userName}
-  </select>
-	
+		select uno, name, email, pwd, img, intro, role, join_dt, rcp_url
+		from
+		users
+		where email = #{email}
+	</select>
+
+	<select id="checkDuplicationUserName" resultMap="userMap"
+		parameterType="String">
+		select uno, name, email, pwd, img, intro, role, join_dt,
+		rcp_url
+		from users
+		where name = #{userName}
+	</select>
+
 	<insert id="insert" parameterType="user">
-	 insert into users(name, email, pwd, role, join_dt)
-	 values ( #{userName}, #{email}, #{password}, 'user', now())
-  </insert>
-    
+		insert into users(name, email,
+		pwd, role, join_dt)
+		values ( #{userName}, #{email}, #{password},
+		'user', now())
+	</insert>
+
 </mapper>

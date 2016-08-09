@@ -12,4 +12,5 @@ public interface UserService {
   boolean checkDuplicationUserName(String userName); // 닉네임 중복체크
   int updateUser(User user);
   int deleteUser(int no);
+  User loginUser(User user); //login
 }

@@ -67,6 +67,14 @@ public class UserServiceImpl implements UserService {
     return 0;
   }
 
-  
+
+  @Override
+  public User loginUser(User user) {
+    // TODO Auto-generated method stub
+    User dbUser=userDao.findUser(user.getEmail());
+    if(! dbUser.getPassword().equals(user.getPassword()))
+      System.out.println("login 실패하였습니다.");
+    return dbUser;
+  }
 
 }

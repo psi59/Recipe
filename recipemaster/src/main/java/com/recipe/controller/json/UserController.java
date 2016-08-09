@@ -22,7 +22,7 @@ public class UserController {
   @RequestMapping(path="list", produces="application/json;charset=UTF-8")
   @ResponseBody
   public String list(@RequestParam(defaultValue="1")int pageNo,
-                     @RequestParam(defaultValue="3")int pageSize){
+      @RequestParam(defaultValue="3")int pageSize){
     HashMap<String, Object> result = new HashMap<>();
     try{
       List<User> list = userService.getUserList(pageNo, pageSize);
@@ -35,7 +35,7 @@ public class UserController {
 
     return new Gson().toJson(result);
   }
-  
+
   @RequestMapping(path="add", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
   @ResponseBody
   public String add(User user, String passwordCheck){    
@@ -52,7 +52,7 @@ public class UserController {
     }    
     return new Gson().toJson(result);
   }  
-  
+
   // 이메일 중복 체크
   @RequestMapping(path="checkDuplication", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
   @ResponseBody
@@ -66,7 +66,7 @@ public class UserController {
     }
     return new Gson().toJson(result);
   }
-    
+
   // 닉네임 중복 체크
   @RequestMapping(path="checkDuplicationUserName", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
   @ResponseBody
@@ -119,11 +119,11 @@ public class UserController {
     }
     return new Gson().toJson(result);
   }
-  
+
   @RequestMapping(path="rank", produces="application/json;charset=UTF-8")
   @ResponseBody
   public String rank(@RequestParam(defaultValue="1")int pageNo,
-                     @RequestParam(defaultValue="10")int pageSize){
+      @RequestParam(defaultValue="10")int pageSize){
     HashMap<String, Object> result = new HashMap<>();
     try{
       List<User> list = userService.getUserList(pageNo, pageSize);
@@ -136,6 +136,22 @@ public class UserController {
 
     return new Gson().toJson(result);
   }
-  
-  
+
+  @RequestMapping(path="login", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+  @ResponseBody //URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
+  public String login(User user) {
+    //index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
+    System.out.println(user.toString());
+    HashMap<String,Object> result = new HashMap<>();
+    try {
+      User logUser = userService.loginUser(user);
+      result.put("status", "success");
+      result.put("data", logUser);
+      System.out.println("logUser:"+logUser.toString());
+    } catch (Exception e) {
+      result.put("status", "failure");
+    }
+    return new Gson().toJson(result);
+    //result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
+  }
 }

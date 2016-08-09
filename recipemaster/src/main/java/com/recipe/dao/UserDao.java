@@ -13,4 +13,5 @@ public interface UserDao {
   User checkDuplicationUserName(String userName);
   int update(User user);
   int delete(int no);
+  User findUser(String email);//Read or Retrieve
 }
