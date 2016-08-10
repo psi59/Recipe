@@ -14,7 +14,7 @@
 //			
 //		});
 //	});
-
+$(function(){
   var detailTemp = $('#recipe-detail-template').html();
   var comDetailTemp = Handlebars.compile(detailTemp); 
 
@@ -27,11 +27,12 @@
   var detailImageStep = $('#recipe-detail-step-images-template').html();
   var comDetailImageStep = Handlebars.compile(detailImageStep); 
 
+
   Handlebars.registerHelper("inc", function(value, options)
 		  {
 		      return parseInt(value) + 1;
  });
- 
+  
 	$(function(){
 		$(document).on('click','.detail',function(event) {
 			console.log($(event.target).parent().children('input[name="recipeNo"]').val());
@@ -45,6 +46,7 @@
 						return;
 					}
 					$('.rcp-header > .title').text(result.data.recipeName);
+					$('.rcp-header > .date').text(result.data.recipeDate);
 					$('#detail_pop_up').bPopup({
 						follow: [false, false], //x, y
 						onOpen:function(){
@@ -72,7 +74,7 @@
 			});
 		});		
 	})
-	
+})	
 	
 //	$(function(){
 //		$('.detail').click(function() {

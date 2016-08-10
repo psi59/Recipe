@@ -31,13 +31,20 @@
    margin-left:35px;
 }
 
+.rcp-detail-body{
+	  margin-left : 80px;
+  margin-right : 80px;
+  margin-top : 20px;
+}
+
+/* 
 .rcp-detail-form .rcp-body{
   
   margin-left : 80px;
   margin-right : 80px;
   margin-top : 20px;
   
-}
+} */
 
 .rcp-detail-form .rcp-images{
   width:504px;

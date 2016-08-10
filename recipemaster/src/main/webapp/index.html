@@ -447,9 +447,9 @@
 {{#each this}}
 
 
- <section id="rcp-custom-list{{@index}}">
+ <section name="rcp-custom-list{{@index}}">
     <div class="rcp-list ">
-      <div class="rcp-1024 list{{@index}}">
+      <div class="rcp-1024 list{{@index}}" >
         <h3>{{@index}}</h3>
         <div class="row"></div>
       </div>
@@ -561,18 +561,22 @@
 
               <!-- 하단 버튼들 시작 (요리시간, 좋아요, 스크랩) -->
               <div class="rcp-240">
-
-                <div class="glyphicon glyphicon-time rcp-cookTime col-xs-4"
+              <input type="hidden" name="recipeNo" value="{{recipeNo}}">
+              <input type="hidden" name="userNo" value="{{userNo}}">
+                <div class="rcp-cookTime col-xs-4"
                   align="center">
+                   <div class="glyphicon glyphicon-time "></div>
                   <b>{{cookTime}}분</b>
                 </div>
                 <div
-                  class="glyphicon glyphicon-heart-empty rcp-cookTime col-xs-4"
+                  class="rcp-cookTime col-xs-4 rcp-heart"
                   align="center">
-                  <a href="#"><b>좋아요</b></a>
+                  <div class="glyphicon glyphicon-heart-empty "></div>
+                  <a><b class="rcp-like" id="rcp-like">좋아요</b></a>
                 </div>
-                <div class="glyphicon glyphicon-pushpin rcp-cookTime col-xs-4"
+                <div class="rcp-cookTime col-xs-4"
                   align="center">
+                  <div class="glyphicon glyphicon-pushpin"></div>
                   <a href="#"><b>스크랩</b></a>
                 </div>
 
@@ -653,19 +657,19 @@
 									$('#loginBtn')
 											.html(
 													'<a href="http://127.0.0.1:8080/" id="logoutBtn"><span class="rcp-btn-default-2">로그아웃</span></a>');
-
+ 
 									sessionStorage.setItem('userNo',
 											result.data.userNo);
 									sessionStorage.setItem('role',
 											result.data.role);
-
+							
+											
 									var userNo = sessionStorage
 											.getItem('userNo')
 									var role = sessionStorage
-											.getItem('role')
+											.getItem('role') 
 
-									location = "http://127.0.0.1:8080?userNo=&"
-											+ userNo;
+									location = "http://127.0.0.1:8080";
 
 									/*  $('#profileEmail').html('<a href="#" class="dropdown__header rcp-infobox-text" id="profileId">'+result.data.email+'</a> ');
 									 $('#profileName').html('<h6 class="rcp-nickname" id="profileName">'+result.data.userName+'</h6>');
