@@ -23,9 +23,11 @@ nav {
   background-color: #b51515;
   position: fixed;
   top: 0;
+  z-index:99999;
 }
 
 .nav-container {
+	z-index:10000;
   padding: 20px;
   margin: 0 auto;
   text-align: center;
@@ -62,7 +64,7 @@ section {
   padding: 50px;
   background-color: #ecf0f1;
   border-bottom: 1px solid #ccc;
-  height: 800px;
+  height: 850px;
   text-align: center;
 }
 
@@ -160,3 +162,222 @@ footer a:hover {
   width: 100%;
   min-width: 230pt;
 }
+
+/* best chef */
+.rcp-rankmedal{
+  position: absolute;
+  left:0%;
+  top:1%;
+  z-index: 88888;
+  width: 90px;
+  height: 100px;
+}
+.rcp-rankstar{
+	position:absolute;
+	left:31%;
+	top:68%;
+	padding-top:-5px;
+	width:15px;
+	height: 15px;
+	
+}
+.rcp-gomain{
+	padding:10pt;
+  padding-top:15pt;
+  padding-bottom:-10pt;	
+	width:150px;
+	height:100%;
+}
+.rcp-topbar{
+	margin-left: -53pt;	
+}
+
+body {
+  margin: 0;
+  color: #b55c80;
+  font: 300 18px/18px Roboto;
+  background: -webkit-linear-gradient(90deg, #DAD299 10%, #B0DAB9 90%);
+  background: -moz-linear-gradient(90deg, #DAD299 10%, #B0DAB9 90%);
+  background: -ms-linear-gradient(90deg, #DAD299 10%, #B0DAB9 90%);
+  background: -o-linear-gradient(90deg, #DAD299 10%, #B0DAB9 90%);
+  background: linear-gradient(90deg, #DAD299 10%, #B0DAB9 90%)
+}
+
+*,
+:after,
+:before {
+  box-sizing: border-box
+}
+
+.clearfix:after,
+.clearfix:before {
+  content: '';
+  display: table
+}
+
+.clearfix:after {
+  clear: both;
+  display: block
+}
+
+.fresh-ui-wrap {
+	z-index:5000;
+  width: 360px;
+  height: 500px;
+  margin: 4% auto;
+  margin-left: 90pt;
+  overflow: hidden;
+  background: #fff;
+  position: relative;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19)
+}
+
+.fresh-ui {
+  padding: 20px;
+  height: 100%;
+  border-top: 5px solid
+}
+
+.fresh-ui:hover .header .social .list {
+  right: 15px
+}
+
+.fresh-ui:hover .header .social .list a {
+  -webkit-transform: translateX(-15px);
+  transform: translateX(-15px);
+  font-size: 10pt;
+  color:#000000;
+}
+
+.fresh-ui .header {
+  position: relative
+}
+
+.fresh-ui .header .photo img {
+  width: 100%;
+  height:270px;
+  display: block
+}
+
+.fresh-ui .header .social {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 150px;
+  padding: 15px;
+  overflow: hidden;
+  position: absolute
+}
+
+.fresh-ui .header .social:after {
+  top: 0;
+  left: 150px;
+  content: '';
+  width: 300px;
+  height: 260px;
+  position: absolute;
+  background: rgba(0, 0, 0, .5);
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+  transition: all .35s ease-in-out 0s
+}
+
+.fresh-ui .header:hover .social:after {
+  left: -150px
+}
+
+.fresh-ui .header:hover .social .list a:before {
+  right: 40px
+}
+
+.fresh-ui .header .social .list {
+  right: -10px;
+  z-index: 999;
+  position: absolute
+}
+
+.fresh-ui .header .social .list a {
+  width: 30px;
+  height: 30px;
+  color: inherit;
+  display: block;
+  margin: 12px 0;
+  background: #fff;
+  line-height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  position: relative;
+  -webkit-transform: translateX(30px);
+  transform: translateX(30px);
+  -webkit-transition: all .4s ease-in-out 0s;
+  transition: all .4s ease-in-out 0s;
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19)
+}
+
+.fresh-ui .header .social .list a:before {
+  top: 0;
+  color: #ddd;
+  right: 200px;
+  font-size: 14px;
+  padding: 0 10px;
+  min-width: 80px;
+  position: absolute;
+  border-radius: 2px;
+  content: attr(data-title);
+  background-color: rgba(0, 0, 0, .4);
+  transition: all .4s ease-in-out 0s
+}
+
+.fresh-ui .header .social .list a:nth-child(1),
+.fresh-ui .header .social .list a:nth-child(1):before {
+  -webkit-transition-duration: .1s;
+  transition-duration: .1s
+}
+
+.fresh-ui .header .social .list a:nth-child(2),
+.fresh-ui .header .social .list a:nth-child(2):before {
+  -webkit-transition-duration: .2s;
+  transition-duration: .2s
+}
+
+.fresh-ui .header .social .list a:nth-child(3),
+.fresh-ui .header .social .list a:nth-child(3):before {
+  -webkit-transition-duration: .3s;
+  transition-duration: .3s
+}
+
+.fresh-ui .header .social .list a:nth-child(4),
+.fresh-ui .header .social .list a:nth-child(4):before {
+  -webkit-transition-duration: .4s;
+  transition-duration: .4s
+}
+
+.fresh-ui .header .social .list a:nth-child(5) {
+  -webkit-transition-duration: .5s;
+  transition-duration: .5s
+}
+
+.fresh-ui .content {
+  padding-top: 10px
+}
+
+.fresh-ui .content .name {
+  font-size: 28px;
+  font-weight: 900;
+  margin-bottom: 15px
+}
+.fresh-ui .content .text{
+  line-height:24px;
+}
+
+.fresh-ui .content .list a {
+  float: left;
+  clear: both;
+  color: inherit;
+  font-size: 16px;
+  line-height: 20px;
+  display: inline-block;
+  text-decoration: none
+}
+/*  */
+

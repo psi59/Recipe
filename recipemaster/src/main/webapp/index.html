@@ -58,12 +58,13 @@
 						<div id="profileView" class="main-nav__dropdown profile-dropdown">
 							<div class="rcp-outline">
 								<div>
-									<a href="#0" class="dropdown__header"><img
-										class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a href="#"
+									<a href="#0" class="dropdown__header"><img id="profileImg"
+										class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a id="profileEmail"
+										 href="#"
 										class="dropdown__header rcp-infobox-text">yongyi1587@naver.com</a>
-									<h6 class="rcp-nickname">길용이</h6>
+									<h6 id="profileName" class="rcp-nickname">길용이</h6>
 									<a href="#0" class="dropdown__header"> <span
-										class="dropdown__title rcp-infobox-text"> <img
+										id="profileGrade" class="dropdown__title rcp-infobox-text"> <img
 											src="img/star.png"> Master Chef
 									</span>
 									</a>
@@ -73,11 +74,13 @@
 										<button type="button" class="btn btn-default rcp-btn-nav">로그아웃</button>
 									</div>
 								</div>
-								<nav class="dropdown__nav rcp-menuname rcp-back">
+								<!-- <nav class="dropdown__nav rcp-menuname rcp-back">
 									<a href="../mypage/mypage.html"><span class="rcp-back">내
 											레시피</span></a><a href="../writerecipe.html"><span class="rcp-back">레시피
 											쓰기</span></a><a href="#"><span class="rcp-back">구독 정보</span></a>
-								</nav>
+								</nav> -->
+								<button class="infoBtn">Write</button>
+                <button class="infoBtn">Recipe</button>
 							</div>
 						</div>
 					</div>
@@ -594,14 +597,19 @@
 {{/each}}
 </script>
 
-
 	<script id="chef-card-template" type="text/x-handlebars-template">
   {{#each data}}
-  <!-- 쉐프카드 -->          
-  <figure class="snip1344">
-   <img src="img/food01_1.png" alt="profile-sample1" class="background" />
-   <img src="img/ic_launcher.png" alt="profile-sample1" class="profile" />
-   <img src="img/medal1.png" alt="profile-sample1" class="medal" />
+  <!-- 쉐프카드 -->
+  {{#if @first}} <figure class="snip1344">
+  {{else if @last}} <figure class="snip1344 rcp-hidden-xs rcp-hidden-sm">
+  {{else}} <figure class="snip1344 rcp-hidden-xs">
+  {{/if}} <img src="img/food01.png" alt="profile-sample1" class="background" />
+  <img src="{{image}}" alt="profile-sample1" class="profile" />
+  <img src=
+  {{#if @first}} "img/medal1.png"
+  {{else if @last}} "img/medal3.png"
+  {{else}} "img/medal2.png"
+  {{/if}} alt="profile-sample1" class="medal" />
    <figcaption>
     <h3>{{userName}}</h3>           
       <div>{{intro}}</div>
@@ -609,7 +617,7 @@
    </figcaption>
   </figure>
   {{/each}}
-</script>
+  </script>
 
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -620,6 +628,7 @@
 	<script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
 	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
 
+
 	<!--  사용자 js -->
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/common.js"></script>
@@ -629,6 +638,7 @@
 	<script src="js/signup.js"></script>
 	<script src="js/mainListAjax.js"></script>
 	<script src="js/recipeDetail.js"></script>
+  <script src="js/login.js"></script>
 
 	<!-- 준모 login -->
 	<script>
@@ -682,6 +692,7 @@
 							}); /* end of ajax */
 				}); /* end of jquery */
 	</script>
+
 
 	<script>
 		$(function() {

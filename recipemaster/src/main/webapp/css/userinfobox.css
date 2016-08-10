@@ -14,6 +14,21 @@ $main: #7b7de5;
 	width: 100%;
 } */
 
+/* 버튼 0810수정*/
+.infoBtn {
+    display: block;
+    width: 170px;
+    height: 40px;
+    padding: 0;
+    margin: 10px 20px 10px;
+    font-weight: 700;
+    color: #fff;
+    background-color: #B51515;
+    border: none;
+    border-radius: 20px;
+    transition: background-color .10s ease-in-out;
+}
+
 #editUserInfo-pop-up-banner {
   display: none;
   width: 375px;
@@ -72,11 +87,19 @@ $main: #7b7de5;
   font-size: 11pt;
 }
 
+/* 0810수정 */
 .rcp-btn-nav {
-  color: #b51515;
+  /* color: #b51515;
   font-weight: bold;
   margin-top: 1.3em;
-  margin-bottom: 1em;
+  margin-bottom: 1em; */
+      font-weight: bold;
+    margin-top: 1.3em;
+    margin-bottom: 1em;
+    color: #fff;
+    background-color: #B51515;
+    border: none;
+    border-radius: 20px;
 }
 
 .rcp-outline {
@@ -178,7 +201,7 @@ html, body {
 
 .main-nav__dropdown {
   position: absolute;
-  background: #b51515;
+  background-color: rgba(10,10,10,.68); /* 0810수정 */
   top: 4em;
   right:-4.5em;
   min-width: 15em;
