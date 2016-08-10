@@ -35,13 +35,13 @@
 
         var time;
         	$("#list"+i+"image"+j).hover(function(event){
-        	   this.src = "images/3.jpg";
+        	   this.src = "img/3.jpg";
         	  time= setTimeout(function(){
         		  console.log("event target"+$(event.target).attr("src"));
-        		   $(event.target).attr('src',"images/4.jpg");
+        		   $(event.target).attr('src',"img/4.jpg");
         	    	},1500);
         	}, function(){
-        	    this.src = "images/2.jpg";
+        	    this.src = "img/2.jpg";
         	}).mouseleave(function(){
         		clearTimeout(time);
         		  });

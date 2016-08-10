@@ -42,7 +42,7 @@
 	<insert id="insertMaterials" parameterType="map">
         insert into rcp_mt(rcpno, mtno, rcpqt)
         values <!-- (#{recipeNo}, #{materialName}, #{materialAmount}) -->
-        <foreach collection="list" item="item" separator=" , ">
+        <foreach collection="materialList" item="item" separator=" , ">
             (#{recipeNo}, #{item.materialName}, #{item.materialAmount})
         </foreach>
   </insert>
