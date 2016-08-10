@@ -6,7 +6,7 @@ import java.util.Map;
 import com.recipe.domain.User;
 
 public interface UserDao {
-  Map insert(User user);
+  void insert(User user);
   List<User> selectList(Map<String,Object> params);
   User selectOne(int no);
   User checkDuplication(String email);

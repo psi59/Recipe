@@ -60,4 +60,10 @@ public class RecipeServiceImpl implements RecipeService {
 	public int updateHits(Recipe recipe) {
 		return recipeDao.updateHits(recipe);
 	}
+
+  @Override
+  public int likeUp(Recipe recipe) {
+    // TODO Auto-generated method stub
+    return recipeDao.likeUp(recipe);
+  }
 }

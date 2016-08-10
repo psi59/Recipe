@@ -8,6 +8,7 @@ import com.recipe.domain.Recipe;
 public interface RecipeService {
   int addRecipe(Map map); 
   void addMaterials(Map map);
+  int likeUp(Recipe recipe);
   List<Recipe> getRecipeList(int pageNo, int pageSize);
   Recipe getRecipe(int recipeNo);
   int updateRecipe(Recipe recipe);

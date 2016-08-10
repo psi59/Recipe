@@ -102,8 +102,8 @@ jQuery(document)
 					var pasteAvailable = Boolean(clipBoardAvailable
 							& fileReaderAvailable & !eval('/*@cc_on !@*/false'));
 
-					if (fileReaderAvailable) {
 
+					if (fileReaderAvailable) {
 						// Enable drop area upload
 						$('#dropzone').imageUpload({
 							errorContainer : $('span', '#errormessages'),

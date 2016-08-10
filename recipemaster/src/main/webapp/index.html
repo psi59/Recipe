@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="css/popup.css">
 
 <!-- --- 아이콘 CDN ----- -->
-<script src="https://use.fontawesome.com/d9e67edb08.js"></script>
+<script src="js/template/d9e67edb08.js"></script>
 
 </head>
 
@@ -58,12 +58,13 @@
 						<div id="profileView" class="main-nav__dropdown profile-dropdown">
 							<div class="rcp-outline">
 								<div>
-									<a href="#0" class="dropdown__header"><img
-										class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a href="#"
+									<a href="#0" class="dropdown__header"><img id="profileImg"
+										class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a id="profileEmail"
+										 href="#"
 										class="dropdown__header rcp-infobox-text">yongyi1587@naver.com</a>
-									<h6 class="rcp-nickname">길용이</h6>
+									<h6 id="profileName" class="rcp-nickname">길용이</h6>
 									<a href="#0" class="dropdown__header"> <span
-										class="dropdown__title rcp-infobox-text"> <img
+										id="profileGrade" class="dropdown__title rcp-infobox-text"> <img
 											src="img/star.png"> Master Chef
 									</span>
 									</a>
@@ -73,11 +74,13 @@
 										<button type="button" class="btn btn-default rcp-btn-nav">로그아웃</button>
 									</div>
 								</div>
-								<nav class="dropdown__nav rcp-menuname rcp-back">
+								<!-- <nav class="dropdown__nav rcp-menuname rcp-back">
 									<a href="../mypage/mypage.html"><span class="rcp-back">내
 											레시피</span></a><a href="../writerecipe.html"><span class="rcp-back">레시피
 											쓰기</span></a><a href="#"><span class="rcp-back">구독 정보</span></a>
-								</nav>
+								</nav> -->
+								<button class="infoBtn">Write</button>
+                <button class="infoBtn">Recipe</button>
 							</div>
 						</div>
 					</div>
@@ -447,9 +450,9 @@
 {{#each this}}
 
 
- <section id="rcp-custom-list{{@index}}">
+ <section name="rcp-custom-list{{@index}}">
     <div class="rcp-list ">
-      <div class="rcp-1024 list{{@index}}">
+      <div class="rcp-1024 list{{@index}}" >
         <h3>{{@index}}</h3>
         <div class="row"></div>
       </div>
@@ -477,9 +480,9 @@
       
             <div class="thumbnail row relative">
               <div class="rcp-profile-position">
-                <img src="images/profile{{@index}}.jpg" class="img-circle rcp-profile">
+                <img src="img/profile{{@index}}.jpg" class="img-circle rcp-profile">
               </div>
-              <img src="images/2.jpg" class="image1" class="rcp-relative">
+              <img src="img/2.jpg" class="image1" class="rcp-relative">
              
               <div class="rcp-caption">
                 <h4 class="pull-right rcp-Grade">평점</h4>
@@ -531,8 +534,8 @@
                   <div class="item">
                     <div class="rcp-comment col-md-offset-1 col-md-10">
                       <!--  image 크기를 잘 몰라서 일단 %로 안하고 85px로 고정해놓 -->
-                      <img src="images/view.png" class="img-rounded rcp-images">
-                      <img src="images/view.png" class="img-rounded rcp-images">
+                      <img src="img/view.png" class="img-rounded rcp-images">
+                      <img src="img/view.png" class="img-rounded rcp-images">
                     </div>
                     <div class="col-md-1"></div>
                   </div>
@@ -561,18 +564,22 @@
 
               <!-- 하단 버튼들 시작 (요리시간, 좋아요, 스크랩) -->
               <div class="rcp-240">
-
-                <div class="glyphicon glyphicon-time rcp-cookTime col-xs-4"
+              <input type="hidden" name="recipeNo" value="{{recipeNo}}">
+              <input type="hidden" name="userNo" value="{{userNo}}">
+                <div class="rcp-cookTime col-xs-4"
                   align="center">
+                   <div class="glyphicon glyphicon-time "></div>
                   <b>{{cookTime}}분</b>
                 </div>
                 <div
-                  class="glyphicon glyphicon-heart-empty rcp-cookTime col-xs-4"
+                  class="rcp-cookTime col-xs-4 rcp-heart"
                   align="center">
-                  <a href="#"><b>좋아요</b></a>
+                  <div class="glyphicon glyphicon-heart-empty "></div>
+                  <a><b class="rcp-like" id="rcp-like">좋아요</b></a>
                 </div>
-                <div class="glyphicon glyphicon-pushpin rcp-cookTime col-xs-4"
+                <div class="rcp-cookTime col-xs-4"
                   align="center">
+                  <div class="glyphicon glyphicon-pushpin"></div>
                   <a href="#"><b>스크랩</b></a>
                 </div>
 
@@ -590,14 +597,19 @@
 {{/each}}
 </script>
 
-
 	<script id="chef-card-template" type="text/x-handlebars-template">
   {{#each data}}
-  <!-- 쉐프카드 -->          
-  <figure class="snip1344">
-   <img src="img/food01_1.png" alt="profile-sample1" class="background" />
-   <img src="img/ic_launcher.png" alt="profile-sample1" class="profile" />
-   <img src="img/medal1.png" alt="profile-sample1" class="medal" />
+  <!-- 쉐프카드 -->
+  {{#if @first}} <figure class="snip1344">
+  {{else if @last}} <figure class="snip1344 rcp-hidden-xs rcp-hidden-sm">
+  {{else}} <figure class="snip1344 rcp-hidden-xs">
+  {{/if}} <img src="img/food01.png" alt="profile-sample1" class="background" />
+  <img src="{{image}}" alt="profile-sample1" class="profile" />
+  <img src=
+  {{#if @first}} "img/medal1.png"
+  {{else if @last}} "img/medal3.png"
+  {{else}} "img/medal2.png"
+  {{/if}} alt="profile-sample1" class="medal" />
    <figcaption>
     <h3>{{userName}}</h3>           
       <div>{{intro}}</div>
@@ -605,7 +617,7 @@
    </figcaption>
   </figure>
   {{/each}}
-</script>
+  </script>
 
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -616,6 +628,7 @@
 	<script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
 	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
 
+
 	<!--  사용자 js -->
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/common.js"></script>
@@ -625,59 +638,8 @@
 	<script src="js/signup.js"></script>
 	<script src="js/mainListAjax.js"></script>
 	<script src="js/recipeDetail.js"></script>
+  <script src="js/login.js"></script>
 
-	<!-- 준모 login -->
-	<script>
-
-		$("#userLogin")
-				.click(
-						function() {
-							$.ajax({
-								url : '/user/login.json',
-								method : 'post',
-								dataType : 'json',
-								data : {
-									email : $('#userEmail').val(),
-									password : $('#userPassword').val()
-								},
-								success : function(result) {
-									if (result.status != 'success') {
-										alert('실행중 오류 발생');
-										return;
-									}
-									alert(result.data.userName
-											+ '님 환영합니다.');
-									$('#login-pop-up-banner').bPopup()
-											.close();
-									$('#signUpBtn').hide();
-									$('#loginBtn')
-											.html(
-													'<a href="http://127.0.0.1:8080/" id="logoutBtn"><span class="rcp-btn-default-2">로그아웃</span></a>');
-
-									sessionStorage.setItem('userNo',
-											result.data.userNo);
-									sessionStorage.setItem('role',
-											result.data.role);
-
-									var userNo = sessionStorage
-											.getItem('userNo')
-									var role = sessionStorage
-											.getItem('role')
-
-									location = "http://127.0.0.1:8080?userNo=&"
-											+ userNo;
-
-									/*  $('#profileEmail').html('<a href="#" class="dropdown__header rcp-infobox-text" id="profileId">'+result.data.email+'</a> ');
-									 $('#profileName').html('<h6 class="rcp-nickname" id="profileName">'+result.data.userName+'</h6>');
-									 $('#profileGrade').html('<span  class="dropdown__title rcp-infobox-text" id="profileGrade"><img src="img/star.png" >'+head Chef+'</span>'); */
-
-								},
-								error : function() {
-									alert('서버 요청 오류');
-								}
-							}); /* end of ajax */
-				}); /* end of jquery */
-	</script>
 
 	<script>
 		$(function() {

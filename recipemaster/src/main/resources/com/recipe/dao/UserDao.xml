@@ -55,10 +55,8 @@
 	</select>
 
 	<insert id="insert" parameterType="user">
-		insert into users(name, email,
-		pwd, role, join_dt)
-		values ( #{userName}, #{email}, #{password},
-		'user', now())
+		insert into users(name, email, pwd, role, join_dt)
+		values ( #{userName}, #{email}, #{password}, 'user', now())
 	</insert>
 
 </mapper>
