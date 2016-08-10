@@ -29,9 +29,7 @@
   width: 100%;
   height: 100%;
   vertical-align: top;
-  opacity: 0.3;
-  /* -webkit-filter: grayscale(100%) blur(10px); */  
-  /* filter: grayscale(100%) blur(10px); */  
+  opacity: 0.3; 
   -webkit-transition: all 2s ease;
   transition: all 2s ease;
 }
@@ -55,8 +53,7 @@
   transform: translate(-50%, 0%);
 }
 
-.snip1344 figcaption {  
-  /* color: #fff; */
+.snip1344 figcaption { 
   text-align: left;
   position: absolute;
   bottom: 3%;
@@ -64,8 +61,6 @@
 } 
 
 .snip1344 h3 {
-  /* margin: 0 0 5px; */
-  /* width:5em; */
   font-size: 20px;
   font-weight: 400;
   color: #fff;

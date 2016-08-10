@@ -590,14 +590,19 @@
 {{/each}}
 </script>
 
-
 	<script id="chef-card-template" type="text/x-handlebars-template">
   {{#each data}}
-  <!-- 쉐프카드 -->          
-  <figure class="snip1344">
-   <img src="img/food01_1.png" alt="profile-sample1" class="background" />
-   <img src="img/ic_launcher.png" alt="profile-sample1" class="profile" />
-   <img src="img/medal1.png" alt="profile-sample1" class="medal" />
+  <!-- 쉐프카드 -->
+  {{#if @first}} <figure class="snip1344">
+  {{else if @last}} <figure class="snip1344 rcp-hidden-xs">
+  {{else}} <figure class="snip1344 rcp-hidden-xs rcp-hidden-sm">
+  {{/if}} <img src="img/food01.png" alt="profile-sample1" class="background" />
+  <img src="{{image}}" alt="profile-sample1" class="profile" />
+  <img src=
+  {{#if @first}} "img/medal1.png"
+  {{else if @last}} "img/medal3.png"
+  {{else}} "img/medal2.png"
+  {{/if}} alt="profile-sample1" class="medal" />
    <figcaption>
     <h3>{{userName}}</h3>           
       <div>{{intro}}</div>
@@ -605,7 +610,7 @@
    </figcaption>
   </figure>
   {{/each}}
-</script>
+  </script>
 
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>

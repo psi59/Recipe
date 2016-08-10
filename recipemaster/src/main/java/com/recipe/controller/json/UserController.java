@@ -41,8 +41,7 @@ public class UserController {
   public String add(User user, String passwordCheck){    
     HashMap<String,Object> result = new HashMap<>();
     try{
-      // 이메일 중복 확인
-      System.out.println("Null Check : _"+user.getEmail()+"_"+user.getPassword()+"_");
+      // 이메일 중복 확인      
       if(userService.checkDuplication(user.getEmail()) && user.getPassword().equals(passwordCheck)){
         userService.addUser(user);
         result.put("status", "success");
