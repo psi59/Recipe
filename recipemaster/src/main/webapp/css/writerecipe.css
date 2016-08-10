@@ -1,0 +1,75 @@
+body {
+  background-color: #ffb9b9;
+}
+
+.lablebox {
+  position: relative;
+  display: block;
+}
+.lablebox .inputbox {
+  font: 18px Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+  display: block;
+  border: none;
+  padding: 20px;
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 18px;
+  outline: none;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.lablebox .inputbox::-webkit-input-placeholder {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  color: #999;
+  font: 18px Helvetica, Arial, sans-serif;
+}
+.lablebox .inputbox::-moz-placeholder {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  color: #999;
+  font: 18px Helvetica, Arial, sans-serif;
+}
+.lablebox .inputbox:-ms-input-placeholder {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  color: #999;
+  font: 18px Helvetica, Arial, sans-serif;
+}
+.lablebox .inputbox::placeholder {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  color: #999;
+  font: 18px Helvetica, Arial, sans-serif;
+}
+.lablebox .inputbox:focus, .lablebox .inputbox.populated {
+  padding-top: 28px;
+  padding-bottom: 12px;
+}
+.lablebox .inputbox:focus::-webkit-input-placeholder, .lablebox .inputbox.populated::-webkit-input-placeholder {
+  color: transparent;
+}
+.lablebox .inputbox:focus::-moz-placeholder, .lablebox .inputbox.populated::-moz-placeholder {
+  color: transparent;
+}
+.lablebox .inputbox:focus:-ms-input-placeholder, .lablebox .inputbox.populated:-ms-input-placeholder {
+  color: transparent;
+}
+.lablebox .inputbox:focus::placeholder, .lablebox .inputbox.populated::placeholder {
+  color: transparent;
+}
+.lablebox .inputbox:focus + span, .lablebox .inputbox.populated + span {
+  opacity: 1;
+  top: 10px;
+}
+.lablebox .inputname {
+  color: #ee7272;
+  font: 13px Helvetica, Arial, sans-serif;
+  position: absolute;
+  top: 0px;
+  left: 20px;
+  opacity: 0;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
