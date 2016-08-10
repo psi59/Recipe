@@ -12,7 +12,7 @@ $("#userLogin").click(
 					if (result.status != 'success') {
 						alert('실행중 오류 발생');
 						return;
-					}
+					} 
 					
 					alert(result.data.image);
 					
