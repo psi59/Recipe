@@ -141,7 +141,7 @@
 
 					});
 	
-	$('#appmtbtn')
+	$('#appmtbtn') 
 	.click(
 			function() {
 				$("#appendSlot")
