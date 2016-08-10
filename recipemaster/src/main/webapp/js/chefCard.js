@@ -117,7 +117,7 @@ $(document).ready(function(){
 					return;
 				}
 
-				$('#rcp-main-rank').append(template(result));
+				$('#rcp-chef-rank').append(template(result));
 			},
 			error : function() {
 				alert('서버 요청 오류!...')
