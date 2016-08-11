@@ -16,6 +16,7 @@ $("#userLogin").click(
 						$('#warning').css('color','red').css('font-size', '13px');
 						return;
 					} 
+
 					if(result.data != null){
 					alert(result.data.userName+ '님 환영합니다.');
 					
@@ -33,6 +34,7 @@ $("#userLogin").click(
 						subsCount : result.data.subsCount
 					});
 					
+
 					var jsonData = JSON.stringify(data);
 					
 					

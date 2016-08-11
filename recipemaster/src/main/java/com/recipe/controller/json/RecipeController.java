@@ -65,11 +65,13 @@ public class RecipeController {
 	 @RequestMapping(path="list",produces="application/json;charset=UTF-8")
 	  @ResponseBody
 	  public String list(
-	      @RequestParam(defaultValue="1") int pageNo, 
+	      @RequestParam int userNo, 
 	      @RequestParam(defaultValue="4") int pageSize){
 	    HashMap<String,Object> result = new HashMap<>();
-	    List<Recipe> list = recipeService.getRecipeList(pageNo, pageSize);
-	      System.out.println(list.get(0));
+	    System.out.println("userNo"+userNo);
+	    List<Recipe> list = recipeService.getRecipeList(userNo, pageSize);
+	    for(int i =0; i<list.size(); i++){
+	    }
 	    try{
 	      result.put("status","success");
 	      result.put("data", list);
@@ -79,6 +81,27 @@ public class RecipeController {
 
 	    return new Gson().toJson(result);
 	  }
+	 
+	 @RequestMapping(path="list2",produces="application/json;charset=UTF-8")
+   @ResponseBody
+   public String list2(
+       @RequestParam int userNo,
+       @RequestParam(defaultValue="4") int pageSize){
+     HashMap<String,Object> result = new HashMap<>();
+     List<Recipe> list = recipeService.getRecipeList2(userNo, pageSize);
+     for(int i =0; i<list.size(); i++){
+     }
+     try{
+       result.put("status","success");
+       result.put("data", list);
+     }catch (Exception e){
+       result.put("status", "false");
+     }
+
+     return new Gson().toJson(result);
+   }
+ 
+	 
 	
 	@RequestMapping(path="recipeDetail",produces="application/json;charset=UTF-8")
 	@ResponseBody
@@ -90,10 +113,7 @@ public class RecipeController {
 		Recipe recipe = recipeService.getRecipe(recipeNo);
 		recipe.setHits(recipe.getHits()+1);
 		recipeService.updateHits(recipe);
-		System.out.println("recipe : "+recipe.toString());
-
-		System.out.println("레시피 네임 "+recipe.getRecipeName());
-		try{
+	try{
 			result.put("status","success");
 			result.put("data", recipe);
 		}catch (Exception e){
@@ -108,8 +128,6 @@ public class RecipeController {
   public String recipeLikeUp(@RequestParam("recipeNo") int recipeNo,
                              @RequestParam("userNo") int userNo){
 	  HashMap<String,Object> result = new HashMap<>();
-	  System.out.println(recipeNo);
-	  System.out.println(userNo);
 	  
 	  Recipe recipe = new Recipe();
 	  recipe.setRecipeNo(recipeNo);
@@ -124,6 +142,25 @@ public class RecipeController {
     }
 
     return new Gson().toJson(result);
+	}
+	
+	@RequestMapping(path="likeDown",produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String recipeLikeDown(@RequestParam("recipeNo") int recipeNo,
+                             @RequestParam("userNo") int userNo){
+	  Recipe recipe= new Recipe();
+	  recipe.setRecipeNo(recipeNo);
+	  recipe.setUserNo(userNo);
+	  recipeService.likeDown(recipe);
+	    
+	  HashMap<String,Object> result = new HashMap<>();	  
+	  try{
+      result.put("status","success");
+    }catch (Exception e){
+      result.put("status", "false");
+    }
+	  
+	  return new Gson().toJson(result);
 	}
 	
 //	---------------------고재현 -------------------------

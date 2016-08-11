@@ -1,3 +1,4 @@
+
 $('#updateUserInfo').click(function(){
 	  /* 폼 입력 유무 확인 */
 	  if( $('#beforePwd').val() == ""){
@@ -60,5 +61,4 @@ if($('#afterPwdcf').val()==$('#afterPwd').val()){
 $('#updateUserReset').click(function(){
 	  $('#editUserInfo-pop-up-banner').bPopup().close();
 });
-
 

@@ -17,6 +17,7 @@
 		<result column="gpa" property="gradePoint" />
 		<result column="userName" property="user.userName"/>
 		<result column="lc_dt" property="likeDate"/>
+		<result column="likeUser" property="likeUser"/>
 	</resultMap>
 	
 	<resultMap type="material" id="materialMap">
@@ -30,6 +31,11 @@
 	VALUES (${userNo}, ${recipeNo}, now())
 	
 	</insert>
+	
+	<insert id="likeDown" parameterType="Recipe">
+  DELETE FROM
+  rcp_lik WHERE uno=${userNo} and rcpno=${recipeNo}
+  </insert>
 	
 	<insert id="insert" parameterType="map">
 		 INSERT INTO rcps(uno, name, intro, ptn, rcp_pd,rcp_dt, rgst) 
@@ -48,12 +54,22 @@
   </insert>
 	
 	
-   <select id="selectList" resultMap="recipeMap" parameterType="Map">
-    SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits, r.rgst, r.gpa, u.uno, u.name userName, l.rcpno, l.lc_dt
+   <select id="recipeList" resultMap="recipeMap" parameterType="Map">
+    SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits, 
+    r.rgst, r.gpa, u.uno, u.name userName, l.rcpno, l.lc_dt, l.uno likeUser
     FROM (users u INNER JOIN rcps r on u.uno=r.uno) 
-    LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno
-    ORDER BY r.rcpno
-    limit #{startIndex}, #{len}
+    LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=${userNo}
+    ORDER BY r.hits desc
+    limit #{len}
+  </select>
+  
+   <select id="recipeList2" resultMap="recipeMap" parameterType="Map">
+    SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits,
+     r.rgst, r.gpa, u.uno, u.name userName, l.rcpno, l.lc_dt, l.uno likeUser
+    FROM (users u INNER JOIN rcps r on u.uno=r.uno) 
+    LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=${userNo}
+    ORDER BY r.rcp_dt desc
+    limit #{len}
   </select>
   
   

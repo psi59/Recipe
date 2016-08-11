@@ -151,10 +151,12 @@ public class UserController {
       User logUser = userService.loginUser(user);
       
       result.put("status", "success");
-      result.put("data", logUser);
+          
+  result.put("data", logUser);
       System.out.println("logUser:"+logUser.toString());
     } catch (Exception e) {
-      result.put("status", "failure");
+         
+   result.put("status", "failure");
     }
     return new Gson().toJson(result);
     //result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
