@@ -10,10 +10,11 @@ $("#userLogin").click(
 				},
 				success : function(result) {
 					if (result.status != 'success') {
-						
+						$( "#userPassword" ).effect('bounce');
 						$('#loginInputBox > .warning').remove();
 						$('#loginInputBox').append("<div id='warning' class='warning'>아이디 또는 비밀번호를 다시 확인하세요.</div>");
 						$('#warning').css('color','red').css('font-size', '13px');
+						
 						return;
 					} 
  
