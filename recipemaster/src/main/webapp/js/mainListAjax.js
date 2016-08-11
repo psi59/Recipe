@@ -26,8 +26,8 @@
   function Main1List(){
 
 	  var url;
-	  if( sessionStorage.getItem('userNo') != null){
-		  url = 'recipe/list.json?userNo='+sessionStorage.getItem('userNo')
+	  if( eval(sessionStorage.getItem('data'))[0].userNo != null){
+		  url = 'recipe/list.json?userNo='+eval(sessionStorage.getItem('data'))[0].userNo
 	  }else{
 		  url = 'recipe/list.json'
 	  }
@@ -60,8 +60,8 @@
   function Main2List(){
 
 	  var url;
-	  if( sessionStorage.getItem('userNo') != null){
-		  url = 'recipe/list2.json?userNo='+sessionStorage.getItem('userNo')
+	  if( eval(sessionStorage.getItem('data'))[0].userNo != null){
+		  url = 'recipe/list2.json?userNo='+eval(sessionStorage.getItem('data'))[0].userNo
 	  }
 	  else{ 
 
@@ -96,7 +96,7 @@
 
 	  for(var j=0; j< result.data.length; j++){
 		 
-		  if(result.data[j].likeDate != null &&  sessionStorage.getItem('userNo') == result.data[j].likeUser){
+		  if(result.data[j].likeDate != null &&  eval(sessionStorage.getItem('data'))[0].userNo == result.data[j].likeUser){
 			  $('#list'+listNum+'240'+j+' .rcp-heart b').attr('name','like');
 			  $('#list'+listNum+'240'+j+' .rcp-heart b').css('color','#337ab7');
 			  $('#list'+listNum+'240'+j+' .rcp-heart b').parent().parent().css('color','#337ab7');		
@@ -118,7 +118,7 @@
 			  $.ajax({
 				  url:'recipe/likeDown.json?recipeNo=' + $(event.target).parent()
 				  .parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
-				  + sessionStorage.getItem('userNo'),
+				  + eval(sessionStorage.getItem('data'))[0].userNo,
 				  dataType:'json',
 				  method:'get',
 				  success:function(){
@@ -142,7 +142,7 @@
 			  $.ajax({
 				  url:'recipe/likeUp.json?recipeNo=' + $(event.target).parent()
 				  .parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
-				  +  sessionStorage.getItem('userNo'),
+				  +  eval(sessionStorage.getItem('data'))[0].userNo,
 				  dataType:'json',
 				  method:'get',
 				  success:function(){

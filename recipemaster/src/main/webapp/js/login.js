@@ -13,7 +13,7 @@ $("#userLogin").click(
 						alert('실행중 오류 발생');
 						return;
 					} 
-		
+
 					if(result.data != null){
 					alert(result.data.userName+ '님 환영합니다.');
 					
@@ -82,5 +82,31 @@ $(function(){
 		});
 	};
 });
+
+
+var lastScrollTop = 0;
+$(window).scroll(function(event){
+   var st = $(this).scrollTop();
+   
+   if (st <= 50){
+	   $('#profileView').removeClass().addClass("main-nav__dropdown top-main-nav__dropdown profile-dropdown");
+   } else {
+	   $('#profileView').removeClass().addClass("main-nav__dropdown bottom-main-nav__dropdown profile-dropdown");
+   }
+   lastScrollTop = st;
+   
+   
+});
+
+
+
+	
+	$('#TopBtn').on('click', function(){
+		$('#login-pop-up-banner').bPopup();
+	});
+
+
+
+
 
 

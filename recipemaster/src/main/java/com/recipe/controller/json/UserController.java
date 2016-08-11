@@ -149,6 +149,7 @@ public class UserController {
     HashMap<String,Object> result = new HashMap<>();
     try {
       User logUser = userService.loginUser(user);
+      
       result.put("status", "success");
           
   result.put("data", logUser);

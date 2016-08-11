@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="css/template/font-awesome.min.css">
 <link rel="stylesheet" href="css/template/animate.css">
 <link rel="stylesheet" href="css/template/main.css">
-<link rel="stylesheet"
-	href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
+
+<link rel="stylesheet" href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
 
 
 <!-- 사용자 정의 css -->
@@ -84,6 +84,7 @@
 								<button class="infoBtn">Recipe</button>
 							</div>
 						</div>
+
 					</div>
 				</div>
 			</div>
@@ -204,9 +205,7 @@
 			<span id="signup-addBtn">가입</span> <span id="signup-resetBtn">취소</span>
 		</div>
 	</div>
-
 	<!--준모_login------------------------------------------------------------------------------- -->
-
 	<div id='login-pop-up-banner'>
 		<div class="rcp-section">
 			<span>로그인</span>
@@ -224,9 +223,8 @@
 			<span>로그인</span>
 		</div>
 	</div>
-
 	<!--  -->
-	
+
 	<div id='editUserInfo-pop-up-banner'>
 		<div class="rcp-laytop">
 			<div class="col-md-1">
@@ -267,7 +265,6 @@
 			<span id="updateUserInfo">확인</span> <span id="updateUserReset">취소</span>
 		</div>
 	</div>
-
 	<!-- -------------------------------recipe detail-------------------------------- -->
 
 	<div id='detail_pop_up'>
@@ -328,7 +325,6 @@
 		</div>
 		<!-- /tabbable -->
 	</section>
-
 	<!------------------------- Rank List ------------------------------>
 
 	<script id="recipe-detail-template" type="text/x-handlebars-template">
@@ -351,11 +347,9 @@
                    <p>대패삼겹살을 구워먹기만 했었는데,,,</p>
                    <p>고기를 데쳐서 이렇게 무쳐먹으니 또 색다른 요리가 되더라구요~</p>
                 </div>
-               
                <div class="rcp-nav-down">
                    <a href="#" class="glyphicon glyphicon-chevron-down rcp-detail-move"></a>
                </div>
-               
 {{/each}}
 
 </script>
@@ -370,7 +364,6 @@
 <div align="center">
   <a href="#"><img src="img/scrap.png"></a>
 </div>
-
 <div class="rcp-info-items">
    <div class="rcp-icons">
    <i class="fa fa-eye" aria-hidden="true"></i>
@@ -402,7 +395,7 @@
 
   <script id="recipe-detail-main-images-template"
     type="text/x-handlebars-template">
-    
+
     <div class="rcp-main"> 
       <a href="#">MAIN</a>
       <div style="float:right">
@@ -602,7 +595,6 @@
   </figure>
   {{/each}}
   </script>
-
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="js/template/main.js"></script>
@@ -674,7 +666,8 @@
 				         $('#updateBoxEmail').text(eval(sessionStorage.getItem('data'))[0].email);
 				         $('#updateBoxName').text(eval(sessionStorage.getItem('data'))[0].userName);
 				         $('#profileGrade').text(eval(sessionStorage.getItem('data'))[0].recipeUrl);
-				 }
+
+				 }
 			});
 		});
 	</script>

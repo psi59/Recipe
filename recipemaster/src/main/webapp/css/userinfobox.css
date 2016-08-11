@@ -215,6 +215,21 @@ html, body {
   pointer-events: none;
 }
 
+.top-main-nav__dropdown {
+
+  top: 10em;
+  right: -8.5em;
+ 
+}
+
+.bottom-main-nav__dropdown {
+
+  top: 4em;
+  right:-4.5em;
+ 
+}
+
+
 .main-nav__dropdown.active {
   opacity: 1;
   z-index: 50;
