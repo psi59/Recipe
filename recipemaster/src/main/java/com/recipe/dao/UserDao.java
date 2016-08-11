@@ -11,7 +11,7 @@ public interface UserDao {
   User selectOne(int no);
   User checkDuplication(String email);
   User checkDuplicationUserName(String userName);
-  int update(User user);
+  void update(User user);
   int delete(int no);
   User findUser(String email);//Read or Retrieve
 }

@@ -58,5 +58,15 @@
 		insert into users(name, email, pwd, role, join_dt)
 		values ( #{userName}, #{email}, #{password}, 'user', now())
 	</insert>
+	
+	<update  id="update" parameterType="user" >
+      UPDATE users
+      <set>
+        pwd = #{password},
+        intro = #{intro}
+      </set>
+      WHERE email = #{email}
+   </update>
+
 
 </mapper>

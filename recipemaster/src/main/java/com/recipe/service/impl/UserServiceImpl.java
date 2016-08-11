@@ -55,11 +55,6 @@ public class UserServiceImpl implements UserService {
     return result;
   } 
 
-  @Override
-  public int updateUser(User user) {
-    userDao.update(user);
-    return 0;
-  }
 
   @Override
   public int deleteUser(int no) {
@@ -72,9 +67,16 @@ public class UserServiceImpl implements UserService {
   public User loginUser(User user) {
     // TODO Auto-generated method stub
     User dbUser=userDao.findUser(user.getEmail());
-    if(! dbUser.getPassword().equals(user.getPassword()))
+    if(! dbUser.getPassword().equals(user.getPassword())){
       System.out.println("login 실패하였습니다.");
+      
+      return null;
+    }
     return dbUser;
   }
-
+  
+  @Override
+  public void updateUser(User user) {
+    userDao.update(user);
+  }
 }

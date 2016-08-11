@@ -16,7 +16,6 @@
 	href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
 
 
-
 <!-- 사용자 정의 css -->
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/userinfobox.css">
@@ -28,12 +27,11 @@
 <link rel="stylesheet" href="css/popup.css">
 
 <!-- --- 아이콘 CDN ----- -->
-<script src="js/template/d9e67edb08.js"></script>
+<!-- <script src="js/template/d9e67edb08.js"></script> -->
 
 </head>
-
 <body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
+	<div id="topBtn" class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container rcp-container-top">
 			<div class="navbar-header">
 				<div class="row">
@@ -50,37 +48,40 @@
 					<div class="col-md-4 col-sm-4 hidden-xs" style="margin-right: 2em;">
 						<div class="navbar-collapse">
 							<ul class="nav navbar-nav navbar-right">
-								<li><a href="#"><span class="rcp-btn-default-top">회원가입</span></a></li>
-								<li><img class="rcp-barimg dropdown-trigger img-circle"
-									src="img/Chef3.jpg" /></li>
+								<li><a href="#"><span id="signUpTopBtn" class="rcp-btn-default-top">회원가입</span></a></li>
+								<li id="topbarUserImg">
+								<a ><span id="TopBtn" class="rcp-btn-default-top">로그인</span></a>
+								</li>
 							</ul>
 						</div>
+						<!-- 준모2 -->
 						<div id="profileView" class="main-nav__dropdown profile-dropdown">
 							<div class="rcp-outline">
 								<div>
 									<a href="#0" class="dropdown__header"><img id="profileImg"
-										class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a id="profileEmail"
-										 href="#"
-										class="dropdown__header rcp-infobox-text">yongyi1587@naver.com</a>
-									<h6 id="profileName" class="rcp-nickname">길용이</h6>
+										class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a
+										id="profileEmail" href="#"
+										class="dropdown__header rcp-infobox-text"></a>
+									<h6 id="profileName" class="rcp-nickname"></h6>
 									<a href="#0" class="dropdown__header"> <span
-										id="profileGrade" class="dropdown__title rcp-infobox-text"> <img
-											src="img/star.png"> Master Chef
+										id="profileGrade" class="dropdown__title rcp-infobox-text">
+											<img src="img/star.png"> Master Chef
 									</span>
 									</a>
 									<div id=Btn align="center">
 										<button id="userInfoEditBtn" type="button"
 											class="btn btn-default rcp-btn-nav">정보수정</button>
-										<button type="button" class="btn btn-default rcp-btn-nav">로그아웃</button>
+										<button id="logoutBtn" type="button"
+											class="btn btn-default rcp-btn-nav">로그아웃</button>
 									</div>
 								</div>
 								<!-- <nav class="dropdown__nav rcp-menuname rcp-back">
-									<a href="../mypage/mypage.html"><span class="rcp-back">내
-											레시피</span></a><a href="../writerecipe.html"><span class="rcp-back">레시피
-											쓰기</span></a><a href="#"><span class="rcp-back">구독 정보</span></a>
-								</nav> -->
+                  <a href="../mypage/mypage.html"><span class="rcp-back">내
+                      레시피</span></a><a href="../writerecipe.html"><span class="rcp-back">레시피
+                      쓰기</span></a><a href="#"><span class="rcp-back">구독 정보</span></a>
+                </nav> -->
 								<button class="infoBtn">Write</button>
-                <button class="infoBtn">Recipe</button>
+								<button class="infoBtn">Recipe</button>
 							</div>
 						</div>
 					</div>
@@ -99,6 +100,7 @@
 						<a href="#" id="signUpBtn"><span class="rcp-btn-default-2">회원가입</span></a>&nbsp;
 						&nbsp; <a href="#" id="loginBtn"><span
 							class="rcp-btn-default-2">로그인</span></a>
+							<a id="loginIcon"></a>
 					</div>
 				</div>
 
@@ -224,40 +226,49 @@
 	</div>
 
 	<!--  -->
-
-
+	
 	<div id='editUserInfo-pop-up-banner'>
 		<div class="rcp-laytop">
 			<div class="col-md-1">
-				<img class="chefimg" src="img/Chef3.jpg">
+				<img class="chefimg img-circle" src="img/Chef3.jpg">
 			</div>
 			<div class="col-md-11 rcp-laytext">
-				<h4>길용이</h4>
-				<h5>Master Chef</h5>
-				<h5>yongyi1587@naver.com</h5>
+				<h4 id="updateBoxName"></h4>
+				<h5 id="updateBoxGrade">Master Chef</h5>
+				<h5 id="updateBoxEmail"></h5>
 			</div>
 		</div>
 		<div class="rcp-section">
 			<span>회원정보수정</span>
 		</div>
 		<div class="rcp-innnersec">
-			<div class="rcp-mar rcp-info form-group form-group-md">
-				<input class="form-control" type="text" id="befpas"
-					placeholder="이전비밀번호 입력"><br /> <input class="form-control"
-					type="text" id="aftpas" placeholder="변경비밀번호 입력"><br /> <input
-					class="form-control" type="text" id="aftpascf"
-					placeholder="변경비밀번호 확인"><br />
+			<div id="beforePwd-div" class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
+				<input class="form-control" type="text" id="beforePwd"
+					placeholder="이전비밀번호 입력">
+      </div>
+
+      <div id="afterPwd-div" class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
+				<input class="form-control"
+					type="text" id="afterPwd" placeholder="변경비밀번호 입력">
+			</div>	
+			
+			<div id="afterPwdcf-div" class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
+				<input
+					class="form-control" type="text" id="afterPwdcf"
+					placeholder="변경비밀번호 확인">
+			</div>
+
+			<div class="rcp-mar rcp-info form-group form-group-md has-success has-feedback">
 				<textarea class="form-control rcp-tara" rows="5rem" cols="30rem"
-					placeholder="자기소개를 입력해주세요"></textarea>
+					id="introduce" placeholder="자기소개를 입력해주세요"></textarea>
 			</div>
 		</div>
 		<div class="rcp-sign-membership">
-			<span>확인</span> <span>취소</span>
+			<span id="updateUserInfo">확인</span> <span id="updateUserReset">취소</span>
 		</div>
 	</div>
 
 	<!-- -------------------------------recipe detail-------------------------------- -->
-
 
 	<div id='detail_pop_up'>
 		<div class="rcp-detail-form row">
@@ -355,60 +366,43 @@
 <div class="detail-images">
 <img src="img/profile.jpg" class="rcp-right-profile img-circle">
 <p class="rcp-nickName">{{data.user.userName}}</p>
-
 <h4 class="rcp-detail-title">{{data.recipeName}}</h4>
 <div align="center">
   <a href="#"><img src="img/scrap.png"></a>
 </div>
 
 <div class="rcp-info-items">
-
    <div class="rcp-icons">
    <i class="fa fa-eye" aria-hidden="true"></i>
    <i class="fa fa-heart" aria-hidden="true"></i>
    <i class="fa fa-comments" aria-hidden="true"></i>
    <i class="fa fa-external-link" aria-hidden="true"></i>
-   
-   
-   
   </div>
-  
   <div class="rcp-icons-names">
-  
     <p>조회수</p>
     <p>좋아요</p>
     <p>댓글</p>
     <p>스크랩</p>  
-  
   </div>
-
   <div class="rcp-icons-info" align="right">
-  
     <p>{{data.hits}}</p>
     <p>182</p>
     <p>28</p>
     <p>58</p>  
-  
   </div>
-
 </div>
-
 <div class="rcp-info-filter">
     <hr class="rcp-info-next"/>
     <a href="#">모아보기</a>
 </div>
-
 <div class="rcp-info-images">
-
 </div>
-
 </div>
 </script>
 
-
   <script id="recipe-detail-main-images-template"
     type="text/x-handlebars-template">
-
+    
     <div class="rcp-main"> 
       <a href="#">MAIN</a>
       <div style="float:right">
@@ -417,26 +411,20 @@
     <a href="#"><img src="img/food01.jpg" class="rcp-info-images-emts"></a>
     </div>
   <div class="rcp-detail-step">
-
   </div>
-
 
 </script>
 
 	<script id="recipe-detail-step-images-template"
 		type="text/x-handlebars-template">
 {{#each data}}
-
-    
      <div class="rcp-main dd"> 
       <a href="#">STEP {{inc @index}}</a>
       <div style="float:right">
          <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
       </div>
-      
      <img src="img/food02.jpg" class="rcp-info-images-emts"> 
     </div>
-    
 {{/each}}
 </script>
 
@@ -559,7 +547,6 @@
 
               </div>
 
-
               <!-- 하단 버튼들 시작 (요리시간, 좋아요, 스크랩) -->
               <div class="rcp-240">
               <input type="hidden" name="recipeNo" value="{{recipeNo}}">
@@ -581,8 +568,6 @@
                   <div class="glyphicon glyphicon-pushpin rcp-scrap"></div>
                   <a href="#">  <input type="hidden" name="recipeNo" value="{{recipeNo}}"><b>스크랩</b></a>
                 </div>
-
-
               </div>
               <!--  버튼 끝  -->
             </div>
@@ -637,13 +622,24 @@
 	<script src="js/signup.js"></script>
 	<script src="js/mainListAjax.js"></script>
 	<script src="js/recipeDetail.js"></script>
-  <script src="js/login.js"></script>
-
-
+	<script src="js/login.js"></script>
+	<!-- 용이 userUpdate -->
+	<script src="js/updateUser.js"></script>
+	<!-- 용이 userUpdate 끝 -->
 	<script>
 		$(function() {
 			getWeather();
 			getRealTimeRank();
+			
+
+			  /* 준모3 */				  
+				if(eval(sessionStorage.getItem('data'))[0].userNo!=null){
+				 
+				  $('#topbarUserImg').html("<img class='rcp-barimg dropdown-trigger img-circle' src='img/Chef3.jpg' />");
+		
+				  
+				}
+
 
 			$('.profile-dropdown:has(.active)').bind('click', function() {
 
@@ -654,9 +650,16 @@
 			});
 
 			$('.dropdown-trigger').on('click', function() {
-				dropdownClick('.profile-dropdown', '.mobile-menu-dropdown');
-			});
-
+		      dropdownClick('.profile-dropdown', '.mobile-menu-dropdown');
+				  /* 용이 추가() */    
+				    if(eval(sessionStorage.getItem('data'))[0].userNo!=null){
+			         $('#profileEmail').text(eval(sessionStorage.getItem('data'))[0].email);
+			         $('#profileName').text(eval(sessionStorage.getItem('data'))[0].userName);
+			         $('#profileGrade').text(eval(sessionStorage.getItem('data'))[0].recipeUrl);
+			  /* 용이 추가() */       
+			         $('#introduce').text(eval(sessionStorage.getItem('data'))[0].intro);
+			 	     }
+				   });
 			$('.dropdown-trigger').on('scroll', function() {
 				dropdownClick('.profile-dropdown', '.mobile-menu-dropdown');
 			});
@@ -667,6 +670,11 @@
 
 			$('#userInfoEditBtn').on('click', function() {
 				$('#editUserInfo-pop-up-banner').bPopup();
+				if(eval(sessionStorage.getItem('data'))[0].userNo!=null){
+				         $('#updateBoxEmail').text(eval(sessionStorage.getItem('data'))[0].email);
+				         $('#updateBoxName').text(eval(sessionStorage.getItem('data'))[0].userName);
+				         $('#profileGrade').text(eval(sessionStorage.getItem('data'))[0].recipeUrl);
+				 }
 			});
 		});
 	</script>
