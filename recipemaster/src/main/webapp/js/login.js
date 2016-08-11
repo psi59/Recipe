@@ -36,9 +36,7 @@ $("#userLogin").click(
 					
 					/*eval 사용 방법, eval(jsonData)[0].email*/
 					/*alert('1111'+eval(jsonData)[0].role);*/
-					
 					sessionStorage.setItem('data', jsonData);
-					
 					location.reload();
 					
 					$('#login-pop-up-banner').bPopup().close();

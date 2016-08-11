@@ -95,11 +95,16 @@ public class UserController {
 
   @RequestMapping(path="update", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
   @ResponseBody
-  public String update(User user){    
+  public String update(User user,String bfPwd,int sUno){    
     HashMap<String,Object> result = new HashMap<>();
     try{      
-      userService.updateUser(user);
-      result.put("status", "success");      
+      User dbUser = userService.getUser(sUno);
+      if(bfPwd.equals(dbUser.getPassword())){      
+        userService.updateUser(user);
+        result.put("status", "success");
+      } else {
+        result.put("status", "pwdFail");
+      }
     }catch(Exception e){
       result.put("status", "failure");
     }

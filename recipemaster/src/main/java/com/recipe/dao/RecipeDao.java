@@ -14,4 +14,5 @@ public interface RecipeDao {
   int updateHits(Recipe recipe);
   int delete(int no); // Delete
   List<String> selectMaterialName(String materialName);
+  int likeUp(Recipe recipe);
 }

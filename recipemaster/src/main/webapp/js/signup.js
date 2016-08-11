@@ -109,7 +109,7 @@ $(function() {
                     userName : userName
                 },
                 success : function(result) {					
-                    if (result.data) {
+                    if (result.data) { 
 						// 사용가능한 이메일
 						$('#signup-userName-div').removeClass().addClass("form-group has-success has-feedback");
 						$('#signup-userName-span').removeClass().addClass("glyphicon glyphicon-ok form-control-feedback");

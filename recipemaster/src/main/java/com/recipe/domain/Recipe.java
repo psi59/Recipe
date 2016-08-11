@@ -19,7 +19,16 @@ public class Recipe {
 	private int regiStatus;
 	private int gradePoint;
 	private User user;
-	public User getUser() {
+	private Date likeDate;
+	
+	
+	public Date getLikeDate() {
+    return likeDate;
+  }
+  public void setLikeDate(Date likeDate) {
+    this.likeDate = likeDate;
+  }
+  public User getUser() {
 		return user;
 	}
 	public void setUser(User user) {
@@ -98,12 +107,11 @@ public class Recipe {
 	public void setGradePoint(int gradePoint) {
 		this.gradePoint = gradePoint;
 	}
-	
-	@Override
-	public String toString() {
-		return "Recipe [recipeNo=" + recipeNo + ", userNo=" + userNo + ", recipeName=" + recipeName + ", intro=" + intro
-				+ ", materials=" + materials + ", recipeProcedure=" + recipeProcedure + ", cookTime=" + cookTime
-				+ ", portion=" + portion + ", recipeDate=" + recipeDate + ", hits=" + hits + ", regiStatus="
-				+ regiStatus + ", gradePoint=" + gradePoint + ", user=" + user + "]";
-	}
+  @Override
+  public String toString() {
+    return "Recipe [recipeNo=" + recipeNo + ", userNo=" + userNo + ", recipeName=" + recipeName + ", intro=" + intro
+        + ", materials=" + materials + ", recipeProcedure=" + recipeProcedure + ", cookTime=" + cookTime + ", portion="
+        + portion + ", recipeDate=" + recipeDate + ", hits=" + hits + ", regiStatus=" + regiStatus + ", gradePoint="
+        + gradePoint + ", user=" + user + ", likeDate=" + likeDate + "]";
+  }
 }

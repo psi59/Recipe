@@ -10,11 +10,13 @@
   margin:6px 3px;
   padding:1px 5px;
 }
+
 .rcp-title hr{
-	border-top:7px solid #b51515;
-	width: 50%;
-	min-width: 230pt;
-	
+   border-top: 5px solid #b51515;
+   width: 96.5%;
+   min-width: 230pt;
+   margin-top: auto;
+   padding-right: 15px;
 }
 .rcp-delImg{
 	margin-left: 96%;
@@ -24,8 +26,8 @@
 .rcp-delMtSlot{
 	margin-top: 15pt;
 	text-align: center;
-	padding-left: 37%;
-	padding-right: 37%;
+	height: 100%;
+	width: 100%;
 }
 .rcp-btn{
   margin-top:25pt;
@@ -39,12 +41,16 @@
   font-size: 33pt;
   margin-top: 40pt;
   margin-bottom: 10pt;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .rcp-subtitle {
   font-weight: bold;
   font-size: 20pt;
   margin-top: 20pt;
+  margin-bottom: 10pt;
+  padding: 0px;
 }
 
 .rcp-formdata {
@@ -64,7 +70,7 @@
   border: 6px dotted #b51515;
   border-radius: 10px;
   height: 200px;
-  width: 200px;
+  width: 96.5%;
   position: relative;
   cursor: pointer;
   transition: background-color .3s ease-in-out, border-color .3s ease-in-out;
