@@ -56,12 +56,6 @@ public class UserServiceImpl implements UserService {
   } 
 
   @Override
-  public int updateUser(User user) {
-    userDao.update(user);
-    return 0;
-  }
-
-  @Override
   public int deleteUser(int no) {
     userDao.delete(no);
     return 0;
@@ -76,5 +70,9 @@ public class UserServiceImpl implements UserService {
       System.out.println("login 실패하였습니다.");
     return dbUser;
   }
-
+  
+  @Override
+  public void updateUser(User user) {
+    userDao.update(user);
+  }
 }

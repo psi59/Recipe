@@ -59,13 +59,13 @@
 							<div class="rcp-outline">
 								<div>
 									<a href="#0" class="dropdown__header"><img id="profileImg"
-										class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a id="profileEmail"
-										 href="#"
-										class="dropdown__header rcp-infobox-text">yongyi1587@naver.com</a>
-									<h6 id="profileName" class="rcp-nickname">길용이</h6>
+										class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a
+										id="profileEmail" href="#"
+										class="dropdown__header rcp-infobox-text"></a>
+									<h6 id="profileName" class="rcp-nickname"></h6>
 									<a href="#0" class="dropdown__header"> <span
-										id="profileGrade" class="dropdown__title rcp-infobox-text"> <img
-											src="img/star.png"> Master Chef
+										id="profileGrade" class="dropdown__title rcp-infobox-text">
+											<img src="img/star.png"> Master Chef
 									</span>
 									</a>
 									<div id=Btn align="center">
@@ -80,7 +80,7 @@
 											쓰기</span></a><a href="#"><span class="rcp-back">구독 정보</span></a>
 								</nav> -->
 								<button class="infoBtn">Write</button>
-                <button class="infoBtn">Recipe</button>
+								<button class="infoBtn">Recipe</button>
 							</div>
 						</div>
 					</div>
@@ -202,9 +202,7 @@
 			<span id="signup-addBtn">가입</span> <span id="signup-resetBtn">취소</span>
 		</div>
 	</div>
-
 	<!--준모_login------------------------------------------------------------------------------- -->
-
 	<div id='login-pop-up-banner'>
 		<div class="rcp-section">
 			<span>로그인</span>
@@ -222,43 +220,48 @@
 			<span>로그인</span>
 		</div>
 	</div>
-
 	<!--  -->
-
-
 	<div id='editUserInfo-pop-up-banner'>
 		<div class="rcp-laytop">
 			<div class="col-md-1">
-				<img class="chefimg" src="img/Chef3.jpg">
+				<img class="chefimg img-circle" src="img/Chef3.jpg">
 			</div>
 			<div class="col-md-11 rcp-laytext">
-				<h4>길용이</h4>
-				<h5>Master Chef</h5>
-				<h5>yongyi1587@naver.com</h5>
+				<h4 id="updateBoxName"></h4>
+				<h5 id="updateBoxGrade">Master Chef</h5>
+				<h5 id="updateBoxEmail"></h5>
 			</div>
 		</div>
 		<div class="rcp-section">
 			<span>회원정보수정</span>
 		</div>
 		<div class="rcp-innnersec">
-			<div class="rcp-mar rcp-info form-group form-group-md">
-				<input class="form-control" type="text" id="befpas"
-					placeholder="이전비밀번호 입력"><br /> <input class="form-control"
-					type="text" id="aftpas" placeholder="변경비밀번호 입력"><br /> <input
-					class="form-control" type="text" id="aftpascf"
-					placeholder="변경비밀번호 확인"><br />
+			<div id="beforePwd-div" class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
+				<input class="form-control" type="text" id="beforePwd"
+					placeholder="이전비밀번호 입력">
+      </div>
+
+      <div id="afterPwd-div" class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
+				<input class="form-control"
+					type="text" id="afterPwd" placeholder="변경비밀번호 입력">
+			</div>	
+			
+			<div id="afterPwdcf-div" class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
+				<input
+					class="form-control" type="text" id="afterPwdcf"
+					placeholder="변경비밀번호 확인">
+			</div>
+
+			<div class="rcp-mar rcp-info form-group form-group-md has-success has-feedback">
 				<textarea class="form-control rcp-tara" rows="5rem" cols="30rem"
-					placeholder="자기소개를 입력해주세요"></textarea>
+					id="introduce" placeholder="자기소개를 입력해주세요"></textarea>
 			</div>
 		</div>
 		<div class="rcp-sign-membership">
-			<span>확인</span> <span>취소</span>
+			<span id="updateUserInfo">확인</span> <span id="updateUserReset">취소</span>
 		</div>
 	</div>
-
 	<!-- -------------------------------recipe detail-------------------------------- -->
-
-
 	<div id='detail_pop_up'>
 		<div class="rcp-detail-form row">
 
@@ -317,7 +320,6 @@
 		</div>
 		<!-- /tabbable -->
 	</section>
-
 	<!------------------------- Rank List ------------------------------>
 
 	<script id="recipe-detail-template" type="text/x-handlebars-template">
@@ -340,11 +342,9 @@
                    <p>대패삼겹살을 구워먹기만 했었는데,,,</p>
                    <p>고기를 데쳐서 이렇게 무쳐먹으니 또 색다른 요리가 되더라구요~</p>
                 </div>
-               
                <div class="rcp-nav-down">
                    <a href="#" class="glyphicon glyphicon-chevron-down rcp-detail-move"></a>
                </div>
-               
 {{/each}}
 
 </script>
@@ -355,63 +355,40 @@
 <div class="detail-images">
 <img src="img/profile.jpg" class="rcp-right-profile img-circle">
 <p class="rcp-nickName">{{data.user.userName}}</p>
-
 <h4 class="rcp-detail-title">{{data.recipeName}}</h4>
 <div align="center">
   <a href="#"><img src="img/scrap.png"></a>
 </div>
-
 <div class="rcp-info-items">
-
    <div class="rcp-icons">
    <i class="fa fa-eye" aria-hidden="true"></i>
    <i class="fa fa-heart" aria-hidden="true"></i>
    <i class="fa fa-comments" aria-hidden="true"></i>
    <i class="fa fa-external-link" aria-hidden="true"></i>
-   
-   
-   
   </div>
-  
   <div class="rcp-icons-names">
-  
     <p>조회수</p>
     <p>좋아요</p>
     <p>댓글</p>
     <p>스크랩</p>  
-  
   </div>
-
   <div class="rcp-icons-info" align="right">
-  
     <p>{{data.hits}}</p>
     <p>182</p>
     <p>28</p>
     <p>58</p>  
-  
   </div>
-
 </div>
-
 <div class="rcp-info-filter">
     <hr class="rcp-info-next"/>
     <a href="#">모아보기</a>
 </div>
-
 <div class="rcp-info-images">
-
 </div>
-
 </div>
 </script>
-
-
-  <script id="recipe-detail-main-images-template"
-    type="text/x-handlebars-template">
-
-     
-
-
+	<script id="recipe-detail-main-images-template"
+		type="text/x-handlebars-template">
     <div class="rcp-main"> 
       <a href="#">MAIN</a>
       <div style="float:right">
@@ -420,26 +397,20 @@
     <a href="#"><img src="img/food01.jpg" class="rcp-info-images-emts"></a>
     </div>
   <div class="rcp-detail-step">
-
   </div>
-
 
 </script>
 
 	<script id="recipe-detail-step-images-template"
 		type="text/x-handlebars-template">
 {{#each data}}
-
-    
      <div class="rcp-main dd"> 
       <a href="#">STEP {{inc @index}}</a>
       <div style="float:right">
          <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
       </div>
-      
      <img src="img/food02.jpg" class="rcp-info-images-emts"> 
     </div>
-    
 {{/each}}
 </script>
 
@@ -461,16 +432,7 @@
 
 {{/each}}
 </script>
-
-
-
-
 	<!------------------------- Rank List ------------------------------>
-
-
-
-
-
 	<script id="recipe-card-template" type="text/x-handlebars-template"> 
 {{#each data}}
  
@@ -561,7 +523,6 @@
 
               </div>
 
-
               <!-- 하단 버튼들 시작 (요리시간, 좋아요, 스크랩) -->
               <div class="rcp-240">
               <input type="hidden" name="recipeNo" value="{{recipeNo}}">
@@ -582,8 +543,6 @@
                   <div class="glyphicon glyphicon-pushpin"></div>
                   <a href="#"><b>스크랩</b></a>
                 </div>
-
-
               </div>
               <!--  버튼 끝  -->
             </div>
@@ -618,7 +577,6 @@
   </figure>
   {{/each}}
   </script>
-
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="js/template/main.js"></script>
@@ -638,9 +596,10 @@
 	<script src="js/signup.js"></script>
 	<script src="js/mainListAjax.js"></script>
 	<script src="js/recipeDetail.js"></script>
-  <script src="js/login.js"></script>
-
-
+	<script src="js/login.js"></script>
+	<!-- 용이 userUpdate -->
+	<script src="js/updateUser.js"></script>
+	<!-- 용이 userUpdate 끝 -->
 	<script>
 		$(function() {
 			getWeather();
@@ -655,9 +614,16 @@
 			});
 
 			$('.dropdown-trigger').on('click', function() {
-				dropdownClick('.profile-dropdown', '.mobile-menu-dropdown');
-			});
-
+				      dropdownClick('.profile-dropdown', '.mobile-menu-dropdown');
+				  /* 용이 추가() */    
+				    if(eval(sessionStorage.getItem('data'))[0].userNo!=null){
+				         $('#profileEmail').text(eval(sessionStorage.getItem('data'))[0].email);
+				         $('#profileName').text(eval(sessionStorage.getItem('data'))[0].userName);
+				         $('#profileGrade').text(eval(sessionStorage.getItem('data'))[0].recipeUrl);
+				  /* 용이 추가() */       
+				  $('#introduce').text(eval(sessionStorage.getItem('data'))[0].intro);
+			 	            }
+				            });
 			$('.dropdown-trigger').on('scroll', function() {
 				dropdownClick('.profile-dropdown', '.mobile-menu-dropdown');
 			});
@@ -668,6 +634,11 @@
 
 			$('#userInfoEditBtn').on('click', function() {
 				$('#editUserInfo-pop-up-banner').bPopup();
+				if(eval(sessionStorage.getItem('data'))[0].userNo!=null){
+				         $('#updateBoxEmail').text(eval(sessionStorage.getItem('data'))[0].email);
+				         $('#updateBoxName').text(eval(sessionStorage.getItem('data'))[0].userName);
+				         $('#profileGrade').text(eval(sessionStorage.getItem('data'))[0].recipeUrl);
+				                      }
 			});
 		});
 	</script>
