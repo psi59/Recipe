@@ -7,10 +7,15 @@
 	background: #ffffff;
 }
 
+#warning{
+	font-style: #ff0000;
+	
+}
+
 #login-pop-up-banner {
   display: none;
   width: 375px;
-  height: 285px;
+  height: 310px;
   background: #ffffff;
 }
 
