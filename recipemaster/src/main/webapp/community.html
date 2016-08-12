@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>community</title>
+<link rel="stylesheet"
+	href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+<!--  -->
+<link rel="stylesheet" href="css/community.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+
+<style>
+
+</style>
+</head>
+<body>
+<!-- 입력창 -->
+  <div class="rcp-Vst-write"> 
+    <div class="inputWrite">
+      <textarea rows="6" cols="50" style="resize:none;"></textarea>
+      <button class="rcp-Vst-inputBtn btn btn-default">등록</button>
+    </div>
+  </div>
+<!-- 방명록 추가되는부분 -->  
+<section class="Vst">
+	<div class="rcp-Vst">
+		<div class="rcp-Vst-top">
+			<img class="rcp-Vst-img img-circle" src="/img/pika.jpg" />
+			<div class="rcp-Vst-common">
+			<span
+        id="editBtn1"><img class="vstUpdateBtn" id="vstUpdateBtn"
+        src="/img/vstUpdateBtn.png"></span> <img class="vstDeleteBtn"
+        id="vstDeleteBtn" src="/img/vstDeleteBtn.png">
+				<span> 1111번째 게시물 </span><br /> <span>닉네임 : 길용이</span><br /> <span>등
+					급 : Master Chef</span><br /> <span>등록일 : 2016-08-12</span><br />
+			</div>
+		</div>
+		<div class="rcp-Vst-bottom" id="vst-contents">
+			<div class="rcp-Vst-contents">
+				<p>내용이다 으어우어으어으우어으어우으어우으어앙,우어아으어아아ㅡ어아ㅓ아으ㅓ아으</p>
+			</div>
+		</div>
+		<div class="rcp-Vst-footer">
+			<div>
+				<div class="rcp-Vst-writeRp">
+					<img class="rcp-Vst-img-rep img-circle" src="/img/pika.jpg" />
+					<div class="rcp-Vst-contents-rep">
+						<span>박상일</span><span> &nbsp;</span> <span><input
+							 placeholder="댓글을 입력해주세요" type="text" size="40px"></span> <span><button
+								type="button" class="btn btn-default rcp-Vst-submitBtn">등록</button></span>
+					</div>
+				</div>
+			</div>
+			<div class="rcp-Vst-slotRp">
+				<!---->
+			</div>
+			<div class="rcp-Vst-moreRp">
+				<a><span id="moreRp">댓글 더보기..(1)</span></a>
+			</div>
+		</div>
+	</div>
+</section>
+	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
+	<script src="js/community.js"></script>
+</body>
+</html>
