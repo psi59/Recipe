@@ -1,0 +1,68 @@
+@CHARSET "UTF-8";
+
+/* --------------------------------------박상일형 Mypage css 시작-------------------------------- */
+.rcp-profile-img{
+  margin-top:20%;
+  width: 50%;
+}
+
+#userNickName{
+  margin-top:0.5em;
+  font-size: 2em;
+  font-weight: 2px;
+}
+
+#userLevel{
+  font-size: .8em;
+}
+
+
+#userIntroduce{
+  margin-top:0.5em;
+  font-size: 1em;
+}
+
+#postingBtn{
+  background-color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #b51515;
+  margin-left: 15%;
+  margin-top: 10px;
+  width: 70%;
+  padding: 7px;
+  border-radius: 0.3em;
+}
+
+#menus{
+  margin-top: 20px;
+  text-align: center;
+  font-size: 2em;
+}
+
+.menu{
+  color: white;
+  text-decoration: underline;
+  margin-bottom: 10px;
+}
+
+#spoonImg{
+  position: absolute;
+  bottom: 25px;
+  right: 5px;
+  width: 9em;
+}
+
+.left-box {
+  background: #b51515;
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  left:0;
+  top:0;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+/* -----------------------------------------상일이형 css 끝 --------------------------- */
+ 

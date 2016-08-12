@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+.rcp-main-right{
+	padding-left:250px;
+}
+
+
+.rcp-subscribe{
+background-color:#f3f3f3;
+padding-top:100px;
+}
+
+.rcp-subscribe-detail{
+width:799px;
+height:400px;
+background-color:white;
+border:1px solid black;
+maring-top:50px;
+margin:0 auto;
+}
+
+.rcp-left-div{
+	width:400px;
+}
+
+.rcp-subscribe-image{
+	width:400px;
+	height:250px;
+}
