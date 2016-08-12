@@ -1,5 +1,6 @@
 package com.recipe.controller.json;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.recipe.domain.User;
@@ -95,11 +97,19 @@ public class UserController {
 
   @RequestMapping(path="update", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
   @ResponseBody
-  public String update(User user,String bfPwd,int sUno){    
+  public String update(User user,String bfPwd,int sUno,
+                      @RequestParam("uploadFile") MultipartFile file){    
     HashMap<String,Object> result = new HashMap<>();
     try{      
       User dbUser = userService.getUser(sUno);
-      if(bfPwd.equals(dbUser.getPassword())){      
+      if(bfPwd.equals(dbUser.getPassword())){
+        /*파일업로드 추가*/
+        if(null!=file){
+          String fileName = file.getOriginalFilename();
+          user.setRecipeUrl(fileName);
+        File recipeUrl= new File("C:\\User\\BitCamp\\git\\Recipe_team\\recipemaster\\WebContent\\images\\"+fileName);
+        file.transferTo(recipeUrl);
+        }/*파일업로드 추가 끝*/
         userService.updateUser(user);
         result.put("status", "success");
       } else {
