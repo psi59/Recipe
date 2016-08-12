@@ -18,6 +18,7 @@
 		<result column="userName" property="user.userName"/>
 		<result column="lc_dt" property="likeDate"/>
 		<result column="likeUser" property="likeUser"/>
+		<result column="countLike" property="countLike"/>
 	</resultMap>
 	
 	<resultMap type="material" id="materialMap">
@@ -56,7 +57,8 @@
 	
    <select id="recipeList" resultMap="recipeMap" parameterType="Map">
     SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits, 
-    r.rgst, r.gpa, u.uno, u.name userName, l.rcpno, l.lc_dt, l.uno likeUser
+    r.rgst, r.gpa, u.uno, u.name userName, l.rcpno, l.lc_dt, l.uno likeUser,
+    (select count(uno) from rcp_lik where uno = ${userNo}) as countLike
     FROM (users u INNER JOIN rcps r on u.uno=r.uno) 
     LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=${userNo}
     ORDER BY r.hits desc

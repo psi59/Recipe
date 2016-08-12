@@ -21,9 +21,16 @@ public class Recipe {
   private User user;
   private Date likeDate;
   private int likeUser;
+  private int countLike;
   
   
-	public int getLikeUser() {
+	public int getCountLike() {
+    return countLike;
+  }
+  public void setCountLike(int countLike) {
+    this.countLike = countLike;
+  }
+  public int getLikeUser() {
     return likeUser;
   }
   public void setLikeUser(int likeUser) {
@@ -120,6 +127,7 @@ public class Recipe {
     return "Recipe [recipeNo=" + recipeNo + ", userNo=" + userNo + ", recipeName=" + recipeName + ", intro=" + intro
         + ", materials=" + materials + ", recipeProcedure=" + recipeProcedure + ", cookTime=" + cookTime + ", portion="
         + portion + ", recipeDate=" + recipeDate + ", hits=" + hits + ", regiStatus=" + regiStatus + ", gradePoint="
-        + gradePoint + ", user=" + user + ", likeDate=" + likeDate + ", likeUser=" + likeUser + "]";
+        + gradePoint + ", user=" + user + ", likeDate=" + likeDate + ", likeUser=" + likeUser + ", countLike="
+        + countLike + "]";
   }
 }

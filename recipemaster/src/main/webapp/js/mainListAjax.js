@@ -25,11 +25,12 @@
   
   function Main1List(){
 
-	  var url;
-	  if( eval(sessionStorage.getItem('data'))[0].userNo != null){
-		  url = 'recipe/list.json?userNo='+eval(sessionStorage.getItem('data'))[0].userNo
-	  }else{
-		  url = 'recipe/list.json'
+	  var url = 'recipe/list.json?userNo=0';
+	  var a = eval(sessionStorage.getItem('data'));
+	
+	  
+	  if( a != null ){
+		  url = 'recipe/list.json?userNo='+a[0].userNo;
 	  }
 
 	  $.ajax({	  		  
@@ -59,15 +60,14 @@
   
   function Main2List(){
 
-	  var url;
-	  if( eval(sessionStorage.getItem('data'))[0].userNo != null){
-		  url = 'recipe/list2.json?userNo='+eval(sessionStorage.getItem('data'))[0].userNo
+	  var url = 'recipe/list2.json?userNo=0';
+	  var a = eval(sessionStorage.getItem('data'));
+	 
+	
+	  if(  a != null ){
+		  url = 'recipe/list2.json?userNo='+a[0].userNo;
 	  }
-	  else{ 
 
-		  url = 'recipe/list2.json'
-	  }	  
-	  
 	  $.ajax({
 		  url:url,
 		  dataType:'json',
@@ -114,6 +114,7 @@
   function likeLogic(listNum, result){
 	  
 	  $(document).on('click',('.list'+listNum+' .rcp-like'),function(event){
+		  event.preventDefault();
 		  if($(event.target).is('b[name="like"]') ){
 			  $.ajax({
 				  url:'recipe/likeDown.json?recipeNo=' + $(event.target).parent()
@@ -146,7 +147,6 @@
 				  dataType:'json',
 				  method:'get',
 				  success:function(){
-					  console.log(status);
 					  console.log("like up 성공성공");
 					  $(event.target).css('color','#337ab7');
 					  $(event.target).parent().parent().css('color','#337ab7');
@@ -197,9 +197,7 @@
 //--------------------------  음식사진 커서 올리면 바뀌게 --------------------------------- 
   function mouseHover(result,listNum){
 	  var time;
-	  console.log("여기옴 ?");
 	  for(var j=0; j<result.data.length; j++){
-		  console.log("여기옴 ?");
 		  $("#list"+listNum+" #list"+listNum+"image"+j).hover(function(event){
 			  console.log("여기옴 ?");
 		  this.src = "img/3.jpg";
