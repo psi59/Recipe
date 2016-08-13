@@ -56,10 +56,12 @@ function dropdownClick(target, other) {
 
 //signUpBtn 팝업 , 불투명 배경 띄우기
 $('#signUpBtn').on('click', function(){
+	event.preventDefault();
 	$('#signup-pop-up-banner').bPopup();
 });
 
 //loginBtn팝업 , 불투명 배경 띄우기
-$('#loginBtn').on('click', function(){
+$('#loginBtn').on('click', function(event){
+	event.preventDefault();
 	$('#login-pop-up-banner').bPopup();
 });

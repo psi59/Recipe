@@ -130,4 +130,11 @@ $(function () {
           console.log("이미지 등록해주세용 ㅎㅎ");
         }
       });
+//    if(eval(sessionStorage.getItem('data'))[0].userNo!=null){
+//    	$('userNo').val(eval(sessionStorage.getItem('data'))[0].userNo);
+//    } else {
+//    	alert('로그인 하고 오세욤 ㅎㅎ');
+//    	location = "index.html";
+//    }
+    
 });

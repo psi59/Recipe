@@ -1,0 +1,90 @@
+/* body, html {
+  margin: 0;
+  position: relative;
+  height: 100%;
+  width: 100%;
+} */
+
+##rcp-list-count-order {
+	margin-bottom: 5px;
+}
+
+#rcp-list-count-order #rcp-list-count{
+	float: left;
+	/* width: 30%; */
+	margin: 0 auto; 
+} 
+
+#rcp-list-count-order #order-btn{
+  float: right;
+  /* width: 20%; */
+  margin: 0 auto; 
+}
+
+#rcp-list-count-order h2 {	
+	color: #000000;
+	font-size: 20px;
+	margin: 0px;
+	font-family: 'Jeju Gothic', serif;
+}
+
+/* #rcp-list-count-order div#order-latest-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
+
+#rcp-list-count-order button {	
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  background: transparent;
+  /* font-family: Geneva, sans-serif; */
+  color: #b51515;
+  border: 1px solid #000000;
+  border-radius: 2px;
+  width: 80px;
+  height: 40px;
+  /* min-width: 100px; */  
+}
+
+
+#rcp-list-count-order .btn-color {
+  position: absolute;
+  z-index:-1;
+  top:0;
+  right:0%;
+  background: #b51515;
+  width:10%;
+  height:120%;
+  margin-right:-35%;
+  -webkit-transition: width 0.2s ease-out; /* For Safari 3.1 to 6.0 */
+    transition: width 0.2s ease-out;
+  -webkit-transform: skew(-45deg);
+}
+
+#rcp-list-count-order button:hover .btn-color {
+  right:-195%;
+  width:160%;
+  margin-right:170%;
+  /* HOVER ON */
+   -webkit-transition: right 0.2s ease-out, color 0s 0.1s;
+   transition: right 0.2s ease-out, color 0s 0.1s;
+  
+  
+}
+
+#rcp-list-count-order button:hover h2 {
+  color: white;
+  -webkit-transition: color 0s 0.1s;
+   transition: color 0s 0.1s;
+}
+
+#rcp-list-count-order button:active {
+  margin-top: 2px;
+}
+
+#rcp-list-count-order button:focus {
+  outline: none;
+}

@@ -1,3 +1,4 @@
+
 package com.recipe.service;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public interface UserService {
   User getUser(int no);
   boolean checkDuplication(String email); // email 중복체크
   boolean checkDuplicationUserName(String userName); // 닉네임 중복체크
-  int updateUser(User user);
+  void updateUser(User user); //유저정보수정(용이-완료)
   int deleteUser(int no);
   User loginUser(User user); //login
 }

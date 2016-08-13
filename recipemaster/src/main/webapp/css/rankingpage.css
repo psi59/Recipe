@@ -130,7 +130,7 @@ footer a:hover {
   position: relative;
   right: 4px;
   bottom: 2px;
-  border-left: 15px solid transparent;
+  border-left: 15px solid transparent; 
   border-right: 15px solid transparent;
   border-bottom: 20px solid #16a085;
 }

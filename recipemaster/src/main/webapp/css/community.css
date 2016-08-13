@@ -1,0 +1,109 @@
+.rcp-Vst {
+  margin: 10px;
+  width: 500px;
+  height: 400px;
+}
+.rcp-Vst-write{
+  margin:10px;
+  background-color: #b51515;
+  width: 500px;
+  height: 160px;
+  border: 1px solid #b51515;
+  border-radius: 10px;
+}
+.inputWrite{
+  padding: 10px;
+}
+.rcp-Vst-inputBtn{
+  position: relative;
+  top:-44pt;
+  left:5pt;
+  height: 95pt;
+  width: 70pt;
+}
+.rcp-Vst-top {
+  background-color: #b51515;
+  width: 500px;
+  height: 100px;
+}
+
+.rcp-Vst-contents-rep>hr{
+	margin:0;
+}
+.rcp-Vst-bottom {
+  background-color: #fff;
+  width: 500px;
+  height: 150px;
+  border: 1px solid #b51515;
+}
+
+.rcp-Vst-footer {
+  width: 500px;
+  height: 60px;
+  border: 1px solid #b51515;
+  border-top: 0px solid #fff;
+}
+
+.rcp-Vst-img {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  padding: 5px;
+}
+
+.rcp-Vst-img-rep {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  padding: 5px;
+}
+
+.rcp-Vst-img-rep1 {
+  position: relative;
+  left:1%;
+  top:1%;
+  width: 50px;
+  height: 50px;
+  padding: 5px;
+}
+
+.rcp-Vst-common {
+  padding-left: 120px;
+  padding-top: 10px;
+  margin: 10px;
+  color: white;
+  font-size: 11pt;
+  font-weight: bold;
+}
+
+.rcp-Vst-contents {
+  font-size: 10pt;
+  padding-left: 10pt;
+  padding-top:10pt;
+}
+
+.rcp-Vst-contents-rep {
+  padding-left: 40pt;
+  padding-top: 10pt;
+  padding-bottom: 10pt;
+}
+
+.vstUpdateBtn {
+  position: relative;
+  left: 84%;
+  top: 10%;
+}
+.rcp-Vst-moreRp{
+	text-align: center;
+	border: 1px solid #b51515;
+}
+.vstDeleteBtn {
+  position: relative;
+  left: 85%;
+  top: 11%;
+}
+.rcp-Vst-submitBtn{
+  position: relative;
+  left:1%;
+  top:79%;
+}

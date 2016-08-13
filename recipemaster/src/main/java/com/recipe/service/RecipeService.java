@@ -9,7 +9,9 @@ public interface RecipeService {
   int addRecipe(Map map); 
   void addMaterials(Map map);
   int likeUp(Recipe recipe);
+  void likeDown(Recipe recipe);
   List<Recipe> getRecipeList(int pageNo, int pageSize);
+  List<Recipe> getRecipeList2(int pageNo, int pageSize);
   Recipe getRecipe(int recipeNo);
   int updateRecipe(Recipe recipe);
   int updateHits(Recipe recipe);

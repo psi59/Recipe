@@ -22,11 +22,11 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public List<Recipe> getRecipeList(int pageNo, int pageSize) {
+	public List<Recipe> getRecipeList(int userNo, int pageSize) {
 		HashMap<String,Object> params = new HashMap<>();
-		params.put("startIndex", (pageNo-1)*pageSize);
+		params.put("userNo", userNo);
 		params.put("len", pageSize);
-		return recipeDao.selectList(params);
+		return recipeDao.recipeList(params);
 	}
 
 	@Override
@@ -67,5 +67,18 @@ public class RecipeServiceImpl implements RecipeService {
 	@Override
 	public int registyProduce(Map map) {
 		return recipeDao.insertProduce(map);
+	}
+
+	@Override
+	public List<Recipe> getRecipeList2(int userNo, int pageSize) {
+		HashMap<String,Object> params = new HashMap<>();
+		params.put("userNo", userNo);
+		params.put("len", pageSize);
+		return recipeDao.recipeList2(params);
+	}
+
+	@Override
+	public void likeDown(Recipe recipe) {
+		recipeDao.likeDown(recipe);
 	}
 }

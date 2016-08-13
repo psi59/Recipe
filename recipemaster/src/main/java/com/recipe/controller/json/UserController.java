@@ -1,5 +1,6 @@
 package com.recipe.controller.json;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.recipe.domain.User;
@@ -95,11 +97,24 @@ public class UserController {
 
   @RequestMapping(path="update", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
   @ResponseBody
-  public String update(User user){    
+  public String update(User user,String bfPwd,int sUno,
+                      @RequestParam("uploadFile") MultipartFile file){    
     HashMap<String,Object> result = new HashMap<>();
     try{      
-      userService.updateUser(user);
-      result.put("status", "success");      
+      User dbUser = userService.getUser(sUno);
+      if(bfPwd.equals(dbUser.getPassword())){
+        /*파일업로드 추가*/
+        if(null!=file){
+          String fileName = file.getOriginalFilename();
+          user.setRecipeUrl(fileName);
+        File recipeUrl= new File("C:\\User\\BitCamp\\git\\Recipe_team\\recipemaster\\WebContent\\images\\"+fileName);
+        file.transferTo(recipeUrl);
+        }/*파일업로드 추가 끝*/
+        userService.updateUser(user);
+        result.put("status", "success");
+      } else {
+        result.put("status", "pwdFail");
+      }
     }catch(Exception e){
       result.put("status", "failure");
     }
@@ -144,11 +159,14 @@ public class UserController {
     HashMap<String,Object> result = new HashMap<>();
     try {
       User logUser = userService.loginUser(user);
+      
       result.put("status", "success");
-      result.put("data", logUser);
+          
+  result.put("data", logUser);
       System.out.println("logUser:"+logUser.toString());
     } catch (Exception e) {
-      result.put("status", "failure");
+         
+   result.put("status", "failure");
     }
     return new Gson().toJson(result);
     //result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
