@@ -216,10 +216,9 @@
 			<div id="loginInputBox" class="rcp-mar rcp-info"
 				style="height: 110px;">
 				<input class="form-control" type="text" id="userEmail" name="email"
-					placeholder="아이디 입력"/>
-					<br /> 
-				<input class="form-control"
-					type="password" id="userPassword" name="password" placeholder="비밀번호 입력"/>
+					placeholder="아이디 입력" /> <br /> <input class="form-control"
+					type="password" id="userPassword" name="password"
+					placeholder="비밀번호 입력" />
 			</div>
 		</div>
 		<div class="rcp-sign-membership" id="userLogin"
@@ -228,55 +227,60 @@
 		</div>
 	</div>
 	<!--  -->
+		<div id='editUserInfo-pop-up-banner'>
+		<form action="user/update.do" method="post" id="updateUserForm"
+    enctype="multipart/form-data">
+			<div class="rcp-laytop">
+				<!--유저 이미지 업로드 --용이  !!!!!enctype?????16.08.12-->
+				<div class="rcp-up-preview img-wrapper col-md-1"></div>
+				<div class="file-upload-wrapper">
+					<input id="profileImage" type="file" name="profileImage"
+						class="file-upload-native" accept="image/*" /> <input type="text"
+						disabled placeholder="이미지" class="file-upload-text" />
+				</div>
+				<!--유저 이미지 업로드 끝--용이  -->
+				<div class="col-md-11 rcp-laytext">
+					<h4 id="updateBoxName"></h4>
+					<h5 id="updateBoxGrade">Master Chef</h5>
+					<h5 id="updateBoxEmail"></h5>
+				</div>
+			</div>
+			<div class="rcp-section">
+				<span>회원정보수정</span>
+			</div>
+			<div class="rcp-innnersec">
+				<div id="beforePwd-div"
+					class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
+					<input class="form-control" type="password" id="beforePwd"
+						placeholder="이전비밀번호 입력">
+				</div>
 
-	<div id='editUserInfo-pop-up-banner'>
-		<div class="rcp-laytop">
-			<!--유저 이미지 업로드 --용이  !!!!!enctype?????16.08.12-->
-			<div class="rcp-up-preview img-wrapper col-md-1"></div>
-			<div class="file-upload-wrapper">
-				<input type="file" name="uploadFile" class="file-upload-native"
-					accept="image/*" /> <input type="text" disabled
-					placeholder="이미지" class="file-upload-text" />
-			</div>
-      <!--유저 이미지 업로드 끝--용이  -->
-			<div class="col-md-11 rcp-laytext">
-				<h4 id="updateBoxName"></h4>
-				<h5 id="updateBoxGrade">Master Chef</h5>
-				<h5 id="updateBoxEmail"></h5>
-			</div>
-		</div>
-		<div class="rcp-section">
-			<span>회원정보수정</span>
-		</div>
-		<div class="rcp-innnersec">
-			<div id="beforePwd-div"
-				class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
-				<input class="form-control" type="password" id="beforePwd"
-					placeholder="이전비밀번호 입력">
-			</div>
+				<div id="afterPwd-div"
+					class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
+					<input class="form-control" type="password" id="afterPwd"
+						placeholder="변경비밀번호 입력">
+				</div>
 
-			<div id="afterPwd-div"
-				class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
-				<input class="form-control" type="password" id="afterPwd"
-					placeholder="변경비밀번호 입력">
-			</div>
+				<div id="afterPwdcf-div"
+					class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
+					<input class="form-control" type="password" id="afterPwdcf"
+						placeholder="변경비밀번호 확인">
+				</div>
 
-			<div id="afterPwdcf-div"
-				class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
-				<input class="form-control" type="password" id="afterPwdcf"
-					placeholder="변경비밀번호 확인">
+				<div
+					class="rcp-mar rcp-info form-group form-group-md has-success has-feedback">
+					<textarea class="form-control rcp-tara" rows="5rem" cols="30rem"
+						id="introduce" placeholder="자기소개를 입력해주세요"></textarea>
+				</div>
 			</div>
-
-			<div
-				class="rcp-mar rcp-info form-group form-group-md has-success has-feedback">
-				<textarea class="form-control rcp-tara" rows="5rem" cols="30rem"
-					id="introduce" placeholder="자기소개를 입력해주세요"></textarea>
+			<div class="rcp-sign-membership">
+				<!-- <button id="updateUserInfo" type="submit">확인</button> -->
+				<button type="submit" id="updateUserInfo">확인</button>
+				<span id="updateUserReset">취소</span>
 			</div>
+			</form>
 		</div>
-		<div class="rcp-sign-membership">
-			<span id="updateUserInfo">확인</span> <span id="updateUserReset">취소</span>
-		</div>
-	</div>
+	
 	<!-- -------------------------------recipe detail-------------------------------- -->
 
 	<div id='detail_pop_up'>
@@ -617,6 +621,20 @@
 	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
 
 
+	<script src="node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
+	<script
+		src="node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js"></script>
+	<!-- <script src="js/jquery.iframe-transport.js"></script> -->
+	<script
+		src="node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+	<script src="node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+	<script
+		src="node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
+	<script
+		src="node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
+	<script
+		src="node_modules/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
+
 	<!--  사용자 js -->
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/common.js"></script>
@@ -686,29 +704,7 @@
 			$('.dropdown-trigger--mobile').on('click', function() {
 				dropdownClick('.mobile-menu-dropdown', '.profile-dropdown');
 			});
-
-			$('#userInfoEditBtn')
-					.on(
-							'click',
-							function() {
-								$('#editUserInfo-pop-up-banner').bPopup();
-								if (eval(sessionStorage.getItem('data'))[0].userNo != null) {
-									$('#updateBoxEmail')
-											.text(
-													eval(sessionStorage
-															.getItem('data'))[0].email);
-									$('#updateBoxName')
-											.text(
-													eval(sessionStorage
-															.getItem('data'))[0].userName);
-									$('#profileGrade')
-											.text(
-													eval(sessionStorage
-															.getItem('data'))[0].recipeUrl);
-
-								}
-							});
-		});
+	});
 	</script>
 	<script>
 	$(function() {
