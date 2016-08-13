@@ -44,7 +44,7 @@ public class UserController {
 //      }
 //    }catch(Exception e){
 //      result.put("status", "failure");
-//    }
+//    } 
     return new Gson().toJson(result);
   }
 }
