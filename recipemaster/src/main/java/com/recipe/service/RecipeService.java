@@ -15,4 +15,5 @@ public interface RecipeService {
   int updateHits(Recipe recipe);
   int deleteRecipe(int no);
   List<String> getMaterial(String materialName);
+  int registyProduce(Map map);
 }

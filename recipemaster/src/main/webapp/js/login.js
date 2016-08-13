@@ -14,10 +14,10 @@ $("#userLogin").click(
 						return;
 					} 
 					
-					alert(result.data.image);
-					
-					alert(result.data.toString());
-					
+//					alert(result.data.image);
+//					
+//					alert(result.data.toString());√
+//					
 					$('#profileImg').html("<img id='profileImg' class='rcp-img img-circle' src='"+result.data.image+"'/>");
 					$('#profileEmail').html('<a id="profileEmail" href="#" class="dropdown__header rcp-infobox-text">'+result.data.email+'</a>');
 					$('#profileName').html('<h6 id="profileName" class="rcp-nickname">'+result.data.userName+'</h6>');

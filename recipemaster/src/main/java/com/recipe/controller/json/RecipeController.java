@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.recipe.domain.Recipe;
@@ -27,13 +28,17 @@ public class RecipeController {
 
 	@RequestMapping(path="addRecipe",produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public String addRecipe(Recipe recipe, @RequestParam("materialName") String[] materialNames, @RequestParam("materialAmount") String[] materialAmounts){
+	public String addRecipe(Recipe recipe, @RequestParam("materialName") String[] materialNames, @RequestParam("materialAmount") String[] materialAmounts, @RequestParam("files") List<MultipartFile> images){
 		Map<String, Object> result = new HashMap<>();
 		Map<String, Object> map = new HashMap<>();
 		User user = new User();
 		user.setUserNo(1);
 		List<Map> materialList = new ArrayList<>();
 
+		for (MultipartFile mpf: images) {
+            System.out.println(mpf.getOriginalFilename() + " uploaded");
+		}
+		
 		for(int i=0; i<materialNames.length; i++){
 			Map<String, String> matertialInfo = new HashMap<>();
 			matertialInfo.put("materialName", materialNames[i]);

@@ -37,13 +37,11 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public int updateRecipe(Recipe recipe) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int deleteRecipe(int no) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -61,9 +59,13 @@ public class RecipeServiceImpl implements RecipeService {
 		return recipeDao.updateHits(recipe);
 	}
 
-  @Override
-  public int likeUp(Recipe recipe) {
-    // TODO Auto-generated method stub
-    return recipeDao.likeUp(recipe);
-  }
+	@Override
+	public int likeUp(Recipe recipe) {
+		return recipeDao.likeUp(recipe);
+	}
+
+	@Override
+	public int registyProduce(Map map) {
+		return recipeDao.insertProduce(map);
+	}
 }

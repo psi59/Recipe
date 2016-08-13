@@ -18,10 +18,14 @@
   </context:component-scan>
   
   <mvc:annotation-driven></mvc:annotation-driven>
-<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+<!-- <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
     <property name="prefix" value="/WEB-INF/jsp/"/>
     <property name="suffix" value=".jsp"/>
+</bean> -->
+
+ <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
+  <property name="maxUploadSize" value="30720000" />
 </bean>
 
 

@@ -4,9 +4,12 @@
   "description": "{\\rtf1\\ansi\\ansicpg1252\\cocoartf1348\\cocoasubrtf170 {\\fonttbl\\f0\\fmodern\\fcharset0 Courier;} {\\colortbl;\\red255\\green255\\blue255;\\red0\\green0\\blue0;} \\margl1440\\margr1440\\vieww21920\\viewh11840\\viewkind0 \\deftab720 \\pard\\pardeftab720",
   "main": "index.js",
   "dependencies": {
-  "bootstrap": "^3.3.7",
-  "handlebars": "^4.0.5",
-  "jquery": "^3.1.0"
+    "blueimp-canvas-to-blob": "^3.3.0",
+    "blueimp-file-upload": "^9.12.5",
+    "blueimp-load-image": "^2.6.1",
+    "bootstrap": "^3.3.7",
+    "handlebars": "^4.0.5",
+    "jquery": "^3.1.0"
   },
   "devDependencies": {},
   "scripts": {

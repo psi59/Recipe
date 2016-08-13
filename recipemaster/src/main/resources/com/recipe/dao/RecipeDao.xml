@@ -46,6 +46,10 @@
             (#{recipeNo}, #{item.materialName}, #{item.materialAmount})
         </foreach>
   </insert>
+  
+  <update id="insertProduce" parameterType="map">
+    UPDATE rcps SET rcp_pd=#{recipeProduceDatas} where rcpno=#{recipeNo};
+  </update>
 	
 	
    <select id="selectList" resultMap="recipeMap" parameterType="Map">

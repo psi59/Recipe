@@ -73,3 +73,55 @@ body {
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
+
+/*박상일 글쓰기 css*/
+.rcp-title hr{
+   border-top: 5px solid #b51515;
+   width: 96.5%;
+   min-width: 230pt;
+   margin-top: auto;
+   padding-right: 15px;
+}
+
+.rcp-delMtSlot{
+  margin-top: 15pt;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+}
+
+.rcp-btn{
+  margin-top:25pt;
+  margin-bottom:30pt;
+  width: 100%;
+  height: 30pt;
+  font-size: 12pt;
+}
+
+.rcp-title {
+  font-weight: bold;
+  font-size: 33pt;
+  margin-top: 40pt;
+  margin-bottom: 10pt;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.rcp-subtitle {
+  font-weight: bold;
+  font-size: 20pt;
+  margin-top: 20pt;
+  margin-bottom: 10pt;
+  padding: 0px;
+}
+
+.files{
+    border: 1px dotted rgba(255, 255, 255, 0.7);
+    padding: 1em;
+    min-height: 150px;
+    vertical-align: middle;
+}
+
+.height_150px{
+	height: 150px !important;
+}
