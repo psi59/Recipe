@@ -22,7 +22,7 @@ $(function () {
 						+'</span>'
 						+'</div>'
 						+'</div>');
-			})
+			}) 
 
 			$(document).on('click', "button[name='delMtSlot']", function() {
 //				if($(this).parent().parent().length==1){
