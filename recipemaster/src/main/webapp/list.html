@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/userinfobox.css">
 <link rel="stylesheet" href="css/signup.css">
+<link rel="stylesheet" href="css/mainlist.css">
 <link rel="stylesheet" href="css/list.css">
 <link rel="stylesheet" href="css/categoryCheckbox.css">
 <link rel="stylesheet" href="css/hoverButton.css">
@@ -33,7 +34,7 @@
 
 </head>
 <body>
-	<div id="topBtn" class="navbar navbar-inverse navbar-fixed-top">
+	<div id="topBtn" class="navbar navbar-inverse navbar-fixed-top open">
 		<div class="container rcp-container-top">
 			<div class="navbar-header">
 				<div class="row">
@@ -84,6 +85,7 @@
                 </nav> -->
 								<button class="infoBtn">Write</button>
 								<button class="infoBtn">Recipe</button>
+								
 							</div>
 						</div>
 
@@ -92,57 +94,6 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- <header>
-		<div class="rcp-mask">
-			<div class="rcp-container">
-				<div class="row">
-					<div class="col-md-7 col-sm-7 col-xs-7"></div>
-					<div
-						class="col-md-4 col-sm-4 col-xs-4 signin text-right navbar-nav">
-						<a href="#" id="signUpBtn"><span class="rcp-btn-default-2">회원가입</span></a>&nbsp;
-						&nbsp; <a href="#" id="loginBtn"><span
-							class="rcp-btn-default-2">로그인</span></a>
-							<a id="loginIcon"></a>
-					</div>
-				</div>
-
-				<div class="row header-info">
-					<div class="col-md-10 col-md-offset-1 text-center">
-						<img src="img/logo.png" class="wow fadeIn"
-							style="width: 40%; height: 40%; margin-bottom: 1em;"> <br />
-
-						<div class="row lead wow fadeIn">
-							<div
-								class="col-md-3 col-md-offset-3 col-sm-3 col-sm-offset-3 col-xs-4 col-xs-offset-4">
-								<div class="rcp-rt-recipe-btn">실시간 인기 레시피</div>
-								<div id="rt_rank_recipe"
-									class="list-group scroll-img rcp-rt-recipe-rank"></div>
-							</div>
-							<div class="col-md-3 hidden-xs col-sm-3">
-								<div class="rcp-rt-chef-btn">실시간 인기 쉐프</div>
-								<div id="rt_rank_chef"
-									class="list-group scroll-img rcp-rt-chef-rank"></div>
-							</div>
-						</div>
-						row 태그 종료
-
-						<div class="row">
-							<div
-								class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4 wow fadeInUp">
-								<div class="input-group wow fadeIn" data-wow-delay="0.5s">
-									<input type="text" class="form-control"
-										placeholder="레시피명, 쉐프명, 재료명" aria-describedby="basic-addon2">
-									<span class="input-group-addon" id="basic-addon2">검색</span>
-								</div>
-							</div>
-						</div>
-						row 태그종료
-					</div>
-				</div>
-			</div>
-		</div>
-	</header> -->
 
 	<div class="mouse-icon hidden-xs">
 		<div class="scroll"></div>
@@ -162,35 +113,35 @@
 	   <input type="checkbox" name="cb" id="cb4" />
 	   <label for="cb4">분식</label>
 	   <input type="checkbox" name="cb" id="cb5" />
-	   <label for="cb5">찜/탕</label>    
+	   <label for="cb5">찜</label>    
 	   <input type="checkbox" name="cb" id="cb6" />
-	   <label for="cb6">면요리</label>
+	   <label for="cb6">탕</label>    
 	   <input type="checkbox" name="cb" id="cb7" />
-	   <label for="cb7">야식</label>
+	   <label for="cb7">면요리</label>
 	   <input type="checkbox" name="cb" id="cb8" />
-	   <label for="cb8">초간단요리</label>
+	   <label for="cb8">야식</label>
+	   <input type="checkbox" name="cb" id="cb9" />
+	   <label for="cb9">초간단</label>
     </div>
 	</section>
 	<!----------------------- /리스트 카테고리 ----------------------->
 	<!----------------------- 리스트 레시피 카운트 및 정렬 ----------------------->
 	<section id="rcp-list-count-order">
-	 <div id="rcp-list-count">
-	   ~~~ 개의 레시피가 검색되었습니다.
-	 </div>
-	 
-	 <div id="order-btn">
+		<div id="rcp-list-count">~~~ 개의 레시피가 검색되었습니다.</div>
+
+		<div id="order-btn">
 			<button id="order-latest-btn">
 				<h2>최신순</h2>
 				<div class="btn-color"></div>
-			</button>	
-		
-      <button id="order-grade-btn">
-        <h2>평점순</h2>
-        <div class="btn-color"></div>
-      </button>    
-    
-    </div>
-  
+			</button>
+
+			<button id="order-grade-btn">
+				<h2>평점순</h2>
+				<div class="btn-color"></div>
+			</button>
+
+		</div>
+
 	</section>
 	<!----------------------- /리스트 레시피 카운트 및 정렬 ----------------------->
 
@@ -346,32 +297,7 @@
 	<section id="main-list">
 		<div></div>
 	</section>
-
-	<!-------------------------------- Rank List --------------------------------->
-	<section id="rcp-main-rank">
-		<div class="tabs-left">
-			<h3>랭킹</h3>
-
-			<ul class="nav nav-tabs">
-				<li class="active"><a href="#rcp-chef-rank" data-toggle="tab">
-						<img class="rcp-rank-icon" src="img/cooker.png">
-				</a></li>
-				<li><a href="#rcp-recipe-rank" data-toggle="tab"> <img
-						class="rcp-rank-icon" src="img/recipe2.png">
-				</a></li>
-			</ul>
-
-			<div class="tab-content">
-				<!---------------- Chef Rank --------------------->
-				<div class="row tab-pane active" id="rcp-chef-rank"></div>
-				<!---------------- Recipe Rank--------------------->
-				<div class="tab-pane" id="rcp-recipe-rank"></div>
-			</div>
-			<!-- /tab-content -->
-		</div>
-		<!-- /tabbable -->
-	</section>
-	<!------------------------- Rank List ------------------------------>
+	
 
 	<script id="recipe-detail-template" type="text/x-handlebars-template">
     {{#each this}}
@@ -619,37 +545,15 @@
 
 {{/each}}
 </script>
-
-	<script id="chef-card-template" type="text/x-handlebars-template">
-  {{#each data}}
-  <!-- 쉐프카드 -->
-  {{#if @first}} <figure class="snip1344">
-  {{else if @last}} <figure class="snip1344 rcp-hidden-xs rcp-hidden-sm">
-  {{else}} <figure class="snip1344 rcp-hidden-xs">
-  {{/if}} <img src="img/food01.png" alt="profile-sample1" class="background" />
-  <img src="{{image}}" alt="profile-sample1" class="profile" />
-  <img src=
-  {{#if @first}} "img/medal1.png"
-  {{else if @last}} "img/medal3.png"
-  {{else}} "img/medal2.png"
-  {{/if}} alt="profile-sample1" class="medal" />
-   <figcaption>
-    <h3>{{userName}}</h3>           
-      <div>{{intro}}</div>
-      <div>{{role}}</div>
-   </figcaption>
-  </figure>
-  {{/each}}
-  </script>
+  
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="js/template/main.js"></script>
+	<!-- <script src="js/template/main.js"></script> -->	
 	<script src="js/template/wow.min.js"></script>
 	<script src="js/template/jquery-slider-rolling.js"></script>
 	<script src="js/mouseover.js"></script>
 	<script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
 	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
-
 
 	<!--  사용자 js -->
 	<script src="js/jquery.bpopup.min.js"></script>
