@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,36 +17,42 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 import com.recipe.domain.User;
 import com.recipe.service.UserService;
+import com.recipe.util.CommonUtil;
 
 @Controller
 @RequestMapping("/user/")
 public class UserController {
-  @Autowired UserService userService;
+	@Autowired UserService userService;
+	
+	public CommonUtil commonUtil = new CommonUtil(); 
 
-  @RequestMapping(path="update")
-  @ResponseBody
-  public String update(@RequestParam("profileImage") MultipartFile profileImage){    
-    HashMap<String,Object> result = new HashMap<>();
-    
-    System.out.println("file 명 : "+ profileImage.getOriginalFilename());
-//    try{      
-//      User dbUser = userService.getUser(sUno);
-//      if(bfPwd.equals(dbUser.getPassword())){
-//        /*파일업로드 추가*/
-//        if(null!=file){
-//          String fileName = file.getOriginalFilename();
-//          user.setRecipeUrl(fileName);
-//        File recipeUrl= new File("C:\\User\\BitCamp\\git\\Recipe_team\\recipemaster\\WebContent\\images\\"+fileName);
-//        file.transferTo(recipeUrl);
-//        }/*파일업로드 추가 끝*/
-//        userService.updateUser(user);
-//        result.put("status", "success");
-//      } else {
-//        result.put("status", "pwdFail");
-//      }
-//    }catch(Exception e){
-//      result.put("status", "failure");
-//    } 
-    return new Gson().toJson(result);
-  }
+	@RequestMapping(path="update")
+	@ResponseBody
+	public String update(User user, @RequestParam("beforePassword")String beforePassword, 
+			@RequestParam("profileImage") MultipartFile profileImage,
+			HttpServletRequest request){    
+		HashMap<String,Object> result = new HashMap<>();
+		try{
+			User dbUser = userService.getUser(user.getUserNo());
+			System.out.println(user);
+			if(beforePassword.equals(dbUser.getPassword())){
+				/*파일업로드 추가*/
+				if(null!=profileImage){
+					String fileName = profileImage.getOriginalFilename();
+					user.setImage(fileName);
+					File recipeUrl= new File(commonUtil.getImageFolderPath("profileImg", request)+"/"+fileName);
+					profileImage.transferTo(recipeUrl);
+				}/*파일업로드 추가 끝*/
+				userService.updateUser(user);
+				result.put("status", "success");
+			} else {
+				result.put("status", "pwdFail");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			result.put("status", "failure");
+		} 
+		
+		return new Gson().toJson(result);
+	}
 }

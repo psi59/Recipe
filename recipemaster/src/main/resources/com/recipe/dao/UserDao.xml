@@ -63,7 +63,8 @@
       UPDATE users
       <set>
         pwd = #{password},
-        intro = #{intro}
+        intro = #{intro},
+        img = #{image}
       </set>
       WHERE email = #{email}
    </update>

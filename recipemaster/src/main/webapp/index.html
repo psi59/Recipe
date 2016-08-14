@@ -230,6 +230,8 @@
 		<div id='editUserInfo-pop-up-banner'>
 		<form action="user/update.do" method="post" id="updateUserForm"
     enctype="multipart/form-data">
+      <input type="hidden" name="userNo" id="updateFormUserNo">
+      <input type="hidden" name="email" id="updateFormEmail">
 			<div class="rcp-laytop">
 				<!--유저 이미지 업로드 --용이  !!!!!enctype?????16.08.12-->
 				<div class="rcp-up-preview img-wrapper col-md-1"></div>
@@ -251,13 +253,13 @@
 			<div class="rcp-innnersec">
 				<div id="beforePwd-div"
 					class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
-					<input class="form-control" type="password" id="beforePwd"
+					<input class="form-control" type="password" id="beforePwd" name="beforePassword"
 						placeholder="이전비밀번호 입력">
 				</div>
 
 				<div id="afterPwd-div"
 					class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
-					<input class="form-control" type="password" id="afterPwd"
+					<input class="form-control" type="password" id="afterPwd" name="password"
 						placeholder="변경비밀번호 입력">
 				</div>
 
@@ -270,12 +272,12 @@
 				<div
 					class="rcp-mar rcp-info form-group form-group-md has-success has-feedback">
 					<textarea class="form-control rcp-tara" rows="5rem" cols="30rem"
-						id="introduce" placeholder="자기소개를 입력해주세요"></textarea>
+						id="introduce" name="intro" placeholder="자기소개를 입력해주세요"></textarea>
 				</div>
 			</div>
 			<div class="rcp-sign-membership">
 				<!-- <button id="updateUserInfo" type="submit">확인</button> -->
-				<button type="submit" id="updateUserInfo">확인</button>
+				<span id="updateUserInfo">확인</span>
 				<span id="updateUserReset">취소</span>
 			</div>
 			</form>
