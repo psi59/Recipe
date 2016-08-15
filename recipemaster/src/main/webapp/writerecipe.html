@@ -3,17 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <title>글쓰기 페이지</title>
-<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/writerecipe.css">
-<link rel="stylesheet" href="node_modules/blueimp-file-upload/css/jquery.fileupload.css">
+<link rel="stylesheet"
+	href="node_modules/blueimp-file-upload/css/jquery.fileupload.css">
 
+<style type="text/css">
+  .scroll{
+    overflow: scroll;  
+    width:100%;
+    white-space:nowrap;
+  }
+</style>
 </head>
 <body>
-	<form id="addRecipe" action="recipe/addRecipe.do" method="post" enctype="multipart/form-data">
-	
-	<input type="hidden" id="userNo"/>
-	
-	
+	<form id="addRecipe" action="recipe/addRecipe.do" method="post"
+		enctype="multipart/form-data">
+
+		<input type="hidden" id="userNo" />
+
+
 		<div class="row col-md-offset-2 col-sm-offset-2 col-md-8 col-sm-8 ">
 			<div class="rcp-title">
 				<span>RECIPE 등록</span>
@@ -35,7 +45,23 @@
 					<input name="intro" type="text" placeholder="요리에 대해 간단히 설명해주세요"
 						class="inputbox"> <span class="inputname">요리설명</span>
 				</div>
-
+				
+				<div>
+          <div class="col-md-12 rcp-subtitle ">
+            <span>대표사진 등록</span>
+            <div class="btn btn-success fileinput-button">
+              <span>사진 추가</span>
+              <input id="representImage" type="file" name="representImage"
+                multiple="multiple">
+            </div>
+          </div>
+          <!--  대표사진 드롭존-->
+          <div id="representImgDropzone">
+            <div id="representImgs" class="files col-md-12 scroll"></div>
+          </div>
+          <!--  대표사진 드롭존-->
+        </div>
+				
 				<div class="col-md-12">
 					<div class="col-md-9 rcp-subtitle ">
 						<span>재료 등록</span>
@@ -60,18 +86,18 @@
 					</div>
 
 					<div>
-						<!-- The fileinput-button span is used to style the file input field as button -->
 						<div class="col-md-12 rcp-subtitle ">
-	            <span>조리과정 등록</span>
-	            <div class="btn btn-success fileinput-button"> <!--         <i class="glyphicon glyphicon-plus"></i> -->
-	              <span>사진 추가</span> <!-- The file input field used as target for the file upload widget -->
-	              <input id="fileupload" type="file" name="files" multiple="multiple">
-	            </div> 
-	          </div>
+							<span>조리과정 등록</span>
+							<div class="btn btn-success fileinput-button">
+								<span>사진 추가</span>
+								<input id="fileupload" type="file" name="files"
+									multiple="multiple">
+							</div>
+						</div>
 						<!-- The container for the uploaded files -->
-					<div id="dropzone">
-					 <div id="files" class="files col-md-12"></div>
-					</div>
+						<div id="dropzone">
+							<div id="files" class="files col-md-12"></div>
+						</div>
 						<br>
 					</div>
 					<div class="col-md-12">
@@ -98,15 +124,20 @@
 	<script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
 	<script src="js/template/jquery.fancybox.min.js"></script>
 	<script src="js/template/jquery.dragbetter.js"></script>
-	<script	src="node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
-	<script	src="node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js"></script>
-  <!-- <script src="js/jquery.iframe-transport.js"></script> -->
-	<script src="node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+	<script src="node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
+	<script
+		src="node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js"></script>
+	<!-- <script src="js/jquery.iframe-transport.js"></script> -->
+	<script
+		src="node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
 	<script src="node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
-	<script src="node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
-	<script src="node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
-	<script src="node_modules/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
+	<script
+		src="node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
+	<script
+		src="node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
+	<script
+		src="node_modules/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
 
-  <script src="js/writerecipe.js"></script>
+	<script src="js/writerecipe.js"></script>
 </body>
 </html>

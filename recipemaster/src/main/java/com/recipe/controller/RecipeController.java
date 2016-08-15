@@ -1,6 +1,7 @@
 package com.recipe.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,17 +47,19 @@ public class RecipeController {
 			@RequestParam("materialName") String[] materialNames,
 			@RequestParam("materialAmount") String[] materialAmounts,
 			@RequestParam("recipeProduce") String[] recipeProduce,
-			@RequestParam("files") MultipartFile[] recipeProduceImage, 
+			@RequestParam("files") MultipartFile[] recipeProduceImage,
+			@RequestParam("representImage") List<MultipartFile> rcpRepresentImage,
 			HttpServletRequest request) {
 		Map<String, Object> result = new HashMap<>();
 		Map<String, Object> map = new HashMap<>();
 		Map<String, Object> recipeDatas = new HashMap<>();
 		List<Map> materialList = new ArrayList<>();
 		JsonArray recipeProduceDatas = new JsonArray();
+		JsonArray recipeRepresentImages = new JsonArray();
 		
 		User user = new User();
 		user.setUserNo(1);
-		
+			
 		for (int i = 0; i < materialNames.length; i++) {
 			Map<String, String> matertialInfo = new HashMap<>();
 			matertialInfo.put("materialName", materialNames[i]);
@@ -71,17 +74,28 @@ public class RecipeController {
 		recipeDatas.put("materialList", materialList);
 		
 		try {
+			/*대표사진 등록*/
+			for(MultipartFile image : rcpRepresentImage){
+				int no = rcpRepresentImage.indexOf(image);
+				String fileName = recipeNo + "_" + user.getUserNo() + "_" + commonUtil.nowData() + "_" + no+".png";
+				File file = new File(commonUtil.getImageFolderPath("representImg", request)+"/"+fileName);
+				image.transferTo(file);
+				recipeRepresentImages.add(fileName);
+			} //end of for
+			
+			/*조리과정 등록*/
 			for (int i = 0; i < recipeProduceImage.length; i++) {
 				JsonObject obj = new JsonObject();
 				String fileName = recipeNo + "_" + user.getUserNo() + "_" + commonUtil.nowData() + "_" + i+".png";
-				File file = new File("/Volumes/StoreSpace/Workspace/bitProject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/recipemaster/img/recipeimg/"+fileName);
+				File file = new File(commonUtil.getImageFolderPath("recipeImg", request)+"/"+fileName);
 				obj.addProperty("recipeProduceImage", fileName);
 				obj.addProperty("recipeProduce", recipeProduce[i]);
 				recipeProduceDatas.add(obj);
 				recipeProduceImage[i].transferTo(file);
-			}
+			} // end of for
 			recipeDatas.put("recipeProduceDatas", recipeProduceDatas.toString());
-			recipeService.registyProduce(recipeDatas);
+			recipeDatas.put("recipeRepresentImages", recipeRepresentImages.toString());
+			recipeService.registyImageAndProduce(recipeDatas);
 			recipeService.addMaterials(recipeDatas);
 			result.put("status", "success");
 		} catch (Exception e) {

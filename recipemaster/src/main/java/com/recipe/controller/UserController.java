@@ -38,8 +38,9 @@ public class UserController {
 			if(beforePassword.equals(dbUser.getPassword())){
 				/*파일업로드 추가*/
 				if(null!=profileImage){
-					String fileName = profileImage.getOriginalFilename();
+					String fileName = "userprofile_"+user.getUserNo()+".png";
 					user.setImage(fileName);
+					System.out.println(profileImage.getOriginalFilename());
 					File recipeUrl= new File(commonUtil.getImageFolderPath("profileImg", request)+"/"+fileName);
 					profileImage.transferTo(recipeUrl);
 				}/*파일업로드 추가 끝*/

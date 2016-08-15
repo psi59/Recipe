@@ -1,5 +1,15 @@
 $(function () {
 	
+	var rcpPdImgList = new Array();
+	var rcpRepresentImgList = new Array();
+    'use strict';
+	
+    $( "#representImgs" ).sortable();
+    $( "#representImgs" ).disableSelection();
+    
+    $( "#files" ).sortable();
+    $( "#files" ).disableSelection();
+    
 	$('#userNo').val('1'); //hidden 태그에 userNo set
 	
 	$('#appmtbtn')
@@ -31,21 +41,45 @@ $(function () {
 					$(this).parent().parent().remove();
 //				}
 			});
-	
-	var filesList = new Array();
-    'use strict';
-    // Change this to the location of your server-side upload handler:
-    var url = 'recipe/addRecipe.do', 
-        uploadButton = $('<button/>')
-            .addClass('btn btn-primary');
+    
+//    대표사진등록관련 js
+    $('#representImage').fileupload({
+        dataType: 'json',
+        autoUpload: false,
+        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+        disableImageResize: /Android(?!.*Chrome)|Opera/
+            .test(window.navigator.userAgent),
+        previewMaxWidth: 150,
+        previewMaxHeight: 150,
+        previewCrop: true,
+        dropZone : $('#representImgDropzone')
+    }).on('fileuploadadd', function (e, data) {
+        data.context = $('<span class="scroll"/>').appendTo('#representImgs');
+        $.each(data.files, function (index, file) {
+        	rcpRepresentImgList.push(data.files[index]);
+        	var node = $('<span/>')
+            node.appendTo(data.context);         
+        });
+    }).on('fileuploadprocessalways', function (e, data) {
+        var index = data.index,
+        file = data.files[index],
+        node = $(data.context.children()[index]);
+	    if (file.preview) {
+	    	  node.prepend(file.preview);
+	    }
+	    if (file.error) {
+	        node
+	            .append('<br>')
+	            .append($('<span class="text-danger"/>').text(file.error));
+	    }
+	});
+    
+    
+//	조리과정 js    
     $('#fileupload').fileupload({
         dataType: 'json',
         autoUpload: false,
         acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-        maxFileSize: 999000,
-        // Enable image resizing, except for Android and Opera,
-        // which actually support image resizing, but fail to
-        // send Blob objects via XHR requests:
         disableImageResize: /Android(?!.*Chrome)|Opera/
             .test(window.navigator.userAgent),
         previewMaxWidth: 150,
@@ -55,7 +89,7 @@ $(function () {
     }).on('fileuploadadd', function (e, data) {
         data.context = $('<div/>').appendTo('#files');
         $.each(data.files, function (index, file) {
-        	  filesList.push(data.files[index]);
+        	rcpPdImgList.push(data.files[index]);        	
             var node = $('<div class="row"/>');
             var textarea = $('<span class="lablebox  col-md-9"/>').append($('<textarea name="recipeProduce" class="height_150px inputbox" placeholder="조리과정을 설명해주세요."/>')).append($('<span class="inputname">조리과정</span>'));
             if (!index) {  }
@@ -112,11 +146,15 @@ $(function () {
         var formData = new FormData(this);
         var formURL = $(this).attr("action");
         
-        if (filesList.length > 0) {
+        if (rcpPdImgList.length > 0) {
           console.log("multi file submit");
           event.preventDefault();
           $('#fileupload').fileupload('send', {
-            files : filesList
+            files : rcpPdImgList
+          });
+          
+          $('#representImage').fileupload('send', {
+        	  files : rcpRepresentImgList
           });
 //          .success(function(result, textStatus, jqXHR) {
 //            console.log('success');

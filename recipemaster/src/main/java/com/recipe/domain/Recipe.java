@@ -10,6 +10,7 @@ public class Recipe {
 	private int userNo;
 	private String recipeName;
 	private String intro;
+	private JsonArray representImages;
 	private JsonArray materials;
 	private JsonArray recipeProcedure;
 	private int cookTime;
@@ -18,38 +19,17 @@ public class Recipe {
 	private int hits;
 	private int regiStatus;
 	private int gradePoint;
-  private User user;
-  private Date likeDate;
-  private int likeUser;
-  private int countLike;
-  
-  
-	public int getCountLike() {
-    return countLike;
-  }
-  public void setCountLike(int countLike) {
-    this.countLike = countLike;
-  }
-  public int getLikeUser() {
-    return likeUser;
-  }
-  public void setLikeUser(int likeUser) {
-    this.likeUser = likeUser;
-  }
+	private User user;
+	private Date likeDate;
+	private int likeUser;
+	private int countLike;
 	
-	public Date getLikeDate() {
-    return likeDate;
-  }
-  public void setLikeDate(Date likeDate) {
-    this.likeDate = likeDate;
-  }
-  public User getUser() {
-		return user;
+	//Constructor
+	public Recipe() {
+		super();
 	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-
+	
+	//Method
 	public int getRecipeNo() {
 		return recipeNo;
 	}
@@ -73,6 +53,12 @@ public class Recipe {
 	}
 	public void setIntro(String intro) {
 		this.intro = intro;
+	}
+	public JsonArray getRepresentImages() {
+		return representImages;
+	}
+	public void setRepresentImages(JsonArray representImages) {
+		this.representImages = representImages;
 	}
 	public JsonArray getMaterials() {
 		return materials;
@@ -122,12 +108,37 @@ public class Recipe {
 	public void setGradePoint(int gradePoint) {
 		this.gradePoint = gradePoint;
 	}
-  @Override
-  public String toString() {
-    return "Recipe [recipeNo=" + recipeNo + ", userNo=" + userNo + ", recipeName=" + recipeName + ", intro=" + intro
-        + ", materials=" + materials + ", recipeProcedure=" + recipeProcedure + ", cookTime=" + cookTime + ", portion="
-        + portion + ", recipeDate=" + recipeDate + ", hits=" + hits + ", regiStatus=" + regiStatus + ", gradePoint="
-        + gradePoint + ", user=" + user + ", likeDate=" + likeDate + ", likeUser=" + likeUser + ", countLike="
-        + countLike + "]";
-  }
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Date getLikeDate() {
+		return likeDate;
+	}
+	public void setLikeDate(Date likeDate) {
+		this.likeDate = likeDate;
+	}
+	public int getLikeUser() {
+		return likeUser;
+	}
+	public void setLikeUser(int likeUser) {
+		this.likeUser = likeUser;
+	}
+	public int getCountLike() {
+		return countLike;
+	}
+	public void setCountLike(int countLike) {
+		this.countLike = countLike;
+	}
+	
+	@Override
+	public String toString() {
+		return "Recipe [recipeNo=" + recipeNo + ", userNo=" + userNo + ", recipeName=" + recipeName + ", intro=" + intro
+				+ ", representImages=" + representImages + ", materials=" + materials + ", recipeProcedure="
+				+ recipeProcedure + ", cookTime=" + cookTime + ", portion=" + portion + ", recipeDate=" + recipeDate
+				+ ", hits=" + hits + ", regiStatus=" + regiStatus + ", gradePoint=" + gradePoint + ", user=" + user
+				+ ", likeDate=" + likeDate + ", likeUser=" + likeUser + ", countLike=" + countLike + "]";
+	}
 }

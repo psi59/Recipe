@@ -69,26 +69,26 @@ $(function(){
 
 		$("#updateUserForm").submit();
 
-		$.post('/user/update.json', {
-			sUno : eval(sessionStorage.getItem('data'))[0].userNo,
-			email : $('#updateBoxEmail').text(),
-			bfPwd : $('#beforePwd').val(),
-			password : $('#afterPwd').val(),
-			intro : $('#introduce').val(),
-		}, function(result) {   	  
-			if (result.status == 'pwdFail'){
-				$('#beforePwd-div').removeClass().addClass("rcp-mar rcp-info form-group form-group-md has-error has-feedback");
-				alert('이전 비밀번호 불일치');
-				$('#beforePwd').focus();
-				return;
-			} else if(result.status == 'failure'){
-				alert('서버 오류');
-				return;
-			} else {
-				alert('정보수정 완료');
-				$('#editUserInfo-pop-up-banner').bPopup().close();
-			}
-		}, 'json');
+//		$.post('/user/update.json', {
+//			sUno : eval(sessionStorage.getItem('data'))[0].userNo,
+//			email : $('#updateBoxEmail').text(),
+//			bfPwd : $('#beforePwd').val(),
+//			password : $('#afterPwd').val(),
+//			intro : $('#introduce').val(),
+//		}, function(result) {   	  
+//			if (result.status == 'pwdFail'){
+//				$('#beforePwd-div').removeClass().addClass("rcp-mar rcp-info form-group form-group-md has-error has-feedback");
+//				alert('이전 비밀번호 불일치');
+//				$('#beforePwd').focus();
+//				return;
+//			} else if(result.status == 'failure'){
+//				alert('서버 오류');
+//				return;
+//			} else {
+//				alert('정보수정 완료');
+//				$('#editUserInfo-pop-up-banner').bPopup().close();
+//			}
+//		}, 'json');
 	});
 
 	/* 비밀번호 폼 색상변화 */

@@ -8,7 +8,7 @@ import com.recipe.domain.Recipe;
 public interface RecipeDao {
   int insert(Map map); // Create
   void insertMaterials(Map map); // Create
-  int insertProduce(Map map);
+  int insertImageAndProduce(Map map);
   
   List<Recipe> recipeList(Map<String,Object> params); // Read or Retrieve
   List<Recipe> recipeList2(Map<String,Object> params); // Read or Retrieve
