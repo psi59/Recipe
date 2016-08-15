@@ -19,7 +19,7 @@
 		<result column="lc_dt" property="likeDate"/>
 		<result column="likeUser" property="likeUser"/>
 		<result column="countLike" property="countLike"/>
-	</resultMap>
+	</resultMap> 
 	
 	<resultMap type="material" id="materialMap">
     <id column="mtno" property="materialNo" />
