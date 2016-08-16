@@ -65,3 +65,5 @@ $('#loginBtn').on('click', function(event){
 	event.preventDefault();
 	$('#login-pop-up-banner').bPopup();
 });
+
+
