@@ -1,30 +1,36 @@
 .rcp-Vst {
   margin: 10px;
-  width: 500px;
+  width: 300px;
   height: 400px;
 }
 .rcp-Vst-write{
   margin:10px;
-  background-color: #b51515;
-  width: 500px;
-  height: 160px;
-  border: 1px solid #b51515;
+  background-color: #ffffff;
+    width: 300px;
+    height: 89px;
+  border: 1px solid #8c94a2;
   border-radius: 10px;
 }
 .inputWrite{
   padding: 10px;
 }
 .rcp-Vst-inputBtn{
-  position: relative;
-  top:-44pt;
-  left:5pt;
-  height: 95pt;
-  width: 70pt;
+      position: relative;
+       top: -52pt;
+    left: 152pt;
+    height: 48pt;
+    width: 60pt;
 }
 .rcp-Vst-top {
-  background-color: #b51515;
-  width: 500px;
-  height: 100px;
+	background-color:#eaeaea;;
+  border: 1px solid #8c94a2;
+     width: 300px;
+    height: 50px;
+}
+
+rcp-Vst-id{
+	font-color:#d5d8dd;
+	
 }
 
 .rcp-Vst-contents-rep>hr{
@@ -32,22 +38,24 @@
 }
 .rcp-Vst-bottom {
   background-color: #fff;
-  width: 500px;
+  width: 300px;
   height: 150px;
-  border: 1px solid #b51515;
+  border: 1px solid #8c94a2;
+  border-top-width: 0px;
+  
 }
 
 .rcp-Vst-footer {
-  width: 500px;
+  width: 300px;
   height: 60px;
-  border: 1px solid #b51515;
+  border: 1px solid #8c94a2;
   border-top: 0px solid #fff;
 }
 
 .rcp-Vst-img {
   position: absolute;
-  width: 100px;
-  height: 100px;
+ width: 50px;
+    height: 50px;
   padding: 5px;
 }
 
@@ -68,10 +76,10 @@
 }
 
 .rcp-Vst-common {
-  padding-left: 120px;
-  padding-top: 10px;
-  margin: 10px;
-  color: white;
+  padding-left: 5px;
+  padding-top: -10px;
+  margin: 5px;
+  color:#8c94a2
   font-size: 11pt;
   font-weight: bold;
 }
@@ -83,7 +91,7 @@
 }
 
 .rcp-Vst-contents-rep {
-  padding-left: 40pt;
+  padding-left: 10pt;
   padding-top: 10pt;
   padding-bottom: 10pt;
 }
@@ -95,7 +103,7 @@
 }
 .rcp-Vst-moreRp{
 	text-align: center;
-	border: 1px solid #b51515;
+	border: 1px solid #8c94a2;
 }
 .vstDeleteBtn {
   position: relative;
