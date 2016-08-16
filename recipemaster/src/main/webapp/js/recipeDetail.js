@@ -1,4 +1,4 @@
-
+/*
 //$(function(){
 //	$(document).on('click','.detail', function(){
 //		$('#detail_pop_up').bPopup({
@@ -96,4 +96,4 @@ $(function(){
 //			});
 //		});		
 //	})
-	
+	*/

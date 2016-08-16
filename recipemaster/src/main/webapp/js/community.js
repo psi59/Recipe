@@ -1,6 +1,6 @@
 $(document).on('click','#vstUpdateBtn',function() {
 							$('#vst-contents').html(
-											'<div class="rcp-Vst-contents"><textarea rows="6" cols="64" style="resize:none;"></textarea></div>');
+											'<div class="rcp-Vst-contents"><textarea rows="6" cols="30" style="resize:none;"></textarea></div>');
 							$('#editBtn1').html('<img class="vstUpdateBtn" id="vstConfirmBtn"'+
 									'src="/img/vstConfirmBtn.png">')
 						});
