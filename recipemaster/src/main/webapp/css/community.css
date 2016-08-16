@@ -1,20 +1,12 @@
 .rcp-Vst {
   margin: 10px;
-<<<<<<< HEAD
   width: 288px;
-=======
-  width: 300px;
->>>>>>> branch 'master' of https://github.com/tkddlf59/Recipe.git
   height: 400px;
 }
 .rcp-Vst-write{
   margin:10px;
   background-color: #ffffff;
-<<<<<<< HEAD
     width: 288px;
-=======
-    width: 300px;
->>>>>>> branch 'master' of https://github.com/tkddlf59/Recipe.git
     height: 89px;
   border: 1px solid #8c94a2;
   border-radius: 10px;
@@ -27,27 +19,13 @@
        top: -52pt;
     left: 152pt;
     height: 48pt;
-<<<<<<< HEAD
     width: 53pt;
-=======
-    width: 60pt;
->>>>>>> branch 'master' of https://github.com/tkddlf59/Recipe.git
 }
 .rcp-Vst-top {
 	background-color:#eaeaea;;
   border: 1px solid #8c94a2;
-<<<<<<< HEAD
      width: 288px;
     height: 50px;
-=======
-     width: 300px;
-    height: 50px;
-}
-
-rcp-Vst-id{
-	font-color:#d5d8dd;
-	
->>>>>>> branch 'master' of https://github.com/tkddlf59/Recipe.git
 }
 rcp-Vst-id{
 	font-color:#d5d8dd;
@@ -57,22 +35,14 @@ rcp-Vst-id{
 }
 .rcp-Vst-bottom {
   background-color: #fff;
-<<<<<<< HEAD
   width: 288px;
-=======
-  width: 300px;
->>>>>>> branch 'master' of https://github.com/tkddlf59/Recipe.git
   height: 150px;
   border: 1px solid #8c94a2;
   border-top-width: 0px;
   
 }
 .rcp-Vst-footer {
-<<<<<<< HEAD
   width: 288px;
-=======
-  width: 300px;
->>>>>>> branch 'master' of https://github.com/tkddlf59/Recipe.git
   height: 60px;
   border: 1px solid #8c94a2;
   border-top: 0px solid #fff;
@@ -116,10 +86,7 @@ rcp-Vst-id{
 }
 
 .rcp-Vst-contents-rep {
-<<<<<<< HEAD
   background-color:white;
-=======
->>>>>>> branch 'master' of https://github.com/tkddlf59/Recipe.git
   padding-left: 10pt;
   padding-top: 10pt;
   padding-bottom: 10pt;
@@ -132,10 +99,7 @@ rcp-Vst-id{
 }
 .rcp-Vst-moreRp{
 	text-align: center;
-<<<<<<< HEAD
 	background-color:white;
-=======
->>>>>>> branch 'master' of https://github.com/tkddlf59/Recipe.git
 	border: 1px solid #8c94a2;
 }
 .vstDeleteBtn {
