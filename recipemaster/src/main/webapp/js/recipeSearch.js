@@ -11,7 +11,7 @@ $(function() {
 });
 
 function search(){
-	var userNo = 0;
+	var userNo = 0; 
 	var a = eval(sessionStorage.getItem('data'));		
 	if(a != null){
 		userNo = eval(sessionStorage.getItem('data'))[0].userNo;
