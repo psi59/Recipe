@@ -23,11 +23,11 @@
 	</select>
 
 	<select id="selectList" resultMap="userMap" parameterType="Map">
-		select uno, name, email, pwd, img, intro, role, join_dt, rcp_url
-		from
-		users
-		order by uno desc
-		limit #{startIndex}, #{len}
+		SELECT uno, name, email, pwd, img, intro, role, join_dt, rcp_url
+		FROM
+		users		
+		ORDER BY uno desc
+		LIMIT #{startIndex}, #{len}
 	</select>
 
 	<select id="selectOne" resultMap="userMap" parameterType="int">

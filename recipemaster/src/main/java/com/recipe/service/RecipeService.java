@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.recipe.domain.Recipe;
+import com.recipe.domain.Search;
 
 public interface RecipeService {
   int addRecipe(Map map); 
@@ -12,6 +13,10 @@ public interface RecipeService {
   void likeDown(Recipe recipe);
   List<Recipe> getRecipeList(int pageNo, int pageSize);
   List<Recipe> getRecipeList2(int pageNo, int pageSize);
+  
+  List<Recipe> getRecipeSearchList(int pageNo, int pageSize, Search search, int userNo);
+  int getRecipeCount(int pageNo, int pageSize, Search search, int userNo);
+  
   Recipe getRecipe(int recipeNo);
   int updateRecipe(Recipe recipe);
   int updateHits(Recipe recipe);

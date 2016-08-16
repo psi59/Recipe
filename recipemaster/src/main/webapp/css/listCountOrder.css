@@ -1,23 +1,18 @@
-/* body, html {
-  margin: 0;
-  position: relative;
-  height: 100%;
-  width: 100%;
-} */
 
-##rcp-list-count-order {
+
+#rcp-list-count-order {
+	width: 100%;
+	height: 50px;
 	margin-bottom: 5px;
 }
 
-#rcp-list-count-order #rcp-list-count{
+#rcp-list-count-order #rcp-list-count #recipe-count{
 	float: left;
-	/* width: 30%; */
 	margin: 0 auto; 
 } 
 
 #rcp-list-count-order #order-btn{
   float: right;
-  /* width: 20%; */
   margin: 0 auto; 
 }
 
@@ -81,9 +76,9 @@
    transition: color 0s 0.1s;
 }
 
-#rcp-list-count-order button:active {
+/* #rcp-list-count-order button:active {
   margin-top: 2px;
-}
+}  */
 
 #rcp-list-count-order button:focus {
   outline: none;

@@ -24,11 +24,6 @@ public class Recipe {
 	private int likeUser;
 	private int countLike;
 	
-	//Constructor
-	public Recipe() {
-		super();
-	}
-	
 	//Method
 	public int getRecipeNo() {
 		return recipeNo;
@@ -132,13 +127,12 @@ public class Recipe {
 	public void setCountLike(int countLike) {
 		this.countLike = countLike;
 	}
-	
-	@Override
-	public String toString() {
-		return "Recipe [recipeNo=" + recipeNo + ", userNo=" + userNo + ", recipeName=" + recipeName + ", intro=" + intro
-				+ ", representImages=" + representImages + ", materials=" + materials + ", recipeProcedure="
-				+ recipeProcedure + ", cookTime=" + cookTime + ", portion=" + portion + ", recipeDate=" + recipeDate
-				+ ", hits=" + hits + ", regiStatus=" + regiStatus + ", gradePoint=" + gradePoint + ", user=" + user
-				+ ", likeDate=" + likeDate + ", likeUser=" + likeUser + ", countLike=" + countLike + "]";
-	}
+  @Override
+  public String toString() {
+    return "Recipe [recipeNo=" + recipeNo + ", userNo=" + userNo + ", recipeName=" + recipeName + ", intro=" + intro
+        + ", representImages=" + representImages + ", materials=" + materials + ", recipeProcedure=" + recipeProcedure
+        + ", cookTime=" + cookTime + ", portion=" + portion + ", recipeDate=" + recipeDate + ", hits=" + hits
+        + ", regiStatus=" + regiStatus + ", gradePoint=" + gradePoint + ", user=" + user + ", likeDate=" + likeDate
+        + ", likeUser=" + likeUser + ", countLike=" + countLike + "]";
+  }	
 }

@@ -24,7 +24,7 @@ public class UserController {
   @RequestMapping(path="list", produces="application/json;charset=UTF-8")
   @ResponseBody
   public String list(@RequestParam(defaultValue="1")int pageNo,
-      @RequestParam(defaultValue="3")int pageSize){
+                     @RequestParam(defaultValue="3")int pageSize){
     HashMap<String, Object> result = new HashMap<>();
     try{
       List<User> list = userService.getUserList(pageNo, pageSize);

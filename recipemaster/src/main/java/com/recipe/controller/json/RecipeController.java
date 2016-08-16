@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.recipe.domain.Recipe;
+import com.recipe.domain.Search;
 import com.recipe.domain.User;
 import com.recipe.service.RecipeService;
 
@@ -25,6 +26,32 @@ import com.recipe.service.RecipeService;
 public class RecipeController {
 
 	@Autowired RecipeService recipeService;
+	
+	// 이성현
+	@RequestMapping(path="listSearch",produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String listSearch(@RequestParam(defaultValue="1") int pageNo,
+                           @RequestParam(defaultValue="6") int pageSize,
+                           Search search, int userNo){
+    HashMap<String,Object> result = new HashMap<>();     
+    
+    // TEST용으로 searchCondition, sortCondition 때려박음
+    search.setSearchCondition("name");
+    search.setSortCondition("newest");   
+    
+    List<Recipe> list = recipeService.getRecipeSearchList(pageNo, pageSize, search, userNo);
+    int recipeCount = recipeService.getRecipeCount(pageNo, pageSize, search, userNo);
+   
+    try{
+      result.put("status","success");
+      result.put("data", list);
+      result.put("recipeCount", recipeCount);
+    }catch (Exception e){
+      result.put("status", "false");
+    }
+
+    return new Gson().toJson(result);
+  }
 
 	@RequestMapping(path="addRecipe",produces="application/json;charset=UTF-8")
 	@ResponseBody
@@ -65,7 +92,7 @@ public class RecipeController {
 		return new Gson().toJson(result);
 	}
 
-//	            ---------------------고재현 -------------------------
+//---------------------고재현 -------------------------
 
 	 @RequestMapping(path="list",produces="application/json;charset=UTF-8")
 	  @ResponseBody
@@ -73,7 +100,7 @@ public class RecipeController {
 	      @RequestParam int userNo, 
 	      @RequestParam(defaultValue="4") int pageSize){
 	    HashMap<String,Object> result = new HashMap<>();
-	    System.out.println("userNo"+userNo);
+	    /*System.out.println("userNo"+userNo);*/
 	    List<Recipe> list = recipeService.getRecipeList(userNo, pageSize);
 	    for(int i =0; i<list.size(); i++){
 	    }
