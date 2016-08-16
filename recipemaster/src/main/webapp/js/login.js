@@ -9,7 +9,7 @@ $("#userLogin").click(
 				data : {
 					email : $('#userEmail').val(),
 					password : $('#userPassword').val()
-				},
+				}, 
 				success : function(result) {
 					if (result.status == 'failure') {
 						dataStatus='failure';
