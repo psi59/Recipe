@@ -19,7 +19,7 @@
 		<result column="lc_dt" property="likeDate"/>
 		<result column="likeUser" property="likeUser"/>
 		<result column="countLike" property="countLike"/>
-	</resultMap>
+	</resultMap> 
 	
 	<resultMap type="material" id="materialMap">
     <id column="mtno" property="materialNo" />
@@ -39,8 +39,8 @@
   </insert>
 	
 	<insert id="insert" parameterType="map">
-		 INSERT INTO rcps(uno, name, intro, ptn, rcp_pd,rcp_dt, rgst) 
-		 VALUES(#{user.userNo}, #{recipe.recipeName}, #{recipe.intro}, #{recipe.portion}, '성현이형바보',now(), 1)
+		 INSERT INTO rcps(uno, name, intro, c_time, ptn, rcp_pd, rpimg, rcp_dt, rgst) 
+		 VALUES(#{user.userNo}, #{recipe.recipeName}, #{recipe.cookTime}, #{recipe.intro}, #{recipe.portion}, 'rcp_pd', 'rpimg', now(), 1)
 		 <selectKey keyProperty="recipeNo" resultType="int" order="AFTER">
             SELECT LAST_INSERT_ID();
      </selectKey>		 	 
@@ -54,8 +54,10 @@
         </foreach>
   </insert>
   
-  <update id="insertProduce" parameterType="map">
-    UPDATE rcps SET rcp_pd=#{recipeProduceDatas} where rcpno=#{recipeNo};
+  <update id="insertImageAndProduce" parameterType="map">
+    UPDATE rcps 
+    SET rcp_pd=#{recipeProduceDatas}, rpimg=#{recipeRepresentImages}
+    WHERE rcpno=#{recipeNo};
   </update>
 	
 	

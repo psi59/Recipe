@@ -65,8 +65,8 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public int registyProduce(Map map) {
-		return recipeDao.insertProduce(map);
+	public int registyImageAndProduce(Map map) {
+		return recipeDao.insertImageAndProduce(map);
 	}
 
 	@Override
