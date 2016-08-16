@@ -72,6 +72,7 @@
 </style>
 </head>
 <body>
+<<<<<<< HEAD
   <section class="rcp-fullpage">
     <section class="rcp-pagetop">
       <div>
@@ -357,5 +358,55 @@
       $("#quick").css("left", ($(window).width() / 2) + 580);
     }
   </script>
+=======
+<!-- 입력창 -->
+  <div class="rcp-Vst-write"> 
+    <div class="inputWrite">
+      <textarea rows="3" cols="25" style="resize:none;"></textarea>
+      <button class="rcp-Vst-inputBtn btn btn-default">등록</button>
+    </div>
+  </div>
+<!-- 방명록 추가되는부분 -->  
+<section class="Vst">
+	<div class="rcp-Vst">
+		<div class="rcp-Vst-top">
+			<img class="rcp-Vst-img img-circle" src="/img/pika.jpg" />
+			<div class="rcp-Vst-common">
+			<span
+        id="editBtn1"><img class="vstUpdateBtn" id="vstUpdateBtn"
+        src="/img/vstUpdateBtn.png"></span> <img class="vstDeleteBtn"
+        id="vstDeleteBtn" src="/img/vstDeleteBtn.png">
+				<span id="rcp-Vst-id">fly2thesky</span><br>
+				&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<span id="rcp-Vst-time">몇 시간전</span>
+			</div>
+		</div>
+		<div class="rcp-Vst-bottom" id="vst-contents">
+			<div class="rcp-Vst-contents">
+				<p>내용이다 으어우어으어으우어으어우으어우으어앙,우어아으어아아ㅡ어아ㅓ아으ㅓ아으</p>
+			</div>
+		</div>
+		<div class="rcp-Vst-footer">
+			<div>
+				<div class="rcp-Vst-writeRp">
+					<div class="rcp-Vst-contents-rep">
+						<span><input placeholder="댓글을 입력해주세요" type="text" size="26px"></span> 
+						<span><button type="button" class="btn btn-default rcp-Vst-submitBtn">등록</button></span>
+					</div>
+				</div>
+			</div>
+			<div class="rcp-Vst-slotRp">
+				<!---->
+			</div>
+			<div class="rcp-Vst-moreRp">
+				<a><span id="moreRp">댓글 더보기..(1)</span></a>
+			</div>
+		</div>
+	</div>
+</section>
+	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
+	<script src="js/community.js"></script>
+>>>>>>> branch 'master' of https://github.com/tkddlf59/Recipe.git
 </body>
 </html>
