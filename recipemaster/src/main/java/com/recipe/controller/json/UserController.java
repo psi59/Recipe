@@ -159,15 +159,43 @@ public class UserController {
     HashMap<String,Object> result = new HashMap<>();
     try {
       User logUser = userService.loginUser(user);
-      
+
       result.put("status", "success");
-          
-  result.put("data", logUser);
+
+      result.put("data", logUser);
+      System.out.println("status:success"+result.values());
       System.out.println("logUser:"+logUser.toString());
     } catch (Exception e) {
-         
-   result.put("status", "failure");
+      result.put("status", "failure");
+      System.out.println("status:failure"+result.values());
     }
+    System.out.println(new Gson().toJson(result));
+    return new Gson().toJson(result);
+    //result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
+  }
+  
+  @RequestMapping(path="getUser", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+  @ResponseBody //URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
+  public String getUser(int no) {
+    //index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
+    System.out.println(no);
+    HashMap<String,Object> result = new HashMap<>();
+    try {
+      
+      System.out.println("들어오냐??");
+      
+      User logUser = userService.getUser(no);
+
+      result.put("status", "success");
+
+      result.put("data", logUser);
+      System.out.println("status:success"+result.values());
+      System.out.println("logUser:"+logUser.toString());
+    } catch (Exception e) {
+      result.put("status", "failure");
+      System.out.println("status:failure"+result.values());
+    }
+    System.out.println(new Gson().toJson(result));
     return new Gson().toJson(result);
     //result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
   }

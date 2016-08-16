@@ -53,7 +53,7 @@
 							<ul class="nav navbar-nav navbar-right">
 								<li><a href="#"><span id="signUpTopBtn"
 										class="rcp-btn-default-top">회원가입</span></a></li>
-								<li id="topbarUserImg"><a><span id="TopBtn"
+								<li id="topbarUserImg"><a href="#"><span id="TopBtn"
 										class="rcp-btn-default-top">로그인</span></a></li>
 							</ul>
 						</div>
@@ -83,8 +83,8 @@
                       레시피</span></a><a href="../writerecipe.html"><span class="rcp-back">레시피
                       쓰기</span></a><a href="#"><span class="rcp-back">구독 정보</span></a>
                 </nav> -->
-								<button class="infoBtn">Write</button>
-								<button class="infoBtn">Recipe</button>
+								<button class="infoBtn"><a href="/community.html" >MyPage</a></button>
+								<button class="infoBtn"><a href="/writerecipe.html" >Recipe 작성</a></button>
 							</div>
 						</div>
 
@@ -100,14 +100,14 @@
 				<div class="row">
 					<div class="col-md-7 col-sm-7 col-xs-7"></div>
 					<div
-						class="col-md-4 col-sm-4 col-xs-4 signin text-right navbar-nav">
+						class="col-md-4 col-sm-4 col-xs-4 signin rcp-signin text-right navbar-nav">
 						<a href="#" id="signUpBtn"><span class="rcp-btn-default-2">회원가입</span></a>&nbsp;
 						&nbsp; <a href="#" id="loginBtn"><span
-							class="rcp-btn-default-2">로그인</span></a> <a id="loginIcon"></a>
+							class="rcp-btn-default-2">로그인</span></a> <a href="#" id="loginIcon"></a>
 					</div>
 				</div>
 
-				<div class="row header-info">
+				<div class="row header-info rcp-header-info">
 					<div class="col-md-10 col-md-offset-1 text-center">
 						<img src="img/logo.png" class="wow fadeIn"
 							style="width: 40%; height: 40%; margin-bottom: 1em;"> <br />
@@ -224,7 +224,7 @@
 		</div>
 		<div class="rcp-sign-membership" id="userLogin"
 			style="margin-top: 50px;">
-			<span>로그인</span>
+			<a href="#"><span>로그인</span></a>
 		</div>
 	</div>
 	<!--  -->
@@ -278,8 +278,8 @@
 			</div>
 			<div class="rcp-sign-membership">
 				<!-- <button id="updateUserInfo" type="submit">확인</button> -->
-				<span id="updateUserInfo">확인</span>
-				<span id="updateUserReset">취소</span>
+				<a href="#"><span id="updateUserInfo">확인</span></a>
+				<a href="#"><span id="updateUserReset">취소</span></a>
 			</div>
 			</form>
 		</div>
@@ -676,7 +676,8 @@
 			$('.dropdown-trigger')
 					.on(
 							'click',
-							function() {
+							function(event) {
+								event.preventDefault();
 								dropdownClick('.profile-dropdown',
 										'.mobile-menu-dropdown');
 								/* 용이 추가() */
@@ -711,6 +712,14 @@
 	</script>
 	<script>
 	$(function() {
+			/* $('a').on('click', function(event){
+				console.log($('a').attr('href'));
+				if($('a').attr('href')=='index.html'){
+					event.preventDefault();
+				}
+			}); */
+		
+		
 		  function maskImgs() {
 		    //$('.img-wrapper img').imagesLoaded({}, function() {
 		    $.each($('.img-wrapper img'), function(index, img) {

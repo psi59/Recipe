@@ -392,4 +392,12 @@ header .header-content {
   }
 }
 
+.rcp-signin{
+  z-index:99990;
+}
+
+.rcp-header-info{
+  z-index:500;
+}
+
 /********** main css 종료 - 박상일 ***********/

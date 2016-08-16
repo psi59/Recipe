@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.recipe.dao.VisitorDao">
+
+	<resultMap type="visitor" id="visitorMap">
+		<id column="vno" property="visitorNo" />
+		<result column="vct" property="visitorContent" />
+		<result column="vimg" property="visitorImg" />
+		<result column="vc_dt" property="visitorDate" />
+		<result column="uno" property="user.userNo" />
+		<result column="uno2" property="visitorUserNo" />
+    
+	</resultMap>
+
+	<select id="selectList" resultMap="visitorMap" parameterType="Map">
+		SELECT vno, vct, vc_dt, uno
+		FROM vsts
+		ORDER BY vno desc
+		LIMIT #{startIndex}, #{len}
+	</select>
+
+	<select id="selectOne" resultMap="visitorMap" parameterType="int">
+		SELECT vno, vct, vc_dt, uno
+		FROM vsts
+		WHERE vno=#{value}
+	</select>
+
+	<!-- <insert id="insert" parameterType="visitor">
+		insert into vtst(vct, vc_dt)
+		values ( #{visitorContent},now())
+	</insert> -->
+ 
+	 <update id="update" parameterType="visitor" > UPDATE vtst 
+	   <set>
+	     vct = #{visitorContent} 
+		 </set> WHERE vno = #{vno} 
+	 </update>
+
+	<delete id="delete" parameterType="int">
+		delete from vtst
+		where vno=#{no}
+	</delete>
+
+</mapper>

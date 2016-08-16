@@ -2,67 +2,360 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>community</title>
+<title>길용이님의 Page</title>
 <link rel="stylesheet"
-	href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-<!--  -->
-<link rel="stylesheet" href="css/community.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-
+  href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/mypage.css">
+<link rel="stylesheet" href="/css/subscribe.css">
+<link rel="stylesheet" href="/css/community.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/subscribe.css">
+<link rel="stylesheet"
+  href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
 <style>
+.rcp-fullpage {
+  width: 1024px;
+  height: 1500px;
+  margin: 19%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
 
+.rcp-pagetop {
+  /*  background-color: #D4F4FA; */
+  background-image: URL(img/pagebanner.jpg);
+  width: 100%;
+  height: 20%;
+}
+
+.rcp-topimg {
+  padding: 1%;
+  padding-top: 2%;
+  padding-left: 2%;
+  height: 290px;
+  width: 290px;
+  float: left;
+}
+
+.rcp-topinfo {
+  font-weight: bold;
+  padding-left: 1%;
+  padding-top: 19%;
+}
+
+.rcp-topbtn {
+  position: absolute;
+  top: 65px;
+  right: 335px;
+}
+
+.rcp-pagemiddle {
+  background-color: #EAEAEA;
+  width: 100%;
+  height: 10%;
+}
+
+.rcp-pageleft {
+  background-color: #f3f3f3;
+  width: 70%;
+  height: 70%;
+  float: left;
+}
+
+.rcp-pageright {
+  background-color: #f3f3f3;
+  width: 30%;
+  height: 70%;
+  float: right;
+}
 </style>
 </head>
 <body>
-<!-- 입력창 -->
-  <div class="rcp-Vst-write"> 
-    <div class="inputWrite">
-      <textarea rows="6" cols="50" style="resize:none;"></textarea>
-      <button class="rcp-Vst-inputBtn btn btn-default">등록</button>
-    </div>
-  </div>
-<!-- 방명록 추가되는부분 -->  
-<section class="Vst">
-	<div class="rcp-Vst">
-		<div class="rcp-Vst-top">
-			<img class="rcp-Vst-img img-circle" src="/img/pika.jpg" />
-			<div class="rcp-Vst-common">
-			<span
-        id="editBtn1"><img class="vstUpdateBtn" id="vstUpdateBtn"
-        src="/img/vstUpdateBtn.png"></span> <img class="vstDeleteBtn"
-        id="vstDeleteBtn" src="/img/vstDeleteBtn.png">
-				<span> 1111번째 게시물 </span><br /> <span>닉네임 : 길용이</span><br /> <span>등
-					급 : Master Chef</span><br /> <span>등록일 : 2016-08-12</span><br />
-			</div>
-		</div>
-		<div class="rcp-Vst-bottom" id="vst-contents">
-			<div class="rcp-Vst-contents">
-				<p>내용이다 으어우어으어으우어으어우으어우으어앙,우어아으어아아ㅡ어아ㅓ아으ㅓ아으</p>
-			</div>
-		</div>
-		<div class="rcp-Vst-footer">
-			<div>
-				<div class="rcp-Vst-writeRp">
-					<img class="rcp-Vst-img-rep img-circle" src="/img/pika.jpg" />
-					<div class="rcp-Vst-contents-rep">
-						<span>박상일</span><span> &nbsp;</span> <span><input
-							 placeholder="댓글을 입력해주세요" type="text" size="40px"></span> <span><button
-								type="button" class="btn btn-default rcp-Vst-submitBtn">등록</button></span>
-					</div>
-				</div>
-			</div>
-			<div class="rcp-Vst-slotRp">
-				<!---->
-			</div>
-			<div class="rcp-Vst-moreRp">
-				<a><span id="moreRp">댓글 더보기..(1)</span></a>
-			</div>
-		</div>
-	</div>
-</section>
-	<script src="node_modules/jquery/dist/jquery.min.js"></script>
-	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
-	<script src="js/community.js"></script>
+  <section class="rcp-fullpage">
+    <section class="rcp-pagetop">
+      <div>
+        <img src="/img/pika.jpg" class="rcp-topimg">
+        <div class="rcp-topinfo">
+          <h3>길용이</h3>
+          <h4>구독자수 : 194,553명</h4>
+          <button class="btn btn-default rcp-topbtn">구독하기</button>
+        </div>
+      </div>
+    </section>
+    <!-- <section class="rcp-pagemiddle">
+      <div>
+        <p>여기는 여러가지 미리보기 들어감</p>
+      </div>
+    </section> -->
+    <section class="rcp-pageleft">
+      <div>
+        <div id="tabs">
+          <ul>
+            <li><a href="#tabs-1">My Recipe</a></li>
+            <li><a href="#tabs-2">구독중인 페이지</a></li>
+          </ul>
+          <div id="tabs-1">
+            <div class="rcp-main-right">
+              <div class="rcp-subscribe">
+                <div class="rcp-subscribe-detail">
+
+                  <div class="rcp-subscribe-column">
+
+                    <div class="rcp-left-div rcp-float-left-div">
+                      <img class="rcp-subscribe-image" src="../img/4.jpg">
+                    </div>
+
+                    <!-- <div id="triangle-left"></div> -->
+                    <div class="rcp-right-div">
+                      <a href="#" class="rcp-viewMore">더보기</a>
+                      <div class="rcp-element-default-position">
+
+                        <div class="rcp-subscribe-recipe-profile">
+                          <img class="rcp-subscribe-profile img-circle"
+                            src="../img/pika.jpg">
+                          <div class="rcp-subscribe-recipe-name">
+                            <p class="rcp-subscribe-p-tag">
+                              <b>스테이크 레시피</b>
+                            </p>
+                            <h6 style="color: #9a9a9a">2016.08.15 오후 03:20:11 게시됨
+                            </h6>
+                          </div>
+                          <p class="rcp-first-p-margin">빵같아 보이기도 생선같아 보이기도 한다 !</p>
+
+                        </div>
+                        <div class="rcp-subscribe-preview">
+                          <p class="rcp-subscribe-preview-p-tag">최신 레시피</p>
+
+                          <img class="rcp-subscribe-preview-image" src="../img/2.jpg">
+                          <img class="rcp-subscribe-preview-image" src="../img/3.jpg">
+                          <img class="rcp-subscribe-preview-image" src="../img/4.jpg">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="rcp-subscribe">
+                <div class="rcp-subscribe-detail">
+
+                  <div class="rcp-subscribe-column">
+
+                    <div class="rcp-left-div rcp-float-left-div">
+                      <img class="rcp-subscribe-image" src="../img/4.jpg">
+                    </div>
+
+                    <!-- <div id="triangle-left"></div> -->
+                    <div class="rcp-right-div">
+                      <a href="#" class="rcp-viewMore">더보기</a>
+                      <div class="rcp-element-default-position">
+
+                        <div class="rcp-subscribe-recipe-profile">
+                          <img class="rcp-subscribe-profile img-circle"
+                            src="../img/profile1.jpg">
+                          <div class="rcp-subscribe-recipe-name">
+                            <p class="rcp-subscribe-p-tag">
+                              <b>스테이크 레시피</b>
+                            </p>
+                            <h6 style="color: #9a9a9a">2016.08.15 오후 03:20:11 게시됨
+                            </h6>
+                          </div>
+                          <p class="rcp-first-p-margin">빵같아 보이기도 생선같아 보이기도 한다 !</p>
+
+                        </div>
+                        <div class="rcp-subscribe-preview">
+                          <p class="rcp-subscribe-preview-p-tag">최신 레시피</p>
+
+                          <img class="rcp-subscribe-preview-image" src="../img/2.jpg">
+                          <img class="rcp-subscribe-preview-image" src="../img/3.jpg">
+                          <img class="rcp-subscribe-preview-image" src="../img/4.jpg">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="tabs-2">
+            <div class="rcp-main-right">
+              <div class="rcp-subscribe">
+                <div class="rcp-subscribe-detail">
+
+                  <div class="rcp-subscribe-column">
+
+                    <div class="rcp-left-div rcp-float-left-div">
+                      <img class="rcp-subscribe-image" src="../img/4.jpg">
+                    </div>
+
+                    <!-- <div id="triangle-left"></div> -->
+                    <div class="rcp-right-div">
+                      <a href="#" class="rcp-viewMore">더보기</a>
+                      <div class="rcp-element-default-position">
+
+                        <div class="rcp-subscribe-recipe-profile">
+                          <img class="rcp-subscribe-profile img-circle"
+                            src="../img/pika.jpg">
+                          <div class="rcp-subscribe-recipe-name">
+                            <p class="rcp-subscribe-p-tag">
+                              <b>길용이</b>
+                            </p>
+                            <h6 style="color: #9a9a9a">2016.08.15 오후 03:20:11 게시됨
+                            </h6>
+                          </div>
+                          <p class="rcp-first-p-margin">빵같아 보이기도 생선같아 보이기도 한다 !</p>
+
+                        </div>
+                        <div class="rcp-subscribe-preview">
+                          <p class="rcp-subscribe-preview-p-tag">길용이님의 인기레시피</p>
+
+                          <img class="rcp-subscribe-preview-image" src="../img/2.jpg">
+                          <img class="rcp-subscribe-preview-image" src="../img/3.jpg">
+                          <img class="rcp-subscribe-preview-image" src="../img/4.jpg">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="rcp-subscribe">
+                <div class="rcp-subscribe-detail">
+
+                  <div class="rcp-subscribe-column">
+
+                    <div class="rcp-left-div rcp-float-left-div">
+                      <img class="rcp-subscribe-image" src="../img/4.jpg">
+                    </div>
+
+                    <!-- <div id="triangle-left"></div> -->
+                    <div class="rcp-right-div">
+                      <a href="#" class="rcp-viewMore">더보기</a>
+                      <div class="rcp-element-default-position">
+
+                        <div class="rcp-subscribe-recipe-profile">
+                          <img class="rcp-subscribe-profile img-circle"
+                            src="../img/profile1.jpg">
+                          <div class="rcp-subscribe-recipe-name">
+                            <p class="rcp-subscribe-p-tag">
+                              <b>암캐</b>
+                            </p>
+                            <h6 style="color: #9a9a9a">2016.08.15 오후 03:20:11 게시됨
+                            </h6>
+                          </div>
+                          <p class="rcp-first-p-margin">빵같아 보이기도 생선같아 보이기도 한다 !</p>
+
+                        </div>
+                        <div class="rcp-subscribe-preview">
+                          <p class="rcp-subscribe-preview-p-tag">고재현님의 인기레시피</p>
+
+                          <img class="rcp-subscribe-preview-image" src="../img/2.jpg">
+                          <img class="rcp-subscribe-preview-image" src="../img/3.jpg">
+                          <img class="rcp-subscribe-preview-image" src="../img/4.jpg">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="rcp-pageright">
+      <div>
+        <div class="rcp-Vst-write">
+          <div class="inputWrite">
+            <textarea rows="3" cols="25" style="resize: none;"></textarea>
+            <button class="rcp-Vst-inputBtn btn btn-default">등록</button>
+          </div> 
+        </div>
+      </div>
+      <section class="Vst">
+        <div class="rcp-Vst">
+          <div class="rcp-Vst-top">
+            <img class="rcp-Vst-img img-circle" src="/img/pika.jpg" />
+            <div class="rcp-Vst-common">
+              <span id="editBtn1"><img class="vstUpdateBtn"
+                id="vstUpdateBtn" src="/img/vstUpdateBtn.png"></span> <img
+                class="vstDeleteBtn" id="vstDeleteBtn"
+                src="/img/vstDeleteBtn.png"> <span id="rcp-Vst-id">fly2thesky</span><br>
+              &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<span id="rcp-Vst-time">몇
+                시간전</span>
+            </div>
+          </div>
+          <div class="rcp-Vst-bottom" id="vst-contents">
+            <div class="rcp-Vst-contents">
+              <p>내용이다 으어우어으어으우어으어우으어우으어앙,우어아으어아아ㅡ어아ㅓ아으ㅓ아으</p>
+            </div>
+          </div>
+          <div class="rcp-Vst-footer">
+            <div>
+              <div class="rcp-Vst-writeRp">
+                <div class="rcp-Vst-contents-rep">
+                  <span><input placeholder="댓글을 입력해주세요" type="text"
+                    size="24px"></span> <span><button type="button"
+                      class="btn btn-default rcp-Vst-submitBtn">등록</button></span>
+                </div>
+              </div>
+            </div>
+            <div class="rcp-Vst-slotRp">
+              <!---->
+            </div>
+            <div class="rcp-Vst-moreRp">
+              <a><span id="moreRp">댓글 더보기..(1)</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+    <div style="height: 1100px;"></div>
+    <div id="quick"
+      style="position: absolute; top: 350px; border: solid 3px #6799FF; width: 150px; height: 480px; text-align: center; color: #6799FF;">
+      최근 방문한 페이지</div>
+  </section>
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
+  <script src="js/community.js"></script>
+  <script>
+    $(function() {
+      $("#tabs").tabs();
+    });
+  </script>
+  <script type="text/javascript">
+    //마지막 스크롤 TOP 위치
+    var lastScrollY = 0;
+
+    $(document).ready(function() {
+      //setInterVal(사용할 함수, 1/1000초)  즉 quick함수를 1/1000초마다 실행
+      setInterval(quick, 1);
+    });
+
+    function quick() {
+      //현재 스크롤바 top 위치, .scrollTop() - 선택한 element의 scroll 가능한 영역에서 가장 위쪽 위치
+      currentY = $(window).scrollTop();
+
+      //위치가 틀린 경우
+      if (currentY != lastScrollY) {
+        //percent=움직임속도 * (현재 scrollTop위치) - (마지막 scrollTop위치) 
+        percent = 0.1 * (currentY - lastScrollY);
+        //percent가 0보다 크면 수를 올림  작으면 수를 내림. 
+        percent = (percent > 0 ? Math.ceil(percent) : Math
+            .floor(percent));
+        //quick의 style:top을 현재의 top에서 percent를 더한 값(음수라면 빼지겠지?)으로 바꿔준다. 
+        $("#quick").css("top",
+            parseInt($("#quick").css("top")) + percent);
+        //현재 위치를 lastScrollY에 저장해준다.
+        lastScrollY = lastScrollY + percent;
+      }
+      //현재 ((윈도우넓이/2) +480) 을 left로 지정
+      $("#quick").css("left", ($(window).width() / 2) + 580);
+    }
+  </script>
 </body>
 </html>

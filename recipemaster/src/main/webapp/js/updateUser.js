@@ -49,8 +49,9 @@ $(function(){
 		});
 	});
 
-	$('#updateUserInfo').click(function(){
+	$('#updateUserInfo').click(function(event){
 		/* 폼 입력 유무 확인 */
+		event.preventDefault();
 		if( $('#beforePwd').val() == ""){
 			alert('이전비밀번호를 입력해주세요');
 			return;
@@ -111,7 +112,8 @@ $(function(){
 	})
 
 
-	$('#updateUserReset').click(function(){
+	$('#updateUserReset').click(function(event){
+		event.preventDefault();
 		$('#editUserInfo-pop-up-banner').bPopup().close();
 	});
 });
