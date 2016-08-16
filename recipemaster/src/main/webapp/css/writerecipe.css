@@ -1,93 +1,59 @@
 body {
-  background-color: #ffb9b9;
+  background-color: #dddddd;
 }
 
-.lablebox {
-  position: relative;
-  display: block;
+.imagewrapper{
+	width: 150px;
+	height: 150px;
+	padding-right: 10px;
+	padding-left: 10px;
 }
-.lablebox .inputbox {
-  font: 18px Helvetica, Arial, sans-serif;
-  box-sizing: border-box;
-  display: block;
-  border: none;
-  padding: 20px;
-  width: 100%;
-  margin-bottom: 20px;
-  font-size: 18px;
-  outline: none;
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
+
+.rcp-border{
+  border: 1px solid #aaa;
 }
-.lablebox .inputbox::-webkit-input-placeholder {
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-  color: #999;
-  font: 18px Helvetica, Arial, sans-serif;
+
+.rcp-form-row{
+	margin-bottom: 10px;
+	height: 50px;
 }
-.lablebox .inputbox::-moz-placeholder {
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-  color: #999;
-  font: 18px Helvetica, Arial, sans-serif;
+
+.form_100_width{
+	width: 865px;
 }
-.lablebox .inputbox:-ms-input-placeholder {
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-  color: #999;
-  font: 18px Helvetica, Arial, sans-serif;
+
+.form_70_width{
+  width: 609px;
+  float: left;
 }
-.lablebox .inputbox::placeholder {
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-  color: #999;
-  font: 18px Helvetica, Arial, sans-serif;
+
+.form_15_width{
+  width: 123px;
+  float: left;
 }
-.lablebox .inputbox:focus, .lablebox .inputbox.populated {
-  padding-top: 28px;
-  padding-bottom: 12px;
-}
-.lablebox .inputbox:focus::-webkit-input-placeholder, .lablebox .inputbox.populated::-webkit-input-placeholder {
-  color: transparent;
-}
-.lablebox .inputbox:focus::-moz-placeholder, .lablebox .inputbox.populated::-moz-placeholder {
-  color: transparent;
-}
-.lablebox .inputbox:focus:-ms-input-placeholder, .lablebox .inputbox.populated:-ms-input-placeholder {
-  color: transparent;
-}
-.lablebox .inputbox:focus::placeholder, .lablebox .inputbox.populated::placeholder {
-  color: transparent;
-}
-.lablebox .inputbox:focus + span, .lablebox .inputbox.populated + span {
-  opacity: 1;
-  top: 10px;
-}
-.lablebox .inputname {
-  color: #ee7272;
-  font: 13px Helvetica, Arial, sans-serif;
-  position: absolute;
-  top: 0px;
-  left: 20px;
-  opacity: 0;
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
+
+.wrapper{
+	background-color: #ffffff;
+  width: 900px;
+  margin: 0 auto;
+  margin-top: 70px;
+  margin-bottom: 70px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 /*박상일 글쓰기 css*/
 .rcp-title hr{
    border-top: 5px solid #b51515;
-   width: 96.5%;
+   width: 866px;
    min-width: 230pt;
    margin-top: auto;
-   padding-right: 15px;
 }
 
 .rcp-delMtSlot{
-  margin-top: 15pt;
-  text-align: center;
-  height: 100%;
-  width: 100%;
+   text-align: center;
+   height: 43px;
+   width: 100%;
 }
 
 .rcp-btn{
@@ -103,8 +69,6 @@ body {
   font-size: 33pt;
   margin-top: 40pt;
   margin-bottom: 10pt;
-  padding-left: 15px;
-  padding-right: 15px;
 }
 
 .rcp-subtitle {
@@ -116,7 +80,6 @@ body {
 }
 
 .files{
-    border: 1px dotted rgba(255, 255, 255, 0.7);
     padding: 1em;
     min-height: 150px;
     vertical-align: middle;
@@ -124,4 +87,51 @@ body {
 
 .height_150px{
 	height: 150px !important;
+	width: 685px !important;
+	margin-right: 10px;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+input[type='text'] {
+  width: 100%;
+  height:100%;
+  padding: 13px 12px 14px 60px;
+  font-size: 12px;
+  color: #555;
+  border: 1px solid #aaa;
+  background-color: #fff;
+}
+
+.inputwrapper {
+  display: inline-block;
+  position: relative;
+  margin: 0 5px 0 0;
+}
+
+.inputwrapper input {
+  transition: .1s all linear;
+}
+
+.inputwrapper label {
+  position: absolute;
+  top: 13px;
+  left: 15px;
+  font-size: 12px;
+  color: #aaa;
+  transition: .1s all linear;
+  cursor: text;
+}
+
+.inputwrapper.active input {
+  padding-left: 50px;
+}
+
+.inputwrapper.active label {
+  left: 6px;
+  opacity: .5;
 }
