@@ -10,7 +10,7 @@ $(function() {
 	});
 });
 
-function search(){
+function search(){ 
 	var userNo = 0; 
 	var a = eval(sessionStorage.getItem('data'));		
 	if(a != null){
