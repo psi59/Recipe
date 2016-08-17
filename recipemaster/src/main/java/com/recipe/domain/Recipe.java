@@ -18,7 +18,7 @@ public class Recipe {
 	private Date recipeDate;
 	private int hits;
 	private int regiStatus;
-	private int gradePoint;
+	private double gradePoint;
 	private User user;
 	private Date likeDate;
 	private int likeUser;
@@ -112,10 +112,10 @@ public class Recipe {
 	public void setRegiStatus(int regiStatus) {
 		this.regiStatus = regiStatus;
 	}
-	public int getGradePoint() {
+	public double getGradePoint() {
 		return gradePoint;
 	}
-	public void setGradePoint(int gradePoint) {
+	public void setGradePoint(double gradePoint) {
 		this.gradePoint = gradePoint;
 	}
 	public User getUser() {

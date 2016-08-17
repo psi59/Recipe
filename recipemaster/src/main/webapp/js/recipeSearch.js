@@ -1,5 +1,5 @@
-/* 검색버튼 이벤트 -성현 */
-$(function() {	
+/* 검색버튼 및 정렬버튼 이벤트 -성현 */
+$(function() {
 		
 	$('#searchBtn').click(function() {
 		search();			    
@@ -7,6 +7,10 @@ $(function() {
 	
 	$('#searchKeyword').keydown( function(){
 		if(event.keyCode == '13') search();
+	});
+	
+	$('#order-grade-btn').click(function(){
+		search($('#order-grade-btn').val());
 	});
 	
 	// 스크롤을 끝까지 내렸을때 레시피 카드 생성
@@ -18,7 +22,7 @@ $(function() {
 	
 });
 
-function search(){ 
+function search(sort){ 
 	var userNo = 0; 
 	var a = eval(sessionStorage.getItem('data'));		
 	if(a != null){
@@ -26,14 +30,17 @@ function search(){
 	}
 	
 	var source = $('#recipe-card-search-template').text();
-	var template = Handlebars.compile(source);			
-
+	var template = Handlebars.compile(source);	
+	if(sort == null){
+		sort = 'newest';
+	}
 	$.ajax({
 		url : 'recipe/listSearch.json',
 		method : 'post',
 		data : {
 			searchKeyword : $('#searchKeyword').val(),				
-			userNo : userNo			
+			userNo : userNo,
+			sort : sort
 		},
 		dataType : 'json',
 		success : function(result) {
@@ -44,7 +51,7 @@ function search(){
 			$('#search-result > div').remove();			
 			$('.searchResult > .row').append(template(result));
 			mathods(0,result);
-			$('#recipe-count').text(result.recipeCount+' 개의 레시피가 검색되었습니다.');
+			$('#recipe-count').text('총 '+result.recipeCount+'개의 레시피가 검색되었습니다.');
 			$('#search-pageNo').attr('value', '1');
 		},
 		error : function() {
@@ -86,6 +93,8 @@ function searchScrollAppend(){
 		}
 	})	
 }
+
+
 
 
 
