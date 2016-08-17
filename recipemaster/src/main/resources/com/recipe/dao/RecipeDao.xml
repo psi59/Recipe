@@ -71,7 +71,7 @@
 	
 	<insert id="insert" parameterType="map">
 		 INSERT INTO rcps(uno, name, intro, c_time, ptn, rcp_pd, rpimg, rcp_dt, rgst) 
-		 VALUES(#{user.userNo}, #{recipe.recipeName}, #{recipe.cookTime}, #{recipe.intro}, #{recipe.portion}, 'rcp_pd', 'rpimg', now(), 1)
+		 VALUES(#{user.userNo}, #{recipe.recipeName}, #{recipe.intro}, #{recipe.cookTime}, #{recipe.portion}, 'rcp_pd', 'rpimg', now(), 1)
 		 <selectKey keyProperty="recipeNo" resultType="int" order="AFTER">
             SELECT LAST_INSERT_ID();
      </selectKey>		 	 
