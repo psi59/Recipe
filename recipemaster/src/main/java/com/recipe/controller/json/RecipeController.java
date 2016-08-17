@@ -36,7 +36,7 @@ public class RecipeController {
     HashMap<String,Object> result = new HashMap<>();     
     int recipeCount = 0;
     // TEST용으로 searchCondition, sortCondition 때려박음
-    search.setSearchCondition("name");
+    search.setSearchCondition("name"); 
     search.setSortCondition("newest");   
     
     System.out.println("pageNo : "+pageNo);
