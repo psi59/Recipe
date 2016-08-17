@@ -14,7 +14,7 @@ $(function() {
 	});
 	
 	// 스크롤을 끝까지 내렸을때 레시피 카드 생성
-	$(window).scroll(function() {
+	$(window).scroll(function() { 
 	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
 	    	searchScrollAppend();
 	    }
