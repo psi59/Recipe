@@ -31,21 +31,25 @@ public class RecipeController {
 	@RequestMapping(path="listSearch",produces="application/json;charset=UTF-8")
   @ResponseBody
   public String listSearch(@RequestParam(defaultValue="1") int pageNo,
-                           @RequestParam(defaultValue="12") int pageSize,
+                           @RequestParam(defaultValue="8") int pageSize,
                            Search search, int userNo){
     HashMap<String,Object> result = new HashMap<>();     
-    
+    int recipeCount = 0;
     // TEST용으로 searchCondition, sortCondition 때려박음
-    search.setSearchCondition("name");
+    search.setSearchCondition("name"); 
     search.setSortCondition("newest");   
     
+    System.out.println("pageNo : "+pageNo);
+    
     List<Recipe> list = recipeService.getRecipeSearchList(pageNo, pageSize, search, userNo);
-    int recipeCount = recipeService.getRecipeCount(pageNo, pageSize, search, userNo);
-   
+    if(pageNo == 1){
+      recipeCount = recipeService.getRecipeCount(pageNo, pageSize, search, userNo);
+    }
     try{
       result.put("status","success");
       result.put("data", list);
-      result.put("recipeCount", recipeCount);
+      result.put("recipeCount", recipeCount);      
+      result.put("pageNo", pageNo);
     }catch (Exception e){
       result.put("status", "false");
     }
@@ -191,6 +195,37 @@ public class RecipeController {
 	  
 	  return new Gson().toJson(result);
 	}
+	
+	
+	@RequestMapping(path="subscribe",produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String subscribe(int userNo ){
+    HashMap<String,Object> result = new HashMap<>();
+    Recipe recipe = new Recipe();
+    try{
+      System.out.println(userNo);
+      List<Recipe> userNoList = recipeService.selectSubscribeUno(userNo);
+      
+      for(int i =0; i<userNoList.size(); i++){
+        if(recipe.getSubscribe() == null){    
+          recipe.setSubscribe(String.valueOf(userNoList.get(0).getSubscribeNum()));
+        }else{
+          
+          recipe.setSubscribe(recipe.getSubscribe()+","+userNoList.get(i).getSubscribeNum());
+          System.out.println(userNoList.get(i).getSubscribeNum());
+          System.out.println(recipe.getSubscribe());
+        }
+      }
+      List<Recipe> subscribe = recipeService.selectSbuscribe(recipe.getSubscribe());
+      System.out.println(subscribe);
+      result.put("status","success");
+      result.put("data", subscribe);
+    }catch (Exception e){
+      result.put("status", "false");
+    }
+    return new Gson().toJson(result);
+  }
+  
 	
 //	---------------------고재현 -------------------------
 	@RequestMapping(path="materialSearch",produces="application/json;charset=UTF-8")

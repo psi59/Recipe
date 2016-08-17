@@ -19,6 +19,7 @@
 		<result column="lc_dt" property="likeDate"/>
 		<result column="likeUser" property="likeUser"/>
 		<result column="countLike" property="countLike"/>		
+		<result column="uno2" property="subscribeNum"/>
 	</resultMap> 
 	
 	<resultMap type="material" id="materialMap">
@@ -26,18 +27,7 @@
     <result column="name" property="materialName" />
     <result column="mtst" property="materialStatement" />
   </resultMap>
-  
-  <!-- <select id="recipeSearch" resultMap="recipeMap" parameterType="Map">
-    SELECT rcpno, uno, name, intro, c_time, ptn, rpimg, rcp_pd, rcp_dt, hits, rgst, gpa
-    FROM rcps
-    <if test="search.searchCondition == 'name'">
-      WHERE name LIKE '%${search.searchKeyword}%'
-    </if>
-    <if test="search.sortCondition == 'newest'">
-      ORDER BY rcp_dt desc
-    </if>
-  </select> -->
-  
+   
   <select id="recipeSearch" resultMap="recipeMap" parameterType="Map">
     SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits,
            r.rgst, r.gpa, u.uno, u.name userName, l.rcpno, l.lc_dt, l.uno likeUser
@@ -47,7 +37,10 @@
       WHERE r.name LIKE '%${search.searchKeyword}%'
     </if>
     <if test="search.sortCondition == 'newest'">
-      ORDER BY r.rcp_dt desc
+      ORDER BY r.rcpno desc
+    </if>
+    <if test="search.sortCondition == 'grade'">
+      ORDER BY r.gpa desc
     </if>
     limit #{startIndex}, #{len}
   </select>
@@ -97,7 +90,18 @@
     SET rcp_pd=#{recipeProduceDatas}, rpimg=#{recipeRepresentImages}
     WHERE rcpno=#{recipeNo};
   </update>
-	
+  
+    
+  <select id="selectSubscribeUno" resultMap="recipeMap" parameterType="INTEGER">
+    SELECT * FROM scs WHERE uno=#{value}
+  </select>
+  
+  <select id="selectSbuscribe" resultMap="recipeMap" parameterType="string">
+  
+  select * from rcps where uno in( ${value} )
+  
+  </select>
+
 	
    <select id="recipeList" resultMap="recipeMap" parameterType="Map">
     SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits, 

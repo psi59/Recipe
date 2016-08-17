@@ -23,7 +23,22 @@ public class Recipe {
 	private Date likeDate;
 	private int likeUser;
 	private int countLike;
-	
+	private int subscribeNum;
+  private String subscribe;
+  
+  
+  public String getSubscribe() {
+    return subscribe;
+  }
+  public void setSubscribe(String subscribe) {
+    this.subscribe = subscribe;
+  }
+  public int getSubscribeNum() {
+    return subscribeNum;
+  }
+  public void setSubscribeNum(int subscribeNum) {
+    this.subscribeNum = subscribeNum;
+  }
 	//Method
 	public int getRecipeNo() {
 		return recipeNo;
@@ -133,6 +148,7 @@ public class Recipe {
         + ", representImages=" + representImages + ", materials=" + materials + ", recipeProcedure=" + recipeProcedure
         + ", cookTime=" + cookTime + ", portion=" + portion + ", recipeDate=" + recipeDate + ", hits=" + hits
         + ", regiStatus=" + regiStatus + ", gradePoint=" + gradePoint + ", user=" + user + ", likeDate=" + likeDate
-        + ", likeUser=" + likeUser + ", countLike=" + countLike + "]";
+        + ", likeUser=" + likeUser + ", countLike=" + countLike + ", subscribeNum=" + subscribeNum + ", subscribe="
+        + subscribe + "]";
   }	
 }

@@ -8,6 +8,14 @@ $(function() {
 	$('#searchKeyword').keydown( function(){
 		if(event.keyCode == '13') search();
 	});
+	
+	// 스크롤을 끝까지 내렸을때 레시피 카드 생성
+	$(window).scroll(function() {
+	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+	    	searchScrollAppend();
+	    }
+	});
+	
 });
 
 function search(){ 
@@ -25,18 +33,19 @@ function search(){
 		method : 'post',
 		data : {
 			searchKeyword : $('#searchKeyword').val(),				
-			userNo : userNo
+			userNo : userNo			
 		},
 		dataType : 'json',
 		success : function(result) {
 			if (result.status != 'success') {
 				alert('실패 ~');
 				return;
-			}			
-			$('#search-result > div').remove();
+			}
+			$('#search-result > div').remove();			
 			$('.searchResult > .row').append(template(result));
 			mathods(0,result);
 			$('#recipe-count').text(result.recipeCount+' 개의 레시피가 검색되었습니다.');
+			$('#search-pageNo').attr('value', '1');
 		},
 		error : function() {
 			alert('서버 요청 오류 !')
@@ -44,6 +53,47 @@ function search(){
 	})	
 }
 
+function searchScrollAppend(){ 
+	var userNo = 0; 
+	var a = eval(sessionStorage.getItem('data'));		
+	if(a != null){
+		userNo = eval(sessionStorage.getItem('data'))[0].userNo;
+	}
+	
+	var source = $('#recipe-card-search-template').text();
+	var template = Handlebars.compile(source);	
+	
+	$.ajax({
+		url : 'recipe/listSearch.json',
+		method : 'post',
+		data : {
+			searchKeyword : $('#searchKeyword').val(),				
+			userNo : userNo,
+			pageNo : parseInt($('#search-pageNo').val())+1
+		},
+		dataType : 'json',
+		success : function(result) {
+			if (result.status != 'success') {
+				alert('실패 ~');
+				return;
+			}
+			$('.searchResult > .row').append(template(result));			
+			mathods(0,result);			
+			$('#search-pageNo').val(result.pageNo);
+		},
+		error : function() {
+			alert('서버 요청 오류 !')
+		}
+	})	
+}
+
+
+
+
+
+
+
+//----------------------------------------고재현 부분--------------------------------------------//
 function mathods(listNum,result){
 	  idOptions(result);	
 	  mouseHover(result,listNum);
@@ -132,8 +182,7 @@ function idOptions(result){
 	  
 	  var list= result.data;
 	  
-	  for(var k=0; k<$('.rcp-list').length; k++){	
-		  console.log(k);
+	  for(var k=0; k<$('.rcp-list').length; k++){		  
 		  for(var j=0; j<result.data.length; j++){
 
 			  $('.list'+k+' .row > div:nth-child('+(j+1)+') .rcp-240').attr("id","list"+k+"240"+j);
@@ -142,17 +191,6 @@ function idOptions(result){
 			  $('.list'+k+' #search-result > div:nth-child('+(j+1)+') .rcp-right-slideButton').attr("href","#list"+k+"myCarousel"+j);
 			  $('.list'+k+' .row > div:nth-child('+(j+1)+') .image1').attr("id","list"+k+"image"+j);
 
-		  
-//			  if(result.data[1]){
-//				  $('.list'+k+' > .row > div:nth-child(2)').attr("class","col-xs-3 col-sm-3 col-md-3 visible-sm rcp-list-margin rcp-list-margin");
-//			  }
-//			  if(result.data[2]){
-//				  $('.list'+k+' > .row > div:nth-child(3)').attr("class","col-sm-3 col-md-3 visible-md rcp-list-margin rcp-list-margin");
-//			  }
-//
-//			  if(result.data[3]){
-//				  $('.list'+k+' > .row > div:nth-child(4) ').attr("class","col-md-3 visible-lg rcp-list-margin rcp-list-margin");
-//			  }
 		  }
 	  }
 }
