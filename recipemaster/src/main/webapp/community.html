@@ -3,20 +3,84 @@
 <head>
 <meta charset="UTF-8">
 <title>길용이님의 Page</title>
+<!-- css -->
 <link rel="stylesheet"
 	href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/mypage.css">
-<link rel="stylesheet" href="/css/subscribe.css">
-<link rel="stylesheet" href="/css/community.css">
 <link rel="stylesheet" href="/css/font-awesome.min.css">
-<link rel="stylesheet" href="/css/subscribe.css">
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
+<link rel="stylesheet" href="css/template/animate.css">
+<link rel="stylesheet" href="css/template/main.css">
+<!-- 사용자 css -->
+<link rel="stylesheet" href="/css/subscribe.css">
+<link rel="stylesheet" href="/css/community.css">
+<link rel="stylesheet" href="/css/subscribe.css">
+
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/userinfobox.css">
+<link rel="stylesheet" href="css/signup.css">
+<link rel="stylesheet" href="css/popup.css">
+<link rel="stylesheet" href="css/updateImg.css">
+
 <style>
 </style>
 </head>
 <body>
+<div id="topBtn" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container rcp-container-top">
+      <div class="navbar-header">
+        <div class="row">
+          <div class="row col-md-7 col-sm-7 col-xs-12">
+            <a class="logo col-md-3 col-sm-3 hidden-xs rt-navbar-top-logo"
+              href="index.html"><img src="img/logo.svg" alt="Logo"></a>
+            <div
+              class="input-group col-md-5 col-sm-5 col-xs-11 col-xs-offset-1 rcp-navbar-searchbar-size rt-navbar-top-searchbar">
+               <input
+                type="text" class="form-control rcp-navbar-searchbar-size"
+                placeholder="레시피명, 쉐프명, 재료명" aria-describedby="basic-addon1">
+               <span class="input-group-addon" id="searchBarKeyword">검색</span>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4 hidden-xs" style="margin-right: 2em;">
+            <div class="navbar-collapse">
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span id="signUpTopBtn"
+                    class="rcp-btn-default-top">회원가입</span></a></li>
+                <li id="topbarUserImg"><a href="#"><span id="TopBtn"
+                    class="rcp-btn-default-top">로그인</span></a></li>
+              </ul>
+            </div>
+            <!-- 준모2 -->
+            <div id="profileView" class="main-nav__dropdown profile-dropdown">
+              <div class="rcp-outline">
+                <div>
+                  <a href="#0" class="dropdown__header"><img id="profileImg"
+                    class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a
+                    id="profileEmail" href="#"
+                    class="dropdown__header rcp-infobox-text"></a>
+                  <h6 id="profileName" class="rcp-nickname"></h6>
+                  <a href="#0" class="dropdown__header"> <span
+                    id="profileGrade" class="dropdown__title rcp-infobox-text">
+                      <img src="img/star.png"> Master Chef
+                  </span>
+                  </a>
+                  <div id=Btn align="center">
+                    <button id="userInfoEditBtn" type="button"
+                      class="btn btn-default rcp-btn-nav">정보수정</button>
+                    <button id="logoutBtn" type="button"
+                      class="btn btn-default rcp-btn-nav">로그아웃</button>
+                  </div>
+                </div>
+                <button class="infoBtn"><a href="/community.html" >MyPage</a></button>
+                <button class="infoBtn"><a href="/writerecipe.html" >Recipe 작성</a></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 	<section class="rcp-fullpage">
 		<section class="rcp-pagetop">
 			<div>
@@ -234,7 +298,28 @@
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
 	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
-
+  <script src="js/template/main.js"></script>
+  <script src="js/template/wow.min.js"></script>
+  <script src="node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
+  <script
+    src="node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js"></script>
+  <!-- <script src="js/jquery.iframe-transport.js"></script> -->
+  <script
+    src="node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+  <script src="node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+  <script
+    src="node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
+  <script
+    src="node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
+  <script
+    src="node_modules/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
+  <!-- 사용자 js -->
+  <script src="js/jquery.bpopup.min.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/popup.js"></script>
+  <script src="js/signup.js"></script>
+  <script src="js/login.js"></script>
+  <script src="js/updateUser.js"></script>
 	<script src="js/community.js"></script>
 
 	<script id="visitor-template" type="text/x-handlebars-template">
@@ -303,6 +388,142 @@
               return;
         }
      });
+  </script>
+  <script>
+    $(function() {
+      getWeather();
+      getRealTimeRank();
+
+      /* 준모3 */
+      if (eval(sessionStorage.getItem('data'))[0].userNo != null) {
+
+        $('#topbarUserImg')
+            .html(
+                "<img class='rcp-barimg dropdown-trigger img-circle' src='img/Chef3.jpg' />");
+
+      }
+
+      $('.profile-dropdown:has(.active)').bind('click', function() {
+
+      });
+
+      $(window).bind('scroll', function(e) {
+        $('.main-nav__dropdown').removeClass('active');
+      });
+
+      $('.dropdown-trigger')
+          .on(
+              'click',
+              function(event) {
+                event.preventDefault();
+                dropdownClick('.profile-dropdown',
+                    '.mobile-menu-dropdown');
+                /* 용이 추가() */
+                if (eval(sessionStorage.getItem('data'))[0].userNo != null) {
+                  $('#profileEmail')
+                      .text(
+                          eval(sessionStorage
+                              .getItem('data'))[0].email);
+                  $('#profileName')
+                      .text(
+                          eval(sessionStorage
+                              .getItem('data'))[0].userName);
+                  $('#profileGrade')
+                      .text(
+                          eval(sessionStorage
+                              .getItem('data'))[0].recipeUrl);
+                  /* 용이 추가() */
+                  $('#introduce')
+                      .text(
+                          eval(sessionStorage
+                              .getItem('data'))[0].intro);
+                }
+              });
+      $('.dropdown-trigger').on('scroll', function() {
+        dropdownClick('.profile-dropdown', '.mobile-menu-dropdown');
+      });
+
+      $('.dropdown-trigger--mobile').on('click', function() {
+        dropdownClick('.mobile-menu-dropdown', '.profile-dropdown');
+      });
+  });
+  </script>
+  <script>
+  $(function() {
+      /* $('a').on('click', function(event){
+        console.log($('a').attr('href'));
+        if($('a').attr('href')=='index.html'){
+          event.preventDefault();
+        }
+      }); */
+    
+    
+      function maskImgs() {
+        //$('.img-wrapper img').imagesLoaded({}, function() {
+        $.each($('.img-wrapper img'), function(index, img) {
+          var src = $(img).attr('src');
+          var parent = $(img).parent();
+          parent
+            .css('background', 'url(' + src + ') no-repeat center center')
+            .css('background-size', 'cover');
+          $(img).remove();
+        });
+        //});
+      }
+
+      var preview = {
+        init: function() {
+          preview.setPreviewImg();
+          preview.listenInput();
+        },
+        setPreviewImg: function(fileInput) {
+          var path = $(fileInput).val();
+          var uploadText = $(fileInput).siblings('.file-upload-text');
+
+          if (!path) {
+            $(uploadText).val('');
+          } else {
+            path = path.replace(/^C:\\fakepath\\/, "");
+            $(uploadText).val(path);
+
+            preview.showPreview(fileInput, path, uploadText);
+          }
+        },
+        showPreview: function(fileInput, path, uploadText) {
+          var file = $(fileInput)[0].files;
+
+          if (file && file[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+              var previewImg = $(fileInput).parents('.file-upload-wrapper').siblings('.rcp-up-preview');
+              var img = $(previewImg).find('img');
+
+              if (img.length == 0) {
+                $(previewImg).html('<img src="' + e.target.result + '" alt=""/>');
+              } else {
+                img.attr('src', e.target.result);
+              }
+
+              uploadText.val(path);
+              maskImgs();
+            }
+
+            reader.onloadstart = function() {
+              $(uploadText).val('uploading..');
+            }
+
+            reader.readAsDataURL(file[0]);
+          }
+        },
+        listenInput: function() {
+          $('.file-upload-native').on('change', function() {
+            preview.setPreviewImg(this);
+          });
+        }
+      };
+      preview.init();
+    });
   </script>
 </body>
 </html>
