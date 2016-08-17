@@ -31,7 +31,7 @@ public class RecipeController {
 	@RequestMapping(path="listSearch",produces="application/json;charset=UTF-8")
   @ResponseBody
   public String listSearch(@RequestParam(defaultValue="1") int pageNo,
-                           @RequestParam(defaultValue="6") int pageSize,
+                           @RequestParam(defaultValue="12") int pageSize,
                            Search search, int userNo){
     HashMap<String,Object> result = new HashMap<>();     
     
