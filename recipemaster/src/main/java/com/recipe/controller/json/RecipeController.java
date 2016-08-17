@@ -192,6 +192,37 @@ public class RecipeController {
 	  return new Gson().toJson(result);
 	}
 	
+	
+	@RequestMapping(path="subscribe",produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String subscribe(int userNo ){
+    HashMap<String,Object> result = new HashMap<>();
+    Recipe recipe = new Recipe();
+    try{
+      System.out.println(userNo);
+      List<Recipe> userNoList = recipeService.selectSubscribeUno(userNo);
+      
+      for(int i =0; i<userNoList.size(); i++){
+        if(recipe.getSubscribe() == null){    
+          recipe.setSubscribe(String.valueOf(userNoList.get(0).getSubscribeNum()));
+        }else{
+          
+          recipe.setSubscribe(recipe.getSubscribe()+","+userNoList.get(i).getSubscribeNum());
+          System.out.println(userNoList.get(i).getSubscribeNum());
+          System.out.println(recipe.getSubscribe());
+        }
+      }
+      List<Recipe> subscribe = recipeService.selectSbuscribe(recipe.getSubscribe());
+      System.out.println(subscribe);
+      result.put("status","success");
+      result.put("data", subscribe);
+    }catch (Exception e){
+      result.put("status", "false");
+    }
+    return new Gson().toJson(result);
+  }
+  
+	
 //	---------------------고재현 -------------------------
 	@RequestMapping(path="materialSearch",produces="application/json;charset=UTF-8")
 	@ResponseBody

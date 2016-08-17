@@ -103,4 +103,18 @@ public class RecipeServiceImpl implements RecipeService {
 	public void likeDown(Recipe recipe) {
 		recipeDao.likeDown(recipe);
 	}
+	
+	 @Override
+	  public List<Recipe> selectSubscribeUno(int userNo) {
+	   
+	    return recipeDao.selectSubscribeUno(userNo);
+	  }
+
+	  @Override
+	  public List<Recipe> selectSbuscribe(String userNo) {
+	    System.out.println("impl "+userNo);
+	    System.out.println("impl :  "+ recipeDao.selectSbuscribe(userNo));
+	    return recipeDao.selectSbuscribe(userNo);
+	  }
+	
 }

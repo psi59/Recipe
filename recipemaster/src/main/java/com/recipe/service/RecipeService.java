@@ -16,7 +16,9 @@ public interface RecipeService {
   
   List<Recipe> getRecipeSearchList(int pageNo, int pageSize, Search search, int userNo);
   int getRecipeCount(int pageNo, int pageSize, Search search, int userNo);
-  
+
+  List<Recipe> selectSubscribeUno(int userNo);
+  List<Recipe> selectSbuscribe(String userNo);
   Recipe getRecipe(int recipeNo);
   int updateRecipe(Recipe recipe);
   int updateHits(Recipe recipe);
