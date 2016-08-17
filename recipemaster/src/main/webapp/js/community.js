@@ -1,11 +1,3 @@
-/*업데이트	*/
-		/*$(document).on('click','#vstConfirmBtn',function(event) {
-			event.preventDefault();
-        			$('#vst-contents').html(
-                      '<div class="rcp-Vst-contents"><p id="updatevContent">{{visitorContent}}</p></div>');
-              $('#editBtn1').html('<img class="vstUpdateBtn" id="vstUpdateBtn"'+
-                  'src="/img/vstUpdateBtn.png">')
-            });*/
 		
 		$(document).on('mouseenter','.rcp-Vst-slotRp',function(){
 			$('.addDelete').html('<img id="addDeleteBtn"'+

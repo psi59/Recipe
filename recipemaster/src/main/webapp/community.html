@@ -456,7 +456,7 @@
           });
    
 	    $(document).on('click','#vstConfirmBtn',function(event) {
-	      event.preventDefault();
+	      event.preventDefault(); 
 	      $.post('visitor/update.json', 
 	    	{
 	    	  visitorNo : $(this).attr('data-index'),
