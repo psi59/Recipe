@@ -27,7 +27,9 @@
   padding-left: 1%;
   padding-top: 19%;
 }
-
+.rcp-topinfo>h3{
+	font-size: 18pt;
+}
 .rcp-topbtn {
   position: absolute;
   top: 65px;

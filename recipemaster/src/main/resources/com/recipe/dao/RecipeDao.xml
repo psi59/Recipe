@@ -19,6 +19,7 @@
 		<result column="lc_dt" property="likeDate"/>
 		<result column="likeUser" property="likeUser"/>
 		<result column="countLike" property="countLike"/>		
+		<result column="uno2" property="subscribeNum"/>
 	</resultMap> 
 	
 	<resultMap type="material" id="materialMap">
@@ -89,7 +90,18 @@
     SET rcp_pd=#{recipeProduceDatas}, rpimg=#{recipeRepresentImages}
     WHERE rcpno=#{recipeNo};
   </update>
-	
+  
+    
+  <select id="selectSubscribeUno" resultMap="recipeMap" parameterType="INTEGER">
+    SELECT * FROM scs WHERE uno=#{value}
+  </select>
+  
+  <select id="selectSbuscribe" resultMap="recipeMap" parameterType="string">
+  
+  select * from rcps where uno in( ${value} )
+  
+  </select>
+
 	
    <select id="recipeList" resultMap="recipeMap" parameterType="Map">
     SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits, 
