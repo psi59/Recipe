@@ -13,6 +13,7 @@ public class Visitor {
   private Date visitorDate;
   private User user; //로그인한 유저넘버 저장할꺼
   private int visitorUserNo; //방문한 유저페이지의 유저넘버
+  
   public int getVisitorNo() {
     return visitorNo;
   }

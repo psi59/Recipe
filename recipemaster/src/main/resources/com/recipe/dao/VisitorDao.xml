@@ -3,7 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.recipe.dao.VisitorDao">
-
 	<resultMap type="visitor" id="visitorMap">
 		<id column="vno" property="visitorNo" />
 		<result column="vct" property="visitorContent" />
@@ -13,7 +12,7 @@
 		<result column="uno2" property="visitorUserNo" />
     
 	</resultMap>
-
+  <!-- list 완료-->
 	<select id="selectList" resultMap="visitorMap" parameterType="Map">
 		SELECT vno, vct, vc_dt, uno
 		FROM vsts
@@ -27,19 +26,21 @@
 		WHERE vno=#{value}
 	</select>
 
-	<!-- <insert id="insert" parameterType="visitor">
-		insert into vtst(vct, vc_dt)
+	<insert id="insert" parameterType="visitor">
+		insert into vsts(vct, vc_dt)
 		values ( #{visitorContent},now())
-	</insert> -->
+	</insert>
  
-	 <update id="update" parameterType="visitor" > UPDATE vtst 
+	 <update id="update" parameterType="visitor" > 
+	 UPDATE vsts 
 	   <set>
 	     vct = #{visitorContent} 
 		 </set> WHERE vno = #{vno} 
 	 </update>
 
-	<delete id="delete" parameterType="int">
-		delete from vtst
+  <!-- delete 완료 -->
+  <delete id="delete" parameterType="int">
+		delete from vsts
 		where vno=#{no}
 	</delete>
 

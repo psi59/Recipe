@@ -1,14 +1,73 @@
+.rcp-fullpage {
+  width: 1024px;
+  height: 1500px;
+  margin: 19%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+
+.rcp-pagetop {
+  /*  background-color: #D4F4FA; */
+  background-image: URL(../img/pagebanner.jpg);
+  width: 100%;
+  height: 20%;
+}
+
+.rcp-topimg {
+  padding: 1%;
+  padding-top: 2%;
+  padding-left: 2%;
+  height: 290px;
+  width: 290px;
+  float: left;
+}
+
+.rcp-topinfo {
+  font-weight: bold;
+  padding-left: 1%;
+  padding-top: 19%;
+}
+
+.rcp-topbtn {
+  position: absolute;
+  top: 65px;
+  right: 335px;
+}
+
+.rcp-pagemiddle {
+  background-color: #EAEAEA;
+  width: 100%;
+  height: 10%;
+}
+
+.rcp-pageleft {
+  background-color: #f3f3f3;
+  width: 70%;
+  height: 70%;
+  float: left;
+}
+
+.rcp-pageright {
+  background-color: #f3f3f3;
+  width: 30%;
+  height: 70%;
+  float: right;
+}
+rcp-Vst-id{
+	font-color:#d5d8dd;
+}
 .rcp-Vst {
   margin: 10px;
+  margin-top:0;
   width: 288px;
-  height: 400px;
+  height: 150px;
 }
 .rcp-Vst-write{
   margin:10px;
   background-color: #ffffff;
     width: 288px;
     height: 89px;
-  border: 1px solid #8c94a2;
+  border: 1px solid #BDBDBD;
   border-radius: 10px;
 }
 .inputWrite{
@@ -22,13 +81,10 @@
     width: 53pt;
 }
 .rcp-Vst-top {
-	background-color:#eaeaea;;
-  border: 1px solid #8c94a2;
+  background-color:#eaeaea;;
+  border: 1px solid #BDBDBD;
      width: 288px;
     height: 50px;
-}
-rcp-Vst-id{
-	font-color:#d5d8dd;
 }
 .rcp-Vst-contents-rep>hr{
 	margin:0;
@@ -36,16 +92,16 @@ rcp-Vst-id{
 .rcp-Vst-bottom {
   background-color: #fff;
   width: 288px;
-  height: 150px;
-  border: 1px solid #8c94a2;
+  height: 100px;
+  border: 1px solid #BDBDBD;
   border-top-width: 0px;
   
 }
 .rcp-Vst-footer {
   width: 288px;
   height: 60px;
-  border: 1px solid #8c94a2;
-  border-top: 0px solid #fff;
+  border: 1px solid #BDBDBD;
+  border-top: 0px solid #BDBDBD;
 }
 
 .rcp-Vst-img {
@@ -90,6 +146,7 @@ rcp-Vst-id{
   padding-left: 10pt;
   padding-top: 10pt;
   padding-bottom: 10pt;
+  border: 1px solid #BDBDBD;
 }
 
 .vstUpdateBtn {
@@ -100,7 +157,7 @@ rcp-Vst-id{
 .rcp-Vst-moreRp{
 	text-align: center;
 	background-color:white;
-	border: 1px solid #8c94a2;
+	border: 1px solid #BDBDBD;
 }
 .vstDeleteBtn {
   position: relative;

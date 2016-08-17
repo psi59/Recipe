@@ -78,11 +78,13 @@ public class VisitorController {
   @RequestMapping(path="delete", produces="application/json;charset=UTF-8")
   @ResponseBody
   public String delete(int no){    
+    System.out.println("vno="+no);
     HashMap<String,Object> result = new HashMap<>();
     try{
       visitorService.deleteVisitor(no);
       result.put("status", "success");      
     }catch(Exception e){
+      e.printStackTrace();
       result.put("status", "failure");
     }
     return new Gson().toJson(result);
