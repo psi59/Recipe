@@ -160,6 +160,13 @@ rcp-Vst-id{
   left: 82%;
   top: 10%;
 }
+.vstConfirmBtn {
+  position: relative;
+  left: 82%;
+  top: 10%;
+}
+
+
 .rcp-Vst-moreRp{
 	text-align: center;
 	background-color:white;
