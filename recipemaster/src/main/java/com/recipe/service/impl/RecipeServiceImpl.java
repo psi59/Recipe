@@ -9,13 +9,35 @@ import org.springframework.stereotype.Service;
 
 import com.recipe.dao.RecipeDao;
 import com.recipe.domain.Recipe;
+import com.recipe.domain.Search;
 import com.recipe.service.RecipeService;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
 	@Autowired RecipeDao recipeDao;
-
+	
 	@Override
+  public List<Recipe> getRecipeSearchList(int pageNo, int pageSize, Search search, int userNo) {	
+	  Map<String,Object> params = new HashMap<>();
+	  params.put("startIndex", (pageNo - 1) * pageSize);
+	  params.put("len", pageSize);
+	  params.put("search", search);
+	  params.put("userNo", userNo);
+    
+    return recipeDao.recipeSearch(params);
+  }	
+
+  @Override
+  public int getRecipeCount(int pageNo, int pageSize, Search search, int userNo) {
+    Map<String,Object> params = new HashMap<>();
+    params.put("startIndex", (pageNo - 1) * pageSize);
+    params.put("len", pageSize);
+    params.put("search", search);
+    params.put("userNo", userNo);
+    return recipeDao.recipeCount(params);
+  }
+
+  @Override
 	public int addRecipe(Map map) {
 		recipeDao.insert(map);
 		return (int)map.get("recipeNo");

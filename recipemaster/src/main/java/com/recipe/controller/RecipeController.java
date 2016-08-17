@@ -1,7 +1,6 @@
 package com.recipe.controller;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,7 +31,7 @@ public class RecipeController {
 	@Autowired
 	RecipeService recipeService;
 
-	CommonUtil commonUtil = new CommonUtil();
+	// CommonUtil commonUtil = new CommonUtil();
 
 	@RequestMapping("list")
 	public String list(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "4") int pageSize,
@@ -47,51 +47,55 @@ public class RecipeController {
 			@RequestParam("materialName") String[] materialNames,
 			@RequestParam("materialAmount") String[] materialAmounts,
 			@RequestParam("recipeProduce") String[] recipeProduce,
-			@RequestParam("files") MultipartFile[] recipeProduceImage,
-			@RequestParam("representImage") List<MultipartFile> rcpRepresentImage,
-			HttpServletRequest request) {
+			@RequestParam("imageFiles") List<MultipartFile> imageFiles,
+			@RequestParam("representImgNames") List<String> representImgNames,
+			@RequestParam("produceImgNames") List<String> produceImgNames, HttpServletRequest request) {
 		Map<String, Object> result = new HashMap<>();
 		Map<String, Object> map = new HashMap<>();
 		Map<String, Object> recipeDatas = new HashMap<>();
 		List<Map> materialList = new ArrayList<>();
 		JsonArray recipeProduceDatas = new JsonArray();
 		JsonArray recipeRepresentImages = new JsonArray();
-		
+
 		User user = new User();
 		user.setUserNo(1);
-			
+
 		for (int i = 0; i < materialNames.length; i++) {
 			Map<String, String> matertialInfo = new HashMap<>();
 			matertialInfo.put("materialName", materialNames[i]);
 			matertialInfo.put("materialAmount", materialAmounts[i]);
 			materialList.add(matertialInfo);
 		}
-		
+
 		map.put("user", user);
 		map.put("recipe", recipe);
 		int recipeNo = recipeService.addRecipe(map);
 		recipeDatas.put("recipeNo", recipeNo);
 		recipeDatas.put("materialList", materialList);
-		
+
 		try {
-			/*대표사진 등록*/
-			for(MultipartFile image : rcpRepresentImage){
-				int no = rcpRepresentImage.indexOf(image);
-				String fileName = recipeNo + "_" + user.getUserNo() + "_" + commonUtil.nowData() + "_" + no+".png";
-				File file = new File(commonUtil.getImageFolderPath("representImg", request)+"/"+fileName);
-				image.transferTo(file);
+			for (int i = 0; i < representImgNames.size(); i++) {
+				// MultipartFile image = null;
+				String[] fileInfo = representImgNames.get(i).split("/");
+				// image = CommonUtil.findImageFile(fileInfo, imageFiles);
+				String fileName = recipeNo + "_" + user.getUserNo() + "_" + CommonUtil.nowData() + "_" + i + ".png";
+//				File newFile = new File(CommonUtil.getImageFolderPath("representImg", request) + "/" + fileName);
+//				CommonUtil.findImageFile(fileInfo, imageFiles).transferTo(newFile);
+				FileCopyUtils.copy(CommonUtil.findImageFile(fileInfo, imageFiles).getBytes(),
+						new FileOutputStream(CommonUtil.getImageFolderPath("representImg", request) + "/" + fileName));
 				recipeRepresentImages.add(fileName);
-			} //end of for
-			
-			/*조리과정 등록*/
-			for (int i = 0; i < recipeProduceImage.length; i++) {
+			} // end of for
+
+			/* 조리과정 등록 */
+			for (int i = 0; i < produceImgNames.size(); i++) {
+				String[] fileInfo = produceImgNames.get(i).split("/");
 				JsonObject obj = new JsonObject();
-				String fileName = recipeNo + "_" + user.getUserNo() + "_" + commonUtil.nowData() + "_" + i+".png";
-				File file = new File(commonUtil.getImageFolderPath("recipeImg", request)+"/"+fileName);
+				String fileName = recipeNo + "_" + user.getUserNo() + "_" + CommonUtil.nowData() + "_" + i + ".png";
 				obj.addProperty("recipeProduceImage", fileName);
 				obj.addProperty("recipeProduce", recipeProduce[i]);
 				recipeProduceDatas.add(obj);
-				recipeProduceImage[i].transferTo(file);
+				FileCopyUtils.copy(CommonUtil.findImageFile(fileInfo, imageFiles).getBytes(),
+						new FileOutputStream(CommonUtil.getImageFolderPath("recipeImg", request) + "/" + fileName));
 			} // end of for
 			recipeDatas.put("recipeProduceDatas", recipeProduceDatas.toString());
 			recipeDatas.put("recipeRepresentImages", recipeRepresentImages.toString());

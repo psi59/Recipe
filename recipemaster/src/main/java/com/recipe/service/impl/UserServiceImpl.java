@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
   public List<User> getUserList(int pageNo, int pageSize) {
     HashMap<String,Object> params= new HashMap<>();    
     params.put("startIndex", (pageNo - 1) * pageSize);
-    params.put("len", pageSize);    
+    params.put("len", pageSize);   
     
     return userDao.selectList(params);
   }

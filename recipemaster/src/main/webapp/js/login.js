@@ -1,7 +1,8 @@
 var dataStatus=null;
 
 $("#userLogin").click(	
-		function() {
+		function(event) {
+			event.preventDefault();
 			$.ajax({
 				url : '/user/login.json',
 				method : 'post',
