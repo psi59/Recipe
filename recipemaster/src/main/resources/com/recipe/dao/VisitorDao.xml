@@ -27,21 +27,22 @@
 	</select>
 
 	<insert id="insert" parameterType="visitor">
-		insert into vsts(vct, vc_dt)
-		values ( #{visitorContent},now())
+		insert into vsts(uno,uno2,vct,vimg,vc_dt)
+		values ('1',#{visitorUserNo},#{visitorContent},'없음',now())
 	</insert>
  
 	 <update id="update" parameterType="visitor" > 
-	 UPDATE vsts 
+	     UPDATE vsts 
 	   <set>
 	     vct = #{visitorContent} 
-		 </set> WHERE vno = #{vno} 
+		 </set> 
+		 WHERE vno =#{visitorNo} 
 	 </update>
 
   <!-- delete 완료 -->
   <delete id="delete" parameterType="int">
-		delete from vsts
-		where vno=#{no}
+		DELETE FROM vsts
+		WHERE vno=#{no}
 	</delete>
 
 </mapper>

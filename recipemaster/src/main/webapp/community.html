@@ -3,84 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <title>길용이님의 Page</title>
-<!-- css -->
 <link rel="stylesheet"
 	href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<link rel="stylesheet" href="css/template/animate.css">
-<link rel="stylesheet" href="css/template/main.css">
-<!-- 사용자 css -->
+<link rel="stylesheet" href="/css/mypage.css">
 <link rel="stylesheet" href="/css/subscribe.css">
 <link rel="stylesheet" href="/css/community.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/subscribe.css">
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 
+<!-- Template css -->
+<link rel="stylesheet" href="css/template/animate.css">
+<link rel="stylesheet" href="css/template/main.css">
+
+<!-- 사용자 정의 css -->
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/userinfobox.css">
 <link rel="stylesheet" href="css/signup.css">
 <link rel="stylesheet" href="css/popup.css">
 <link rel="stylesheet" href="css/updateImg.css">
 
-<style>
-</style>
 </head>
 <body>
-<div id="topBtn" class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container rcp-container-top">
-      <div class="navbar-header">
-        <div class="row">
-          <div class="row col-md-7 col-sm-7 col-xs-12">
-            <a class="logo col-md-3 col-sm-3 hidden-xs rt-navbar-top-logo"
-              href="index.html"><img src="img/logo.svg" alt="Logo"></a>
-            <div
-              class="input-group col-md-5 col-sm-5 col-xs-11 col-xs-offset-1 rcp-navbar-searchbar-size rt-navbar-top-searchbar">
-               <input
-                type="text" class="form-control rcp-navbar-searchbar-size"
-                placeholder="레시피명, 쉐프명, 재료명" aria-describedby="basic-addon1">
-               <span class="input-group-addon" id="searchBarKeyword">검색</span>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-4 hidden-xs" style="margin-right: 2em;">
-            <div class="navbar-collapse">
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span id="signUpTopBtn"
-                    class="rcp-btn-default-top">회원가입</span></a></li>
-                <li id="topbarUserImg"><a href="#"><span id="TopBtn"
-                    class="rcp-btn-default-top">로그인</span></a></li>
-              </ul>
-            </div>
-            <!-- 준모2 -->
-            <div id="profileView" class="main-nav__dropdown profile-dropdown">
-              <div class="rcp-outline">
-                <div>
-                  <a href="#0" class="dropdown__header"><img id="profileImg"
-                    class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a
-                    id="profileEmail" href="#"
-                    class="dropdown__header rcp-infobox-text"></a>
-                  <h6 id="profileName" class="rcp-nickname"></h6>
-                  <a href="#0" class="dropdown__header"> <span
-                    id="profileGrade" class="dropdown__title rcp-infobox-text">
-                      <img src="img/star.png"> Master Chef
-                  </span>
-                  </a>
-                  <div id=Btn align="center">
-                    <button id="userInfoEditBtn" type="button"
-                      class="btn btn-default rcp-btn-nav">정보수정</button>
-                    <button id="logoutBtn" type="button"
-                      class="btn btn-default rcp-btn-nav">로그아웃</button>
-                  </div>
-                </div>
-                <button class="infoBtn"><a href="/community.html" >MyPage</a></button>
-                <button class="infoBtn"><a href="/writerecipe.html" >Recipe 작성</a></button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+	<!--준모_login------------------------------------------------------------------------------- -->
+	<div id='login-pop-up-banner'>
+		<div class="rcp-section">
+			<span>로그인</span>
+		</div>
+		<div class="rcp-laytop rcp-laytop2"></div>
+		<div class="rcp-innnersec">
+			<div id="loginInputBox" class="rcp-mar rcp-info"
+				style="height: 110px;">
+				<input class="form-control" type="text" id="userEmail" name="email"
+					placeholder="아이디 입력" /> <br /> <input class="form-control"
+					type="password" id="userPassword" name="password"
+					placeholder="비밀번호 입력" />
+			</div>
+		</div>
+		<div class="rcp-sign-membership" id="userLogin"
+			style="margin-top: 50px;">
+			<a href="#"><span>로그인</span></a>
+		</div>
+	</div>
+	<!--  -->
+
+	<div id="topBtn" class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container rcp-container-top">
+			<div class="navbar-header">
+				<div class="row">
+					<div class="row col-md-7 col-sm-7 col-xs-12">
+						<a class="logo col-md-3 col-sm-3 hidden-xs rt-navbar-top-logo"
+							href="index.html"><img src="img/logo.svg" alt="Logo"></a>
+						<div
+							class="input-group col-md-5 col-sm-5 col-xs-11 col-xs-offset-1 rcp-navbar-searchbar-size rt-navbar-top-searchbar">
+							<input type="text" class="form-control rcp-navbar-searchbar-size"
+								placeholder="레시피명, 쉐프명, 재료명" aria-describedby="basic-addon1">
+							<span class="input-group-addon" id="searchBarKeyword">검색</span>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-4 hidden-xs" style="margin-right: 2em;">
+						<div class="navbar-collapse">
+							<ul class="nav navbar-nav navbar-right">
+								<li><a href="#"><span id="signUpTopBtn"
+										class="rcp-btn-default-top">회원가입</span></a></li>
+								<li id="topbarUserImg"><a href="#"><span id="TopBtn"
+										class="rcp-btn-default-top">로그인</span></a></li>
+							</ul>
+						</div>
+						<!-- 준모2 -->
+						<div id="profileView" class="main-nav__dropdown profile-dropdown">
+							<div class="rcp-outline">
+								<div>
+									<a href="#0" class="dropdown__header"><img id="profileImg"
+										class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a
+										id="profileEmail" href="#"
+										class="dropdown__header rcp-infobox-text"></a>
+									<h6 id="profileName" class="rcp-nickname"></h6>
+									<a href="#0" class="dropdown__header"> <span
+										id="profileGrade" class="dropdown__title rcp-infobox-text">
+											<img src="img/star.png"> Master Chef
+									</span>
+									</a>
+									<div id=Btn align="center">
+										<button id="userInfoEditBtn" type="button"
+											class="btn btn-default rcp-btn-nav">정보수정</button>
+										<button id="logoutBtn" type="button"
+											class="btn btn-default rcp-btn-nav">로그아웃</button>
+									</div>
+								</div>
+								<!-- <nav class="dropdown__nav rcp-menuname rcp-back">
+                  <a href="../mypage/mypage.html"><span class="rcp-back">내
+                      레시피</span></a><a href="../writerecipe.html"><span class="rcp-back">레시피
+                      쓰기</span></a><a href="#"><span class="rcp-back">구독 정보</span></a>
+                </nav> -->
+								<button class="infoBtn">
+									<a href="/community.html">MyPage</a>
+								</button>
+								<button class="infoBtn">
+									<a href="/writerecipe.html">Recipe 작성</a>
+								</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<section class="rcp-fullpage">
 		<section class="rcp-pagetop">
 			<div>
@@ -280,7 +310,7 @@
 				<div class="rcp-Vst-write">
 					<div class="inputWrite">
 						<textarea id="rcp-rpcontent" rows="3" cols="25"
-							style="resize: none;"></textarea>
+							style="resize: none;" placeholder="방명록을 입력해주세요"></textarea>
 						<button id="rcp-rpBtn" class="rcp-Vst-inputBtn btn btn-default">등록</button>
 					</div>
 				</div>
@@ -298,29 +328,31 @@
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
 	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
-  <script src="js/template/main.js"></script>
-  <script src="js/template/wow.min.js"></script>
-  <script src="node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
-  <script
-    src="node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js"></script>
-  <!-- <script src="js/jquery.iframe-transport.js"></script> -->
-  <script
-    src="node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-  <script src="node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
-  <script
-    src="node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
-  <script
-    src="node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
-  <script
-    src="node_modules/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
-  <!-- 사용자 js -->
-  <script src="js/jquery.bpopup.min.js"></script>
-  <script src="js/common.js"></script>
-  <script src="js/popup.js"></script>
-  <script src="js/signup.js"></script>
-  <script src="js/login.js"></script>
-  <script src="js/updateUser.js"></script>
+
 	<script src="js/community.js"></script>
+
+
+
+	<script src="node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
+	<script
+		src="node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js"></script>
+	<!-- <script src="js/jquery.iframe-transport.js"></script> -->
+	<script
+		src="node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+	<script src="node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+	<script
+		src="node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
+	<script
+		src="node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
+	<script
+		src="node_modules/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
+
+	<!--  사용자 js -->
+	<script src="js/jquery.bpopup.min.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/signup.js"></script>
+	<script src="js/login.js"></script>
+	<script src="js/updateUser.js"></script>
 
 	<script id="visitor-template" type="text/x-handlebars-template">
   {{#each data}}
@@ -329,7 +361,7 @@
             <img class="rcp-Vst-img img-circle" src="/img/pika.jpg" />
             <div class="rcp-Vst-common">
               <span id="editBtn1"><a href="#"><img class="vstUpdateBtn"
-                src="/img/vstUpdateBtn.png"></a></span> 
+                src="/img/vstUpdateBtn.png" data-index="{{visitorNo}}"></a></span> 
               <a href="#"><img class="vstDeleteBtn" name="vstDeleteBtn" data-index="{{visitorNo}}"
                 src="/img/vstDeleteBtn.png"></a> <span id="rcp-Vst-id" class="rcp-Vst-id">{{visitorNo}}</span><br>
               &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<span id="rcp-Vst-time">{{visitorDate}}</span>
@@ -337,7 +369,7 @@
           </div>
           <div class="rcp-Vst-bottom" id="vst-contents">
             <div class="rcp-Vst-contents">
-              <p id="vContent">{{visitorContent}}</p>
+              <p>{{visitorContent}}</p>
             </div>
           </div>
             <div class="rcp-Vst-slotRp">
@@ -345,7 +377,6 @@
             </div>
           </div>
         </div>
-
   {{/each}}
   </script>
 	<script>
@@ -388,11 +419,69 @@
               return;
         }
      });
+      
+      /* Add */
+      $('#rcp-rpBtn').click(function() {
+    	  console.log($('#rcp-rpcontent'));
+      $.ajax({
+        url : 'visitor/add.json',
+        method : 'post',
+        data : {
+        	visitorUserNo : eval(sessionStorage.getItem('data'))[0].userNo,  
+          visitorContent : $('#rcp-rpcontent').val()
+        },
+        dataType : 'json',
+        success : function(result) {
+          if (result.status != 'success') {
+            alert('등록 오류입니다.');
+            return;
+          }
+          $('#Vst>').remove(); 
+          loadVisitor(); // 테이블 데이터를 갱신한다.
+        },
+        error : function() {
+          alert('서버 요청 오류 !')
+        }
+      })
+    });
+      
+    /* 업데이트 */
+    
+      $(document).on('click','.vstUpdateBtn',function(event) {
+      event.preventDefault();
+            $('#vst-contents').html(
+                    '<div class="rcp-Vst-contents"><textarea id="updatevContent" rows="3" cols="34" placeholder="편집해주세요" style="resize:none;"></textarea></div>');
+            $('#editBtn1').html('<img class="vstUpdateBtn" id="vstConfirmBtn" data-index="'+$(this).attr('data-index')+' "'+
+                'src="/img/vstConfirmBtn.png">')
+          });
+   
+	    $(document).on('click','#vstConfirmBtn',function(event) {
+	      event.preventDefault();
+	      $.post('visitor/update.json', 
+	    	{
+	    	  visitorNo : $(this).attr('data-index'),
+	        visitorContent : $('#updatevContent').val()
+	      }, function(result) {
+	    	  $('#vst-contents').html(
+              '<div class="rcp-Vst-contents"><p id="updatevContent">{{visitorContent}}</p></div>');
+	    	  $('#editBtn1').html('<a href="#"><img class="vstUpdateBtn"'+
+	                  'src="/img/vstUpdateBtn.png" data-index="{{visitorNo}}"></a>')
+	    	  
+	        if (result.status != 'success') {
+	          alert('변경 오류입니다.');
+	          return;
+	        }
+	    	  $('#Vst>').remove(); 
+	          loadVisitor(); // 테이블 데이터를 갱신한다.
+	      }, 'json');
+	    });
+	      
   </script>
-  <script>
+
+	<script>
     $(function() {
-      getWeather();
-      getRealTimeRank();
+      //getWeather();
+      //getRealTimeRank();
 
       /* 준모3 */
       if (eval(sessionStorage.getItem('data'))[0].userNo != null) {
@@ -447,83 +536,6 @@
         dropdownClick('.mobile-menu-dropdown', '.profile-dropdown');
       });
   });
-  </script>
-  <script>
-  $(function() {
-      /* $('a').on('click', function(event){
-        console.log($('a').attr('href'));
-        if($('a').attr('href')=='index.html'){
-          event.preventDefault();
-        }
-      }); */
-    
-    
-      function maskImgs() {
-        //$('.img-wrapper img').imagesLoaded({}, function() {
-        $.each($('.img-wrapper img'), function(index, img) {
-          var src = $(img).attr('src');
-          var parent = $(img).parent();
-          parent
-            .css('background', 'url(' + src + ') no-repeat center center')
-            .css('background-size', 'cover');
-          $(img).remove();
-        });
-        //});
-      }
-
-      var preview = {
-        init: function() {
-          preview.setPreviewImg();
-          preview.listenInput();
-        },
-        setPreviewImg: function(fileInput) {
-          var path = $(fileInput).val();
-          var uploadText = $(fileInput).siblings('.file-upload-text');
-
-          if (!path) {
-            $(uploadText).val('');
-          } else {
-            path = path.replace(/^C:\\fakepath\\/, "");
-            $(uploadText).val(path);
-
-            preview.showPreview(fileInput, path, uploadText);
-          }
-        },
-        showPreview: function(fileInput, path, uploadText) {
-          var file = $(fileInput)[0].files;
-
-          if (file && file[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function(e) {
-              var previewImg = $(fileInput).parents('.file-upload-wrapper').siblings('.rcp-up-preview');
-              var img = $(previewImg).find('img');
-
-              if (img.length == 0) {
-                $(previewImg).html('<img src="' + e.target.result + '" alt=""/>');
-              } else {
-                img.attr('src', e.target.result);
-              }
-
-              uploadText.val(path);
-              maskImgs();
-            }
-
-            reader.onloadstart = function() {
-              $(uploadText).val('uploading..');
-            }
-
-            reader.readAsDataURL(file[0]);
-          }
-        },
-        listenInput: function() {
-          $('.file-upload-native').on('change', function() {
-            preview.setPreviewImg(this);
-          });
-        }
-      };
-      preview.init();
-    });
   </script>
 </body>
 </html>

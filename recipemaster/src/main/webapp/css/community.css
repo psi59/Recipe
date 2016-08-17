@@ -1,8 +1,12 @@
+.navbar {
+    top: 0px !important;
+}
+
 .rcp-fullpage {
   width: 1024px;
   height: 1500px;
   margin: 19%;
-  margin-top: 3%;
+  margin-top: 6%;
   margin-bottom: 3%;
 }
 
@@ -32,7 +36,7 @@
 }
 .rcp-topbtn {
   position: absolute;
-  top: 65px;
+  top: 113px;
   right: 335px;
 }
 
