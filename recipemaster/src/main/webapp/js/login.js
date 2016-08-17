@@ -4,7 +4,7 @@ $("#userLogin").click(
 		function(event) {
 			event.preventDefault();
 			$.ajax({
-				url : '/user/login.json',
+				url : '/user/login.json', 
 				method : 'post',
 				dataType : 'json',
 				data : {
