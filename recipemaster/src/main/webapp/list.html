@@ -266,7 +266,7 @@
 	<!-- -------------------------------recipe list-------------------------------- -->
 	<section id="main-list">
 		<div>
-			<section name="rcp-custom-list">
+			<section id="rcp-custom-list">
 				<div class="rcp-list list0">
 					<div class="rcp-1024 searchResult">						
 						<div id="search-result" class="row"></div>
@@ -274,14 +274,14 @@
 				</div>
 			</section>
 		</div>
-	</section>	
+	</section>
 
+  <input id="search-pageNo" type="hidden" value="1">
+  
 	<script id="recipe-card-search-template" type="text/x-handlebars-template"> 
   {{#each data}} 
       
-          <div
-            class="col-xs-3 col-sm-3 col-md-3 rcp-listSize rcp-list-margin">
-      
+          <div class="col-xs-3 col-sm-3 col-md-3 rcp-listSize rcp-list-margin">      
             <div class="thumbnail row relative">
               <div class="rcp-profile-position">
                 <img src="img/profile{{@index}}.jpg" class="img-circle rcp-profile">
@@ -397,7 +397,8 @@
   </div>
 
   {{/each}}
-  </script>
+  </script>  
+
   
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>

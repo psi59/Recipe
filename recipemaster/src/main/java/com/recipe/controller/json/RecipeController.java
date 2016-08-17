@@ -31,21 +31,25 @@ public class RecipeController {
 	@RequestMapping(path="listSearch",produces="application/json;charset=UTF-8")
   @ResponseBody
   public String listSearch(@RequestParam(defaultValue="1") int pageNo,
-                           @RequestParam(defaultValue="12") int pageSize,
+                           @RequestParam(defaultValue="8") int pageSize,
                            Search search, int userNo){
     HashMap<String,Object> result = new HashMap<>();     
-    
+    int recipeCount = 0;
     // TEST용으로 searchCondition, sortCondition 때려박음
     search.setSearchCondition("name");
     search.setSortCondition("newest");   
     
+    System.out.println("pageNo : "+pageNo);
+    
     List<Recipe> list = recipeService.getRecipeSearchList(pageNo, pageSize, search, userNo);
-    int recipeCount = recipeService.getRecipeCount(pageNo, pageSize, search, userNo);
-   
+    if(pageNo == 1){
+      recipeCount = recipeService.getRecipeCount(pageNo, pageSize, search, userNo);
+    }
     try{
       result.put("status","success");
       result.put("data", list);
-      result.put("recipeCount", recipeCount);
+      result.put("recipeCount", recipeCount);      
+      result.put("pageNo", pageNo);
     }catch (Exception e){
       result.put("status", "false");
     }
