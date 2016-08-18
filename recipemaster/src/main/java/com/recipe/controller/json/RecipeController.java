@@ -33,15 +33,16 @@ public class RecipeController {
   @ResponseBody
   public String listSearch(@RequestParam(defaultValue="1") int pageNo,
                            @RequestParam(defaultValue="8") int pageSize,
-                           Search search, int userNo, HttpSession session){
+                           Search search, HttpSession session){
     HashMap<String,Object> result = new HashMap<>();     
     int recipeCount = 0;
     // TEST용으로 searchCondition, sortCondition 때려박음
     search.setSearchCondition("name");
     
-    System.out.println("session : "+session.getAttribute("userNo"));
-    
-    System.out.println("pageNo : "+pageNo);
+    int userNo = 0;    
+    if(session.getAttribute("userNo") != null){
+      userNo = (Integer)(session.getAttribute("userNo"));
+    }
     
     List<Recipe> list = recipeService.getRecipeSearchList(pageNo, pageSize, search, userNo);
     

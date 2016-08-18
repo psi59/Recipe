@@ -1,12 +1,16 @@
-/* 검색버튼 및 정렬버튼 이벤트 -성현 */
+/* 검색 및 정렬 이벤트 -성현 */
 $(function() {
-		
+	
+	// 검색버튼 클릭 검색 이벤트
 	$('#searchBtn').click(function() {
+		$("body").scrollTop(0);
 		search('newest');			    
 	});
 	
-	$('#searchKeyword').keydown( function(){
-		if(event.keyCode == '13') search('newest');
+	// 키보드에서 뗐을때의 검색 이벤트
+	$('#searchKeyword').keyup( function(){
+		$("body").scrollTop(0);
+		search('newest'); 
 	});
 	
 	// 최신순 정렬
@@ -40,13 +44,9 @@ $(function() {
 	
 });
 
+// 처음 검색했을때의 1페이지 결과 가져오기
 function search(sort){ 
-	var userNo = 0; 
-	var a = eval(sessionStorage.getItem('data'));		
-	if(a != null){
-		userNo = eval(sessionStorage.getItem('data'))[0].userNo;
-	}
-	
+			
 	var source = $('#recipe-card-search-template').text();
 	var template = Handlebars.compile(source);
 	
@@ -54,7 +54,6 @@ function search(sort){
 		url : 'recipe/listSearch.json',
 		method : 'post',
 		data : {
-			userNo : userNo,
 			searchKeyword : $('#searchKeyword').val(),			
 			sortCondition : sort,
 			orderCondition : $('#order-grade-btn').val()
@@ -76,14 +75,9 @@ function search(sort){
 		}
 	})	
 }
-
+// 스크롤 끝까지 내렸을때 추가될 결과 한페이지씩 가져오기
 function searchScrollAppend(){ 
-	var userNo = 0; 
-	var a = eval(sessionStorage.getItem('data'));		
-	if(a != null){
-		userNo = eval(sessionStorage.getItem('data'))[0].userNo;
-	}
-	
+		
 	var source = $('#recipe-card-search-template').text();
 	var template = Handlebars.compile(source);	
 	
@@ -92,8 +86,7 @@ function searchScrollAppend(){
 	$.ajax({
 		url : 'recipe/listSearch.json',
 		method : 'post',
-		data : {
-			userNo : userNo,			
+		data : {					
 			pageNo : pageNo,
 			searchKeyword : $('#searchKeyword').val(),
 			sortCondition : $('#sort-condition').val(),
