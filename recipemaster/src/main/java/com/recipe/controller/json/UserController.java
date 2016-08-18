@@ -188,7 +188,6 @@ public class UserController {
     HashMap<String,Object> result = new HashMap<>();
     try {
       
-      System.out.println("들어오냐??");
       
       User logUser = userService.getUser(no);
 
