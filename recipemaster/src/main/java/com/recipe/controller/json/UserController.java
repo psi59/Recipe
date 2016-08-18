@@ -159,15 +159,21 @@ public class UserController {
     //index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
     System.out.println(user.toString());
     HashMap<String,Object> result = new HashMap<>();
+    
+    User logUser = userService.loginUser(user);
+    
     try {
-      User logUser = userService.loginUser(user);
+
 
       result.put("status", "success");
 
       result.put("data", logUser);
       System.out.println("status:success"+result.values());
       System.out.println("logUser:"+logUser.toString());
+//    server sessionStorage에 유저 정보 저장  ------------------
       session.setAttribute("userNo", logUser.getUserNo());
+      session.setAttribute("userEmail", logUser.getEmail());
+//    ----------------------------------------------------------
     } catch (Exception e) {
       result.put("status", "failure");
       System.out.println("status:failure"+result.values());
