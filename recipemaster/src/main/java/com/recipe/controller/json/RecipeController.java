@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.recipe.domain.Material;
 import com.recipe.domain.Recipe;
 import com.recipe.domain.Search;
 import com.recipe.domain.User;
@@ -234,10 +237,18 @@ public class RecipeController {
 	public String mts(@RequestParam("searchValue") String materialName, Model model) {
 		System.out.println("데헷데헷");
 		Map<String,Object> result = new HashMap<>();
-		List<String> list = recipeService.getMaterial(materialName);
+		List<Material> list = recipeService.getMaterial(materialName);
+		System.out.println(list);
 		try{
 			result.put("status","success");
-			result.put("data", list);
+			List<JsonObject> materialInfos = new ArrayList<>();
+			for(Material mt : list){
+				JsonObject data = new JsonObject();
+				data.addProperty("lable", mt.getMaterialName()+"/"+mt.getMaterialNo());
+				data.addProperty("category", (mt.getMaterialStatement()==1)?"식재료":"조미료");
+				materialInfos.add(data);
+			}
+			result.put("data", materialInfos);
 		}catch (Exception e){
 			result.put("status", "false");
 		}

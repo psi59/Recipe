@@ -2,26 +2,26 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Recipe Master</title>
+<title>Recipe Master</title> 
 <meta name="keywords" content="">
 <meta name="description" content="">
 
 <!-- Template css -->
-<link rel="stylesheet"
-	href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/template/font-awesome.min.css">
 <link rel="stylesheet" href="css/template/animate.css">
 <link rel="stylesheet" href="css/template/main.css">
-
 <link rel="stylesheet"
 	href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
+	
+<link rel="stylesheet" href="node_modules/bxslider/dist/jquery.bxslider.css">
 
 
 <!-- 사용자 정의 css -->
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/userinfobox.css">
 <link rel="stylesheet" href="css/signup.css">
-<link rel="stylesheet" href="css/mainlist.css">
+<link href="css/mainlist.css" rel="stylesheet">
 <link rel="stylesheet" href="css/detail.css">
 <link rel="stylesheet" href="css/chefCard.css">
 <link rel="stylesheet" href="css/rankTabs.css">
@@ -42,10 +42,9 @@
 							href="index.html"><img src="img/logo.svg" alt="Logo"></a>
 						<div
 							class="input-group col-md-5 col-sm-5 col-xs-11 col-xs-offset-1 rcp-navbar-searchbar-size rt-navbar-top-searchbar">
-							 <input
+							<span class="input-group-addon" id="searchBarKeyword">검색</span> <input
 								type="text" class="form-control rcp-navbar-searchbar-size"
 								placeholder="레시피명, 쉐프명, 재료명" aria-describedby="basic-addon1">
-							 <span class="input-group-addon" id="searchBarKeyword">검색</span>
 						</div>
 					</div>
 					<div class="col-md-4 col-sm-4 hidden-xs" style="margin-right: 2em;">
@@ -347,7 +346,7 @@
 	<!------------------------- Rank List ------------------------------>
 
 	<script id="recipe-detail-template" type="text/x-handlebars-template">
-    {{#each this}}
+    {{#each data}}
               <div class="rcp-body">
               <div>
                 <div class="rcp-title-size">
@@ -369,6 +368,7 @@
                <div class="rcp-nav-down">
                    <a href="#" class="glyphicon glyphicon-chevron-down rcp-detail-move"></a>
                </div>
+            </div>
 {{/each}}
 
 </script>
@@ -619,8 +619,9 @@
 	<script src="js/template/main.js"></script>
 	<script src="js/template/wow.min.js"></script>
 	<script src="js/template/jquery-slider-rolling.js"></script>
-	<script src="js/mouseover.js"></script>
 	<script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
+	<script src="js/mouseover.js"></script>
+	
 	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
 
 
@@ -636,7 +637,11 @@
 	<script
 		src="node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
 	<script
-		src="node_modules/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
+    src="node_modules/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
+  
+  <script
+    src="node_modules/bxslider/dist/jquery.bxslider.min.js"></script>
+
 
 	<!--  사용자 js -->
 	<script src="js/jquery.bpopup.min.js"></script>
@@ -655,6 +660,7 @@
 		$(function() {
 			getWeather();
 			getRealTimeRank();
+			
 
 			/* 준모3 */
 			if (eval(sessionStorage.getItem('data'))[0].userNo != null) {

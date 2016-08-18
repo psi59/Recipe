@@ -1,4 +1,3 @@
-/*
 //$(function(){
 //	$(document).on('click','.detail', function(){
 //		$('#detail_pop_up').bPopup({
@@ -14,6 +13,7 @@
 //			
 //		});
 //	});
+
 $(function(){
   var detailTemp = $('#recipe-detail-template').html();
   var comDetailTemp = Handlebars.compile(detailTemp); 
@@ -26,6 +26,8 @@ $(function(){
 
   var detailImageStep = $('#recipe-detail-step-images-template').html();
   var comDetailImageStep = Handlebars.compile(detailImageStep); 
+  
+  var slider;
 
 
   Handlebars.registerHelper("inc", function(value, options)
@@ -34,6 +36,21 @@ $(function(){
  });
   
 	$(function(){
+//		
+//		var lastScrollTop = 0, delta = 5;
+//		 $(window).scroll(function(){
+//			 var nowScrollTop = $(this).scrollTop();
+//			 if(Math.abs(lastScrollTop - nowScrollTop) >= delta){
+//				 if (nowScrollTop > lastScrollTop){
+//					 slider.goToNextSlide();
+//				 } else {
+//					 slider.goToPrevSlide();
+//				 }
+//				 lastScrollTop = nowScrollTop;
+//			 }
+//		 });
+		
+		
 		$(document).on('click','.detail',function(event) {
 			console.log($(event.target).parent().children('input[name="recipeNo"]').val());
 			$.ajax({
@@ -51,17 +68,28 @@ $(function(){
 						follow: [false, false], //x, y
 						onOpen:function(){
 							$("body").css("overflow", "hidden");
-							$('.rcp-720 > .rcp-detail-body').append( comDetailTemp(result) );
+							$('.rcp-detail-body').append( comDetailTemp(result) );
 							$('.rcp-304').append( comDetailInfoTemp(result) );
-							$('.rcp-304 .rcp-info-images').append( comDetailImageMain(result) );
-							$('.rcp-304 .rcp-info-images > .rcp-detail-step').append( comDetailImageStep(result) );
+							$('.rcp-info-images').append( comDetailImageMain(result) );
+							$('.rcp-detail-step').append( comDetailImageStep(result) );
+							slider = $('.rcp-detail-body').bxSlider({
+//								  mode:'vertical',
+								  pager: false,
+								  moveSlides: 1
+							});
 						},
 						onClose:function(){ 
 							$("body").css("overflow", "auto");
-							$(".rcp-304 > .detail-images").remove();
+							$(".detail-images").remove();
 							$(".rcp-body").remove();
 							$(".rcp-main").remove();
 							$(".rcp-detail-step").remove();
+							$(".bx-wrapper").remove();
+							$(".rcp-720").html('<div class="rcp-header">'
+									+'<h2 class="title">매콤 대패삼겹살 볶음</h2>'
+									+'<p class="hash">#돼지고기 #대패삼겹살 #야식 #간단고기요리 #매콤고기</p>'
+									+'<p class="date">2016.07.21</p><hr /></div>'
+									+'<div class="rcp-detail-body"></div>');
 						}
 						
 						});
@@ -74,8 +102,7 @@ $(function(){
 			});
 		});		
 	})
-})	
-	
+});		
 //	$(function(){
 //		$('.detail').click(function() {
 //			$.ajax({
@@ -96,4 +123,3 @@ $(function(){
 //			});
 //		});		
 //	})
-	*/

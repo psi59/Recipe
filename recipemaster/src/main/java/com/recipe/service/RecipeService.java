@@ -3,6 +3,7 @@ package com.recipe.service;
 import java.util.List;
 import java.util.Map;
 
+import com.recipe.domain.Material;
 import com.recipe.domain.Recipe;
 import com.recipe.domain.Search;
 
@@ -23,6 +24,6 @@ public interface RecipeService {
   int updateRecipe(Recipe recipe);
   int updateHits(Recipe recipe);
   int deleteRecipe(int no);
-  List<String> getMaterial(String materialName);
+  List<Material> getMaterial(String materialName);
   int registyImageAndProduce(Map map);
 }

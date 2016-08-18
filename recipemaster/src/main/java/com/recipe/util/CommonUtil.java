@@ -15,8 +15,6 @@ public class CommonUtil {
 	}
 	
 	public static String getImageFolderPath(String folderName, HttpServletRequest request){
-		
-		
 		return request.getServletContext().getRealPath("img/"+folderName+"/");
 	}
 	

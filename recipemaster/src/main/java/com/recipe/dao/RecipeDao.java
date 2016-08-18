@@ -3,6 +3,7 @@ package com.recipe.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.recipe.domain.Material;
 import com.recipe.domain.Recipe;
 
 public interface RecipeDao {
@@ -20,7 +21,7 @@ public interface RecipeDao {
   int update(Recipe recipe); // Update
   int updateHits(Recipe recipe);
   int delete(int no); // Delete
-  List<String> selectMaterialName(String materialName);
+  List<Material> selectMaterialName(String materialName);
   int likeUp(Recipe recipe);
   void likeDown(Recipe recipe);
 }

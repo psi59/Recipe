@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.recipe.dao.RecipeDao;
+import com.recipe.domain.Material;
 import com.recipe.domain.Recipe;
 import com.recipe.domain.Search;
 import com.recipe.service.RecipeService;
@@ -68,7 +69,7 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public List<String> getMaterial(String materialName) {
+	public List<Material> getMaterial(String materialName) {
 		return recipeDao.selectMaterialName(materialName);
 	}
 

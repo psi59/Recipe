@@ -129,8 +129,8 @@
    WHERE r.uno = u.uno and r.rcpno=#{value};
   </select>
 	
-	<select id="selectMaterialName" resultType="string" parameterType="string">
-    SELECT name 
+	<select id="selectMaterialName" resultMap="materialMap" parameterType="string">
+    SELECT * 
     FROM mts
     WHERE name LIKE '%${value}%'
     ORDER BY mtno

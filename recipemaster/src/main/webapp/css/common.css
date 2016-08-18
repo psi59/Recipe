@@ -1,4 +1,8 @@
 /********** main header css 시작 ***********/
+header{
+	margin-bottom: 2em;
+}
+
 .rcp-container {
 	width: 100%;
 	padding-top: 2em;
