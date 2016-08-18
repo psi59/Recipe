@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -153,7 +155,7 @@ public class UserController {
 
   @RequestMapping(path="login", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
   @ResponseBody //URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
-  public String login(User user) {
+  public String login(User user, HttpSession session) {
     //index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
     System.out.println(user.toString());
     HashMap<String,Object> result = new HashMap<>();
@@ -165,10 +167,14 @@ public class UserController {
       result.put("data", logUser);
       System.out.println("status:success"+result.values());
       System.out.println("logUser:"+logUser.toString());
+      session.setAttribute("userNo", logUser.getUserNo());
     } catch (Exception e) {
       result.put("status", "failure");
       System.out.println("status:failure"+result.values());
     }
+    
+    
+    
     System.out.println(new Gson().toJson(result));
     return new Gson().toJson(result);
     //result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
