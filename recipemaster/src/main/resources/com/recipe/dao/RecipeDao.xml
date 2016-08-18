@@ -41,10 +41,10 @@
     <if test="search.searchCondition == 'name'">
       WHERE r.name LIKE '%${search.searchKeyword}%'
     </if>
-    <if test="search.sortCondition == 'newest'and search.orderCondition == 'DESC'">
+    <if test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'">
       ORDER BY r.rcpno DESC
     </if>
-    <if test="search.sortCondition == 'newest'and search.orderCondition == 'ASC'">
+    <if test="search.sortCondition == 'newest' and search.orderCondition == 'ASC'">
       ORDER BY r.rcpno ASC
     </if>
     <if test="search.sortCondition == 'grade' and search.orderCondition == 'DESC'">

@@ -15,24 +15,28 @@ $(function() {
 	
 	// 최신순 정렬
 	$('#order-latest-btn').click(function(){
-		if($('#order-grade-btn').val() == 'DESC'){
-			$('#order-grade-btn').val('ASC')
-		} else if($('#order-grade-btn').val() == 'ASC'){
-			$('#order-grade-btn').val('DESC')
+		if($('#order-latest-btn').val() == 'DESC'){
+			$('#order-latest-btn h2').text('최신순▲');
+			$('#order-latest-btn').val('ASC')
+		} else if($('#order-latest-btn').val() == 'ASC'){
+			$('#order-latest-btn h2').text('최신순▼');
+			$('#order-latest-btn').val('DESC')
 		}
 		$('#sort-condition').val('newest');
-		search($('#sort-condition').val());
+		search($('#sort-condition').val(), $('#order-latest-btn').val());
 	});
 	
 	// 평점순 정렬
 	$('#order-grade-btn').click(function(){
 		if($('#order-grade-btn').val() == 'DESC'){
+			$('#order-grade-btn h2').text('평점순▲');
 			$('#order-grade-btn').val('ASC')
 		} else if($('#order-grade-btn').val() == 'ASC'){
+			$('#order-grade-btn h2').text('평점순▼');
 			$('#order-grade-btn').val('DESC')
 		}
 		$('#sort-condition').val('grade');
-		search($('#sort-condition').val());
+		search($('#sort-condition').val(), $('#order-grade-btn').val());
 	});
 	
 	// 스크롤을 끝까지 내렸을때 레시피 카드 생성
@@ -45,7 +49,7 @@ $(function() {
 });
 
 // 처음 검색했을때의 1페이지 결과 가져오기
-function search(sort){ 
+function search(sort,order){ 
 			
 	var source = $('#recipe-card-search-template').text();
 	var template = Handlebars.compile(source);
@@ -56,7 +60,7 @@ function search(sort){
 		data : {
 			searchKeyword : $('#searchKeyword').val(),			
 			sortCondition : sort,
-			orderCondition : $('#order-grade-btn').val()
+			orderCondition : order
 		},
 		dataType : 'json',
 		success : function(result) {
@@ -76,7 +80,7 @@ function search(sort){
 	})	
 }
 // 스크롤 끝까지 내렸을때 추가될 결과 한페이지씩 가져오기
-function searchScrollAppend(){ 
+function searchScrollAppend(order){ 
 		
 	var source = $('#recipe-card-search-template').text();
 	var template = Handlebars.compile(source);	
