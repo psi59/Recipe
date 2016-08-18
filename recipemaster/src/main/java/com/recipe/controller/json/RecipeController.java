@@ -264,7 +264,7 @@ public class RecipeController {
 	}
 	//커뮤니티 레시피 리스트 : 용
 	@RequestMapping(path="comList",produces="application/json;charset=UTF-8")
-  @ResponseBody
+  @ResponseBody 
   public String comList(HttpSession session){
     HashMap<String,Object> result = new HashMap<>();
     try{
