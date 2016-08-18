@@ -133,7 +133,7 @@
     limit #{len}
   </select>
   
-  <select id="selectMts" resultMap="material" parameterType="INTEGER">
+  <select id="selectMts" resultMap="materialMap" parameterType="INTEGER">
   
        select * from mts m, rcp_mt mt, rcps r 
        where m.mtno=mt.mtno and r.rcpno = mt.rcpno and r.rcpno =${value}

@@ -77,7 +77,7 @@ $("#userLogin").click(
 $(function(){
 	$('#profileView').removeClass().addClass("main-nav__dropdown top-main-nav__dropdown profile-dropdown");
 
-	if(eval(sessionStorage.getItem('data'))[0].userNo!=null){
+	if(eval(sessionStorage.getItem('data'))!=null){
 		$('#signUpBtn').hide();
 		$('#loginBtn').hide();
 		$('#signUpTopBtn').hide();
@@ -133,7 +133,7 @@ function test(){
 
 $(function() {
 	
-	if(sessionStorage.length>0){
+	if(sessionStorage.getItem('data') != null){
 	$.ajax({
 		url : '/user/getUser.json',
 		method : 'post',

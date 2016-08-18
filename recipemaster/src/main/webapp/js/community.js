@@ -1,19 +1,23 @@
-/*업데이트	*/
-		$(document).on('click','.vstUpdateBtn',function(event) {
-				event.preventDefault();
-							$('#vst-contents').html(
-											'<div class="rcp-Vst-contents"><textarea rows="3" cols="34" placeholder="편집해주세요" style="resize:none;"></textarea></div>');
-							$('#editBtn1').html('<img class="vstUpdateBtn" id="vstConfirmBtn"'+
-									'src="/img/vstConfirmBtn.png">')
-						});
-		$(document).on('click','#vstConfirmBtn',function(event) {
-			event.preventDefault();
-        			$('#vst-contents').html(
-                      '<div class="rcp-Vst-contents"><p id="vContent">{{visitorContent}}</p></div>');
-              $('#editBtn1').html('<img class="vstUpdateBtn" id="vstUpdateBtn"'+
-                  'src="/img/vstUpdateBtn.png">')
-            });
-		
+  $(function(){
+    	$('.rcp-topbtn').on('click',function(){
+    		$.ajax({
+    			url:'recipe/addSubscribe.json',
+    			datatype:'json',
+    			data:{
+    				fromUserNo:1
+    			},
+    			method:'post',
+    			succeess:(function(){
+    				
+    			}),
+    			error:(function(){
+    				
+    			})
+    		})
+    	})
+    })
+	
+
 		$(document).on('mouseenter','.rcp-Vst-slotRp',function(){
 			$('.addDelete').html('<img id="addDeleteBtn"'+
 			        'src="/img/vstDeleteBtnWt.png">');
@@ -27,7 +31,7 @@
 			if(confirm("댓글을 삭제하시겠습니까?")){
 				$(this).parent().parent().remove();
 			}else{
-				return;
+				return;  
 			}
 		})
 		
@@ -80,3 +84,6 @@
       //현재 ((윈도우넓이/2) +480) 을 left로 지정
       $("#quick").css("left", ($(window).width() / 2) + 580);
     }
+    
+    
+  
