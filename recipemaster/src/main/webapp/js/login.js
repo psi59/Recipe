@@ -1,53 +1,59 @@
-var dataStatus=null;
 
-$("#userLogin").click(	
-		function(event) {
-			event.preventDefault();
-			$.ajax({
-				url : '/user/login.json', 
-				method : 'post',
-				dataType : 'json',
-				data : {
-					email : $('#userEmail').val(),
-					password : $('#userPassword').val()
-				}, 
-				success : function(result) {
-					if (result.status == 'failure') {
-						dataStatus='failure';
-						
-						$( "#userPassword" ).effect('bounce');
-						$('#loginInputBox > .warning').remove();
-						$('#loginInputBox').append("<div id='warning' class='warning'>아이디 또는 비밀번호를 다시 확인하세요.</div>");
-						$('#warning').css('color','red').css('font-size', '13px');
+$("#userLogin").click(function(){
+	login(event);
+});
 
-						return;
-					} 
-					
-					$('#profileImg').html("<img id='profileImg' class='rcp-img img-circle' src='"+result.data.image+"'/>");
-					$('#profileEmail').html('<a id="profileEmail" href="#" class="dropdown__header rcp-infobox-text">'+result.data.email+'</a>');
-					$('#profileName').html('<h6 id="profileName" class="rcp-nickname">'+result.data.userName+'</h6>');
-					$('#profileGrade').html('<span id="profileGrade" class="dropdown__title rcp-infobox-text">'+result.data.recipeUrl+'</span>');
+$('#userPassword').keydown(function(){
+	if(event.keyCode == 13) login(event);
+});
 
-					if(result.status == 'success'){
-						dataStatus='success';
-						
-						alert(result.data.userName+ '님 환영합니다.');
+function login(event) {
+	event.preventDefault();
+	$.ajax({
+		url : '/user/login.json', 
+		method : 'post',
+		dataType : 'json',
+		data : {
+			email : $('#userEmail').val(),
+			password : $('#userPassword').val()
+		}, 
+		success : function(result) {
+			if (result.status == 'failure') {
+				dataStatus='failure';
+				
+				$( "#userPassword" ).effect('bounce');
+				$('#loginInputBox > .warning').remove();
+				$('#loginInputBox').append("<div id='warning' class='warning'>아이디 또는 비밀번호를 다시 확인하세요.</div>");
+				$('#warning').css('color','red').css('font-size', '13px');
 
-						var data = [];
-						data.push({
-							userNo : result.data.userNo,
-							userName : result.data.userName,
-							email : result.data.email,
-							image : result.data.image,
-							intro : result.data.intro,
-							role : result.data.role,
-							joinDate : result.data.joinDate,
-							recipeUrl : result.data.recipeUrl,
-							recipeCount : result.data.recipeCount,
-							subsCount : result.data.subsCount
-						});
+				return;
+			} 
+			
+			$('#profileImg').html("<img id='profileImg' class='rcp-img img-circle' src='"+result.data.image+"'/>");
+			$('#profileEmail').html('<a id="profileEmail" href="#" class="dropdown__header rcp-infobox-text">'+result.data.email+'</a>');
+			$('#profileName').html('<h6 id="profileName" class="rcp-nickname">'+result.data.userName+'</h6>');
+			$('#profileGrade').html('<span id="profileGrade" class="dropdown__title rcp-infobox-text">'+result.data.recipeUrl+'</span>');
 
-						var jsonData = JSON.stringify(data);
+			if(result.status == 'success'){
+				
+				
+				
+				var data = [];
+				data.push({
+					userNo : result.data.userNo,
+					userName : result.data.userName,
+					email : result.data.email,
+					image : result.data.image,
+					intro : result.data.intro,
+					role : result.data.role,
+					joinDate : result.data.joinDate,
+					recipeUrl : result.data.recipeUrl,
+					recipeCount : result.data.recipeCount,
+					subsCount : result.data.subsCount
+				});
+
+				var jsonData = JSON.stringify(data);
+
 
 						/*eval 사용 방법, eval(jsonData)[0].email*/
 						/*alert('1111'+eval(jsonData)[0].role);*/
@@ -71,7 +77,8 @@ $("#userLogin").click(
 					alert('서버 요청 오류');
 				}
 			}); /* end of ajax */
-		}); /* end of jquery */
+		}; /* end of jquery */
+
 
 /*로그아웃 버튼*/
 $(function(){
@@ -83,10 +90,6 @@ $(function(){
 		$('#signUpTopBtn').hide();
 		$('#loginIcon').html('<img id="loginIconAction" class="rcp-barimg dropdown-trigger img-circle"src="img/Chef3.jpg" />');
 
-
-		/*$(window).bind('scroll', function(e) {
-				$('#profileView').removeClass().addClass("main-nav__dropdown profile-dropdown");
-			});*/
 
 		$("#logoutBtn").click(
 				function(){
@@ -115,20 +118,6 @@ $('#TopBtn').on('click', function(){
 	$('#login-pop-up-banner').bPopup();
 });
 
-
-if(dataStatus=='success'){
-	
-	$(function(){
-		alert('하이');
-	});
-	
-}
-	
-
-function test(){
-	
-	
-}
 
 
 $(function() {
