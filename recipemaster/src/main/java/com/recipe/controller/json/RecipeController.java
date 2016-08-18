@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -261,5 +262,19 @@ public class RecipeController {
 
 		return new Gson().toJson(result);
 	}
-
+	//커뮤니티 레시피 리스트 : 용
+	@RequestMapping(path="comList",produces="application/json;charset=UTF-8")
+  @ResponseBody 
+  public String comList(HttpSession session){
+    HashMap<String,Object> result = new HashMap<>();
+    try{
+      List<Recipe> myRecipeList = recipeService.selectSbuscribe((session.getAttribute("userNo")).toString());
+      result.put("status","success");
+      result.put("data", myRecipeList);
+    }catch (Exception e){
+      result.put("status", "false");
+    }
+    return new Gson().toJson(result);
+  }
+	
 }

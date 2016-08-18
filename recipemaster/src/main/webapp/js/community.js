@@ -1,4 +1,172 @@
-		
+
+
+/*탑바 js(common.js 에 공통적으로 들어갈부분 일단 넣음*/
+   $(function() {
+      //getWeather();
+      //getRealTimeRank();
+
+      /* 준모3 */
+      if (eval(sessionStorage.getItem('data'))[0].userNo != null) {
+
+        $('#topbarUserImg')
+            .html(
+                "<img class='rcp-barimg dropdown-trigger img-circle' src='img/Chef3.jpg' />");
+
+      }
+
+      $('.profile-dropdown:has(.active)').bind('click', function() {
+
+      });
+
+      $(window).bind('scroll', function(e) {
+        $('.main-nav__dropdown').removeClass('active');
+      });
+
+      $('.dropdown-trigger')
+          .on(
+              'click',
+              function(event) {
+                event.preventDefault();
+                dropdownClick('.profile-dropdown',
+                    '.mobile-menu-dropdown');
+                /* 용이 추가() */
+                if (eval(sessionStorage.getItem('data'))[0].userNo != null) {
+                  $('#profileEmail')
+                      .text(
+                          eval(sessionStorage
+                              .getItem('data'))[0].email);
+                  $('#profileName')
+                      .text(
+                          eval(sessionStorage
+                              .getItem('data'))[0].userName);
+                  $('#profileGrade')
+                      .text(
+                          eval(sessionStorage
+                              .getItem('data'))[0].recipeUrl);
+                  /* 용이 추가() */
+                  $('#introduce')
+                      .text(
+                          eval(sessionStorage
+                              .getItem('data'))[0].intro);
+                }
+              });
+      $('.dropdown-trigger').on('scroll', function() {
+        dropdownClick('.profile-dropdown', '.mobile-menu-dropdown');
+      });
+
+      $('.dropdown-trigger--mobile').on('click', function() {
+        dropdownClick('.mobile-menu-dropdown', '.profile-dropdown');
+      });
+  });
+	/*탑바 js 끝*/
+
+	var sourceVisitor = $('#visitor-template').html();
+    var templateVisitor = Handlebars.compile(sourceVisitor);
+    
+    loadVisitor();
+    
+    function loadVisitor(){
+      $.ajax({
+        url :'/visitor/list.json',
+        dataType : 'json',
+        method : 'get',
+        success : function(result) {
+          if (result.status != 'success') {
+            alert('실행 중 오류 발생');
+            return;
+          }
+
+          $('#Vst').append(templateVisitor(result));
+        },
+        error : function() {
+          alert('서버 요청 오류!...')
+        }
+      }); 
+    }  
+      
+      /* Add */
+      $('#rcp-rpBtn').click(function() {
+    	  /* swal({   title: "방명록 작성 완료!",   
+    		  html: true }); */
+    	  
+      $.ajax({
+        url : 'visitor/add.json',
+        method : 'post',
+        data : {
+          visitorContent : $('#rcp-rpcontent').val()
+        },
+        dataType : 'json',
+        success : function(result) {
+          if (result.status != 'success') {
+            alert('등록 오류입니다.');
+            return;
+          }
+                    
+          $('#Vst>').remove(); 
+          loadVisitor(); // 테이블 데이터를 갱신한다.
+        },
+        error : function() {
+          alert('서버 요청 오류 !')
+        }
+      })
+      $('#rcp-rpcontent').val("");
+    });
+
+      $(document).on('click','.vstDeleteBtn',function(event) {
+    	   var vNo = $(this).attr('data-index');
+    	    swal({   title: "방명록 삭제?",   
+    	        text: "진짜 지울꺼야??",   
+    	        type: "warning",   
+    	        showCancelButton: true,
+    	        confirmButtonColor: "#DD6B55",   
+    	        confirmButtonText: "delete",   
+    	        closeOnConfirm: false }, function(){
+    	    $.getJSON('visitor/delete.json?no=' + vNo,
+    	                 function(result) {
+    	                if (result.status != 'success') {
+    	                    alert('게시물 삭제 오류');
+    	                    return;
+    	                  }
+    	                $(this).parent().parent().parent().parent().remove();
+    	                $('#Vst>').remove(); 
+    	                  loadVisitor();
+    	        });
+    	     swal.close();
+    	    });
+    	   });
+      
+      
+    /* 업데이트 */
+    
+      $(document).on('click','.vstUpdateBtn',function(event) {
+      event.preventDefault();
+      $('.vst-contents[data-index='+$(this).attr('data-index')+']').html(
+                    '<div class="rcp-Vst-contents"><textarea id="updatevContent" rows="3" cols="34" placeholder="편집해주세요" style="resize:none;"></textarea></div>');
+      $('.editBtn1[data-index='+$(this).attr('data-index')+']').html('<img class="vstConfirmBtn" id="vstConfirmBtn" data-index="'+$(this).attr('data-index')+' "'+
+                'src="/img/vstConfirmBtn.png">')
+                
+          });
+   
+	    $(document).on('click','.vstConfirmBtn',function(event) {
+	    	event.preventDefault();
+	    	/* swal({   title: "방명록 업데이트 완료!",   
+	            html: true }); */
+	      $.post('visitor/update.json', 
+	    	{
+	    	  visitorNo : $(this).attr('data-index'),
+	    	  visitorContent : $('#updatevContent').val()
+	      }, function(result) {
+	        if (result.status != 'success') {
+	          alert('변경 오류입니다.');
+	          return;
+	        }
+	    	  $('#Vst>').remove(); 
+	          loadVisitor(); // 테이블 데이터를 갱신한다.
+	      }, 'json');
+	      event.preventDefault();
+	    });
+	      
+
 		$(document).on('mouseenter','.rcp-Vst-slotRp',function(){
 			$('.addDelete').html('<img id="addDeleteBtn"'+
 			        'src="/img/vstDeleteBtnWt.png">');
@@ -8,7 +176,8 @@
 			$('.addDelete').text('');
 		    });
 		
-		$(document).on('click','#addDeleteBtn',function(){
+		$(document).on('click','#addDeleteBtn',function(evenet){
+			event.preventDefault();
 			if(confirm("댓글을 삭제하시겠습니까?")){
 				$(this).parent().parent().remove();
 			}else{
