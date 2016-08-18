@@ -4,7 +4,7 @@
     			url:'recipe/addSubscribe.json',
     			datatype:'json',
     			data:{
-    				fromUserNo:1
+    				fromUserNo:1 
     			},
     			method:'post',
     			succeess:(function(){
