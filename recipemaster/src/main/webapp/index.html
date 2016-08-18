@@ -28,6 +28,10 @@
 <link rel="stylesheet" href="css/rankTabs.css">
 <link rel="stylesheet" href="css/popup.css">
 <link rel="stylesheet" href="css/signup.css">
+<!-- alert css -->
+<link rel="stylesheet"
+  href="node_modules/sweetalert/dist/sweetalert.css">
+
 <!-- --- 아이콘 CDN ----- -->
 <!-- <script src="js/template/d9e67edb08.js"></script> -->
 
@@ -354,12 +358,7 @@
                </div>
                 <img src="img/food01.jpg" class="rcp-images">
                <div class="rcp-explanation">
-                   <p>EBS 최고의 요리비결에서 대패삼겹살무침 만들기 레시피를 배우고!</p> 
-                   <p>만들어먹고싶은 마음에 재료를 다 준비해뒀었는데...</p>
-                   <p>임신당뇨검사로 조금 미뤄져서 오늘 만들었네요~</p>
-                   <p>대패삼겹살의 새로운 변신!!</p>
-                   <p>대패삼겹살을 구워먹기만 했었는데,,,</p>
-                   <p>고기를 데쳐서 이렇게 무쳐먹으니 또 색다른 요리가 되더라구요~</p>
+                  <p>{{recipeDetail}}</p>
                 </div>
                <div class="rcp-nav-down">
                    <a href="#" class="glyphicon glyphicon-chevron-down rcp-detail-move"></a>
@@ -372,11 +371,15 @@
 		type="text/x-handlebars-template">
 
 <div class="detail-images">
+<input type="hidden" class="rcp-hidden-userNo" value="{{data.userNo}}">
+<input type="hidden" class="rcp-hidden-recipeNo" value="{{data.recipeNo}}">
 <img src="img/profile.jpg" class="rcp-right-profile img-circle">
 <p class="rcp-nickName">{{data.user.userName}}</p>
 <h4 class="rcp-detail-title">{{data.recipeName}}</h4>
 <div align="center">
-  <a href="#"><img src="img/scrap.png"></a>
+<div class="rcp-scrap-button-text" >
+<a href="#" class="rcp-detail-scrap">
+<i class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></i>  스크랩하기</a></div>
 </div>
 <div class="rcp-info-items">
    <div class="rcp-icons">
@@ -393,9 +396,9 @@
   </div>
   <div class="rcp-icons-info" align="right">
     <p>{{data.hits}}</p>
-    <p>182</p>
-    <p>28</p>
-    <p>58</p>  
+    <p>{{data.countLike}}</p>
+    <p>{{data.countComment}}</p>
+    <p>{{data.countScrap}}</p>  
   </div>
 </div>
 <div class="rcp-info-filter">
@@ -487,7 +490,7 @@
                 <div class="rcp-relative rcp-height30">
                   <h4 class="pull-right rcp-recipeGrade">{{gradePoint}}</h4>
                   <h4 class="pull-left rcp-left_position">
-                    <span><a class="detail" style="z-index:9999">{{recipeName}} </a> 
+                    <span><a href="#" class="detail" style="z-index:9999">{{recipeName}} </a> 
                       <input type="hidden" name="recipeNo" value="{{recipeNo}}">
                    
                   </h4>
@@ -517,9 +520,7 @@
                 <div class="carousel-inner" role="listbox">
                   <div class="item active">
                     <div class="rcp-comment col-md-offset-1 col-md-10">
-                      <p>어린시절의 추억을 먹다 !!</p>
-                      <p>즉석에서 뚝딱 먹을 수 있는</p>
-                      <p>간편한 추억의 국물 떡볶이 !!</p>
+                      <p>{{intro}}</p>
                     </div>
                     <div class="col-md-1"></div>
                   </div>
@@ -633,6 +634,11 @@
 	<script
 		src="node_modules/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
 
+  <!-- alert js -->
+  <script
+    src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+
+ 
 	<!--  사용자 js -->
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/common.js"></script>

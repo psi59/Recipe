@@ -3,6 +3,8 @@ package com.recipe.controller.json;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,9 +39,10 @@ public class VisitorController {
 
   @RequestMapping(path="add", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
   @ResponseBody
-  public String add(Visitor visitor){    
+  public String add(Visitor visitor,HttpSession session){    
     HashMap<String,Object> result = new HashMap<>();
     try{
+      visitor.setVisitorUserNo((Integer)session.getAttribute("userNo"));
       visitorService.addVisitor(visitor);
       result.put("status", "success");      
     }catch(Exception e){
@@ -79,7 +82,6 @@ public class VisitorController {
   @RequestMapping(path="delete", produces="application/json;charset=UTF-8")
   @ResponseBody
   public String delete(int no){    
-    System.out.println("vno="+no);
     HashMap<String,Object> result = new HashMap<>();
     try{
       visitorService.deleteVisitor(no);

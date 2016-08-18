@@ -86,11 +86,11 @@ public class UserController {
 
   @RequestMapping(path="detail", produces="application/json;charset=UTF-8")
   @ResponseBody
-  public String detail(int no){    
+  public String detail(HttpSession session){    
     HashMap<String,Object> result = new HashMap<>();    
     try{      
       result.put("status", "success");      
-      result.put("data", userService.getUser(no));
+      result.put("data", userService.getUser((Integer)session.getAttribute("userNo")));
     }catch(Exception e){
       result.put("status", "failure");
     }
@@ -159,8 +159,11 @@ public class UserController {
     //index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
     System.out.println(user.toString());
     HashMap<String,Object> result = new HashMap<>();
+    
+    User logUser = userService.loginUser(user);
+    
     try {
-      User logUser = userService.loginUser(user);
+
 
       result.put("status", "success");
 
@@ -175,6 +178,9 @@ public class UserController {
       result.put("status", "failure");
       System.out.println("status:failure"+result.values());
     }
+    
+    
+    
     System.out.println(new Gson().toJson(result));
     return new Gson().toJson(result);
     //result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
@@ -188,7 +194,6 @@ public class UserController {
     HashMap<String,Object> result = new HashMap<>();
     try {
       
-      System.out.println("들어오냐??");
       
       User logUser = userService.getUser(no);
 

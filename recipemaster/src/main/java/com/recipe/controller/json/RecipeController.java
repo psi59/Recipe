@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpSession;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -148,9 +148,16 @@ public class RecipeController {
 	
 	@RequestMapping(path="recipeDetail",produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public String recipeDetail(@RequestParam int recipeNo){
+	public String recipeDetail(int recipeNo,HttpSession session){
 		HashMap<String,Object> result = new HashMap<>();
-		Recipe recipe = recipeService.getRecipe(recipeNo);
+		
+		Recipe recipe = new Recipe();
+		if(session.getAttribute("userNo") != null){
+		recipe = recipeService.getRecipe(recipeNo,(int)session.getAttribute("userNo"));
+		}else{
+		  recipe = recipeService.getRecipe(recipeNo,0);
+		}
+		//System.out.println("controller  : "+recipeNo+(int)session.getAttribute("userNo") );
 		recipe.setHits(recipe.getHits()+1);
 		recipeService.updateHits(recipe);
 	try{
@@ -233,6 +240,66 @@ public class RecipeController {
     return new Gson().toJson(result);
   }
   
+	@RequestMapping(path="scrap",produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String scrap(int recipeNo, HttpSession session){
+    HashMap<String,Object> result = new HashMap<>();
+    User userNo = new User();    
+  
+    try{
+      
+      if(session.getAttribute("userNo") == null){
+        result.put("status", "notLogin");
+        System.out.println("notLogin");
+      }else{
+      userNo.setUserNo((int)session.getAttribute("userNo"));      
+      recipeService.addScrap(userNo.getUserNo(), recipeNo);
+      result.put("status","success");
+      System.out.println("success");
+      }      
+    }catch(Exception e){
+      result.put("status", "false");
+    }
+    return new Gson().toJson(result);
+  }
+	
+	@RequestMapping(path="deleteScrap",produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String deleteScrap(int recipeNo, HttpSession session){
+    HashMap<String,Object> result = new HashMap<>();
+    
+    User userNo = new User();
+    userNo.setUserNo((int)session.getAttribute("userNo"));
+    System.out.println(userNo.getUserNo());
+    
+    recipeService.deleteScrap(userNo.getUserNo(), recipeNo);
+    try{
+      result.put("status","success");
+    }catch(Exception e){
+      result.put("status", "false");
+    }
+    return new Gson().toJson(result);
+  }
+	
+	@RequestMapping(path="addSubscribe",produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String addSubscribe(HttpSession session,int fromUserNo){
+    HashMap<String,Object> result = new HashMap<>();
+    
+    //toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
+    User user = new User();
+    int toUserNo=(int)session.getAttribute("userNo");
+    System.out.println(user.getUserNo());
+    
+    recipeService.deleteScrap(toUserNo, fromUserNo );
+    try{
+      result.put("status","success");
+    }catch(Exception e){
+      result.put("status", "false");
+    }
+    return new Gson().toJson(result);
+  }
+	
 	
 //	---------------------고재현 -------------------------
 	@RequestMapping(path="materialSearch",produces="application/json;charset=UTF-8")
@@ -267,5 +334,19 @@ public class RecipeController {
 
 		return new Gson().toJson(result);
 	}
-
+	//커뮤니티 레시피 리스트 : 용
+	@RequestMapping(path="comList",produces="application/json;charset=UTF-8")
+  @ResponseBody 
+  public String comList(HttpSession session){
+    HashMap<String,Object> result = new HashMap<>();
+    try{
+      List<Recipe> myRecipeList = recipeService.selectSbuscribe((session.getAttribute("userNo")).toString());
+      result.put("status","success");
+      result.put("data", myRecipeList);
+    }catch (Exception e){
+      result.put("status", "false");
+    }
+    return new Gson().toJson(result);
+  }
+	
 }
