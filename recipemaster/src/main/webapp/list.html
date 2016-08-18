@@ -131,12 +131,12 @@
 		</div>
 
 		<div id="order-btn">
-			<button id="order-latest-btn">
+			<button id="order-latest-btn" value="DESC">
 				<h2>최신순</h2>
 				<div class="btn-color"></div>
 			</button>
 
-			<button id="order-grade-btn" value="grade">
+			<button id="order-grade-btn" value="DESC">
 				<h2>평점순</h2>
 				<div class="btn-color"></div>
 			</button>
@@ -277,6 +277,7 @@
 	</section>
 
   <input id="search-pageNo" type="hidden" value="1">
+  <input id="sort-condition" type="hidden" value="newest">
   
 	<script id="recipe-card-search-template" type="text/x-handlebars-template"> 
   {{#each data}} 

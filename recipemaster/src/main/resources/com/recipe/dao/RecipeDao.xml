@@ -36,11 +36,17 @@
     <if test="search.searchCondition == 'name'">
       WHERE r.name LIKE '%${search.searchKeyword}%'
     </if>
-    <if test="search.sortCondition == 'newest'">
-      ORDER BY r.rcpno desc
+    <if test="search.sortCondition == 'newest'and search.orderCondition == 'DESC'">
+      ORDER BY r.rcpno DESC
     </if>
-    <if test="search.sortCondition == 'grade'">
-      ORDER BY r.gpa desc
+    <if test="search.sortCondition == 'newest'and search.orderCondition == 'ASC'">
+      ORDER BY r.rcpno ASC
+    </if>
+    <if test="search.sortCondition == 'grade' and search.orderCondition == 'DESC'">
+      ORDER BY r.gpa DESC
+    </if>
+    <if test="search.sortCondition == 'grade' and search.orderCondition == 'ASC'">
+      ORDER BY r.gpa ASC
     </if>
     limit #{startIndex}, #{len}
   </select>

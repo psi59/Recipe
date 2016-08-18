@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,22 +33,26 @@ public class RecipeController {
   @ResponseBody
   public String listSearch(@RequestParam(defaultValue="1") int pageNo,
                            @RequestParam(defaultValue="8") int pageSize,
-                           Search search, String sort, int userNo){
+                           Search search, int userNo, HttpSession session){
     HashMap<String,Object> result = new HashMap<>();     
     int recipeCount = 0;
     // TEST용으로 searchCondition, sortCondition 때려박음
-    search.setSearchCondition("name"); 
-    search.setSortCondition(sort);   
+    search.setSearchCondition("name");
+    
+    System.out.println("session : "+session.getAttribute("userNo"));
     
     System.out.println("pageNo : "+pageNo);
     
     List<Recipe> list = recipeService.getRecipeSearchList(pageNo, pageSize, search, userNo);
     
+    // 처음에만 레시피카드들을 카운트 한다.
     if(pageNo == 1){
       recipeCount = recipeService.getRecipeCount(pageNo, pageSize, search, userNo);
     }
+            
     try{
       result.put("status","success");
+      result.put("data", "lastPage");        
       result.put("data", list);
       result.put("recipeCount", recipeCount);      
       result.put("pageNo", pageNo);
