@@ -10,6 +10,7 @@ public class Recipe {
 	private int userNo;
 	private String recipeName;
 	private String intro;
+	private String recipeDetail;
 	private JsonArray representImages;
 	private JsonArray materials;
 	private JsonArray recipeProcedure;
@@ -25,8 +26,34 @@ public class Recipe {
 	private int countLike;
 	private int subscribeNum;
   private String subscribe;
+  private int countComment;
+  private int countScrap;
+  private int scrapUser;
   
-  
+  public int getScrapUser() {
+    return scrapUser;
+  }
+  public void setScrapUser(int scrapUser) {
+    this.scrapUser = scrapUser;
+  }
+  public String getRecipeDetail() {
+    return recipeDetail;
+  }
+  public void setRecipeDetail(String recipeDetail) {
+    this.recipeDetail = recipeDetail;
+  }
+  public int getCountComment() {
+    return countComment;
+  }
+  public void setCountComment(int countComment) {
+    this.countComment = countComment;
+  }
+  public int getCountScrap() {
+    return countScrap;
+  }
+  public void setCountScrap(int countScrap) {
+    this.countScrap = countScrap;
+  }
   public String getSubscribe() {
     return subscribe;
   }
@@ -145,10 +172,11 @@ public class Recipe {
   @Override
   public String toString() {
     return "Recipe [recipeNo=" + recipeNo + ", userNo=" + userNo + ", recipeName=" + recipeName + ", intro=" + intro
-        + ", representImages=" + representImages + ", materials=" + materials + ", recipeProcedure=" + recipeProcedure
-        + ", cookTime=" + cookTime + ", portion=" + portion + ", recipeDate=" + recipeDate + ", hits=" + hits
-        + ", regiStatus=" + regiStatus + ", gradePoint=" + gradePoint + ", user=" + user + ", likeDate=" + likeDate
-        + ", likeUser=" + likeUser + ", countLike=" + countLike + ", subscribeNum=" + subscribeNum + ", subscribe="
-        + subscribe + "]";
+        + ", recipeDetail=" + recipeDetail + ", representImages=" + representImages + ", materials=" + materials
+        + ", recipeProcedure=" + recipeProcedure + ", cookTime=" + cookTime + ", portion=" + portion + ", recipeDate="
+        + recipeDate + ", hits=" + hits + ", regiStatus=" + regiStatus + ", gradePoint=" + gradePoint + ", user=" + user
+        + ", likeDate=" + likeDate + ", likeUser=" + likeUser + ", countLike=" + countLike + ", subscribeNum="
+        + subscribeNum + ", subscribe=" + subscribe + ", countComment=" + countComment + ", countScrap=" + countScrap
+        + ", scrapUser=" + scrapUser + "]";
   }	
 }

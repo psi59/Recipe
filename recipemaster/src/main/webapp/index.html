@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Recipe Master</title> 
+<title>Recipe Master</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 
@@ -22,11 +22,17 @@
 <link rel="stylesheet" href="css/userinfobox.css">
 <link rel="stylesheet" href="css/signup.css">
 <link href="css/mainlist.css" rel="stylesheet">
+<link rel="stylesheet" href="css/mainlist.css">
 <link rel="stylesheet" href="css/detail.css">
+<link rel="stylesheet" href="css/updateImg.css">
+<!-- 성현 -->
 <link rel="stylesheet" href="css/chefCard.css">
 <link rel="stylesheet" href="css/rankTabs.css">
 <link rel="stylesheet" href="css/popup.css">
-<link rel="stylesheet" href="css/updateImg.css">
+<link rel="stylesheet" href="css/signup.css">
+<!-- alert css -->
+<link rel="stylesheet"
+  href="node_modules/sweetalert/dist/sweetalert.css">
 
 <!-- --- 아이콘 CDN ----- -->
 <!-- <script src="js/template/d9e67edb08.js"></script> -->
@@ -42,8 +48,8 @@
 							href="index.html"><img src="img/logo.svg" alt="Logo"></a>
 						<div
 							class="input-group col-md-5 col-sm-5 col-xs-11 col-xs-offset-1 rcp-navbar-searchbar-size rt-navbar-top-searchbar">
-							<span class="input-group-addon" id="searchBarKeyword">검색</span> <input
-								type="text" class="form-control rcp-navbar-searchbar-size"
+							<span class="input-group-addon" id="searchBarKeyword">검색</span> 
+							 <input id="searchKeyword" type="text" class="searchKeyword form-control rcp-navbar-searchbar-size"
 								placeholder="레시피명, 쉐프명, 재료명" aria-describedby="basic-addon1">
 						</div>
 					</div>
@@ -77,11 +83,7 @@
 											class="btn btn-default rcp-btn-nav">로그아웃</button>
 									</div>
 								</div>
-								<!-- <nav class="dropdown__nav rcp-menuname rcp-back">
-                  <a href="../mypage/mypage.html"><span class="rcp-back">내
-                      레시피</span></a><a href="../writerecipe.html"><span class="rcp-back">레시피
-                      쓰기</span></a><a href="#"><span class="rcp-back">구독 정보</span></a>
-                </nav> -->
+								
 								<button class="infoBtn"><a href="/community.html" >MyPage</a></button>
 								<button class="infoBtn"><a href="/writerecipe.html" >Recipe 작성</a></button>
 							</div>
@@ -130,7 +132,7 @@
 							<div
 								class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4 wow fadeInUp">
 								<div class="input-group wow fadeIn" data-wow-delay="0.5s">
-									<input type="text" class="form-control"
+									<input type="text" class="form-control searchKeyword"
 										placeholder="레시피명, 쉐프명, 재료명" aria-describedby="basic-addon2">
 									<span class="input-group-addon" id="basic-addon2">검색</span>
 								</div>
@@ -358,12 +360,7 @@
                </div>
                 <img src="img/food01.jpg" class="rcp-images">
                <div class="rcp-explanation">
-                   <p>EBS 최고의 요리비결에서 대패삼겹살무침 만들기 레시피를 배우고!</p> 
-                   <p>만들어먹고싶은 마음에 재료를 다 준비해뒀었는데...</p>
-                   <p>임신당뇨검사로 조금 미뤄져서 오늘 만들었네요~</p>
-                   <p>대패삼겹살의 새로운 변신!!</p>
-                   <p>대패삼겹살을 구워먹기만 했었는데,,,</p>
-                   <p>고기를 데쳐서 이렇게 무쳐먹으니 또 색다른 요리가 되더라구요~</p>
+                  <p>{{recipeDetail}}</p>
                 </div>
                <div class="rcp-nav-down">
                    <a href="#" class="glyphicon glyphicon-chevron-down rcp-detail-move"></a>
@@ -377,11 +374,15 @@
 		type="text/x-handlebars-template">
 
 <div class="detail-images">
+<input type="hidden" class="rcp-hidden-userNo" value="{{data.userNo}}">
+<input type="hidden" class="rcp-hidden-recipeNo" value="{{data.recipeNo}}">
 <img src="img/profile.jpg" class="rcp-right-profile img-circle">
 <p class="rcp-nickName">{{data.user.userName}}</p>
 <h4 class="rcp-detail-title">{{data.recipeName}}</h4>
 <div align="center">
-  <a href="#"><img src="img/scrap.png"></a>
+<div class="rcp-scrap-button-text" >
+<a href="#" class="rcp-detail-scrap">
+<i class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></i>  스크랩하기</a></div>
 </div>
 <div class="rcp-info-items">
    <div class="rcp-icons">
@@ -398,9 +399,9 @@
   </div>
   <div class="rcp-icons-info" align="right">
     <p>{{data.hits}}</p>
-    <p>182</p>
-    <p>28</p>
-    <p>58</p>  
+    <p>{{data.countLike}}</p>
+    <p>{{data.countComment}}</p>
+    <p>{{data.countScrap}}</p>  
   </div>
 </div>
 <div class="rcp-info-filter">
@@ -492,7 +493,7 @@
                 <div class="rcp-relative rcp-height30">
                   <h4 class="pull-right rcp-recipeGrade">{{gradePoint}}</h4>
                   <h4 class="pull-left rcp-left_position">
-                    <span><a class="detail" style="z-index:9999">{{recipeName}} </a> 
+                    <span><a href="#" class="detail" style="z-index:9999">{{recipeName}} </a> 
                       <input type="hidden" name="recipeNo" value="{{recipeNo}}">
                    
                   </h4>
@@ -522,9 +523,7 @@
                 <div class="carousel-inner" role="listbox">
                   <div class="item active">
                     <div class="rcp-comment col-md-offset-1 col-md-10">
-                      <p>어린시절의 추억을 먹다 !!</p>
-                      <p>즉석에서 뚝딱 먹을 수 있는</p>
-                      <p>간편한 추억의 국물 떡볶이 !!</p>
+                      <p>{{intro}}</p>
                     </div>
                     <div class="col-md-1"></div>
                   </div>
@@ -643,19 +642,26 @@
     src="node_modules/bxslider/dist/jquery.bxslider.min.js"></script>
 
 
+  <!-- alert js -->
+  <script
+    src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+
+ 
 	<!--  사용자 js -->
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/common.js"></script>
-	<script src="js/detail.js"></script>
-	<script src="js/popup.js"></script>
-	<script src="js/chefCard.js"></script>
-	<script src="js/signup.js"></script>
+	<script src="js/detail.js"></script>	
 	<script src="js/mainListAjax.js"></script>
 	<script src="js/recipeDetail.js"></script>
 	<script src="js/login.js"></script>
 	<!-- 용이 userUpdate -->
 	<script src="js/updateUser.js"></script>
-	<!-- 용이 userUpdate 끝 -->
+	<!-- 성현 -->  
+  <script src="js/popup.js"></script>
+  <script src="js/chefCard.js"></script>
+  <script src="js/signup.js"></script>  
+  <script src="js/mainListMove.js"></script>
+	
 	<script>
 		$(function() {
 			getWeather();

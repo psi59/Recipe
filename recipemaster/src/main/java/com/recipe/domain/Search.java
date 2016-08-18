@@ -4,6 +4,7 @@ public class Search {
   private String searchKeyword; //검색어
   private String searchCondition; //검색조건
   private String sortCondition; //정렬조건
+  private String orderCondition; // 오름차순 , 내림차순 조건
   
   public String getSearchKeyword() {
     return searchKeyword;
@@ -22,11 +23,16 @@ public class Search {
   }
   public void setSortCondition(String sortCondition) {
     this.sortCondition = sortCondition;
+  }  
+  public String getOrderCondition() {
+    return orderCondition;
   }
-  
+  public void setOrderCondition(String orderCondition) {
+    this.orderCondition = orderCondition;
+  }
   @Override
   public String toString() {
     return "Search [searchKeyword=" + searchKeyword + ", searchCondition=" + searchCondition + ", sortCondition="
-        + sortCondition + "]";
-  }  
+        + sortCondition + ", orderCondition=" + orderCondition + "]";
+  }    
 }

@@ -1,16 +1,38 @@
-/* 검색버튼 및 정렬버튼 이벤트 -성현 */
+/* 검색 및 정렬 이벤트 -성현 */
 $(function() {
-		
+	
+	// 검색버튼 클릭 검색 이벤트
 	$('#searchBtn').click(function() {
-		search();			    
+		$("body").scrollTop(0);
+		search('newest');			    
 	});
 	
-	$('#searchKeyword').keydown( function(){
-		if(event.keyCode == '13') search();
+	// 키보드에서 뗐을때의 검색 이벤트
+	$('#searchKeyword').keyup( function(){
+		$("body").scrollTop(0);
+		search('newest'); 
 	});
 	
+	// 최신순 정렬
+	$('#order-latest-btn').click(function(){
+		if($('#order-grade-btn').val() == 'DESC'){
+			$('#order-grade-btn').val('ASC')
+		} else if($('#order-grade-btn').val() == 'ASC'){
+			$('#order-grade-btn').val('DESC')
+		}
+		$('#sort-condition').val('newest');
+		search($('#sort-condition').val());
+	});
+	
+	// 평점순 정렬
 	$('#order-grade-btn').click(function(){
-		search($('#order-grade-btn').val());
+		if($('#order-grade-btn').val() == 'DESC'){
+			$('#order-grade-btn').val('ASC')
+		} else if($('#order-grade-btn').val() == 'ASC'){
+			$('#order-grade-btn').val('DESC')
+		}
+		$('#sort-condition').val('grade');
+		search($('#sort-condition').val());
 	});
 	
 	// 스크롤을 끝까지 내렸을때 레시피 카드 생성
@@ -22,25 +44,19 @@ $(function() {
 	
 });
 
+// 처음 검색했을때의 1페이지 결과 가져오기
 function search(sort){ 
-	var userNo = 0; 
-	var a = eval(sessionStorage.getItem('data'));		
-	if(a != null){
-		userNo = eval(sessionStorage.getItem('data'))[0].userNo;
-	}
-	
+			
 	var source = $('#recipe-card-search-template').text();
-	var template = Handlebars.compile(source);	
-	if(sort == null){
-		sort = 'newest';
-	}
+	var template = Handlebars.compile(source);
+	
 	$.ajax({
 		url : 'recipe/listSearch.json',
 		method : 'post',
 		data : {
-			searchKeyword : $('#searchKeyword').val(),				
-			userNo : userNo,
-			sort : sort
+			searchKeyword : $('#searchKeyword').val(),			
+			sortCondition : sort,
+			orderCondition : $('#order-grade-btn').val()
 		},
 		dataType : 'json',
 		success : function(result) {
@@ -59,24 +75,22 @@ function search(sort){
 		}
 	})	
 }
-
+// 스크롤 끝까지 내렸을때 추가될 결과 한페이지씩 가져오기
 function searchScrollAppend(){ 
-	var userNo = 0; 
-	var a = eval(sessionStorage.getItem('data'));		
-	if(a != null){
-		userNo = eval(sessionStorage.getItem('data'))[0].userNo;
-	}
-	
+		
 	var source = $('#recipe-card-search-template').text();
 	var template = Handlebars.compile(source);	
+	
+	var pageNo = parseInt($('#search-pageNo').val())+1;
 	
 	$.ajax({
 		url : 'recipe/listSearch.json',
 		method : 'post',
-		data : {
-			searchKeyword : $('#searchKeyword').val(),				
-			userNo : userNo,
-			pageNo : parseInt($('#search-pageNo').val())+1
+		data : {					
+			pageNo : pageNo,
+			searchKeyword : $('#searchKeyword').val(),
+			sortCondition : $('#sort-condition').val(),
+			orderCondition : $('#order-grade-btn').val()
 		},
 		dataType : 'json',
 		success : function(result) {
@@ -84,8 +98,8 @@ function searchScrollAppend(){
 				alert('실패 ~');
 				return;
 			}
-			$('.searchResult > .row').append(template(result));			
-			mathods(0,result);			
+			$('.searchResult > .row').append(template(result));
+			mathods(0,result);
 			$('#search-pageNo').val(result.pageNo);
 		},
 		error : function() {

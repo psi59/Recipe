@@ -86,11 +86,11 @@ public class UserController {
 
   @RequestMapping(path="detail", produces="application/json;charset=UTF-8")
   @ResponseBody
-  public String detail(int no){    
+  public String detail(HttpSession session){    
     HashMap<String,Object> result = new HashMap<>();    
     try{      
       result.put("status", "success");      
-      result.put("data", userService.getUser(no));
+      result.put("data", userService.getUser((Integer)session.getAttribute("userNo")));
     }catch(Exception e){
       result.put("status", "failure");
     }
@@ -158,8 +158,10 @@ public class UserController {
   public String login(User user, HttpSession session) {
     //index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
     HashMap<String,Object> result = new HashMap<>();
+    
+    User logUser = userService.loginUser(user);
+    
     try {
-      User logUser = userService.loginUser(user);
       result.put("status", "success");
       result.put("data", logUser);
 //    server sessionStorage에 유저 정보 저장  ------------------
