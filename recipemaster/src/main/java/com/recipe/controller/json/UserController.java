@@ -86,11 +86,11 @@ public class UserController {
 
   @RequestMapping(path="detail", produces="application/json;charset=UTF-8")
   @ResponseBody
-  public String detail(int no){    
+  public String detail(HttpSession session){    
     HashMap<String,Object> result = new HashMap<>();    
     try{      
       result.put("status", "success");      
-      result.put("data", userService.getUser(no));
+      result.put("data", userService.getUser((Integer)session.getAttribute("userNo")));
     }catch(Exception e){
       result.put("status", "failure");
     }
