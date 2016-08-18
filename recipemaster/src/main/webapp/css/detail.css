@@ -6,7 +6,27 @@
   bottom:0px;
 }
 
+.rcp-scrap-button-text{
+	width:110px;
+	height: 40px;
+	border-radius:5em;
+	border : 1px solid white;
+	margin-top: 10px;
+	
+}
 
+.rcp-scrap-button-text .glyphicon-paperclip:before{
+	color:white;
+}
+.rcp-i-tag-margin-right-5px{
+	margin-right: 5px;
+}
+
+.rcp-scrap-button-text a{
+	font-size:12px;
+	color:white;
+	margin-top:8px;
+}
 #detail_pop_up{
   display:none;
 }

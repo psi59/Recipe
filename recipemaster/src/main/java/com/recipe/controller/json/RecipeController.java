@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -222,6 +224,24 @@ public class RecipeController {
     return new Gson().toJson(result);
   }
   
+	@RequestMapping(path="scrap",produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String scrap(int recipeNo, HttpSession session){
+	  HashMap<String,Object> result = new HashMap<>();
+	  
+	  User userNo = new User();
+	  userNo.setUserNo((int)session.getAttribute("userNo"));
+	  System.out.println(userNo.getUserNo());
+	  
+	  recipeService.addScrap(userNo.getUserNo(), recipeNo);
+    try{
+      result.put("status","success");
+    }catch(Exception e){
+      result.put("status", "false");
+    }
+	  return new Gson().toJson(result);
+	}
+	
 	
 //	---------------------고재현 -------------------------
 	@RequestMapping(path="materialSearch",produces="application/json;charset=UTF-8")

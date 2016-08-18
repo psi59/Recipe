@@ -112,9 +112,16 @@ public class RecipeServiceImpl implements RecipeService {
 
 	  @Override
 	  public List<Recipe> selectSbuscribe(String userNo) {
-	    System.out.println("impl "+userNo);
-	    System.out.println("impl :  "+ recipeDao.selectSbuscribe(userNo));
+
 	    return recipeDao.selectSbuscribe(userNo);
 	  }
+
+    @Override
+    public int addScrap(int userNo, int recipeNo) {
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("userNo", userNo);
+      params.put("recipeNo", recipeNo);
+      return recipeDao.addScrap(params);
+    }
 	
 }

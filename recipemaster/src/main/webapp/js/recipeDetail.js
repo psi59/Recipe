@@ -1,4 +1,4 @@
-/*
+
 //$(function(){
 //	$(document).on('click','.detail', function(){
 //		$('#detail_pop_up').bPopup({
@@ -35,6 +35,7 @@ $(function(){
   
 	$(function(){
 		$(document).on('click','.detail',function(event) {
+			event.preventDefault();
 			console.log($(event.target).parent().children('input[name="recipeNo"]').val());
 			$.ajax({
 				url : 'recipe/recipeDetail.json?recipeNo=' + $(event.target).parent().children('input[name="recipeNo"]').val(),
@@ -45,6 +46,7 @@ $(function(){
 						alert('게시물 조회 오류');
 						return;
 					}
+					console.log(result);
 					$('.rcp-header > .title').text(result.data.recipeName);
 					$('.rcp-header > .date').text(result.data.recipeDate);
 					$('#detail_pop_up').bPopup({
@@ -74,6 +76,35 @@ $(function(){
 			});
 		});		
 	})
+	
+	
+	$(document).on('click','.rcp-detail-scrap',function(event){
+		event.preventDefault();
+		
+		$.ajax({
+			url:'recipe/scrap.json',
+			method:'post',
+			dataType:'json',
+			data: {
+					recipeNo:$('.detail-images .rcp-hidden-recipeNo').val()
+			},
+			success:function(result){
+				if (result.status != 'success') {
+					alert('게시물 조회 오류');
+					return;
+				}
+				$('.rcp-detail-scrap').attr('style','color:#ffce6e');
+				$('.glyphicon-paperclip:before').attr('style','color:#ffce63');
+			},
+			error : function(){
+				alert('서버 요청 오류');
+			}
+		
+				
+		})
+	})
+	
+	
 })	
 	
 //	$(function(){
@@ -96,4 +127,3 @@ $(function(){
 //			});
 //		});		
 //	})
-	*/

@@ -25,4 +25,5 @@ public interface RecipeService {
   int deleteRecipe(int no);
   List<String> getMaterial(String materialName);
   int registyImageAndProduce(Map map);
+  int addScrap(int userNo, int recipeNo);
 }

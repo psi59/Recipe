@@ -23,4 +23,5 @@ public interface RecipeDao {
   List<String> selectMaterialName(String materialName);
   int likeUp(Recipe recipe);
   void likeDown(Recipe recipe);
+  int addScrap(Map<String, Object> Numbers);
 }

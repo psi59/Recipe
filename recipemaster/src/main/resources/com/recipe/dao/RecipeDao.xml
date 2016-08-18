@@ -9,6 +9,7 @@
 		<result column="uno" property="userNo" />
 		<result column="name" property="recipeName" />
 		<result column="intro" property="intro" />
+		<result column="rcp_pd" property="recipeDetail"/>
 		<result column="c_time" property="cookTime" />
 		<result column="ptn" property="portion" />
 		<result column="rcp_dt" property="recipeDate" />
@@ -20,6 +21,9 @@
 		<result column="likeUser" property="likeUser"/>
 		<result column="countLike" property="countLike"/>		
 		<result column="uno2" property="subscribeNum"/>
+		<result column="countComment" property="countComment"/>
+		<result column="countScrap" property="countScrap"/>
+		
 	</resultMap> 
 	
 	<resultMap type="material" id="materialMap">
@@ -72,6 +76,11 @@
 	
 	</insert>
 	
+	<insert id="addScrap" parameterType="Map">
+	   INSERT INTO rcp_scr 
+	   VALUES ( ${userNo}, ${recipeNo}, now() )
+	</insert>
+	
 	<insert id="likeDown" parameterType="Recipe">
   DELETE FROM
   rcp_lik WHERE uno=${userNo} and rcpno=${recipeNo}
@@ -79,7 +88,7 @@
 	
 	<insert id="insert" parameterType="map">
 		 INSERT INTO rcps(uno, name, intro, c_time, ptn, rcp_pd, rpimg, rcp_dt, rgst) 
-		 VALUES(#{user.userNo}, #{recipe.recipeName}, #{recipe.cookTime}, #{recipe.intro}, #{recipe.portion}, 'rcp_pd', 'rpimg', now(), 1)
+		 VALUES(#{user.userNo}, #{recipe.recipeName}, #{recipe.intro}, #{recipe.cookTime}, #{recipe.portion}, 'rcp_pd', 'rpimg', now(), 1)
 		 <selectKey keyProperty="recipeNo" resultType="int" order="AFTER">
             SELECT LAST_INSERT_ID();
      </selectKey>		 	 
@@ -132,9 +141,14 @@
   
   
   <select id="selectOne" resultMap="recipeMap" parameterType="INTEGER">
-   SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits, r.rgst, r.gpa, u.uno, u.name userName
-   FROM rcps r, users u
-   WHERE r.uno = u.uno and r.rcpno=#{value};
+    SELECT DISTINCT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits,
+     r.rgst, r.gpa,r.rcp_pd, u.uno, u.name userName,
+    (select count(rcpno) from rcp_lik where rcpno=${value}) countLike,
+    (select count(rrpno) from rcp_rp where rcpno=${value}) countComment,
+    (select count(rcpno) from rcp_scr where rcpno=${value}) countScrap
+    FROM users u INNER JOIN rcps r on u.uno=r.uno and r.rcpno=${value}
+    LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno
+    
   </select>
 	
 	<select id="selectMaterialName" resultType="string" parameterType="string">
