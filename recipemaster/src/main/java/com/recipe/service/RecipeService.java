@@ -17,13 +17,15 @@ public interface RecipeService {
   List<Recipe> getRecipeSearchList(int pageNo, int pageSize, Search search, int userNo);
   int getRecipeCount(int pageNo, int pageSize, Search search, int userNo);
 
+  int addSubscribe(int toUserNo, int fromUserNo);
   List<Recipe> selectSubscribeUno(int userNo);
   List<Recipe> selectSbuscribe(String userNo);
-  Recipe getRecipe(int recipeNo);
+  Recipe getRecipe(int recipeNo,int userNo);
   int updateRecipe(Recipe recipe);
   int updateHits(Recipe recipe);
   int deleteRecipe(int no);
   List<String> getMaterial(String materialName);
   int registyImageAndProduce(Map map);
   int addScrap(int userNo, int recipeNo);
+  int deleteScrap(int userNo, int recipeNo);
 }

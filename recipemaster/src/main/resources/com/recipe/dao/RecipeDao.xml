@@ -15,7 +15,7 @@
 		<result column="rcp_dt" property="recipeDate" />
 		<result column="hits" property="hits" />
 		<result column="rgst" property="regiStatus" />
-		<result column="gpa" property="gradePoint" />
+		<result column="gpa" property="gradePoint"/>
 		<result column="userName" property="user.userName"/>
 		<result column="lc_dt" property="likeDate"/>
 		<result column="likeUser" property="likeUser"/>
@@ -23,6 +23,7 @@
 		<result column="uno2" property="subscribeNum"/>
 		<result column="countComment" property="countComment"/>
 		<result column="countScrap" property="countScrap"/>
+		<result column="scrapUser" property="scrapUser"/>
 		
 	</resultMap> 
 	
@@ -31,28 +32,20 @@
     <result column="name" property="materialName" />
     <result column="mtst" property="materialStatement" />
   </resultMap>
-  
-  <!-- <select id="recipeSearch" resultMap="recipeMap" parameterType="Map">
-    SELECT rcpno, uno, name, intro, c_time, ptn, rpimg, rcp_pd, rcp_dt, hits, rgst, gpa
-    FROM rcps
-    <if test="search.searchCondition == 'name'">
-      WHERE name LIKE '%${search.searchKeyword}%'
-    </if>
-    <if test="search.sortCondition == 'newest'">
-      ORDER BY rcp_dt desc
-    </if>
-  </select> -->
-  
+   
   <select id="recipeSearch" resultMap="recipeMap" parameterType="Map">
     SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits,
-           r.rgst, r.gpa, u.uno, u.name userName, l.rcpno, l.lc_dt, l.uno likeUser
+           r.rgst, truncate(r.gpa,1) gpa, u.uno, u.name userName, l.rcpno, l.lc_dt, l.uno likeUser
     FROM users u INNER JOIN rcps r on u.uno=r.uno
          LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=#{userNo}      
     <if test="search.searchCondition == 'name'">
       WHERE r.name LIKE '%${search.searchKeyword}%'
     </if>
     <if test="search.sortCondition == 'newest'">
-      ORDER BY r.rcp_dt desc
+      ORDER BY r.rcpno desc
+    </if>
+    <if test="search.sortCondition == 'grade'">
+      ORDER BY r.gpa desc
     </if>
     limit #{startIndex}, #{len}
   </select>
@@ -76,10 +69,15 @@
 	
 	</insert>
 	
-	<insert id="addScrap" parameterType="Map">
-	   INSERT INTO rcp_scr 
-	   VALUES ( ${userNo}, ${recipeNo}, now() )
-	</insert>
+  <insert id="addScrap" parameterType="Map">
+     INSERT INTO rcp_scr 
+     VALUES ( ${userNo}, ${recipeNo}, now() )
+  </insert>
+  
+    <delete id="deleteScrap" parameterType="Map">
+		  DELETE FROM
+		  rcp_scr WHERE uno=${userNo} and rcpno=${recipeNo}
+  </delete>
 	
 	<insert id="likeDown" parameterType="Recipe">
   DELETE FROM
@@ -108,6 +106,11 @@
     WHERE rcpno=#{recipeNo};
   </update>
   
+  
+  <insert id="addSubscribe" parameterType="Map">
+  INSERT INTO (uno, uno2, sc_dt)
+  values(${toUserNo}, ${fromUserNo}, now() )
+  </insert>
     
   <select id="selectSubscribeUno" resultMap="recipeMap" parameterType="INTEGER">
     SELECT * FROM scs WHERE uno=#{value}
@@ -130,6 +133,12 @@
     limit #{len}
   </select>
   
+  <select id="selectMts" resultMap="material" parameterType="INTEGER">
+  
+       select * from mts m, rcp_mt mt, rcps r 
+       where m.mtno=mt.mtno and r.rcpno = mt.rcpno and r.rcpno =${value}
+  </select>
+  
    <select id="recipeList2" resultMap="recipeMap" parameterType="Map">
     SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits,
      r.rgst, r.gpa, u.uno, u.name userName, l.rcpno, l.lc_dt, l.uno likeUser
@@ -142,13 +151,13 @@
   
   <select id="selectOne" resultMap="recipeMap" parameterType="INTEGER">
     SELECT DISTINCT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits,
-     r.rgst, r.gpa,r.rcp_pd, u.uno, u.name userName,
-    (select count(rcpno) from rcp_lik where rcpno=${value}) countLike,
-    (select count(rrpno) from rcp_rp where rcpno=${value}) countComment,
-    (select count(rcpno) from rcp_scr where rcpno=${value}) countScrap
-    FROM users u INNER JOIN rcps r on u.uno=r.uno and r.rcpno=${value}
+     r.rgst, r.gpa,r.rcp_pd, u.uno, u.name userName,s.uno scrapUser, s.rcpno,
+    (select count(rcpno) from rcp_lik where rcpno=${recipeNo}) countLike,
+    (select count(rrpno) from rcp_rp where rcpno=${recipeNo}) countComment,
+    (select count(rcpno) from rcp_scr where rcpno=${recipeNo}) countScrap
+    FROM users u INNER JOIN rcps r on u.uno=r.uno and r.rcpno=${recipeNo}
     LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno
-    
+    LEFT OUTER JOIN rcp_scr s ON r.rcpno=s.rcpno and s.uno=${userNo}
   </select>
 	
 	<select id="selectMaterialName" resultType="string" parameterType="string">

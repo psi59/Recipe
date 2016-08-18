@@ -19,7 +19,7 @@ public class Recipe {
 	private Date recipeDate;
 	private int hits;
 	private int regiStatus;
-	private int gradePoint;
+	private double gradePoint;
 	private User user;
 	private Date likeDate;
 	private int likeUser;
@@ -28,7 +28,14 @@ public class Recipe {
   private String subscribe;
   private int countComment;
   private int countScrap;
+  private int scrapUser;
   
+  public int getScrapUser() {
+    return scrapUser;
+  }
+  public void setScrapUser(int scrapUser) {
+    this.scrapUser = scrapUser;
+  }
   public String getRecipeDetail() {
     return recipeDetail;
   }
@@ -132,10 +139,10 @@ public class Recipe {
 	public void setRegiStatus(int regiStatus) {
 		this.regiStatus = regiStatus;
 	}
-	public int getGradePoint() {
+	public double getGradePoint() {
 		return gradePoint;
 	}
-	public void setGradePoint(int gradePoint) {
+	public void setGradePoint(double gradePoint) {
 		this.gradePoint = gradePoint;
 	}
 	public User getUser() {
@@ -170,6 +177,6 @@ public class Recipe {
         + recipeDate + ", hits=" + hits + ", regiStatus=" + regiStatus + ", gradePoint=" + gradePoint + ", user=" + user
         + ", likeDate=" + likeDate + ", likeUser=" + likeUser + ", countLike=" + countLike + ", subscribeNum="
         + subscribeNum + ", subscribe=" + subscribe + ", countComment=" + countComment + ", countScrap=" + countScrap
-        + "]";
+        + ", scrapUser=" + scrapUser + "]";
   }	
 }

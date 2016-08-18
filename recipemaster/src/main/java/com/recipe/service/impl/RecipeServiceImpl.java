@@ -52,9 +52,12 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public Recipe getRecipe(int recipeNo) {
-
-		return recipeDao.selectOne(recipeNo);
+	public Recipe getRecipe(int recipeNo, int userNo) {
+	  HashMap<String,Object> params = new HashMap<>();
+    params.put("userNo", userNo);
+    params.put("recipeNo", recipeNo);
+	  
+		return recipeDao.selectOne(params);
 	}
 
 	@Override
@@ -122,6 +125,22 @@ public class RecipeServiceImpl implements RecipeService {
       params.put("userNo", userNo);
       params.put("recipeNo", recipeNo);
       return recipeDao.addScrap(params);
+    }
+
+    @Override
+    public int deleteScrap(int userNo, int recipeNo) {
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("userNo", userNo);
+      params.put("recipeNo", recipeNo);
+      return recipeDao.deleteScrap(params);
+    }
+
+    @Override
+    public int addSubscribe(int toUserNo, int fromUserNo) {
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("toUserNo", toUserNo);
+      params.put("fromUserNo", fromUserNo);
+      return recipeDao.addSubscribe(params);
     }
 	
 }

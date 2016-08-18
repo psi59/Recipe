@@ -33,21 +33,26 @@ public class RecipeController {
 	@RequestMapping(path="listSearch",produces="application/json;charset=UTF-8")
   @ResponseBody
   public String listSearch(@RequestParam(defaultValue="1") int pageNo,
-                           @RequestParam(defaultValue="12") int pageSize,
-                           Search search, int userNo){
+                           @RequestParam(defaultValue="8") int pageSize,
+                           Search search, String sort, int userNo){
     HashMap<String,Object> result = new HashMap<>();     
-    
+    int recipeCount = 0;
     // TEST용으로 searchCondition, sortCondition 때려박음
-    search.setSearchCondition("name");
-    search.setSortCondition("newest");   
+    search.setSearchCondition("name"); 
+    search.setSortCondition(sort);   
+    
+    System.out.println("pageNo : "+pageNo);
     
     List<Recipe> list = recipeService.getRecipeSearchList(pageNo, pageSize, search, userNo);
-    int recipeCount = recipeService.getRecipeCount(pageNo, pageSize, search, userNo);
-   
+    
+    if(pageNo == 1){
+      recipeCount = recipeService.getRecipeCount(pageNo, pageSize, search, userNo);
+    }
     try{
       result.put("status","success");
       result.put("data", list);
-      result.put("recipeCount", recipeCount);
+      result.put("recipeCount", recipeCount);      
+      result.put("pageNo", pageNo);
     }catch (Exception e){
       result.put("status", "false");
     }
@@ -139,9 +144,16 @@ public class RecipeController {
 	
 	@RequestMapping(path="recipeDetail",produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public String recipeDetail(@RequestParam int recipeNo){
+	public String recipeDetail(int recipeNo,HttpSession session){
 		HashMap<String,Object> result = new HashMap<>();
-		Recipe recipe = recipeService.getRecipe(recipeNo);
+		
+		Recipe recipe = new Recipe();
+		if(session.getAttribute("userNo") != null){
+		recipe = recipeService.getRecipe(recipeNo,(int)session.getAttribute("userNo"));
+		}else{
+		  recipe = recipeService.getRecipe(recipeNo,0);
+		}
+		//System.out.println("controller  : "+recipeNo+(int)session.getAttribute("userNo") );
 		recipe.setHits(recipe.getHits()+1);
 		recipeService.updateHits(recipe);
 	try{
@@ -227,20 +239,62 @@ public class RecipeController {
 	@RequestMapping(path="scrap",produces="application/json;charset=UTF-8")
   @ResponseBody
   public String scrap(int recipeNo, HttpSession session){
-	  HashMap<String,Object> result = new HashMap<>();
-	  
-	  User userNo = new User();
-	  userNo.setUserNo((int)session.getAttribute("userNo"));
-	  System.out.println(userNo.getUserNo());
-	  
-	  recipeService.addScrap(userNo.getUserNo(), recipeNo);
+    HashMap<String,Object> result = new HashMap<>();
+    User userNo = new User();    
+  
+    try{
+      
+      if(session.getAttribute("userNo") == null){
+        result.put("status", "notLogin");
+        System.out.println("notLogin");
+      }else{
+      userNo.setUserNo((int)session.getAttribute("userNo"));      
+      recipeService.addScrap(userNo.getUserNo(), recipeNo);
+      result.put("status","success");
+      System.out.println("success");
+      }      
+    }catch(Exception e){
+      result.put("status", "false");
+    }
+    return new Gson().toJson(result);
+  }
+	
+	@RequestMapping(path="deleteScrap",produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String deleteScrap(int recipeNo, HttpSession session){
+    HashMap<String,Object> result = new HashMap<>();
+    
+    User userNo = new User();
+    userNo.setUserNo((int)session.getAttribute("userNo"));
+    System.out.println(userNo.getUserNo());
+    
+    recipeService.deleteScrap(userNo.getUserNo(), recipeNo);
     try{
       result.put("status","success");
     }catch(Exception e){
       result.put("status", "false");
     }
-	  return new Gson().toJson(result);
-	}
+    return new Gson().toJson(result);
+  }
+	
+	@RequestMapping(path="addSubscribe",produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String addSubscribe(HttpSession session,int fromUserNo){
+    HashMap<String,Object> result = new HashMap<>();
+    
+    //toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
+    User user = new User();
+    int toUserNo=(int)session.getAttribute("userNo");
+    System.out.println(user.getUserNo());
+    
+    recipeService.deleteScrap(toUserNo, fromUserNo );
+    try{
+      result.put("status","success");
+    }catch(Exception e){
+      result.put("status", "false");
+    }
+    return new Gson().toJson(result);
+  }
 	
 	
 //	---------------------고재현 -------------------------

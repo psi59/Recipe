@@ -14,12 +14,12 @@
 	margin-top: 10px;
 	
 }
-
-.rcp-scrap-button-text .glyphicon-paperclip:before{
+.rcp-scrap-button-text{
 	color:white;
 }
-.rcp-i-tag-margin-right-5px{
+.rcp-i-tag-margin-right-top{
 	margin-right: 5px;
+	margin-top:10px;
 }
 
 .rcp-scrap-button-text a{
