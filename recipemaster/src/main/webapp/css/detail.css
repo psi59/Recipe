@@ -3,6 +3,7 @@
   width:1024px;
   height:880px;
   bottom:0px;
+  margin-top: 50px;
 }
 
 .rcp-scrap-button-text{
@@ -48,6 +49,7 @@
 
 .rcp-detail-form .rcp-header{
    margin-left:35px;
+   z-index: 1;
 }
 
 .rcp-detail-body{
