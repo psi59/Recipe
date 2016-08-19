@@ -1,4 +1,24 @@
 
+  $(function(){
+    	$('.rcp-topbtn').on('click',function(){
+    		$.ajax({
+    			url:'recipe/addSubscribe.json',
+    			datatype:'json',
+    			data:{
+    				fromUserNo:1
+    			},
+    			method:'post',
+    			succeess:(function(){
+    				
+    			}),
+    			error:(function(){
+    				
+    			})
+    		})
+    	})
+    })
+	
+
 
 /*탑바 js(common.js 에 공통적으로 들어갈부분 일단 넣음*/
    $(function() {
@@ -166,7 +186,6 @@
 	      event.preventDefault();
 	    });
 	      
-
 		$(document).on('mouseenter','.rcp-Vst-slotRp',function(){
 			$('.addDelete').html('<img id="addDeleteBtn"'+
 			        'src="/img/vstDeleteBtnWt.png">');
@@ -234,3 +253,6 @@
       //현재 ((윈도우넓이/2) +480) 을 left로 지정
       $("#quick").css("left", ($(window).width() / 2) + 580);
     }
+    
+    
+  

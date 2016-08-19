@@ -54,34 +54,37 @@ function login(event) {
 
 				var jsonData = JSON.stringify(data);
 
-				/*eval 사용 방법, eval(jsonData)[0].email*/
-				/*alert('1111'+eval(jsonData)[0].role);*/
-				sessionStorage.setItem('data', jsonData);
-				
-				
-				swal("오호라~", result.data.userName+ '님 환영합니다.', "success")
-				$('.sweet-alert button').on('click', function() {
-					$('#login-pop-up-banner').bPopup().close();
-					location.reload();
-				});
-				
-				
-			} else {
-				alert('비밀번호를 다시 입력해주세요');
-			}
-			
-		},
-		error : function() {
-			alert('서버 요청 오류');
-		}
-	}); /* end of ajax */
-} /* end of jquery */
+
+						/*eval 사용 방법, eval(jsonData)[0].email*/
+						/*alert('1111'+eval(jsonData)[0].role);*/
+						sessionStorage.setItem('data', jsonData);
+						sessionStorage.setItem('name', result.data.userName);
+						location.reload();
+
+						$('#login-pop-up-banner').bPopup().close();
+					} else {
+						alert('비밀번호를 다시 입력해주세요');
+					}
+
+
+					/*$('#profileEmail').text(eval(sessionStorage.getItem('data'))[0].email);
+					$('#profileName').text(eval(sessionStorage.getItem('data'))[0].userName);
+					$('#profileGrade').text(eval(sessionStorage.getItem('data'))[0].recipeUrl);*/
+					//location.href = "http://127.0.0.1:8080";
+
+				},
+				error : function() {
+					alert('서버 요청 오류');
+				}
+			}); /* end of ajax */
+		}; /* end of jquery */
+
 
 /*로그아웃 버튼*/
 $(function(){
 	$('#profileView').removeClass().addClass("main-nav__dropdown top-main-nav__dropdown profile-dropdown");
 
-	if(eval(sessionStorage.getItem('data'))[0].userNo!=null){
+	if(eval(sessionStorage.getItem('data'))!=null){
 		$('#signUpBtn').hide();
 		$('#loginBtn').hide();
 		$('#signUpTopBtn').hide();
@@ -119,7 +122,7 @@ $('#TopBtn').on('click', function(){
 
 $(function() {
 	
-	if(sessionStorage.length>0){
+	if(sessionStorage.getItem('data') != null){
 	$.ajax({
 		url : '/user/getUser.json',
 		method : 'post',

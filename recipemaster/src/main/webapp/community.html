@@ -211,8 +211,11 @@
     <input id="rcpList-pageNo" type="hidden" value="1">
     
 		<section class="rcp-pageleft">
+
+
 			<div>
 				<div id="tabs" class="rcp-vst-tabs">
+
 					<ul>
 						<li><a href="#tabs-1">My Recipe</a></li>
 						<li><a href="#tabs-2">구독중인 페이지</a></li>
@@ -373,9 +376,10 @@ $(window).scroll(function() {
     if ($(window).scrollTop() == $(document).height() - $(window).height()) {
     	rcpListScrollAppend();
     }
+      /* 준모3 */
 });
 </script>
-<script>
+<script> 
 $(function(){
 	loadComRcpList();	
 });

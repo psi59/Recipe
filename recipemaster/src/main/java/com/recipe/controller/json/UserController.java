@@ -28,7 +28,7 @@ public class UserController {
   public String list(@RequestParam(defaultValue="1")int pageNo,
                      @RequestParam(defaultValue="3")int pageSize){
     HashMap<String, Object> result = new HashMap<>();
-    try{
+    try{ 
       List<User> list = userService.getUserList(pageNo, pageSize);
 
       result.put("status", "success");
@@ -157,25 +157,20 @@ public class UserController {
   @ResponseBody //URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
   public String login(User user, HttpSession session) {
     //index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
-    System.out.println(user.toString());
     HashMap<String,Object> result = new HashMap<>();
+    
+    User logUser = userService.loginUser(user);
+    
     try {
-      User logUser = userService.loginUser(user);
-
       result.put("status", "success");
-
       result.put("data", logUser);
-      System.out.println("status:success"+result.values());
-      System.out.println("logUser:"+logUser.toString());
 //    server sessionStorage에 유저 정보 저장  ------------------
       session.setAttribute("userNo", logUser.getUserNo());
       session.setAttribute("userEmail", logUser.getEmail());
 //    ----------------------------------------------------------
     } catch (Exception e) {
       result.put("status", "failure");
-      System.out.println("status:failure"+result.values());
     }
-    System.out.println(new Gson().toJson(result));
     return new Gson().toJson(result);
     //result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
   }
@@ -184,23 +179,14 @@ public class UserController {
   @ResponseBody //URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
   public String getUser(int no) {
     //index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
-    System.out.println(no);
     HashMap<String,Object> result = new HashMap<>();
     try {
-      
-      
       User logUser = userService.getUser(no);
-
       result.put("status", "success");
-
       result.put("data", logUser);
-      System.out.println("status:success"+result.values());
-      System.out.println("logUser:"+logUser.toString());
     } catch (Exception e) {
       result.put("status", "failure");
-      System.out.println("status:failure"+result.values());
     }
-    System.out.println(new Gson().toJson(result));
     return new Gson().toJson(result);
     //result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
   }

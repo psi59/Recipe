@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.recipe.dao.RecipeDao;
+import com.recipe.domain.Material;
 import com.recipe.domain.Recipe;
 import com.recipe.domain.Search;
 import com.recipe.service.RecipeService;
@@ -52,9 +53,12 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public Recipe getRecipe(int recipeNo) {
-
-		return recipeDao.selectOne(recipeNo);
+	public Recipe getRecipe(int recipeNo, int userNo) {
+	  HashMap<String,Object> params = new HashMap<>();
+    params.put("userNo", userNo);
+    params.put("recipeNo", recipeNo);
+	  
+		return recipeDao.selectOne(params);
 	}
 
 	@Override
@@ -68,7 +72,7 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public List<String> getMaterial(String materialName) {
+	public List<Material> getMaterial(String materialName) {
 		return recipeDao.selectMaterialName(materialName);
 	}
 
@@ -103,17 +107,16 @@ public class RecipeServiceImpl implements RecipeService {
 	public void likeDown(Recipe recipe) {
 		recipeDao.likeDown(recipe);
 	}
-	
+	 
 	 @Override
 	  public List<Recipe> selectSubscribeUno(int userNo) {
 	   
 	    return recipeDao.selectSubscribeUno(userNo);
 	  }
-
+ 
 	  @Override
 	  public List<Recipe> selectSbuscribe(String userNo) {
-	    System.out.println("impl "+userNo);
-	    System.out.println("impl :  "+ recipeDao.selectSbuscribe(userNo));
+
 	    return recipeDao.selectSbuscribe(userNo);
 	  }
 	  
@@ -125,6 +128,29 @@ public class RecipeServiceImpl implements RecipeService {
       params.put("startIndex", (pageNo - 1) * pageSize);
       params.put("len", pageSize);
       return recipeDao.selectSbuscribe2(params);
+    }
+    @Override
+    public int addScrap(int userNo, int recipeNo) {
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("userNo", userNo);
+      params.put("recipeNo", recipeNo);
+      return recipeDao.addScrap(params);
+    }
+
+    @Override
+    public int deleteScrap(int userNo, int recipeNo) {
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("userNo", userNo);
+      params.put("recipeNo", recipeNo);
+      return recipeDao.deleteScrap(params);
+    }
+
+    @Override
+    public int addSubscribe(int toUserNo, int fromUserNo) {
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("toUserNo", toUserNo);
+      params.put("fromUserNo", fromUserNo);
+      return recipeDao.addSubscribe(params);
     }
 	
 }

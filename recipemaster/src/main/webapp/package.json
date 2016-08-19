@@ -8,6 +8,7 @@
     "blueimp-file-upload": "^9.12.5",
     "blueimp-load-image": "^2.6.1",
     "bootstrap": "^3.3.7",
+    "bxslider": "^4.2.6",
     "handlebars": "^4.0.5",
     "jquery": "^3.1.0",
     "sweetalert": "^1.1.3"
