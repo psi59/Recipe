@@ -8,6 +8,9 @@
 <link rel="stylesheet" href="css/writerecipe.css">
 <link rel="stylesheet"
 	href="node_modules/blueimp-file-upload/css/jquery.fileupload.css">
+<link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.min.css">
+<link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.themes.min.css">
+
 
 <style type="text/css">
 .scroll {
@@ -70,28 +73,13 @@
 				<div class="form_100_width">
 					<div class="form_100_width rcp-subtitle ">
 						<span>재료 등록</span>
-						<button type="button" class="btn btn-default" id="appmtbtn">재료추가</button>
 					</div>
-					<div id="appendSlot">
-						<div name="addSlot">
-							<div class="rcp-form-row">
-								<div class="inputwrapper form_70_width">
-									<label for="d1">재료명</label> <input name="materialName"
-										type="text" />
-								</div>
-
-								<div class="inputwrapper form_15_width">
-									<label for="d1">분량</label> <input name="materialAmount"
-										type="text" placeholder="(예:400g)" />
-								</div>
-
-								<span class="form_15_width" name="delMt">
-									<button type="button" class="btn btn-default rcp-delMtSlot"
-										id="delMtBtn" name="delMtSlot">삭제</button>
-								</span>
-							</div>
-						</div>
-					</div>
+					<div class="inputwrapper form_100_width">
+            <label for="d1">재료명</label> <input name="materialName"
+              type="text" />
+          </div>
+					
+					<div id="materialList" class="files form_100_width rcp-border"></div>
 
 					<div>
 						<div class="form_100_width rcp-subtitle ">
@@ -144,7 +132,72 @@
 		src="node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
 	<script
 		src="node_modules/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
+	<script
+    src="node_modules/easy-autocomplete/dist/jquery.easy-autocomplete.min.js"></script>
 
 	<script src="js/writerecipe.js"></script>
+	
+	<script type="text/javascript">
+	var options = {
+		  url: function(phrase) {
+			  console.log(phrase);
+		    return "recipe/materialSearch.json?searchValue="+phrase;
+		  },
+
+		  getValue: function(element) {
+		    return element.name;
+		  },
+
+		  ajaxSettings: {
+		    dataType: "json",
+		    method: "GET"
+		  },
+		  requestDelay: 400,
+		  
+		  categories: [
+	                   {   //Category fruits
+	                       listLocation: "foodstuff",
+	                       header: "-- 식재료 --"
+	                   }, 
+	                   {   //Category vegetables
+	                       listLocation: "seasoning",
+	                       header: "-- 조미료 --"
+	                   }
+	      ],
+	      list: {
+	          showAnimation: {
+	            type: "slide", //normal|slide|fade
+	            time: 200
+	          },
+
+	          hideAnimation: {
+	            type: "slide", //normal|slide|fade
+	            time: 200
+	          },
+	          onChooseEvent: function() {
+	              var name = $('input[name="materialName"]').getSelectedItemData().name;
+	              var no = $('input[name="materialName"]').getSelectedItemData().no;
+	              var existMt = $('input[name="materialNo"]');
+	              for(i=0; i<existMt.length; i++){
+	            	  if($(existMt[i]).val()==no){
+	                      alert('재료를 중복으로 등록하실 수 없습니다.');
+	                      return;
+	                }
+	              }	              
+	              
+	              $('#materialList').append(
+	            		 $('<span><span class="form_15_width" style="text-align:center; border:1px solid black;">'+name+'</span>'
+	            		  +'<span class="inputwrapper form_15_width">'
+	            		  +'<label for="d1">분량</label>'
+	                  +'<input name="materialAmount"type="text" placeholder="(예:400g)" />'
+	                  +'</span>'
+	            		  +'<input type="hidden" name="materialNo" value="'+no+'"></span>'));
+            }
+	       }
+	};
+	
+	$('input[name="materialName"]').easyAutocomplete(options);
+	
+	</script>
 </body>
 </html>
