@@ -16,6 +16,7 @@ public interface RecipeDao {
   int recipeCount(Map<String,Object> params); //Recipe Count 성현
   List<Recipe> selectSubscribeUno(int userNo); //subscribe 고재
   List<Recipe> selectSbuscribe(String userNo); //subscribe 고재
+  List<Recipe> selectSbuscribe2(Map<String,Object> params); //준모
   Recipe selectOne(int recipeNo); // Read or Retrieve
   int update(Recipe recipe); // Update
   int updateHits(Recipe recipe);

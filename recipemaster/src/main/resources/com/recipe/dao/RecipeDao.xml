@@ -101,7 +101,15 @@
   select * from rcps where uno in( ${value} )
   
   </select>
-
+  
+<select id="selectSbuscribe2" resultMap="recipeMap" parameterType="string">
+  
+  SELECT * 
+  FROM rcps 
+  WHERE uno = ${userNo}
+  order by uno desc
+  limit #{startIndex}, #{len}
+  </select>
 	
    <select id="recipeList" resultMap="recipeMap" parameterType="Map">
     SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits, 

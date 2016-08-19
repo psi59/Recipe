@@ -16,7 +16,9 @@ public interface RecipeService {
   
   List<Recipe> getRecipeSearchList(int pageNo, int pageSize, Search search, int userNo);
   int getRecipeCount(int pageNo, int pageSize, Search search, int userNo);
-
+  
+  List<Recipe> selectSbuscribe2(String userNo, int pageNo, int pageSize); //준모,용이형
+  
   List<Recipe> selectSubscribeUno(int userNo);
   List<Recipe> selectSbuscribe(String userNo);
   Recipe getRecipe(int recipeNo);

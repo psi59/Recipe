@@ -116,5 +116,15 @@ public class RecipeServiceImpl implements RecipeService {
 	    System.out.println("impl :  "+ recipeDao.selectSbuscribe(userNo));
 	    return recipeDao.selectSbuscribe(userNo);
 	  }
+	  
+	  //준
+    @Override
+    public List<Recipe> selectSbuscribe2(String userNo, int pageNo, int pageSize) {
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("userNo", userNo);
+      params.put("startIndex", (pageNo - 1) * pageSize);
+      params.put("len", pageSize);
+      return recipeDao.selectSbuscribe2(params);
+    }
 	
 }

@@ -17,7 +17,7 @@ public class VisitorController {
   
   @RequestMapping("list")
   public String list(@RequestParam(defaultValue="1")int pageNo, 
-                     @RequestParam(defaultValue="10")int pageSize,
+                     @RequestParam(defaultValue="4")int pageSize,
                      Model model){
     
     model.addAttribute("list", visitorService.getVisitorList(pageNo, pageSize));
