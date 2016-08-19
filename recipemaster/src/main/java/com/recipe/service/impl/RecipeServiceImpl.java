@@ -108,19 +108,28 @@ public class RecipeServiceImpl implements RecipeService {
 	public void likeDown(Recipe recipe) {
 		recipeDao.likeDown(recipe);
 	}
-	
+	 
 	 @Override
 	  public List<Recipe> selectSubscribeUno(int userNo) {
 	   
 	    return recipeDao.selectSubscribeUno(userNo);
 	  }
-
+ 
 	  @Override
 	  public List<Recipe> selectSbuscribe(String userNo) {
 
 	    return recipeDao.selectSbuscribe(userNo);
 	  }
-
+	  
+	  //준
+    @Override
+    public List<Recipe> selectSbuscribe2(String userNo, int pageNo, int pageSize) {
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("userNo", userNo);
+      params.put("startIndex", (pageNo - 1) * pageSize);
+      params.put("len", pageSize);
+      return recipeDao.selectSbuscribe2(params);
+    }
     @Override
     public int addScrap(int userNo, int recipeNo) {
       HashMap<String,Object> params = new HashMap<>();

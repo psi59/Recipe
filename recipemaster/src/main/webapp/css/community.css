@@ -1,5 +1,101 @@
+
+/* ======================================================== */
+body{
+	background: #f0f0f0;
+}
+
+
+
+.rcp-pagemiddle1{
+	    margin-bottom: 13%;
+        
+	color: #515d6e;
+}
+
+.rcp-pagemiddle-div1{
+	    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    background: white;
+    width: 241px;
+  height: 100px;
+  position: relative;
+  float: left;
+   margin-right: 20px;
+    padding: 20px;
+}
+
+.rcp-pagemiddle-div2{
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    background: white;
+   width: 241px;
+  height: 100px;
+  position: relative;
+  float: left;
+    margin-right: 20px;
+    padding: 20px;
+}
+
+
+.rcp-pagemiddle-div3{
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    background: white;
+   width: 241px;
+ height: 100px;
+  position: relative;
+  float: left;
+    margin-right: 20px;
+    padding: 20px;
+}
+
+
+.rcp-pagemiddle-div4{
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    background: white;
+    width: 241px;
+  height: 100px;
+  position: relative;
+   float: left;
+   
+    padding: 20px;
+}
+
+.rcp-pagemiddle-div-img{
+	position: relative;
+	width: 50px;
+  height: 50px;
+}
+
+.heading {
+    display: block;
+    position: relative;
+    color: #515d6e;
+    text-align: right;
+    z-index: 10;
+        font-size: 1.2em;
+    font-weight: 300;
+    text-transform: uppercase;
+        top: -50px;
+}
+
+.value {
+	display: block;
+    position: relative;
+    font-size: 2.1em;
+    font-weight: 600;
+    margin-top: 5px;
+    text-align: right;
+        top: -62px;
+}
+
+
+
+/* ======================================================== */
+
 .navbar {
 	top: 0px !important;
+}
+
+.fa-windows {
+    color: #1C7EBB;
 }
 
 .rcp-fullpage {
@@ -15,6 +111,9 @@
 	background-image: URL(../img/pagebanner.jpg);
 	width: 100%;
 	height: 20%;
+	    margin-bottom: 2%;
+	    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+   /*  background: white !important; */
 }
 
 .rcp-topimg {
@@ -48,23 +147,25 @@
 }
 
 .rcp-pageleft {
-	width: 70%;
-	height: 70%;
+	width: 69%;
 	float: left;
 	padding: 10px;
-	border: 1px solid #BDBDBD;
+	/* border: 1px solid #BDBDBD; */
   border-top: 0px;
   border-bottom: 0px;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    background: white !important;
 }
 
 .rcp-pageright {
 	width: 30%;
-	height: 70%;
 	float: right;
-	border: 1px solid #BDBDBD;
+	/* border: 1px solid #BDBDBD; */
   border-top: 0px;
   border-left: 0px;
   border-bottom: 0px;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    background: white !important;
 }
 
 rcp-Vst-id {

@@ -344,11 +344,12 @@ public class RecipeController {
 
 		return new Gson().toJson(result);
 	}
+
 	//커뮤니티 레시피 리스트 : 용  ----  고재현 수정. 
 	@RequestMapping(path="comList",produces="application/json;charset=UTF-8")
   @ResponseBody 
-  public String comList(String email){
-    HashMap<String,Object> result = new HashMap<>();
+  public String comListKo(String email){
+	  HashMap<String,Object> result = new HashMap<>();
     Recipe recipe = new Recipe();
     try{
       User user = userService.selectFromEmail(email);
@@ -369,8 +370,30 @@ public class RecipeController {
       e.printStackTrace();
       result.put("status", "false");
     }
+ 
+    return new Gson().toJson(result);
+  }
+
+
+
+
+  //community준모,용이형
+  @RequestMapping(path="comList",produces="application/json;charset=UTF-8")
+  @ResponseBody 
+  public String comList( @RequestParam(defaultValue="1") int pageNo,
+                          @RequestParam(defaultValue="4") int pageSize,HttpSession session){
+
+    HashMap<String,Object> result = new HashMap<>();
+    Recipe recipe = new Recipe();
+    try{
+      List<Recipe> myRecipeList = recipeService.selectSbuscribe2((session.getAttribute("userNo")).toString(),pageNo,pageSize);
+      result.put("status","success");
+      result.put("data", myRecipeList);
+    }catch (Exception e){ 
+      result.put("status", "false");
+    }
     System.out.println(result);
     return new Gson().toJson(result);
   }
-	
-}
+    }
+

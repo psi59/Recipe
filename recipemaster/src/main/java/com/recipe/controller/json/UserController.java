@@ -28,7 +28,7 @@ public class UserController {
   public String list(@RequestParam(defaultValue="1")int pageNo,
                      @RequestParam(defaultValue="3")int pageSize){
     HashMap<String, Object> result = new HashMap<>();
-    try{
+    try{ 
       List<User> list = userService.getUserList(pageNo, pageSize);
 
       result.put("status", "success");
@@ -36,7 +36,7 @@ public class UserController {
     }catch(Exception e){
       result.put("status", "failure");
     }
-
+ 
     return new Gson().toJson(result);
   }
 
