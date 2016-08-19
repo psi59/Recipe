@@ -423,10 +423,12 @@ function rcpListScrollAppend(){
 	  if(a != null){
 	    userNo = eval(sessionStorage.getItem('data'))[0].userNo;
 	  }
-	  
+	  if(isNaN(parseInt($('#rcpList-pageNo').val())+1)){
+		  return;
+	  }
 	  var source = $('#comRcpList-template').text();
 	  var template = Handlebars.compile(source);  
-	  
+	   
 	  $.ajax({
 	    url : 'recipe/comList.json',
 	    method : 'post',
