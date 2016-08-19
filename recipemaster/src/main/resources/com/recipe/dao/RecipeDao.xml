@@ -104,7 +104,7 @@
         insert into rcp_mt(rcpno, mtno, rcpqt)
         values <!-- (#{recipeNo}, #{materialName}, #{materialAmount}) -->
         <foreach collection="materialList" item="item" separator=" , ">
-            (#{recipeNo}, #{item.materialName}, #{item.materialAmount})
+            (#{recipeNo}, #{item.materialNo}, #{item.materialAmount})
         </foreach>
   </insert>
   
