@@ -18,34 +18,13 @@ $(function () {
 
 	$('#userNo').val('1'); //hidden 태그에 userNo set
 
-	$('#appmtbtn')
-	.click(
-			function() {
-				$("#appendSlot")
-				.append(
-						'<div name="addSlot">'
-						+'<div class="rcp-form-row">'
-						+'<div class="inputwrapper form_70_width">'
-						+'<label for="d1">재료명</label> '
-						+'<input name="materialName" type="text" />'
-						+'</div>'
-						+'<div class="inputwrapper form_15_width">'
-						+'<label for="d1">분량</label>'
-						+'<input name="materialAmount" type="text" placeholder="(예:400g)"/>'
-						+'</div>'
-						+'<span class="form_15_width" name="delMt">'
-						+'<button type="button" class="btn btn-default rcp-delMtSlot"id="delMtBtn" name="delMtSlot">삭제</button>'
-						+'</span></div></div>'
-				);
-			}) 
-
-			$(document).on('click', "button[name='delMtSlot']", function() {
+	$(document).on('click', "button[name='delMtSlot']", function() {
 //				if($(this).parent().parent().length==1){
 //				alert('재료는 하나 이상 등록하셔야 합니다.')
 //				} else {
-				$(this).parent().parent().remove();
+		$(this).parent().parent().remove();
 //				}
-			});
+	});
 
 //	대표사진등록관련 js
 	$('#representImage').fileupload({
@@ -205,13 +184,19 @@ $(function () {
 
 
 	$('input').each(function() {
-		$(this).on('focus', function() {  $(this).parent('.inputwrapper').addClass('active');
+		$(this).on('focus', function() {  
+			$(this).parent('.inputwrapper').addClass('active');
+			$(this).parent().parent('.inputwrapper').addClass('active');
 		});
 		$(this).on('blur', function() {
 			if ($(this).val().length == 0) {
 				$(this).parent('.inputwrapper').removeClass('active');
+				$(this).parent().parent('.inputwrapper').removeClass('active');
 			}
 		});
-		if ($(this).val() != '') $(this).parent('.inputwrapper').addClass('active');
+		if ($(this).val() != ''){
+			$(this).parent('.inputwrapper').addClass('active');
+			$(this).parent().parent('.inputwrapper').removeClass('active');
+		}
 	});
 });
