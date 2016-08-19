@@ -303,6 +303,7 @@ public class RecipeController {
 	@RequestMapping(path="materialSearch",produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String mts(@RequestParam("searchValue") String materialName, Model model) {
+	  System.out.println(materialName);
 		Map<String,Object> result = new HashMap<>();
 		List<Material> list = recipeService.getMaterial(materialName);
 		List<Map<String,Object>> foodstuffList = new ArrayList<>();
@@ -349,7 +350,7 @@ public class RecipeController {
 	}
 
 	//커뮤니티 레시피 리스트 : 용  ----  고재현 수정. 
-	@RequestMapping(path="comList",produces="application/json;charset=UTF-8")
+	@RequestMapping(path="comListKo",produces="application/json;charset=UTF-8")
   @ResponseBody 
   public String comListKo(String email){
 	  HashMap<String,Object> result = new HashMap<>();
