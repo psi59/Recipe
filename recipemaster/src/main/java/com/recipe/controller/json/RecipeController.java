@@ -275,7 +275,7 @@ public class RecipeController {
       List<Recipe> myRecipeList = recipeService.selectSbuscribe2((session.getAttribute("userNo")).toString(),pageNo,pageSize);
       result.put("status","success");
       result.put("data", myRecipeList);
-    }catch (Exception e){
+    }catch (Exception e){ 
       result.put("status", "false");
     }
     return new Gson().toJson(result);
