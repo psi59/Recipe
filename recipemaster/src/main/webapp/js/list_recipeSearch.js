@@ -1,16 +1,21 @@
 /* 검색 및 정렬 이벤트 -성현 */
 $(function() {
 	
+	$('#searchKeyword').focus();
+	
+	// 처음화면에 모든 레시피들을 보여준다
+	search('newest', $('#order-latest-btn').val());
+	
 	// 검색버튼 클릭 검색 이벤트
 	$('#searchBtn').click(function() {
 		$("body").scrollTop(0);
-		search('newest');			    
+		search('newest', $('#order-latest-btn').val());			    
 	});
 	
 	// 키보드에서 뗐을때의 검색 이벤트
 	$('#searchKeyword').keyup( function(){
 		$("body").scrollTop(0);
-		search('newest'); 
+		search('newest', $('#order-latest-btn').val()); 
 	});
 	
 	// 최신순 정렬
@@ -80,12 +85,17 @@ function search(sort,order){
 	})	
 }
 // 스크롤 끝까지 내렸을때 추가될 결과 한페이지씩 가져오기
-function searchScrollAppend(order){ 
+function searchScrollAppend(){ 
 		
 	var source = $('#recipe-card-search-template').text();
-	var template = Handlebars.compile(source);	
-	
+	var template = Handlebars.compile(source);		
 	var pageNo = parseInt($('#search-pageNo').val())+1;
+	
+	if($('#sort-condition').val() == 'newest'){
+		var order = $('#order-latest-btn').val();		
+	} else {
+		var order = $('#order-grade-btn').val();
+	}
 	
 	$.ajax({
 		url : 'recipe/listSearch.json',
@@ -94,7 +104,7 @@ function searchScrollAppend(order){
 			pageNo : pageNo,
 			searchKeyword : $('#searchKeyword').val(),
 			sortCondition : $('#sort-condition').val(),
-			orderCondition : $('#order-grade-btn').val()
+			orderCondition : order
 		},
 		dataType : 'json',
 		success : function(result) {
