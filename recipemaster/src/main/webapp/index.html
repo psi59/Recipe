@@ -487,7 +487,9 @@
                 <h4 class="pull-right rcp-Grade">평점</h4>
                 <h5 class="pluu-left rcp-relative rcp-profileName">
 
-                  <span class="glyphicon glyphicon-star"></span><a href="#" title="{{user.userNo}}">{{user.userName}}</a>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <input type="hidden" value="{{user.email}}">
+                   <a href="#" class="rcp-userName">{{user.userName}}</a>
                 </h5>
                 <!-- 두번째 줄 (레시피명, 점수)  -->
                 <div class="rcp-relative rcp-height30">
@@ -650,10 +652,13 @@
 	<!--  사용자 js -->
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/common.js"></script>
-	<script src="js/detail.js"></script>	
-	<script src="js/mainListAjax.js"></script>
-	<script src="js/recipeDetail.js"></script>
 	<script src="js/login.js"></script>
+	
+	<!--  재현 -->
+	<script src="js/detail.js"></script>  
+  <script src="js/mainListAjax.js"></script>
+  <script src="js/recipeDetail.js"></script>
+<!-- 	<script src="js/community.js"></script> -->
 	<!-- 용이 userUpdate -->
 	<script src="js/updateUser.js"></script>
 	<!-- 성현 -->  
@@ -669,7 +674,7 @@
 			
 
 			/* 준모3 */
-			if (eval(sessionStorage.getItem('data'))[0].userNo != null) {
+			if (eval(sessionStorage.getItem('data')) != null) {
 
 				$('#topbarUserImg')
 						.html(

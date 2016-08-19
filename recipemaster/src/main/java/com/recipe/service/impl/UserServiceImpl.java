@@ -78,4 +78,10 @@ public class UserServiceImpl implements UserService {
   public void updateUser(User user) {
     userDao.update(user);
   }
+
+  @Override
+  public User selectFromEmail(String email) {
+    // TODO Auto-generated method stub
+    return userDao.selectFromEmail(email);
+  }
 }

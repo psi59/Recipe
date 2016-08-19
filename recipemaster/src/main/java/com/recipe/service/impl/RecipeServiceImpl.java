@@ -11,6 +11,7 @@ import com.recipe.dao.RecipeDao;
 import com.recipe.domain.Material;
 import com.recipe.domain.Recipe;
 import com.recipe.domain.Search;
+import com.recipe.domain.User;
 import com.recipe.service.RecipeService;
 
 @Service
@@ -142,6 +143,26 @@ public class RecipeServiceImpl implements RecipeService {
       params.put("toUserNo", toUserNo);
       params.put("fromUserNo", fromUserNo);
       return recipeDao.addSubscribe(params);
+    }
+
+    @Override
+    public List<Recipe> selectMypage(int userNo) {
+      // TODO Auto-generated method stub
+      return recipeDao.selectMypage(userNo);
+    }
+
+    @Override
+    public List<Recipe> selectScrapUserNoMypage(int userNo) {
+      // TODO Auto-generated method stub
+      return recipeDao.selectScrapUserNoMypage(userNo);
+    }
+
+    @Override
+    public List<Recipe> selectScrapMypage(String userNumbers, int userNo) {
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("userNumbers", userNumbers);
+      params.put("userNo", userNo);
+      return recipeDao.selectScrapMypage(params);
     }
 	
 }

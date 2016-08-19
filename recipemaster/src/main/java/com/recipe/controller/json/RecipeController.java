@@ -24,12 +24,14 @@ import com.recipe.domain.Recipe;
 import com.recipe.domain.Search;
 import com.recipe.domain.User;
 import com.recipe.service.RecipeService;
+import com.recipe.service.UserService;
 
 @Controller
 @RequestMapping("/recipe/")
 public class RecipeController {
 
 	@Autowired RecipeService recipeService;
+	@Autowired UserService userService;
 	
 	// 이성현
 	@RequestMapping(path="listSearch",produces="application/json;charset=UTF-8")
@@ -253,12 +255,10 @@ public class RecipeController {
       
       if(session.getAttribute("userNo") == null){
         result.put("status", "notLogin");
-        System.out.println("notLogin");
       }else{
       userNo.setUserNo((int)session.getAttribute("userNo"));      
       recipeService.addScrap(userNo.getUserNo(), recipeNo);
       result.put("status","success");
-      System.out.println("success");
       }      
     }catch(Exception e){
       result.put("status", "false");
@@ -273,7 +273,6 @@ public class RecipeController {
     
     User userNo = new User();
     userNo.setUserNo((int)session.getAttribute("userNo"));
-    System.out.println(userNo.getUserNo());
     
     recipeService.deleteScrap(userNo.getUserNo(), recipeNo);
     try{
@@ -345,18 +344,32 @@ public class RecipeController {
 
 		return new Gson().toJson(result);
 	}
-	//커뮤니티 레시피 리스트 : 용
+	//커뮤니티 레시피 리스트 : 용  ----  고재현 수정. 
 	@RequestMapping(path="comList",produces="application/json;charset=UTF-8")
   @ResponseBody 
-  public String comList(HttpSession session){
+  public String comList(String email){
     HashMap<String,Object> result = new HashMap<>();
+    Recipe recipe = new Recipe();
     try{
-      List<Recipe> myRecipeList = recipeService.selectSbuscribe((session.getAttribute("userNo")).toString());
+      User user = userService.selectFromEmail(email);
+      List<Recipe> userScrapNumbers = recipeService.selectScrapUserNoMypage(user.getUserNo());
+      for(int i =0; i<userScrapNumbers.size(); i++){
+        if(recipe.getScrap() == null){    
+          recipe.setScrap(String.valueOf(userScrapNumbers.get(0).getRecipeNo()));
+        }else{
+          recipe.setScrap(recipe.getScrap()+","+ userScrapNumbers.get(i).getRecipeNo());
+        }
+      }
+      System.out.println("여기옴?");
+      List<Recipe> scrapList = recipeService.selectScrapMypage(recipe.getScrap(), user.getUserNo());
+      System.out.println("여기옴? service");
       result.put("status","success");
-      result.put("data", myRecipeList);
+      result.put("data",scrapList);
     }catch (Exception e){
+      e.printStackTrace();
       result.put("status", "false");
     }
+    System.out.println(result);
     return new Gson().toJson(result);
   }
 	

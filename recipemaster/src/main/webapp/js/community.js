@@ -16,8 +16,12 @@
     			})
     		})
     	})
+    	
+ 
     })
-	
+    
+
+  
 
 
 /*탑바 js(common.js 에 공통적으로 들어갈부분 일단 넣음*/
@@ -26,7 +30,7 @@
       //getRealTimeRank();
 
       /* 준모3 */
-      if (eval(sessionStorage.getItem('data'))[0].userNo != null) {
+      if (eval(sessionStorage.getItem('data')) != null) {
 
         $('#topbarUserImg')
             .html(

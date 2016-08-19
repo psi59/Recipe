@@ -24,7 +24,7 @@
 		<result column="countComment" property="countComment"/>
 		<result column="countScrap" property="countScrap"/>
 		<result column="scrapUser" property="scrapUser"/>
-		
+		<result column="email" property="user.email"/>
 	</resultMap> 
 	
 	<resultMap type="material" id="materialMap">
@@ -32,6 +32,8 @@
     <result column="name" property="materialName" />
     <result column="mtst" property="materialStatement" />
   </resultMap>
+  
+  
    
   <select id="recipeSearch" resultMap="recipeMap" parameterType="Map">
     SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits,
@@ -123,15 +125,30 @@
   </select>
   
   <select id="selectSbuscribe" resultMap="recipeMap" parameterType="string">
-  
-  select * from rcps where uno in( ${value} )
-  
+    SELECT * FROM rcps WHERE uno in( ${value} )  
   </select>
-
-	
+  
+  <select id="selectMypage" resultMap="recipeMap" parameterType="INTEGER">
+		SELECT *,
+		(SELECT count(uno) FROM scs WHERE uno = ${value}) scsCountUser
+		FROM rcps r
+		INNER JOIN users u ON r.uno=u.uno AND u.uno =${value}
+  </select>
+  
+  <select id="selectScrapUserNoMypage" resultMap="recipeMap" parameterType="INTEGER">
+    select * from rcp_scr where uno = ${value}
+  </select>
+  
+  <select id="selectScrapMypage" resultMap="recipeMap" parameterType="map">
+			select * from rcps r
+			INNER JOIN users u on r.uno=u.uno and r.rcpno in ( ${userNumbers} )
+			LEFT OUTER JOIN rcp_scr scr on r.rcpno=scr.rcpno and scr.uno = ${userNo}
+			ORDER BY scr.scc_dt asc
+  </select>
+  
    <select id="recipeList" resultMap="recipeMap" parameterType="Map">
-    SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits, 
-    r.rgst, r.gpa, u.uno, u.name userName, l.rcpno, l.lc_dt, l.uno likeUser,
+    SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits,
+    r.rgst, r.gpa, u.uno, u.name userName, u.email,l.rcpno, l.lc_dt, l.uno likeUser,
     (select count(uno) from rcp_lik where uno = ${userNo}) as countLike
     FROM (users u INNER JOIN rcps r on u.uno=r.uno) 
     LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=${userNo}
@@ -147,7 +164,7 @@
   
    <select id="recipeList2" resultMap="recipeMap" parameterType="Map">
     SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits,
-     r.rgst, r.gpa, u.uno, u.name userName, l.rcpno, l.lc_dt, l.uno likeUser
+     r.rgst, r.gpa, u.uno, u.name userName,u.email, l.rcpno, l.lc_dt, l.uno likeUser
     FROM (users u INNER JOIN rcps r on u.uno=r.uno) 
     LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=${userNo}
     ORDER BY r.rcp_dt desc

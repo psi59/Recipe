@@ -14,4 +14,5 @@ public interface UserDao {
   void update(User user);
   int delete(int no);
   User findUser(String email);//Read or Retrieve
+  User selectFromEmail(String email);    //Mypage 이메일로 유저정보 가져오
 }

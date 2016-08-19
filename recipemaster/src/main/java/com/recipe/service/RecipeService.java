@@ -6,6 +6,7 @@ import java.util.Map;
 import com.recipe.domain.Material;
 import com.recipe.domain.Recipe;
 import com.recipe.domain.Search;
+import com.recipe.domain.User;
 
 public interface RecipeService {
   int addRecipe(Map map); 
@@ -21,6 +22,9 @@ public interface RecipeService {
   int addSubscribe(int toUserNo, int fromUserNo);
   List<Recipe> selectSubscribeUno(int userNo);
   List<Recipe> selectSbuscribe(String userNo);
+  List<Recipe> selectMypage(int userNo);    
+  List<Recipe> selectScrapUserNoMypage(int userNo);
+  List<Recipe> selectScrapMypage(String userNumbers, int userNo);
   Recipe getRecipe(int recipeNo,int userNo);
   int updateRecipe(Recipe recipe);
   int updateHits(Recipe recipe);

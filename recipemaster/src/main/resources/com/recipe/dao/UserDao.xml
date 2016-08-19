@@ -39,6 +39,11 @@
 		where u.uno = #{no}
 	</select>
 
+  <select id="selectFromEmail" resultMap="userMap" parameterType="string">
+  SELECT * FROM users WHERE email = '${value}'
+  </select>
+  
+
 	<select id="checkDuplication" resultMap="userMap" parameterType="String">
 		select uno, name, email, pwd, img, intro, role, join_dt, rcp_url
 		from
