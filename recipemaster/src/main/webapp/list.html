@@ -22,13 +22,13 @@
 <link rel="stylesheet" href="css/mainlist.css">
 <link rel="stylesheet" href="css/detail.css">
 <!-- 성현 -->
+<link rel="stylesheet" href="css/common/chefCard.css">
+<link rel="stylesheet" href="css/common/popup.css">
+<link rel="stylesheet" href="css/common/signup.css">
+<link rel="stylesheet" href="css/index_rankTabs.css">
 <link rel="stylesheet" href="css/list.css">
-<link rel="stylesheet" href="css/chefCard.css">
-<link rel="stylesheet" href="css/rankTabs.css">
-<link rel="stylesheet" href="css/popup.css">
-<link rel="stylesheet" href="css/categoryCheckbox.css">
-<link rel="stylesheet" href="css/listCountOrder.css">
-<link rel="stylesheet" href="css/signup.css">
+<link rel="stylesheet" href="css/list_categoryCheckbox.css">
+<link rel="stylesheet" href="css/list_countOrder.css">
 <!-- --- 아이콘 CDN ----- -->
 <!-- <script src="js/template/d9e67edb08.js"></script> -->
 
@@ -121,7 +121,8 @@
 	</section>
 	<!----------------------- /리스트 카테고리 ----------------------->
 	<!----------------------- 리스트 레시피 카운트 및 정렬 ----------------------->
-	<section id="rcp-list-count-order">	 
+	<section id="rcp-list-count-order">	
+	 <div id="rcp-list-count-order-first-div">
 		<div id="rcp-list-count">		  
 		  <h2 id="recipe-count"></h2>
 		</div>
@@ -136,8 +137,8 @@
 				<h2>평점순▼</h2>
 				<div class="btn-color"></div>
 			</button>
-
 		</div>   
+		</div>
 	</section>
 	<!----------------------- /리스트 레시피 카운트 및 정렬 ----------------------->
 
@@ -415,16 +416,15 @@
 	<!-- 용이 userUpdate -->
 	<script src="js/updateUser.js"></script>
 	<!-- 성현 -->	
-	<script src="js/popup.js"></script>
-  <script src="js/chefCard.js"></script>
-  <script src="js/signup.js"></script>
-	<script src="js/recipeSearch.js"></script>
+	<script src="js/common/popup.js"></script>
+  <script src="js/common/chefCard.js"></script>
+  <script src="js/common/signup.js"></script>
+	<script src="js/list_recipeSearch.js"></script>
 	<script>
 		$(function() {		
 			
 			getWeather();
-			getRealTimeRank();
-			
+			getRealTimeRank();			
 
 			  /* 준모3 */				  
 				if(eval(sessionStorage.getItem('data'))[0].userNo!=null){
