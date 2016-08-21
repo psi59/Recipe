@@ -6,30 +6,28 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.recipe.domain.Material;
 import com.recipe.domain.Recipe;
 import com.recipe.domain.Search;
 import com.recipe.domain.User;
 import com.recipe.service.RecipeService;
+import com.recipe.service.UserService;
 
 @Controller
 @RequestMapping("/recipe/")
 public class RecipeController {
 
 	@Autowired RecipeService recipeService;
+	@Autowired UserService userService;
 	
 	// 이성현
 	@RequestMapping(path="listSearch",produces="application/json;charset=UTF-8")
@@ -74,7 +72,7 @@ public class RecipeController {
 		Map<String, Object> map = new HashMap<>();
 		User user = new User();
 		user.setUserNo(1);
-		List<Map> materialList = new ArrayList<>();
+		List<Map<String, String>> materialList = new ArrayList<>();
 
 		for (MultipartFile mpf: images) {
             System.out.println(mpf.getOriginalFilename() + " uploaded");
@@ -253,12 +251,10 @@ public class RecipeController {
       
       if(session.getAttribute("userNo") == null){
         result.put("status", "notLogin");
-        System.out.println("notLogin");
       }else{
       userNo.setUserNo((int)session.getAttribute("userNo"));      
       recipeService.addScrap(userNo.getUserNo(), recipeNo);
       result.put("status","success");
-      System.out.println("success");
       }      
     }catch(Exception e){
       result.put("status", "false");
@@ -273,7 +269,6 @@ public class RecipeController {
     
     User userNo = new User();
     userNo.setUserNo((int)session.getAttribute("userNo"));
-    System.out.println(userNo.getUserNo());
     
     recipeService.deleteScrap(userNo.getUserNo(), recipeNo);
     try{
@@ -308,24 +303,32 @@ public class RecipeController {
 	@RequestMapping(path="materialSearch",produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String mts(@RequestParam("searchValue") String materialName, Model model) {
-		System.out.println("데헷데헷");
+	  System.out.println(materialName);
 		Map<String,Object> result = new HashMap<>();
 		List<Material> list = recipeService.getMaterial(materialName);
+		List<Map<String,Object>> foodstuffList = new ArrayList<>();
+		List<Map<String,Object>> seasoningList = new ArrayList<>();
 		System.out.println(list);
-		try{
-			result.put("status","success");
-			List<JsonObject> materialInfos = new ArrayList<>();
+		try{		
 			for(Material mt : list){
-				JsonObject data = new JsonObject();
-				data.addProperty("lable", mt.getMaterialName()+"/"+mt.getMaterialNo());
-				data.addProperty("category", (mt.getMaterialStatement()==1)?"식재료":"조미료");
-				materialInfos.add(data);
+				Map<String,Object> seasoning = new HashMap<>();
+				Map<String,Object> foodstuff = new HashMap<>();
+				if(mt.getMaterialStatement()==1){
+					foodstuff.put("name", mt.getMaterialName());
+					foodstuff.put("no", mt.getMaterialNo());
+					foodstuffList.add(foodstuff);
+				} else {
+					seasoning.put("name", mt.getMaterialName());
+					seasoning.put("no", mt.getMaterialNo());
+					seasoningList.add(seasoning);
+				}
+				result.put("foodstuff", foodstuffList);
+				result.put("seasoning", seasoningList);
 			}
-			result.put("data", materialInfos);
 		}catch (Exception e){
 			result.put("status", "false");
 		}
-
+		System.out.println(new Gson().toJson(result));
 		return new Gson().toJson(result);
 	}
 
@@ -345,19 +348,56 @@ public class RecipeController {
 
 		return new Gson().toJson(result);
 	}
-	//커뮤니티 레시피 리스트 : 용
-	@RequestMapping(path="comList",produces="application/json;charset=UTF-8")
+
+	//커뮤니티 레시피 리스트 : 용  ----  고재현 수정. 
+	@RequestMapping(path="comListKo",produces="application/json;charset=UTF-8")
   @ResponseBody 
-  public String comList(HttpSession session){
-    HashMap<String,Object> result = new HashMap<>();
+  public String comListKo(String email){
+	  HashMap<String,Object> result = new HashMap<>();
+    Recipe recipe = new Recipe();
     try{
-      List<Recipe> myRecipeList = recipeService.selectSbuscribe((session.getAttribute("userNo")).toString());
+      User user = userService.selectFromEmail(email);
+      List<Recipe> userScrapNumbers = recipeService.selectScrapUserNoMypage(user.getUserNo());
+      for(int i =0; i<userScrapNumbers.size(); i++){
+        if(recipe.getScrap() == null){    
+          recipe.setScrap(String.valueOf(userScrapNumbers.get(0).getRecipeNo()));
+        }else{
+          recipe.setScrap(recipe.getScrap()+","+ userScrapNumbers.get(i).getRecipeNo());
+        }
+      }
+      System.out.println("여기옴?");
+      List<Recipe> scrapList = recipeService.selectScrapMypage(recipe.getScrap(), user.getUserNo());
+      System.out.println("여기옴? service");
       result.put("status","success");
-      result.put("data", myRecipeList);
+      result.put("data",scrapList);
     }catch (Exception e){
+      e.printStackTrace();
       result.put("status", "false");
     }
+ 
     return new Gson().toJson(result);
   }
-	
-}
+
+
+
+
+  //community준모,용이형
+  @RequestMapping(path="comList",produces="application/json;charset=UTF-8")
+  @ResponseBody 
+  public String comList( @RequestParam(defaultValue="1") int pageNo,
+                          @RequestParam(defaultValue="4") int pageSize,HttpSession session){
+
+    HashMap<String,Object> result = new HashMap<>();
+    Recipe recipe = new Recipe();
+    try{
+      List<Recipe> myRecipeList = recipeService.selectSbuscribe2((session.getAttribute("userNo")).toString(),pageNo,pageSize);
+      result.put("status","success");
+      result.put("data", myRecipeList);
+    }catch (Exception e){ 
+      result.put("status", "false");
+    }
+    System.out.println(result);
+    return new Gson().toJson(result);
+  }
+    }
+

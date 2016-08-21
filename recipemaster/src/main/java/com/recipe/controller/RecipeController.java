@@ -44,7 +44,7 @@ public class RecipeController {
 	@ResponseBody
 	public String addRecipe(Recipe recipe,
 			// @RequestParam("userNo") int userNo,
-			@RequestParam("materialName") String[] materialNames,
+			@RequestParam("materialNo") String[] materialNos,
 			@RequestParam("materialAmount") String[] materialAmounts,
 			@RequestParam("recipeProduce") String[] recipeProduce,
 			@RequestParam("imageFiles") List<MultipartFile> imageFiles,
@@ -60,9 +60,11 @@ public class RecipeController {
 		User user = new User();
 		user.setUserNo(1);
 
-		for (int i = 0; i < materialNames.length; i++) {
+		for (int i = 0; i < materialNos.length; i++) {
 			Map<String, String> matertialInfo = new HashMap<>();
-			matertialInfo.put("materialName", materialNames[i]);
+			System.out.println(materialNos.toString());
+			System.out.println(materialAmounts.toString());
+			matertialInfo.put("materialNo", materialNos[i]);
 			matertialInfo.put("materialAmount", materialAmounts[i]);
 			materialList.add(matertialInfo);
 		}

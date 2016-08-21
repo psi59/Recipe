@@ -24,7 +24,7 @@ public class VisitorController {
   @RequestMapping(path="list", produces="application/json;charset=UTF-8")
   @ResponseBody
   public String list(@RequestParam(defaultValue="1")int pageNo, 
-      @RequestParam(defaultValue="10")int pageSize){
+                      @RequestParam(defaultValue="10")int pageSize){
 
     HashMap<String,Object> result = new HashMap<>();
     try{
@@ -70,7 +70,6 @@ public class VisitorController {
   public String update(Visitor visitor){    
     HashMap<String,Object> result = new HashMap<>();
     try{
-      System.out.println(visitor);
       visitorService.updateVisitor(visitor);
       result.put("status", "success");      
     }catch(Exception e){

@@ -29,6 +29,9 @@
 </style>
 </head>
 <body>
+
+  
+
 	<!--준모_login------------------------------------------------------------------------------- -->
 	<div id='login-pop-up-banner'>
 		<div class="rcp-section">
@@ -176,17 +179,41 @@
 			<div>
 				<img src="/img/pika.jpg" class="rcp-topimg">
 				<div class="rcp-topinfo">
-					<h3>길용이</h3>
+
+					<h3 class="rcp-userName">길용이</h3>
 					<h4>구독자수 : 194,553명</h4>
+
 					<button class="btn btn-default rcp-topbtn">구독하기</button>
 				</div>
 			</div>
 		</section>
-		<!-- <section class="rcp-pagemiddle">
-      <div>
-        <p>여기는 여러가지 미리보기 들어감</p>
+		
+		<section class="rcp-pagemiddle1">
+      <div  class="rcp-pagemiddle-div1">
+              <img class="rcp-pagemiddle-div-img"  src="img/profileImg/users.png">
+              <span class="heading">방문자</span>
+              <span class="value">1234명</span>
       </div>
-    </section> -->
+      <div class="rcp-pagemiddle-div2">
+      <img class="rcp-pagemiddle-div-img" src="img/profileImg/like-1.png">
+              <span class="heading">좋아요</span>
+              <span class="value">12개</span>
+      </div>
+      <div class="rcp-pagemiddle-div3">
+      <img class="rcp-pagemiddle-div-img" src="img/profileImg/attachment.png">
+              <span class="heading">스크랩</span>
+              <span class="value">124개</span>
+      </div>
+      <div class="rcp-pagemiddle-div4">
+      <img class="rcp-pagemiddle-div-img" src="img/profileImg/star-1.png">
+              <span class="heading">평점</span>
+              <span class="value">4점</span>
+      </div>
+    </section>
+    
+    <!-- page hidden -->
+    <input id="rcpList-pageNo" type="hidden" value="1">
+    
 		<section class="rcp-pageleft">
 
 
@@ -348,32 +375,87 @@
       </div>
  {{/each}}
   </script>
-	<script>
-    if (eval(sessionStorage.getItem('data'))!= null) {
-var sourceCRList = $('#comRcpList-template').text();
-var templateCRList = Handlebars.compile(sourceCRList);
-loadComRcpList();
+<script>
+$(window).scroll(function() { 
+    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+    	rcpListScrollAppend();
     }
       /* 준모3 */
-
-function loadComRcpList() {
-  $.ajax({
-    url :'recipe/comList.json',
-    dataType : 'json',
-    method : 'get',
-    success : function(result) {
-      if (result.status != 'success') {
-        alert('실행 중 오류 발생');
-        return;
-      }
-      $('#tabs-1 .rcp-subscribe').append(templateCRList(result));
-    },
-    error : function() {
-      alert('서버 요청 오류!...')
-    }
-  });
-}
+});
 </script>
+<script> 
+$(function(){
+	loadComRcpList();	
+});
+
+function loadComRcpList(){ 
+	
+	var userNo = 0; 
+	  var a = eval(sessionStorage.getItem('data'));   
+	  if(a != null){
+	    userNo = eval(sessionStorage.getItem('data'))[0].userNo;
+	  }
+	  
+	  var source = $('#comRcpList-template').text();
+	  var template = Handlebars.compile(source);  
+	  $.ajax({
+	    url : 'recipe/comList.json',
+	    method : 'post',
+	    data : {
+	      userNo : userNo
+	    },
+	    dataType : 'json',
+	    success : function(result) {
+	      if (result.status != 'success') {
+	        swal('실패 ~');
+	        return;
+	      }
+	      //$('#search-result > div').remove();    
+	      $('#tabs-1 .rcp-subscribe').append(template(result));
+	      $('#rcpList-pageNo').attr('value', '1');
+	    },
+	    error : function() {
+	      swal('더이상 데이터가 없습니다.')
+	    }
+	  })  
+	}
+</script>
+<script>
+function rcpListScrollAppend(){ 
+	var userNo = 0; 
+	  var a = eval(sessionStorage.getItem('data'));   
+	  if(a != null){
+	    userNo = eval(sessionStorage.getItem('data'))[0].userNo;
+	  }
+	  if(isNaN(parseInt($('#rcpList-pageNo').val())+1)){
+		  return;
+	  }
+	  var source = $('#comRcpList-template').text();
+	  var template = Handlebars.compile(source);  
+	   
+	  $.ajax({
+	    url : 'recipe/comList.json',
+	    method : 'post',
+	    data : {
+	      userNo : userNo,
+	      pageNo : parseInt($('#rcpList-pageNo').val())+1
+	    },
+	    dataType : 'json',
+	    success : function(result) {
+	      if (result.status != 'success') {
+	        swal('실패 ~');
+	        return;
+	      }
+	      $('#tabs-1 .rcp-subscribe').append(template(result));     
+	      $('#rcpList-pageNo').val(result.pageNo);
+	    },
+	    error : function() {
+	      swal('오호라~','더이상 데이터가 없습니다.')
+	    }
+	  })  
+	}
+</script>
+
 	<script src="js/subscribe.js"></script>
 	<script src="js/community.js"></script>
 </body>

@@ -14,4 +14,5 @@ public interface UserService {
   void updateUser(User user); //유저정보수정(용이-완료)
   int deleteUser(int no);
   User loginUser(User user); //login
+  User selectFromEmail(String email);  
 }

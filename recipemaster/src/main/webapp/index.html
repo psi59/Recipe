@@ -12,9 +12,9 @@
 <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/template/font-awesome.min.css">
 <link rel="stylesheet" href="css/template/animate.css">
-<link rel="stylesheet" href="css/template/main.css">
+<link rel="stylesheet" href="css/template/main.css"> 
 <link rel="stylesheet"
-	href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
+	href="js/template/jquery-ui-1.12.0/jquery-ui.min.css"> 
 	
 <link rel="stylesheet" href="node_modules/bxslider/dist/jquery.bxslider.css">
 
@@ -23,15 +23,14 @@
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/userinfobox.css">
 <link rel="stylesheet" href="css/signup.css">
-<link href="css/mainlist.css" rel="stylesheet">
 <link rel="stylesheet" href="css/mainlist.css">
 <link rel="stylesheet" href="css/detail.css">
 <link rel="stylesheet" href="css/updateImg.css">
 <!-- 성현 -->
-<link rel="stylesheet" href="css/chefCard.css">
-<link rel="stylesheet" href="css/rankTabs.css">
-<link rel="stylesheet" href="css/popup.css">
-<link rel="stylesheet" href="css/signup.css">
+<link rel="stylesheet" href="css/common/chefCard.css">
+<link rel="stylesheet" href="css/common/popup.css">
+<link rel="stylesheet" href="css/common/signup.css">
+<link rel="stylesheet" href="css/index_rankTabs.css">
 <!-- alert css -->
 <link rel="stylesheet"
   href="node_modules/sweetalert/dist/sweetalert.css">
@@ -489,7 +488,9 @@
                 <h4 class="pull-right rcp-Grade">평점</h4>
                 <h5 class="pluu-left rcp-relative rcp-profileName">
 
-                  <span class="glyphicon glyphicon-star"></span><a href="#" title="{{user.userNo}}">{{user.userName}}</a>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <input type="hidden" value="{{user.email}}">
+                   <a href="#" class="rcp-userName">{{user.userName}}</a>
                 </h5>
                 <!-- 두번째 줄 (레시피명, 점수)  -->
                 <div class="rcp-relative rcp-height30">
@@ -653,17 +654,20 @@
 	<!--  사용자 js -->
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/common.js"></script>
-	<script src="js/detail.js"></script>	
-	<script src="js/mainListAjax.js"></script>
-	<script src="js/recipeDetail.js"></script>
 	<script src="js/login.js"></script>
+	
+	<!--  재현 -->
+	<script src="js/detail.js"></script>  
+  <script src="js/mainListAjax.js"></script>
+  <script src="js/recipeDetail.js"></script>
+<!-- 	<script src="js/community.js"></script> -->
 	<!-- 용이 userUpdate -->
 	<script src="js/updateUser.js"></script>
 	<!-- 성현 -->  
-  <script src="js/popup.js"></script>
-  <script src="js/chefCard.js"></script>
-  <script src="js/signup.js"></script>  
-  <script src="js/mainListMove.js"></script>
+  <script src="js/common/popup.js"></script>
+  <script src="js/common/chefCard.js"></script>
+  <script src="js/common/signup.js"></script>  
+  <script src="js/index_listPageMove.js"></script>
 	
 	<script>
 		$(function() {
@@ -672,7 +676,7 @@
 			
 
 			/* 준모3 */
-			if (eval(sessionStorage.getItem('data'))[0].userNo != null) {
+			if (eval(sessionStorage.getItem('data')) != null) {
 
 				$('#topbarUserImg')
 						.html(

@@ -29,7 +29,14 @@ public class Recipe {
   private int countComment;
   private int countScrap;
   private int scrapUser;
+  private String scrap;
   
+  public String getScrap() {
+    return scrap;
+  }
+  public void setScrap(String scrap) {
+    this.scrap = scrap;
+  }
   public int getScrapUser() {
     return scrapUser;
   }
@@ -177,6 +184,6 @@ public class Recipe {
         + recipeDate + ", hits=" + hits + ", regiStatus=" + regiStatus + ", gradePoint=" + gradePoint + ", user=" + user
         + ", likeDate=" + likeDate + ", likeUser=" + likeUser + ", countLike=" + countLike + ", subscribeNum="
         + subscribeNum + ", subscribe=" + subscribe + ", countComment=" + countComment + ", countScrap=" + countScrap
-        + ", scrapUser=" + scrapUser + "]";
+        + ", scrapUser=" + scrapUser + ", scrap=" + scrap + "]";
   }	
 }
