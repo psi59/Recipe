@@ -56,14 +56,14 @@ function login(event) {
 
 
 						/*eval 사용 방법, eval(jsonData)[0].email*/
-						/*alert('1111'+eval(jsonData)[0].role);*/
+						/*swal('1111'+eval(jsonData)[0].role);*/
 						sessionStorage.setItem('data', jsonData);
 						sessionStorage.setItem('name', result.data.userName);
 						location.reload();
 
 						$('#login-pop-up-banner').bPopup().close();
 					} else {
-						alert('비밀번호를 다시 입력해주세요');
+						swal('비밀번호를 다시 입력해주세요');
 					}
 
 
@@ -74,7 +74,7 @@ function login(event) {
 
 				},
 				error : function() {
-					alert('서버 요청 오류');
+					swal('서버 요청 오류');
 				}
 			}); /* end of ajax */
 		}; /* end of jquery */
@@ -149,12 +149,12 @@ $(function() {
 				var jsonData = JSON.stringify(data);
 
 				/*eval 사용 방법, eval(jsonData)[0].email*/
-				/*alert('1111'+eval(jsonData)[0].role);*/
+				/*swal('1111'+eval(jsonData)[0].role);*/
 				sessionStorage.setItem('data', jsonData);
 
 		},
 		error : function() {
-			alert('서버 요청 오류');
+			swal('서버 요청 오류');
 		}
 	}); /* end of ajax */
 	} /*end of if*/

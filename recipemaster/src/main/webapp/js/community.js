@@ -92,14 +92,14 @@
         method : 'get',
         success : function(result) {
           if (result.status != 'success') {
-            alert('실행 중 오류 발생');
+            swal('실행 중 오류 발생');
             return;
           }
 
           $('#Vst').append(templateVisitor(result));
         },
         error : function() {
-          alert('서버 요청 오류!...')
+          swal('서버 요청 오류!...')
         }
       }); 
     }  
@@ -118,7 +118,7 @@
         dataType : 'json',
         success : function(result) {
           if (result.status != 'success') {
-            alert('등록 오류입니다.');
+            swal('등록 오류입니다.');
             return;
           }
                     
@@ -126,7 +126,7 @@
           loadVisitor(); // 테이블 데이터를 갱신한다.
         },
         error : function() {
-          alert('서버 요청 오류 !')
+          swal('서버 요청 오류 !')
         }
       })
       $('#rcp-rpcontent').val("");
@@ -144,7 +144,7 @@
     	    $.getJSON('visitor/delete.json?no=' + vNo,
     	                 function(result) {
     	                if (result.status != 'success') {
-    	                    alert('게시물 삭제 오류');
+    	                    swal('게시물 삭제 오류');
     	                    return;
     	                  }
     	                $(this).parent().parent().parent().parent().remove();
@@ -177,7 +177,7 @@
 	    	  visitorContent : $('#updatevContent').val()
 	      }, function(result) {
 	        if (result.status != 'success') {
-	          alert('변경 오류입니다.');
+	          swal('변경 오류입니다.');
 	          return;
 	        }
 	    	  $('#Vst>').remove(); 

@@ -65,7 +65,7 @@ function search(sort,order){
 		dataType : 'json',
 		success : function(result) {
 			if (result.status != 'success') {
-				alert('실패 ~');
+				swal('실패 ~');
 				return;
 			}
 			$('#search-result > div').remove();			
@@ -75,7 +75,7 @@ function search(sort,order){
 			$('#search-pageNo').attr('value', '1');
 		},
 		error : function() {
-			alert('서버 요청 오류 !')
+			swal('서버 요청 오류 !')
 		}
 	})	
 }
@@ -99,7 +99,7 @@ function searchScrollAppend(order){
 		dataType : 'json',
 		success : function(result) {
 			if (result.status != 'success') {
-				alert('실패 ~');
+				swal('실패 ~');
 				return;
 			}
 			$('.searchResult > .row').append(template(result));
@@ -107,7 +107,7 @@ function searchScrollAppend(order){
 			$('#search-pageNo').val(result.pageNo);
 		},
 		error : function() {
-			alert('서버 요청 오류 !')
+			swal('서버 요청 오류 !')
 		}
 	})	
 }
@@ -174,7 +174,7 @@ function likeLogic(listNum, result){
 					 
 				  },
 				  error:function(){
-					  alert('like : 서버 요청 오류');
+					  swal('like : 서버 요청 오류');
 				
 				  }
 			  });
@@ -195,7 +195,7 @@ function likeLogic(listNum, result){
 					  
 				  },
 				  error:function(){
-					  alert('ajax likeclick: 서버 요청 오류');
+					  swal('ajax likeclick: 서버 요청 오류');
 				  }
 			  });
 		  }

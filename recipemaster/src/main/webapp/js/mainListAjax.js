@@ -39,7 +39,7 @@
 		  method:'get',
 		  success:function(result){
 			  if (result.status !='success'){
-				  alert('실행중 오류 발생');
+				  swal('실행중 오류 발생');
 				  return;
 			  }
 			  var list = result.data;
@@ -74,7 +74,7 @@
 		  method:'get',
 		  success:function(result){
 			  if (result.status !='success'){
-				  alert('실행중 오류 발생');
+				  swal('실행중 오류 발생');
 				  return;
 			  }
 			  var list = result.data;
@@ -134,7 +134,7 @@
 					 
 				  },
 				  error:function(){
-					  alert('like : 서버 요청 오류');
+					  swal('like : 서버 요청 오류');
 				
 				  }
 			  });
@@ -155,7 +155,7 @@
 					  
 				  },
 				  error:function(){
-					  alert('ajax likeclick: 서버 요청 오류');
+					  swal('ajax likeclick: 서버 요청 오류');
 				  }
 			  });
 		  }

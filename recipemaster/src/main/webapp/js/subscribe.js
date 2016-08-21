@@ -25,7 +25,7 @@ $(function(){
 	
 			  },
 			  error:function(){
-				  alert('like : 서버 요청 오류');
+				  swal('like : 서버 요청 오류');
 			
 			  }
 
