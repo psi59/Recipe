@@ -25,6 +25,8 @@
 		<result column="countScrap" property="countScrap"/>
 		<result column="scrapUser" property="scrapUser"/>
 		<result column="email" property="user.email"/>
+		<result column="rownum" property="rownum"/>
+		<result column="totalPoint" property="totalPoint"/>
 	</resultMap> 
 	
 	<resultMap type="material" id="materialMap">
@@ -156,16 +158,32 @@
   limit #{startIndex}, #{len}
   </select>
 
-   <select id="recipeList" resultMap="recipeMap" parameterType="Map">
-    SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits,
+<!--   <select id="recipeList" resultMap="recipeMap" parameterType="Map">
+    SELECT @rownum:=@rownum+1 rownum,r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits,
     r.rgst, r.gpa, u.uno, u.name userName, u.email,l.rcpno, l.lc_dt, l.uno likeUser,
     (select count(uno) from rcp_lik where uno = ${userNo}) as countLike
-    FROM (users u INNER JOIN rcps r on u.uno=r.uno) 
+    FROM (users u INNER JOIN rcps r on u.uno=r.uno)
+    INNER JOIN(select @rownum:=0) t
     LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=${userNo}
     ORDER BY r.hits desc
     limit #{len}
+  </select> -->
+    
+  <select id="recipeList" resultMap="recipeMap" parameterType="Map">
+    SELECT @rownum:=@rownum+1 rownum,vt.* 
+    FROM (SELECT r.rcpno a, r.uno b, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits,
+    r.rgst, r.gpa, u.uno, u.name userName, u.email,l.rcpno, l.lc_dt, l.uno likeUser,
+    (select count(lk.uno) from rcp_lik lk where lk.uno = ${userNo}) as countLike
+    FROM users u
+    INNER JOIN rcps r on u.uno=r.uno
+    INNER JOIN(select @rownum:=0) t
+    LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=${userNo}
+    ORDER BY r.hits desc
+    limit #{len}
+    ) vt
   </select>
   
+   
   <select id="selectMts" resultMap="materialMap" parameterType="INTEGER">
   
        select * from mts m, rcp_mt mt, rcps r 
