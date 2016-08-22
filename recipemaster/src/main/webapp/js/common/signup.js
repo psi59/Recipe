@@ -5,15 +5,15 @@ $(function() {
 	///// 회원가입 팝업창 가입 버튼 이벤트 /////
 	$('#signup-addBtn').click(function() {
 		if( $('#signup-e-mail').val() == ""){
-			alert('이메일을 입력해주세요');			
+			swal('이메일을 입력해주세요');			
 		}else if( $('#signup-userName').val() == ""){
-			alert('닉네임을 입력해주세요');			
+			swal('닉네임을 입력해주세요');			
 		}else if( $('#signup-password').val() == ""){
-			alert('비밀번호를 입력해주세요');			
+			swal('비밀번호를 입력해주세요');			
 		}else if( $('#signup-passwordCheck').val() == ""){
-			alert('비밀번호 확인을 입력해주세요');	
+			swal('비밀번호 확인을 입력해주세요');	
 		}else if( !$('#agrchk').is(":checked") ){
-			alert('약관에 동의해주세요.');
+			swal('약관에 동의해주세요.');
 		}
 		if($('#signup-e-mail').val() != "" && $('#signup-userName').val() != "" &&
 		   $('#signup-password').val() != "" && $('#signup-passwordCheck').val() != "" && $('#agrchk').is(":checked")){
@@ -30,10 +30,10 @@ $(function() {
 				success : function(result) {				
 					// 중복된 이메일이거나 형식 오류일 경우
 					if (result.status != 'success') {
-						alert('이메일과 비밀번호를 확인해주세요.');
+						swal('이메일과 비밀번호를 확인해주세요.');
 						return;
 					} 				
-					alert($('#signup-userName').val()+"님 환영합니다 !")						
+					swal($('#signup-userName').val()+"님 환영합니다 !")						
 					$('#signup-pop-up-banner').bPopup().close(); // 팝업창 닫기												
 				},
 				error : function() {
@@ -59,7 +59,7 @@ $(function() {
  
         // 이메일 유효성 검사
         if(! email_check(email) ) {
-            alert('잘못된 형식의 이메일 주소입니다.');        	
+        	swal('잘못된 형식의 이메일 주소입니다.');        	
             $(this).focus();
             return false;
         }
