@@ -92,4 +92,19 @@ public class VisitorController {
     return new Gson().toJson(result);
   }
   
+  @RequestMapping(path="loadMyPage",produces="application/json;charset=UTF-8")
+  @ResponseBody 
+  public String loadMyPage(int userNo,HttpSession session){
+
+    HashMap<String,Object> result = new HashMap<>();
+    try{
+      result = visitorService.loadMyPage((int)session.getAttribute("userNo"));
+      result.put("status","success");
+    }catch (Exception e){ 
+      result.put("status", "false");
+    }
+    System.out.println(result);
+    return new Gson().toJson(result);
+  }
+  
 }
