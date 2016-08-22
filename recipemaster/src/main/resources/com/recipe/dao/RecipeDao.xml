@@ -42,8 +42,11 @@
            r.rgst, truncate(r.gpa,1) gpa, u.uno, u.name userName, l.rcpno, l.lc_dt, l.uno likeUser
     FROM users u INNER JOIN rcps r on u.uno=r.uno
          LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=#{userNo}      
-    <if test="search.searchCondition == 'name'">
+    <if test="search.searchCondition == 'recipe'">
       WHERE r.name LIKE '%${search.searchKeyword}%'
+    </if>
+    <if test="search.searchCondition == 'chef'">
+      WHERE u.name LIKE '%${search.searchKeyword}%'
     </if>
     <if test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'">
       ORDER BY r.rcpno DESC
@@ -64,11 +67,23 @@
     SELECT count(*)
     FROM users u INNER JOIN rcps r on u.uno=r.uno
          LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=#{userNo}      
-    <if test="search.searchCondition == 'name'">
+    <if test="search.searchCondition == 'recipe'">
       WHERE r.name LIKE '%${search.searchKeyword}%'
     </if>
-    <if test="search.sortCondition == 'newest'">
-      ORDER BY r.rcp_dt desc
+    <if test="search.searchCondition == 'chef'">
+      WHERE u.name LIKE '%${search.searchKeyword}%'
+    </if>
+    <if test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'">
+      ORDER BY r.rcpno DESC
+    </if>
+    <if test="search.sortCondition == 'newest' and search.orderCondition == 'ASC'">
+      ORDER BY r.rcpno ASC
+    </if>
+    <if test="search.sortCondition == 'grade' and search.orderCondition == 'DESC'">
+      ORDER BY r.gpa DESC
+    </if>
+    <if test="search.sortCondition == 'grade' and search.orderCondition == 'ASC'">
+      ORDER BY r.gpa ASC
     </if>
     limit #{startIndex}, #{len}
   </select>

@@ -49,7 +49,7 @@ $(function() {
 	})
 	
 	///// 이메일 유효성 검사 /////
-	// name 속성이 'email'인 input 이 focus를 잃었을때(blur) 처리한다.
+	// name 속성이 'email'인 input이 focus를 잃었을때(blur) 처리한다.
     $('#signup-e-mail').blur(function(){
  
         var email = $(this).val();

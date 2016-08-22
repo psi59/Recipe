@@ -55,7 +55,12 @@ function dropdownClick(target, other) {
 //userInfoBox 드롭다운 function 종료 - 박상일
 
 //signUpBtn 팝업 , 불투명 배경 띄우기
-$('#signUpBtn').on('click', function(){
+$('#signUpBtn').on('click', function(event){
+	event.preventDefault();
+	$('#signup-pop-up-banner').bPopup();
+});
+
+$('#signUpTopBtn').on('click', function(event){
 	event.preventDefault();
 	$('#signup-pop-up-banner').bPopup();
 });
@@ -66,4 +71,8 @@ $('#loginBtn').on('click', function(event){
 	$('#login-pop-up-banner').bPopup();
 });
 
-
+//스크롤 내리면 생기는 loginBtn팝업 , 불투명 배경 띄우기
+$('#topLoginBtn').on('click', function(event){
+	event.preventDefault();
+	$('#login-pop-up-banner').bPopup();
+});

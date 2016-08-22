@@ -1,6 +1,6 @@
 /* 검색 및 정렬 이벤트 -성현 */
 $(function() {
-	
+		
 	$('#searchKeyword').focus();
 	
 	// 처음화면에 모든 레시피들을 보여준다
@@ -19,7 +19,7 @@ $(function() {
 	});
 	
 	// 최신순 정렬
-	$('#order-latest-btn').click(function(){
+	$('#order-latest-btn').click(function(){		
 		if($('#order-latest-btn').val() == 'DESC'){
 			$('#order-latest-btn h2').text('최신순▲');
 			$('#order-latest-btn').val('ASC')
@@ -63,7 +63,8 @@ function search(sort,order){
 		url : 'recipe/listSearch.json',
 		method : 'post',
 		data : {
-			searchKeyword : $('#searchKeyword').val(),			
+			searchKeyword : $('#searchKeyword').val(),
+			searchCondition : $("#searchCondition-select option:selected").val(),
 			sortCondition : sort,
 			orderCondition : order
 		},
@@ -103,6 +104,7 @@ function searchScrollAppend(){
 		data : {					
 			pageNo : pageNo,
 			searchKeyword : $('#searchKeyword').val(),
+			searchCondition : $("#searchCondition-select option:selected").val(),
 			sortCondition : $('#sort-condition').val(),
 			orderCondition : order
 		},
@@ -122,9 +124,7 @@ function searchScrollAppend(){
 	})	
 }
 
-
-
-
+// 자동완성 기능
 
 
 

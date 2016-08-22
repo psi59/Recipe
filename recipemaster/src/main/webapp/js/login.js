@@ -1,11 +1,27 @@
 
 $("#userLogin").click(function(){
+	if($('#userEmail').val() == ''){
+		swal('이메일을 입력해주세요.');		
+		return;
+	} else if($('#userPassword').val() == ''){
+		swal('패스워드를 입력해주세요.');		
+		return;
+	}	
 	login(event);
 });
 
-$('#userPassword').keydown(function(){
-	if(event.keyCode == 13) login(event);
+$('#userPassword').keyup(function(){
+	if(event.keyCode == 13){
+		if($('#userPassword').val() == ''){
+			swal('패스워드를 입력해주세요.');		
+			return;
+		}
+		login(event);
+	}
 });
+
+
+
 
 function login(event) {
 	event.preventDefault();
@@ -19,13 +35,17 @@ function login(event) {
 		}, 
 		success : function(result) {
 			if (result.status == 'failure') {
-				dataStatus='failure';
+				/*dataStatus='failure';
 				
 				$( "#userPassword" ).effect('bounce');
 				$('#loginInputBox > .warning').remove();
 				$('#loginInputBox').append("<div id='warning' class='warning'>아이디 또는 비밀번호를 다시 확인하세요.</div>");
 				$('#warning').css('color','red').css('font-size', '13px');
-
+				*/
+				
+				swal('잘못입력하셨습니다.','아이디 또는 비밀번호를 다시 확인하여 주세요.',"error");
+				
+				
 				return;
 			} 
 			
