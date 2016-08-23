@@ -1,8 +1,21 @@
 $(function () {
 	var imageList = new Array();
-	var rcpPdImgList = new Array();
-	var rcpRepresentImgList = new Array();
+	
 	'use strict';
+	
+	if(sessionStorage.getItem('data') == null){
+		swal({
+			  title: "로그인 후 사용하실 수 있습니다.",
+			  type: "warning",
+			  confirmButtonClass: "btn-danger",
+			  confirmButtonText: "확인",
+			  closeOnConfirm: false
+			},
+			function(isConfirm) {
+			   location.href = "index.html"
+			});
+		return;
+	}	
 
 	$( "#representImgs" ).sortable({
 		revert: true,
@@ -15,16 +28,6 @@ $(function () {
 		revert: true
 	});
 	$( "#files" ).disableSelection();
-
-	$('#userNo').val('1'); //hidden 태그에 userNo set
-
-	$(document).on('click', "button[name='delMtSlot']", function() {
-//				if($(this).parent().parent().length==1){
-//				alert('재료는 하나 이상 등록하셔야 합니다.')
-//				} else {
-		$(this).parent().parent().remove();
-//				}
-	});
 
 //	대표사진등록관련 js
 	$('#representImage').fileupload({
@@ -42,12 +45,13 @@ $(function () {
 		$.each(data.files, function (index, file) {
 			if(imageDuplicationCheck(data.files[index])){
 				imageList.push(data.files[index]);
-				console.log(imageList);
 			}
 			var node = $('<span/>');
+			var close = $('<a href="#"><span class="closeBtn thick rpImg"></span></a>');
 			var fileNameTag = $('<input type="hidden" name="representImgNames">');
 			fileNameTag.attr('value', data.files[index].name+"/"+data.files[index].size);
 			node.appendTo(data.context);
+			close.appendTo(data.context);
 			fileNameTag.appendTo(data.context);
 		});
 	}).on('fileuploadprocessalways', function (e, data) {
@@ -81,13 +85,14 @@ $(function () {
 		$.each(data.files, function (index, file) {
 			if(imageDuplicationCheck(data.files[index])){
 				imageList.push(data.files[index]);
-				console.log(imageList);
 			}
 			var node = $('<div class="row"/>');
+			var close = $('<a href="#"><span class="closeBtn thick pdImg"></span></a>');
 			var textarea = $('<span/>').append($('<textarea name="recipeProduce" class="height_150px" placeholder="조리과정을 설명해주세요."/>'));
 			var fileNameTag = $('<input type="hidden" name="produceImgNames">');
 			fileNameTag.attr('value', data.files[index].name+"/"+data.files[index].size);
 			textarea.appendTo(node);
+			close.appendTo(node);
 			node.appendTo(data.context);
 			fileNameTag.appendTo(data.context);
 		});
@@ -115,7 +120,7 @@ $(function () {
 		if(data.result.status=='success'){
 			location="index.html";
 		} else {
-			alert('레시피 등록 실패');
+			swal('레시피 등록 실패');
 		}
 		console.log(data.result.status)
 
@@ -165,7 +170,7 @@ $(function () {
 //	alert('로그인 하고 오세욤 ㅎㅎ');
 //	location = "index.html";
 //	}
-
+	
 	function imageDuplicationCheck(file){
 		if(imageList.length>0){
 			for(i=0; i<imageList.length; i++){
@@ -198,5 +203,48 @@ $(function () {
 			$(this).parent('.inputwrapper').addClass('active');
 			$(this).parent().parent('.inputwrapper').removeClass('active');
 		}
+	});
+	
+	$(document).on('click', '.rpImg', function(event) {
+		event.preventDefault();
+		$(this).parent().parent('.scroll').remove();
+	});
+	
+	$(document).on('click', '.pdImg', function(event) {
+		event.preventDefault();
+		$(this).parent().parent().remove();
+	});
+	
+	
+	$('#addBtn').on('click', function() {
+		if($('input[name="recipeName"]').val().length < 1){
+			swal('레시피 제목을 입력해주세요.');
+			return;
+		} else if($('input[name="portion"]').val().length < 1){
+			swal('몇 인분인지 입력해주세요.');
+			return;
+		} else if($('input[name="cookTime"]').val().length < 1){
+			swal('조리시간을 입력해주세요.');
+			return;
+		} else if($('input[name="intro"]').val().length < 1){
+			swal('요리설명을 입력해주세요.');
+			return;
+		} else if ($('input[name="representImgNames"]').length < 1) {
+			swal('대표사진을 등록해주세요.');
+			return;
+		} else if ($('input[name="materialNo"]').length < 1) {
+			swal('재료를 등록해주세요.');
+			return;
+		} else if ($('input[name="produceImgNames"]').length < 1) {
+			swal('조리과정을 등록해주세요.');
+			return;
+		} 
+		
+		$('#addRecipe').submit();				
+	});
+	
+	$('#imAddBtn').on('click', function() {
+		$('input[name="regiStatus"]').val("1");
+		$('#addRecipe').submit();
 	});
 });
