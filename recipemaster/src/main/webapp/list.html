@@ -271,42 +271,46 @@
 	</div>
 	
 	<!-- -------------------------------recipe list-------------------------------- -->
-	<section id="main-list">
-		<div>
-			<section id="rcp-custom-list">
-				<div class="rcp-list list0">
-					<div class="rcp-1024 searchResult">						
-						<div id="search-result" class="row"></div>
-					</div>
-				</div>
-			</section>
-		</div>
-	</section>
+ <section id="main-list">
+    <div>
+      <section id="rcp-custom-list">
+        <div class="rcp-list list0">
+          <div class="rcp-1024 searchResult">           
+          <div id="search-result" class="row rcp-pageNo0"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
 
   <input id="search-pageNo" type="hidden" value="1">
   <input id="sort-condition" type="hidden" value="newest">
-  
+
 	<script id="recipe-card-search-template" type="text/x-handlebars-template"> 
   {{#each data}} 
       
-          <div class="col-xs-3 col-sm-3 col-md-3 rcp-listSize rcp-list-margin">      
+          <div
+            class="col-xs-3 col-sm-3 col-md-3 rcp-listSize rcp-list-margin">
+      
             <div class="thumbnail row relative">
               <div class="rcp-profile-position">
                 <img src="img/profile{{@index}}.jpg" class="img-circle rcp-profile">
               </div>
-              <img src="img/2.jpg" class="image1" class="rcp-relative">
+              <img src="img/2.jpg" class="image1"  name="rcp-list-images">
              
               <div class="rcp-caption">
                 <h4 class="pull-right rcp-Grade">평점</h4>
                 <h5 class="pluu-left rcp-relative rcp-profileName">
 
-                  <span class="glyphicon glyphicon-star"></span><a href="#" title="{{user.userNo}}">{{user.userName}}</a>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <input type="hidden" value="{{user.email}}">
+                   <a href="#" class="rcp-userName">{{user.userName}}</a>
                 </h5>
                 <!-- 두번째 줄 (레시피명, 점수)  -->
                 <div class="rcp-relative rcp-height30">
                   <h4 class="pull-right rcp-recipeGrade">{{gradePoint}}</h4>
                   <h4 class="pull-left rcp-left_position">
-                    <span><a class="detail" style="z-index:9999">{{recipeName}} </a> 
+                    <span><a href="#" class="detail" style="z-index:9999">{{recipeName}} </a> 
                       <input type="hidden" name="recipeNo" value="{{recipeNo}}">
                    
                   </h4>
@@ -316,16 +320,17 @@
               <!--  레시피 정보 끝 -->
 
               <!--  슬라이드 start -->
-              <div id="myCarousel" class="carousel slide rcp-relative">
+              <div name="myCarousel" class="carousel slide rcp-relative">
+
                 <!--  왼쪽 버튼 시작  -->
-                <a href="#myCarousel" role="button" data-slide="prev"
+                <a href="div[name='myCarousel']" role="button" data-slide="prev"
                   class="rcp-left-slideButton"> <span
                   class="glyphicon glyphicon-chevron-left" aria-hidden="false"></span>
                 </a>
                 <!--  왼쪽 버튼 끝  -->
 
                 <!--  오른쪽 버튼 시작  -->
-                <a href="#myCarousel" role="button" data-slide="next"
+                <a href="div[name='myCarousel']" role="button" data-slide="next"
                   class="rcp-right-slideButton"> <span
                   class="glyphicon glyphicon-chevron-right" aria-hidden="false"></span>
 
@@ -336,9 +341,9 @@
                 <div class="carousel-inner" role="listbox">
                   <div class="item active">
                     <div class="rcp-comment col-md-offset-1 col-md-10">
-                      <p>어린시절의 추억을 먹다 !!</p>
-                      <p>즉석에서 뚝딱 먹을 수 있는</p>
-                      <p>간편한 추억의 국물 떡볶이 !!</p>
+                      <p>{{intro}}</p>
+                      <p>{{intro}}</p>
+                      <p>{{intro}}</p>
                     </div>
                     <div class="col-md-1"></div>
                   </div>
@@ -346,8 +351,8 @@
                   <div class="item">
                     <div class="rcp-comment col-md-offset-1 col-md-10">
                       <!--  image 크기를 잘 몰라서 일단 %로 안하고 85px로 고정해놓 -->
-                      <img src="img/0asdasd.png" class="img-rounded rcp-images">
-                      <img src="img/0ddfds.png" class="img-rounded rcp-images">
+                      <img src="img/view.png" class="img-rounded rcp-images">
+                      <img src="img/view.png" class="img-rounded rcp-images">
                     </div>
                     <div class="col-md-1"></div>
                   </div>
@@ -385,9 +390,15 @@
                 <div
                   class="rcp-cookTime col-xs-4 rcp-heart"
                   align="center">
-                  <div class="glyphicon glyphicon-heart-empty "></div>
-                  <input type="hidden" name="recipeNo" value="{{recipeNo}}">
-                  <a><b class="rcp-like" id="rcp-like">좋아요</b></a>
+                  {{#isLike}}          
+                  <div class="glyphicon glyphicon-heart-empty active"></div>
+                   {{else}}<div class="glyphicon glyphicon-heart-empty"></div>
+                   {{/isLike}}
+                  <input type="hidden" name="recipeNo" value="{{recipeNo}}">                    
+                  <a href="#">
+                  {{#isLike}}<b class="rcp-like active" name="rcp-like">좋아요</b>
+                  {{else}}<b class="rcp-like" name="rcp-like">좋아요</b>
+                   {{/isLike}}</a>
                 </div> 
                 <div class="rcp-cookTime col-xs-4"
                   align="center">
@@ -403,6 +414,7 @@
     </div>
   </div>
   </div>
+
 
   {{/each}}
   </script>  
@@ -421,10 +433,10 @@
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/common.js"></script>
 	<script src="js/detail.js"></script>
-	<script src="js/recipeDetail.js"></script>
+<!-- 	<script src="js/recipeDetail.js"></script> -->
 	<script src="js/login.js"></script>
 	<!-- 용이 userUpdate -->
-	<script src="js/updateUser.js"></script>
+<!-- 	<script src="js/updateUser.js"></script> -->
 	<!-- 성현 -->	
 	<script src="js/common/popup.js"></script>
   <script src="js/common/chefCard.js"></script>
@@ -437,7 +449,7 @@
 			getRealTimeRank();			
 
 			  /* 준모3 */				  
-				if(eval(sessionStorage.getItem('data'))[0].userNo!=null){
+				if(eval(sessionStorage.getItem('data'))!=null){
 				 
 				  $('#topbarUserImg').html("<img class='rcp-barimg dropdown-trigger img-circle' src='img/Chef3.jpg' />");
 		

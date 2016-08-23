@@ -109,10 +109,10 @@ public class RecipeController {
 	  @ResponseBody
 	  public String list(
 	      @RequestParam int userNo, 
-	      @RequestParam(defaultValue="4") int pageSize){
+	      @RequestParam(defaultValue="4") int pageSize,int request){
 	    HashMap<String,Object> result = new HashMap<>();
 	    /*System.out.println("userNo"+userNo);*/
-	    List<Recipe> list = recipeService.getRecipeList(userNo, pageSize);
+	    List<Recipe> list = recipeService.getRecipeList(userNo, pageSize,request);
 	    for(int i =0; i<list.size(); i++){
 	    }
 	    try{
@@ -125,24 +125,8 @@ public class RecipeController {
 	    return new Gson().toJson(result);
 	  }
 	 
-	 @RequestMapping(path="list2",produces="application/json;charset=UTF-8")
-   @ResponseBody
-   public String list2(
-       @RequestParam int userNo,
-       @RequestParam(defaultValue="4") int pageSize){
-     HashMap<String,Object> result = new HashMap<>();
-     List<Recipe> list = recipeService.getRecipeList2(userNo, pageSize);
-     for(int i =0; i<list.size(); i++){
-     }
-     try{
-       result.put("status","success");
-       result.put("data", list);
-     }catch (Exception e){
-       result.put("status", "false");
-     }
+	 
 
-     return new Gson().toJson(result);
-   }
  
 	 
 	
@@ -343,9 +327,9 @@ public class RecipeController {
 	@ResponseBody
 	public String rank(
 			@RequestParam(defaultValue="1") int pageNo, 
-			@RequestParam(defaultValue="10") int pageSize){
+			@RequestParam(defaultValue="10") int pageSize,int request){
 		HashMap<String,Object> result = new HashMap<>();
-		List<Recipe> list = recipeService.getRecipeList(pageNo, pageSize);
+		List<Recipe> list = recipeService.getRecipeList(pageNo, pageSize,request);
 		try{
 			result.put("status","success");
 			result.put("data", list);
