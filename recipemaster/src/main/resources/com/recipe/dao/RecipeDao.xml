@@ -27,6 +27,8 @@
 		<result column="email" property="user.email"/>
 		<result column="rownum" property="rownum"/>
 		<result column="totalPoint" property="totalPoint"/>
+		<result column="rpimg" property="rpimg" />
+		<result column="img" property="user.image"/>
 	</resultMap> 
 	
 	<resultMap type="material" id="materialMap">
@@ -190,8 +192,8 @@
     
   <select id="recipeList" resultMap="recipeMap" parameterType="Map">
     SELECT @rownum:=@rownum+1 rownum,vt.* 
-    FROM (SELECT r.rcpno a, r.uno b, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits,
-    r.rgst, r.gpa, u.uno, u.name userName, u.email,l.rcpno, l.lc_dt, l.uno likeUser,
+    FROM (SELECT r.rcpno rcpno, r.uno uno, r.name, r.intro, r.c_time,r.rpimg,  r.ptn, r.rcp_dt, r.hits,
+    r.rgst, r.gpa, u.uno userNo, u.img, u.name userName, u.email,l.rcpno likeRecipe, l.lc_dt, l.uno likeUser,
     (select count(lk.uno) from rcp_lik lk where lk.uno = ${userNo}) as countLike
     FROM users u
     INNER JOIN rcps r on u.uno=r.uno

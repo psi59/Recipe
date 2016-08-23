@@ -2,19 +2,22 @@
   .active{
   color:#337ab7;
   }
-   /* 
+  
+ 
 .rcp-image-scale{
-   width : 322px;
+  width : 322px;
   height : 181px;
-    overflow: hidden;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 350px;
+
 }
 
 .rcp-image-scale img.image1{
-  
+  width: 100%;
   left: 50%;
   top: 50%;
-  
-} */
+} 
    
    
 @media(max-width:1023px){

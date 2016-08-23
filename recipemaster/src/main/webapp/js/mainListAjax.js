@@ -46,6 +46,14 @@
 			  $('#main-list > div').append( comMainSection(result) );
 			  $('.list0 > .row').append( template(result) );
 			  
+			  for(var i = 0 ; i<result.data.length; i++){
+			  var list=JSON.stringify(result.data[i].rpimg);
+				var firstParse= list.substring(4,(list.length-4));
+			
+
+				 $('div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+firstParse+')');
+			  }
+			  
 			  methods();
 			  Main2List();
 		  },
@@ -85,6 +93,14 @@
 			  $('#main-list > div').append( comMain2Section(result) );
 			  $('.list1 > .row').append( template(result) );
 			  
+			  for(var i = 0 ; i<result.data.length; i++){
+				  var list=JSON.stringify(result.data[i].rpimg);
+					var firstParse= list.substring(4,(list.length-4));
+					
+					console.log(result.data[i].user.image);
+					 $('.list1 div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+firstParse+')');
+				  }
+				  
 			  methods();
 		  },
 		  error : function(){

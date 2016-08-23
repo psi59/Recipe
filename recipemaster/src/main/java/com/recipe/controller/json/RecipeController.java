@@ -121,7 +121,7 @@ public class RecipeController {
 	    }catch (Exception e){
 	      result.put("status", "false");
 	    }
-
+	    System.out.println(result);
 	    return new Gson().toJson(result);
 	  }
 
