@@ -416,7 +416,6 @@ function loadComRcpList(){
 	    dataType : 'json',
 	    success : function(result) {
 	      if (result.status != 'success') {
-	        swal('실패 ~');
 	        return;
 	      }
 	      //$('#search-result > div').remove();    
@@ -452,7 +451,6 @@ function rcpListScrollAppend(){
 	    dataType : 'json',
 	    success : function(result) {
 	      if (result.status != 'success') {
-	        swal('실패 ~');
 	        return;
 	      }
 	      $('#tabs-1 .rcp-subscribe').append(template(result));     
@@ -485,7 +483,6 @@ function loadMyPage(){
       dataType : 'json',
       success : function(result) {
         if (result.status != 'success') {
-          swal('로그인 해주시기 바랍니다.');
           return;
         }
         $('#visitNum').text(result.sum+"명");
