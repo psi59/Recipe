@@ -439,7 +439,7 @@
     <div class="rcp-list">
       <div class="rcp-1024 list0" >
         <h3>오늘의 인기 레시피</h3>
-        <div class="row"></div>
+        <div class="row rcp-order"></div>
       </div>
     </div>
   </section>
@@ -469,10 +469,11 @@
       
             <div class="thumbnail row relative">
               <div class="rcp-profile-position">
-                <img src="img/profile{{@index}}.jpg" class="img-circle rcp-profile">
+                <img src="img/profileImg/{{user.image}}" class="img-circle rcp-profile">
               </div>
-              <img src="img/2.jpg" class="image1" class="rcp-relative">
-             
+            <div class="rcp-image-scale" name="recipe-image" > <!--style="background-image : url('img/representImg/{{rpimg}}');"-->
+              <!--<img src="img/representImg/{{rpimg}}" class="image1"  name="rcp-list-images"> -->
+             </div>
               <div class="rcp-caption">
                 <h4 class="pull-right rcp-Grade">평점</h4>
                 <h5 class="pluu-left rcp-relative rcp-profileName">
@@ -495,16 +496,17 @@
               <!--  레시피 정보 끝 -->
 
               <!--  슬라이드 start -->
-              <div id="myCarousel" class="carousel slide rcp-relative">
+              <div name="myCarousel" class="carousel slide rcp-relative">
+
                 <!--  왼쪽 버튼 시작  -->
-                <a href="#myCarousel" role="button" data-slide="prev"
+                <a href="div[name='myCarousel']" role="button" data-slide="prev"
                   class="rcp-left-slideButton"> <span
                   class="glyphicon glyphicon-chevron-left" aria-hidden="false"></span>
                 </a>
                 <!--  왼쪽 버튼 끝  -->
 
                 <!--  오른쪽 버튼 시작  -->
-                <a href="#myCarousel" role="button" data-slide="next"
+                <a href="div[name='myCarousel']" role="button" data-slide="next"
                   class="rcp-right-slideButton"> <span
                   class="glyphicon glyphicon-chevron-right" aria-hidden="false"></span>
 
@@ -520,14 +522,6 @@
                     <div class="col-md-1"></div>
                   </div>
 
-                  <div class="item">
-                    <div class="rcp-comment col-md-offset-1 col-md-10">
-                      <!--  image 크기를 잘 몰라서 일단 %로 안하고 85px로 고정해놓 -->
-                      <img src="img/view.png" class="img-rounded rcp-images">
-                      <img src="img/view.png" class="img-rounded rcp-images">
-                    </div>
-                    <div class="col-md-1"></div>
-                  </div>
 
                   <div class="item">
                     <div class="rcp-comment col-md-offset-1 col-md-10">
@@ -562,9 +556,15 @@
                 <div
                   class="rcp-cookTime col-xs-4 rcp-heart"
                   align="center">
-                  <div class="glyphicon glyphicon-heart-empty "></div>
-                  <input type="hidden" name="recipeNo" value="{{recipeNo}}">
-                  <a href="#"><b class="rcp-like" id="rcp-like">좋아요</b></a>
+                 {{#isLike}}          
+                  <div class="glyphicon glyphicon-heart-empty active"></div>
+                   {{else}}<div class="glyphicon glyphicon-heart-empty"></div>
+                   {{/isLike}}
+                  <input type="hidden" name="recipeNo" value="{{recipeNo}}">                    
+                  <a href="#">
+                  {{#isLike}}<b class="rcp-like active" name="rcp-like">좋아요</b>
+                  {{else}}<b class="rcp-like" name="rcp-like">좋아요</b>
+                   {{/isLike}}</a>
                 </div> 
                 <div class="rcp-cookTime col-xs-4"
                   align="center">

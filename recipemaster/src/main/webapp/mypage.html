@@ -165,9 +165,12 @@
 	</div>
 	<!--  -->
 	<section class="rcp-fullpage">
+	<div class="rcp-profileCover">
 		<section class="rcp-pagetop">
-			<div>
+			<div class="rcp-topimg-position">
+			<a class="rcp-topimg-border">
 				<img src="/img/pika.jpg" class="rcp-topimg">
+			</a>
 				<div class="rcp-topinfo">
 
 					<h2 class="rcp-userName">길용이</h2>
@@ -176,6 +179,10 @@
 				</div>
 			</div>
 		</section>
+		<div class="rcp-bottomLine-info" style="color:white;">
+		</div>
+		
+	</div>	
 		
 		<section class="rcp-pagemiddle1">
       <div  class="rcp-pagemiddle-div1">
@@ -202,6 +209,8 @@
     
     <!-- page hidden -->
     <input id="rcpList-pageNo" type="hidden" value="1">
+    <input id="scsRcpList-pageNo" type="hidden" value="1">    
+    
     
 		<section class="rcp-pageleft">
 
@@ -320,7 +329,7 @@
                 <p class="rcp-first-p-margin"> 빵같아 보이기도 한다 !</p> 
                </div> 
                <div class="rcp-subscribe-preview">
-               <p class="rcp-subscribe-preview-p-tag">최신 레시피</p>
+               <p class="rcp-subscribe-preview-p-tag">{{userName}}님의 최신 레시피</p>
                <img class="rcp-subscribe-preview-image" src="../img/2.jpg">
                 <img class="rcp-subscribe-preview-image" src="../img/3.jpg">
                  <img class="rcp-subscribe-preview-image" src="../img/4.jpg">

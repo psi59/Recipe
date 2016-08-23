@@ -33,12 +33,12 @@ public class RecipeController {
 
 	// CommonUtil commonUtil = new CommonUtil();
 
-	@RequestMapping("list")
-	public String list(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "4") int pageSize,
-			Model model) {
-		model.addAttribute("list", recipeService.getRecipeList(pageNo, pageSize));
-		return "list";
-	}
+//	@RequestMapping("list")
+//	public String list(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "4") int pageSize,
+//			Model model) {
+//		model.addAttribute("list", recipeService.getRecipeList(pageNo, pageSize));
+//		return "list";
+//	}
 
 	@RequestMapping(path = "addRecipe")
 	@ResponseBody
