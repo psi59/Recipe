@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,177 +18,181 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 import com.recipe.domain.User;
 import com.recipe.service.UserService;
+import com.recipe.util.CommonUtil;
 
 @Controller
 @RequestMapping("/user/")
 public class UserController {
-  @Autowired UserService userService;
+	@Autowired
+	UserService userService;
 
-  @RequestMapping(path="list", produces="application/json;charset=UTF-8")
-  @ResponseBody
-  public String list(@RequestParam(defaultValue="1")int pageNo,
-                     @RequestParam(defaultValue="3")int pageSize){
-    HashMap<String, Object> result = new HashMap<>();
-    try{ 
-      List<User> list = userService.getUserList(pageNo, pageSize);
+	@RequestMapping(path = "list", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String list(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "3") int pageSize) {
+		HashMap<String, Object> result = new HashMap<>();
+		try {
+			List<User> list = userService.getUserList(pageNo, pageSize);
 
-      result.put("status", "success");
-      result.put("data", list);
-    }catch(Exception e){
-      result.put("status", "failure");
-    }
- 
-    return new Gson().toJson(result);
-  }
+			result.put("status", "success");
+			result.put("data", list);
+		} catch (Exception e) {
+			result.put("status", "failure");
+		}
 
-  @RequestMapping(path="add", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
-  @ResponseBody
-  public String add(User user, String passwordCheck){    
-    HashMap<String,Object> result = new HashMap<>();
-    try{
-      // 이메일 중복 확인      
-      if(userService.checkDuplication(user.getEmail()) && user.getPassword().equals(passwordCheck)){
-        userService.addUser(user);
-        result.put("status", "success");
-      }
-    }catch(Exception e){
-      result.put("status", "failure");
-    }    
-    return new Gson().toJson(result);
-  }  
+		return new Gson().toJson(result);
+	}
 
-  // 이메일 중복 체크
-  @RequestMapping(path="checkDuplication", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
-  @ResponseBody
-  public String checkDuplication(String email){    
-    HashMap<String,Object> result = new HashMap<>();    
-    try{
-      result.put("status", "success");      
-      result.put("data", userService.checkDuplication(email));
-    }catch(Exception e){
-      result.put("status", "failure");
-    }
-    return new Gson().toJson(result);
-  }
+	@RequestMapping(path = "add", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String add(User user, String passwordCheck) {
+		HashMap<String, Object> result = new HashMap<>();
+		try {
+			// 이메일 중복 확인
+			if (userService.checkDuplication(user.getEmail()) && user.getPassword().equals(passwordCheck)) {
+				userService.addUser(user);
+				result.put("status", "success");
+			}
+		} catch (Exception e) {
+			result.put("status", "failure");
+		}
+		return new Gson().toJson(result);
+	}
 
-  // 닉네임 중복 체크
-  @RequestMapping(path="checkDuplicationUserName", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
-  @ResponseBody
-  public String checkDuplicationUserName(String userName){    
-    HashMap<String,Object> result = new HashMap<>();     
-    try{
-      result.put("status", "success");      
-      result.put("data", userService.checkDuplicationUserName(userName));
-    }catch(Exception e){
-      result.put("status", "failure");
-    }
-    return new Gson().toJson(result);
-  }
+	// 이메일 중복 체크
+	@RequestMapping(path = "checkDuplication", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String checkDuplication(String email) {
+		HashMap<String, Object> result = new HashMap<>();
+		try {
+			result.put("status", "success");
+			result.put("data", userService.checkDuplication(email));
+		} catch (Exception e) {
+			result.put("status", "failure");
+		}
+		return new Gson().toJson(result);
+	}
 
-  @RequestMapping(path="detail", produces="application/json;charset=UTF-8")
-  @ResponseBody
-  public String detail(HttpSession session){    
-    HashMap<String,Object> result = new HashMap<>();    
-    try{      
-      result.put("status", "success");      
-      result.put("data", userService.getUser((Integer)session.getAttribute("userNo")));
-    }catch(Exception e){
-      result.put("status", "failure");
-    }
-    return new Gson().toJson(result);
-  }
+	// 닉네임 중복 체크
+	@RequestMapping(path = "checkDuplicationUserName", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String checkDuplicationUserName(String userName) {
+		HashMap<String, Object> result = new HashMap<>();
+		try {
+			result.put("status", "success");
+			result.put("data", userService.checkDuplicationUserName(userName));
+		} catch (Exception e) {
+			result.put("status", "failure");
+		}
+		return new Gson().toJson(result);
+	}
 
-  @RequestMapping(path="update", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
-  @ResponseBody
-  public String update(User user,String bfPwd,int sUno,
-                      @RequestParam("uploadFile") MultipartFile file){    
-    HashMap<String,Object> result = new HashMap<>();
-    try{      
-      User dbUser = userService.getUser(sUno);
-      if(bfPwd.equals(dbUser.getPassword())){
-        /*파일업로드 추가*/
-        if(null!=file){
-          String fileName = file.getOriginalFilename();
-          user.setRecipeUrl(fileName);
-        File recipeUrl= new File("C:\\User\\BitCamp\\git\\Recipe_team\\recipemaster\\WebContent\\images\\"+fileName);
-        file.transferTo(recipeUrl);
-        }/*파일업로드 추가 끝*/
-        userService.updateUser(user);
-        result.put("status", "success");
-      } else {
-        result.put("status", "pwdFail");
-      }
-    }catch(Exception e){
-      result.put("status", "failure");
-    }
-    return new Gson().toJson(result);
-  }
+	@RequestMapping(path = "detail", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String detail(HttpSession session) {
+		HashMap<String, Object> result = new HashMap<>();
+		try {
+			result.put("status", "success");
+			result.put("data", userService.getUser((Integer) session.getAttribute("userNo")));
+		} catch (Exception e) {
+			result.put("status", "failure");
+		}
+		return new Gson().toJson(result);
+	}
 
-  @RequestMapping(path="delete", produces="application/json;charset=UTF-8")
-  @ResponseBody
-  public String delete(int no){    
-    HashMap<String,Object> result = new HashMap<>();
-    try{      
-      userService.deleteUser(no);
-      result.put("status", "success");      
-    }catch(Exception e){
-      result.put("status", "failure");
-    }
-    return new Gson().toJson(result);
-  }
+	@RequestMapping(path ="update")
+	@ResponseBody
+	public String update(User user, @RequestParam("beforePassword") String beforePassword,
+			@RequestParam("profileImage") MultipartFile profileImage, HttpServletRequest request) {
+		HashMap<String, Object> result = new HashMap<>();
+		try {
+			User dbUser = userService.getUser(user.getUserNo());
+			System.out.println(user);
+			if (beforePassword.equals(dbUser.getPassword())) {
+				/* 파일업로드 추가 */
+				if (null != profileImage) {
+					String fileName = "userprofile_" + user.getUserNo() + ".png";
+					user.setImage(fileName);
+					System.out.println(profileImage.getOriginalFilename());
+					File recipeUrl = new File(CommonUtil.getImageFolderPath("profileImg", request) + "/" + fileName);
+					profileImage.transferTo(recipeUrl);
+				} /* 파일업로드 추가 끝 */
+				userService.updateUser(user);
+				result.put("status", "success");
+			} else {
+				result.put("status", "pwdFail");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.put("status", "failure");
+		}
 
-  @RequestMapping(path="rank", produces="application/json;charset=UTF-8")
-  @ResponseBody
-  public String rank(@RequestParam(defaultValue="1")int pageNo,
-      @RequestParam(defaultValue="10")int pageSize){
-    HashMap<String, Object> result = new HashMap<>();
-    try{
-      List<User> list = userService.getUserList(pageNo, pageSize);
+		return new Gson().toJson(result);
+	}
 
-      result.put("status", "success");
-      result.put("data", list);
-    }catch(Exception e){
-      result.put("status", "failure");
-    }
+	@RequestMapping(path = "delete", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String delete(int no) {
+		HashMap<String, Object> result = new HashMap<>();
+		try {
+			userService.deleteUser(no);
+			result.put("status", "success");
+		} catch (Exception e) {
+			result.put("status", "failure");
+		}
+		return new Gson().toJson(result);
+	}
 
-    return new Gson().toJson(result);
-  }
+	@RequestMapping(path = "rank", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String rank(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "10") int pageSize) {
+		HashMap<String, Object> result = new HashMap<>();
+		try {
+			List<User> list = userService.getUserList(pageNo, pageSize);
 
-  @RequestMapping(path="login", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
-  @ResponseBody //URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
-  public String login(User user, HttpSession session) {
-    //index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
-    HashMap<String,Object> result = new HashMap<>();
-    
-    User logUser = userService.loginUser(user);
-    
-    try {
-      result.put("status", "success");
-      result.put("data", logUser);
-//    server sessionStorage에 유저 정보 저장  ------------------
-      session.setAttribute("userNo", logUser.getUserNo());
-      session.setAttribute("userEmail", logUser.getEmail());
-//    ----------------------------------------------------------
-    } catch (Exception e) {
-      result.put("status", "failure");
-    }
-    return new Gson().toJson(result);
-    //result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
-  }
-  
-  @RequestMapping(path="getUser", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
-  @ResponseBody //URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
-  public String getUser(int no) {
-    //index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
-    HashMap<String,Object> result = new HashMap<>();
-    try {
-      User logUser = userService.getUser(no);
-      result.put("status", "success");
-      result.put("data", logUser);
-    } catch (Exception e) {
-      result.put("status", "failure");
-    }
-    return new Gson().toJson(result);
-    //result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
-  }
+			result.put("status", "success");
+			result.put("data", list);
+		} catch (Exception e) {
+			result.put("status", "failure");
+		}
+
+		return new Gson().toJson(result);
+	}
+
+	@RequestMapping(path = "login", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody // URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
+	public String login(User user, HttpSession session) {
+		// index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
+		HashMap<String, Object> result = new HashMap<>();
+
+		User logUser = userService.loginUser(user);
+
+		try {
+			result.put("status", "success");
+			result.put("data", logUser);
+			// server sessionStorage에 유저 정보 저장 ------------------
+			session.setAttribute("userNo", logUser.getUserNo());
+			session.setAttribute("userEmail", logUser.getEmail());
+			// ----------------------------------------------------------
+		} catch (Exception e) {
+			result.put("status", "failure");
+		}
+		return new Gson().toJson(result);
+		// result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
+	}
+
+	@RequestMapping(path = "getUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody // URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
+	public String getUser(int no) {
+		// index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
+		HashMap<String, Object> result = new HashMap<>();
+		try {
+			User logUser = userService.getUser(no);
+			result.put("status", "success");
+			result.put("data", logUser);
+		} catch (Exception e) {
+			result.put("status", "failure");
+		}
+		return new Gson().toJson(result);
+		// result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
+	}
 }
