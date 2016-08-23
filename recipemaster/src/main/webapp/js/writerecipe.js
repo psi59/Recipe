@@ -20,7 +20,7 @@ $(function () {
 
 	$(document).on('click', "button[name='delMtSlot']", function() {
 //				if($(this).parent().parent().length==1){
-//				alert('재료는 하나 이상 등록하셔야 합니다.')
+//				swal('재료는 하나 이상 등록하셔야 합니다.')
 //				} else {
 		$(this).parent().parent().remove();
 //				}
@@ -115,7 +115,7 @@ $(function () {
 		if(data.result.status=='success'){
 			location="index.html";
 		} else {
-			alert('레시피 등록 실패');
+			swal('레시피 등록 실패');
 		}
 		console.log(data.result.status)
 
@@ -162,7 +162,7 @@ $(function () {
 //	if(eval(sessionStorage.getItem('data'))[0].userNo!=null){
 //	$('userNo').val(eval(sessionStorage.getItem('data'))[0].userNo);
 //	} else {
-//	alert('로그인 하고 오세욤 ㅎㅎ');
+//	swal('로그인 하고 오세욤 ㅎㅎ');
 //	location = "index.html";
 //	}
 

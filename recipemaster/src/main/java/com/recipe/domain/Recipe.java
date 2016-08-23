@@ -30,7 +30,23 @@ public class Recipe {
   private int countScrap;
   private int scrapUser;
   private String scrap;
+  //ranking
+  private int rownum;
+  private int totalPoint;
+  //ranking end
   
+  public int getRownum() {
+    return rownum;
+  }
+  public int getTotalPoint() {
+    return totalPoint;
+  }
+  public void setTotalPoint(int totalPoint) {
+    this.totalPoint = totalPoint;
+  }
+  public void setRownum(int rownum) {
+    this.rownum = rownum;
+  }
   public String getScrap() {
     return scrap;
   }
@@ -184,6 +200,7 @@ public class Recipe {
         + recipeDate + ", hits=" + hits + ", regiStatus=" + regiStatus + ", gradePoint=" + gradePoint + ", user=" + user
         + ", likeDate=" + likeDate + ", likeUser=" + likeUser + ", countLike=" + countLike + ", subscribeNum="
         + subscribeNum + ", subscribe=" + subscribe + ", countComment=" + countComment + ", countScrap=" + countScrap
-        + ", scrapUser=" + scrapUser + ", scrap=" + scrap + "]";
-  }	
+        + ", scrapUser=" + scrapUser + ", scrap=" + scrap + ", rownum=" + rownum + "]";
+  }
+ 
 }

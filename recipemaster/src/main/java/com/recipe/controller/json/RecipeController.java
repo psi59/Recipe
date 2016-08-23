@@ -37,8 +37,7 @@ public class RecipeController {
                            Search search, HttpSession session){
     HashMap<String,Object> result = new HashMap<>();     
     int recipeCount = 0;
-    // TEST용으로 searchCondition, sortCondition 때려박음
-    search.setSearchCondition("name");
+    // TEST용으로 searchCondition, sortCondition 때려박음    
     
     int userNo = 0;    
     if(session.getAttribute("userNo") != null){

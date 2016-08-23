@@ -113,14 +113,14 @@ $(document).ready(function(){
 			method : 'get',
 			success : function(result) {
 				if (result.status != 'success') {
-					alert('chefCard.js 오류');
+					swal('chefCard.js 오류');
 					return;
 				}
 
 				$('#rcp-chef-rank').append(template(result));
 			},
 			error : function() {
-				alert('서버 요청 오류!...')
+				swal('서버 요청 오류!...')
 			}
 		});
 	}

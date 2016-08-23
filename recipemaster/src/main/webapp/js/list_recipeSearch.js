@@ -1,5 +1,6 @@
 /* 검색 및 정렬 이벤트 -성현 */
 $(function() {
+
 	$('#searchKeyword').focus();
 	
 	// 처음화면에 모든 레시피들을 보여준다
@@ -18,7 +19,7 @@ $(function() {
 	});
 	
 	// 최신순 정렬
-	$('#order-latest-btn').click(function(){
+	$('#order-latest-btn').click(function(){		
 		if($('#order-latest-btn').val() == 'DESC'){
 			$('#order-latest-btn h2').text('최신순▲');
 			$('#order-latest-btn').val('ASC')
@@ -111,14 +112,15 @@ function search(sort,order){
 		url : 'recipe/listSearch.json',
 		method : 'post',
 		data : {
-			searchKeyword : $('#searchKeyword').val(),			
+			searchKeyword : $('#searchKeyword').val(),
+			searchCondition : $("#searchCondition-select option:selected").val(),
 			sortCondition : sort,
 			orderCondition : order
 		},
 		dataType : 'json',
 		success : function(result) {
 			if (result.status != 'success') {
-				alert('실패 ~');
+				swal('실패 ~');
 				return;
 			}
 			
@@ -130,7 +132,7 @@ function search(sort,order){
 			$('#search-pageNo').attr('value', '1');
 		},
 		error : function() {
-			alert('서버 요청 오류 !')
+			swal('서버 요청 오류 !')
 		}
 	})	
 }
@@ -156,13 +158,14 @@ function searchScrollAppend(){
 		data : {					
 			pageNo : pageNo,
 			searchKeyword : $('#searchKeyword').val(),
+			searchCondition : $("#searchCondition-select option:selected").val(),
 			sortCondition : $('#sort-condition').val(),
 			orderCondition : order
 		},
 		dataType : 'json',
 		success : function(result) {
 			if (result.status != 'success') {
-				alert('실패 ~');
+				swal('실패 ~');
 				return;
 			}
 			
@@ -172,7 +175,7 @@ function searchScrollAppend(){
 		
 		},
 		error : function() {
-			alert('서버 요청 오류 !')
+			swal('서버 요청 오류 !')
 		}
 	})	
 }
@@ -181,7 +184,15 @@ function searchScrollAppend(){
 function methods(){
 	  idOptions();	
 	  mouseHover();
-	  
+
+// 자동완성 기능
+
+
+
+
+
+//----------------------------------------고재현 부분--------------------------------------------//
+
 }
 
 Handlebars.registerHelper('isLike', function(options) {
@@ -245,8 +256,53 @@ function mouseHover(){
 function comList(){
 	  $(document).on('click', '.rcp-userName',function(event){
 		  event.preventDefault();
+
 		  $(location).attr('href','http://localhost:8080/community.html');
 
+		  if($(event.target).is('b[name="like"]') ){
+			  $.ajax({
+				  url:'recipe/likeDown.json?recipeNo=' + $(event.target).parent()
+				  .parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
+				  + eval(sessionStorage.getItem('data'))[0].userNo,
+				  dataType:'json',
+				  method:'get',
+				  success:function(){
+					  console.log("like down 성공성공");
+					  $(event.target).css('color','#231f20');
+					  $(event.target).parent().parent().css('color','#231f20');
+					 if($(event.target).is('b[name="like"]') ){
+						 $(event.target).parent().append('<b class="rcp-like" id="rcp-like">좋아요</b>');
+						 $(event.target).remove();
+						 
+					 }
+					 
+				  },
+				  error:function(){
+					  swal('like : 서버 요청 오류');
+				
+				  }
+			  });
+		  }
+		  else{
+			  $.ajax({
+				  url:'recipe/likeUp.json?recipeNo=' + $(event.target).parent()
+				  .parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
+				  +  eval(sessionStorage.getItem('data'))[0].userNo,
+				  dataType:'json',
+				  method:'get',
+				  success:function(){
+					  console.log("like up 성공성공");
+					  $(event.target).css('color','#337ab7');
+					  $(event.target).parent().parent().css('color','#337ab7');
+					  $(event.target).parent().append('<b class="rcp-like" id="rcp-like" name="like" style="color:#337ab7">좋아요</b>');
+					  $(event.target).remove();
+					  
+				  },
+				  error:function(){
+					  swal('ajax likeclick: 서버 요청 오류');
+				  }
+			  });
+		  }
 	  })
 }
 

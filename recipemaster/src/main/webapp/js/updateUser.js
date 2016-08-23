@@ -29,14 +29,14 @@ $(function(){
 	}).on('fileuploaddone', function (e, data) {
 		if (data.result.status == 'pwdFail'){
 			$('#beforePwd-div').removeClass().addClass("rcp-mar rcp-info form-group form-group-md has-error has-feedback");
-			alert('이전 비밀번호 불일치');
+			swal('이전 비밀번호 불일치');
 			$('#beforePwd').focus();
 			return;
 		} else if(data.result.status == 'failure'){
-			alert('서버 오류');
+			swal('서버 오류');
 			return;
 		} 
-		alert('정보수정 완료');
+		swal('정보수정 완료');
 		location.reload();
 		    	
     }).on('fileuploadfail', function (e, data) {
@@ -56,18 +56,18 @@ $(function(){
 		/* 폼 입력 유무 확인 */
 		event.preventDefault();
 		if( $('#beforePwd').val() == ""){
-			alert('이전비밀번호를 입력해주세요');
+			swal('이전비밀번호를 입력해주세요');
 			return;
 		}else if( $('#afterPwd').val() == ""){
-			alert('변경할 비밀번호를 입력해주세요');
+			swal('변경할 비밀번호를 입력해주세요');
 			return;
 		}else if( $('#afterPwdcf').val() == ""){
-			alert('변경할 비밀번호확인을 입력해주세요');
+			swal('변경할 비밀번호확인을 입력해주세요');
 			return;
 		}
 		/* 일치 불일치 확인 */
 		if($('#afterPwd').val()!=$('#afterPwdcf').val()){
-			alert('변경 비밀번호 불일치');
+			swal('변경 비밀번호 불일치');
 			return;
 		}
 
@@ -82,14 +82,14 @@ $(function(){
 //		}, function(result) {   	  
 //			if (result.status == 'pwdFail'){
 //				$('#beforePwd-div').removeClass().addClass("rcp-mar rcp-info form-group form-group-md has-error has-feedback");
-//				alert('이전 비밀번호 불일치');
+//				swal('이전 비밀번호 불일치');
 //				$('#beforePwd').focus();
 //				return;
 //			} else if(result.status == 'failure'){
-//				alert('서버 오류');
+//				swal('서버 오류');
 //				return;
 //			} else {
-//				alert('정보수정 완료');
+//				swal('정보수정 완료');
 //				$('#editUserInfo-pop-up-banner').bPopup().close();
 //			}
 //		}, 'json');

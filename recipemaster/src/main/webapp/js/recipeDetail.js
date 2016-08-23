@@ -48,7 +48,7 @@ $(function(){
 				dataType : 'json',
 				success : function(result) {
 					if (result.status != 'success') {
-						alert('게시물 조회 오류');
+						swal('게시물 조회 오류');
 						return;
 					}
 					console.log(result);
@@ -102,7 +102,7 @@ $(function(){
 				} 
 				,
 				error : function(){
-					alert('서버 요청 오류');
+					swal('서버 요청 오류');
 				}
 			});
 		});		
@@ -116,14 +116,14 @@ $(function(){
 //dataType : 'json',
 //success : function(result) {
 //if (result.status != 'success') {
-//alert('게시물 조회 오류');
+//swal('게시물 조회 오류');
 //return;
 //}
 
 //}
 //,
 //error : function(){
-//alert('서버 요청 오류');
+//swal('서버 요청 오류');
 //}
 //});
 //});		
@@ -147,7 +147,7 @@ $(function(){
 				},
 				success:function(result){
 					if (result.status != 'success') {
-						alert('게시물 조회 오류');
+						swal('게시물 조회 오류');
 						return;
 					}
 					$('.rcp-scrap-button-text').attr('name','');
@@ -156,7 +156,7 @@ $(function(){
 					$('.rcp-detail-scrap i').attr('style','color:white');
 				},
 				error : function(){
-					alert('서버 요청 오류');
+					swal('서버 요청 오류');
 
 				}
 			})
@@ -176,7 +176,7 @@ $(function(){
 
 
 					if(result.status == 'notLogin'){
-						alert('로그인 부탁염 ^^*');
+						swal('로그인 부탁염 ^^*');
 						return;
 					}
 
@@ -186,7 +186,7 @@ $(function(){
 					$('.rcp-detail-scrap i').attr('style','color:#ffce63');
 				},
 				error : function(){
-					alert('서버 요청 오류');
+					swal('서버 요청 오류');
 				}
 			})
 		}

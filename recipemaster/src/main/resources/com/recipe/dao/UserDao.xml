@@ -14,6 +14,8 @@
 		<result column="role" property="role" />
 		<result column="join_dt" property="joinDate" />
 		<result column="rcp_url" property="recipeUrl" />
+		<result column="rcpCount" property="recipeCount"/>
+		<result column="rownum" property="rownum"/>
 	</resultMap>
 
 	<select id="findUser" resultMap="userMap" parameterType="String">
@@ -23,11 +25,16 @@
 	</select>
 
 	<select id="selectList" resultMap="userMap" parameterType="Map">
-		SELECT uno, name, email, pwd, img, intro, role, join_dt, rcp_url
-		FROM
-		users		
-		ORDER BY uno desc
-		LIMIT #{startIndex}, #{len}
+		SELECT @rownum:=@rownum+1 rownum,vt.*
+    FROM(
+        select * from
+    (SELECT u.uno, u.name, u.email, u.pwd, u.img, u.intro, u.role, u.join_dt, u.rcp_url, rcpCount   
+    FROM users u , 
+        (SELECT lk.uno,COUNT(lk.rcpno) rcpCount from rcps lk group by lk.uno) c
+        where u.uno = c.uno) a
+    INNER JOIN(select @rownum:=0) t   
+    ORDER BY rcpCount desc
+    LIMIT #{startIndex}, #{len}) vt
 	</select>
 
 	<select id="selectOne" resultMap="userMap" parameterType="int">
