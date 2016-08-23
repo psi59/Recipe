@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +30,14 @@ public class RecipeController {
 	@Autowired RecipeService recipeService;
 	@Autowired UserService userService;
 	
-	// 이성현
+	// 리스트 검색 -이성현
 	@RequestMapping(path="listSearch",produces="application/json;charset=UTF-8")
   @ResponseBody
   public String listSearch(@RequestParam(defaultValue="1") int pageNo,
                            @RequestParam(defaultValue="8") int pageSize,
                            Search search, HttpSession session){
     HashMap<String,Object> result = new HashMap<>();     
-    int recipeCount = 0;
-    // TEST용으로 searchCondition, sortCondition 때려박음    
+    int recipeCount = 0;    
     
     int userNo = 0;    
     if(session.getAttribute("userNo") != null){
@@ -49,12 +49,14 @@ public class RecipeController {
     // 처음에만 레시피카드들을 카운트 한다.
     if(pageNo == 1){
       recipeCount = recipeService.getRecipeCount(pageNo, pageSize, search, userNo);
-    }
-            
-    try{
-      result.put("status","success");
-      result.put("data", "lastPage");        
+    }    
+    
+    try{      
+      result.put("status","success");      
       result.put("data", list);
+      if(list.isEmpty()){
+        result.put("data", "lastPage"); 
+      }
       result.put("recipeCount", recipeCount);      
       result.put("pageNo", pageNo);
     }catch (Exception e){
@@ -63,7 +65,25 @@ public class RecipeController {
 
     return new Gson().toJson(result);
   }
-
+	
+	//리스트 페이지 레시피 검색 자동완성 -이성현
+	@RequestMapping(path="recipeSearchAutoComplete",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public String recipeSearchAutoComplete(@RequestParam String searchValue){
+	  HashMap<String, Object> result = new HashMap<>();
+	  List<String> recipeNameList = recipeService.getRecipeNameList(searchValue);
+	  for (String recipeName : recipeNameList) {
+      System.out.println("Recipe Name : "+recipeName);
+    }
+	  try{
+	    result.put("status","success");        
+      result.put("data", recipeNameList);
+	  }catch(Exception e){
+	    result.put("status", "false");
+	  }	  
+	  return new Gson().toJson(recipeNameList);
+	}
+	
 	@RequestMapping(path="addRecipe",produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String addRecipe(Recipe recipe, @RequestParam("materialName") String[] materialNames, @RequestParam("materialAmount") String[] materialAmounts, @RequestParam("files") List<MultipartFile> images){
@@ -213,16 +233,10 @@ public class RecipeController {
         }else{
           
           recipe.setSubscribe(recipe.getSubscribe()+","+userNoList.get(i).getSubscribeNum());
-          System.out.println(userNoList.get(i).getSubscribeNum());
-          System.out.println("머나오냐ㅅㅂ"+recipe.getSubscribe());
         }
       }
       String scsUserNo=recipe.getSubscribe();
-      System.out.println("scsUserNo:"+scsUserNo);
-      System.out.println("pageNo:"+pageNo);
-      System.out.println("pageSize:"+pageSize);
       List<Recipe> subscribe = recipeService.selectSbuscribe(scsUserNo,pageNo,pageSize);
-      System.out.println("머나오냐 ㅅㅂsubscribe"+subscribe+"끝");
       result.put("status","success");
       result.put("data", subscribe);
       result.put("pageNo", pageNo);
@@ -376,8 +390,7 @@ public class RecipeController {
   public String comList( @RequestParam(defaultValue="1") int pageNo,
                           @RequestParam(defaultValue="4") int pageSize,HttpSession session){
 
-    HashMap<String,Object> result = new HashMap<>();
-    Recipe recipe = new Recipe();
+    HashMap<String,Object> result = new HashMap<>();    
     try{
       List<Recipe> myRecipeList = recipeService.selectSbuscribe2((session.getAttribute("userNo")).toString(),pageNo,pageSize);
       result.put("status","success");

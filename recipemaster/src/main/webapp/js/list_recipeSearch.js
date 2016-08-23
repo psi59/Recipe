@@ -12,11 +12,12 @@ $(function() {
 		search('newest', $('#order-latest-btn').val());			    
 	});
 	
-	// 키보드에서 뗐을때의 검색 이벤트
+	// 키보드에서 뗐을때의 검색 이벤트	
 	$('#searchKeyword').keyup( function(){
 		$("body").scrollTop(0);
-		search('newest', $('#order-latest-btn').val()); 
-	});
+		search('newest', $('#order-latest-btn').val());		
+	})
+	
 	
 	// 최신순 정렬
 	$('#order-latest-btn').click(function(){		
@@ -50,6 +51,42 @@ $(function() {
 	    	searchScrollAppend();
 	    }
 	});
+
+	// 자동완성 기능
+	var options = {
+			  url: function(phrase) {
+				  console.log(phrase);
+			    return "recipe/recipeSearchAutoComplete.json?searchValue="+phrase;
+			  },
+
+			  getValue: function(element) {
+				console.log(element);
+			    return element;
+			  },
+
+			  ajaxSettings: {
+			    dataType: "json",
+			    method: "GET"
+			  },
+			  requestDelay: 400,
+			  
+		      list: {
+		          showAnimation: {
+		            type: "slide", //normal|slide|fade
+		            time: 200
+		          },
+
+		          hideAnimation: {
+		            type: "slide", //normal|slide|fade
+		            time: 200
+		          },
+		          onChooseEvent: function() {
+		            
+		          }
+		      }
+		};
+		
+	//$('#searchKeyword').easyAutocomplete(options);
 	
 	
 	$(document).on('click',('.rcp-like'),function(event){
@@ -97,6 +134,7 @@ $(function() {
 			  });
 		  }
 	  });
+
 });
 
 // 처음 검색했을때의 1페이지 결과 가져오기
@@ -136,6 +174,7 @@ function search(sort,order){
 		}
 	})	
 }
+
 // 스크롤 끝까지 내렸을때 추가될 결과 한페이지씩 가져오기
 function searchScrollAppend(){ 
 		
@@ -143,41 +182,47 @@ function searchScrollAppend(){
 	var compilePage = Handlebars.compile(page);
 	
 	var source = $('#recipe-card-search-template').text();
-	var template = Handlebars.compile(source);		
-	var pageNo = parseInt($('#search-pageNo').val())+1;
-	
+	var template = Handlebars.compile(source);
+		
 	if($('#sort-condition').val() == 'newest'){
 		var order = $('#order-latest-btn').val();		
 	} else {
 		var order = $('#order-grade-btn').val();
 	}
 	
-	$.ajax({
-		url : 'recipe/listSearch.json',
-		method : 'post',
-		data : {					
-			pageNo : pageNo,
-			searchKeyword : $('#searchKeyword').val(),
-			searchCondition : $("#searchCondition-select option:selected").val(),
-			sortCondition : $('#sort-condition').val(),
-			orderCondition : order
-		},
-		dataType : 'json',
-		success : function(result) {
-			if (result.status != 'success') {
-				swal('실패 ~');
-				return;
+	if($('#search-pageNo').val() != 'lastPage'){
+		var pageNo = parseInt($('#search-pageNo').val())+1;
+		$.ajax({
+			url : 'recipe/listSearch.json',
+			method : 'post',
+			data : {					
+				pageNo : pageNo,
+				searchKeyword : $('#searchKeyword').val(),
+				searchCondition : $("#searchCondition-select option:selected").val(),
+				sortCondition : $('#sort-condition').val(),
+				orderCondition : order
+			},
+			dataType : 'json',
+			success : function(result) {
+				if (result.status != 'success') {
+					swal('실패 ~');
+					return;
+				}
+				$('.searchResult > .row').append(template(result));
+				
+				if(result.data != 'lastPage'){
+					$('#search-pageNo').val(result.pageNo);
+				} else {
+					$('#search-pageNo').val('lastPage');
+				}
+				methods();
+			},
+			error : function() {
+				swal('서버 요청 오류 !')
 			}
-			
-			$('.searchResult > .row').append(template(result));
-			$('#search-pageNo').val(result.pageNo);
-			methods();
-		
-		},
-		error : function() {
-			swal('서버 요청 오류 !')
-		}
-	})	
+
+		})
+	}
 }
 
 

@@ -15,7 +15,7 @@ $main: #7b7de5;
 } */
 
 /* 버튼 0810수정*/
-.infoBtn {
+.goMyPageBtn {
     display: block;
     width: 170px;
     height: 40px;
@@ -29,7 +29,23 @@ $main: #7b7de5;
     transition: background-color .10s ease-in-out;
 }
 
+.goWriteRcpBtn {
+    display: block;
+    width: 170px;
+    height: 40px;
+    padding: 0;
+    margin: 10px 20px 10px;
+    font-weight: 700;
+    color: #fff;
+    background-color: #B51515;
+    border: none;
+    border-radius: 20px;
+    transition: background-color .10s ease-in-out;
+}
+
+
 #editUserInfo-pop-up-banner {
+	z-index:99999;
   display: none;
   width: 375px;
   height: 550px;

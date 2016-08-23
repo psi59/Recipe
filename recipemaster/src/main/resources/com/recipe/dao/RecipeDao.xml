@@ -89,6 +89,13 @@
     </if>
     limit #{startIndex}, #{len}
   </select>
+  
+  <select id="selectRecipeName" parameterType="String" resultType="String">
+	SELECT name
+	FROM rcps
+	WHERE name LIKE '${value}%'
+	ORDER BY LENGTH(name) ASC;
+  </select>
 	
 	<insert id="likeUp" parameterType="Recipe">
 	INSERT INTO RCP_LIK (UNO,RCPNO,LC_DT)

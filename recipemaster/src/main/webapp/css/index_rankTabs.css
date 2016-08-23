@@ -57,17 +57,16 @@
   border: 0;
 }
 
-/* .tab-content {
-  margin-left: 45px;
-} */
 
 .tab-content .tab-pane {
   display: none;
-  background-color: #fff;
-  /* padding: 0.5rem; */  
+  background-color: #FAF4C0;
   overflow-y: auto;
-  /* overflow-x: auto;   */
-  /* width: 81em; */
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin-left: 95px;
+  margin-right: 95px;
+  box-shadow: 10px 10px 5px #888888;
 }
 .tab-content .active {
   display: block;

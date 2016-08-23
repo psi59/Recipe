@@ -2,14 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>길용이님의 Page</title>
+<title>my page</title>
 <link rel="stylesheet"
 	href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="/node_modules/sweetalert/dist/sweetalert.css">
-<link rel="stylesheet" href="/css/mypage.css">
 <link rel="stylesheet" href="/css/subscribe.css">
-<link rel="stylesheet" href="/css/community.css">
+<link rel="stylesheet" href="/css/mypage.css">
 <link rel="stylesheet" href="/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/subscribe.css">
 <link rel="stylesheet"
@@ -22,8 +21,8 @@
 <!-- 사용자 정의 css -->
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/userinfobox.css">
-<link rel="stylesheet" href="css/signup.css">
-<link rel="stylesheet" href="css/popup.css">
+<link rel="stylesheet" href="css/common/signup.css">
+<link rel="stylesheet" href="css/common/popup.css">
 <link rel="stylesheet" href="css/updateImg.css">
 <style>
 </style>
@@ -98,17 +97,8 @@
 											class="btn btn-default rcp-btn-nav">로그아웃</button>
 									</div>
 								</div>
-								<!-- <nav class="dropdown__nav rcp-menuname rcp-back">
-                  <a href="../mypage/mypage.html"><span class="rcp-back">내
-                      레시피</span></a><a href="../writerecipe.html"><span class="rcp-back">레시피
-                      쓰기</span></a><a href="#"><span class="rcp-back">구독 정보</span></a>
-                </nav> -->
-								<button class="infoBtn">
-									<a href="/community.html">MyPage</a>
-								</button>
-								<button class="infoBtn">
-									<a href="/writerecipe.html">Recipe 작성</a>
-								</button>
+								<a href="/mypage.html"><button class="goMyPageBtn btn btn-default rcp-btn-nav">MyPage</button></a>
+                <a href="/writerecipe.html"><button class="goWriteRcpBtn btn btn-default rcp-btn-nav">Recipe 작성</button></a>
 							</div>
 						</div>
 
@@ -183,8 +173,7 @@
 			</a>
 				<div class="rcp-topinfo">
 
-					<h3 class="rcp-userName">길용이</h3>
-					<h4>구독자수 : 194,553명</h4>
+					<h2 class="rcp-userName">길용이</h2>
 
 					<button class="btn btn-default rcp-topbtn">구독하기</button>
 				</div>
@@ -230,8 +219,8 @@
 				<div id="tabs" class="rcp-vst-tabs">
 
 					<ul>
-						<li><a href="#tabs-1">My Recipe</a></li>
-						<li><a href="#tabs-2" id="scsPage">구독중인 페이지</a></li>
+						<li><a href="#tabs-1" style="width: 330px;">My Recipe</a></li>
+						<li><a href="#tabs-2" style="width: 330px;" id="scsPage">구독중인 페이지</a></li>
 					</ul>
 					<div id="tabs-1">
 						<div class="rcp-main-right">
@@ -260,10 +249,10 @@
 				<!-- 방명록  -->
 			</section>
 		</section>
-		<div style="height: 1100px;"></div>
+	<!-- 	<div style="height: 1100px;"></div>
 		<div id="quick"
 			style="position: absolute; top: 350px; border: solid 3px #6799FF; width: 150px; height: 480px; text-align: center; color: #6799FF;">
-			최근 방문한 페이지</div>
+			최근 방문한 페이지</div> -->
 	</section>
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
@@ -289,7 +278,7 @@
 	<!--  사용자 js -->
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/common.js"></script>
-	<script src="js/signup.js"></script>
+	<script src="js/common/signup.js"></script>
 	<script src="js/login.js"></script>
 	<script src="js/updateUser.js"></script>
 
@@ -416,6 +405,7 @@ function loadComRcpList(){
 	    dataType : 'json',
 	    success : function(result) {
 	      if (result.status != 'success') {
+	        //swal('실패 ~');
 	        return;
 	      }
 	      //$('#search-result > div').remove();    
@@ -423,7 +413,7 @@ function loadComRcpList(){
 	      $('#rcpList-pageNo').attr('value', '1');
 	    },
 	    error : function() {
-	      swal('더이상 데이터가 없습니다.')
+	      //swal('더이상 데이터가 없습니다.')
 	    }
 	  })  
 	}
@@ -451,13 +441,14 @@ function rcpListScrollAppend(){
 	    dataType : 'json',
 	    success : function(result) {
 	      if (result.status != 'success') {
+	        //swal('실패 ~');
 	        return;
 	      }
 	      $('#tabs-1 .rcp-subscribe').append(template(result));     
 	      $('#rcpList-pageNo').val(result.pageNo);
 	    },
 	    error : function() {
-	      swal('오호라~','더이상 데이터가 없습니다.')
+	      //swal('오호라~','더이상 데이터가 없습니다.')
 	    }
 	  })  
 	}
@@ -483,6 +474,7 @@ function loadMyPage(){
       dataType : 'json',
       success : function(result) {
         if (result.status != 'success') {
+          //swal('로그인 해주시기 바랍니다.');
           return;
         }
         $('#visitNum').text(result.sum+"명");
@@ -492,12 +484,12 @@ function loadMyPage(){
       
       },
       error : function() {
-        swal('더이상 데이터가 없습니다.')
+        //swal('더이상 데이터가 없습니다.')
       }
     })  
   }
 </script>
 	<script src="js/subscribe.js"></script>
-	<script src="js/community.js"></script>
+	<script src="js/mypage.js"></script>
 </body>
 </html>
