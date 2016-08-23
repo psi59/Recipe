@@ -140,7 +140,7 @@
   </insert>
     
     <delete id="deleteSubscribe" parameterType="Map">
-    DELETE from scs where $(fromUserNo)
+    DELETE from scs where ${fromUserNo}
     </delete>
     
   <select id="selectSubscribeUno" resultMap="recipeMap" parameterType="INTEGER">

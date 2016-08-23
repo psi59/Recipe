@@ -227,39 +227,7 @@ function mouseHover(){
   function comList(){
 	  $(document).on('click', '.rcp-userName',function(event){
 		  event.preventDefault();
-		  $(location).attr('href','http://localhost:8080/community.html' );
-		  
-	
-		  
-		  $.ajax({
-			  url :'recipe/userPage.json',
-			  dataType : 'json',
-			  method : 'post',
-			  data:{
-				 email:$(event.target).parent().children('input[type="hidden"]').val()
-			  },
-			  success : function(result) {
-				  console.log(result);
-				  if (result.status != 'success') {
-					  alert('comList 실행 중 오류 발생');
-					  return;
-				  }
-				  console.log(result.data);
-				 
-				  var sourceCRList = $('#comRcpList-template').text();
-				  var templateCRList = Handlebars.compile(sourceCRList);
-				  
-				  console.log(result.data);
-				 
-				  	$('.rcp-userName').text(result.user);
-			    	
-				  //$('#tabs-1 .rcp-subscribe').append(templateCRList(result));
-			  },
-			  error : function() {
-				 alert('community 서버 요청 오류!...')
-			  }
-		  });
-		  
+		  $(location).attr('href','http://localhost:8080/community.html?'+$(event.target).parent().children('input[type="hidden"]').val() ); 	 
 	  })
   }
   

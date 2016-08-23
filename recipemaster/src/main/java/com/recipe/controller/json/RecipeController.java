@@ -112,7 +112,7 @@ public class RecipeController {
 	      @RequestParam(defaultValue="4") int pageSize,
 	      int request){
 	    HashMap<String,Object> result = new HashMap<>();
-    
+   
 	    List<Recipe> list = recipeService.getRecipeList(userNo, pageSize,request);
 
 	    try{

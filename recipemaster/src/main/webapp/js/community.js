@@ -1,6 +1,37 @@
 
   $(function(){
-	  console.log(location.href.split('?')[1])
+	  console.log(location.href.split('?')[1]);
+	  
+	  $.ajax({
+		  url :'recipe/userPage.json',
+		  dataType : 'json',
+		  method : 'post',
+		  data:{
+			 email:location.href.split('?')[1]
+		  },
+		  success : function(result) {
+			  console.log(result);
+			  if (result.status != 'success') {
+				  alert('comList 실행 중 오류 발생');
+				  return;
+			  }
+			  console.log(result.data);
+			 
+			  var sourceCRList = $('#comRcpList-template').text();
+			  var templateCRList = Handlebars.compile(sourceCRList);
+			  
+			  console.log(result.data);
+			 
+			  	$('.rcp-userName').text(result.data.userName);
+		    	
+			  //$('#tabs-1 .rcp-subscribe').append(templateCRList(result));
+		  },
+		  error : function() {
+			 alert('community 서버 요청 오류!...')
+		  }
+	  });
+	  
+	  
 	  
     	$('.rcp-topbtn').on('click',function(evnet){
     		if($(event.target).is('#subscribeComplete')){
@@ -8,7 +39,7 @@
 	    			url:'recipe/deleteSubscribe.json',
 	    			datatype:'json',
 	    			data:{
-	    				fromUserNo:4
+	    				fromUserNo:5
 	    			},
 	    			method:'post',
 	    			success:(function(){
@@ -25,7 +56,7 @@
 	    			url:'recipe/addSubscribe.json',
 	    			datatype:'json',
 	    			data:{
-	    				fromUserNo:4
+	    				fromUserNo:5
 	    			},
 	    			method:'post',
 	    			success:(function(){
