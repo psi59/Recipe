@@ -2,14 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>길용이님의 Page</title>
+<title>my page</title>
 <link rel="stylesheet"
 	href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="/node_modules/sweetalert/dist/sweetalert.css">
-<link rel="stylesheet" href="/css/mypage.css">
 <link rel="stylesheet" href="/css/subscribe.css">
-<link rel="stylesheet" href="/css/community.css">
+<link rel="stylesheet" href="/css/mypage.css">
 <link rel="stylesheet" href="/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/subscribe.css">
 <link rel="stylesheet"
@@ -98,17 +97,8 @@
 											class="btn btn-default rcp-btn-nav">로그아웃</button>
 									</div>
 								</div>
-								<!-- <nav class="dropdown__nav rcp-menuname rcp-back">
-                  <a href="../mypage/mypage.html"><span class="rcp-back">내
-                      레시피</span></a><a href="../writerecipe.html"><span class="rcp-back">레시피
-                      쓰기</span></a><a href="#"><span class="rcp-back">구독 정보</span></a>
-                </nav> -->
-								<button class="infoBtn">
-									<a href="/community.html">MyPage</a>
-								</button>
-								<button class="infoBtn">
-									<a href="/writerecipe.html">Recipe 작성</a>
-								</button>
+								<a href="/mypage.html"><button class="goMyPageBtn btn btn-default rcp-btn-nav">MyPage</button></a>
+                <a href="/writerecipe.html"><button class="goWriteRcpBtn btn btn-default rcp-btn-nav">Recipe 작성</button></a>
 							</div>
 						</div>
 
@@ -180,8 +170,7 @@
 				<img src="/img/pika.jpg" class="rcp-topimg">
 				<div class="rcp-topinfo">
 
-					<h3 class="rcp-userName">길용이</h3>
-					<h4>구독자수 : 194,553명</h4>
+					<h2 class="rcp-userName">길용이</h2>
 
 					<button class="btn btn-default rcp-topbtn">구독하기</button>
 				</div>
@@ -251,10 +240,10 @@
 				<!-- 방명록  -->
 			</section>
 		</section>
-		<div style="height: 1100px;"></div>
+	<!-- 	<div style="height: 1100px;"></div>
 		<div id="quick"
 			style="position: absolute; top: 350px; border: solid 3px #6799FF; width: 150px; height: 480px; text-align: center; color: #6799FF;">
-			최근 방문한 페이지</div>
+			최근 방문한 페이지</div> -->
 	</section>
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
@@ -492,6 +481,6 @@ function loadMyPage(){
   }
 </script>
 	<script src="js/subscribe.js"></script>
-	<script src="js/community.js"></script>
+	<script src="js/mypage.js"></script>
 </body>
 </html>

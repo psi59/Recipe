@@ -216,7 +216,7 @@
   function comList(){
 	  $(document).on('click', '.rcp-userName',function(event){
 		  event.preventDefault();
-		  $(location).attr('href','http://localhost:8080/community.html');
+		  $(location).attr('href','http://localhost:8080/mypage.html');
 		  $.ajax({
 			  url :'recipe/comList.json',
 			  dataType : 'json',

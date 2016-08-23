@@ -66,3 +66,305 @@
 
 /* -----------------------------------------상일이형 css 끝 --------------------------- */
  
+
+
+/* ======================================================== */
+body{
+	background: #f0f0f0;
+}
+
+
+
+.rcp-pagemiddle1{
+	    margin-bottom: 13%;
+        
+	color: #515d6e;
+}
+
+.rcp-pagemiddle-div1{
+	    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    background: white;
+    width: 241px;
+  height: 100px;
+  position: relative;
+  float: left;
+   margin-right: 20px;
+    padding: 20px;
+}
+
+.rcp-pagemiddle-div2{
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    background: white;
+   width: 241px;
+  height: 100px;
+  position: relative;
+  float: left;
+    margin-right: 20px;
+    padding: 20px;
+}
+
+
+.rcp-pagemiddle-div3{
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    background: white;
+   width: 241px;
+ height: 100px;
+  position: relative;
+  float: left;
+    margin-right: 20px;
+    padding: 20px;
+}
+
+
+.rcp-pagemiddle-div4{
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    background: white;
+    width: 241px;
+  height: 100px;
+  position: relative;
+   float: left;
+   
+    padding: 20px;
+}
+
+.rcp-pagemiddle-div-img{
+	position: relative;
+	width: 50px;
+  height: 50px;
+}
+
+.heading {
+    display: block;
+    position: relative;
+    color: #515d6e;
+    text-align: right;
+    z-index: 10;
+        font-size: 1.2em;
+    font-weight: 300;
+    text-transform: uppercase;
+        top: -50px;
+}
+
+.value {
+	display: block;
+    position: relative;
+    font-size: 2.1em;
+    font-weight: 600;
+    margin-top: 5px;
+    text-align: right;
+        top: -62px;
+}
+
+
+
+/* ======================================================== */
+
+.navbar {
+	top: 0px !important;
+}
+
+.fa-windows {
+    color: #1C7EBB;
+}
+
+.rcp-fullpage {
+	width: 1024px;
+	height: 1500px;
+	margin: 19%;
+	margin-top: 6%;
+	margin-bottom: 3%;
+}
+
+.rcp-pagetop {
+	/*  background-color: #D4F4FA; */
+	background-image: URL(../img/pagebanner.jpg);
+	width: 100%;
+	height: 20%;
+	    margin-bottom: 2%;
+	    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+   /*  background: white !important; */
+}
+
+.rcp-topimg {
+	padding: 1%;
+	padding-top: 2%;
+	padding-left: 2%;
+	height: 290px;
+	width: 290px;
+	float: left;
+}
+
+.rcp-topinfo {
+	font-weight: bold;
+	padding-left: 1%;
+	padding-top: 19%;
+}
+
+.rcp-topinfo>h3 {
+	font-size: 18pt;
+}
+
+.rcp-topbtn {
+	position: absolute;
+	top: 113px;
+	right: 335px;
+}
+
+.rcp-pagemiddle {
+	width: 100%;
+	height: 10%;
+}
+
+.rcp-pageleft {
+	width: 69%;
+	float: left;
+	padding: 10px;
+	/* border: 1px solid #BDBDBD; */
+  border-top: 0px;
+  border-bottom: 0px;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    background: white !important;
+}
+
+.rcp-pageright {
+	width: 30%;
+	float: right;
+	/* border: 1px solid #BDBDBD; */
+  border-top: 0px;
+  border-left: 0px;
+  border-bottom: 0px;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    background: white !important;
+}
+
+rcp-Vst-id {
+	font-color: #d5d8dd;
+}
+
+.rcp-Vst {
+	margin: 10px;
+	margin-top: 0;
+	width: 288px;
+	height: 150px;
+}
+
+.rcp-Vst-write {
+	margin: 10px;
+	background-color: #ffffff;
+	width: 288px;
+	height: 89px;
+	border: 1px solid #BDBDBD;
+	border-radius: 10px;
+}
+
+.inputWrite {
+	padding: 10px;
+}
+
+.rcp-Vst-inputBtn {
+	position: relative;
+	top: -52pt;
+	left: 152pt;
+	height: 48pt;
+	width: 53pt;
+}
+
+.rcp-Vst-top {
+	background-color: #eaeaea;;
+	border: 1px solid #BDBDBD;
+	width: 288px;
+	height: 50px;
+}
+
+.rcp-Vst-contents-rep>hr {
+	margin: 0;
+}
+
+.rcp-Vst-bottom {
+	background-color: #fff;
+	width: 288px;
+	height: 100px;
+	border: 1px solid #BDBDBD;
+	border-top-width: 0px;
+}
+
+.rcp-Vst-footer {
+	width: 288px;
+	height: 60px;
+	border: 1px solid #BDBDBD;
+	border-top: 0px solid #BDBDBD;
+}
+
+.rcp-Vst-img {
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	padding: 5px;
+}
+
+.rcp-Vst-img-rep {
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	padding: 5px;
+}
+
+.rcp-Vst-img-rep1 {
+	position: relative;
+	left: 1%;
+	top: 1%;
+	width: 50px;
+	height: 50px;
+	padding: 5px;
+}
+
+.rcp-Vst-common {
+	padding-left: 5px;
+	padding-top: -10px;
+	margin: 5px;
+	color: #8c94a2 font-size: 11pt;
+	font-weight: bold;
+}
+
+.rcp-Vst-contents {
+	font-size: 10pt;
+	padding: 10pt;
+}
+
+.rcp-Vst-contents-rep {
+	background-color: white;
+	padding-left: 10pt;
+	padding-top: 10pt;
+	padding-bottom: 10pt;
+	border: 1px solid #BDBDBD;
+}
+
+.vstUpdateBtn {
+	position: relative;
+	left: 82%;
+	top: 10%;
+}
+
+.vstConfirmBtn {
+	position: relative;
+	left: 82%;
+	top: 10%;
+}
+
+.rcp-Vst-moreRp {
+	text-align: center;
+	background-color: white;
+	border: 1px solid #BDBDBD;
+}
+
+.vstDeleteBtn {
+	position: relative;
+	left: 83%;
+	top: 11%;
+}
+
+.rcp-Vst-submitBtn {
+	position: relative;
+	left: 1%;
+	top: 79%;
+}
