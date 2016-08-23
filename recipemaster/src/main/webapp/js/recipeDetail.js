@@ -1,18 +1,3 @@
-//$(function(){
-//$(document).on('click','.detail', function(){
-//$('#detail_pop_up').bPopup({
-//follow: [false, false], //x, y
-//onOpen:function(){
-//$("body").css("overflow", "hidden");
-//},
-//onClose:function(){ 
-//$("body").css("overflow", "auto");
-//}
-
-//});
-
-//});
-//});
 
 $(function(){
 	var detailTemp = $('#recipe-detail-template').html();

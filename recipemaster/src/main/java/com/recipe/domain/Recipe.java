@@ -30,6 +30,7 @@ public class Recipe {
   private int countScrap;
   private int scrapUser;
   private String scrap;
+  private String rpimg;
   //ranking
   private int rownum;
   private int totalPoint;
@@ -37,6 +38,12 @@ public class Recipe {
   
   public int getRownum() {
     return rownum;
+  }
+  public String getRpimg() {
+    return rpimg;
+  }
+  public void setRpimg(String rpimg) {
+    this.rpimg = rpimg;
   }
   public int getTotalPoint() {
     return totalPoint;
@@ -200,7 +207,8 @@ public class Recipe {
         + recipeDate + ", hits=" + hits + ", regiStatus=" + regiStatus + ", gradePoint=" + gradePoint + ", user=" + user
         + ", likeDate=" + likeDate + ", likeUser=" + likeUser + ", countLike=" + countLike + ", subscribeNum="
         + subscribeNum + ", subscribe=" + subscribe + ", countComment=" + countComment + ", countScrap=" + countScrap
-        + ", scrapUser=" + scrapUser + ", scrap=" + scrap + ", rownum=" + rownum + "]";
+        + ", scrapUser=" + scrapUser + ", scrap=" + scrap + ", rpimg=" + rpimg + ", rownum=" + rownum + ", totalPoint="
+        + totalPoint + "]";
   }
  
 }
