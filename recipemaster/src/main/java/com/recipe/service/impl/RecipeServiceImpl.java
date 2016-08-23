@@ -27,7 +27,12 @@ public class RecipeServiceImpl implements RecipeService {
 	  params.put("userNo", userNo);
     
     return recipeDao.recipeSearch(params);
-  }	
+  }
+			
+  @Override
+  public List<String> getRecipeNameList(String searchValue) {    
+    return recipeDao.selectRecipeName(searchValue);
+  }
 
   @Override
   public int getRecipeCount(int pageNo, int pageSize, Search search, int userNo) {

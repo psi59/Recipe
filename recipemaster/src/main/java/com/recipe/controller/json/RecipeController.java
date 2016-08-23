@@ -29,15 +29,14 @@ public class RecipeController {
 	@Autowired RecipeService recipeService;
 	@Autowired UserService userService;
 	
-	// 이성현
+	// 리스트 검색 -이성현
 	@RequestMapping(path="listSearch",produces="application/json;charset=UTF-8")
   @ResponseBody
   public String listSearch(@RequestParam(defaultValue="1") int pageNo,
                            @RequestParam(defaultValue="8") int pageSize,
                            Search search, HttpSession session){
     HashMap<String,Object> result = new HashMap<>();     
-    int recipeCount = 0;
-    // TEST용으로 searchCondition, sortCondition 때려박음    
+    int recipeCount = 0;    
     
     int userNo = 0;    
     if(session.getAttribute("userNo") != null){
@@ -49,12 +48,14 @@ public class RecipeController {
     // 처음에만 레시피카드들을 카운트 한다.
     if(pageNo == 1){
       recipeCount = recipeService.getRecipeCount(pageNo, pageSize, search, userNo);
-    }
-            
-    try{
-      result.put("status","success");
-      result.put("data", "lastPage");        
+    }    
+    
+    try{      
+      result.put("status","success");      
       result.put("data", list);
+      if(list.isEmpty()){
+        result.put("data", "lastPage"); 
+      }
       result.put("recipeCount", recipeCount);      
       result.put("pageNo", pageNo);
     }catch (Exception e){
@@ -63,7 +64,25 @@ public class RecipeController {
 
     return new Gson().toJson(result);
   }
-
+	
+	//리스트 페이지 레시피 검색 자동완성 -이성현
+	@RequestMapping(path="recipeSearchAutoComplete",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public String recipeSearchAutoComplete(@RequestParam String searchValue){
+	  HashMap<String, Object> result = new HashMap<>();
+	  List<String> recipeNameList = recipeService.getRecipeNameList(searchValue);
+	  for (String recipeName : recipeNameList) {
+      System.out.println("Recipe Name : "+recipeName);
+    }
+	  try{
+	    result.put("status","success");        
+      result.put("data", recipeNameList);
+	  }catch(Exception e){
+	    result.put("status", "false");
+	  }	  
+	  return new Gson().toJson(recipeNameList);
+	}
+	
 	@RequestMapping(path="addRecipe",produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String addRecipe(Recipe recipe, @RequestParam("materialName") String[] materialNames, @RequestParam("materialAmount") String[] materialAmounts, @RequestParam("files") List<MultipartFile> images){

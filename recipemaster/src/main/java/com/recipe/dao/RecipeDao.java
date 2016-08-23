@@ -10,17 +10,16 @@ import com.recipe.domain.User;
 public interface RecipeDao {
   int insert(Map map); // Create
   void insertMaterials(Map map); // Create
-  int insertImageAndProduce(Map map);
-  
+  int insertImageAndProduce(Map map);  
   List<Recipe> recipeList(Map<String,Object> params); // Read or Retrieve
   List<Recipe> recipeList2(Map<String,Object> params); // Read or Retrieve
   List<Recipe> recipeSearch(Map<String,Object> params); //Search 성현
   int recipeCount(Map<String,Object> params); //Recipe Count 성현
+  List<String> selectRecipeName(String searchValue); //Recipe Name List 성현
   List<Recipe> selectSbuscribe2(Map<String,Object> params); //준모
   int addSubscribe(Map<String,Object> params); //구독하기 추가 고재현
   List<Recipe> selectSubscribeUno(int userNo); //구독하기한 userNo추출  고재현
   List<Recipe> selectSbuscribe(String userNo); //구독한 리스트 고재현
-
   List<Recipe> selectMypage(int userNo);      // mypage리스트  고재현
   List<Recipe> selectScrapUserNoMypage(int userNo);      // mypageScrap리스트  고재현
   List<Recipe> selectScrapMypage(Map<String,Object> params);      // mypageScrap리스트  고재현
