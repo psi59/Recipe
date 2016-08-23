@@ -7,6 +7,8 @@
 <meta name="description" content="">
 
 <!-- Template css -->
+<link rel="stylesheet"
+  href="/node_modules/sweetalert/dist/sweetalert.css">
 <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/template/font-awesome.min.css">
 <link rel="stylesheet" href="css/template/animate.css">
@@ -24,6 +26,8 @@
 <link rel="stylesheet" href="css/mainlist.css">
 <link rel="stylesheet" href="css/detail.css">
 <link rel="stylesheet" href="css/updateImg.css">
+<!-- <link rel="stylesheet" href="css/rankingpage.css"> -->
+<link rel="stylesheet" href="css/mainrankingpage.css">
 <!-- 성현 -->
 <link rel="stylesheet" href="css/common/chefCard.css">
 <link rel="stylesheet" href="css/common/popup.css">
@@ -46,10 +50,10 @@
 						<a class="logo col-md-3 col-sm-3 hidden-xs rt-navbar-top-logo"
 							href="index.html"><img src="img/logo.svg" alt="Logo"></a>
 						<div
-							class="input-group col-md-5 col-sm-5 col-xs-11 col-xs-offset-1 rcp-navbar-searchbar-size rt-navbar-top-searchbar">
-							<span class="input-group-addon" id="searchBarKeyword">검색</span> 
-							 <input id="searchKeyword" type="text" class="searchKeyword form-control rcp-navbar-searchbar-size"
+							class="input-group col-md-5 col-sm-5 col-xs-11 col-xs-offset-1 rcp-navbar-searchbar-size rt-navbar-top-searchbar">							
+							<input id="searchKeyword" type="text" class="searchKeyword form-control rcp-navbar-searchbar-size"
 								placeholder="레시피명, 쉐프명, 재료명" aria-describedby="basic-addon1">
+							<span class="input-group-addon" id="searchBarKeyword">검색</span> 
 						</div>
 					</div>
 					<div class="col-md-4 col-sm-4 hidden-xs" style="margin-right: 2em;">
@@ -57,7 +61,7 @@
 							<ul class="nav navbar-nav navbar-right">
 								<li><a href="#"><span id="signUpTopBtn"
 										class="rcp-btn-default-top">회원가입</span></a></li>
-								<li id="topbarUserImg"><a href="#"><span id="TopBtn"
+								<li id="topbarUserImg"><a href="#"><span id="topLoginBtn"
 										class="rcp-btn-default-top">로그인</span></a></li>
 							</ul>
 						</div>
@@ -82,9 +86,8 @@
 											class="btn btn-default rcp-btn-nav">로그아웃</button>
 									</div>
 								</div>
-								
-								<button class="infoBtn"><a href="/community.html" >MyPage</a></button>
-								<button class="infoBtn"><a href="/writerecipe.html" >Recipe 작성</a></button>
+								<a href="/mypage.html"><button class="goMyPageBtn btn btn-default rcp-btn-nav">MyPage</button></a>
+								<a href="/writerecipe.html"><button class="goWriteRcpBtn btn btn-default rcp-btn-nav">Recipe 작성</button></a>
 							</div>
 						</div>
 
@@ -213,7 +216,7 @@
 			<span>로그인</span>
 		</div>
 		<div class="rcp-laytop rcp-laytop2"></div>
-		<div class="rcp-innnersec">
+		<div class="rcp-innnersec"> 
 			<div id="loginInputBox" class="rcp-mar rcp-info"
 				style="height: 110px;">
 				<input class="form-control" type="text" id="userEmail" name="email"
@@ -222,9 +225,9 @@
 					placeholder="비밀번호 입력" />
 			</div>
 		</div>
-		<div class="rcp-sign-membership" id="userLogin"
+		<div class="rcp-sign-membership" 
 			style="margin-top: 50px;">
-			<a href="#"><span>로그인</span></a>
+			<a href="#" id="userLogin"><span>로그인</span></a>
 		</div>
 	</div>
 	<!--  -->
@@ -322,30 +325,18 @@
 
 	<!-------------------------------- Rank List --------------------------------->
 	<section id="rcp-main-rank">
-		<div class="tabs-left">
-			<h3>랭킹</h3>
-
-			<ul class="nav nav-tabs">
-				<li class="active"><a href="#rcp-chef-rank" data-toggle="tab">
-						<img class="rcp-rank-icon" src="img/cooker.png">
-				</a></li>
-				<li><a href="#rcp-recipe-rank" data-toggle="tab"> <img
-						class="rcp-rank-icon" src="img/recipe2.png">
-				</a></li>
-			</ul>
-
-			<div class="tab-content">
+		<div class="tabs-left rcp-list h3 rcp-1024 list1">
+			<div class="tab-content" style="padding-bottom:200px">
+			<h3 id="rcp-ranking"><a href="/ranking.html">Best Chef</a></h3>
 				<!---------------- Chef Rank --------------------->
 				<div class="row tab-pane active" id="rcp-chef-rank"></div>
 				<!---------------- Recipe Rank--------------------->
 				<div class="tab-pane" id="rcp-recipe-rank"></div>
 			</div>
-			<!-- /tab-content -->
 		</div>
-		<!-- /tabbable -->
 	</section>
 	<!------------------------- Rank List ------------------------------>
-
+<div id="footer"></div>
 	<script id="recipe-detail-template" type="text/x-handlebars-template">
     {{#each data}}
               <div class="rcp-body">
@@ -448,7 +439,7 @@
     <div class="rcp-list">
       <div class="rcp-1024 list0" >
         <h3>오늘의 인기 레시피</h3>
-        <div class="row"></div>
+        <div class="row rcp-order"></div>
       </div>
     </div>
   </section>
@@ -478,10 +469,11 @@
       
             <div class="thumbnail row relative">
               <div class="rcp-profile-position">
-                <img src="img/profile{{@index}}.jpg" class="img-circle rcp-profile">
+                <img src="img/profileImg/{{user.image}}" class="img-circle rcp-profile">
               </div>
-              <img src="img/2.jpg" class="image1" class="rcp-relative">
-             
+            <div class="rcp-image-scale" name="recipe-image" > <!--style="background-image : url('img/representImg/{{rpimg}}');"-->
+              <!--<img src="img/representImg/{{rpimg}}" class="image1"  name="rcp-list-images"> -->
+             </div>
               <div class="rcp-caption">
                 <h4 class="pull-right rcp-Grade">평점</h4>
                 <h5 class="pluu-left rcp-relative rcp-profileName">
@@ -504,16 +496,17 @@
               <!--  레시피 정보 끝 -->
 
               <!--  슬라이드 start -->
-              <div id="myCarousel" class="carousel slide rcp-relative">
+              <div name="myCarousel" class="carousel slide rcp-relative">
+
                 <!--  왼쪽 버튼 시작  -->
-                <a href="#myCarousel" role="button" data-slide="prev"
+                <a href="div[name='myCarousel']" role="button" data-slide="prev"
                   class="rcp-left-slideButton"> <span
                   class="glyphicon glyphicon-chevron-left" aria-hidden="false"></span>
                 </a>
                 <!--  왼쪽 버튼 끝  -->
 
                 <!--  오른쪽 버튼 시작  -->
-                <a href="#myCarousel" role="button" data-slide="next"
+                <a href="div[name='myCarousel']" role="button" data-slide="next"
                   class="rcp-right-slideButton"> <span
                   class="glyphicon glyphicon-chevron-right" aria-hidden="false"></span>
 
@@ -529,14 +522,6 @@
                     <div class="col-md-1"></div>
                   </div>
 
-                  <div class="item">
-                    <div class="rcp-comment col-md-offset-1 col-md-10">
-                      <!--  image 크기를 잘 몰라서 일단 %로 안하고 85px로 고정해놓 -->
-                      <img src="img/view.png" class="img-rounded rcp-images">
-                      <img src="img/view.png" class="img-rounded rcp-images">
-                    </div>
-                    <div class="col-md-1"></div>
-                  </div>
 
                   <div class="item">
                     <div class="rcp-comment col-md-offset-1 col-md-10">
@@ -571,9 +556,15 @@
                 <div
                   class="rcp-cookTime col-xs-4 rcp-heart"
                   align="center">
-                  <div class="glyphicon glyphicon-heart-empty "></div>
-                  <input type="hidden" name="recipeNo" value="{{recipeNo}}">
-                  <a href="#"><b class="rcp-like" id="rcp-like">좋아요</b></a>
+                 {{#isLike}}          
+                  <div class="glyphicon glyphicon-heart-empty active"></div>
+                   {{else}}<div class="glyphicon glyphicon-heart-empty"></div>
+                   {{/isLike}}
+                  <input type="hidden" name="recipeNo" value="{{recipeNo}}">                    
+                  <a href="#">
+                  {{#isLike}}<b class="rcp-like active" name="rcp-like">좋아요</b>
+                  {{else}}<b class="rcp-like" name="rcp-like">좋아요</b>
+                   {{/isLike}}</a>
                 </div> 
                 <div class="rcp-cookTime col-xs-4"
                   align="center">
@@ -592,28 +583,55 @@
 
 {{/each}}
 </script>
-
+<!--쉐프 랭킹카드 수정  -->
 	<script id="chef-card-template" type="text/x-handlebars-template">
-  {{#each data}}
-  <!-- 쉐프카드 -->
-  {{#if @first}} <figure class="snip1344">
-  {{else if @last}} <figure class="snip1344 rcp-hidden-xs rcp-hidden-sm">
-  {{else}} <figure class="snip1344 rcp-hidden-xs">
-  {{/if}} <img src="img/food01.png" alt="profile-sample1" class="background" />
-  <img src="{{image}}" alt="profile-sample1" class="profile" />
-  <img src=
-  {{#if @first}} "img/medal1.png"
-  {{else if @last}} "img/medal3.png"
-  {{else}} "img/medal2.png"
-  {{/if}} alt="profile-sample1" class="medal" />
-   <figcaption>
-    <h3>{{userName}}</h3>           
-      <div>{{intro}}</div>
-      <div>{{role}}</div>
-   </figcaption>
-  </figure>
-  {{/each}}
+{{#each data}}
+<div class="fresh-ui-wrap col-md-3">
+ {{#if @first}}    
+    <img class="rcp-rankmedal" src="/img/medal1.png"/>
+    <img class="rcp-rankstar" src="/img/rankstar.png">  
+  {{else if @last}}    
+    <img class="rcp-rankmedal" src="/img/medal3.png"/>
+    <img class="rcp-rankstar" src="/img/rankstar.png">  
+  {{else}}   
+    <img class="rcp-rankmedal" src="/img/medal2.png"/>
+    <img class="rcp-rankstar" src="/img/rankstar.png">  
+  {{/if}}
+  
+  <div class="fresh-ui">
+    <div class="header">
+      <div class="photo">     
+      {{#if @first}}
+        <img src="img/profileimg.jpg">
+      {{else if @last}}
+        <img src="img/profile.jpg">
+      {{else}}
+        <img src="img/profile2.jpg">
+      {{/if}}
+      </div>
+      <div class="social">
+        <div class="list">
+          <a href="#" data-title="Recipe"><i class="fa fa-facebook"></i></a>
+          <a href="#" data-title="구독하기"><i class="fa fa-dribbble"></i></a>
+          <a href="#" data-title="좋아요">1257</a>
+          <a href="#" data-title="구독자수">102</a>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="name">{{userName}}</div>
+      <div class="job-title">Master Chef </div>
+      <p class="text">{{email}}</p>
+      <div class="list clearfix">
+        <p>소개</p>
+        <p>- {{intro}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+  {{/each}} 
   </script>
+  <!-- 쉐프랭킹카드 수정 -->
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="js/template/main.js"></script>
@@ -641,7 +659,8 @@
   
   <script
     src="node_modules/bxslider/dist/jquery.bxslider.min.js"></script>
-
+  <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
 
   <!-- alert js -->
   <script
@@ -652,25 +671,20 @@
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/common.js"></script>
 	<script src="js/login.js"></script>
-	
-	<!--  재현 -->
 	<script src="js/detail.js"></script>  
   <script src="js/mainListAjax.js"></script>
   <script src="js/recipeDetail.js"></script>
-<!-- 	<script src="js/community.js"></script> -->
-	<!-- 용이 userUpdate -->
 	<script src="js/updateUser.js"></script>
-	<!-- 성현 -->  
   <script src="js/common/popup.js"></script>
   <script src="js/common/chefCard.js"></script>
-  <script src="js/common/signup.js"></script>  
+  <script src="js/common/signup.js"></script>
+  <script src="js/common/rankingpage.js"></script>    
   <script src="js/index_listPageMove.js"></script>
-	
 	<script>
 		$(function() {
 			getWeather();
 			getRealTimeRank();
-			
+			$('#footer').load("../copyright.html");
 
 			/* 준모3 */
 			if (eval(sessionStorage.getItem('data')) != null) {

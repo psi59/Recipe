@@ -1,20 +1,43 @@
 
   $(function(){
-    	$('.rcp-topbtn').on('click',function(){
-    		$.ajax({
-    			url:'recipe/addSubscribe.json',
-    			datatype:'json',
-    			data:{
-    				fromUserNo:1
-    			},
-    			method:'post',
-    			succeess:(function(){
-    				
-    			}),
-    			error:(function(){
-    				
-    			})
-    		})
+	  console.log(location.href.split('?')[1])
+	  
+    	$('.rcp-topbtn').on('click',function(evnet){
+    		if($(event.target).is('#subscribeComplete')){
+    			$.ajax({
+	    			url:'recipe/deleteSubscribe.json',
+	    			datatype:'json',
+	    			data:{
+	    				fromUserNo:4
+	    			},
+	    			method:'post',
+	    			success:(function(){
+	    				console.log('구독하기 해제 성공성공')
+	    				$('.rcp-topbtn').text('구독하기');
+	    				$('.rcp-topbtn').attr('id','');
+	    			}),
+	    			error:(function(){
+	    				console.log('구독하기 서버요청 error');
+	    			})
+	    		});    			
+    		}else{
+	    		$.ajax({
+	    			url:'recipe/addSubscribe.json',
+	    			datatype:'json',
+	    			data:{
+	    				fromUserNo:4
+	    			},
+	    			method:'post',
+	    			success:(function(){
+	    				console.log('구독하기 성공성')
+	    				$('.rcp-topbtn').text('구독하기 완료');
+	    				$('.rcp-topbtn').attr('id','subscribeComplete');
+	    			}),
+	    			error:(function(){
+	    				console.log('구독하기 서버요청 error');
+	    			})
+	    		});
+    	}
     	})
     	
  
@@ -96,14 +119,14 @@
         method : 'get',
         success : function(result) {
           if (result.status != 'success') {
-            alert('실행 중 오류 발생');
+            swal('실행 중 오류 발생');
             return;
           }
 
           $('#Vst').append(templateVisitor(result));
         },
         error : function() {
-          alert('서버 요청 오류!...')
+          swal('서버 요청 오류!...')
         }
       }); 
     }  
@@ -122,7 +145,7 @@
         dataType : 'json',
         success : function(result) {
           if (result.status != 'success') {
-            alert('등록 오류입니다.');
+            swal('등록 오류입니다.');
             return;
           }
                     
@@ -130,7 +153,7 @@
           loadVisitor(); // 테이블 데이터를 갱신한다.
         },
         error : function() {
-          alert('서버 요청 오류 !')
+          swal('서버 요청 오류 !')
         }
       })
       $('#rcp-rpcontent').val("");
@@ -148,7 +171,7 @@
     	    $.getJSON('visitor/delete.json?no=' + vNo,
     	                 function(result) {
     	                if (result.status != 'success') {
-    	                    alert('게시물 삭제 오류');
+    	                    swal('게시물 삭제 오류');
     	                    return;
     	                  }
     	                $(this).parent().parent().parent().parent().remove();
@@ -181,7 +204,7 @@
 	    	  visitorContent : $('#updatevContent').val()
 	      }, function(result) {
 	        if (result.status != 'success') {
-	          alert('변경 오류입니다.');
+	          swal('변경 오류입니다.');
 	          return;
 	        }
 	    	  $('#Vst>').remove(); 
@@ -228,7 +251,7 @@
 	/*화면관리*/	
     $(function() {
       $("#tabs").tabs();
-    });
+    });/*
     //마지막 스크롤 TOP 위치
     var lastScrollY = 0;
 
@@ -254,9 +277,8 @@
         //현재 위치를 lastScrollY에 저장해준다.
         lastScrollY = lastScrollY + percent;
       }
-      //현재 ((윈도우넓이/2) +480) 을 left로 지정
-      $("#quick").css("left", ($(window).width() / 2) + 580);
-    }
+      $("#quick").css("left", 1400);
+    }*/
     
     
   

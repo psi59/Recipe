@@ -19,7 +19,14 @@ public class User {
   private String recipeUrl;
   private int recipeCount;
   private int subsCount;
+  private int rownum;
   
+  public int getRownum() {
+    return rownum;
+  }
+  public void setRownum(int rownum) {
+    this.rownum = rownum;
+  }
   public int getUserNo() {
     return userNo;
   }
@@ -86,11 +93,11 @@ public class User {
   public void setSubsCount(int subsCount) {
     this.subsCount = subsCount;
   }
-  
   @Override
   public String toString() {
     return "User [userNo=" + userNo + ", userName=" + userName + ", email=" + email + ", password=" + password
         + ", image=" + image + ", intro=" + intro + ", role=" + role + ", joinDate=" + joinDate + ", recipeUrl="
-        + recipeUrl + ", recipeCount=" + recipeCount + ", subsCount=" + subsCount + "]";
-  }      
+        + recipeUrl + ", recipeCount=" + recipeCount + ", subsCount=" + subsCount + ", rownum=" + rownum + "]";
+  }
+     
 }

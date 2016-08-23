@@ -9,6 +9,9 @@ body {
 	padding-left: 10px;
 }
 
+.rcp-profileCover{
+	height: 358px;
+}
 .rcp-border{
   border: 1px solid #aaa;
 }

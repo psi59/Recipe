@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,16 +30,14 @@ public class RecipeController {
 	@Autowired RecipeService recipeService;
 	@Autowired UserService userService;
 	
-	// 이성현
+	// 리스트 검색 -이성현
 	@RequestMapping(path="listSearch",produces="application/json;charset=UTF-8")
   @ResponseBody
   public String listSearch(@RequestParam(defaultValue="1") int pageNo,
                            @RequestParam(defaultValue="8") int pageSize,
                            Search search, HttpSession session){
     HashMap<String,Object> result = new HashMap<>();     
-    int recipeCount = 0;
-    // TEST용으로 searchCondition, sortCondition 때려박음
-    search.setSearchCondition("name");
+    int recipeCount = 0;    
     
     int userNo = 0;    
     if(session.getAttribute("userNo") != null){
@@ -50,12 +49,14 @@ public class RecipeController {
     // 처음에만 레시피카드들을 카운트 한다.
     if(pageNo == 1){
       recipeCount = recipeService.getRecipeCount(pageNo, pageSize, search, userNo);
-    }
-            
-    try{
-      result.put("status","success");
-      result.put("data", "lastPage");        
+    }    
+    
+    try{      
+      result.put("status","success");      
       result.put("data", list);
+      if(list.isEmpty()){
+        result.put("data", "lastPage"); 
+      }
       result.put("recipeCount", recipeCount);      
       result.put("pageNo", pageNo);
     }catch (Exception e){
@@ -64,7 +65,25 @@ public class RecipeController {
 
     return new Gson().toJson(result);
   }
-
+	
+	//리스트 페이지 레시피 검색 자동완성 -이성현
+	@RequestMapping(path="recipeSearchAutoComplete",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public String recipeSearchAutoComplete(@RequestParam String searchValue){
+	  HashMap<String, Object> result = new HashMap<>();
+	  List<String> recipeNameList = recipeService.getRecipeNameList(searchValue);
+	  for (String recipeName : recipeNameList) {
+      System.out.println("Recipe Name : "+recipeName);
+    }
+	  try{
+	    result.put("status","success");        
+      result.put("data", recipeNameList);
+	  }catch(Exception e){
+	    result.put("status", "false");
+	  }	  
+	  return new Gson().toJson(recipeNameList);
+	}
+	
 	@RequestMapping(path="addRecipe",produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String addRecipe(Recipe recipe, @RequestParam("materialName") String[] materialNames, @RequestParam("materialAmount") String[] materialAmounts, @RequestParam("files") List<MultipartFile> images){
@@ -110,10 +129,10 @@ public class RecipeController {
 	  @ResponseBody
 	  public String list(
 	      @RequestParam int userNo, 
-	      @RequestParam(defaultValue="4") int pageSize){
+	      @RequestParam(defaultValue="4") int pageSize,int request){
 	    HashMap<String,Object> result = new HashMap<>();
 	    /*System.out.println("userNo"+userNo);*/
-	    List<Recipe> list = recipeService.getRecipeList(userNo, pageSize);
+	    List<Recipe> list = recipeService.getRecipeList(userNo, pageSize,request);
 	    for(int i =0; i<list.size(); i++){
 	    }
 	    try{
@@ -126,24 +145,8 @@ public class RecipeController {
 	    return new Gson().toJson(result);
 	  }
 	 
-	 @RequestMapping(path="list2",produces="application/json;charset=UTF-8")
-   @ResponseBody
-   public String list2(
-       @RequestParam int userNo,
-       @RequestParam(defaultValue="4") int pageSize){
-     HashMap<String,Object> result = new HashMap<>();
-     List<Recipe> list = recipeService.getRecipeList2(userNo, pageSize);
-     for(int i =0; i<list.size(); i++){
-     }
-     try{
-       result.put("status","success");
-       result.put("data", list);
-     }catch (Exception e){
-       result.put("status", "false");
-     }
+	 
 
-     return new Gson().toJson(result);
-   }
  
 	 
 	
@@ -211,30 +214,32 @@ public class RecipeController {
 	  return new Gson().toJson(result);
 	}
 	
-	
+	//준모수정
 	@RequestMapping(path="subscribe",produces="application/json;charset=UTF-8")
   @ResponseBody
-  public String subscribe(int userNo ){
+  public String subscribe(@RequestParam(defaultValue="1") int pageNo,
+      @RequestParam(defaultValue="4") int pageSize,HttpSession session,int userNo ){
     HashMap<String,Object> result = new HashMap<>();
     Recipe recipe = new Recipe();
     try{
-      System.out.println(userNo);
+      System.out.println("오냐??"+userNo);
+    //구독한 사람 뽑는다.
       List<Recipe> userNoList = recipeService.selectSubscribeUno(userNo);
       
-      for(int i =0; i<userNoList.size(); i++){
+    
+      for(int i =0; i<userNoList.size(); i++){ 
         if(recipe.getSubscribe() == null){    
           recipe.setSubscribe(String.valueOf(userNoList.get(0).getSubscribeNum()));
         }else{
           
           recipe.setSubscribe(recipe.getSubscribe()+","+userNoList.get(i).getSubscribeNum());
-          System.out.println(userNoList.get(i).getSubscribeNum());
-          System.out.println(recipe.getSubscribe());
         }
       }
-      List<Recipe> subscribe = recipeService.selectSbuscribe(recipe.getSubscribe());
-      System.out.println(subscribe);
+      String scsUserNo=recipe.getSubscribe();
+      List<Recipe> subscribe = recipeService.selectSbuscribe(scsUserNo,pageNo,pageSize);
       result.put("status","success");
       result.put("data", subscribe);
+      result.put("pageNo", pageNo);
     }catch (Exception e){
       result.put("status", "false");
     }
@@ -336,9 +341,9 @@ public class RecipeController {
 	@ResponseBody
 	public String rank(
 			@RequestParam(defaultValue="1") int pageNo, 
-			@RequestParam(defaultValue="10") int pageSize){
+			@RequestParam(defaultValue="10") int pageSize,int request){
 		HashMap<String,Object> result = new HashMap<>();
-		List<Recipe> list = recipeService.getRecipeList(pageNo, pageSize);
+		List<Recipe> list = recipeService.getRecipeList(pageNo, pageSize,request);
 		try{
 			result.put("status","success");
 			result.put("data", list);
@@ -365,9 +370,7 @@ public class RecipeController {
           recipe.setScrap(recipe.getScrap()+","+ userScrapNumbers.get(i).getRecipeNo());
         }
       }
-      System.out.println("여기옴?");
       List<Recipe> scrapList = recipeService.selectScrapMypage(recipe.getScrap(), user.getUserNo());
-      System.out.println("여기옴? service");
       result.put("status","success");
       result.put("data",scrapList);
     }catch (Exception e){
@@ -387,12 +390,12 @@ public class RecipeController {
   public String comList( @RequestParam(defaultValue="1") int pageNo,
                           @RequestParam(defaultValue="4") int pageSize,HttpSession session){
 
-    HashMap<String,Object> result = new HashMap<>();
-    Recipe recipe = new Recipe();
+    HashMap<String,Object> result = new HashMap<>();    
     try{
       List<Recipe> myRecipeList = recipeService.selectSbuscribe2((session.getAttribute("userNo")).toString(),pageNo,pageSize);
       result.put("status","success");
       result.put("data", myRecipeList);
+      result.put("pageNo",pageNo);
     }catch (Exception e){ 
       result.put("status", "false");
     }

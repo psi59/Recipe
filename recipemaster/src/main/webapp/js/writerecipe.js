@@ -28,7 +28,7 @@ $(function () {
 		revert: true
 	});
 	$( "#files" ).disableSelection();
-
+	
 //	대표사진등록관련 js
 	$('#representImage').fileupload({
 		dataType: 'json',
@@ -167,7 +167,7 @@ $(function () {
 //	if(eval(sessionStorage.getItem('data'))[0].userNo!=null){
 //	$('userNo').val(eval(sessionStorage.getItem('data'))[0].userNo);
 //	} else {
-//	alert('로그인 하고 오세욤 ㅎㅎ');
+//	swal('로그인 하고 오세욤 ㅎㅎ');
 //	location = "index.html";
 //	}
 	

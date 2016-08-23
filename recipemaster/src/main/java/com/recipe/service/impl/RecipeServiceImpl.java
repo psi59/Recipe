@@ -11,7 +11,6 @@ import com.recipe.dao.RecipeDao;
 import com.recipe.domain.Material;
 import com.recipe.domain.Recipe;
 import com.recipe.domain.Search;
-import com.recipe.domain.User;
 import com.recipe.service.RecipeService;
 
 @Service
@@ -27,7 +26,12 @@ public class RecipeServiceImpl implements RecipeService {
 	  params.put("userNo", userNo);
     
     return recipeDao.recipeSearch(params);
-  }	
+  }
+			
+  @Override
+  public List<String> getRecipeNameList(String searchValue) {    
+    return recipeDao.selectRecipeName(searchValue);
+  }
 
   @Override
   public int getRecipeCount(int pageNo, int pageSize, Search search, int userNo) {
@@ -46,8 +50,9 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public List<Recipe> getRecipeList(int userNo, int pageSize) {
+	public List<Recipe> getRecipeList(int userNo, int pageSize, int request) {
 		HashMap<String,Object> params = new HashMap<>();
+		params.put("request", request);
 		params.put("userNo", userNo);
 		params.put("len", pageSize);
 		return recipeDao.recipeList(params);
@@ -97,14 +102,6 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public List<Recipe> getRecipeList2(int userNo, int pageSize) {
-		HashMap<String,Object> params = new HashMap<>();
-		params.put("userNo", userNo);
-		params.put("len", pageSize);
-		return recipeDao.recipeList2(params);
-	}
-
-	@Override
 	public void likeDown(Recipe recipe) {
 		recipeDao.likeDown(recipe);
 	}
@@ -115,10 +112,15 @@ public class RecipeServiceImpl implements RecipeService {
 	    return recipeDao.selectSubscribeUno(userNo);
 	  }
  
+	  //준 수정
 	  @Override
-	  public List<Recipe> selectSbuscribe(String userNo) {
-
-	    return recipeDao.selectSbuscribe(userNo);
+	  public List<Recipe> selectSbuscribe(String scsUserNo, int pageNo, int pageSize) {
+	    HashMap<String,Object> params = new HashMap<>();
+      params.put("userNo", scsUserNo);
+      params.put("startIndex", (pageNo - 1) * pageSize);
+      params.put("len", pageSize);
+      
+	    return recipeDao.selectSbuscribe(params);
 	  }
 	  
 	  //준
@@ -172,6 +174,14 @@ public class RecipeServiceImpl implements RecipeService {
       params.put("userNumbers", userNumbers);
       params.put("userNo", userNo);
       return recipeDao.selectScrapMypage(params);
+    }
+
+    @Override
+    public int deleteSubscribe(int toUserNo, int fromUserNo) {      
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("toUserNo", toUserNo);
+      params.put("fromUserNo", fromUserNo);
+      return recipeDao.deleteSubscribe(params);
     }
 	
 }

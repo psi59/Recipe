@@ -1,11 +1,33 @@
 
 $("#userLogin").click(function(){
+	if($('#userEmail').val() == ''){
+		swal('이메일을 입력해주세요.');		
+		return;
+	} else if($('#userPassword').val() == ''){
+		swal('패스워드를 입력해주세요.');		
+		return;
+	}	
 	login(event);
 });
 
-$('#userPassword').keydown(function(){
-	if(event.keyCode == 13) login(event);
+$("#userEmail").keyup(function(){
+	if(event.keyCode == 9){
+		document.getElementById("userPassword").focus();
+	}
 });
+
+$('#userPassword').keyup(function(){
+	if(event.keyCode == 13){
+		if($('#userPassword').val() == ''){
+			swal('패스워드를 입력해주세요.');		
+			return;
+		}
+		login(event);
+	}
+});
+
+
+
 
 function login(event) {
 	event.preventDefault();
@@ -19,13 +41,17 @@ function login(event) {
 		}, 
 		success : function(result) {
 			if (result.status == 'failure') {
-				dataStatus='failure';
+				/*dataStatus='failure';
 				
 				$( "#userPassword" ).effect('bounce');
 				$('#loginInputBox > .warning').remove();
 				$('#loginInputBox').append("<div id='warning' class='warning'>아이디 또는 비밀번호를 다시 확인하세요.</div>");
 				$('#warning').css('color','red').css('font-size', '13px');
-
+				*/
+				
+				swal('잘못입력하셨습니다.','아이디 또는 비밀번호를 다시 확인하여 주세요.',"error");
+				
+				
 				return;
 			} 
 			
@@ -56,14 +82,14 @@ function login(event) {
 
 
 						/*eval 사용 방법, eval(jsonData)[0].email*/
-						/*alert('1111'+eval(jsonData)[0].role);*/
+						/*swal('1111'+eval(jsonData)[0].role);*/
 						sessionStorage.setItem('data', jsonData);
 						sessionStorage.setItem('name', result.data.userName);
 						location.reload();
 
 						$('#login-pop-up-banner').bPopup().close();
 					} else {
-						alert('비밀번호를 다시 입력해주세요');
+						swal('비밀번호를 다시 입력해주세요');
 					}
 
 
@@ -74,7 +100,7 @@ function login(event) {
 
 				},
 				error : function() {
-					alert('서버 요청 오류');
+					swal('서버 요청 오류');
 				}
 			}); /* end of ajax */
 		}; /* end of jquery */
@@ -149,12 +175,12 @@ $(function() {
 				var jsonData = JSON.stringify(data);
 
 				/*eval 사용 방법, eval(jsonData)[0].email*/
-				/*alert('1111'+eval(jsonData)[0].role);*/
+				/*swal('1111'+eval(jsonData)[0].role);*/
 				sessionStorage.setItem('data', jsonData);
 
 		},
 		error : function() {
-			alert('서버 요청 오류');
+			swal('서버 요청 오류');
 		}
 	}); /* end of ajax */
 	} /*end of if*/

@@ -43,4 +43,19 @@ public class VisitorServiceImpl implements VisitorService {
   public void updateVisitor(Visitor visitor) {
     visitorDao.update(visitor);
   }
+
+  //mypage 가져오기
+  @Override
+  public HashMap<String,Object> loadMyPage(int userNo) {
+    
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("sum", visitorDao.loadMyPageSum(userNo));
+    params.put("avg", visitorDao.loadMyPageAvg(userNo));
+    params.put("scr", visitorDao.loadMyPageScr(userNo));
+    params.put("like", visitorDao.loadMyPageLike(userNo));
+    
+    System.out.println("service"+params);
+    
+    return params;
+  }
 }

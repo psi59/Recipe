@@ -94,7 +94,7 @@
   <script src="node_modules/handlebars/dist/handlebars.min.js"></script>
   
   <!--yongyi  -->
-  <script src="js/chefCard.js"></script>
+  <script src="js/common/chefCard.js"></script>
   <script src="js/waypoints.min.js"></script>
   <script src="js/rankingpage.js"></script>
   <script id="chef-card-template" type="text/x-handlebars-template">
@@ -125,7 +125,6 @@
       <div class="social">
         <div class="list">
           <a href="#" data-title="Recipe"><i class="fa fa-facebook"></i></a>
-          <a href="#" data-title="소통하기"><i class="fa fa-twitter"></i></a>
           <a href="#" data-title="구독하기"><i class="fa fa-dribbble"></i></a>
           <a href="#" data-title="좋아요">1257</a>
           <a href="#" data-title="구독자수">102</a>
@@ -135,12 +134,10 @@
     <div class="content">
       <div class="name">{{userName}}</div>
       <div class="job-title">Master Chef </div>
-      <p class="text">{{intro}}</p>
+      <p class="text">{{email}}</p>
       <div class="list clearfix">
-        <a href="#"><i class="fa fa-envelope-square"></i>이메일 :</a>
-        <a href="#"><i class="fa fa-envelope-square"></i>{{email}}</a>
-        <a href="#"><i class="fa fa-envelope-square"></i>가입일 :</a>
-        <a href="#"><i class="fa fa-envelope-square"></i>{{joinDate}}</a>
+        <p>소개</p>
+        <p>- {{intro}}</p>
       </div>
     </div>
   </div>
@@ -151,9 +148,9 @@
   <script id="chef-rank-template" type="text/x-handlebars-template">
   {{#each data}}
       <div class="row rcp-font">
-        <div class="col-md-2">Rank</div>
+        <div class="col-md-2">{{rownum}}</div>
         <div class="col-md-2">{{userName}}</div>
-        <div class="col-md-2">레시피 등록수</div>
+        <div class="col-md-2">{{recipeCount}}</div>
         <div class="col-md-2">구독자 수</div>
         <div class="col-md-2">이달의 Point</div>
         <div class="col-md-2">Total Point</div>
@@ -188,12 +185,12 @@
   <script id="recipe-rank-template" type="text/x-handlebars-template">
     {{#each data}}
       <div class="row rcp-font">
-        <div class="col-md-2">Rank</div>
+        <div class="col-md-2">{{rownum}}</div>
         <div class="col-md-2">{{recipeName}}</div>
-        <div class="col-md-2">좋아요 수</div>
-        <div class="col-md-2">스크랩 수</div>
-        <div class="col-md-2">조회수</div>
-        <div class="col-md-2">Total Point</div>
+        <div class="col-md-2">{{countLike}}</div>
+        <div class="col-md-2">{{countScrap}}</div>
+        <div class="col-md-2">{{hits}}</div>
+        <div class="col-md-2">{{totalPoint}}</div>
         <hr/>
       </div>
   {{/each}}

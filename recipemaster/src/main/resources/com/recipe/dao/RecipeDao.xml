@@ -25,6 +25,10 @@
 		<result column="countScrap" property="countScrap"/>
 		<result column="scrapUser" property="scrapUser"/>
 		<result column="email" property="user.email"/>
+		<result column="rownum" property="rownum"/>
+		<result column="totalPoint" property="totalPoint"/>
+		<result column="rpimg" property="rpimg" />
+		<result column="img" property="user.image"/>
 	</resultMap> 
 	
 	<resultMap type="material" id="materialMap">
@@ -40,8 +44,11 @@
            r.rgst, truncate(r.gpa,1) gpa, u.uno, u.name userName, l.rcpno, l.lc_dt, l.uno likeUser
     FROM users u INNER JOIN rcps r on u.uno=r.uno
          LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=#{userNo}      
-    <if test="search.searchCondition == 'name'">
+    <if test="search.searchCondition == 'recipe'">
       WHERE r.name LIKE '%${search.searchKeyword}%'
+    </if>
+    <if test="search.searchCondition == 'chef'">
+      WHERE u.name LIKE '%${search.searchKeyword}%'
     </if>
     <if test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'">
       ORDER BY r.rcpno DESC
@@ -62,13 +69,32 @@
     SELECT count(*)
     FROM users u INNER JOIN rcps r on u.uno=r.uno
          LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=#{userNo}      
-    <if test="search.searchCondition == 'name'">
+    <if test="search.searchCondition == 'recipe'">
       WHERE r.name LIKE '%${search.searchKeyword}%'
     </if>
-    <if test="search.sortCondition == 'newest'">
-      ORDER BY r.rcp_dt desc
+    <if test="search.searchCondition == 'chef'">
+      WHERE u.name LIKE '%${search.searchKeyword}%'
+    </if>
+    <if test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'">
+      ORDER BY r.rcpno DESC
+    </if>
+    <if test="search.sortCondition == 'newest' and search.orderCondition == 'ASC'">
+      ORDER BY r.rcpno ASC
+    </if>
+    <if test="search.sortCondition == 'grade' and search.orderCondition == 'DESC'">
+      ORDER BY r.gpa DESC
+    </if>
+    <if test="search.sortCondition == 'grade' and search.orderCondition == 'ASC'">
+      ORDER BY r.gpa ASC
     </if>
     limit #{startIndex}, #{len}
+  </select>
+  
+  <select id="selectRecipeName" parameterType="String" resultType="String">
+	SELECT name
+	FROM rcps
+	WHERE name LIKE '${value}%'
+	ORDER BY LENGTH(name) ASC;
   </select>
 	
 	<insert id="likeUp" parameterType="Recipe">
@@ -116,16 +142,24 @@
   
   
   <insert id="addSubscribe" parameterType="Map">
-  INSERT INTO (uno, uno2, sc_dt)
+  INSERT INTO scs(uno, uno2, sc_dt)
   values(${toUserNo}, ${fromUserNo}, now() )
   </insert>
+    
+    <delete id="deleteSubscribe" parameterType="Map">
+    DELETE from scs where $(fromUserNo)
+    </delete>
     
   <select id="selectSubscribeUno" resultMap="recipeMap" parameterType="INTEGER">
     SELECT * FROM scs WHERE uno=#{value}
   </select>
   
   <select id="selectSbuscribe" resultMap="recipeMap" parameterType="string">
-    SELECT * FROM rcps WHERE uno in( ${value} )  
+	SELECT *
+	FROM rcps
+	WHERE uno in( ${userNo} )
+	order by rcp_dt desc
+	limit #{startIndex}, #{len}
   </select>
   
   <select id="selectMypage" resultMap="recipeMap" parameterType="INTEGER">
@@ -156,31 +190,42 @@
   limit #{startIndex}, #{len}
   </select>
 
-   <select id="recipeList" resultMap="recipeMap" parameterType="Map">
-    SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits,
+<!--   <select id="recipeList" resultMap="recipeMap" parameterType="Map">
+    SELECT @rownum:=@rownum+1 rownum,r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits,
     r.rgst, r.gpa, u.uno, u.name userName, u.email,l.rcpno, l.lc_dt, l.uno likeUser,
     (select count(uno) from rcp_lik where uno = ${userNo}) as countLike
-    FROM (users u INNER JOIN rcps r on u.uno=r.uno) 
+    FROM (users u INNER JOIN rcps r on u.uno=r.uno)
+    INNER JOIN(select @rownum:=0) t
     LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=${userNo}
     ORDER BY r.hits desc
     limit #{len}
+  </select> -->
+    
+  <select id="recipeList" resultMap="recipeMap" parameterType="Map">
+    SELECT @rownum:=@rownum+1 rownum,vt.* 
+    FROM (SELECT r.rcpno rcpno, r.uno uno, r.name, r.intro, r.c_time,r.rpimg,  r.ptn, r.rcp_dt, r.hits,
+    r.rgst, r.gpa, u.uno userNo, u.img, u.name userName, u.email,l.rcpno likeRecipe, l.lc_dt, l.uno likeUser,
+    (select count(lk.uno) from rcp_lik lk where lk.uno = ${userNo}) as countLike
+    FROM users u
+    INNER JOIN rcps r on u.uno=r.uno
+    INNER JOIN(select @rownum:=0) t
+    LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=${userNo}
+   <if test="request == 1">
+    ORDER BY r.hits desc
+    </if>
+    <if test="request == 2">
+    ORDER BY r.rcp_dt desc
+    </if>
+    limit #{len}
+    ) vt
   </select>
   
+   
   <select id="selectMts" resultMap="materialMap" parameterType="INTEGER">
   
        select * from mts m, rcp_mt mt, rcps r 
        where m.mtno=mt.mtno and r.rcpno = mt.rcpno and r.rcpno =${value}
   </select>
-  
-   <select id="recipeList2" resultMap="recipeMap" parameterType="Map">
-    SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits,
-     r.rgst, r.gpa, u.uno, u.name userName,u.email, l.rcpno, l.lc_dt, l.uno likeUser
-    FROM (users u INNER JOIN rcps r on u.uno=r.uno) 
-    LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=${userNo}
-    ORDER BY r.rcp_dt desc
-    limit #{len}
-  </select>
-  
   
   <select id="selectOne" resultMap="recipeMap" parameterType="INTEGER">
     SELECT DISTINCT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits,
