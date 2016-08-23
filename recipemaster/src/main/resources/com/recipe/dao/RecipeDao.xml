@@ -116,9 +116,13 @@
   
   
   <insert id="addSubscribe" parameterType="Map">
-  INSERT INTO (uno, uno2, sc_dt)
+  INSERT INTO scs(uno, uno2, sc_dt)
   values(${toUserNo}, ${fromUserNo}, now() )
   </insert>
+    
+    <delete id="deleteSubscribe" parameterType="Map">
+    DELETE from scs where $(fromUserNo)
+    </delete>
     
   <select id="selectSubscribeUno" resultMap="recipeMap" parameterType="INTEGER">
     SELECT * FROM scs WHERE uno=#{value}
@@ -162,7 +166,12 @@
     (select count(uno) from rcp_lik where uno = ${userNo}) as countLike
     FROM (users u INNER JOIN rcps r on u.uno=r.uno) 
     LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=${userNo}
+   <if test="request == 1">
     ORDER BY r.hits desc
+    </if>
+    <if test="request == 2">
+    ORDER BY r.rcp_dt desc
+    </if>
     limit #{len}
   </select>
   
@@ -171,16 +180,6 @@
        select * from mts m, rcp_mt mt, rcps r 
        where m.mtno=mt.mtno and r.rcpno = mt.rcpno and r.rcpno =${value}
   </select>
-  
-   <select id="recipeList2" resultMap="recipeMap" parameterType="Map">
-    SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits,
-     r.rgst, r.gpa, u.uno, u.name userName,u.email, l.rcpno, l.lc_dt, l.uno likeUser
-    FROM (users u INNER JOIN rcps r on u.uno=r.uno) 
-    LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=${userNo}
-    ORDER BY r.rcp_dt desc
-    limit #{len}
-  </select>
-  
   
   <select id="selectOne" resultMap="recipeMap" parameterType="INTEGER">
     SELECT DISTINCT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits,

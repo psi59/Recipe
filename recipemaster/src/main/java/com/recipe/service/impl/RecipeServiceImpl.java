@@ -46,8 +46,9 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public List<Recipe> getRecipeList(int userNo, int pageSize) {
+	public List<Recipe> getRecipeList(int userNo, int pageSize, int request) {
 		HashMap<String,Object> params = new HashMap<>();
+		params.put("request", request);
 		params.put("userNo", userNo);
 		params.put("len", pageSize);
 		return recipeDao.recipeList(params);
@@ -94,14 +95,6 @@ public class RecipeServiceImpl implements RecipeService {
 	@Override
 	public int registyImageAndProduce(Map map) {
 		return recipeDao.insertImageAndProduce(map);
-	}
-
-	@Override
-	public List<Recipe> getRecipeList2(int userNo, int pageSize) {
-		HashMap<String,Object> params = new HashMap<>();
-		params.put("userNo", userNo);
-		params.put("len", pageSize);
-		return recipeDao.recipeList2(params);
 	}
 
 	@Override
@@ -172,6 +165,14 @@ public class RecipeServiceImpl implements RecipeService {
       params.put("userNumbers", userNumbers);
       params.put("userNo", userNo);
       return recipeDao.selectScrapMypage(params);
+    }
+
+    @Override
+    public int deleteSubscribe(int toUserNo, int fromUserNo) {      
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("toUserNo", toUserNo);
+      params.put("fromUserNo", fromUserNo);
+      return recipeDao.deleteSubscribe(params);
     }
 	
 }

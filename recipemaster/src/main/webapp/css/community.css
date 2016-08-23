@@ -11,7 +11,9 @@ body{
         
 	color: #515d6e;
 }
-
+.rcp-userName{
+	margin-left:200px;
+}
 .rcp-pagemiddle-div1{
 	    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
     background: white;
@@ -110,19 +112,43 @@ body{
 	/*  background-color: #D4F4FA; */
 	background-image: URL(../img/pagebanner.jpg);
 	width: 100%;
-	height: 20%;
-	    margin-bottom: 2%;
-	    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+	height: 315px;
+	  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
    /*  background: white !important; */
 }
 
+
+.rcp-profileCover{
+  height: 358px;
+  
+}
+
+.rcp-topimg-border{
+	background: rgba(0, 0, 0, .3);
+    border-radius: 3px;
+    padding: 1px;
+    position: absolute;
+}
+.rcp-bottomLine-info{
+	height: 43px;
+	background-color: white;
+}
 .rcp-topimg {
-	padding: 1%;
-	padding-top: 2%;
-	padding-left: 2%;
-	height: 290px;
-	width: 290px;
+	
+	height: 168px;
+	width: 168px;
 	float: left;
+	 background-color: #fff;
+  border: 4px solid #fff;
+}
+.rcp-topimg-position{
+  border-radius: 2px;
+  margin-left:30px;
+  padding-top:180px;
+
+}
+
+
 }
 
 .rcp-topinfo {

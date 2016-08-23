@@ -1,5 +1,22 @@
 @CHARSET "UTF-8";
+  .active{
+  color:#337ab7;
+  }
+   /* 
+.rcp-image-scale{
+   width : 322px;
+  height : 181px;
+    overflow: hidden;
+}
 
+.rcp-image-scale img.image1{
+  
+  left: 50%;
+  top: 50%;
+  
+} */
+   
+   
 @media(max-width:1023px){
 .rcp-1024{
 	width:1024px;
@@ -17,6 +34,10 @@
   padding-left:0px;
   padding-right:0px;
 }  
+
+.rcp-comment {
+	height: 67.9px;
+}
 
 .rcp-240{
 	width:240px;
@@ -117,6 +138,8 @@
 
 .rcp-comment{
 	text-align:center;
+	height: 67.97px;
+	
 }
 
 .rcp-right-condiment{
@@ -478,6 +501,7 @@
 
 .rcp-comment{
   text-align:center;
+  height: 67.9px;
 }
 
 .rcp-right-condiment{
@@ -644,10 +668,6 @@
 
 
 /* -------------------- font size end ------------------------ */
-
-.rcp-like{
-	color:#231f20;
-}
 
 
 /* .rcp-list rcp-container{
