@@ -213,16 +213,10 @@ public class RecipeController {
         }else{
           
           recipe.setSubscribe(recipe.getSubscribe()+","+userNoList.get(i).getSubscribeNum());
-          System.out.println(userNoList.get(i).getSubscribeNum());
-          System.out.println("머나오냐ㅅㅂ"+recipe.getSubscribe());
         }
       }
       String scsUserNo=recipe.getSubscribe();
-      System.out.println("scsUserNo:"+scsUserNo);
-      System.out.println("pageNo:"+pageNo);
-      System.out.println("pageSize:"+pageSize);
       List<Recipe> subscribe = recipeService.selectSbuscribe(scsUserNo,pageNo,pageSize);
-      System.out.println("머나오냐 ㅅㅂsubscribe"+subscribe+"끝");
       result.put("status","success");
       result.put("data", subscribe);
       result.put("pageNo", pageNo);
