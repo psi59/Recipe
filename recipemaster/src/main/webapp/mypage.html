@@ -381,43 +381,7 @@ $(window).scroll(function() {
       /* 준모3 */
 });
 </script>
-<script> 
-$(function(){
-	loadComRcpList();	
-});
 
-function loadComRcpList(){ 
-	
-	var userNo = 0; 
-	  var a = eval(sessionStorage.getItem('data'));   
-	  if(a != null){
-	    userNo = eval(sessionStorage.getItem('data'))[0].userNo;
-	  }
-	  
-	  var source = $('#comRcpList-template').text();
-	  var template = Handlebars.compile(source);  
-	  $.ajax({
-	    url : 'recipe/comList.json',
-	    method : 'post',
-	    data : {
-	      userNo : userNo
-	    },
-	    dataType : 'json',
-	    success : function(result) {
-	      if (result.status != 'success') {
-	        //swal('실패 ~');
-	        return;
-	      }
-	      //$('#search-result > div').remove();    
-	      $('#tabs-1 .rcp-subscribe').append(template(result));
-	      $('#rcpList-pageNo').attr('value', '1');
-	    },
-	    error : function() {
-	      //swal('더이상 데이터가 없습니다.')
-	    }
-	  })  
-	}
-</script>
 <script>
 function rcpListScrollAppend(){ 
 	var userNo = 0; 

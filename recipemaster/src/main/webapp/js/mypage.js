@@ -10,21 +10,21 @@
 			 email:location.href.split('?')[1]
 		  },
 		  success : function(result) {
-			  console.log(result);
+			 
 			  if (result.status != 'success') {
 				  alert('comList 실행 중 오류 발생');
 				  return;
 			  }
-			  console.log(result.data);
+			 
 			 
 			  var sourceCRList = $('#comRcpList-template').text();
 			  var templateCRList = Handlebars.compile(sourceCRList);
 			  
 			  console.log(result.data);
 			 
-			  	$('.rcp-userName').text(result.data.userName);
+			  	$('.rcp-userName').text(result.user.userName);
 		    	
-			  //$('#tabs-1 .rcp-subscribe').append(templateCRList(result));
+			  $('#tabs-1 .rcp-subscribe').append(templateCRList(result));
 		  },
 		  error : function() {
 			 alert('community 서버 요청 오류!...')

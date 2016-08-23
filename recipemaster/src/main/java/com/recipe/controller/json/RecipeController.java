@@ -353,25 +353,36 @@ public class RecipeController {
 		return new Gson().toJson(result);
 	}
 
-	//커뮤니티 레시피 리스트 : 용  ----  고재현 수정. 
-	@RequestMapping(path="comListKo",produces="application/json;charset=UTF-8")
+//커뮤니티 레시피 리스트 : 용  ----  고재현 수정. 
+  @RequestMapping(path="userPage",produces="application/json;charset=UTF-8")
   @ResponseBody 
-  public String comListKo(String email){
-	  HashMap<String,Object> result = new HashMap<>();
+  public String userPage(String email){
+    HashMap<String,Object> result = new HashMap<>();
     Recipe recipe = new Recipe();
     try{
+      System.out.println("parameter email : "+email);
       User user = userService.selectFromEmail(email);
+      System.out.println("email로 뽑아온 User정보 : "+user);
       List<Recipe> userScrapNumbers = recipeService.selectScrapUserNoMypage(user.getUserNo());
-      for(int i =0; i<userScrapNumbers.size(); i++){
-        if(recipe.getScrap() == null){    
-          recipe.setScrap(String.valueOf(userScrapNumbers.get(0).getRecipeNo()));
-        }else{
-          recipe.setScrap(recipe.getScrap()+","+ userScrapNumbers.get(i).getRecipeNo());
+      System.out.println("user정보로 뽑은 구독하기 누른 사람 넘버 : "+userScrapNumbers);
+      if(userScrapNumbers.size() == 0 || userScrapNumbers.equals("")){
+        recipe.setScrap("0");
+      }else{        
+        for(int i =0; i<userScrapNumbers.size(); i++){
+          if(recipe.getScrap() == null){    
+            recipe.setScrap(String.valueOf(userScrapNumbers.get(0).getRecipeNo()));
+          }else{
+            recipe.setScrap(recipe.getScrap()+","+ userScrapNumbers.get(i).getRecipeNo());
+          }
         }
       }
+      
       List<Recipe> scrapList = recipeService.selectScrapMypage(recipe.getScrap(), user.getUserNo());
+      System.out.println("스크랩 한 사람 : "+scrapList);
+      
       result.put("status","success");
       result.put("data",scrapList);
+      result.put("user", user);
     }catch (Exception e){
       e.printStackTrace();
       result.put("status", "false");
@@ -379,7 +390,6 @@ public class RecipeController {
  
     return new Gson().toJson(result);
   }
-
 
 
 
