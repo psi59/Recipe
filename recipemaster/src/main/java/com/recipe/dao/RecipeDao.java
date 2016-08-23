@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.recipe.domain.Material;
 import com.recipe.domain.Recipe;
-import com.recipe.domain.User;
 
 public interface RecipeDao {
   int insert(Map map); // Create

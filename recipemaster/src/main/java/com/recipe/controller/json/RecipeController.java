@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -389,8 +390,7 @@ public class RecipeController {
   public String comList( @RequestParam(defaultValue="1") int pageNo,
                           @RequestParam(defaultValue="4") int pageSize,HttpSession session){
 
-    HashMap<String,Object> result = new HashMap<>();
-    Recipe recipe = new Recipe();
+    HashMap<String,Object> result = new HashMap<>();    
     try{
       List<Recipe> myRecipeList = recipeService.selectSbuscribe2((session.getAttribute("userNo")).toString(),pageNo,pageSize);
       result.put("status","success");

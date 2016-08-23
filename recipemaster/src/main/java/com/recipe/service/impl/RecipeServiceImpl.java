@@ -11,7 +11,6 @@ import com.recipe.dao.RecipeDao;
 import com.recipe.domain.Material;
 import com.recipe.domain.Recipe;
 import com.recipe.domain.Search;
-import com.recipe.domain.User;
 import com.recipe.service.RecipeService;
 
 @Service
