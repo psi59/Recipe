@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,7 +50,11 @@ public class RecipeController {
 			@RequestParam("recipeProduce") String[] recipeProduce,
 			@RequestParam("imageFiles") List<MultipartFile> imageFiles,
 			@RequestParam("representImgNames") List<String> representImgNames,
-			@RequestParam("produceImgNames") List<String> produceImgNames, HttpServletRequest request) {
+			@RequestParam("produceImgNames") List<String> produceImgNames, 
+			HttpServletRequest request, HttpSession session) {
+		int userNo = (Integer)session.getAttribute("userNo");
+		System.out.println(userNo);
+		
 		Map<String, Object> result = new HashMap<>();
 		Map<String, Object> map = new HashMap<>();
 		Map<String, Object> recipeDatas = new HashMap<>();
@@ -57,8 +62,10 @@ public class RecipeController {
 		JsonArray recipeProduceDatas = new JsonArray();
 		JsonArray recipeRepresentImages = new JsonArray();
 
+		System.out.println(recipe);
+		
 		User user = new User();
-		user.setUserNo(1);
+		user.setUserNo(userNo);
 
 		for (int i = 0; i < materialNos.length; i++) {
 			Map<String, String> matertialInfo = new HashMap<>();

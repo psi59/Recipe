@@ -282,7 +282,7 @@
 	/*화면관리*/	
     $(function() {
       $("#tabs").tabs();
-    });
+    });/*
     //마지막 스크롤 TOP 위치
     var lastScrollY = 0;
 
@@ -308,9 +308,8 @@
         //현재 위치를 lastScrollY에 저장해준다.
         lastScrollY = lastScrollY + percent;
       }
-      //현재 ((윈도우넓이/2) +480) 을 left로 지정
-      $("#quick").css("left", ($(window).width() / 2) + 580);
-    }
+      $("#quick").css("left", 1400);
+    }*/
     
     
   

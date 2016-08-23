@@ -29,6 +29,8 @@
 <link rel="stylesheet" href="css/list.css">
 <link rel="stylesheet" href="css/list_categoryCheckbox.css">
 <link rel="stylesheet" href="css/list_countOrder.css">
+<link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.min.css">
+<link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.themes.min.css">
 <!-- --- 아이콘 CDN ----- -->
 <!-- <script src="js/template/d9e67edb08.js"></script> -->
 
@@ -89,8 +91,8 @@
                   </div>
                 </div>
                 
-                <button class="infoBtn"><a href="/community.html" >MyPage</a></button>
-                <button class="infoBtn"><a href="/writerecipe.html" >Recipe 작성</a></button>
+                <a href="/mypage.html"><button class="goMyPageBtn btn btn-default rcp-btn-nav">MyPage</button></a>
+                <a href="/writerecipe.html"><button class="goWriteRcpBtn btn btn-default rcp-btn-nav">Recipe 작성</button></a>
               </div>
             </div>
 
@@ -442,6 +444,7 @@
   <script src="js/common/chefCard.js"></script>
   <script src="js/common/signup.js"></script>
 	<script src="js/list_recipeSearch.js"></script>
+	<script src="node_modules/easy-autocomplete/dist/jquery.easy-autocomplete.min.js"></script>
 	<script>
 		$(function() {		
 			

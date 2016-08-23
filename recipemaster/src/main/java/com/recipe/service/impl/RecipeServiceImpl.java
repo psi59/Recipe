@@ -11,7 +11,6 @@ import com.recipe.dao.RecipeDao;
 import com.recipe.domain.Material;
 import com.recipe.domain.Recipe;
 import com.recipe.domain.Search;
-import com.recipe.domain.User;
 import com.recipe.service.RecipeService;
 
 @Service
@@ -27,7 +26,12 @@ public class RecipeServiceImpl implements RecipeService {
 	  params.put("userNo", userNo);
     
     return recipeDao.recipeSearch(params);
-  }	
+  }
+			
+  @Override
+  public List<String> getRecipeNameList(String searchValue) {    
+    return recipeDao.selectRecipeName(searchValue);
+  }
 
   @Override
   public int getRecipeCount(int pageNo, int pageSize, Search search, int userNo) {
@@ -108,10 +112,15 @@ public class RecipeServiceImpl implements RecipeService {
 	    return recipeDao.selectSubscribeUno(userNo);
 	  }
  
+	  //준 수정
 	  @Override
-	  public List<Recipe> selectSbuscribe(String userNo) {
-
-	    return recipeDao.selectSbuscribe(userNo);
+	  public List<Recipe> selectSbuscribe(String scsUserNo, int pageNo, int pageSize) {
+	    HashMap<String,Object> params = new HashMap<>();
+      params.put("userNo", scsUserNo);
+      params.put("startIndex", (pageNo - 1) * pageSize);
+      params.put("len", pageSize);
+      
+	    return recipeDao.selectSbuscribe(params);
 	  }
 	  
 	  //준

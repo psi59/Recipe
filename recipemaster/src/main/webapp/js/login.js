@@ -10,6 +10,12 @@ $("#userLogin").click(function(){
 	login(event);
 });
 
+$("#userEmail").keyup(function(){
+	if(event.keyCode == 9){
+		document.getElementById("userPassword").focus();
+	}
+});
+
 $('#userPassword').keyup(function(){
 	if(event.keyCode == 13){
 		if($('#userPassword').val() == ''){
