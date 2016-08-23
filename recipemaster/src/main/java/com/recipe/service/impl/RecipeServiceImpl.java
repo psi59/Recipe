@@ -115,10 +115,15 @@ public class RecipeServiceImpl implements RecipeService {
 	    return recipeDao.selectSubscribeUno(userNo);
 	  }
  
+	  //준 수정
 	  @Override
-	  public List<Recipe> selectSbuscribe(String userNo) {
-
-	    return recipeDao.selectSbuscribe(userNo);
+	  public List<Recipe> selectSbuscribe(String scsUserNo, int pageNo, int pageSize) {
+	    HashMap<String,Object> params = new HashMap<>();
+      params.put("userNo", scsUserNo);
+      params.put("startIndex", (pageNo - 1) * pageSize);
+      params.put("len", pageSize);
+      
+	    return recipeDao.selectSbuscribe(params);
 	  }
 	  
 	  //준

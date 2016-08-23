@@ -213,6 +213,8 @@
     
     <!-- page hidden -->
     <input id="rcpList-pageNo" type="hidden" value="1">
+    <input id="scsRcpList-pageNo" type="hidden" value="1">    
+    
     
 		<section class="rcp-pageleft">
 
@@ -222,7 +224,7 @@
 
 					<ul>
 						<li><a href="#tabs-1">My Recipe</a></li>
-						<li><a href="#tabs-2">구독중인 페이지</a></li>
+						<li><a href="#tabs-2" id="scsPage">구독중인 페이지</a></li>
 					</ul>
 					<div id="tabs-1">
 						<div class="rcp-main-right">
@@ -331,7 +333,7 @@
                 <p class="rcp-first-p-margin"> 빵같아 보이기도 한다 !</p> 
                </div> 
                <div class="rcp-subscribe-preview">
-               <p class="rcp-subscribe-preview-p-tag">최신 레시피</p>
+               <p class="rcp-subscribe-preview-p-tag">{{userName}}님의 최신 레시피</p>
                <img class="rcp-subscribe-preview-image" src="../img/2.jpg">
                 <img class="rcp-subscribe-preview-image" src="../img/3.jpg">
                  <img class="rcp-subscribe-preview-image" src="../img/4.jpg">

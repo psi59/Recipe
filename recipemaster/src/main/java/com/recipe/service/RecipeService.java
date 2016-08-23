@@ -21,7 +21,7 @@ public interface RecipeService {
   List<Recipe> selectSbuscribe2(String userNo, int pageNo, int pageSize); //준모,용이형
   int addSubscribe(int toUserNo, int fromUserNo);
   List<Recipe> selectSubscribeUno(int userNo);
-  List<Recipe> selectSbuscribe(String userNo);
+  List<Recipe> selectSbuscribe(String scsUserNo, int pageNo, int pageSize); //준모 수정
   List<Recipe> selectMypage(int userNo);    
   List<Recipe> selectScrapUserNoMypage(int userNo);
   List<Recipe> selectScrapMypage(String userNumbers, int userNo);
