@@ -215,7 +215,7 @@ function searchScrollAppend(){
 				} else {
 					$('#search-pageNo').val('lastPage');
 				}
-				mathods();
+				methods();
 			},
 			error : function() {
 				swal('서버 요청 오류 !')
