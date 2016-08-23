@@ -181,7 +181,7 @@
 			ORDER BY scr.scc_dt asc
   </select>
   
-<select id="selectSbuscribe2" resultMap="recipeMap" parameterType="string">
+<select id="selectSubscribe2" resultMap="recipeMap" parameterType="string">
   
   SELECT * 
   FROM rcps 
