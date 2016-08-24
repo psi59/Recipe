@@ -13,6 +13,7 @@
 
 }
 
+
 .rcp-image-scale img.image1{
   width: 100%;
   left: 50%;
@@ -225,8 +226,6 @@
     display: block!important;
 
   }
-
-      
   
 }
 
@@ -396,7 +395,8 @@
 	
 	
 .rcp-height30{
-  height: 30px;
+    height: 20px;
+    margin-top: 10px;
 }
 
 	

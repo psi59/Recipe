@@ -120,7 +120,7 @@ public class RecipeServiceImpl implements RecipeService {
       params.put("startIndex", (pageNo - 1) * pageSize);
       params.put("len", pageSize);
       
-	    return recipeDao.selectSbuscribe(params);
+	    return recipeDao.selectSubscribe(params);
 	  }
 	  
 	  //준

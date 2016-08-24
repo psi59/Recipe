@@ -18,7 +18,7 @@ public interface RecipeDao {
   int addSubscribe(Map<String,Object> params); //구독하기 추가 고재현
   int  deleteSubscribe(Map<String,Object> params);
   List<Recipe> selectSubscribeUno(int userNo); //구독하기한 userNo추출  고재현
-  List<Recipe> selectSbuscribe(Map<String,Object> params); //구독한 리스트 고재현 //준모 수정
+  List<Recipe> selectSubscribe(Map<String,Object> params); //구독한 리스트 고재현 //준모 수정
   List<Recipe> selectMypage(int userNo);      // mypage리스트  고재현
   List<Recipe> selectScrapUserNoMypage(int userNo);      // mypageScrap리스트  고재현
   List<Recipe> selectScrapMypage(Map<String,Object> params);      // mypageScrap리스트  고재현

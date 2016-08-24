@@ -24,6 +24,7 @@
 <!-- 사용자 정의 css -->
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/userinfobox.css">
+<link rel="stylesheet" href="css/common/signup.css">
 <link rel="stylesheet" href="css/mainlist.css">
 <link rel="stylesheet" href="css/detail.css">
 <link rel="stylesheet" href="css/updateImg.css">
@@ -475,7 +476,11 @@
       
             <div class="thumbnail row relative">
               <div class="rcp-profile-position">
+                  {{#defaultImage}}
                 <img src="img/profileImg/{{user.image}}" class="img-circle rcp-profile">
+                    {{else}}
+                <img src="img/profileImg/default.jpg" class="img-circle rcp-profile">
+                    {{/defaultImage}}
               </div>
             <div class="rcp-image-scale" name="recipe-image" > <!--style="background-image : url('img/representImg/{{rpimg}}');"-->
               <!--<img src="img/representImg/{{rpimg}}" class="image1"  name="rcp-list-images"> -->
@@ -671,10 +676,9 @@
 	<!--  사용자 js -->
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/common.js"></script>
-	<script src="js/login.js"></script>
-	<script src="js/detail.js"></script>
-	<script src="js/mainListAjax.js"></script>
-	<script src="js/recipeDetail.js"></script>
+	<script src="js/login.js"></script> 
+  <script src="js/mainListAjax.js"></script>
+  <script src="js/recipeDetail.js"></script>
 	<script src="js/updateUser.js"></script>
 	<script src="js/common/popup.js"></script>
 	<script src="js/common/chefCard.js"></script>

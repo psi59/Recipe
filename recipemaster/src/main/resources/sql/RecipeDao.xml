@@ -29,6 +29,7 @@
 		<result column="totalPoint" property="totalPoint"/>
 		<result column="rpimg" property="rpimg" />
 		<result column="img" property="user.image"/>
+		<result column="userName" property="user.userName"/>
 	</resultMap> 
 	
 	<resultMap type="material" id="materialMap">
@@ -147,14 +148,14 @@
   </insert>
     
     <delete id="deleteSubscribe" parameterType="Map">
-    DELETE from scs where $(fromUserNo)
+    DELETE from scs where ${fromUserNo}
     </delete>
     
   <select id="selectSubscribeUno" resultMap="recipeMap" parameterType="INTEGER">
     SELECT * FROM scs WHERE uno=#{value}
   </select>
   
-  <select id="selectSbuscribe" resultMap="recipeMap" parameterType="string">
+  <select id="selectSubscribe" resultMap="recipeMap" parameterType="string">
 	SELECT *
 	FROM rcps
 	WHERE uno in( ${userNo} )
@@ -175,9 +176,11 @@
   
 
   <select id="selectScrapMypage" resultMap="recipeMap" parameterType="map">
-			select * from rcps r
+			select *, u.name userName,likecnt.countLike from rcps r
 			INNER JOIN users u on r.uno=u.uno and r.rcpno in ( ${userNumbers} )
 			LEFT OUTER JOIN rcp_scr scr on r.rcpno=scr.rcpno and scr.uno = ${userNo}
+			LEFT OUTER JOIN(select rcpno rno, count(*) countLike from rcp_lik group by rcpno) likecnt
+			ON r.rcpno=likecnt.rno
 			ORDER BY scr.scc_dt asc
   </select>
   
@@ -273,5 +276,4 @@
     delete from boards
     where bno=#{no}
   </delete> -->
-  
 </mapper>

@@ -1,6 +1,46 @@
 
+
   $(function(){
-	  console.log(location.href.split('?')[1])
+	  console.log(location.href.split('?')[1]);
+	  
+	  $.ajax({
+		  url :'recipe/userPage.json',
+		  dataType : 'json',
+		  method : 'post',
+		  data:{
+			 email:location.href.split('?')[1]
+		  },
+		  success : function(result) {
+			 
+			  if (result.status != 'success') {
+				  alert('comList 실행 중 오류 발생');
+				  return;
+			  }
+			 
+		
+			  var sourceCRList = $('#temp').text();
+			  var templateCRList = Handlebars.compile(sourceCRList);
+			  
+			  console.log(result.data);
+			 
+			  	$('.rcp-userName').text(result.user.userName);
+		    	
+			  $('.hs-content .container .row').append(templateCRList(result));
+			  
+			  for(var i = 0 ; i<result.data.length; i++){
+				  var list=JSON.stringify(result.data[i].rpimg);
+					var firstParse= list.substring(4,(list.length-4));
+				
+
+					 $('div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+firstParse+')');
+				  }
+		  },
+		  error : function() {
+			 alert('community 서버 요청 오류!...')
+		  }
+	  });
+	  
+	  
 	  
     	$('.rcp-topbtn').on('click',function(evnet){
     		if($(event.target).is('#subscribeComplete')){
@@ -8,7 +48,7 @@
 	    			url:'recipe/deleteSubscribe.json',
 	    			datatype:'json',
 	    			data:{
-	    				fromUserNo:4
+	    				fromUserNo:5
 	    			},
 	    			method:'post',
 	    			success:(function(){
@@ -25,7 +65,7 @@
 	    			url:'recipe/addSubscribe.json',
 	    			datatype:'json',
 	    			data:{
-	    				fromUserNo:4
+	    				fromUserNo:5
 	    			},
 	    			method:'post',
 	    			success:(function(){

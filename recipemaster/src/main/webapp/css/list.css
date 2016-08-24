@@ -1,6 +1,10 @@
   .active{
   color:#337ab7;
   }
+  
+.rcp-listSize{
+	height:416.22px;
+}
 
 #searchBarKeyword {
 	cursor: pointer;

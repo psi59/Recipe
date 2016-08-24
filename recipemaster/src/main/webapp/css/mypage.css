@@ -1,5 +1,7 @@
 @CHARSET "UTF-8";
-
+.navbar{
+	height: 51px;
+}
 .rcp-profile-img {
 	/* 	margin-top: 20%; */
 	width: 50%;
@@ -162,8 +164,6 @@ body {
 }
 
 .rcp-fullpage {
-	width: 1024px;
-	height: 1500px;
 	margin: 19%;
 	margin-top: 6%;
 	margin-bottom: 3%;
@@ -230,9 +230,13 @@ body {
 	height: 10%;
 }
 
-#tabs {
-	border: 1px solid #f0f0f0;
+.hs-content > .container{
+	width:970px;
+}
+#tabs{
+	border: 0px;
 	background-color: #f0f0f0;
+	margin: auto;
 }
 
 .rcp-pageleft {
