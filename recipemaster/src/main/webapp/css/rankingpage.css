@@ -1,6 +1,6 @@
 /*  */
 @import url(http://fonts.googleapis.com/css?family=Oswald);
-
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
 * {
   margin: 0;
   padding: 0;
@@ -9,7 +9,7 @@
 }
 
 body {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Jeju Gothic', sans-serif;
 }
 
 h1 {

@@ -1,12 +1,11 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+*{
+font-family: 'Noto Sans KR', sans-serif;
+}
+
 .badge {
   background-color: #777;
 }
-
-/* .tabs-left {
-  margin-left: 4rem;
-  width: 1024px;
-  margin:0 auto;
-} */
 
 #rcp-main-rank .tabs-left{
   width: 96.2%;
