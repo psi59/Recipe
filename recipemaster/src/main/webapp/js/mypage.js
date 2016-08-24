@@ -1,4 +1,5 @@
 
+
   $(function(){
 	  console.log(location.href.split('?')[1]);
 	  

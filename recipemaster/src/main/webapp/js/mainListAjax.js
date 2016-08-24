@@ -121,6 +121,15 @@
 	    return options.inverse(this);
 	  }
 });
+  
+  Handlebars.registerHelper('defaultImage', function(options) {
+		 
+	  if (this.user.image == null || this.user.image =='') {
+		  return options.inverse(this);
+	  } else {
+	    return options.fn(this);
+	  }
+});
 	  
   
 //--------------------좋아요 등록, 해제 로직-------------------------------  

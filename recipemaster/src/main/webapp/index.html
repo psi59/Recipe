@@ -469,7 +469,11 @@
       
             <div class="thumbnail row relative">
               <div class="rcp-profile-position">
+                  {{#defaultImage}}
                 <img src="img/profileImg/{{user.image}}" class="img-circle rcp-profile">
+                    {{else}}
+                <img src="img/profileImg/default.jpg" class="img-circle rcp-profile">
+                    {{/defaultImage}}
               </div>
             <div class="rcp-image-scale" name="recipe-image" > <!--style="background-image : url('img/representImg/{{rpimg}}');"-->
               <!--<img src="img/representImg/{{rpimg}}" class="image1"  name="rcp-list-images"> -->
