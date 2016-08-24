@@ -400,7 +400,7 @@ public class RecipeController {
       System.out.println("data::"+result.get("data"));
     }catch (Exception e){ 
       result.put("status", "false");
-    }
+    } 
     return new Gson().toJson(result);
   }
     }
