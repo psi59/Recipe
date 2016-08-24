@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="css/common/signup.css">
 <link rel="stylesheet" href="css/common/popup.css">
 <link rel="stylesheet" href="css/updateImg.css">
-
+<style>
 </style>
 </head>
 <body>
@@ -95,8 +95,11 @@
 											class="btn btn-default rcp-btn-nav">로그아웃</button>
 									</div>
 								</div>
-								<a href="/mypage.html"><button class="goMyPageBtn btn btn-default rcp-btn-nav">MyPage</button></a>
-                <a href="/writerecipe.html"><button class="goWriteRcpBtn btn btn-default rcp-btn-nav">Recipe 작성</button></a>
+								<a href="/mypage.html"><button
+										class="goMyPageBtn btn btn-default rcp-btn-nav">MyPage</button></a>
+								<a href="/writerecipe.html"><button
+										class="goWriteRcpBtn btn btn-default rcp-btn-nav">Recipe
+										작성</button></a>
 							</div>
 						</div>
 
@@ -163,57 +166,54 @@
 	</div>
 	<!--  -->
 	<section class="rcp-fullpage">
-	<div class="rcp-profileCover">
-		<section class="rcp-pagetop">
-			<div class="rcp-topimg-position">
-			<a class="rcp-topimg-border">
-				<img src="/img/pika.jpg" class="rcp-topimg">
-			</a>
-				<div class="rcp-topinfo">
+		<div class="rcp-profileCover">
+			<section class="rcp-pagetop">
+				<div class="rcp-topimg-position">
+					<a class="rcp-topimg-border"> <img src="/img/pika.jpg"
+						class="rcp-topimg">
+					</a>
+					<div class="rcp-topinfo">
 
-					<h2 class="rcp-userName">길용이</h2>
+						<h2 class="rcp-userName">길용이</h2>
 
-					<button class="btn btn-default rcp-topbtn">구독하기</button>
+						<button class="btn btn-default rcp-topbtn">구독하기</button>
+					</div>
 				</div>
+			</section>
+			<div class="rcp-bottomLine-info" style="color: white;"></div>
+
+		</div>
+
+		<section class="rcp-pagemiddle1">
+			<div class="rcp-pagemiddle-div1">
+				<img class="rcp-pagemiddle-div-img" src="img/profileImg/users.png">
+				<span class="heading">방문자</span> <span class="value" id="visitNum">명</span>
+			</div>
+			<div class="rcp-pagemiddle-div2">
+				<img class="rcp-pagemiddle-div-img" src="img/profileImg/like-1.png">
+				<span class="heading">좋아요</span> <span class="value" id="likeNum">개</span>
+			</div>
+			<div class="rcp-pagemiddle-div3">
+				<img class="rcp-pagemiddle-div-img"
+					src="img/profileImg/attachment.png"> <span class="heading">스크랩</span>
+				<span class="value" id="scrapNum">개</span>
+			</div>
+			<div class="rcp-pagemiddle-div4">
+				<img class="rcp-pagemiddle-div-img" src="img/profileImg/star-1.png">
+				<span class="heading">평점</span> <span class="value" id="gradeNum">점</span>
 			</div>
 		</section>
-		<div class="rcp-bottomLine-info" style="color:white;">
-		</div>
-		
-	</div>	
-		
-		<section class="rcp-pagemiddle1">
-      <div  class="rcp-pagemiddle-div1">
-              <img class="rcp-pagemiddle-div-img"  src="img/profileImg/users.png">
-              <span class="heading">방문자</span>
-              <span class="value" id="visitNum">명</span>
-      </div>
-      <div class="rcp-pagemiddle-div2">
-      <img class="rcp-pagemiddle-div-img" src="img/profileImg/like-1.png">
-              <span class="heading">좋아요</span>
-              <span class="value" id="likeNum">개</span>
-      </div>
-      <div class="rcp-pagemiddle-div3">
-      <img class="rcp-pagemiddle-div-img" src="img/profileImg/attachment.png">
-              <span class="heading">스크랩</span>
-              <span class="value"  id="scrapNum">개</span>
-      </div>
-      <div class="rcp-pagemiddle-div4">
-      <img class="rcp-pagemiddle-div-img" src="img/profileImg/star-1.png">
-              <span class="heading">평점</span>
-              <span class="value" id="gradeNum">점</span>
-      </div>
-    </section>
-    
-    <!-- page hidden -->
-    <input id="rcpList-pageNo" type="hidden" value="1">
-    <input id="scsRcpList-pageNo" type="hidden" value="1">    
+		<input id="rcpList-pageNo" type="hidden" value="1"> <input
+			id="scsRcpList-pageNo" type="hidden" value="1">
 		<section class="rcp-pageleft">
 			<div>
 				<div id="tabs" class="rcp-vst-tabs">
 					<ul>
-						<li><a href="#tabs-1" style="width: 330px;">My Recipe</a></li>
-						<li><a href="#tabs-2" style="width: 330px;" id="scsPage">구독중인 페이지</a></li>
+						<li><a href="#tabs-1" style="width: 243px;">My Recipe</a></li>
+						<li><a href="#tabs-2" style="width: 242px;" id="scsPage">구독중인
+								페이지</a></li>
+						<li><a href="#tabs-3" style="width: 242px;">스크랩</a></li>
+						<li><a href="#tabs-4" style="width: 242px;">방명록</a></li>
 					</ul>
 					<div id="tabs-1">
 						<div class="rcp-main-right">
@@ -225,24 +225,31 @@
 							<div class="rcp-subscribe"></div>
 						</div>
 					</div>
-				</div>
-			</div>
-		</section>
-		<section class="rcp-pageright">
-			<div>
-				<div class="rcp-Vst-write">
-					<div class="inputWrite">
-						<textarea id="rcp-rpcontent" rows="3" cols="25"
-							style="resize: none;" placeholder="방명록을 입력해주세요"></textarea>
-						<button id="rcp-rpBtn" class="rcp-Vst-inputBtn btn btn-default">등록</button>
+					<div id="tabs-3">
+						<div class="rcp-main-right">
+							<div class="rcp-subscribe"></div>
+						</div>
+					</div>
+					<div id="tabs-4">
+							<div class="rcp-Vst-write">
+								<div class="inputWrite">
+									<textarea id="rcp-rpcontent" rows="5" cols="110"
+										style="resize: none;" placeholder="방명록을 입력해주세요"></textarea>
+									<button id="rcp-rpBtn" class="rcp-Vst-inputBtn btn btn-default">등록</button>
+								</div>
+						</div>
+						<section class="Vst" id="Vst">
+        <!-- 방명록  -->
+      </section>
 					</div>
 				</div>
 			</div>
-			<section class="Vst" id="Vst">
-				<!-- 방명록  -->
-			</section>
 		</section>
-	<!-- 	<div style="height: 1100px;"></div>
+		<!-- <section class="rcp-pageright">
+			<div></div>
+			
+		</section> -->
+		<!-- 	<div style="height: 1100px;"></div>
 		<div id="quick"
 			style="position: absolute; top: 350px; border: solid 3px #6799FF; width: 150px; height: 480px; text-align: center; color: #6799FF;">
 			최근 방문한 페이지</div> -->
@@ -366,7 +373,7 @@
       </div>
  {{/each}}
   </script>
-<script>
+	<script>
 $(window).scroll(function() { 
     if ($(window).scrollTop() == $(document).height() - $(window).height()) {
     	rcpListScrollAppend();
@@ -374,7 +381,7 @@ $(window).scroll(function() {
       /* 준모3 */
 });
 </script>
-<script> 
+	<script> 
 $(function(){
 	loadComRcpList();	
 });
@@ -411,7 +418,7 @@ function loadComRcpList(){
 	  })  
 	}
 </script>
-<script>
+	<script>
 function rcpListScrollAppend(){ 
 	var userNo = 0; 
 	  var a = eval(sessionStorage.getItem('data'));   
@@ -446,7 +453,7 @@ function rcpListScrollAppend(){
 	  })  
 	}
 </script>
-<script> 
+	<script> 
 $(function(){
   loadMyPage(); 
 });
