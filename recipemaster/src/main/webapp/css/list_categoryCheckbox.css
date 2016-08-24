@@ -1,4 +1,7 @@
-@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+*{
+font-family: 'Noto Sans KR', sans-serif;
+}
 #rcp-list-category {
 	color: #000000;
 	font-size: 30px;

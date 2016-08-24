@@ -1,16 +1,7 @@
-/*!
- * SNOW Landing Page Theme
- *
- * Created by Visual Soldiers
- * Visit us at http://www.visualsoldiers.com
- *
- * Handcrafted with love in Atlanta!
- */
-
-
-/* ==========================================================================
-   Global styles
-   ========================================================================== */
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+*{
+font-family: 'Noto Sans KR', sans-serif;
+}
   .active{
   color:#337ab7;
   }
