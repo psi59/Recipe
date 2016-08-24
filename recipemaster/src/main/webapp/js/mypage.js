@@ -251,18 +251,20 @@
 	/*화면관리*/	
     $(function() {
       $("#tabs").tabs();
-    });/*
+    });
+		
+
     //마지막 스크롤 TOP 위치
     var lastScrollY = 0;
 
-    $(document).ready(function() {
+    /*$(document).ready(function() {
       //setInterVal(사용할 함수, 1/1000초)  즉 quick함수를 1/1000초마다 실행
       setInterval(quick, 1);
     });
 
     function quick() {
       //현재 스크롤바 top 위치, .scrollTop() - 선택한 element의 scroll 가능한 영역에서 가장 위쪽 위치
-      currentY = $(window).scrollTop();
+      //currentY = $(window).scrollTop();
 
       //위치가 틀린 경우
       if (currentY != lastScrollY) {
@@ -277,8 +279,8 @@
         //현재 위치를 lastScrollY에 저장해준다.
         lastScrollY = lastScrollY + percent;
       }
-      $("#quick").css("left", 1400);
-    }*/
-    
+      $("#quick").css("left", -13);
+    }
+    */
     
   

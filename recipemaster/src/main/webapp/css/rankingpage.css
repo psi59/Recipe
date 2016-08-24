@@ -103,7 +103,6 @@ footer a:hover {
 
 .to-top {
   padding: 20px;
-  /*background-color: #bdc3c7;*/
   background-color: #bdc3c7;
   width: 60px;
   height: 60px;
@@ -222,10 +221,10 @@ body {
 
 .fresh-ui-wrap {
 	z-index:5000;
-  width: 360px;
-  height: 500px;
+  width: 25%;
+  height: 15%;
   margin: 4% auto;
-  margin-left: 90pt;
+  margin-left: 6%;
   overflow: hidden;
   background: #fff;
   position: relative;

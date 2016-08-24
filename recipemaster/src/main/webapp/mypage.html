@@ -175,7 +175,6 @@
 					<div class="rcp-topinfo">
 
 						<h2 class="rcp-userName">길용이</h2>
-
 						<button class="btn btn-default rcp-topbtn">구독하기</button>
 					</div>
 				</div>
@@ -231,28 +230,22 @@
 						</div>
 					</div>
 					<div id="tabs-4">
-							<div class="rcp-Vst-write">
-								<div class="inputWrite">
-									<textarea id="rcp-rpcontent" rows="5" cols="110"
-										style="resize: none;" placeholder="방명록을 입력해주세요"></textarea>
-									<button id="rcp-rpBtn" class="rcp-Vst-inputBtn btn btn-default">등록</button>
-								</div>
+						<div class="rcp-Vst-write" id="quick"
+							style="margin-left:2%; position:fixed;background-color:#FFD9EC; top:88%; border: solid 2px #FFB2D9; height:90px; width: 55%; text-align: center; color: #6799FF;">
+							<div class="inputWrite">
+								<textarea id="rcp-rpcontent" rows="3" cols="100"
+									style="resize: none;" placeholder="방명록을 입력해주세요"></textarea>
+								<button id="rcp-rpBtn" class="rcp-Vst-inputBtn btn btn-default">등록</button>
+							</div>
 						</div>
 						<section class="Vst" id="Vst">
-        <!-- 방명록  -->
-      </section>
+							<!-- 방명록  -->
+						</section>
 					</div>
 				</div>
 			</div>
 		</section>
-		<!-- <section class="rcp-pageright">
-			<div></div>
-			
-		</section> -->
-		<!-- 	<div style="height: 1100px;"></div>
-		<div id="quick"
-			style="position: absolute; top: 350px; border: solid 3px #6799FF; width: 150px; height: 480px; text-align: center; color: #6799FF;">
-			최근 방문한 페이지</div> -->
+
 	</section>
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
@@ -285,6 +278,8 @@
 	<script id="visitor-template" type="text/x-handlebars-template">
   {{#each data}}
     <div class="rcp-Vst" name="rcp-Vst">
+          
+          
           <div class="rcp-Vst-top">
             <img class="rcp-Vst-img img-circle" src="/img/pika.jpg" />
             <div class="rcp-Vst-common">
@@ -299,7 +294,7 @@
             <div class="rcp-Vst-contents">
               <p>{{visitorContent}}</p>
             </div>
-          </div>
+          </div>  
             <div class="rcp-Vst-slotRp">
               <!---->
             </div>
@@ -374,121 +369,123 @@
  {{/each}}
   </script>
 	<script>
-$(window).scroll(function() { 
-    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-    	rcpListScrollAppend();
-    }
-      /* 준모3 */
-});
-</script>
-	<script> 
-$(function(){
-	loadComRcpList();	
-});
-
-function loadComRcpList(){ 
-	
-	var userNo = 0; 
-	  var a = eval(sessionStorage.getItem('data'));   
-	  if(a != null){
-	    userNo = eval(sessionStorage.getItem('data'))[0].userNo;
-	  }
-	  
-	  var source = $('#comRcpList-template').text();
-	  var template = Handlebars.compile(source);  
-	  $.ajax({
-	    url : 'recipe/comList.json',
-	    method : 'post',
-	    data : {
-	      userNo : userNo
-	    },
-	    dataType : 'json',
-	    success : function(result) {
-	      if (result.status != 'success') {
-	        //swal('실패 ~');
-	        return;
-	      }
-	      //$('#search-result > div').remove();    
-	      $('#tabs-1 .rcp-subscribe').append(template(result));
-	      $('#rcpList-pageNo').attr('value', '1');
-	    },
-	    error : function() {
-	      //swal('더이상 데이터가 없습니다.')
-	    }
-	  })  
-	}
-</script>
+		$(window).scroll(
+				function() {
+					if ($(window).scrollTop() == $(document).height()
+							- $(window).height()) {
+						rcpListScrollAppend();
+					}
+					/* 준모3 */
+				});
+	</script>
 	<script>
-function rcpListScrollAppend(){ 
-	var userNo = 0; 
-	  var a = eval(sessionStorage.getItem('data'));   
-	  if(a != null){
-	    userNo = eval(sessionStorage.getItem('data'))[0].userNo;
-	  }
-	  if(isNaN(parseInt($('#rcpList-pageNo').val())+1)){
-		  return;
-	  }
-	  var source = $('#comRcpList-template').text();
-	  var template = Handlebars.compile(source);  
-	   
-	  $.ajax({
-	    url : 'recipe/comList.json',
-	    method : 'post',
-	    data : {
-	      userNo : userNo,
-	      pageNo : parseInt($('#rcpList-pageNo').val())+1
-	    },
-	    dataType : 'json',
-	    success : function(result) {
-	      if (result.status != 'success') {
-	        //swal('실패 ~');
-	        return;
-	      }
-	      $('#tabs-1 .rcp-subscribe').append(template(result));     
-	      $('#rcpList-pageNo').val(result.pageNo);
-	    },
-	    error : function() {
-	      //swal('오호라~','더이상 데이터가 없습니다.')
-	    }
-	  })  
-	}
-</script>
-	<script> 
-$(function(){
-  loadMyPage(); 
-});
+		$(function() {
+			loadComRcpList();
+		});
 
-function loadMyPage(){ 
-  
-  var userNo = 0; 
-    var a = eval(sessionStorage.getItem('data'));   
-    if(a != null){
-      userNo = eval(sessionStorage.getItem('data'))[0].userNo;
-    }
-    $.ajax({
-      url : 'visitor/loadMyPage.json',
-      method : 'post',
-      data : {
-        userNo : userNo
-      },
-      dataType : 'json',
-      success : function(result) {
-        if (result.status != 'success') {
-          //swal('로그인 해주시기 바랍니다.');
-          return;
-        }
-        $('#visitNum').text(result.sum+"명");
-        $('#likeNum').text(result.like+"개");
-        $('#scrapNum').text(result.scr+"개");
-        $('#gradeNum').text(result.avg+"점");
-      
-      },
-      error : function() {
-        //swal('더이상 데이터가 없습니다.')
-      }
-    })  
-  }
-</script>
+		function loadComRcpList() {
+
+			var userNo = 0;
+			var a = eval(sessionStorage.getItem('data'));
+			if (a != null) {
+				userNo = eval(sessionStorage.getItem('data'))[0].userNo;
+			}
+
+			var source = $('#comRcpList-template').text();
+			var template = Handlebars.compile(source);
+			$.ajax({
+				url : 'recipe/comList.json',
+				method : 'post',
+				data : {
+					userNo : userNo
+				},
+				dataType : 'json',
+				success : function(result) {
+					if (result.status != 'success') {
+						//swal('실패 ~');
+						return;
+					}
+					//$('#search-result > div').remove();    
+					$('#tabs-1 .rcp-subscribe').append(template(result));
+					$('#rcpList-pageNo').attr('value', '1');
+				},
+				error : function() {
+					//swal('더이상 데이터가 없습니다.')
+				}
+			})
+		}
+	</script>
+	<script>
+		function rcpListScrollAppend() {
+			var userNo = 0;
+			var a = eval(sessionStorage.getItem('data'));
+			if (a != null) {
+				userNo = eval(sessionStorage.getItem('data'))[0].userNo;
+			}
+			if (isNaN(parseInt($('#rcpList-pageNo').val()) + 1)) {
+				return;
+			}
+			var source = $('#comRcpList-template').text();
+			var template = Handlebars.compile(source);
+
+			$.ajax({
+				url : 'recipe/comList.json',
+				method : 'post',
+				data : {
+					userNo : userNo,
+					pageNo : parseInt($('#rcpList-pageNo').val()) + 1
+				},
+				dataType : 'json',
+				success : function(result) {
+					if (result.status != 'success') {
+						//swal('실패 ~');
+						return;
+					}
+					$('#tabs-1 .rcp-subscribe').append(template(result));
+					$('#rcpList-pageNo').val(result.pageNo);
+				},
+				error : function() {
+					//swal('오호라~','더이상 데이터가 없습니다.')
+				}
+			})
+		}
+	</script>
+	<script>
+		$(function() {
+			loadMyPage();
+		});
+
+		function loadMyPage() {
+
+			var userNo = 0;
+			var a = eval(sessionStorage.getItem('data'));
+			if (a != null) {
+				userNo = eval(sessionStorage.getItem('data'))[0].userNo;
+			}
+			$.ajax({
+				url : 'visitor/loadMyPage.json',
+				method : 'post',
+				data : {
+					userNo : userNo
+				},
+				dataType : 'json',
+				success : function(result) {
+					if (result.status != 'success') {
+						//swal('로그인 해주시기 바랍니다.');
+						return;
+					}
+					$('#visitNum').text(result.sum + "명");
+					$('#likeNum').text(result.like + "개");
+					$('#scrapNum').text(result.scr + "개");
+					$('#gradeNum').text(result.avg + "점");
+
+				},
+				error : function() {
+					//swal('더이상 데이터가 없습니다.')
+				}
+			})
+		}
+	</script>
 	<script src="js/subscribe.js"></script>
 	<script src="js/mypage.js"></script>
 </body>

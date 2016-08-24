@@ -8,15 +8,17 @@
 
 <!-- Template css -->
 <link rel="stylesheet"
-  href="/node_modules/sweetalert/dist/sweetalert.css">
-<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+	href="/node_modules/sweetalert/dist/sweetalert.css">
+<link rel="stylesheet"
+	href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/template/font-awesome.min.css">
 <link rel="stylesheet" href="css/template/animate.css">
-<link rel="stylesheet" href="css/template/main.css"> 
+<link rel="stylesheet" href="css/template/main.css">
 <link rel="stylesheet"
-	href="js/template/jquery-ui-1.12.0/jquery-ui.min.css"> 
-	
-<link rel="stylesheet" href="node_modules/bxslider/dist/jquery.bxslider.css">
+	href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
+
+<link rel="stylesheet"
+	href="node_modules/bxslider/dist/jquery.bxslider.css">
 
 
 <!-- 사용자 정의 css -->
@@ -34,7 +36,7 @@
 <link rel="stylesheet" href="css/index_rankTabs.css">
 <!-- alert css -->
 <link rel="stylesheet"
-  href="node_modules/sweetalert/dist/sweetalert.css">
+	href="node_modules/sweetalert/dist/sweetalert.css">
 
 <!-- --- 아이콘 CDN ----- -->
 <!-- <script src="js/template/d9e67edb08.js"></script> -->
@@ -49,10 +51,11 @@
 						<a class="logo col-md-3 col-sm-3 hidden-xs rt-navbar-top-logo"
 							href="index.html"><img src="img/logo.svg" alt="Logo"></a>
 						<div
-							class="input-group col-md-5 col-sm-5 col-xs-11 col-xs-offset-1 rcp-navbar-searchbar-size rt-navbar-top-searchbar">							
-							<input id="searchKeyword" type="text" class="searchKeyword form-control rcp-navbar-searchbar-size"
+							class="input-group col-md-5 col-sm-5 col-xs-11 col-xs-offset-1 rcp-navbar-searchbar-size rt-navbar-top-searchbar">
+							<input id="searchKeyword" type="text"
+								class="searchKeyword form-control rcp-navbar-searchbar-size"
 								placeholder="레시피명, 쉐프명, 재료명" aria-describedby="basic-addon1">
-							<span class="input-group-addon" id="searchBarKeyword">검색</span> 
+							<span class="input-group-addon" id="searchBarKeyword">검색</span>
 						</div>
 					</div>
 					<div class="col-md-4 col-sm-4 hidden-xs" style="margin-right: 2em;">
@@ -60,8 +63,8 @@
 							<ul class="nav navbar-nav navbar-right">
 								<li><a href="#"><span id="signUpTopBtn"
 										class="rcp-btn-default-top">회원가입</span></a></li>
-								<li id="topbarUserImg"><a href="#"><span id="topLoginBtn"
-										class="rcp-btn-default-top">로그인</span></a></li>
+								<li id="topbarUserImg"><a href="#"><span
+										id="topLoginBtn" class="rcp-btn-default-top">로그인</span></a></li>
 							</ul>
 						</div>
 						<!-- 준모2 -->
@@ -85,8 +88,11 @@
 											class="btn btn-default rcp-btn-nav">로그아웃</button>
 									</div>
 								</div>
-								<a href="/mypage.html"><button class="goMyPageBtn btn btn-default rcp-btn-nav">MyPage</button></a>
-								<a href="/writerecipe.html"><button class="goWriteRcpBtn btn btn-default rcp-btn-nav">Recipe 작성</button></a>
+								<a href="/mypage.html"><button
+										class="goMyPageBtn btn btn-default rcp-btn-nav">MyPage</button></a>
+								<a href="/writerecipe.html"><button
+										class="goWriteRcpBtn btn btn-default rcp-btn-nav">Recipe
+										작성</button></a>
 							</div>
 						</div>
 
@@ -215,7 +221,7 @@
 			<span>로그인</span>
 		</div>
 		<div class="rcp-laytop rcp-laytop2"></div>
-		<div class="rcp-innnersec"> 
+		<div class="rcp-innnersec">
 			<div id="loginInputBox" class="rcp-mar rcp-info"
 				style="height: 110px;">
 				<input class="form-control" type="text" id="userEmail" name="email"
@@ -224,17 +230,16 @@
 					placeholder="비밀번호 입력" />
 			</div>
 		</div>
-		<div class="rcp-sign-membership" 
-			style="margin-top: 50px;">
+		<div class="rcp-sign-membership" style="margin-top: 50px;">
 			<a href="#" id="userLogin"><span>로그인</span></a>
 		</div>
 	</div>
 	<!--  -->
-		<div id='editUserInfo-pop-up-banner'>
+	<div id='editUserInfo-pop-up-banner'>
 		<form action="user/update.do" method="post" id="updateUserForm"
-    enctype="multipart/form-data">
-      <input type="hidden" name="userNo" id="updateFormUserNo">
-      <input type="hidden" name="email" id="updateFormEmail">
+			enctype="multipart/form-data">
+			<input type="hidden" name="userNo" id="updateFormUserNo"> <input
+				type="hidden" name="email" id="updateFormEmail">
 			<div class="rcp-laytop">
 				<!--유저 이미지 업로드 --용이  !!!!!enctype?????16.08.12-->
 				<div class="rcp-up-preview img-wrapper col-md-1"></div>
@@ -256,14 +261,14 @@
 			<div class="rcp-innnersec">
 				<div id="beforePwd-div"
 					class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
-					<input class="form-control" type="password" id="beforePwd" name="beforePassword"
-						placeholder="이전비밀번호 입력">
+					<input class="form-control" type="password" id="beforePwd"
+						name="beforePassword" placeholder="이전비밀번호 입력">
 				</div>
 
 				<div id="afterPwd-div"
 					class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
-					<input class="form-control" type="password" id="afterPwd" name="password"
-						placeholder="변경비밀번호 입력">
+					<input class="form-control" type="password" id="afterPwd"
+						name="password" placeholder="변경비밀번호 입력">
 				</div>
 
 				<div id="afterPwdcf-div"
@@ -280,12 +285,12 @@
 			</div>
 			<div class="rcp-sign-membership">
 				<!-- <button id="updateUserInfo" type="submit">확인</button> -->
-				<a href="#"><span id="updateUserInfo">확인</span></a>
-				<a href="#"><span id="updateUserReset">취소</span></a>
+				<a href="#"><span id="updateUserInfo">확인</span></a> <a href="#"><span
+					id="updateUserReset">취소</span></a>
 			</div>
-			</form>
-		</div>
-	
+		</form>
+	</div>
+
 	<!-- -------------------------------recipe detail-------------------------------- -->
 
 	<div id='detail_pop_up'>
@@ -325,8 +330,10 @@
 	<!-------------------------------- Rank List --------------------------------->
 	<section id="rcp-main-rank">
 		<div class="tabs-left rcp-list h3 rcp-1024 list1">
-			<div class="tab-content" style="padding-bottom:200px">
-			<h3 id="rcp-ranking"><a href="/ranking.html">Best Chef</a></h3>
+			<div class="tab-content " style="padding-bottom: 200px">
+				<h3 id="rcp-ranking">
+					<a href="/ranking.html">Best Chef</a>
+				</h3>
 				<!---------------- Chef Rank --------------------->
 				<div class="row tab-pane active" id="rcp-chef-rank"></div>
 				<!---------------- Recipe Rank--------------------->
@@ -335,7 +342,7 @@
 		</div>
 	</section>
 	<!------------------------- Rank List ------------------------------>
-<div id="footer"></div>
+	<div id="footer"></div>
 	<script id="recipe-detail-template" type="text/x-handlebars-template">
     {{#each data}}
               <div class="rcp-body">
@@ -582,19 +589,16 @@
 
 {{/each}}
 </script>
-<!--쉐프 랭킹카드 수정  -->
+	<!--쉐프 랭킹카드 수정  -->
 	<script id="chef-card-template" type="text/x-handlebars-template">
 {{#each data}}
 <div class="fresh-ui-wrap col-md-3">
  {{#if @first}}    
     <img class="rcp-rankmedal" src="/img/medal1.png"/>
-    <img class="rcp-rankstar" src="/img/rankstar.png">  
   {{else if @last}}    
     <img class="rcp-rankmedal" src="/img/medal3.png"/>
-    <img class="rcp-rankstar" src="/img/rankstar.png">  
   {{else}}   
     <img class="rcp-rankmedal" src="/img/medal2.png"/>
-    <img class="rcp-rankstar" src="/img/rankstar.png">  
   {{/if}}
   
   <div class="fresh-ui">
@@ -630,7 +634,7 @@
 </div>
   {{/each}} 
   </script>
-  <!-- 쉐프랭킹카드 수정 -->
+	<!-- 쉐프랭킹카드 수정 -->
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="js/template/main.js"></script>
@@ -638,7 +642,7 @@
 	<script src="js/template/jquery-slider-rolling.js"></script>
 	<script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
 	<script src="js/mouseover.js"></script>
-	
+
 	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
 
 
@@ -654,30 +658,28 @@
 	<script
 		src="node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
 	<script
-    src="node_modules/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
-  
-  <script
-    src="node_modules/bxslider/dist/jquery.bxslider.min.js"></script>
-  <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
-  <script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
+		src="node_modules/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
 
-  <!-- alert js -->
-  <script
-    src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="node_modules/bxslider/dist/jquery.bxslider.min.js"></script>
+	<script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
 
- 
+	<!-- alert js -->
+	<script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+
+
 	<!--  사용자 js -->
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/common.js"></script>
 	<script src="js/login.js"></script>
-	<script src="js/detail.js"></script>  
-  <script src="js/mainListAjax.js"></script>
-  <script src="js/recipeDetail.js"></script>
+	<script src="js/detail.js"></script>
+	<script src="js/mainListAjax.js"></script>
+	<script src="js/recipeDetail.js"></script>
 	<script src="js/updateUser.js"></script>
-  <script src="js/common/popup.js"></script>
-  <script src="js/common/chefCard.js"></script>
-  <script src="js/common/signup.js"></script>
-  <script src="js/index_listPageMove.js"></script>
+	<script src="js/common/popup.js"></script>
+	<script src="js/common/chefCard.js"></script>
+	<script src="js/common/signup.js"></script>
+	<script src="js/index_listPageMove.js"></script>
 	<script>
 		$(function() {
 			getWeather();
@@ -736,83 +738,86 @@
 			$('.dropdown-trigger--mobile').on('click', function() {
 				dropdownClick('.mobile-menu-dropdown', '.profile-dropdown');
 			});
-	});
+		});
 	</script>
 	<script>
-	$(function() {
+		$(function() {
 			/* $('a').on('click', function(event){
 				console.log($('a').attr('href'));
 				if($('a').attr('href')=='index.html'){
 					event.preventDefault();
 				}
 			}); */
-		
-		
-		  function maskImgs() {
-		    //$('.img-wrapper img').imagesLoaded({}, function() {
-		    $.each($('.img-wrapper img'), function(index, img) {
-		      var src = $(img).attr('src');
-		      var parent = $(img).parent();
-		      parent
-		        .css('background', 'url(' + src + ') no-repeat center center')
-		        .css('background-size', 'cover');
-		      $(img).remove();
-		    });
-		    //});
-		  }
 
-		  var preview = {
-		    init: function() {
-		      preview.setPreviewImg();
-		      preview.listenInput();
-		    },
-		    setPreviewImg: function(fileInput) {
-		      var path = $(fileInput).val();
-		      var uploadText = $(fileInput).siblings('.file-upload-text');
+			function maskImgs() {
+				//$('.img-wrapper img').imagesLoaded({}, function() {
+				$.each($('.img-wrapper img'), function(index, img) {
+					var src = $(img).attr('src');
+					var parent = $(img).parent();
+					parent.css('background',
+							'url(' + src + ') no-repeat center center').css(
+							'background-size', 'cover');
+					$(img).remove();
+				});
+				//});
+			}
 
-		      if (!path) {
-		        $(uploadText).val('');
-		      } else {
-		        path = path.replace(/^C:\\fakepath\\/, "");
-		        $(uploadText).val(path);
+			var preview = {
+				init : function() {
+					preview.setPreviewImg();
+					preview.listenInput();
+				},
+				setPreviewImg : function(fileInput) {
+					var path = $(fileInput).val();
+					var uploadText = $(fileInput).siblings('.file-upload-text');
 
-		        preview.showPreview(fileInput, path, uploadText);
-		      }
-		    },
-		    showPreview: function(fileInput, path, uploadText) {
-		      var file = $(fileInput)[0].files;
+					if (!path) {
+						$(uploadText).val('');
+					} else {
+						path = path.replace(/^C:\\fakepath\\/, "");
+						$(uploadText).val(path);
 
-		      if (file && file[0]) {
-		        var reader = new FileReader();
+						preview.showPreview(fileInput, path, uploadText);
+					}
+				},
+				showPreview : function(fileInput, path, uploadText) {
+					var file = $(fileInput)[0].files;
 
-		        reader.onload = function(e) {
-		          var previewImg = $(fileInput).parents('.file-upload-wrapper').siblings('.rcp-up-preview');
-		          var img = $(previewImg).find('img');
+					if (file && file[0]) {
+						var reader = new FileReader();
 
-		          if (img.length == 0) {
-		            $(previewImg).html('<img src="' + e.target.result + '" alt=""/>');
-		          } else {
-		            img.attr('src', e.target.result);
-		          }
+						reader.onload = function(e) {
+							var previewImg = $(fileInput).parents(
+									'.file-upload-wrapper').siblings(
+									'.rcp-up-preview');
+							var img = $(previewImg).find('img');
 
-		          uploadText.val(path);
-		          maskImgs();
-		        }
+							if (img.length == 0) {
+								$(previewImg)
+										.html(
+												'<img src="' + e.target.result + '" alt=""/>');
+							} else {
+								img.attr('src', e.target.result);
+							}
 
-		        reader.onloadstart = function() {
-		          $(uploadText).val('uploading..');
-		        }
+							uploadText.val(path);
+							maskImgs();
+						}
 
-		        reader.readAsDataURL(file[0]);
-		      }
-		    },
-		    listenInput: function() {
-		      $('.file-upload-native').on('change', function() {
-		        preview.setPreviewImg(this);
-		      });
-		    }
-		  };
-		  preview.init();
+						reader.onloadstart = function() {
+							$(uploadText).val('uploading..');
+						}
+
+						reader.readAsDataURL(file[0]);
+					}
+				},
+				listenInput : function() {
+					$('.file-upload-native').on('change', function() {
+						preview.setPreviewImg(this);
+					});
+				}
+			};
+			preview.init();
 		});
 	</script>
 </body>
