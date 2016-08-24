@@ -95,10 +95,8 @@
 			  
 			  for(var i = 0 ; i<result.data.length; i++){
 				  var list=JSON.stringify(result.data[i].rpimg);
-					var firstParse= list.substring(4,(list.length-4));
-					
-					console.log(result.data[i].user.image);
-					 $('.list1 div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+firstParse+')');
+					var firstParse= list.substring(4,(list.length-4));					
+					$('.list1 div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+firstParse+')');
 				  }
 				  
 			  methods();

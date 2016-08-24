@@ -154,7 +154,7 @@
     SELECT * FROM scs WHERE uno=#{value}
   </select>
   
-  <select id="selectSbuscribe" resultMap="recipeMap" parameterType="string">
+  <select id="selectSubscribe" resultMap="recipeMap" parameterType="string">
 	SELECT *
 	FROM rcps
 	WHERE uno in( ${userNo} )
@@ -273,5 +273,4 @@
     delete from boards
     where bno=#{no}
   </delete> -->
-  
 </mapper>

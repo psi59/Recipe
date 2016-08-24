@@ -25,6 +25,16 @@
 			  	$('.rcp-userName').text(result.user.userName);
 		    	
 			  $('#tabs-1 .rcp-subscribe').append(templateCRList(result));
+			  
+			  
+			  for(var i = 0 ; i<result.data.length; i++){
+			  var list=JSON.stringify(result.data[i].rpimg);
+				var firstParse= list.substring(4,(list.length-4));
+			
+
+				 $('img[name="rcp-subscribe-images"]:eq('+i+')').attr('src','img/representImg/'+firstParse);
+			  }
+			  
 		  },
 		  error : function() {
 			 alert('community 서버 요청 오류!...')
