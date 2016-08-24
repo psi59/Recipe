@@ -1,174 +1,177 @@
 @CHARSET "UTF-8";
 
-/* --------------------------------------박상일형 Mypage css 시작-------------------------------- */
-.rcp-profile-img{
-  margin-top:20%;
-  width: 50%;
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+
+* {
+	font-family: 'Hanna', serif;
 }
 
-#userNickName{
-  margin-top:0.5em;
-  font-size: 2em;
-  font-weight: 2px;
+.navbar{
+	height: 51px;
 }
 
-#userLevel{
-  font-size: .8em;
+.rcp-profile-img {
+	/* 	margin-top: 20%; */
+	width: 50%;
 }
 
-
-#userIntroduce{
-  margin-top:0.5em;
-  font-size: 1em;
+#userNickName {
+	margin-top: 0.5em;
+	font-size: 2em;
+	font-weight: 2px;
 }
 
-#postingBtn{
-  background-color: white;
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #b51515;
-  margin-left: 15%;
-  margin-top: 10px;
-  width: 70%;
-  padding: 7px;
-  border-radius: 0.3em;
+#userLevel {
+	font-size: .8em;
 }
 
-#menus{
-  margin-top: 20px;
-  text-align: center;
-  font-size: 2em;
+#userIntroduce {
+	margin-top: 0.5em;
+	font-size: 1em;
 }
 
-.menu{
-  color: white;
-  text-decoration: underline;
-  margin-bottom: 10px;
+#postingBtn {
+	background-color: white;
+	font-size: 1.5em;
+	/*font-weight: bold;*/
+	color: #b51515;
+	margin-left: 15%;
+	margin-top: 10px;
+	width: 70%;
+	padding: 7px;
+	border-radius: 0.3em;
 }
 
-#spoonImg{
-  position: absolute;
-  bottom: 25px;
-  right: 5px;
-  width: 9em;
+#menus {
+	margin-top: 20px;
+	text-align: center;
+	font-size: 2em;
+}
+
+.menu {
+	color: white;
+	text-decoration: underline;
+	margin-bottom: 10px;
+}
+
+#spoonImg {
+	position: absolute;
+	bottom: 25px;
+	right: 5px;
+	width: 9em;
 }
 
 .left-box {
-  background: #b51515;
-  height: 100%;
-  width: 250px;
-  position: fixed;
-  left:0;
-  top:0;
-  text-align: center;
-  color: #FFFFFF;
+	background: #b51515;
+	height: 100%;
+	width: 250px;
+	position: fixed;
+	left: 0;
+	top: 0;
+	text-align: center;
+	color: #FFFFFF;
 }
 
 /* -----------------------------------------상일이형 css 끝 --------------------------- */
 /* ======================================================== */
-body{
+body {
 	background: #f0f0f0;
 }
 
-
-
-.rcp-pagemiddle1{
-	    margin-bottom: 13%;
-        
+.rcp-pagemiddle1 {
+	margin-bottom: 13%;
 	color: #515d6e;
 }
-.rcp-userName{
-	margin-left:200px;
-}
-.rcp-pagemiddle-div1{
-	    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-    background: white;
-    width: 241px;
-  height: 100px;
-  position: relative;
-  float: left;
-   margin-right: 20px;
-    padding: 20px;
+
+.rcp-userName {
+	margin-left: 200px;
 }
 
-.rcp-pagemiddle-div2{
-      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-    background: white;
-   width: 241px;
-  height: 100px;
-  position: relative;
-  float: left;
-    margin-right: 20px;
-    padding: 20px;
+.rcp-pagemiddle-div1 {
+	font-family: 'Jeju Gothic', sans-serif;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+	background: white;
+	width: 241px;
+	height: 100px;
+	position: relative;
+	float: left;
+	margin-right: 20px;
+	padding: 20px;
 }
 
-
-.rcp-pagemiddle-div3{
-      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-    background: white;
-   width: 241px;
- height: 100px;
-  position: relative;
-  float: left;
-    margin-right: 20px;
-    padding: 20px;
+.rcp-pagemiddle-div2 {
+	font-family: 'Jeju Gothic', sans-serif;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+	background: white;
+	width: 241px;
+	height: 100px;
+	position: relative;
+	float: left;
+	margin-right: 20px;
+	padding: 20px;
 }
 
-
-.rcp-pagemiddle-div4{
-      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-    background: white;
-    width: 241px;
-  height: 100px;
-  position: relative;
-   float: left;
-   
-    padding: 20px;
+.rcp-pagemiddle-div3 {
+	font-family: 'Jeju Gothic', sans-serif;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+	background: white;
+	width: 241px;
+	height: 100px;
+	position: relative;
+	float: left;
+	margin-right: 20px;
+	padding: 20px;
 }
 
-.rcp-pagemiddle-div-img{
+.rcp-pagemiddle-div4 {
+	font-family: 'Jeju Gothic', sans-serif;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+	background: white;
+	width: 241px;
+	height: 100px;
+	position: relative;
+	float: left;
+	padding: 20px;
+}
+
+.rcp-pagemiddle-div-img {
 	position: relative;
 	width: 50px;
-  height: 50px;
+	height: 50px;
 }
 
 .heading {
-    display: block;
-    position: relative;
-    color: #515d6e;
-    text-align: right;
-    z-index: 10;
-        font-size: 1.2em;
-    font-weight: 300;
-    text-transform: uppercase;
-        top: -50px;
+	display: block;
+	position: relative;
+	color: #515d6e;
+	text-align: right;
+	z-index: 10;
+	font-size: 1.2em;
+	font-weight: 300;
+	text-transform: uppercase;
+	top: -50px;
 }
 
 .value {
 	display: block;
-    position: relative;
-    font-size: 2.1em;
-    font-weight: 600;
-    margin-top: 5px;
-    text-align: right;
-        top: -62px;
+	position: relative;
+	font-size: 2.1em;
+	font-weight: 600;
+	margin-top: 5px;
+	text-align: right;
+	top: -62px;
 }
 
-
-
 /* ======================================================== */
-
 .navbar {
 	top: 0px !important;
 }
 
 .fa-windows {
-    color: #1C7EBB;
+	color: #1C7EBB;
 }
 
 .rcp-fullpage {
-	width: 1024px;
-	height: 1500px;
 	margin: 19%;
 	margin-top: 6%;
 	margin-bottom: 3%;
@@ -179,46 +182,43 @@ body{
 	background-image: URL(../img/pagebanner.jpg);
 	width: 100%;
 	height: 315px;
-	  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-   /*  background: white !important; */
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+	/*  background: white !important; */
 }
 
-
-.rcp-profileCover{
-  height: 358px;
-  
+.rcp-profileCover {
+	height: 358px;
 }
 
-.rcp-topimg-border{
+.rcp-topimg-border {
 	background: rgba(0, 0, 0, .3);
-    border-radius: 3px;
-    padding: 1px;
-    position: absolute;
+	border-radius: 3px;
+	padding: 1px;
+	position: absolute;
 }
-.rcp-bottomLine-info{
+
+.rcp-bottomLine-info {
 	height: 43px;
 	background-color: white;
 }
+
 .rcp-topimg {
-	
 	height: 168px;
 	width: 168px;
 	float: left;
-	 background-color: #fff;
-  border: 4px solid #fff;
-}
-.rcp-topimg-position{
-  border-radius: 2px;
-  margin-left:30px;
-  padding-top:180px;
-
+	background-color: #fff;
+	border: 4px solid #fff;
 }
 
-
+.rcp-topimg-position {
+	border-radius: 2px;
+	margin-left: 30px;
+	padding-top: 180px;
 }
 
+}
 .rcp-topinfo {
-	font-weight: bold;
+	/*font-weight: bold;*/
 	padding-left: 1%;
 	padding-top: 19%;
 }
@@ -238,28 +238,33 @@ body{
 	height: 10%;
 }
 
+.hs-content > .container{
+	width:970px;
+}
+#tabs{
+	border: 0px;
+	background-color: #f0f0f0;
+	margin: auto;
+}
 .rcp-pageleft {
-	width: 69%;
+	width: 100%;
 	float: left;
 	padding: 10px;
-	/* border: 1px solid #BDBDBD; */
-  border-top: 0px;
-  border-bottom: 0px;
-      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-    background: white !important;
+	background-color: #f0f0f0 !important;
 }
-
-.rcp-pageright {
+.rcp-tabs{
+	border: 0px solid #ffffff;
+}
+/* .rcp-pageright {
 	width: 30%;
 	float: right;
-	/* border: 1px solid #BDBDBD; */
-  border-top: 0px;
-  border-left: 0px;
-  border-bottom: 0px;
-      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-    background: white !important;
-}
-
+	border: 1px solid #BDBDBD;
+	border-top: 0px;
+	border-left: 0px;
+	border-bottom: 0px;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+	background: white !important;
+} */
 rcp-Vst-id {
 	font-color: #d5d8dd;
 }
@@ -267,15 +272,15 @@ rcp-Vst-id {
 .rcp-Vst {
 	margin: 10px;
 	margin-top: 0;
-	width: 288px;
+	width: 100%;
 	height: 150px;
 }
 
 .rcp-Vst-write {
 	margin: 10px;
 	background-color: #ffffff;
-	width: 288px;
-	height: 89px;
+	width: 97%;
+	height: 150px;
 	border: 1px solid #BDBDBD;
 	border-radius: 10px;
 }
@@ -286,17 +291,17 @@ rcp-Vst-id {
 
 .rcp-Vst-inputBtn {
 	position: relative;
-	top: -52pt;
-	left: 152pt;
-	height: 48pt;
-	width: 53pt;
+	top: -37pt;
+	left: 7pt;
+	height: 81pt;
+	width: 74pt;
 }
 
 .rcp-Vst-top {
 	background-color: #eaeaea;;
 	border: 1px solid #BDBDBD;
-	width: 288px;
-	height: 50px;
+	width: 97%;
+	height: 40%;
 }
 
 .rcp-Vst-contents-rep>hr {
@@ -305,14 +310,14 @@ rcp-Vst-id {
 
 .rcp-Vst-bottom {
 	background-color: #fff;
-	width: 288px;
-	height: 100px;
+	width: 97%;
+	height: 60%;
 	border: 1px solid #BDBDBD;
 	border-top-width: 0px;
 }
 
 .rcp-Vst-footer {
-	width: 288px;
+	width: 97%;
 	height: 60px;
 	border: 1px solid #BDBDBD;
 	border-top: 0px solid #BDBDBD;
@@ -346,7 +351,7 @@ rcp-Vst-id {
 	padding-top: -10px;
 	margin: 5px;
 	color: #8c94a2 font-size: 11pt;
-	font-weight: bold;
+	/*font-weight: bold;*/
 }
 
 .rcp-Vst-contents {
@@ -364,13 +369,13 @@ rcp-Vst-id {
 
 .vstUpdateBtn {
 	position: relative;
-	left: 82%;
+	left: 91%;
 	top: 10%;
 }
 
 .vstConfirmBtn {
 	position: relative;
-	left: 82%;
+	left: 91%;
 	top: 10%;
 }
 
@@ -382,7 +387,7 @@ rcp-Vst-id {
 
 .vstDeleteBtn {
 	position: relative;
-	left: 83%;
+	left: 93%;
 	top: 11%;
 }
 

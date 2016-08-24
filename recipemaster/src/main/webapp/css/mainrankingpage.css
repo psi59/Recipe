@@ -1,6 +1,7 @@
-/*  */
-@import url(http://fonts.googleapis.com/css?family=Oswald);
-
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+*{
+font-family: 'Noto Sans KR', sans-serif;
+}
 .nav-container {
 	z-index:10000;
   padding: 20px;

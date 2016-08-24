@@ -307,9 +307,6 @@ input[type="submit"] {
 figure {
   margin: 0; }
 
-img {
-  vertical-align: middle;
-  margin-bottom: 20px; }
 
 .img-responsive {
   display: block;
@@ -393,8 +390,6 @@ select:focus,
 textarea:focus {
   outline: none !important; }
 
-img {
-  max-width: 100%; }
 
 p {
   margin: 0 0 15px; }
@@ -2067,7 +2062,12 @@ dd {
 .hs-recipes.grid .entry,
 .hs-recipes.grid .we {
   line-height: 30px;
-  margin-bottom: 30px; }
+  margin-bottom: 30px;
+  width:283px;
+  margin-right:20px;
+  margin-left:20px;
+  float: left;
+   }
   .hs-recipes.grid .entry .entry-inner:hover .entry-action,
   .hs-recipes.grid .entry .entry-inner:hover .we-action,
   .hs-recipes.grid .entry .we-inner:hover .entry-action,
@@ -2120,8 +2120,12 @@ dd {
   .hs-recipes.grid .entry .we-media,
   .hs-recipes.grid .we .entry-media,
   .hs-recipes.grid .we .we-media {
-    position: relative;
-    height: 100%; }
+  position: relative;
+  width : 283px;
+  height: 160px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 350px; }
     .hs-recipes.grid .entry .entry-media img,
     .hs-recipes.grid .entry .we-media img,
     .hs-recipes.grid .we .entry-media img,
@@ -5222,37 +5226,11 @@ output {
   line-height: 1.428571429;
   color: #555555; }
 
-.form-control,
-select,
-textarea,
-input[type="text"],
-input[type="password"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="date"],
-input[type="month"],
-input[type="time"],
-input[type="week"],
-input[type="number"],
-input[type="email"],
-input[type="url"],
-input[type="search"],
-input[type="tel"],
-input[type="color"] {
+.form-control{
   display: block;
-  width: 100%;
-  height: 34px;
-  padding: 6px 12px;
+
   font-size: 14px;
-  line-height: 1.428571429;
-  color: #555555;
-  background-color: #fff;
-  background-image: none;
-  border: 1px solid #ccc;
-  border-radius: 0px;
-  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; }
+ }
   .form-control:focus,
   select:focus,
   textarea:focus,
@@ -5399,41 +5377,7 @@ input[type="color"] {
     background-color: #eeeeee;
     opacity: 1; }
 
-.form-control,
-select,
-textarea,
-input[type="text"],
-input[type="password"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="date"],
-input[type="month"],
-input[type="time"],
-input[type="week"],
-input[type="number"],
-input[type="email"],
-input[type="url"],
-input[type="search"],
-input[type="tel"],
-input[type="color"],
-select,
-textarea,
-input[type="text"],
-input[type="password"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="date"],
-input[type="month"],
-input[type="time"],
-input[type="week"],
-input[type="number"],
-input[type="email"],
-input[type="url"],
-input[type="search"],
-input[type="tel"],
-input[type="color"] {
-  border-color: rgba(0, 0, 0, 0.15);
-  background: transparent; }
+
   .form-control:focus,
   select:focus,
   textarea:focus,

@@ -17,25 +17,23 @@
 				  return;
 			  }
 			 
-			 
-			  var sourceCRList = $('#comRcpList-template').text();
+		
+			  var sourceCRList = $('#temp').text();
 			  var templateCRList = Handlebars.compile(sourceCRList);
 			  
 			  console.log(result.data);
 			 
 			  	$('.rcp-userName').text(result.user.userName);
 		    	
-			  $('#tabs-1 .rcp-subscribe').append(templateCRList(result));
-			  
+			  $('.hs-content .container .row').append(templateCRList(result));
 			  
 			  for(var i = 0 ; i<result.data.length; i++){
-			  var list=JSON.stringify(result.data[i].rpimg);
-				var firstParse= list.substring(4,(list.length-4));
-			
+				  var list=JSON.stringify(result.data[i].rpimg);
+					var firstParse= list.substring(4,(list.length-4));
+				
 
-				 $('img[name="rcp-subscribe-images"]:eq('+i+')').attr('src','img/representImg/'+firstParse);
-			  }
-			  
+					 $('div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+firstParse+')');
+				  }
 		  },
 		  error : function() {
 			 alert('community 서버 요청 오류!...')
