@@ -24,12 +24,10 @@
 <link rel="stylesheet" href="css/common/signup.css">
 <link rel="stylesheet" href="css/common/popup.css">
 <link rel="stylesheet" href="css/updateImg.css">
-<style>
+
 </style>
 </head>
 <body>
-
-  
 
 	<!--준모_login------------------------------------------------------------------------------- -->
 	<div id='login-pop-up-banner'>
@@ -210,14 +208,9 @@
     <!-- page hidden -->
     <input id="rcpList-pageNo" type="hidden" value="1">
     <input id="scsRcpList-pageNo" type="hidden" value="1">    
-    
-    
 		<section class="rcp-pageleft">
-
-
 			<div>
 				<div id="tabs" class="rcp-vst-tabs">
-
 					<ul>
 						<li><a href="#tabs-1" style="width: 330px;">My Recipe</a></li>
 						<li><a href="#tabs-2" style="width: 330px;" id="scsPage">구독중인 페이지</a></li>
@@ -326,7 +319,7 @@
                 <p class="rcp-subscribe-p-tag"><b>{{recipeName}}</b></p>
                 <h6 style="color:#9a9a9a">{{recipeDate}} 게시됨 </h6>
                 </div>
-                <p class="rcp-first-p-margin"> 빵같아 보이기도 한다 !</p> 
+                <p class="rcp-first-p-margin"> {{intro}}</p> 
                </div> 
                <div class="rcp-subscribe-preview">
                <p class="rcp-subscribe-preview-p-tag">{{userName}}님의 최신 레시피</p>
