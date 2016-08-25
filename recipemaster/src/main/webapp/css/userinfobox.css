@@ -129,6 +129,8 @@ $main: #7b7de5;
 .rcp-barimg {
   width: 3.2em;
   height: 3.2em;
+  cursor: pointer;
+  
 }
 
 html, body {

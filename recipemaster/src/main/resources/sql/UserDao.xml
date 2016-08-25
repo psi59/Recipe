@@ -19,7 +19,7 @@
 	</resultMap>
 
 	<select id="findUser" resultMap="userMap" parameterType="String">
-		SELECT * 
+		SELECT *
 		FROM users	
 		WHERE email=#{value}
 	</select>
