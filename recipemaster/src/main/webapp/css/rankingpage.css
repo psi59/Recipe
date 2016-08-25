@@ -11,7 +11,7 @@
 }
 
 .hover {
-	background-color: #ffffff;
+	background-color: #ecf0f1;
 	text-align: center;
 	transition: all 0.3s, color 0.2s 0.2s;
 	color: #504f4f;
@@ -204,6 +204,54 @@ footer a:hover {
 	width: 90px;
 	height: 100px;
 }
+.rcp-rankmedal-small1 {
+      position: absolute;
+    left: 9%;
+    top: 119%;
+    z-index: 10000;
+    width: 26px;
+    height: 31px;
+}
+.rcp-rankmedal-small2 {
+      position: absolute;
+    left: 9%;
+    top: 124.5%;
+    z-index: 10000;
+    width: 26px;
+    height: 31px;
+}
+.rcp-rankmedal-small3 {
+     position: absolute;
+    left: 9%;
+    top: 130%;
+    z-index: 10000;
+    width: 26px;
+    height: 31px;
+}
+.rcp-rankmedal-small4 {
+      position: absolute;
+    left: 9%;
+    top: 208.5%;
+    z-index: 10000;
+    width: 26px;
+    height: 31px;
+}
+.rcp-rankmedal-small5 {
+      position: absolute;
+    left: 9%;
+    top: 214%;
+    z-index: 10000;
+    width: 26px;
+    height: 31px;
+}
+.rcp-rankmedal-small6 {
+     position: absolute;
+    left: 9%;
+    top: 219.5%;
+    z-index: 10000;
+    width: 26px;
+    height: 31px;
+}
 
 .rcp-rankstar {
 	position: absolute;
@@ -329,7 +377,7 @@ body {
 }
 
 .fresh-ui .header .social .list a {
-	width: 45px;
+	width: 37px;
 	height: 30px;
 	color: inherit;
 	display: block;
