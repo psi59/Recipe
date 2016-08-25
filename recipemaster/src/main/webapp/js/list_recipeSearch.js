@@ -27,18 +27,7 @@ $(function() {
 		$("body").scrollTop(0);
 		search('newest', $('#order-latest-btn').val());
 	})
-	
-	// 카테고리 라벨 클릭 했을때 라디오 박스 체크해제 이벤트
-	/*$('.rcp-category-click').click(function(){
-		alert('과연 ? : '+$(this).prev().is(':checked'));
 		
-		if( $(this).prev().is(':checked') ){
-			$(this).prev().removeAttr('checked');			
-		}
-		
-		alert('과연 ? : '+$(this).prev().is(':checked'));
-	})	*/
-	
 	// 최신순 정렬
 	$('#order-latest-btn').click(function(){		
 		if($('#order-latest-btn').val() == 'DESC'){

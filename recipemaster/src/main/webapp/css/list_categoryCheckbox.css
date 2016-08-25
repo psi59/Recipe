@@ -4,8 +4,6 @@
 }
 
 #rcp-category-section {
-
-#rcp-list-category {
 	color: #000000;
 	font-size: 23px;
 	text-align: center;
@@ -35,8 +33,7 @@
   opacity: 0;
   z-index: -1;
 }
-.rcp-category label {	
-  /* font-family: 'Jeju Gothic', serif; */
+.rcp-category label {  
   position: relative;
   display: inline-block;
   margin-right: 10px;
