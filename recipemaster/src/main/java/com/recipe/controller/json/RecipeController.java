@@ -266,7 +266,6 @@ public class RecipeController {
     HashMap<String,Object> result = new HashMap<>();
     Recipe recipe = new Recipe();
     try{
-      System.out.println("오냐??"+userNo);
     //구독한 사람 뽑는다.
       List<Recipe> userNoList = recipeService.selectSubscribeUno(userNo);
       
@@ -287,6 +286,7 @@ public class RecipeController {
     }catch (Exception e){
       result.put("status", "false");
     }
+    System.out.println(result);
     return new Gson().toJson(result);
   }
   
@@ -537,10 +537,11 @@ public class RecipeController {
       result.put("status","success");
       result.put("data", myRecipeList);
       result.put("pageNo",pageNo);
+      System.out.println("pageNo::"+result.get("pageNo"));
+      System.out.println("data::"+result.get("data"));
     }catch (Exception e){ 
       result.put("status", "false");
-    }
-    System.out.println(result);
+    } 
     return new Gson().toJson(result);
   }
     }

@@ -15,7 +15,7 @@ public interface RecipeDao {
   List<Recipe> recipeSearch(Map<String,Object> params); //Search 성현
   int recipeCount(Map<String,Object> params); //Recipe Count 성현
   List<String> selectRecipeName(String searchValue); //Recipe Name List 성현
-  List<Recipe> selectSbuscribe2(Map<String,Object> params); //준모
+  List<Recipe> selectSubscribe2(Map<String,Object> params); //준모
   int addSubscribe(Map<String,Object> params); //구독하기 추가 고재현
   int  deleteSubscribe(Map<String,Object> params);
   List<Recipe> selectSubscribeUno(int userNo); //구독하기한 userNo추출  고재현

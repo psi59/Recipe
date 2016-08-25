@@ -62,10 +62,10 @@
 					<div class="col-md-4 col-sm-4 hidden-xs" style="margin-right: 2em;">
 						<div class="navbar-collapse">
 							<ul class="nav navbar-nav navbar-right">
-								<li><a href="#"><span id="signUpTopBtn"
+								<li><a href="#" id="signUpTopBtn"><span 
 										class="rcp-btn-default-top">회원가입</span></a></li>
-								<li id="topbarUserImg"><a href="#"><span
-										id="topLoginBtn" class="rcp-btn-default-top">로그인</span></a></li>
+								<li id="topbarUserImg" ><a href="#" ><span id="topLoginBtn"
+										class="rcp-btn-default-top">로그인</span></a></li>
 							</ul>
 						</div>
 						<!-- 준모2 -->
@@ -674,33 +674,25 @@
 	<!-- alert js -->
 	<script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
 
-
 	<!--  사용자 js -->
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/common.js"></script>
-	<script src="js/login.js"></script> 
+	<script src="js/login.js"></script>  
   <script src="js/mainListAjax.js"></script>
   <script src="js/recipeDetail.js"></script>
 	<script src="js/updateUser.js"></script>
-	<script src="js/common/popup.js"></script>
-	<script src="js/common/chefCard.js"></script>
-	<script src="js/common/signup.js"></script>
-	<script src="js/index_listPageMove.js"></script>
+  <script src="js/common/popup.js"></script>
+  <script src="js/common/chefCard.js"></script>
+  <script src="js/common/signup.js"></script>
+  <script src="js/rankingpage.js"></script>    
+  <script src="js/index_listPageMove.js"></script>
+  
 	<script>
 		$(function() {
 			getWeather();
 			getRealTimeRank();
 			$('#footer').load("../copyright.html");
-
-			/* 준모3 */
-			if (eval(sessionStorage.getItem('data')) != null) {
-
-				$('#topbarUserImg')
-						.html(
-								"<img class='rcp-barimg dropdown-trigger img-circle' src='img/Chef3.jpg' />");
-
-			}
-
+			
 			$('.profile-dropdown:has(.active)').bind('click', function() {
 
 			});
@@ -709,35 +701,6 @@
 				$('.main-nav__dropdown').removeClass('active');
 			});
 
-			$('.dropdown-trigger')
-					.on(
-							'click',
-							function(event) {
-								event.preventDefault();
-								dropdownClick('.profile-dropdown',
-										'.mobile-menu-dropdown');
-								/* 용이 추가() */
-								if (eval(sessionStorage.getItem('data'))[0].userNo != null) {
-									$('#profileEmail')
-											.text(
-													eval(sessionStorage
-															.getItem('data'))[0].email);
-									$('#profileName')
-											.text(
-													eval(sessionStorage
-															.getItem('data'))[0].userName);
-									$('#profileGrade')
-											.text(
-													eval(sessionStorage
-															.getItem('data'))[0].recipeUrl);
-									
-									/* 용이 추가() */
-									$('#introduce')
-											.text(
-													eval(sessionStorage
-															.getItem('data'))[0].intro);
-								}
-							});
 			$('.dropdown-trigger').on('scroll', function() {
 				dropdownClick('.profile-dropdown', '.mobile-menu-dropdown');
 			});
@@ -745,86 +708,6 @@
 			$('.dropdown-trigger--mobile').on('click', function() {
 				dropdownClick('.mobile-menu-dropdown', '.profile-dropdown');
 			});
-		});
-	</script>
-	<script>
-		$(function() {
-			/* $('a').on('click', function(event){
-				console.log($('a').attr('href'));
-				if($('a').attr('href')=='index.html'){
-					event.preventDefault();
-				}
-			}); */
-
-			function maskImgs() {
-				//$('.img-wrapper img').imagesLoaded({}, function() {
-				$.each($('.img-wrapper img'), function(index, img) {
-					var src = $(img).attr('src');
-					var parent = $(img).parent();
-					parent.css('background',
-							'url(' + src + ') no-repeat center center').css(
-							'background-size', 'cover');
-					$(img).remove();
-				});
-				//});
-			}
-
-			var preview = {
-				init : function() {
-					preview.setPreviewImg();
-					preview.listenInput();
-				},
-				setPreviewImg : function(fileInput) {
-					var path = $(fileInput).val();
-					var uploadText = $(fileInput).siblings('.file-upload-text');
-
-					if (!path) {
-						$(uploadText).val('');
-					} else {
-						path = path.replace(/^C:\\fakepath\\/, "");
-						$(uploadText).val(path);
-
-						preview.showPreview(fileInput, path, uploadText);
-					}
-				},
-				showPreview : function(fileInput, path, uploadText) {
-					var file = $(fileInput)[0].files;
-
-					if (file && file[0]) {
-						var reader = new FileReader();
-
-						reader.onload = function(e) {
-							var previewImg = $(fileInput).parents(
-									'.file-upload-wrapper').siblings(
-									'.rcp-up-preview');
-							var img = $(previewImg).find('img');
-
-							if (img.length == 0) {
-								$(previewImg)
-										.html(
-												'<img src="' + e.target.result + '" alt=""/>');
-							} else {
-								img.attr('src', e.target.result);
-							}
-
-							uploadText.val(path);
-							maskImgs();
-						}
-
-						reader.onloadstart = function() {
-							$(uploadText).val('uploading..');
-						}
-
-						reader.readAsDataURL(file[0]);
-					}
-				},
-				listenInput : function() {
-					$('.file-upload-native').on('change', function() {
-						preview.setPreviewImg(this);
-					});
-				}
-			};
-			preview.init();
 		});
 	</script>
 </body>

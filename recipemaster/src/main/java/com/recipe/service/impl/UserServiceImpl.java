@@ -76,10 +76,12 @@ public class UserServiceImpl implements UserService {
     // TODO Auto-generated method stub
     User dbUser=userDao.findUser(user.getEmail());
     if(! dbUser.getPassword().equals(user.getPassword())){
-      System.out.println("login 실패하였습니다.");
+      System.out.println("비밀번호가 부적합합니다.");
       
       return null;
     }
+    dbUser.setPassword(null);
+    
     return dbUser;
   }
   

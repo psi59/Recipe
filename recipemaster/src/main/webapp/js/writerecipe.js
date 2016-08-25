@@ -1,21 +1,59 @@
+document.write('<script type"text/javascript" src="js/login.js"></script>')
 $(function () {
+	
+	$.ajax({
+		url : '/user/loginCheck.json', 
+		method : 'get',
+		dataType : 'json',
+		success : function(result) {
+			if (result.status == 'failure') {
+				swal({
+					title: "로그인 후 사용하실 수 있습니다.",
+					type: "warning",
+					confirmButtonClass: "btn-danger",
+					confirmButtonText: "확인",
+					closeOnConfirm: false
+				},
+				function(isConfirm) {
+					location.href = "index.html"
+				}); 
+			} 
+			if(result.status == 'success'){
+
+				var data = [];
+				data.push({
+					userNo : result.data.userNo,
+					userName : result.data.userName,
+					email : result.data.email,
+					image : result.data.image,
+					intro : result.data.intro,
+					role : result.data.role,
+					joinDate : result.data.joinDate,
+					recipeUrl : result.data.recipeUrl,
+					recipeCount : result.data.recipeCount,
+					subsCount : result.data.subsCount
+				});
+
+				jsonData = JSON.stringify(data);
+
+				/*eval 사용 방법, eval(jsonData)[0].email*/
+				if(jsonData!=null){
+					$('#signUpBtn').hide();
+					$('#loginBtn').hide();
+					$('#signUpTopBtn').hide();
+					$('#loginIcon').html('<img id="loginIconAction1" class="rcp-barimg dropdown-trigger img-circle" src="img/Chef3.jpg" />');
+					$('#topbarUserImg').html('<img id="loginIconAction2" class="rcp-barimg dropdown-trigger img-circle" src="img/Chef3.jpg" />');
+				}
+			} 
+		},
+		error : function() {
+			swal('서버 요청 오류');
+		}
+	}); /* end of ajax */
+
 	var imageList = new Array();
-	
+
 	'use strict';
-	
-	if(sessionStorage.getItem('data') == null){
-		swal({
-			  title: "로그인 후 사용하실 수 있습니다.",
-			  type: "warning",
-			  confirmButtonClass: "btn-danger",
-			  confirmButtonText: "확인",
-			  closeOnConfirm: false
-			},
-			function(isConfirm) {
-			   location.href = "index.html"
-			});
-		return;
-	}	
 
 	$( "#representImgs" ).sortable({
 		revert: true,
@@ -28,7 +66,7 @@ $(function () {
 		revert: true
 	});
 	$( "#files" ).disableSelection();
-	
+
 //	대표사진등록관련 js
 	$('#representImage').fileupload({
 		dataType: 'json',
@@ -170,7 +208,7 @@ $(function () {
 //	swal('로그인 하고 오세욤 ㅎㅎ');
 //	location = "index.html";
 //	}
-	
+
 	function imageDuplicationCheck(file){
 		if(imageList.length>0){
 			for(i=0; i<imageList.length; i++){
@@ -204,18 +242,18 @@ $(function () {
 			$(this).parent().parent('.inputwrapper').removeClass('active');
 		}
 	});
-	
+
 	$(document).on('click', '.rpImg', function(event) {
 		event.preventDefault();
 		$(this).parent().parent('.scroll').remove();
 	});
-	
+
 	$(document).on('click', '.pdImg', function(event) {
 		event.preventDefault();
 		$(this).parent().parent().remove();
 	});
-	
-	
+
+
 	$('#addBtn').on('click', function() {
 		if($('input[name="recipeName"]').val().length < 1){
 			swal('레시피 제목을 입력해주세요.');
@@ -239,10 +277,10 @@ $(function () {
 			swal('조리과정을 등록해주세요.');
 			return;
 		} 
-		
+
 		$('#addRecipe').submit();				
 	});
-	
+
 	$('#imAddBtn').on('click', function() {
 		$('input[name="regiStatus"]').val("1");
 		$('#addRecipe').submit();

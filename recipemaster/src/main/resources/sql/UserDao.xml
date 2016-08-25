@@ -44,6 +44,7 @@
 		ORDER BY rcpCount desc
 		LIMIT #{startIndex}, #{len}) vt
 	</select>
+	
 	<!-- 레시피 *5, 구독자 * 3 , 좋아요 * 2 -->
 	<select id="selectRankList" resultMap="userMap" parameterType="Map">
 		SELECT @rownum:=@rownum+1 rownum,vt.* FROM(
@@ -112,6 +113,5 @@
 		</set>
 		WHERE email = #{email}
 	</update>
-
-
+	
 </mapper>

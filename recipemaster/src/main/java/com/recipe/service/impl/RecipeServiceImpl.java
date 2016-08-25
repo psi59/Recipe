@@ -139,7 +139,7 @@ public class RecipeServiceImpl implements RecipeService {
       params.put("userNo", userNo);
       params.put("startIndex", (pageNo - 1) * pageSize);
       params.put("len", pageSize);
-      return recipeDao.selectSbuscribe2(params);
+      return recipeDao.selectSubscribe2(params);
     }
     @Override
     public int addScrap(int userNo, int recipeNo) {
