@@ -27,6 +27,15 @@ public class UserServiceImpl implements UserService {
     
     return userDao.selectList(params);
   }
+  
+  @Override
+  public List<User> getUserRankList(int pageNo, int pageSize) {
+    HashMap<String,Object> params= new HashMap<>();    
+    params.put("startIndex", (pageNo - 1) * pageSize);
+    params.put("len", pageSize);   
+    
+    return userDao.selectRankList(params);
+  }
 
   @Override
   public User getUser(int no) {    

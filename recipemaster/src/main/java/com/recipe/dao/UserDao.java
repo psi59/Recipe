@@ -8,6 +8,7 @@ import com.recipe.domain.User;
 public interface UserDao {
   void insert(User user);
   List<User> selectList(Map<String,Object> params);
+  List<User> selectRankList(Map<String,Object> params); //용이추가
   User selectOne(int no);
   User checkDuplication(String email);
   User checkDuplicationUserName(String userName);

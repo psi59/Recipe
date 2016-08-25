@@ -11,6 +11,7 @@ public interface RecipeDao {
   void insertMaterials(Map map); // Create
   int insertImageAndProduce(Map map);  
   List<Recipe> recipeList(Map<String,Object> params); // Read or Retrieve
+  List<Recipe> recipeRankList(Map<String,Object> params); //용이
   List<Recipe> recipeSearch(Map<String,Object> params); //Search 성현
   int recipeCount(Map<String,Object> params); //Recipe Count 성현
   List<String> selectRecipeName(String searchValue); //Recipe Name List 성현
