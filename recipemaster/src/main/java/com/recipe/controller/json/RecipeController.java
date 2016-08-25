@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -396,36 +395,91 @@ public class RecipeController {
 
 		return new Gson().toJson(result);
 	}
+//
+////커뮤니티 레시피 리스트 : 용  ----  고재현 수정. 
+//  @RequestMapping(path="userPage",produces="application/json;charset=UTF-8")
+//  @ResponseBody 
+//  public String userPage(String email, int request,HttpSession session){
+//    HashMap<String,Object> result = new HashMap<>();
+//    Recipe recipe = new Recipe();
+//    int userNo;
+//    try{
+//      List<Recipe> recipeList = new ArrayList<Recipe>();
+//      List<Recipe> userNumbers = new ArrayList<Recipe>();
+//      System.out.println("parameter email : "+email);
+//      
+//      User user = userService.selectFromEmail(email);
+//      System.out.println("email로 뽑아온 User정보 : "+user);
+//      if(request == 1){
+//      userNumbers = recipeService.selectScrapUserNoMypage(user.getUserNo());     
+//      }else if(request == 2){
+//        
+//      }    
+//      System.out.println("user정보로 뽑은 구독하기 누른 사람 넘버 : "+userNumbers);
+//      if(session.getAttribute("userNo") == null){
+//        userNo = 0;
+//      }else{
+//        userNo = (int)session.getAttribute("userNo");
+//      }
+//      
+//      System.out.println("myrecipe parameter 1 - user.getUserNo : "+user.getUserNo());
+//      System.out.println("myrecipe parameter 2 - session : "+userNo);
+//      if(request == 1){     
+//        recipeList = recipeService.selectMypageRecipe(String.valueOf(user.getUserNo()), userNo,request);      
+//      }else if(request == 2){
+//        System.out.println("여기옴?"+recipe.getScrap()+" : "+userNo+"  : "+request);
+//        recipeList = recipeService.selectMypageRecipe(recipe.getScrap(), userNo,request);
+//      }else if(request == 3){
+//        
+//      }
+//      System.out.println("결과값 : "+recipeList);
+//      result.put("status","success");
+//      result.put("data",recipeList);
+//      result.put("user", user);
+//    }catch (Exception e){
+//      e.printStackTrace();
+//      result.put("status", "false");
+//    }
+// 
+//    return new Gson().toJson(result);
+//  }
 
 //커뮤니티 레시피 리스트 : 용  ----  고재현 수정. 
   @RequestMapping(path="userPage",produces="application/json;charset=UTF-8")
   @ResponseBody 
-  public String userPage(String email){
+  public String userPage(String email, int request,HttpSession session){
     HashMap<String,Object> result = new HashMap<>();
-    Recipe recipe = new Recipe();
+   
+    
     try{
-      System.out.println("parameter email : "+email);
+      List<Recipe> recipeList = new ArrayList<Recipe>();
+      List<Recipe> userNumbers = new ArrayList<Recipe>();
+      int userNo = 0; 
       User user = userService.selectFromEmail(email);
       System.out.println("email로 뽑아온 User정보 : "+user);
-      List<Recipe> userScrapNumbers = recipeService.selectScrapUserNoMypage(user.getUserNo());
-      System.out.println("user정보로 뽑은 구독하기 누른 사람 넘버 : "+userScrapNumbers);
-      if(userScrapNumbers.size() == 0 || userScrapNumbers.equals("")){
-        recipe.setScrap("0");
-      }else{        
-        for(int i =0; i<userScrapNumbers.size(); i++){
-          if(recipe.getScrap() == null){    
-            recipe.setScrap(String.valueOf(userScrapNumbers.get(0).getRecipeNo()));
-          }else{
-            recipe.setScrap(recipe.getScrap()+","+ userScrapNumbers.get(i).getRecipeNo());
-          }
-        }
+     
+      userNumbers = recipeService.selectScrapUserNoMypage(user.getUserNo());
+      Recipe recipe = functionForUserNumbers(userNumbers,request);
+      getSession(userNo, session);
+      
+      if(request == 1){
+      recipeList = recipeService.selectMypageRecipe(String.valueOf(user.getUserNo()), userNo,request);      
+      }else if(request == 2){
+        recipeList = recipeService.selectMypageRecipe(recipe.getScrap(), userNo,request);
+      }else if(request == 3){
+        userNumbers = recipeService.selectSubscribeMypage(user.getUserNo());
+        System.out.println("request3 userNumbers : "+ userNumbers);
+        Recipe subscribeRecipe = functionForUserNumbers(userNumbers,request);
+        System.out.println("subscribeRecipeNumbers : "+subscribeRecipe);
+        getSession(userNo, session);
+        recipeList = recipeService.selectMypageRecipe(subscribeRecipe.getScrap(), userNo,request);
       }
       
-      List<Recipe> scrapList = recipeService.selectScrapMypage(recipe.getScrap(), user.getUserNo());
-      System.out.println("스크랩 한 사람 : "+scrapList);
-      
+
+ 
+      System.out.println("결과값 : "+recipeList);
       result.put("status","success");
-      result.put("data",scrapList);
+      result.put("data",recipeList);
       result.put("user", user);
     }catch (Exception e){
       e.printStackTrace();
@@ -435,6 +489,38 @@ public class RecipeController {
     return new Gson().toJson(result);
   }
 
+  public int getSession(int userNo,HttpSession session){  
+    if(session.getAttribute("userNo") == null){
+      userNo = 0;
+    }else{
+      userNo = (int)session.getAttribute("userNo");
+    }
+    return userNo;
+  }
+  
+  public Recipe functionForUserNumbers(List<Recipe> userNumbers,int request){
+    Recipe recipe = new Recipe(); 
+    if(userNumbers.size() == 0 || userNumbers.equals("")){
+      recipe.setScrap("0");
+    }else{        
+      for(int i =0; i<userNumbers.size(); i++){
+        if(recipe.getScrap() == null){    
+          if(request == 3){
+            recipe.setScrap(String.valueOf(userNumbers.get(0).getSubscribeNum()));
+          }else{
+            recipe.setScrap(String.valueOf(userNumbers.get(0).getRecipeNo()));
+          }
+        }else{
+          if(request == 3){
+            recipe.setScrap(recipe.getScrap()+","+ userNumbers.get(i).getSubscribeNum());
+          }else{
+            recipe.setScrap(recipe.getScrap()+","+ userNumbers.get(i).getRecipeNo());
+          }            
+        }
+      }
+    }
+    return recipe;
+  }
   //community준모,용이형
   @RequestMapping(path="comList",produces="application/json;charset=UTF-8")
   @ResponseBody 

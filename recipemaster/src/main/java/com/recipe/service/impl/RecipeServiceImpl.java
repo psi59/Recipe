@@ -169,11 +169,12 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public List<Recipe> selectScrapMypage(String userNumbers, int userNo) {
+    public List<Recipe> selectMypageRecipe(String userNumbers, int userNo,int request) {
       HashMap<String,Object> params = new HashMap<>();
       params.put("userNumbers", userNumbers);
       params.put("userNo", userNo);
-      return recipeDao.selectScrapMypage(params);
+      params.put("request", request);
+      return recipeDao.selectMypageRecipe(params);
     }
 
     @Override
@@ -182,6 +183,12 @@ public class RecipeServiceImpl implements RecipeService {
       params.put("toUserNo", toUserNo);
       params.put("fromUserNo", fromUserNo);
       return recipeDao.deleteSubscribe(params);
+    }
+
+    @Override
+    public List<Recipe> selectSubscribeMypage(int userNo) {
+      // TODO Auto-generated method stub
+      return recipeDao.selectSubscribeMypage(userNo);
     }
 	
 }

@@ -174,10 +174,17 @@
     select * from rcp_scr where uno = ${value}
   </select>
   
+  <select id="selectSubscribeMypage" resultMap="recipeMap" parameterType="INTEGER">
+    select * from scs where uno = ${value}
+  </select>
 
-  <select id="selectScrapMypage" resultMap="recipeMap" parameterType="map">
+
+  <select id="selectMypageRecipe" resultMap="recipeMap" parameterType="map">
 			select *, u.name userName,likecnt.countLike from rcps r
-			INNER JOIN users u on r.uno=u.uno and r.rcpno in ( ${userNumbers} )
+			INNER JOIN users u on r.uno=u.uno and 
+			<if test="request == 1 or request == 3">u.uno </if>
+			<if test="request == 2">r.rcpno </if>
+			in ( ${userNumbers} )
 			LEFT OUTER JOIN rcp_scr scr on r.rcpno=scr.rcpno and scr.uno = ${userNo}
 			LEFT OUTER JOIN(select rcpno rno, count(*) countLike from rcp_lik group by rcpno) likecnt
 			ON r.rcpno=likecnt.rno

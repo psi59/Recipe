@@ -23,7 +23,8 @@ public interface RecipeService {
   List<Recipe> selectSbuscribe(String scsUserNo, int pageNo, int pageSize); //준모 수정
   List<Recipe> selectMypage(int userNo);    
   List<Recipe> selectScrapUserNoMypage(int userNo);
-  List<Recipe> selectScrapMypage(String userNumbers, int userNo);
+  List<Recipe> selectSubscribeMypage(int userNo);
+  List<Recipe> selectMypageRecipe(String userNumbers, int userNo, int request);
   Recipe getRecipe(int recipeNo,int userNo);
   int updateRecipe(Recipe recipe);
   int updateHits(Recipe recipe);

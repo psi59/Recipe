@@ -8,7 +8,8 @@
 		  dataType : 'json',
 		  method : 'post',
 		  data:{
-			 email:location.href.split('?')[1]
+			 email:location.href.split('?')[1],
+	  		request:1
 		  },
 		  success : function(result) {
 			 
@@ -21,12 +22,10 @@
 			  var sourceCRList = $('#temp').text();
 			  var templateCRList = Handlebars.compile(sourceCRList);
 			  
-			  console.log(result.data);
-			 
 			  	$('.rcp-userName').text(result.user.userName);
 		    	
-			  $('.hs-content .container .row').append(templateCRList(result));
-			  
+			  $('#tabs-1 .hs-content .container .row .rcp-mypage-section').append(templateCRList(result));
+			  console.log(result.data);
 			  for(var i = 0 ; i<result.data.length; i++){
 				  var list=JSON.stringify(result.data[i].rpimg);
 					var firstParse= list.substring(4,(list.length-4));
@@ -80,7 +79,7 @@
     	}
     	})
     	
- 
+ pageTabs();
     })
     
 
@@ -291,7 +290,71 @@
 	/*화면관리*/	
     $(function() {
       $("#tabs").tabs();
-    });/*
+    });
+		
+		function pageTabs(){
+			$('.isotope-filter a').on('click', function(event){
+				event.preventDefault();
+				 var request;
+				 var url = 'recipe/userPage.json';
+				  
+				 
+				 if($(event.target).is('#searchRecipe')){
+					 request=1;
+				  }
+				  else if($(event.target).is('#searchScrap')){
+					  request=2;
+				  }else if($(event.target).is('#searchSubscribe')){
+					  request=3;
+				  }else{
+					  request = 4;
+					  url='visitor/list.json'
+				  }
+				 
+				  $.ajax({
+					  url :url,
+					  dataType : 'json',
+					  method : 'post',
+					  data:{
+						  email:location.href.split('?')[1],
+						  request:request
+					  },
+					  success : function(result) {
+						 
+						  if (result.status != 'success') {
+							  alert('comList 실행 중 오류 발생');
+							  return;
+						  }
+						 
+					
+						  var sourceCRList = $('#temp').text();
+						  var templateCRList = Handlebars.compile(sourceCRList);
+						  
+						  console.log(result.data);
+						
+						  $('#tabs-'+$('#tabId').val()+' .hs-content .container .row .rcp-mypage-section div').remove();
+						  $('#tabs-'+request+' .hs-content .container .row .rcp-mypage-section').append(templateCRList(result));
+						  $('#tabId').val(request);
+						  
+						  
+						  console.log(result.data);
+						  for(var i = 0 ; i<result.data.length; i++){
+							  var list=JSON.stringify(result.data[i].rpimg);
+								var firstParse= list.substring(4,(list.length-4));
+							
+
+								 $('div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+firstParse+')');
+							  }
+					  },
+					  error : function() {
+						 alert('community 서버 요청 오류!...')
+					  }
+				  });
+			})
+		}
+		
+		
+		/*
     //마지막 스크롤 TOP 위치
     var lastScrollY = 0;
 

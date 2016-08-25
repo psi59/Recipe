@@ -20,8 +20,9 @@ public interface RecipeDao {
   List<Recipe> selectSubscribeUno(int userNo); //구독하기한 userNo추출  고재현
   List<Recipe> selectSubscribe(Map<String,Object> params); //구독한 리스트 고재현 //준모 수정
   List<Recipe> selectMypage(int userNo);      // mypage리스트  고재현
-  List<Recipe> selectScrapUserNoMypage(int userNo);      // mypageScrap리스트  고재현
-  List<Recipe> selectScrapMypage(Map<String,Object> params);      // mypageScrap리스트  고재현
+  List<Recipe> selectScrapUserNoMypage(int userNo);
+  List<Recipe> selectSubscribeMypage(int userNo);// mypageScrap리스트  고재현
+  List<Recipe> selectMypageRecipe(Map<String,Object> params);      // mypageScrap리스트  고재현
   Recipe selectOne(Map<String,Object> params); // Read or Retrieve
   int update(Recipe recipe); // Update
   int updateHits(Recipe recipe);  //조회수 증가  고재현
