@@ -51,8 +51,9 @@ $(function(){
 						swal('게시물 조회 오류');
 						return;
 					}
-					console.log(result);
-					console.log(result.data.recipeDetail.indexOf('ge"'));
+				
+					console.log(result.data);
+					
 					$('.rcp-header > .title').text(result.data.recipeName);
 					$('.rcp-header > .date').text(result.data.recipeDate);
 					$('.hash').text(result.data.intro);

@@ -46,13 +46,15 @@
 			  $('#main-list > div').append( comMainSection(result) );
 			  $('.list0 > .row').append( template(result) );
 
-			  for(var i = 0 ; i<result.data.length; i++){
-			  var list=JSON.stringify(result.data[i].rpimg);
-				var firstParse= list.substring(4,(list.length-4));
-			
-				
-				 $('div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+firstParse+')');
-			  }
+			  	console.log(result.data);
+//			 
+				  for(var i=0; i<result.data.length; i++){
+//					  for(var j=0; j<result.data[i].representImages.length; j++){
+						  $('.list0 div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');
+
+//					  }
+				  }
+					
 			  
 			  methods();
 			  Main2List();
@@ -92,13 +94,24 @@
 			  var list = result.data;
 			  $('#main-list > div').append( comMain2Section(result) );
 			  $('.list1 > .row').append( template(result) );
+			  console.log(result.data)
+				console.log(result.data[0].representImages[0]);
 			  
-			  for(var i = 0 ; i<result.data.length; i++){
-				  var list=JSON.stringify(result.data[i].rpimg);
-					var firstParse= list.substring(4,(list.length-4));					
-					$('.list1 div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+firstParse+')');
-				  }
-				  
+			  for(var i=0; i<result.data.length; i++){
+//				  for(var j=0; j<result.data[i].representImages.length; j++){
+					  $('.list1 div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');
+
+//				  }
+			  }
+				
+				
+				
+//			  for(var i = 0 ; i<result.data.length; i++){
+//				  var list=JSON.stringify(result.data[i].rpimg);
+//					var firstParse= list.substring(4,(list.length-4));					
+//					$('.list1 div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+firstParse+')');
+//				  }
+//				  
 			  methods();
 		  },
 		  error : function(){

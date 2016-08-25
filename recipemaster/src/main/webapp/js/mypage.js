@@ -26,13 +26,13 @@
 		    	
 			  $('#tabs-1 .hs-content .container .row .rcp-mypage-section').append(templateCRList(result));
 			  console.log(result.data);
-			  for(var i = 0 ; i<result.data.length; i++){
-				  var list=JSON.stringify(result.data[i].rpimg);
-					var firstParse= list.substring(4,(list.length-4));
-				
+			 
+			  for(var i=0; i<result.data.length; i++){
+//				  for(var j=0; j<result.data[i].representImages.length; j++){
+					  $('div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');
 
-					 $('div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+firstParse+')');
-				  }
+//				  }
+			  }
 		  },
 		  error : function() {
 			 alert('community 서버 요청 오류!...')
@@ -338,13 +338,12 @@
 						  
 						  
 						  console.log(result.data);
-						  for(var i = 0 ; i<result.data.length; i++){
-							  var list=JSON.stringify(result.data[i].rpimg);
-								var firstParse= list.substring(4,(list.length-4));
-							
+						  for(var i=0; i<result.data.length; i++){
+//							  for(var j=0; j<result.data[i].representImages.length; j++){
+								  $('div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');
 
-								 $('div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+firstParse+')');
-							  }
+//							  }
+						  }
 					  },
 					  error : function() {
 						 alert('community 서버 요청 오류!...')

@@ -9,7 +9,7 @@
 		<result column="uno" property="userNo" />
 		<result column="name" property="recipeName" />
 		<result column="intro" property="intro" />
-		<result column="rcp_pd" property="recipeDetail"/>
+		<result column="rcp_pd" property="recipeProcedure" typeHandler="com.github.javaplugs.mybatis.JsonElementTypeHandler"/>
 		<result column="c_time" property="cookTime" />
 		<result column="ptn" property="portion" />
 		<result column="rcp_dt" property="recipeDate" />
@@ -27,7 +27,7 @@
 		<result column="email" property="user.email"/>
 		<result column="rownum" property="rownum"/>
 		<result column="totalPoint" property="totalPoint"/>
-		<result column="rpimg" property="rpimg" />
+		<result column="rpimg" property="representImages" typeHandler="com.github.javaplugs.mybatis.JsonElementTypeHandler" />
 		<result column="img" property="user.image"/>
 		<result column="userName" property="user.userName"/>
 	</resultMap> 
@@ -281,6 +281,5 @@
   
   <delete id="delete" parameterType="int">
     delete from boards
-    where bno=#{no}
-  </delete> -->
+    where bno=#{no}-->
 </mapper>

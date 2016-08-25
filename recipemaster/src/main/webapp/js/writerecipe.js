@@ -220,10 +220,10 @@ $(function () {
 		if($('input[name="recipeName"]').val().length < 1){
 			swal('레시피 제목을 입력해주세요.');
 			return;
-		} else if($('input[name="portion"]').val().length < 1){
+		} else if($('#portion').val().length < 1){
 			swal('몇 인분인지 입력해주세요.');
 			return;
-		} else if($('input[name="cookTime"]').val().length < 1){
+		} else if($('#cookTime').val().length < 1){
 			swal('조리시간을 입력해주세요.');
 			return;
 		} else if($('input[name="intro"]').val().length < 1){
@@ -247,4 +247,27 @@ $(function () {
 		$('input[name="regiStatus"]').val("1");
 		$('#addRecipe').submit();
 	});
+	
+	var cookTimeSlider = $( "#cookTime-slider" ).slider({
+	      range: "max",
+	      min: 1,
+	      max: 300,
+	      value: 1,
+	      slide: function( event, ui ) {
+	        $( "#cookTime" ).val( ui.value );
+	      }
+	    });
+    $( "#cookTime" ).val( $( "#cookTime-slider" ).slider( "value" ) );
+    
+    $( "#cookTime" ).on( "keyup", function() {
+    	cookTimeSlider.slider( "value", this.value );
+    });
+    
+    $( ".accordion" ).accordion({
+        collapsible: true
+      });
+    
+    var spinner = $( "#portion" ).spinner({
+    	min: 1
+    });
 });

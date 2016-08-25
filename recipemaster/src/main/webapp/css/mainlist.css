@@ -9,6 +9,10 @@ font-family: 'Noto Sans KR', sans-serif;
   }
 
 
+.active {
+  border-bottom: 0px solid #ecf0f1 !important;
+}
+
 .rcp-image-scale img.image1{
   width: 100%;
   left: 50%;
@@ -401,14 +405,7 @@ font-family: 'Noto Sans KR', sans-serif;
 
 @media(min-width:1023px){
 	
-.rcp-image-scale{
-  width : 100%;
-  height : 141px;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: 350px;
 
-}
 	
 .rcp-height30{
     height: 20px;
@@ -635,18 +632,17 @@ font-family: 'Noto Sans KR', sans-serif;
 }
 
 
-
-@media (min-width:1360px) and (max-width : 1485px){
+@media (min-width:1200px) and (max-width : 1360px){
   
 .rcp-image-scale{
   width : 100%;
-  height : 155px;
+  height : 141px;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 350px;
 
 }
-
+}
 
 @media (min-width:1360px) and (max-width : 1485px){
   
