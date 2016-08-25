@@ -57,6 +57,15 @@ public class RecipeServiceImpl implements RecipeService {
 		params.put("len", pageSize);
 		return recipeDao.recipeList(params);
 	}
+	
+	@Override
+  public List<Recipe> getRecipeRankList(int pageNo,int pageSize) {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("startIndex", (pageNo - 1) * pageSize);
+    params.put("len", pageSize);
+    return recipeDao.recipeRankList(params);
+  }
+	
 
 	@Override
 	public Recipe getRecipe(int recipeNo, int userNo) {

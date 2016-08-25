@@ -619,15 +619,17 @@
       </div>
       <div class="social">
         <div class="list">
-          <a href="#" data-title="Recipe"><i class="fa fa-facebook"></i></a>
-          <a href="#" data-title="구독하기"><i class="fa fa-dribbble"></i></a>
-          <a href="#" data-title="좋아요">1257</a>
-          <a href="#" data-title="구독자수">102</a>
+          <a href="#" data-title="Recipe">{{recipeCount}}</a>
+          <a href="#" data-title="구독자">{{subsCount}}</a>
+          <a href="#" data-title="좋아요">{{likeCount}}</a>
+          <a href="#" data-title="Total">{{totalPoint}}</a>
         </div>
       </div>
     </div>
     <div class="content">
-      <div class="name">{{userName}}</div>
+          
+      <div class="name"><input type="hidden" value="{{email}}">
+                   <a href="#" class="rcp-userName">{{userName}}</a></div>
       <div class="job-title">Master Chef </div>
       <p class="text">{{email}}</p>
       <div class="list clearfix">
@@ -637,7 +639,7 @@
     </div>
   </div>
 </div>
-  {{/each}} 
+  {{/each}}
   </script>
 	<!-- 쉐프랭킹카드 수정 -->
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
@@ -728,6 +730,7 @@
 											.text(
 													eval(sessionStorage
 															.getItem('data'))[0].recipeUrl);
+									
 									/* 용이 추가() */
 									$('#introduce')
 											.text(

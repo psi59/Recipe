@@ -1,4 +1,11 @@
-    //Default active on home
+	  $(document).on('click', '.rcp-userName',function(event){
+		  event.preventDefault();
+
+		  $(location).attr('href','http://localhost:8080/mypage.html?'+$(event.target).parent().children('input[type="hidden"]').val() ); 	 
+
+	  })
+
+//Default active on home
     $('#s1').addClass("active");
 
     /*

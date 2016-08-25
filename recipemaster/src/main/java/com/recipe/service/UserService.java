@@ -8,6 +8,7 @@ import com.recipe.domain.User;
 public interface UserService {
   void addUser(User user);
   List<User> getUserList(int pageNo, int pageSize);
+  List<User> getUserRankList(int pageNo, int pageSize);//용이추가
   User getUser(int no);
   boolean checkDuplication(String email); // email 중복체크
   boolean checkDuplicationUserName(String userName); // 닉네임 중복체크

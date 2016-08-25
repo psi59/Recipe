@@ -25,7 +25,7 @@
       </div>
 	    <div class="nav-container col-md-11 rcp-topbar">
 	      <ul>
-	        <li><a id="s1" href="#1">Home</a></li>
+	        <li><a id="s1" href="#1">Best Chef</a></li>
 	        <li><a id="s2" href="#2">Chef Ranking</a></li>
 	        <li><a id="s3" href="#3">Recipe Ranking</a></li>
 	      </ul>
@@ -47,9 +47,9 @@
        <br/><br/>
         <div class="col-md-2">Rank</div>
         <div class="col-md-2">Chef 이름</div>
-        <div class="col-md-2">레시피</div>
-        <div class="col-md-2">구독자</div>
-        <div class="col-md-2">이달의 Point</div>
+        <div class="col-md-2">레시피 수</div>
+        <div class="col-md-2">구독자 수</div>
+        <div class="col-md-2">좋아요 수</div>
         <div class="col-md-2">Total Point</div>
       </div>
       <div class="rcp-title">
@@ -94,8 +94,10 @@
   <script src="node_modules/handlebars/dist/handlebars.min.js"></script>
   
   <!--yongyi  -->
+  <script src="js/jquery.bpopup.min.js"></script>
   <script src="js/common/chefCard.js"></script>
   <script src="js/waypoints.min.js"></script>
+  <script src="js/recipeDetail.js"></script>
   <script src="js/rankingpage.js"></script>
   <script id="chef-card-template" type="text/x-handlebars-template">
 {{#each data}}
@@ -121,15 +123,17 @@
       </div>
       <div class="social">
         <div class="list">
-          <a href="#" data-title="Recipe"><i class="fa fa-facebook"></i></a>
-          <a href="#" data-title="구독하기"><i class="fa fa-dribbble"></i></a>
-          <a href="#" data-title="좋아요">1257</a>
-          <a href="#" data-title="구독자수">102</a>
+          <a href="#" data-title="Recipe">{{recipeCount}}</a>
+          <a href="#" data-title="구독자">{{subsCount}}</a>
+          <a href="#" data-title="좋아요">{{likeCount}}</a>
+          <a href="#" data-title="Total">{{totalPoint}}</a>
         </div>
       </div>
     </div>
     <div class="content">
-      <div class="name">{{userName}}</div>
+          
+      <div class="name"><input type="hidden" value="{{email}}">
+                   <a href="#" class="rcp-userName">{{userName}}</a></div>
       <div class="job-title">Master Chef </div>
       <p class="text">{{email}}</p>
       <div class="list clearfix">
@@ -146,11 +150,14 @@
   {{#each data}}
       <div class="row rcp-font">
         <div class="col-md-2">{{rownum}}</div>
-        <div class="col-md-2">{{userName}}</div>
+        <div class="col-md-2">
+          <div class="name"><input type="hidden" value="{{email}}">
+                   <a href="#" class="rcp-userName">{{userName}}</a></div>
+        </div>
         <div class="col-md-2">{{recipeCount}}</div>
-        <div class="col-md-2">구독자 수</div>
-        <div class="col-md-2">이달의 Point</div>
-        <div class="col-md-2">Total Point</div>
+        <div class="col-md-2">{{subsCount}}</div>
+        <div class="col-md-2">{{likeCount}}</div>
+        <div class="col-md-2">{{totalPoint}}</div>
         <hr/>
       </div>
   {{/each}}
@@ -172,6 +179,7 @@
           }
           var list = result.data;
           $('#chefRanking').append(templateChef(result));
+          console.log(result.data)
         },
         error : function() {
           alert('서버 요청 오류');
@@ -183,7 +191,9 @@
     {{#each data}}
       <div class="row rcp-font">
         <div class="col-md-2">{{rownum}}</div>
-        <div class="col-md-2">{{recipeName}}</div>
+        <div class="col-md-2">
+          <a href="#" class="detail" style="z-index:9999">{{recipeName}} </a> 
+          <input type="hidden" name="recipeNo" value="{{recipeNo}}"></div>
         <div class="col-md-2">{{countLike}}</div>
         <div class="col-md-2">{{countScrap}}</div>
         <div class="col-md-2">{{hits}}</div>
@@ -204,14 +214,14 @@
         method : 'get',
         success : function(result) {
           if (result.status != 'success') {
-            alert('실행중 오류 발생');
+             alert('실행중 오류 발생');
             return;
           }
           var list = result.data;
           $('#recipeRanking').append(templateRcp(result));
         },
         error : function() {
-          alert('서버 요청 오류');
+           alert('서버 요청 오류');
         }
       });
     }

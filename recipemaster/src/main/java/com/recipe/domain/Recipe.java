@@ -36,7 +36,7 @@ public class Recipe {
 	private int rownum;
 	private int totalPoint;
 	// ranking end
-
+	
 	public int getRownum() {
 		return rownum;
 	}

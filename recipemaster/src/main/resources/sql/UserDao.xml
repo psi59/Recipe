@@ -14,27 +14,51 @@
 		<result column="role" property="role" />
 		<result column="join_dt" property="joinDate" />
 		<result column="rcp_url" property="recipeUrl" />
-		<result column="rcpCount" property="recipeCount"/>
-		<result column="rownum" property="rownum"/>
+		<result column="rcpCount" property="recipeCount" />
+		<result column="scnt" property="subsCount" />
+		<result column="lcnt" property="likeCount" />
+		<result column="total" property="totalPoint" />
+		<result column="rownum" property="rownum" />
 	</resultMap>
 
 	<select id="findUser" resultMap="userMap" parameterType="String">
-		SELECT * 
-		FROM users	
+		SELECT *
+		FROM users
 		WHERE email=#{value}
 	</select>
 
 	<select id="selectList" resultMap="userMap" parameterType="Map">
 		SELECT @rownum:=@rownum+1 rownum,vt.*
-    FROM(
-        select * from
-    (SELECT u.uno, u.name, u.email, u.pwd, u.img, u.intro, u.role, u.join_dt, u.rcp_url, rcpCount   
-    FROM users u , 
-        (SELECT lk.uno,COUNT(lk.rcpno) rcpCount from rcps lk group by lk.uno) c
-        where u.uno = c.uno) a
-    INNER JOIN(select @rownum:=0) t   
-    ORDER BY rcpCount desc
+		FROM(
+		select * from
+		(SELECT u.uno, u.name, u.email, u.pwd, u.img, u.intro, u.role, u.join_dt,
+		u.rcp_url, rcpCount
+		FROM users u ,
+		(SELECT lk.uno,COUNT(lk.rcpno) rcpCount from rcps lk group by lk.uno) c
+		where u.uno = c.uno) a
+		INNER JOIN(select @rownum:=0) t
+		ORDER BY rcpCount desc
+		LIMIT #{startIndex}, #{len}) vt
+	</select>
+<!-- 레시피 *5, 구독자 * 3  , 좋아요 * 2  -->
+	<select id="selectRankList" resultMap="userMap" parameterType="Map">
+		SELECT @rownum:=@rownum+1 rownum,vt.* FROM(
+    SELECT r1.uno,r1.name,r1.intro,IFNULL(r2.cnt,0) rcpCount,IFNULL(r3.cnt,0) scnt,IFNULL(r4.cnt,0) lcnt,
+    SUM((IFNULL(r2.cnt,0)*5)+(IFNULL(r3.cnt,0)*3)+(IFNULL(r4.cnt,0)*2)) total
+    FROM USERS r1
+    LEFT OUTER JOIN (SELECT uno,COUNT(rcpno) cnt
+    FROM RCPS GROUP BY uno) r2
+    ON r1.uno=r2.uno
+    LEFT OUTER JOIN (SELECT uno,COUNT(uno2) cnt
+    FROM SCS GROUP BY uno) r3
+    ON r2.uno=r3.uno
+    LEFT OUTER JOIN (SELECT uno,COUNT(rcpno) cnt
+    FROM RCP_LIK GROUP BY uno) r4
+    ON r3.uno=r4.uno
+    INNER JOIN(select @rownum:=0) t
+    GROUP BY r1.uno
     LIMIT #{startIndex}, #{len}) vt
+    ORDER BY vt.total DESC
 	</select>
 
 	<select id="selectOne" resultMap="userMap" parameterType="int">
@@ -46,10 +70,10 @@
 		where u.uno = #{no}
 	</select>
 
-  <select id="selectFromEmail" resultMap="userMap" parameterType="string">
-  SELECT * FROM users WHERE email = '${value}'
-  </select>
-  
+	<select id="selectFromEmail" resultMap="userMap" parameterType="string">
+		SELECT * FROM users WHERE email = '${value}'
+	</select>
+
 
 	<select id="checkDuplication" resultMap="userMap" parameterType="String">
 		select uno, name, email, pwd, img, intro, role, join_dt, rcp_url
@@ -67,19 +91,21 @@
 	</select>
 
 	<insert id="insert" parameterType="user">
-		insert into users(name, email, pwd, role, join_dt)
-		values ( #{userName}, #{email}, #{password}, 'user', now())
+		insert into users(name, email,
+		pwd, role, join_dt)
+		values ( #{userName}, #{email}, #{password},
+		'user', now())
 	</insert>
-	
-	<update  id="update" parameterType="user" >
-      UPDATE users
-      <set>
-        pwd = #{password},
-        intro = #{intro},
-        img = #{image}
-      </set>
-      WHERE email = #{email}
-   </update>
+
+	<update id="update" parameterType="user">
+		UPDATE users
+		<set>
+			pwd = #{password},
+			intro = #{intro},
+			img = #{image}
+		</set>
+		WHERE email = #{email}
+	</update>
 
 
 </mapper>

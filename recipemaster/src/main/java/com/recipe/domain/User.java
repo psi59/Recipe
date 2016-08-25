@@ -19,8 +19,22 @@ public class User {
   private String recipeUrl;
   private int recipeCount;
   private int subsCount;
+  private int likeCount;
   private int rownum;
+  private int totalPoint;
   
+  public int getTotalPoint() {
+    return totalPoint;
+  }
+  public void setTotalPoint(int totalPoint) {
+    this.totalPoint = totalPoint;
+  }
+  public int getLikeCount() {
+    return likeCount;
+  }
+  public void setLikeCount(int likeCount) {
+    this.likeCount = likeCount;
+  }
   public int getRownum() {
     return rownum;
   }
@@ -97,7 +111,8 @@ public class User {
   public String toString() {
     return "User [userNo=" + userNo + ", userName=" + userName + ", email=" + email + ", password=" + password
         + ", image=" + image + ", intro=" + intro + ", role=" + role + ", joinDate=" + joinDate + ", recipeUrl="
-        + recipeUrl + ", recipeCount=" + recipeCount + ", subsCount=" + subsCount + ", rownum=" + rownum + "]";
+        + recipeUrl + ", recipeCount=" + recipeCount + ", subsCount=" + subsCount + ", likeCount=" + likeCount
+        + ", rownum=" + rownum + ", totalPoint=" + totalPoint + "]";
   }
-     
+  
 }

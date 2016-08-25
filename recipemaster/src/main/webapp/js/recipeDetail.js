@@ -52,7 +52,7 @@ $(function(){
 						return;
 					}
 					console.log(result);
-					console.log(result.data.recipeDetail.indexOf('ge"'));
+					console.log(result.data.recipeDetail.indexOf('ge'));
 					$('.rcp-header > .title').text(result.data.recipeName);
 					$('.rcp-header > .date').text(result.data.recipeDate);
 					$('.hash').text(result.data.intro);

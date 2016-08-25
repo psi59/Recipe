@@ -108,7 +108,7 @@ $(document).ready(function(){
 		var template = Handlebars.compile(source);
 
 		$.ajax({
-			url : 'user/list.json',
+			url : 'user/best.json',
 			dataType : 'json',
 			method : 'get',
 			success : function(result) {
