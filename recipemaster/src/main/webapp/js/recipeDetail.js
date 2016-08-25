@@ -38,7 +38,6 @@ $(function(){
 
 		$(document).on('click','.detail',function(event) {
 			event.preventDefault();
-			console.log($(event.target).parent().children('input[name="recipeNo"]').val());
 			$.ajax({
 				url : 'recipe/recipeDetail.json',
 				method : 'post',
@@ -51,8 +50,10 @@ $(function(){
 						swal('게시물 조회 오류');
 						return;
 					}
+					console.log("reproduce1 :"+result.data.recipeProcedure[0].recipeProduce);
+					console.log("reproduce2 :"+jQuery.parseJSON(JSON.stringify(result.data.recipeProcedure[0].recipeProduce)));
+					console.log("reproduce3 :"+JSON.parse(JSON.stringify(result.data.recipeProcedure)));
 				
-					console.log(result.data);
 					
 					$('.rcp-header > .title').text(result.data.recipeName);
 					$('.rcp-header > .date').text(result.data.recipeDate);
@@ -65,14 +66,15 @@ $(function(){
 							$('.rcp-304').append( comDetailInfoTemp(result) );
 							$('.rcp-info-images').append( comDetailImageMain(result) );
 							$('.rcp-detail-step').append( comDetailImageStep(result) );
+							$('.rcp-explanation').text(result.data.recipeProcedure[0].reproduce);
 							slider = $('.rcp-detail-body').bxSlider({
 								mode:'vertical',
 								pager: false,
 								moveSlides: 1
 							});
 
-							if( eval(sessionStorage.getItem('data')) != null ){			
-								if(result.data.scrapUser == eval(sessionStorage.getItem('data'))[0].userNo){
+							if( eval(jsonData)[0] != null ){			
+								if(result.data.scrapUser == eval(jsonData)[0].userNo){
 									$('.rcp-scrap-button-text').attr('name','scrap');
 									$('.rcp-scrap-button-text').css('border','1px solid #ffce6e');
 									$('.rcp-detail-scrap').attr('style','color:#ffce6e');
@@ -110,31 +112,8 @@ $(function(){
 		});		
 	})
 });		
-//$(function(){
-//$('.detail').click(function() {
-//$.ajax({
-//url : 'recipe/recipeDetail.json?recipeNo=' + $('input[name="recipeNo"]').val(),
-//method : 'get',
-//dataType : 'json',
-//success : function(result) {
-//if (result.status != 'success') {
-//swal('게시물 조회 오류');
-//return;
-//}
-
-//}
-//,
-//error : function(){
-//swal('서버 요청 오류');
-//}
-//});
-//});		
-//})
 
 
-//----------------------스크랩 요청 AJAX--------------------
-
-//--------------------스크랩 해제 ------------------------------		
 $(function(){
 	$(document).on('click','.rcp-detail-scrap',function(event){
 		event.preventDefault();
@@ -145,7 +124,7 @@ $(function(){
 				method:'post',
 				dataType:'json',
 				data: {
-					recipeNo:$('.rcp-hidden-recipeNo').val()
+					recipeNo : $(event.target).parent().parent().parent().children('input[class="rcp-hidden-recipeNo"]').val()
 				},
 				success:function(result){
 					if (result.status != 'success') {
@@ -165,14 +144,15 @@ $(function(){
 
 		}else{
 //			-------------------------------스크랩 등록 --------------------------------
-			console.log('여기옴? else문 ');	
+			console.log('여기옴? else문 ');
+			console.log($(event.target).parent().parent().parent().children('input[class="rcp-hidden-recipeNo"]').val());
 			event.preventDefault();	
 			$.ajax({
 				url:'recipe/scrap.json',
 				method:'post',
 				dataType:'json',
 				data: {
-					recipeNo:$('.detail-images .rcp-hidden-recipeNo').val()
+					recipeNo : $(event.target).parent().parent().parent().children('input[class="rcp-hidden-recipeNo"]').val()
 				},
 				success:function(result){
 
