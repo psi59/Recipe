@@ -11,7 +11,7 @@
 	href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/template/font-awesome.min.css">
 <link rel="stylesheet" href="css/template/animate.css">
-<link rel="stylesheet" href="css/template/main.css">
+<!-- <link rel="stylesheet" href="css/template/main.css"> -->
 
 <link rel="stylesheet" href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
  
@@ -31,6 +31,7 @@
 <link rel="stylesheet" href="css/list_countOrder.css">
 <link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.min.css">
 <link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.themes.min.css">
+
 <!-- --- 아이콘 CDN ----- -->
 <!-- <script src="js/template/d9e67edb08.js"></script> -->
 
@@ -109,35 +110,75 @@
 	<!-- ------------------------------------------------------------------------------- -->
 
   <!----------------------- 리스트 카테고리 ----------------------->
-	<section id="rcp-list-category">
-    <div id="rcp-nation-category">
+  <div id="accordion">
+    <h3 id="category-accordion-btn">CATEGORY</h3>
+	  <div>
+			<section id="rcp-category-section" class="row">			
+			  <div class="rcp-category col-md-2 col-md-offset-2">
+				  <div>나라별</div>
+				  
+			    <div class="rcp-nation-category-box">	         
+			     <div>
+					   <input type="checkbox" name="cb1" id="cb1" value="한식"/>
+					   <label class="rcp-category-click" for="cb1">한식</label>
+				   </div>
+				   
+				   <div>
+					   <input type="checkbox" name="cb1" id="cb2" value="일식"/>
+					   <label class="rcp-category-click" for="cb2">일식</label>
+				   </div>
+				   
+				   <div>
+					   <input type="checkbox" name="cb1" id="cb3" value="중식"/>
+					   <label class="rcp-category-click" for="cb3">중식</label>	   
+			     </div>	     
+			    </div>
+		    
+		    </div>
+		    
+		    <div class="rcp-category col-md-2">
+		      <div>상황별</div>
+		      
+		      <div class="rcp-nation-category-box">           
+		       <div>
+		         <input type="checkbox" name="cb2" id="cb4" value="야식"/>
+		         <label class="rcp-category-click" for="cb4">야식</label>
+		       </div>
+		       
+		       <div>
+		         <input type="checkbox" name="cb2" id="cb5" value="술안주"/>
+		         <label class="rcp-category-click" for="cb5">술안주</label>
+		       </div>
+		       
+		       <div>
+		         <input type="checkbox" name="cb2" id="cb6" value="초간단"/>
+		         <label class="rcp-category-click" for="cb6">초간단</label>     
+		       </div>      
+		      </div>
+		    
+		    </div>
+			</section>
+		</div>
+	</div>
+	
+	   <!-- <input type="checkbox" name="cb" id="cb4" />
+     <label for="cb4">분식</label>
      
-	   <input type="checkbox" name="cb" id="cb1" />
-	   <label for="cb1">한식</label>
-	   
-	   <input type="checkbox" name="cb" id="cb2" />
-	   <label for="cb2">일식</label>
-	   
-	   <input type="checkbox" name="cb" id="cb3" />
-	   <label for="cb3">중식</label>
-	   
-	   <input type="checkbox" name="cb" id="cb4" />
-	   <label for="cb4">분식</label>
-	   
-	  </div>
-    
-    
-    <!-- <input type="checkbox" name="cb" id="cb5" />
+     <input type="checkbox" name="cb" id="cb5" />
      <label for="cb5">찜</label>    
+     
      <input type="checkbox" name="cb" id="cb6" />
      <label for="cb6">탕</label>    
+     
      <input type="checkbox" name="cb" id="cb7" />
      <label for="cb7">면요리</label>
+     
      <input type="checkbox" name="cb" id="cb8" />
      <label for="cb8">야식</label>
+     
      <input type="checkbox" name="cb" id="cb9" />
      <label for="cb9">초간단</label> -->
-	</section>
+     
 	<!----------------------- /리스트 카테고리 ----------------------->
 	<!----------------------- 리스트 레시피 카운트 및 정렬 ----------------------->
 	<section id="rcp-list-count-order">	
@@ -440,12 +481,11 @@
 
 	<!--  사용자 js -->
 	<script src="js/jquery.bpopup.min.js"></script>
-	<script src="js/common.js"></script>
-	<script src="js/detail.js"></script>
-<!-- 	<script src="js/recipeDetail.js"></script> -->
+	<script src="js/common.js"></script>	
+  <script src="js/recipeDetail.js"></script>
 	<script src="js/login.js"></script>
 	<!-- 용이 userUpdate -->
-<!-- 	<script src="js/updateUser.js"></script> -->
+	<script src="js/updateUser.js"></script>
 	<!-- 성현 -->	
 	<script src="js/common/popup.js"></script>
   <script src="js/common/chefCard.js"></script>

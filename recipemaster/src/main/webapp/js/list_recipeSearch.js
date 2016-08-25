@@ -1,6 +1,10 @@
 /* 검색 및 정렬 이벤트 -성현 */
 $(function() {
-
+		
+	$( "#accordion" ).accordion({
+		collapsible: true
+	});
+	
 	$('#searchKeyword').focus();
 	
 	// 처음화면에 모든 레시피들을 보여준다
@@ -13,11 +17,27 @@ $(function() {
 	});
 	
 	// 키보드에서 뗐을때의 검색 이벤트	
-	$('#searchKeyword').keyup( function(){
+	$('#searchKeyword').keyup(function(){
 		$("body").scrollTop(0);
 		search('newest', $('#order-latest-btn').val());		
 	})
 	
+	// 카테고리 라벨 변경 이벤트
+	$('input[type=checkbox]').change(function(){		
+		$("body").scrollTop(0);
+		search('newest', $('#order-latest-btn').val());
+	})
+	
+	// 카테고리 라벨 클릭 했을때 라디오 박스 체크해제 이벤트
+	/*$('.rcp-category-click').click(function(){
+		alert('과연 ? : '+$(this).prev().is(':checked'));
+		
+		if( $(this).prev().is(':checked') ){
+			$(this).prev().removeAttr('checked');			
+		}
+		
+		alert('과연 ? : '+$(this).prev().is(':checked'));
+	})	*/
 	
 	// 최신순 정렬
 	$('#order-latest-btn').click(function(){		
@@ -88,7 +108,7 @@ $(function() {
 		
 	//$('#searchKeyword').easyAutocomplete(options);
 	
-	
+	// 고재현
 	$(document).on('click',('.rcp-like'),function(event){
 		  event.preventDefault();
 		  if($(event.target).is('.active') ){
@@ -137,7 +157,7 @@ $(function() {
 
 });
 
-// 처음 검색했을때의 1페이지 결과 가져오기
+// 처음 검색했을때의 1페이지 결과 가져오기 -이성현
 function search(sort,order){ 
 			
 	var page = $('#recipe-card-searchPage-template').text();
@@ -146,6 +166,15 @@ function search(sort,order){
 	var source = $('#recipe-card-search-template').text();
 	var template = Handlebars.compile(source);
 	
+	var categoryList = '';
+	$('input[type=checkbox]:checked').each(function(index){
+		if(index !== ($('input[type=checkbox]:checked').length-1)){
+			categoryList += $(this).val()+','; 
+		} else {
+			categoryList += $(this).val();
+		}				
+	})	
+	
 	$.ajax({
 		url : 'recipe/listSearch.json',
 		method : 'post',
@@ -153,7 +182,8 @@ function search(sort,order){
 			searchKeyword : $('#searchKeyword').val(),
 			searchCondition : $("#searchCondition-select option:selected").val(),
 			sortCondition : sort,
-			orderCondition : order
+			orderCondition : order,
+			categoryList : categoryList	
 		},
 		dataType : 'json',
 		success : function(result) {
@@ -175,7 +205,7 @@ function search(sort,order){
 	})	
 }
 
-// 스크롤 끝까지 내렸을때 추가될 결과 한페이지씩 가져오기
+// 스크롤 끝까지 내렸을때 추가될 결과 한페이지씩 가져오기 -이성현
 function searchScrollAppend(){ 
 		
 	var page = $('#recipe-card-searchPage-template').text();
@@ -190,6 +220,15 @@ function searchScrollAppend(){
 		var order = $('#order-grade-btn').val();
 	}
 	
+	var categoryList = '';
+	$('input[type=checkbox]:checked').each(function(index){
+		if(index !== ($('input[type=checkbox]:checked').length-1)){
+			categoryList += $(this).val()+','; 
+		} else {
+			categoryList += $(this).val();
+		}				
+	})	
+	
 	if($('#search-pageNo').val() != 'lastPage'){
 		var pageNo = parseInt($('#search-pageNo').val())+1;
 		$.ajax({
@@ -200,7 +239,8 @@ function searchScrollAppend(){
 				searchKeyword : $('#searchKeyword').val(),
 				searchCondition : $("#searchCondition-select option:selected").val(),
 				sortCondition : $('#sort-condition').val(),
-				orderCondition : order
+				orderCondition : order,
+				categoryList : categoryList	
 			},
 			dataType : 'json',
 			success : function(result) {

@@ -37,19 +37,36 @@
     <result column="mtst" property="materialStatement" />
   </resultMap>
   
-  
-   
   <select id="recipeSearch" resultMap="recipeMap" parameterType="Map">
     SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits,
            r.rgst, truncate(r.gpa,1) gpa, u.uno, u.name userName, l.rcpno, l.lc_dt, l.uno likeUser
-    FROM users u INNER JOIN rcps r on u.uno=r.uno
-         LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=#{userNo}      
-    <if test="search.searchCondition == 'recipe'">
+    FROM users u INNER JOIN rcps r on u.uno=r.uno         
+    LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=#{userNo}
+         
+         <if test="!categorySize eq 0">        
+	         ,(SELECT rcpno , count(*) vc FROM
+	         (SELECT c.ctgno, c.name, cn.rcpno from ctg c, ctg_no cn where c.ctgno = cn.ctgno and c.name IN (
+	         <foreach collection="search.categoryList" item="item" separator=",">
+	          #{item}
+	         </foreach>
+	         )) a
+	         GROUP BY rcpno) d         
+	         WHERE r.rcpno = d.rcpno AND vc = #{categorySize}
+         </if>
+                 
+    <if test="search.searchCondition == 'recipe' and categorySize eq 0">
       WHERE r.name LIKE '%${search.searchKeyword}%'
     </if>
-    <if test="search.searchCondition == 'chef'">
+    <if test="search.searchCondition == 'recipe' and !categorySize eq 0">
+      AND r.name LIKE '%${search.searchKeyword}%'
+    </if>
+    <if test="search.searchCondition == 'chef' and categorySize eq 0">
       WHERE u.name LIKE '%${search.searchKeyword}%'
     </if>
+    <if test="search.searchCondition == 'recipe' and !categorySize eq 0">
+      AND r.name LIKE '%${search.searchKeyword}%'
+    </if> 
+    
     <if test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'">
       ORDER BY r.rcpno DESC
     </if>
@@ -65,16 +82,67 @@
     limit #{startIndex}, #{len}
   </select>
   
-  <select id="recipeCount" resultType="int" parameterType="Map">
-    SELECT count(*)
+  <!-- <select id="recipeSearch" resultMap="recipeMap" parameterType="Map">
+    SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits,
+           r.rgst, truncate(r.gpa,1) gpa, u.uno, u.name userName, l.rcpno, l.lc_dt, l.uno likeUser
     FROM users u INNER JOIN rcps r on u.uno=r.uno
-         LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=#{userNo}      
+         LEFT OUTER JOIN rcp_ctg c ON r.rcpno=c.rcpno
+         LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=#{userNo}  
     <if test="search.searchCondition == 'recipe'">
       WHERE r.name LIKE '%${search.searchKeyword}%'
     </if>
     <if test="search.searchCondition == 'chef'">
       WHERE u.name LIKE '%${search.searchKeyword}%'
     </if>
+    
+    <foreach collection="search.categoryList" item="item">
+      AND c.ctg LIKE '%${item}%'
+    </foreach>    
+    
+    <if test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'">
+      ORDER BY r.rcpno DESC
+    </if>
+    <if test="search.sortCondition == 'newest' and search.orderCondition == 'ASC'">
+      ORDER BY r.rcpno ASC
+    </if>
+    <if test="search.sortCondition == 'grade' and search.orderCondition == 'DESC'">
+      ORDER BY r.gpa DESC
+    </if>
+    <if test="search.sortCondition == 'grade' and search.orderCondition == 'ASC'">
+      ORDER BY r.gpa ASC
+    </if>
+    limit #{startIndex}, #{len}
+  </select> -->
+  
+   <select id="recipeCount" resultType="int" parameterType="Map">
+    SELECT count(*)
+    FROM users u INNER JOIN rcps r on u.uno=r.uno         
+    LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=#{userNo}    
+    
+    <if test="!categorySize eq 0">        
+	    ,(SELECT rcpno , count(*) vc FROM
+	    (SELECT c.ctgno, c.name, cn.rcpno from ctg c, ctg_no cn where c.ctgno = cn.ctgno and c.name IN (
+	    <foreach collection="search.categoryList" item="item" separator=",">
+	     #{item}
+	    </foreach>
+	    )) a
+	    GROUP BY rcpno) d         
+	    WHERE r.rcpno = d.rcpno AND vc = #{categorySize}
+    </if>
+                 
+    <if test="search.searchCondition == 'recipe' and categorySize eq 0">
+      WHERE r.name LIKE '%${search.searchKeyword}%'
+    </if>
+    <if test="search.searchCondition == 'recipe' and !categorySize eq 0">
+      AND r.name LIKE '%${search.searchKeyword}%'
+    </if>
+    <if test="search.searchCondition == 'chef' and categorySize eq 0">
+      WHERE u.name LIKE '%${search.searchKeyword}%'
+    </if>
+    <if test="search.searchCondition == 'recipe' and !categorySize eq 0">
+      AND r.name LIKE '%${search.searchKeyword}%'
+    </if> 
+    
     <if test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'">
       ORDER BY r.rcpno DESC
     </if>
@@ -89,6 +157,37 @@
     </if>
     limit #{startIndex}, #{len}
   </select>
+  
+ <!--  <select id="recipeCount" resultType="int" parameterType="Map">
+    SELECT count(*)
+    FROM users u INNER JOIN rcps r on u.uno=r.uno
+         LEFT OUTER JOIN rcp_ctg c ON r.rcpno=c.rcpno
+         LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=#{userNo}     
+    <if test="search.searchCondition == 'recipe'">
+      WHERE r.name LIKE '%${search.searchKeyword}%'
+    </if>
+    <if test="search.searchCondition == 'chef'">
+      WHERE u.name LIKE '%${search.searchKeyword}%'
+    </if>
+    
+    <foreach collection="search.categoryList" item="item">
+      AND c.ctg LIKE '%${item}%'
+    </foreach>
+    
+    <if test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'">
+      ORDER BY r.rcpno DESC
+    </if>
+    <if test="search.sortCondition == 'newest' and search.orderCondition == 'ASC'">
+      ORDER BY r.rcpno ASC
+    </if>
+    <if test="search.sortCondition == 'grade' and search.orderCondition == 'DESC'">
+      ORDER BY r.gpa DESC
+    </if>
+    <if test="search.sortCondition == 'grade' and search.orderCondition == 'ASC'">
+      ORDER BY r.gpa ASC
+    </if>
+    limit #{startIndex}, #{len}
+  </select> -->
   
   <select id="selectRecipeName" parameterType="String" resultType="String">
 	SELECT name

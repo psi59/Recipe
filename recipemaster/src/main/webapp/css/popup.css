@@ -2,9 +2,7 @@
 
 @import url(https://fonts.googleapis.com/css?family=Dosis:400,700,600,500);
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
-*{
-font-family: 'Noto Sans KR', sans-serif;
-}
+
 .light-grey{ color:#999;}
 .mid-grey{ color:#505050;}
 .dark-grey{ color:#141414;}

@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,7 +41,8 @@ public class RecipeController {
   @ResponseBody
   public String listSearch(@RequestParam(defaultValue="1") int pageNo,
                            @RequestParam(defaultValue="8") int pageSize,
-                           Search search, HttpSession session){
+                           Search search, @RequestParam(value="categoryList") List<String> categoryList, HttpSession session){
+	    
     HashMap<String,Object> result = new HashMap<>();     
     int recipeCount = 0;    
     
@@ -50,7 +50,8 @@ public class RecipeController {
     if(session.getAttribute("userNo") != null){
       userNo = (Integer)(session.getAttribute("userNo"));
     }
-    
+    //카테고리 list를 search 객체에 담는다.    
+    search.setCategoryList(categoryList);
     List<Recipe> list = recipeService.getRecipeSearchList(pageNo, pageSize, search, userNo);
     
     // 처음에만 레시피카드들을 카운트 한다.

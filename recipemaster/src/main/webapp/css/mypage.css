@@ -1,9 +1,6 @@
 @CHARSET "UTF-8";
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 
-*{
-font-family: 'Hanna', serif;
-}
 .rcp-profile-img {
 	margin-top: 20%;
 	width: 50%;

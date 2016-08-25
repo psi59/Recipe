@@ -1,30 +1,39 @@
-@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
-*{
-font-family: 'Noto Sans KR', sans-serif;
+#category-accordion-btn {
+  margin-top: 110px;	
 }
-#rcp-list-category {
+
+#rcp-category-section {
 	color: #000000;
-	font-size: 30px;
+	font-size: 23px;
 	text-align: center;
 	box-shadow: 0px 5px 5px lightgray;
 	margin-bottom: 10px;
-	margin-top: 110px;
-	height: 500px;
+	/* margin-top: 120px; */
+	height: 200px;
 }
 
-/* #rcp-nation-category{
-	width: 400px;
-	height: 500px;
-}  */
+.rcp-category {
+	width: 200px;
+	text-align: center;
+}
 
-#rcp-list-category input[type="checkbox"],
-#rcp-list-category input[type="radio"] {
+.rcp-nation-category-box {	
+	border: 2px solid black;
+	border-radius: 7px;
+	box-shadow: 3px 3px 3px #949292;
+	text-align: center;
+}
+
+
+
+.rcp-category input[type="checkbox"],
+.rcp-category input[type="radio"] {
   position: absolute;
   opacity: 0;
   z-index: -1;
 }
-#rcp-list-category label {	
-  font-family: 'Jeju Gothic', serif;
+.rcp-category label {	
+  /* font-family: 'Jeju Gothic', serif; */
   position: relative;
   display: inline-block;
   margin-right: 10px;
@@ -34,7 +43,7 @@ font-family: 'Noto Sans KR', sans-serif;
   line-height: 36px;
   cursor: pointer;
 }
-#rcp-list-category label::before {
+.rcp-category label::before {
   content: " ";
   position: absolute;
   top: 6px;
@@ -46,25 +55,25 @@ font-family: 'Noto Sans KR', sans-serif;
   border-radius: 4px;
   z-index: -1;
 }
-#rcp-list-category input[type="radio"] + label::before {
+.rcp-category input[type="radio"] + label::before {
   border-radius: 18px;
 }
 /* Checked */
-#rcp-list-category input[type="checkbox"]:checked + label,
-#rcp-list-category input[type="radio"]:checked + label {
+.rcp-category input[type="checkbox"]:checked + label,
+.rcp-category input[type="radio"]:checked + label {
   padding-left: 10px;
   color: #fff;
 }
-#rcp-list-category input[type="checkbox"]:checked + label::before,
-#rcp-list-category input[type="radio"]:checked + label::before {
+.rcp-category input[type="checkbox"]:checked + label::before,
+.rcp-category input[type="radio"]:checked + label::before {
   top: 0;
   width: 100%;
   height: 100%;
   background: #b51515;
 }
 /* Transition */
-#rcp-list-category label,
-#rcp-list-category label::before {
+.rcp-category label,
+.rcp-category label::before {
   -webkit-transition: .25s all ease;
   -o-transition: .25s all ease;
   transition: .25s all ease;
