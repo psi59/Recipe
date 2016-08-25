@@ -170,23 +170,23 @@ public class RecipeController {
 	}
 
 //---------------------고재현 -------------------------
-
 	 @RequestMapping(path="list",produces="application/json;charset=UTF-8")
-	  @ResponseBody
+	 @ResponseBody
 	  public String list(
 	      @RequestParam int userNo, 
 	      @RequestParam(defaultValue="4") int pageSize,int request){
 	    HashMap<String,Object> result = new HashMap<>();
-	    /*System.out.println("userNo"+userNo);*/
 	    List<Recipe> list = recipeService.getRecipeList(userNo, pageSize,request);
 	    for(int i =0; i<list.size(); i++){
 	    }
 	    try{
 	      result.put("status","success");
 	      result.put("data", list);
+		  System.out.println(list);
 	    }catch (Exception e){
 	      result.put("status", "false");
 	    }
+	    
 	    return new Gson().toJson(result);
 	  }
 	 
@@ -210,12 +210,13 @@ public class RecipeController {
 		recipe.setHits(recipe.getHits()+1);
 		recipeService.updateHits(recipe);
 	try{
-			result.put("status","success");
-			result.put("data", recipe);
+	  result.put("status","success");
+	  result.put("data",recipe);
+			System.out.println(recipe);
 		}catch (Exception e){
 			result.put("status", "false");
 		}
-
+		
 		return new Gson().toJson(result);
 	}
 	
@@ -267,7 +268,6 @@ public class RecipeController {
     HashMap<String,Object> result = new HashMap<>();
     Recipe recipe = new Recipe();
     try{
-      System.out.println("오냐??"+userNo);
     //구독한 사람 뽑는다.
       List<Recipe> userNoList = recipeService.selectSubscribeUno(userNo);
       
@@ -288,6 +288,7 @@ public class RecipeController {
     }catch (Exception e){
       result.put("status", "false");
     }
+    System.out.println(result);
     return new Gson().toJson(result);
   }
   
@@ -366,10 +367,12 @@ public class RecipeController {
 				if(mt.getMaterialStatement()==1){
 					foodstuff.put("name", mt.getMaterialName());
 					foodstuff.put("no", mt.getMaterialNo());
+					foodstuff.put("category", mt.getMaterialStatement());
 					foodstuffList.add(foodstuff);
 				} else {
 					seasoning.put("name", mt.getMaterialName());
 					seasoning.put("no", mt.getMaterialNo());
+					seasoning.put("category", mt.getMaterialStatement());
 					seasoningList.add(seasoning);
 				}
 				result.put("foodstuff", foodstuffList);
@@ -386,9 +389,9 @@ public class RecipeController {
 	@ResponseBody
 	public String rank(
 			@RequestParam(defaultValue="1") int pageNo, 
-			@RequestParam(defaultValue="10") int pageSize,int request){
+			@RequestParam(defaultValue="10") int pageSize){
 		HashMap<String,Object> result = new HashMap<>();
-		List<Recipe> list = recipeService.getRecipeList(pageNo, pageSize,request);
+		List<Recipe> list = recipeService.getRecipeRankList(pageNo, pageSize);
 		try{
 			result.put("status","success");
 			result.put("data", list);
@@ -398,26 +401,92 @@ public class RecipeController {
 
 		return new Gson().toJson(result);
 	}
+//
+////커뮤니티 레시피 리스트 : 용  ----  고재현 수정. 
+//  @RequestMapping(path="userPage",produces="application/json;charset=UTF-8")
+//  @ResponseBody 
+//  public String userPage(String email, int request,HttpSession session){
+//    HashMap<String,Object> result = new HashMap<>();
+//    Recipe recipe = new Recipe();
+//    int userNo;
+//    try{
+//      List<Recipe> recipeList = new ArrayList<Recipe>();
+//      List<Recipe> userNumbers = new ArrayList<Recipe>();
+//      System.out.println("parameter email : "+email);
+//      
+//      User user = userService.selectFromEmail(email);
+//      System.out.println("email로 뽑아온 User정보 : "+user);
+//      if(request == 1){
+//      userNumbers = recipeService.selectScrapUserNoMypage(user.getUserNo());     
+//      }else if(request == 2){
+//        
+//      }    
+//      System.out.println("user정보로 뽑은 구독하기 누른 사람 넘버 : "+userNumbers);
+//      if(session.getAttribute("userNo") == null){
+//        userNo = 0;
+//      }else{
+//        userNo = (int)session.getAttribute("userNo");
+//      }
+//      
+//      System.out.println("myrecipe parameter 1 - user.getUserNo : "+user.getUserNo());
+//      System.out.println("myrecipe parameter 2 - session : "+userNo);
+//      if(request == 1){     
+//        recipeList = recipeService.selectMypageRecipe(String.valueOf(user.getUserNo()), userNo,request);      
+//      }else if(request == 2){
+//        System.out.println("여기옴?"+recipe.getScrap()+" : "+userNo+"  : "+request);
+//        recipeList = recipeService.selectMypageRecipe(recipe.getScrap(), userNo,request);
+//      }else if(request == 3){
+//        
+//      }
+//      System.out.println("결과값 : "+recipeList);
+//      result.put("status","success");
+//      result.put("data",recipeList);
+//      result.put("user", user);
+//    }catch (Exception e){
+//      e.printStackTrace();
+//      result.put("status", "false");
+//    }
+// 
+//    return new Gson().toJson(result);
+//  }
 
-	//커뮤니티 레시피 리스트 : 용  ----  고재현 수정. 
-	@RequestMapping(path="comListKo",produces="application/json;charset=UTF-8")
+//커뮤니티 레시피 리스트 : 용  ----  고재현 수정. 
+  @RequestMapping(path="userPage",produces="application/json;charset=UTF-8")
   @ResponseBody 
-  public String comListKo(String email){
-	  HashMap<String,Object> result = new HashMap<>();
-    Recipe recipe = new Recipe();
+  public String userPage(String email, int request,HttpSession session){
+    HashMap<String,Object> result = new HashMap<>();
+   
+    
     try{
+      List<Recipe> recipeList = new ArrayList<Recipe>();
+      List<Recipe> userNumbers = new ArrayList<Recipe>();
+      int userNo = 0; 
       User user = userService.selectFromEmail(email);
-      List<Recipe> userScrapNumbers = recipeService.selectScrapUserNoMypage(user.getUserNo());
-      for(int i =0; i<userScrapNumbers.size(); i++){
-        if(recipe.getScrap() == null){    
-          recipe.setScrap(String.valueOf(userScrapNumbers.get(0).getRecipeNo()));
-        }else{
-          recipe.setScrap(recipe.getScrap()+","+ userScrapNumbers.get(i).getRecipeNo());
-        }
+      System.out.println("email로 뽑아온 User정보 : "+user);
+     
+      userNumbers = recipeService.selectScrapUserNoMypage(user.getUserNo());
+      Recipe recipe = functionForUserNumbers(userNumbers,request);
+      getSession(userNo, session);
+      
+      if(request == 1){
+      recipeList = recipeService.selectMypageRecipe(String.valueOf(user.getUserNo()), userNo,request);      
+      }else if(request == 2){
+        recipeList = recipeService.selectMypageRecipe(recipe.getScrap(), userNo,request);
+      }else if(request == 3){
+        userNumbers = recipeService.selectSubscribeMypage(user.getUserNo());
+        System.out.println("request3 userNumbers : "+ userNumbers);
+        Recipe subscribeRecipe = functionForUserNumbers(userNumbers,request);
+        System.out.println("subscribeRecipeNumbers : "+subscribeRecipe);
+        getSession(userNo, session);
+        recipeList = recipeService.selectMypageRecipe(subscribeRecipe.getScrap(), userNo,request);
       }
-      List<Recipe> scrapList = recipeService.selectScrapMypage(recipe.getScrap(), user.getUserNo());
+      
+
+ 
+      System.out.println("결과값 : "+recipeList);
       result.put("status","success");
-      result.put("data",scrapList);
+      result.put("data",recipeList);
+      result.put("user", user);
     }catch (Exception e){
       e.printStackTrace();
       result.put("status", "false");
@@ -426,6 +495,38 @@ public class RecipeController {
     return new Gson().toJson(result);
   }
 
+  public int getSession(int userNo,HttpSession session){  
+    if(session.getAttribute("userNo") == null){
+      userNo = 0;
+    }else{
+      userNo = (int)session.getAttribute("userNo");
+    }
+    return userNo;
+  }
+  
+  public Recipe functionForUserNumbers(List<Recipe> userNumbers,int request){
+    Recipe recipe = new Recipe(); 
+    if(userNumbers.size() == 0 || userNumbers.equals("")){
+      recipe.setScrap("0");
+    }else{        
+      for(int i =0; i<userNumbers.size(); i++){
+        if(recipe.getScrap() == null){    
+          if(request == 3){
+            recipe.setScrap(String.valueOf(userNumbers.get(0).getSubscribeNum()));
+          }else{
+            recipe.setScrap(String.valueOf(userNumbers.get(0).getRecipeNo()));
+          }
+        }else{
+          if(request == 3){
+            recipe.setScrap(recipe.getScrap()+","+ userNumbers.get(i).getSubscribeNum());
+          }else{
+            recipe.setScrap(recipe.getScrap()+","+ userNumbers.get(i).getRecipeNo());
+          }            
+        }
+      }
+    }
+    return recipe;
+  }
   //community준모,용이형
   @RequestMapping(path="comList",produces="application/json;charset=UTF-8")
   @ResponseBody 
@@ -438,10 +539,11 @@ public class RecipeController {
       result.put("status","success");
       result.put("data", myRecipeList);
       result.put("pageNo",pageNo);
+      System.out.println("pageNo::"+result.get("pageNo"));
+      System.out.println("data::"+result.get("data"));
     }catch (Exception e){ 
       result.put("status", "false");
-    }
-    System.out.println(result);
+    } 
     return new Gson().toJson(result);
   }
     }

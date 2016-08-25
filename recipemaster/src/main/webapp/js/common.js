@@ -1,3 +1,9 @@
+function onlyNumber()
+{
+	if ((event.keyCode<48)||(event.keyCode>57))
+	event.returnValue = false;
+}
+
 //날씨 정보 받는 function
 function getWeather(){
 	$.getJSON('http://api.openweathermap.org/data/2.5/weather?lat=37.541&lon=126.986&appid=a0ccb666270bab97723eace09ed1b61c',

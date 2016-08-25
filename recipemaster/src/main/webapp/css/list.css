@@ -1,3 +1,4 @@
+
 @import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
 
 *{
@@ -6,6 +7,10 @@
 
 .active{
 color:#337ab7;
+}
+  
+.rcp-listSize{
+	height:416.22px;
 }
 
 #searchBarKeyword {

@@ -1,4 +1,5 @@
 @CHARSET "UTF-8";
+
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 $main: #7b7de5;
@@ -128,6 +129,8 @@ $main: #7b7de5;
 .rcp-barimg {
   width: 3.2em;
   height: 3.2em;
+  cursor: pointer;
+  
 }
 
 html, body {

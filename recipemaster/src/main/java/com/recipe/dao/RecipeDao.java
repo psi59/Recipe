@@ -11,17 +11,19 @@ public interface RecipeDao {
   void insertMaterials(Map map); // Create
   int insertImageAndProduce(Map map);  
   List<Recipe> recipeList(Map<String,Object> params); // Read or Retrieve
+  List<Recipe> recipeRankList(Map<String,Object> params); //용이
   List<Recipe> recipeSearch(Map<String,Object> params); //Search 성현
   int recipeCount(Map<String,Object> params); //Recipe Count 성현
   List<String> selectRecipeName(String searchValue); //Recipe Name List 성현
-  List<Recipe> selectSbuscribe2(Map<String,Object> params); //준모
+  List<Recipe> selectSubscribe2(Map<String,Object> params); //준모
   int addSubscribe(Map<String,Object> params); //구독하기 추가 고재현
   int  deleteSubscribe(Map<String,Object> params);
   List<Recipe> selectSubscribeUno(int userNo); //구독하기한 userNo추출  고재현
-  List<Recipe> selectSbuscribe(Map<String,Object> params); //구독한 리스트 고재현 //준모 수정
+  List<Recipe> selectSubscribe(Map<String,Object> params); //구독한 리스트 고재현 //준모 수정
   List<Recipe> selectMypage(int userNo);      // mypage리스트  고재현
-  List<Recipe> selectScrapUserNoMypage(int userNo);      // mypageScrap리스트  고재현
-  List<Recipe> selectScrapMypage(Map<String,Object> params);      // mypageScrap리스트  고재현
+  List<Recipe> selectScrapUserNoMypage(int userNo);
+  List<Recipe> selectSubscribeMypage(int userNo);// mypageScrap리스트  고재현
+  List<Recipe> selectMypageRecipe(Map<String,Object> params);      // mypageScrap리스트  고재현
   Recipe selectOne(Map<String,Object> params); // Read or Retrieve
   int update(Recipe recipe); // Update
   int updateHits(Recipe recipe);  //조회수 증가  고재현

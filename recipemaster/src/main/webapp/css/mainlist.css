@@ -4,15 +4,10 @@
   .active{
   color:#337ab7;
   }
-  
- 
-.rcp-image-scale{
-  width : 322px;
-  height : 181px;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: 350px;
 
+
+.active {
+  border-bottom: 0px solid #ecf0f1 !important;
 }
 
 .rcp-image-scale img.image1{
@@ -23,6 +18,17 @@
    
    
 @media(max-width:1023px){
+	  
+.rcp-image-scale{
+  width : 100%;
+  height : 141px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 350px;
+
+}
+	
+	
 .rcp-1024{
 	width:1024px;
 	margin:0 auto;
@@ -227,8 +233,6 @@
     display: block!important;
 
   }
-
-      
   
 }
 
@@ -304,6 +308,8 @@
 /* -------------------------rcp 1024 margin ------------------------------ */
 
 @media(min-width:1024px) and (max-width:1100px){
+	
+	
   .rcp-1024{
    margin-left:1.5%;
    margin-right:1.5%;
@@ -396,9 +402,11 @@
 
 @media(min-width:1023px){
 	
+
 	
 .rcp-height30{
-  height: 30px;
+    height: 20px;
+    margin-top: 10px;
 }
 
 	
@@ -582,6 +590,15 @@
 
 @media (min-width:1023px) and (max-width : 1199px){
 
+.rcp-image-scale{
+  width : 100%;
+  height : 141px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 350px;
+
+}
+	
     .rcp-list h3{
       font-size:15pt;
       margin-top:1em;
@@ -612,8 +629,33 @@
 }
 
 
+@media (min-width:1200px) and (max-width : 1360px){
+  
+.rcp-image-scale{
+  width : 100%;
+  height : 141px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 350px;
 
+}
+}
+
+@media (min-width:1360px) and (max-width : 1485px){
+  
+.rcp-image-scale{
+  width : 100%;
+  height : 155px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 350px;
+
+}
+
+}
 @media (min-width:1200px) and (max-width : 1400px){
+	
+	
 
 		.rcp-list h3{
 		  font-size:14pt;
@@ -669,6 +711,15 @@
     font-size:10pt;
     margin-bottom: 0.05em;
   }
+    
+.rcp-image-scale{
+  width : 100%;
+  height : 181px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 350px;
+
+}
 }
 
 

@@ -22,7 +22,7 @@
   
   <!-- DaoImpl 객체 생성  -->
   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-    <property name="basePackage" value="com/recipe/dao" />
+    <property name="basePackage" value="com.recipe.dao" />
   </bean>
   
 </beans>

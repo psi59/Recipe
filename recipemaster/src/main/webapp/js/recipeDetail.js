@@ -51,7 +51,6 @@ $(function(){
 						swal('게시물 조회 오류');
 						return;
 					}
-					console.log(result);
 					$('.rcp-header > .title').text(result.data.recipeName);
 					$('.rcp-header > .date').text(result.data.recipeDate);
 					$('.hash').text(result.data.intro);

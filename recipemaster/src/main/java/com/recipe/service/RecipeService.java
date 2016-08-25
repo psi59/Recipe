@@ -14,6 +14,7 @@ public interface RecipeService {
   void likeDown(Recipe recipe);
   List<String> getRecipeNameList(String searchValue); //레시피 이름 자동완성 -이성현
   List<Recipe> getRecipeList(int pageNo, int pageSize, int request);
+  List<Recipe> getRecipeRankList(int pageNo, int pageSize);
   List<Recipe> getRecipeSearchList(int pageNo, int pageSize, Search search, int userNo); //레시피 페이지 검색 -이성현
   int getRecipeCount(int pageNo, int pageSize, Search search, int userNo);
   List<Recipe> selectSbuscribe2(String userNo, int pageNo, int pageSize); //준모,용이형
@@ -23,7 +24,8 @@ public interface RecipeService {
   List<Recipe> selectSbuscribe(String scsUserNo, int pageNo, int pageSize); //준모 수정
   List<Recipe> selectMypage(int userNo);    
   List<Recipe> selectScrapUserNoMypage(int userNo);
-  List<Recipe> selectScrapMypage(String userNumbers, int userNo);
+  List<Recipe> selectSubscribeMypage(int userNo);
+  List<Recipe> selectMypageRecipe(String userNumbers, int userNo, int request);
   Recipe getRecipe(int recipeNo,int userNo);
   int updateRecipe(Recipe recipe);
   int updateHits(Recipe recipe);

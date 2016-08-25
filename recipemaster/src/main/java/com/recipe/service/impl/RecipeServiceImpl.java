@@ -58,6 +58,15 @@ public class RecipeServiceImpl implements RecipeService {
 		params.put("len", pageSize);
 		return recipeDao.recipeList(params);
 	}
+	
+	@Override
+  public List<Recipe> getRecipeRankList(int pageNo,int pageSize) {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("startIndex", (pageNo - 1) * pageSize);
+    params.put("len", pageSize);
+    return recipeDao.recipeRankList(params);
+  }
+	
 
 	@Override
 	public Recipe getRecipe(int recipeNo, int userNo) {
@@ -121,7 +130,7 @@ public class RecipeServiceImpl implements RecipeService {
       params.put("startIndex", (pageNo - 1) * pageSize);
       params.put("len", pageSize);
       
-	    return recipeDao.selectSbuscribe(params);
+	    return recipeDao.selectSubscribe(params);
 	  }
 	  
 	  //준
@@ -131,7 +140,7 @@ public class RecipeServiceImpl implements RecipeService {
       params.put("userNo", userNo);
       params.put("startIndex", (pageNo - 1) * pageSize);
       params.put("len", pageSize);
-      return recipeDao.selectSbuscribe2(params);
+      return recipeDao.selectSubscribe2(params);
     }
     @Override
     public int addScrap(int userNo, int recipeNo) {
@@ -170,11 +179,12 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public List<Recipe> selectScrapMypage(String userNumbers, int userNo) {
+    public List<Recipe> selectMypageRecipe(String userNumbers, int userNo,int request) {
       HashMap<String,Object> params = new HashMap<>();
       params.put("userNumbers", userNumbers);
       params.put("userNo", userNo);
-      return recipeDao.selectScrapMypage(params);
+      params.put("request", request);
+      return recipeDao.selectMypageRecipe(params);
     }
 
     @Override
@@ -183,6 +193,12 @@ public class RecipeServiceImpl implements RecipeService {
       params.put("toUserNo", toUserNo);
       params.put("fromUserNo", fromUserNo);
       return recipeDao.deleteSubscribe(params);
+    }
+
+    @Override
+    public List<Recipe> selectSubscribeMypage(int userNo) {
+      // TODO Auto-generated method stub
+      return recipeDao.selectSubscribeMypage(userNo);
     }
 	
 }

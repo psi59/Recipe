@@ -11,6 +11,8 @@ $(function(){
 		   
 		});
 	});
+	
+	
 });
 
 function scsRcpListScroll(){ 
@@ -68,8 +70,11 @@ function scsRcpListScrollAppend(){
 	        swal('실패 ~');
 	        return;
 	      }
-	      $('#tabs-2 .rcp-subscribe').append( comOddSubscribe(result) );   
-	      $('#scsRcpList-pageNo').val(result.pageNo);
+	     
+	    	  $('#tabs-2 .rcp-subscribe').append( comOddSubscribe(result) );   
+		      $('#scsRcpList-pageNo').val(result.pageNo);
+		
+	    	 
 	    },
 	    error : function() {
 	      swal('오호라~','더이상 데이터가 없습니다.')

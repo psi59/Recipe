@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.recipe.domain.User;
 import com.recipe.domain.Visitor;
 import com.recipe.service.VisitorService;
 
@@ -94,11 +95,12 @@ public class VisitorController {
   
   @RequestMapping(path="loadMyPage",produces="application/json;charset=UTF-8")
   @ResponseBody 
-  public String loadMyPage(int userNo,HttpSession session){
+  public String loadMyPage(HttpSession session){
 
     HashMap<String,Object> result = new HashMap<>();
+    
     try{
-      result = visitorService.loadMyPage((int)session.getAttribute("userNo"));
+      result = visitorService.loadMyPage((int)((User)session.getAttribute("loginUser")).getUserNo());
       result.put("status","success");
     }catch (Exception e){ 
       result.put("status", "false");
