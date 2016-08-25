@@ -16,7 +16,7 @@ $(function () {
 				},
 				function(isConfirm) {
 					location.href = "index.html"
-				});
+				}); 
 			} 
 			if(result.status == 'success'){
 
