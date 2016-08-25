@@ -7,14 +7,19 @@
 <!-- Template css -->
 <link rel="stylesheet" href="css/template/animate.css">
 <link rel="stylesheet" href="css/template/main.css">
-<link rel="stylesheet" href="/node_modules/sweetalert/dist/sweetalert.css">
 <link rel="stylesheet"
-  href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+	href="/node_modules/sweetalert/dist/sweetalert.css">
 <link rel="stylesheet"
-  href="node_modules/blueimp-file-upload/css/jquery.fileupload.css">
-<link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.min.css">
-<link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.themes.min.css">
-
+	href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="node_modules/blueimp-file-upload/css/jquery.fileupload.css">
+<link rel="stylesheet"
+	href="node_modules/easy-autocomplete/dist/easy-autocomplete.min.css">
+<link rel="stylesheet"
+	href="node_modules/easy-autocomplete/dist/easy-autocomplete.themes.min.css">
+<link rel="stylesheet"
+  href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
+  
 <!-- 사용자 정의 css -->
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/userinfobox.css">
@@ -28,207 +33,215 @@
 	overflow: scroll;
 	overflow-y: hidden;
 	width: 100%;
-	white-space: nowrap; 
+	white-space: nowrap;
 }
 
-.mtWrapper{
-    border: 1px solid #BDBDBD;
-    float: left;
-    padding: 10px;
-}
-
-.navbar{
-  top: 0px !important;
-  background-color: #B51515 !important;
+.navbar {
+	top: 0px !important;
+	background-color: #B51515 !important;
 }
 
 #representImgs>span {
 	margin: 10px;
 }
 
-.mtName{
-  height: 43px;
-  text-align:center:;
-  padding:10px;
-  float: left;
+.mtWrapper{
+  text-align: center;
+  font-size: 13px;
+}
+
+.mtName {
+	width: 44%;
+  text-align: right;
+}
+
+.mtAmount{
+  width: 48%;
+  text-align: left;
 }
 </style>
 </head>
 <body>
-  
-  <!--준모_login------------------------------------------------------------------------------- -->
-  <div id='login-pop-up-banner'>
-    <div class="rcp-section">
-      <span>로그인</span>
-    </div>
-    <div class="rcp-laytop rcp-laytop2"></div>
-    <div class="rcp-innnersec">
-      <div id="loginInputBox" class="rcp-mar rcp-info"
-        style="height: 110px;">
-        <input class="form-control" type="text" id="userEmail" name="email"
-          placeholder="아이디 입력" /> <br /> <input class="form-control"
-          type="password" id="userPassword" name="password"
-          placeholder="비밀번호 입력" />
-      </div>
-    </div>
-    <div class="rcp-sign-membership" id="userLogin"
-      style="margin-top: 50px;">
-      <a href="#"><span>로그인</span></a>
-    </div>
-  </div>
-  <!--  -->
 
-  <div id="topBtn" class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container rcp-container-top">
-      <div class="navbar-header">
-        <div class="row">
-          <div class="row col-md-7 col-sm-7 col-xs-12">
-            <a class="logo col-md-3 col-sm-3 hidden-xs rt-navbar-top-logo"
-              href="index.html"><img src="img/logo.svg" alt="Logo"></a>
-            <div
-              class="input-group col-md-5 col-sm-5 col-xs-11 col-xs-offset-1 rcp-navbar-searchbar-size rt-navbar-top-searchbar">
-              <input type="text" class="form-control rcp-navbar-searchbar-size"
-                placeholder="레시피명, 쉐프명, 재료명" aria-describedby="basic-addon1">
-              <span class="input-group-addon" id="searchBarKeyword">검색</span>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-4 hidden-xs" style="margin-right: 2em;">
-            <div class="navbar-collapse">
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span id="signUpTopBtn"
-                    class="rcp-btn-default-top">회원가입</span></a></li>
-                <li id="topbarUserImg"><a href="#"><span id="TopBtn"
-                    class="rcp-btn-default-top">로그인</span></a></li>
-              </ul>
-            </div>
-            <!-- 준모2 -->
-            <div id="profileView" class="main-nav__dropdown profile-dropdown">
-              <div class="rcp-outline">
-                <div>
-                  <a href="#0" class="dropdown__header"><img id="profileImg"
-                    class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a
-                    id="profileEmail" href="#"
-                    class="dropdown__header rcp-infobox-text"></a>
-                  <h6 id="profileName" class="rcp-nickname"></h6>
-                  <a href="#0" class="dropdown__header"> <span
-                    id="profileGrade" class="dropdown__title rcp-infobox-text">
-                      <img src="img/star.png"> Master Chef
-                  </span>
-                  </a>
-                  <div id=Btn align="center">
-                    <button id="userInfoEditBtn" type="button"
-                      class="btn btn-default rcp-btn-nav">정보수정</button>
-                    <button id="logoutBtn" type="button"
-                      class="btn btn-default rcp-btn-nav">로그아웃</button>
-                  </div>
-                </div>
-                <!-- <nav class="dropdown__nav rcp-menuname rcp-back">
+	<!--준모_login------------------------------------------------------------------------------- -->
+	<div id='login-pop-up-banner'>
+		<div class="rcp-section">
+			<span>로그인</span>
+		</div>
+		<div class="rcp-laytop rcp-laytop2"></div>
+		<div class="rcp-innnersec">
+			<div id="loginInputBox" class="rcp-mar rcp-info"
+				style="height: 110px;">
+				<input class="form-control" type="text" id="userEmail" name="email"
+					placeholder="아이디 입력" /> <br /> <input class="form-control"
+					type="password" id="userPassword" name="password"
+					placeholder="비밀번호 입력" />
+			</div>
+		</div>
+		<div class="rcp-sign-membership" id="userLogin"
+			style="margin-top: 50px;">
+			<a href="#"><span>로그인</span></a>
+		</div>
+	</div>
+	<!--  -->
+
+	<div id="topBtn" class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container rcp-container-top">
+			<div class="navbar-header">
+				<div class="row">
+					<div class="row col-md-7 col-sm-7 col-xs-12">
+						<a class="logo col-md-3 col-sm-3 hidden-xs rt-navbar-top-logo"
+							href="index.html"><img src="img/logo.svg" alt="Logo"></a>
+						<div
+							class="input-group col-md-5 col-sm-5 col-xs-11 col-xs-offset-1 rcp-navbar-searchbar-size rt-navbar-top-searchbar">
+							<input type="text" class="form-control rcp-navbar-searchbar-size"
+								placeholder="레시피명, 쉐프명, 재료명" aria-describedby="basic-addon1">
+							<span class="input-group-addon" id="searchBarKeyword">검색</span>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-4 hidden-xs" style="margin-right: 2em;">
+						<div class="navbar-collapse">
+							<ul class="nav navbar-nav navbar-right">
+								<li><a href="#"><span id="signUpTopBtn"
+										class="rcp-btn-default-top">회원가입</span></a></li>
+								<li id="topbarUserImg"><a href="#"><span id="TopBtn"
+										class="rcp-btn-default-top">로그인</span></a></li>
+							</ul>
+						</div>
+						<!-- 준모2 -->
+						<div id="profileView" class="main-nav__dropdown profile-dropdown">
+							<div class="rcp-outline">
+								<div>
+									<a href="#0" class="dropdown__header"><img id="profileImg"
+										class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a
+										id="profileEmail" href="#"
+										class="dropdown__header rcp-infobox-text"></a>
+									<h6 id="profileName" class="rcp-nickname"></h6>
+									<a href="#0" class="dropdown__header"> <span
+										id="profileGrade" class="dropdown__title rcp-infobox-text">
+											<img src="img/star.png"> Master Chef
+									</span>
+									</a>
+									<div id=Btn align="center">
+										<button id="userInfoEditBtn" type="button"
+											class="btn btn-default rcp-btn-nav">정보수정</button>
+										<button id="logoutBtn" type="button"
+											class="btn btn-default rcp-btn-nav">로그아웃</button>
+									</div>
+								</div>
+								<!-- <nav class="dropdown__nav rcp-menuname rcp-back">
                   <a href="../mypage/mypage.html"><span class="rcp-back">내
                       레시피</span></a><a href="../writerecipe.html"><span class="rcp-back">레시피
                       쓰기</span></a><a href="#"><span class="rcp-back">구독 정보</span></a>
                 </nav> -->
-                <button class="infoBtn">
-                  <a href="/community.html">MyPage</a>
-                </button>
-                <button class="infoBtn">
-                  <a href="/writerecipe.html">Recipe 작성</a>
-                </button>
-              </div>
-            </div>
+								<button class="infoBtn">
+									<a href="/community.html">MyPage</a>
+								</button>
+								<button class="infoBtn">
+									<a href="/writerecipe.html">Recipe 작성</a>
+								</button>
+							</div>
+						</div>
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- 회원정보수정 bpopup -->
-  <div id='editUserInfo-pop-up-banner'>
-    <form action="user/update.json" method="post" id="updateUserForm"
-      enctype="multipart/form-data">
-      <input type="hidden" name="userNo" id="updateFormUserNo"> <input
-        type="hidden" name="email" id="updateFormEmail">
-      <div class="rcp-laytop">
-        <!--유저 이미지 업로드 --용이  !!!!!enctype?????16.08.12-->
-        <div class="rcp-up-preview img-wrapper col-md-1"></div>
-        <div class="file-upload-wrapper">
-          <input id="profileImage" type="file" name="profileImage"
-            class="file-upload-native" accept="image/*" /> <input type="text"
-            disabled placeholder="이미지" class="file-upload-text" />
-        </div>
-        <!--유저 이미지 업로드 끝--용이  -->
-        <div class="col-md-11 rcp-laytext">
-          <h4 id="updateBoxName"></h4>
-          <h5 id="updateBoxGrade">Master Chef</h5>
-          <h5 id="updateBoxEmail"></h5>
-        </div>
-      </div>
-      <div class="rcp-section">
-        <span>회원정보수정</span>
-      </div>
-      <div class="rcp-innnersec">
-        <div id="beforePwd-div"
-          class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
-          <input class="form-control" type="password" id="beforePwd"
-            name="beforePassword" placeholder="이전비밀번호 입력">
-        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 회원정보수정 bpopup -->
+	<div id='editUserInfo-pop-up-banner'>
+		<form action="user/update.json" method="post" id="updateUserForm"
+			enctype="multipart/form-data">
+			<input type="hidden" name="userNo" id="updateFormUserNo"> <input
+				type="hidden" name="email" id="updateFormEmail">
+			<div class="rcp-laytop">
+				<!--유저 이미지 업로드 --용이  !!!!!enctype?????16.08.12-->
+				<div class="rcp-up-preview img-wrapper col-md-1"></div>
+				<div class="file-upload-wrapper">
+					<input id="profileImage" type="file" name="profileImage"
+						class="file-upload-native" accept="image/*" /> <input type="text"
+						disabled placeholder="이미지" class="file-upload-text" />
+				</div>
+				<!--유저 이미지 업로드 끝--용이  -->
+				<div class="col-md-11 rcp-laytext">
+					<h4 id="updateBoxName"></h4>
+					<h5 id="updateBoxGrade">Master Chef</h5>
+					<h5 id="updateBoxEmail"></h5>
+				</div>
+			</div>
+			<div class="rcp-section">
+				<span>회원정보수정</span>
+			</div>
+			<div class="rcp-innnersec">
+				<div id="beforePwd-div"
+					class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
+					<input class="form-control" type="password" id="beforePwd"
+						name="beforePassword" placeholder="이전비밀번호 입력">
+				</div>
 
-        <div id="afterPwd-div"
-          class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
-          <input class="form-control" type="password" id="afterPwd"
-            name="password" placeholder="변경비밀번호 입력">
-        </div>
+				<div id="afterPwd-div"
+					class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
+					<input class="form-control" type="password" id="afterPwd"
+						name="password" placeholder="변경비밀번호 입력">
+				</div>
 
-        <div id="afterPwdcf-div"
-          class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
-          <input class="form-control" type="password" id="afterPwdcf"
-            placeholder="변경비밀번호 확인">
-        </div>
+				<div id="afterPwdcf-div"
+					class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
+					<input class="form-control" type="password" id="afterPwdcf"
+						placeholder="변경비밀번호 확인">
+				</div>
 
-        <div
-          class="rcp-mar rcp-info form-group form-group-md has-success has-feedback">
-          <textarea class="form-control rcp-tara" rows="5rem" cols="30rem"
-            id="introduce" name="intro" placeholder="자기소개를 입력해주세요"></textarea>
-        </div>
-      </div>
-      <div class="rcp-sign-membership">
-        <!-- <button id="updateUserInfo" type="submit">확인</button> -->
-        <a href="#"><span id="updateUserInfo">확인</span></a> <a href="#"><span
-          id="updateUserReset">취소</span></a>
-      </div>
-    </form>
-  </div>
-  <!--  -->
+				<div
+					class="rcp-mar rcp-info form-group form-group-md has-success has-feedback">
+					<textarea class="form-control rcp-tara" rows="5rem" cols="30rem"
+						id="introduce" name="intro" placeholder="자기소개를 입력해주세요"></textarea>
+				</div>
+			</div>
+			<div class="rcp-sign-membership">
+				<!-- <button id="updateUserInfo" type="submit">확인</button> -->
+				<a href="#"><span id="updateUserInfo">확인</span></a> <a href="#"><span
+					id="updateUserReset">취소</span></a>
+			</div>
+		</form>
+	</div>
+	<!--  -->
 
 
 	<form id="addRecipe" action="recipe/addRecipe.json" method="post"
 		enctype="multipart/form-data">
-    
-    <input type="hidden" value="0" name="regiStatus"/>
+
+		<input type="hidden" value="0" name="regiStatus" />
 		<div class="row wrapper">
 			<div class="rcp-title">
 				<span>RECIPE 등록</span>
 				<hr class="rcp-title" />
 			</div>
 			<div class="form-group">
-				<div class="rcp-form-row">
-					<div class="inputwrapper form_70_width">
-						<label for="d1">요리명</label> <input name="recipeName" type="text" />
-					</div>
-
-					<div class="inputwrapper form_15_width">
-						<label for="d1">몇인분</label> <input name="portion" type="text" />
-					</div>
-
-					<div class="inputwrapper form_15_width">
-						<label for="d1">조리시간</label> <input name="cookTime" type="text" />
-					</div>
-				</div>
-				<div class="inputwrapper form_100_width">
-					<label for="d1">요리설명</label> <input name="intro" type="text" />
-				</div>
-
 				<div>
-					<div class="form_100_width rcp-subtitle ">
+					<div class="form-group recipeNameWrapper">
+						<label for="recipeName">요리명</label> 
+						<input id="recipeName" name="recipeName" type="text" class="inputstyle form-control"/>
+					</div>
+					
+					<div class="form-group portionWrapper">
+            <label for="portion">몇 인분?</label> <br>
+            <input id="portion" name="portion" OnKeypress="onlyNumber();" class="portion form-control" value="1"/>
+          </div>
+				</div>
+				<div class="form-group">
+					<p>
+					  <label for="cookTime">조리시간(min) : </label>
+					  <input type="text" id="cookTime" OnKeypress="onlyNumber();" style="border: 1px solid #ccc; color: #f6931f; font-weight: bold; width: 50px; text-align: center;">
+					</p>
+					<div id="cookTime-slider"></div>
+				</div>
+				<div class="form-group">
+          <label for="intro">요리설명</label> 
+          <input id="intro" name="intro" type="text" class="inputstyle intro form-control"/>
+        </div>
+                
+				<div>
+					<div class="rcp-subtitle ">
 						<span>대표사진 등록</span>
 						<div class="btn btn-success fileinput-button">
 							<span>사진 추가</span> <input id="representImage" type="file"
@@ -238,24 +251,33 @@
 					<!--  대표사진 드롭존-->
 					<div id="representImgDropzone">
 						<div id="representImgs"
-							class="files form_100_width scroll rcp-border"></div>
+							class="files  scroll rcp-border"></div>
 					</div>
 					<!--  대표사진 드롭존-->
 				</div>
 
-				<div class="form_100_width">
-					<div class="form_100_width rcp-subtitle ">
+				<div>
+					<div class=" rcp-subtitle ">
 						<span>재료 등록</span>
 					</div>
-					<div class="inputwrapper form_100_width">
-            <label for="d1">재료명</label> <input name="materialName"
-              type="text" />
-          </div>
+					<div class="form-group">
+             <input name="materialName" type="text" class="inputstyle" placeholder="재료를 검색해서 등록하세요." />
+					</div>
 					
-					<div id="materialList" class="files form_100_width rcp-border"></div>
+					<div class="row margin_bottom_70px">
+					 <div id="materialList" class="post-it-note col-md-5 col-md-offset-5">
+					   식재료<hr>
+					 </div>
+					 
+					 <div id="seasoningList" class="post-it-note col-md-5">
+             조미료<hr>
+           </div>
+					</div>
+					
+					<!-- <div id="materialList" class="files rcp-border"></div> -->
 
 					<div>
-						<div class="form_100_width rcp-subtitle ">
+						<div class=" rcp-subtitle ">
 							<span>조리과정 등록</span>
 							<div class="btn btn-success fileinput-button">
 								<span>사진 추가</span> <input id="fileupload" type="file"
@@ -263,8 +285,8 @@
 							</div>
 						</div>
 						<!-- The container for the uploaded files -->
-						<div id="dropzone">
-							<div id="files" class="files form_100_width rcp-border"></div>
+						<div id="dropzone dropzonehover">
+							<div id="files" class="files rcp-border"></div>
 						</div>
 						<br>
 					</div>
@@ -306,18 +328,18 @@
 	<script
 		src="node_modules/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
 	<script
-    src="node_modules/easy-autocomplete/dist/jquery.easy-autocomplete.min.js"></script>
-  <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
-  <script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
+		src="node_modules/easy-autocomplete/dist/jquery.easy-autocomplete.min.js"></script>
+	<script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
 
 	<!--  사용자 js -->
-  <script src="js/jquery.bpopup.min.js"></script>
-  <script src="js/common.js"></script>
-  <script src="js/common/signup.js"></script>
-  <script src="js/login.js"></script>
-  <script src="js/updateUser.js"></script>
+	<script src="js/jquery.bpopup.min.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/common/signup.js"></script>
+	<script src="js/login.js"></script>
+	<script src="js/updateUser.js"></script>
 	<script src="js/writerecipe.js"></script>
-	
+
 	<script type="text/javascript">
 	var options = {
 		  url: function(phrase) {
@@ -358,21 +380,32 @@
 	          onChooseEvent: function() {
 	              var name = $('input[name="materialName"]').getSelectedItemData().name;
 	              var no = $('input[name="materialName"]').getSelectedItemData().no;
+	              var category = $('input[name="materialName"]').getSelectedItemData().category;
 	              var existMt = $('input[name="materialNo"]');
 	              for(i=0; i<existMt.length; i++){
 	            	  if($(existMt[i]).val()==no){
 	                      alert('재료를 중복으로 등록하실 수 없습니다.');
 	                      return;
 	                }
-	              }	              
+	              }
 	              
-	              $('#materialList').append(
-	            		 $('<div class="mtWrapper"><span class="mtName form_15_width">'+name+'</span>'
-	            		  +'<span class="inputwrapper form_15_width">'
-	            		  +'<label for="d1">분량</label>'
-	                  +'<input name="materialAmount"type="text" placeholder="(예:400g)" />'
-	                  +'</span>'
-	            		  +'<input type="hidden" name="materialNo" value="'+no+'"></div>'));
+	              if(category=='1'){
+	            	  $('#materialList').append(
+	                          $('<div class="mtWrapper"><div class="mtName float_left">'+name+'</div>'
+	                           +'<div class="float_left">&nbsp;:&nbsp;</div>'
+	                           +'<div class="float_left mtAmount"><input name="materialAmount" type="text" placeholder="분량 (예:400g)" /></div>'
+	                           +'<input type="hidden" name="materialNo" value="'+no+'">'
+	                           +'</div>'));
+	              } else {
+	            	  $('#seasoningList').append(
+	                            $('<div class="mtWrapper"><div class="mtName float_left">'+name+'</div>'
+	                             +'<div class="float_left">&nbsp;:&nbsp;</div>'
+	                             +'<div class="float_left mtAmount"><input name="materialAmount" type="text" placeholder="분량 (예:400g)" /></div>'
+	                             +'<input type="hidden" name="materialNo" value="'+no+'">'
+	                             +'</div>'));
+	              }
+	              
+	              
             }
 	       }
 	};

@@ -169,9 +169,8 @@ public class RecipeController {
 	}
 
 //---------------------고재현 -------------------------
-
 	 @RequestMapping(path="list",produces="application/json;charset=UTF-8")
-	  @ResponseBody
+	 @ResponseBody
 	  public String list(
 	      @RequestParam int userNo, 
 	      @RequestParam(defaultValue="4") int pageSize,int request){
@@ -183,9 +182,11 @@ public class RecipeController {
 	    try{
 	      result.put("status","success");
 	      result.put("data", list);
+		  System.out.println(list);
 	    }catch (Exception e){
 	      result.put("status", "false");
 	    }
+	    
 	    return new Gson().toJson(result);
 	  }
 	 
@@ -210,11 +211,11 @@ public class RecipeController {
 		recipeService.updateHits(recipe);
 	try{
 			result.put("status","success");
-			result.put("data", recipe);
+			System.out.println(recipe);
 		}catch (Exception e){
 			result.put("status", "false");
 		}
-
+		
 		return new Gson().toJson(result);
 	}
 	
@@ -365,10 +366,12 @@ public class RecipeController {
 				if(mt.getMaterialStatement()==1){
 					foodstuff.put("name", mt.getMaterialName());
 					foodstuff.put("no", mt.getMaterialNo());
+					foodstuff.put("category", mt.getMaterialStatement());
 					foodstuffList.add(foodstuff);
 				} else {
 					seasoning.put("name", mt.getMaterialName());
 					seasoning.put("no", mt.getMaterialNo());
+					seasoning.put("category", mt.getMaterialStatement());
 					seasoningList.add(seasoning);
 				}
 				result.put("foodstuff", foodstuffList);

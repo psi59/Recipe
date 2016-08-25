@@ -27,7 +27,7 @@
 		<result column="email" property="user.email"/>
 		<result column="rownum" property="rownum"/>
 		<result column="totalPoint" property="totalPoint"/>
-		<result column="rpimg" property="rpimg" />
+		<result column="rpimg" property="representImages" typeHandler="com.github.javaplugs.mybatis.JsonElementTypeHandler"/>
 		<result column="img" property="user.image"/>
 	</resultMap> 
 	

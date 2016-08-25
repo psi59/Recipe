@@ -4,7 +4,7 @@ font-family: 'Noto Sans KR', sans-serif;
 }
 
 body {
-  background-color: #dddddd;
+  background-image: url("../../img/light-wooden-background.jpg");
 }
 
 .imagewrapper{
@@ -18,26 +18,8 @@ body {
 	height: 358px;
 }
 .rcp-border{
-  border: 1px solid #aaa;
-}
-
-.rcp-form-row{
-	margin-bottom: 10px;
-	height: 50px;
-}
-
-.form_100_width{
-	width: 865px;
-}
-
-.form_70_width{
-  width: 609px;
-  float: left;
-}
-
-.form_15_width{
-  width: 123px;
-  float: left;
+  border: 1px solid #ccc;
+  border-radius: 2px;
 }
 
 .wrapper{
@@ -46,16 +28,16 @@ body {
   margin: 0 auto;
   margin-top: 70px;
   margin-bottom: 70px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 130px;
+  padding-right: 130px;
 }
 
 /*박상일 글쓰기 css*/
 .rcp-title hr{
-   border-top: 5px solid #b51515;
-   width: 866px;
-   min-width: 230pt;
-   margin-top: auto;
+   width: 300px;
+   min-width: 300px;
+   margin-top: 15px;
+   margin-bottom: 40px;
 }
 
 .rcp-delMtSlot{
@@ -68,20 +50,22 @@ body {
   margin-top:25pt;
   margin-bottom:30pt;
   width: 100%;
-  height: 30pt;
+/*   height: 30pt; */
   font-size: 12pt;
 }
 
 .rcp-title {
   font-weight: bold;
-  font-size: 33pt;
-  margin-top: 40pt;
-  margin-bottom: 10pt;
+  font-size: 18pt;
+  margin-top: 40px;
+  margin-bottom: 50px;
+  text-align: center;
 }
 
 .rcp-subtitle {
   font-weight: bold;
-  font-size: 20pt;
+  font-size: 12pt;
+  color: #ee7272;
   margin-top: 20pt;
   margin-bottom: 10pt;
   padding: 0px;
@@ -95,61 +79,29 @@ body {
 
 .height_150px{
 	height: 150px !important;
-	width: 650px !important;
+	width: 430px !important;
 	margin-right: 10px; 
-}
-
-button::-moz-focus-inner,
-input::-moz-focus-inner {
-  border: 0;
-  padding: 0;
-}
-
-input[type='text'] {
-  width: 100%;
-  height:100%;
-  padding: 13px 12px 14px 60px !important;
-  font-size: 12px;
-  color: #555 !important;
-  border-color: #555 !important;
-  border: 1px solid #aaa;
-  background-color: #fff;
-}
-
-.inputwrapper {
-  display: inline-block;
-  position: relative;
-  margin: 0 5px 0 0;
-}
-
-.inputwrapper input {
-  transition: .1s all linear;
-}
-
-.inputwrapper label {
-  position: absolute;
-  top: 13px;
-  left: 15px;
-  font-size: 12px;
-  color: #aaa;
-  transition: .1s all linear;
-  cursor: text;
-  z-index: 1;
-}
-
-.inputwrapper.active input {
-  padding-left: 50px;
-}
-
-.inputwrapper.active label {
-  left: 6px;
-  opacity: .5;
 }
 
 #materialList{
   margin-top: 10px;
+  text-align: center;
 }
 
+#materialList > hr{
+    border-top: 1px solid #333;
+    margin-top: 9px;
+}
+
+#seasoningList{
+  margin-top: 10px;
+  text-align: center;
+}
+
+#seasoningList > hr{
+    border-top: 1px solid #333;
+    margin-top: 9px;
+}
 
 /*삭제버튼*/
 .closeBtn {
@@ -189,4 +141,107 @@ input[type='text'] {
 .closeBtn.thick::before, .closeBtn.thick::after {
   height: 4px;
   margin-top: -2px;
+}
+
+label{
+	color: #ee7272 !important;
+	font-size: 12pt;
+	margin-bottom: 14px;
+}
+
+.inputstyle{
+	height: 41px !important;
+	border-radius: 2px !important;
+}
+
+.recipeNameWrapper{
+	width: 320px;
+  float: left;
+  margin-right: 25px;
+}
+
+.portionWrapper{
+    margin-left: 525px;
+}
+
+#recipeName{
+	width: 500px;
+}
+
+#portion{
+	width: 80px;
+	text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px !important;
+}
+
+input[name="materialName"]{
+	width: 100% !important;
+}
+
+input[name="materialAmount"]{
+  border: 0;
+  border-bottom: 1px solid #bbb;
+  outline: 0;
+  background-color: ;
+  background-color: rgba(0, 0, 0, 0);
+  margin-left: 3px;
+  width: 84px;
+  text-align: center;
+}
+
+.dropzonehover:hover{
+    box-shadow:
+      0 80px 0 0  rgba(0,0,0,0.25) inset, 
+      0 -80px 0 0  rgba(0,0,0,0.25) inset;
+}
+
+/* 조리시간 슬라이더 */
+.ui-slider-handle{
+  border: 2px solid #f55d5d !important;
+  background-color: white !important;
+}
+
+#slider-range-max {
+    background: #ffb9b9 !important;
+}
+/* 몇인분 사이즈 */
+.ui-spinner{
+	height: 41px;
+}
+
+/* post-it style */
+.post-it-note {
+  padding: 2em;
+  background: #FFF799;
+  position: relative;
+  min-height: 10em;
+  min-width: 13em;
+  margin: 1em auto;
+  margin-left: 33px;
+  margin-bottom: 10px;
+  box-shadow: 8px 30px 30px #bbb7b7;
+}
+
+.post-it-note:after {
+  content: "";
+  position: absolute;
+  bottom: -2em;
+  left: 0;
+  right: 2em;
+  border-width: 1em;
+  border-style: solid;
+  border-color: #FFF799;
+}
+
+.post-it-note:before {
+   content: "";
+   position: absolute;
+   bottom: -2em;
+   right: 0;
+   border-width: 2em 2em 0 0;
+   border-style: solid;
+   border-color: #f5e27f transparent;
 }

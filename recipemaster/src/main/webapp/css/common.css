@@ -412,3 +412,28 @@ header .header-content {
 }
 
 /********** main css 종료 - 박상일 ***********/
+
+.float_left{
+	float: left;
+}
+
+.margin_bottom_30px{
+	margin-bottom: 30px !important;
+}
+
+.margin_bottom_40px{
+  margin-bottom: 40px !important;
+}
+
+.margin_bottom_50px{
+  margin-bottom: 50px !important;
+}
+
+.margin_bottom_60px{
+  margin-bottom: 60px !important;
+}
+
+.margin_bottom_70px{
+  margin-bottom: 70px !important;
+}
+

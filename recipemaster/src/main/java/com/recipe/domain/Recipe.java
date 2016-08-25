@@ -2,7 +2,6 @@ package com.recipe.domain;
 
 import java.util.Date;
 
-import com.alibaba.fastjson.JSONArray;
 import com.google.gson.JsonArray;
 
 public class Recipe {
@@ -12,7 +11,7 @@ public class Recipe {
 	private String recipeName;
 	private String intro;
 	private String recipeDetail;
-	private JSONArray representImages;
+	private JsonArray representImages;
 	private JsonArray materials;
 	private JsonArray recipeProcedure;
 	private int cookTime;
@@ -150,11 +149,11 @@ public class Recipe {
 		this.intro = intro;
 	}
 
-	public JSONArray getRepresentImages() {
+	public JsonArray getRepresentImages() {
 		return representImages;
 	}
 
-	public void setRepresentImages(JSONArray representImages) {
+	public void setRepresentImages(JsonArray representImages) {
 		this.representImages = representImages;
 	}
 
