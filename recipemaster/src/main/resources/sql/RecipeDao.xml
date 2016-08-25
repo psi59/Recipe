@@ -25,7 +25,7 @@
 		<result column="countComment" property="countComment" />
 		<result column="countScrap" property="countScrap" />
 		<result column="scrapUser" property="scrapUser" />
-		<result column="email" property="user.email" />
+		<result column="email" property="user.email" /> 
 		<result column="rownum" property="rownum" />
 		<result column="totalPoint" property="totalPoint" />
 		<result column="rpimg" property="representImages"
