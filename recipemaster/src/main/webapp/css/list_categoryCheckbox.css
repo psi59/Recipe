@@ -1,15 +1,10 @@
-
-#category-accordion-btn {
-  margin-top: 110px;	
-}
-
 #rcp-category-section {
 	color: #000000;
 	font-size: 23px;
 	text-align: center;
 	box-shadow: 0px 5px 5px lightgray;
 	margin-bottom: 10px;
-	/* margin-top: 120px; */
+	margin-top: 120px;
 	height: 200px;
 }
 
@@ -18,7 +13,7 @@
 	text-align: center;
 }
 
-.rcp-nation-category-box {	
+.rcp-category-box {	
 	border: 2px solid black;
 	border-radius: 7px;
 	box-shadow: 3px 3px 3px #949292;

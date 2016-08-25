@@ -1,10 +1,6 @@
 /* 검색 및 정렬 이벤트 -성현 */
 $(function() {
 		
-	$( "#accordion" ).accordion({
-		collapsible: true
-	});
-	
 	$('#searchKeyword').focus();
 	
 	// 처음화면에 모든 레시피들을 보여준다
