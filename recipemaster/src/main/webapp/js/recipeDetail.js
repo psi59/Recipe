@@ -60,6 +60,11 @@ $(function(){
 							$('.rcp-info-images').append( comDetailImageMain(result) );
 							$('.rcp-detail-step').append( comDetailImageStep(result) );
 							$('.rcp-detail-body').append( comDetailTemp(result) );
+							slider = $('.rcp-detail-body').bxSlider({
+								mode:'vertical',
+								pager: false,
+								moveSlides: 1
+							});
 							for(var i = 0; i <result.data.recipeProcedure.length; i++){
 								console.log("여기옴? "+result.data.recipeProcedure[i].recipeProduceImage);
 								
@@ -67,11 +72,7 @@ $(function(){
 								$('div[name="rcp-body"]:eq('+i+') .rcp-explanation p').text(result.data.recipeProcedure[i].recipeProduce);
 								
 							}
-							slider = $('.rcp-detail-body').bxSlider({
-								mode:'vertical',
-								pager: false,
-								moveSlides: 1
-							});
+						
 							
 							
 							if( eval(jsonData) != null ){										
