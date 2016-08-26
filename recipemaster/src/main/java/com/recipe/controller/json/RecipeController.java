@@ -218,6 +218,30 @@ public class RecipeController {
 		return new Gson().toJson(result);
 	}
 	
+	@RequestMapping(path="recipeComment",produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String recipeComment(int recipeNo){
+	  HashMap<String,Object> result = new HashMap<>();
+	  System.out.println(recipeNo);
+	  List<Recipe> recipeComment = recipeService.recipeComment(recipeNo);
+
+	  System.out.println("comment : "+recipeComment);
+
+    try{
+     
+      result.put("status","success");
+      result.put("data", recipeComment);
+      //result.put("user", recipeCommentUser);
+    }catch (Exception e){
+      result.put("status", "false");
+    }
+	  
+	  return new Gson().toJson(result);
+	}
+	
+	
+	
+	
 	@RequestMapping(path="likeUp",produces="application/json;charset=UTF-8")
   @ResponseBody
   public String recipeLikeUp(@RequestParam("recipeNo") int recipeNo,
@@ -546,4 +570,8 @@ public class RecipeController {
     return new Gson().toJson(result);
   }
     }
+
+
+
+
 

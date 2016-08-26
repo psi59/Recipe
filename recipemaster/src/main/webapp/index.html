@@ -312,7 +312,7 @@
 			<div class="rcp-taps">
 				<div class="rcp-first-info"></div>
 
-				<div class="rcp-seconde-info"></div>
+				<a href="#"><div class="rcp-seconde-info"></div></a>
 
 				<div class="rcp-third-info"></div>
 
@@ -367,6 +367,26 @@
 
 </script>
 
+
+  <script id="recipe-comment" type="text/x-handlebars-template">
+{{#each data}}
+<div class="cs-comments-area">           
+ <span class="rcp-comment-indexNum"></span> 
+                <article>
+                  <div class="cs-comment-author">
+                   <img class="avatar" src="img/profileImg/{{user.image}}" alt=""> 
+                      <b><a href="#">{{user.userName}}</a></b> 
+                          <a class="cs-comment-metadata" href="#"> 
+                         <span class="rcp-comment-date">{{recipeCommentDate}}</span>
+                    </a>
+                  </div>
+                  <div class="cs-comment-content">
+                    <p>{{recipeComment}}</p>                    
+                  </div>
+                </article>   
+          </div>
+{{/each}}
+  </script>
 	<script id="recipe-detail-304-info-template"
 		type="text/x-handlebars-template">
 
@@ -469,11 +489,8 @@
 
 	<script id="recipe-card-template" type="text/x-handlebars-template"> 
 {{#each data}}
- 
-      
           <div
             class="col-xs-3 col-sm-3 col-md-3 rcp-listSize rcp-list-margin">
-      
             <div class="thumbnail row relative">
               <div class="rcp-profile-position">
                   {{#defaultImage}}

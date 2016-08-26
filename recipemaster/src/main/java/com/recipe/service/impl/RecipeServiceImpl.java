@@ -199,5 +199,17 @@ public class RecipeServiceImpl implements RecipeService {
       // TODO Auto-generated method stub
       return recipeDao.selectSubscribeMypage(userNo);
     }
+
+    @Override
+    public List<Recipe> recipeComment(int recipeNo) {
+      // TODO Auto-generated method stub
+      return recipeDao.recipeComment(recipeNo);
+    }
+
+    @Override
+    public List<Recipe> recipeCommentUserInfo(String userNums) {
+      // TODO Auto-generated method stub
+      return recipeDao.recipeCommentUserInfo(userNums);
+    }
 	
 }

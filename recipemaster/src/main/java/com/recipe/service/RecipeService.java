@@ -14,6 +14,8 @@ public interface RecipeService {
   void likeDown(Recipe recipe);
   List<String> getRecipeNameList(String searchValue); //레시피 이름 자동완성 -이성현
   List<Recipe> getRecipeList(int pageNo, int pageSize, int request);
+  List<Recipe> recipeComment(int recipeNo);
+  List<Recipe> recipeCommentUserInfo(String userNums);
   List<Recipe> getRecipeRankList(int pageNo, int pageSize);
   List<Recipe> getRecipeSearchList(int pageNo, int pageSize, Search search, int userNo); //레시피 페이지 검색 -이성현
   int getRecipeCount(int pageNo, int pageSize, Search search, int userNo);
