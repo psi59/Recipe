@@ -27,13 +27,19 @@ $("#userEmail").keyup(function(){
 	if(event.keyCode == 9){
 		document.getElementById("userPassword").focus();
 	}
+	if(event.keyCode == 13){
+		if($('#userPassword').val() == ''){
+			swal('패스워드를 입력해주세요.');		
+			document.getElementById("userPassword").focus();
+		}
+	}
 });
 
 $('#userPassword').keyup(function(){
 	if(event.keyCode == 13){
 		if($('#userPassword').val() == ''){
 			swal('패스워드를 입력해주세요.');		
-			return;
+			document.getElementById("userPassword").focus();
 		}
 		login(event);
 	}

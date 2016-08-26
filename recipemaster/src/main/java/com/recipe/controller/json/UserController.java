@@ -185,11 +185,16 @@ public class UserController {
 		User loginUser = userService.loginUser(user);
 
 		try {
-			result.put("status", "success");
-			result.put("data", loginUser);
-			// server sessionStorage에 유저 정보 저장 ------------------
-			session.setAttribute("loginUser", loginUser);
-			// ----------------------------------------------------------
+		  if (loginUser!=null) {
+		    result.put("status", "success");
+	      result.put("data", loginUser);
+	      // server sessionStorage에 유저 정보 저장 ------------------
+	      session.setAttribute("loginUser", loginUser);
+	      // ----------------------------------------------------------
+      }else{
+        result.put("status", "failure");
+      }
+			
 		} catch (Exception e) {
 			result.put("status", "failure");
 		}
