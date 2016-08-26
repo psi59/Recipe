@@ -345,7 +345,7 @@
 	<!------------------------- Rank List ------------------------------>
 	<div id="footer"></div>
 	<script id="recipe-detail-template" type="text/x-handlebars-template">
-    {{#each data.recipeProcedure}}
+    {{#rcpBody data.recipeProcedure data.representImages}}
               <div class="rcp-body" name="rcp-body">
               <div>
                 <div class="rcp-title-size">
@@ -363,7 +363,7 @@
                    <a href="#" class="glyphicon glyphicon-chevron-down rcp-detail-move"></a>
                </div>
             </div>
-{{/each}}
+{{/rcpBody}}
 
 </script>
 

@@ -18,8 +18,10 @@ var slider;
 
 $(function(){
 	handlebarsIndexNumbering();
+	handlebarsRecipeBodys();
 	recipeDetail();
 	comment();
+	
 })
 
 
@@ -29,6 +31,16 @@ function handlebarsIndexNumbering(){
 		return parseInt(value) + 1;
 			});
 }
+
+function handlebarsRecipeBodys(){
+	Handlebars.registerHelper("rcpBody", function(value1,value2, options){
+		console.log("parse1"+(value1.length));
+		console.log("parse2"+(value2));
+		return (value1) + (value2);
+	});
+}
+
+
 
 
 function recipeDetail(){	
