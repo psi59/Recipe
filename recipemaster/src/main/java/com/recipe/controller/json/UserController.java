@@ -99,14 +99,14 @@ public class UserController {
 		return new Gson().toJson(result);
 	}
 
-	@RequestMapping(path ="update")
+	@RequestMapping(path = "update")
 	@ResponseBody
 	public String update(User user, @RequestParam("beforePassword") String beforePassword,
 			@RequestParam("profileImage") MultipartFile profileImage, HttpServletRequest request) {
 		HashMap<String, Object> result = new HashMap<>();
+		System.out.println("여기여기여기 + " + user);
 		try {
 			User dbUser = userService.getUser(user.getUserNo());
-			System.out.println(user);
 			if (beforePassword.equals(dbUser.getPassword())) {
 				/* 파일업로드 추가 */
 				if (null != profileImage) {
@@ -141,29 +141,25 @@ public class UserController {
 		}
 		return new Gson().toJson(result);
 	}
-	@RequestMapping(path = "best", produces = "application/json;charset=UTF-8")
-  @ResponseBody
-  public String best(
-      @RequestParam(defaultValue = "1") int pageNo
-      , @RequestParam(defaultValue = "3") int pageSize) {
-    HashMap<String, Object> result = new HashMap<>();
-    try {
-      List<User> list = userService.getUserRankList(pageNo, pageSize);
-      result.put("status", "success");
-      result.put("data", list);
-    } catch (Exception e) {
-      result.put("status", "failure");
-    }
 
-    return new Gson().toJson(result);
-  }
-	
-	
+	@RequestMapping(path = "best", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String best(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "3") int pageSize) {
+		HashMap<String, Object> result = new HashMap<>();
+		try {
+			List<User> list = userService.getUserRankList(pageNo, pageSize);
+			result.put("status", "success");
+			result.put("data", list);
+		} catch (Exception e) {
+			result.put("status", "failure");
+		}
+
+		return new Gson().toJson(result);
+	}
+
 	@RequestMapping(path = "rank", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String rank(
-	    @RequestParam(defaultValue = "1") int pageNo
-	    , @RequestParam(defaultValue = "10") int pageSize) {
+	public String rank(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "10") int pageSize) {
 		HashMap<String, Object> result = new HashMap<>();
 		try {
 			List<User> list = userService.getUserRankList(pageNo, pageSize);
@@ -196,47 +192,47 @@ public class UserController {
 		return new Gson().toJson(result);
 		// result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
 	}
-	
-	 @RequestMapping(path = "loginCheck", produces = "application/json;charset=UTF-8")
-	  @ResponseBody // URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
-	  public String loginCheck(HttpSession session) {
-	    // index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
-	    HashMap<String, Object> result = new HashMap<>();
-	    User loginUser=(User) session.getAttribute("loginUser");
-      if(session.isNew()){
-        result.put("status", "failure");
-        System.out.println("unLogin");
-      } else {
-        if(loginUser!=null){
-	        System.out.println("login");
-	        result.put("status", "success");
-	        result.put("data", loginUser);
-	        System.out.println("들어오냐??");
-	        System.out.println(loginUser);
-	      } else {
-	        result.put("status", "failure");
-	      }
-      }
-	    return new Gson().toJson(result);
-	    // result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
-	  }
-	 
-   @RequestMapping(path = "logout", produces = "application/json;charset=UTF-8")
-   @ResponseBody // URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
-   public String logout(HttpSession session) {
-     // index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
-     HashMap<String, Object> result = new HashMap<>();
-     
-     try {
-       session.removeAttribute("loginUser");
-       System.out.println("session.removeAttribute()"+session);
-       result.put("status", "success");
-     } catch (Exception e) {
-       result.put("status", "failure");
-     }
-     return new Gson().toJson(result);
-     // result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
-   }
+
+	@RequestMapping(path = "loginCheck", produces = "application/json;charset=UTF-8")
+	@ResponseBody // URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
+	public String loginCheck(HttpSession session) {
+		// index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
+		HashMap<String, Object> result = new HashMap<>();
+		User loginUser = (User) session.getAttribute("loginUser");
+		if (session.isNew()) {
+			result.put("status", "failure");
+			System.out.println("unLogin");
+		} else {
+			if (loginUser != null) {
+				System.out.println("login");
+				result.put("status", "success");
+				result.put("data", loginUser);
+				System.out.println("들어오냐??");
+				System.out.println(loginUser);
+			} else {
+				result.put("status", "failure");
+			}
+		}
+		return new Gson().toJson(result);
+		// result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
+	}
+
+	@RequestMapping(path = "logout", produces = "application/json;charset=UTF-8")
+	@ResponseBody // URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
+	public String logout(HttpSession session) {
+		// index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
+		HashMap<String, Object> result = new HashMap<>();
+
+		try {
+			session.removeAttribute("loginUser");
+			System.out.println("session.removeAttribute()" + session);
+			result.put("status", "success");
+		} catch (Exception e) {
+			result.put("status", "failure");
+		}
+		return new Gson().toJson(result);
+		// result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
+	}
 
 	@RequestMapping(path = "getUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody // URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
