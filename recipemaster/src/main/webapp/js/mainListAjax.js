@@ -22,7 +22,7 @@
   function Main1List(){
 	  
 	  var userNo = 0;
-	  var a = eval(sessionStorage.getItem('data'));
+	  var a = eval(jsonData);
 	  
 	  
 	  if( a != null ){
@@ -72,7 +72,7 @@
 	  
 
 	  var userNo = 0;
-	  var a = eval(sessionStorage.getItem('data'));
+	  var a = eval(jsonData);
 	  
 	  
 	  if( a != null ){
@@ -154,7 +154,7 @@ function likeLogin(){
 			  $.ajax({
 				  url:'recipe/likeDown.json?recipeNo=' + $(event.target).parent()
 				  .parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
-				  + eval(sessionStorage.getItem('data'))[0].userNo,
+				  + eval(jsonData)[0].userNo,
 				  dataType:'json',
 				  method:'get',
 				  success:function(){
@@ -176,7 +176,7 @@ function likeLogin(){
 			  $.ajax({
 				  url:'recipe/likeUp.json?recipeNo=' + $(event.target).parent()
 				  .parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
-				  +  eval(sessionStorage.getItem('data'))[0].userNo,
+				  +  eval(jsonData)[0].userNo,
 				  dataType:'json',
 				  method:'get',
 				  success:function(){
