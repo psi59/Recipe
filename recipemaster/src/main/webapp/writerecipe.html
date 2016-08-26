@@ -34,6 +34,7 @@
 	overflow-y: hidden;
 	width: 100%;
 	white-space: nowrap;
+	float: left;
 }
 
 .navbar {
@@ -51,8 +52,9 @@
 }
 
 .mtName {
-	width: 44%;
-  text-align: right;
+    width: 40%;
+    text-align: right;
+    padding-right: 6px;
 }
 
 .mtAmount{
@@ -308,6 +310,18 @@
 			</div>
 		</div>
 	</form>
+	
+ <script id="represent-image-template" type="text/x-handlebars-template">
+  {{#each representImages}}
+    <div class="scroll width_180px">
+      <span><img class="rpimg" src="img/representImg/{{this}}"></span>
+      <a href="#">
+        <span class="closeBtn thick rpImgRemove"></span>
+        <input type="hidden" value="{{this}}"/>
+      </a>
+    </div>
+  {{/each}}
+ </script>
 
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -329,6 +343,7 @@
 		src="node_modules/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
 	<script
 		src="node_modules/easy-autocomplete/dist/jquery.easy-autocomplete.min.js"></script>
+	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
 	<script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
 
@@ -341,6 +356,42 @@
 	<script src="js/writerecipe.js"></script>
 
 	<script type="text/javascript">
+	var recipeNo = location.href.split('?')[1];
+	
+	var rpImageTemp = $('#represent-image-template').html();
+  var rpImageTempImpl = Handlebars.compile(rpImageTemp); 
+	
+	if(recipeNo!=null){
+		$.ajax({
+	        url : 'recipe/recipeDetail.json',
+	        method : 'post',
+	        data:{
+	          recipeNo:recipeNo
+	        },
+	        dataType : 'json',
+	        success : function(result) {
+	          if (result.status != 'success') {
+	            swal('레시피 정보를 가져오는데 실패하였습니다.');
+	            return;
+	          }
+	          var recipeData = result.data;
+	          console.log(recipeData);
+	          
+	          $('#recipeName').val(recipeData.recipeName);
+	          $('#portion').val(recipeData.portion);
+	          $('#cookTime').val(recipeData.cookTime);
+	          $('#intro').val(recipeData.intro);	      
+	          console.log(recipeData.representImages);
+	          $('#representImgs').append( rpImageTempImpl(recipeData) );
+	          
+	        } 
+	        ,
+	        error : function(){
+	          swal('서버 요청 오류');
+	        }
+	      });
+	}	
+	
 	var options = {
 		  url: function(phrase) {
 			  console.log(phrase);
@@ -382,6 +433,14 @@
 	              var no = $('input[name="materialName"]').getSelectedItemData().no;
 	              var category = $('input[name="materialName"]').getSelectedItemData().category;
 	              var existMt = $('input[name="materialNo"]');
+	              
+	              var appendContent = $('<div class="mtWrapper"><div class="mtName float_left">'+name+'</div>'
+                          +'<div class="float_left">&nbsp;:&nbsp;</div>'
+                          +'<div class="float_left mtAmount"><input name="materialAmount" type="text" placeholder="분량 (예:400g)" /></div>'
+                          +'<input type="hidden" name="materialNo" value="'+no+'">'
+                          +'<a href="#"><span class="closeBtn mtClose thick pdImg"></span></a>'
+                          +'</div>');
+	              
 	              for(i=0; i<existMt.length; i++){
 	            	  if($(existMt[i]).val()==no){
 	                      alert('재료를 중복으로 등록하실 수 없습니다.');
@@ -390,22 +449,10 @@
 	              }
 	              
 	              if(category=='1'){
-	            	  $('#materialList').append(
-	                          $('<div class="mtWrapper"><div class="mtName float_left">'+name+'</div>'
-	                           +'<div class="float_left">&nbsp;:&nbsp;</div>'
-	                           +'<div class="float_left mtAmount"><input name="materialAmount" type="text" placeholder="분량 (예:400g)" /></div>'
-	                           +'<input type="hidden" name="materialNo" value="'+no+'">'
-	                           +'</div>'));
+	            	  $('#materialList').append(appendContent);
 	              } else {
-	            	  $('#seasoningList').append(
-	                            $('<div class="mtWrapper"><div class="mtName float_left">'+name+'</div>'
-	                             +'<div class="float_left">&nbsp;:&nbsp;</div>'
-	                             +'<div class="float_left mtAmount"><input name="materialAmount" type="text" placeholder="분량 (예:400g)" /></div>'
-	                             +'<input type="hidden" name="materialNo" value="'+no+'">'
-	                             +'</div>'));
-	              }
-	              
-	              
+	            	  $('#seasoningList').append(appendContent);
+	              }         
             }
 	       }
 	};

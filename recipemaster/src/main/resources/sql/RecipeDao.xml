@@ -272,18 +272,18 @@
 		select * from mts m, rcp_mt mt, rcps r
 		where m.mtno=mt.mtno and r.rcpno = mt.rcpno and r.rcpno =${value}
 	</select>
-
-<select id="selectOne" resultMap="recipeMap" parameterType="INTEGER">
-    SELECT DISTINCT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn,
-    r.rcp_dt, r.hits, r.rpimg,
-    r.rgst, r.gpa, r.rcp_pd, u.uno, u.name userName,s.uno scrapUser, s.rcpno,
-    (select count(rcpno) from rcp_lik where rcpno=${recipeNo}) countLike,
-    (select count(rrpno) from rcp_rp where rcpno=${recipeNo})
-    countComment,
-    (select count(rcpno) from rcp_scr where rcpno=${recipeNo}) countScrap
-    FROM users u INNER JOIN rcps r on u.uno=r.uno and r.rcpno=${recipeNo}
-    LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno
-    LEFT OUTER JOIN rcp_scr s ON r.rcpno=s.rcpno and s.uno=${userNo}
+	
+	<select id="selectOne" resultMap="recipeMap" parameterType="INTEGER">
+	    SELECT DISTINCT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn,
+	    r.rcp_dt, r.hits, r.rpimg,
+	    r.rgst, r.gpa, r.rcp_pd, u.uno, u.name userName,s.uno scrapUser, s.rcpno,
+	    (select count(rcpno) from rcp_lik where rcpno=${recipeNo}) countLike,
+	    (select count(rrpno) from rcp_rp where rcpno=${recipeNo})
+	    countComment,
+	    (select count(rcpno) from rcp_scr where rcpno=${recipeNo}) countScrap
+	    FROM users u INNER JOIN rcps r on u.uno=r.uno and r.rcpno=${recipeNo}
+	    LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno
+	    LEFT OUTER JOIN rcp_scr s ON r.rcpno=s.rcpno and s.uno=${userNo}
   </select>
 
 	<select id="selectMaterialName" resultMap="materialMap"

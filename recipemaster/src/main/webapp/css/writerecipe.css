@@ -2,6 +2,17 @@ body {
   background-image: url("../../img/light-wooden-background.jpg");
 }
 
+.rpimg{
+	height: 150px;
+	width: 150px;
+}
+
+.mtClose{
+  width: 14px !important;
+  height: 18px !important;
+  right: 32px;
+}
+
 .imagewrapper{
 	width: 150px;
 	height: 150px;
@@ -70,6 +81,7 @@ body {
     padding: 1em;
     min-height: 150px;
     vertical-align: middle;
+    margin-bottom: 20px;
 }
 
 .height_150px{

@@ -1,8 +1,6 @@
 /*  */
-@import url(http://fonts.googleapis.com/css?family=Oswald);
-
-@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
-
+@import url('https://fonts.googleapis.com/css?family=Baloo+Tamma');
+@import url('https://fonts.googleapis.com/css?family=Baloo+Tamma|Nunito');
 * {
 	margin: 0;
 	padding: 0;
@@ -32,7 +30,8 @@
 
 .introfont {
 	padding-top: 10pt;
-	font-size: 10pt
+	font-size: 10pt;
+	font-family: 'Nunito', sans-serif;
 }
 
 .rcp-userName1 {
@@ -89,8 +88,9 @@
 }
 
 h1 {
+	font-family: 'Baloo Tamma', cursive;
 	margin-top: 27px;
-	font-size: 66px;
+	font-size: 87px;
 	color: #b51515;
 	letter-spacing: -2px;
 }
@@ -353,7 +353,7 @@ body {
 		margin: 8% auto;
 		margin-left: 8.2%;
 		overflow: hidden;
-		background: #fff;
+		background: #D9E5FF;
 		position: relative;
 		box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
 			rgba(0, 0, 0, .19);
@@ -365,7 +365,7 @@ body {
 		margin: 4% auto;
 		margin-left: 2.2%;
 		overflow: hidden;
-		background: #fff;
+		background: #D9E5FF;
 		position: relative;
 		box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
 			rgba(0, 0, 0, .19);
@@ -378,7 +378,7 @@ body {
 		margin: 4% auto;
 		margin-left: 2.2%;
 		overflow: hidden;
-		background: #fff;
+		background: #D9E5FF;
 		position: relative;
 		box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
 			rgba(0, 0, 0, .19);
@@ -394,7 +394,7 @@ body {
 		margin: 4% auto;
 		margin-left: 2.2%;
 		overflow: hidden;
-		background: #fff;
+		background: #D9E5FF;
 		position: relative;
 		box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
 			rgba(0, 0, 0, .19);
@@ -409,7 +409,7 @@ body {
 		margin: 4% auto;
 		margin-left: 4.8%;
 		overflow: hidden;
-		background: #fff;
+		background: #D9E5FF;
 		position: relative;
 		box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
 			rgba(0, 0, 0, .19);
@@ -424,7 +424,7 @@ body {
 		margin: 4% auto;
 		margin-left: 5%;
 		overflow: hidden;
-		background: #fff;
+		background: #D9E5FF;
 		position: relative;
 		box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
 			rgba(0, 0, 0, .19);
@@ -439,7 +439,7 @@ body {
 		margin: 4% auto;
 		margin-left: 6.2%;
 		overflow: hidden;
-		background: #fff;
+		background: #D9E5FF;
 		position: relative;
 		box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
 			rgba(0, 0, 0, .19);
@@ -454,7 +454,7 @@ body {
 		margin: 4% auto;
 		margin-left: 6%;
 		overflow: hidden;
-		background: #fff;
+		background: #D9E5FF;
 		position: relative;
 		box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
 			rgba(0, 0, 0, .19);
@@ -469,7 +469,7 @@ body {
 		margin: 4% auto;
 		margin-left: 6.6%;
 		overflow: hidden;
-		background: #fff;
+		background: #D9E5FF;
 		position: relative;
 		box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
 			rgba(0, 0, 0, .19);
@@ -479,11 +479,11 @@ body {
 .fresh-ui {
 	padding: 20px;
 	height: 500px;
-	border-top: 5px solid
+	border-top: 5px solid #F15F5F;
 }
 
 .fresh-ui:hover .header .social .list {
-	right: 15px
+	right: 0px
 }
 
 .fresh-ui:hover .header .social .list a {
@@ -543,7 +543,7 @@ body {
 .fresh-ui .header .social .list a {
 	width: 37px;
 	height: 30px;
-/* 	color: inherit; */
+ 	color: inherit;
 	display: block;
 	margin: 23px 0;
 	background: #fff;
@@ -591,7 +591,7 @@ body {
 	transition-duration: .3s
 }
 
-/* .fresh-ui .header .social .list a:nth-child(4), .fresh-ui .header .social .list a:nth-child(4):before
+.fresh-ui .header .social .list a:nth-child(4), .fresh-ui .header .social .list a:nth-child(4):before
 	{
 	-webkit-transition-duration: .4s;
 	transition-duration: .4s
@@ -600,7 +600,7 @@ body {
 .fresh-ui .header .social .list a:nth-child(5) {
 	-webkit-transition-duration: .5s;
 	transition-duration: .5s
-} */
+}
 
 .fresh-ui .content {
 	padding-top: 10px
@@ -614,6 +614,7 @@ body {
 
 .fresh-ui .content .text {
 	line-height: 24px;
+	font-family: 'Nunito', sans-serif;
 }
 
 .fresh-ui .content .list a {
