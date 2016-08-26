@@ -75,7 +75,7 @@ function loginCheck(event) {
 					$('#signUpBtn').hide();
 					$('#loginBtn').hide();
 					$('#signUpTopBtn').hide();
-					$('#loginIcon').html('<img id="loginIconAction1" class="rcp-barimg dropdown-trigger img-circle" src="img/Chef3.jpg" />');
+					$('#loginIcon').html('<img id="loginIconAction1" class="rcp-barimg rcp-barimg-r dropdown-trigger img-circle" src="img/Chef3.jpg" />');
 					$('#topbarUserImg').html('<img id="loginIconAction2" class="rcp-barimg dropdown-trigger img-circle" src="img/Chef3.jpg" />');
 				}
 			} else {
