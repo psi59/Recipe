@@ -19,7 +19,7 @@ public interface RecipeService {
   int getRecipeCount(int pageNo, int pageSize, Search search, int userNo);
   List<Recipe> selectSbuscribe2(String userNo, int pageNo, int pageSize); //준모,용이형
   int addSubscribe(int toUserNo, int fromUserNo);
-  int deleteSubscribe(int toUserNo, int fromUserNo);
+  int deleteSubscribe(int toUserNo, int fromUserNo);  
   List<Recipe> selectSubscribeUno(int userNo);
   List<Recipe> selectSbuscribe(String scsUserNo, int pageNo, int pageSize); //준모 수정
   List<Recipe> selectMypage(int userNo);    
@@ -29,7 +29,7 @@ public interface RecipeService {
   Recipe getRecipe(int recipeNo,int userNo);
   int updateRecipe(Recipe recipe);
   int updateHits(Recipe recipe);
-  int deleteRecipe(int no);
+  int deleteRecipe(int recipeNo);
   List<Material> getMaterial(String materialName);
   int registyImageAndProduce(Map map);
   int addScrap(int userNo, int recipeNo);

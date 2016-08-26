@@ -335,10 +335,10 @@ public class RecipeController {
     
     //toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
     User user = new User();
-    int toUserNo=(int)session.getAttribute("userNo");
+    int toUserNo=(int)session.getAttribute("loginUser");
     System.out.println(user.getUserNo());
     
-    recipeService.deleteScrap(toUserNo, fromUserNo );
+    recipeService.addSubscribe(toUserNo, fromUserNo);
     try{
       result.put("status","success");
     }catch(Exception e){
@@ -494,10 +494,11 @@ public class RecipeController {
   }
 
   public int getSession(int userNo,HttpSession session){  
-    if(session.getAttribute("userNo") == null){
+   // User user = new User();
+    if(session.getAttribute("loginUser") == null){
       userNo = 0;
     }else{
-      userNo = (int)session.getAttribute("userNo");
+      userNo = ((User) session.getAttribute("loginUser")).getUserNo();
     }
     return userNo;
   }

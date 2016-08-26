@@ -166,7 +166,8 @@ $(function(){
 		$("#logoutBtn").click(
 				function(){
 					logout(event);
-					location.reload();
+					//location.reload();
+					$(location).attr('href','/');
 				});
 });
 

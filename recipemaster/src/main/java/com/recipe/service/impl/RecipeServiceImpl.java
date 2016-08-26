@@ -82,8 +82,8 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public int deleteRecipe(int no) {
-		return 0;
+	public int deleteRecipe(int recipeNo) {
+		return recipeDao.deleteRecipe(recipeNo);
 	}
 
 	@Override
