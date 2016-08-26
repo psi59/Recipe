@@ -57,6 +57,15 @@ public class RecipeServiceImpl implements RecipeService {
 		params.put("len", pageSize);
 		return recipeDao.recipeList(params);
 	}
+	
+	@Override
+  public List<Recipe> getRecipeRankList(int pageNo,int pageSize) {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("startIndex", (pageNo - 1) * pageSize);
+    params.put("len", pageSize);
+    return recipeDao.recipeRankList(params);
+  }
+	
 
 	@Override
 	public Recipe getRecipe(int recipeNo, int userNo) {
@@ -73,8 +82,8 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public int deleteRecipe(int no) {
-		return 0;
+	public int deleteRecipe(int recipeNo) {
+		return recipeDao.deleteRecipe(recipeNo);
 	}
 
 	@Override
@@ -130,7 +139,7 @@ public class RecipeServiceImpl implements RecipeService {
       params.put("userNo", userNo);
       params.put("startIndex", (pageNo - 1) * pageSize);
       params.put("len", pageSize);
-      return recipeDao.selectSbuscribe2(params);
+      return recipeDao.selectSubscribe2(params);
     }
     @Override
     public int addScrap(int userNo, int recipeNo) {

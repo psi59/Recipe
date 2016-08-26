@@ -292,95 +292,62 @@
       $("#tabs").tabs();
     });
 		
-		function pageTabs(){
-			$('.isotope-filter a').on('click', function(event){
-				event.preventDefault();
-				 var request;
-				 var url = 'recipe/userPage.json';
+function pageTabs(){
+	$('.isotope-filter a').on('click', function(event){
+		event.preventDefault();
+		 var request;
+		 var url = 'recipe/userPage.json';
+		  
+		 
+		 if($(event.target).is('#searchRecipe')){
+			 request=1;
+		  }
+		  else if($(event.target).is('#searchScrap')){
+			  request=2;
+		  }else if($(event.target).is('#searchSubscribe')){
+			  request=3;
+		  }else{
+			  request = 4;
+			  url='visitor/list.json'
+		  }
+		 
+		  $.ajax({
+			  url :url,
+			  dataType : 'json',
+			  method : 'post',
+			  data:{
+				  email:location.href.split('?')[1],
+				  request:request
+			  },
+			  success : function(result) {
+				 
+				  if (result.status != 'success') {
+					  alert('comList 실행 중 오류 발생');
+					  return;
+				  }
+				 
+			
+				  var sourceCRList = $('#temp').text();
+				  var templateCRList = Handlebars.compile(sourceCRList);
 				  
-				 
-				 if($(event.target).is('#searchRecipe')){
-					 request=1;
-				  }
-				  else if($(event.target).is('#searchScrap')){
-					  request=2;
-				  }else if($(event.target).is('#searchSubscribe')){
-					  request=3;
-				  }else{
-					  request = 4;
-					  url='visitor/list.json'
-				  }
-				 
-				  $.ajax({
-					  url :url,
-					  dataType : 'json',
-					  method : 'post',
-					  data:{
-						  email:location.href.split('?')[1],
-						  request:request
-					  },
-					  success : function(result) {
-						 
-						  if (result.status != 'success') {
-							  alert('comList 실행 중 오류 발생');
-							  return;
-						  }
-						 
-					
-						  var sourceCRList = $('#temp').text();
-						  var templateCRList = Handlebars.compile(sourceCRList);
-						  
-						  console.log(result.data);
-						
-						  $('#tabs-'+$('#tabId').val()+' .hs-content .container .row .rcp-mypage-section div').remove();
-						  $('#tabs-'+request+' .hs-content .container .row .rcp-mypage-section').append(templateCRList(result));
-						  $('#tabId').val(request);
-						  
-						  
-						  console.log(result.data);
-						  for(var i=0; i<result.data.length; i++){
+				  console.log(result.data);
+				
+				  $('#tabs-'+$('#tabId').val()+' .hs-content .container .row .rcp-mypage-section div').remove();
+				  $('#tabs-'+request+' .hs-content .container .row .rcp-mypage-section').append(templateCRList(result));
+				  $('#tabId').val(request);
+				  
+				  
+				  console.log(result.data);
+				  for(var i=0; i<result.data.length; i++){
 //							  for(var j=0; j<result.data[i].representImages.length; j++){
-								  $('div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');
+						  $('div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');
 
 //							  }
-						  }
-					  },
-					  error : function() {
-						 alert('community 서버 요청 오류!...')
-					  }
-				  });
-			})
-		}
-		
-		
-		/*
-    //마지막 스크롤 TOP 위치
-    var lastScrollY = 0;
-
-    $(document).ready(function() {
-      //setInterVal(사용할 함수, 1/1000초)  즉 quick함수를 1/1000초마다 실행
-      setInterval(quick, 1);
-    });
-
-    function quick() {
-      //현재 스크롤바 top 위치, .scrollTop() - 선택한 element의 scroll 가능한 영역에서 가장 위쪽 위치
-      currentY = $(window).scrollTop();
-
-      //위치가 틀린 경우
-      if (currentY != lastScrollY) {
-        //percent=움직임속도 * (현재 scrollTop위치) - (마지막 scrollTop위치) 
-        percent = 0.1 * (currentY - lastScrollY);
-        //percent가 0보다 크면 수를 올림  작으면 수를 내림. 
-        percent = (percent > 0 ? Math.ceil(percent) : Math
-            .floor(percent));
-        //quick의 style:top을 현재의 top에서 percent를 더한 값(음수라면 빼지겠지?)으로 바꿔준다. 
-        $("#quick").css("top",
-            parseInt($("#quick").css("top")) + percent);
-        //현재 위치를 lastScrollY에 저장해준다.
-        lastScrollY = lastScrollY + percent;
-      }
-      $("#quick").css("left", 1400);
-    }*/
-    
-    
-  
+				  }
+			  },
+			  error : function() {
+				 alert('community 서버 요청 오류!...')
+			  }
+		  });
+	})
+}

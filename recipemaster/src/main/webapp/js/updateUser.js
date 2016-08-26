@@ -2,17 +2,17 @@ $(function(){
 	
 
 	if(sessionStorage.getItem('data') != null){
-	$('#updateFormUserNo').val(eval(sessionStorage.getItem('data'))[0].userNo);
-	$('#updateFormEmail').val(eval(sessionStorage.getItem('data'))[0].email);
+	$('#updateFormUserNo').val(eval(jsonData)[0].userNo);
+	$('#updateFormEmail').val(eval(jsonData)[0].email);
 	}
 	var profileImage;
 
 	$('#userInfoEditBtn').on('click', function() {
 		$('#editUserInfo-pop-up-banner').bPopup();
-		if (eval(sessionStorage.getItem('data'))[0].userNo != null) {
-			$('#updateBoxEmail').text(eval(sessionStorage.getItem('data'))[0].email);
-			$('#updateBoxName').text(eval(sessionStorage.getItem('data'))[0].userName);
-			$('#profileGrade').text(eval(sessionStorage.getItem('data'))[0].recipeUrl);
+		if (eval(jsonData)[0].userNo != null) {
+			$('#updateBoxEmail').text(eval(jsonData)[0].email);
+			$('#updateBoxName').text(eval(jsonData)[0].userName);
+			$('#profileGrade').text(eval(jsonData)[0].recipeUrl);
 		}
 	});
 

@@ -1,4 +1,3 @@
-
 $(function(){
 	var detailTemp = $('#recipe-detail-template').html();
 	var comDetailTemp = Handlebars.compile(detailTemp); 
@@ -50,36 +49,38 @@ $(function(){
 						swal('게시물 조회 오류');
 						return;
 					}
-					console.log("reproduce1 :"+result.data.recipeProcedure[0].recipeProduce);
-					console.log("reproduce2 :"+jQuery.parseJSON(JSON.stringify(result.data.recipeProcedure[0].recipeProduce)));
-					console.log("reproduce3 :"+JSON.parse(JSON.stringify(result.data.recipeProcedure)));
-				
-					
 					$('.rcp-header > .title').text(result.data.recipeName);
 					$('.rcp-header > .date').text(result.data.recipeDate);
 					$('.hash').text(result.data.intro);
 					$('#detail_pop_up').bPopup({
 						follow: [false, false], //x, y
 						onOpen:function(){
-							$("body").css("overflow", "hidden");
-							$('.rcp-detail-body').append( comDetailTemp(result) );
+							$("body").css("overflow", "hidden");						
 							$('.rcp-304').append( comDetailInfoTemp(result) );
 							$('.rcp-info-images').append( comDetailImageMain(result) );
 							$('.rcp-detail-step').append( comDetailImageStep(result) );
-							$('.rcp-explanation').text(result.data.recipeProcedure[0].reproduce);
+							$('.rcp-detail-body').append( comDetailTemp(result) );
+							for(var i = 0; i <result.data.recipeProcedure.length; i++){
+								console.log("여기옴? "+result.data.recipeProcedure[i].recipeProduceImage);
+								
+								$('div[name="rcp-body"]:eq('+i+') .rcp-images').attr('src','img/recipeImg/'+result.data.recipeProcedure[i].recipeProduceImage);
+								$('div[name="rcp-body"]:eq('+i+') .rcp-explanation p').text(result.data.recipeProcedure[i].recipeProduce);
+								
+							}
 							slider = $('.rcp-detail-body').bxSlider({
 								mode:'vertical',
 								pager: false,
 								moveSlides: 1
 							});
-
-							if( eval(jsonData)[0] != null ){			
+							
+							
+							if( eval(jsonData) != null ){										
 								if(result.data.scrapUser == eval(jsonData)[0].userNo){
 									$('.rcp-scrap-button-text').attr('name','scrap');
 									$('.rcp-scrap-button-text').css('border','1px solid #ffce6e');
 									$('.rcp-detail-scrap').attr('style','color:#ffce6e');
 									$('.rcp-detail-scrap i').attr('style','color:#ffce63');
-								}else{
+								}else{									
 									$('.rcp-scrap-button-text').attr('name','');
 									$('.rcp-scrap-button-text').css('border','1px solid white');
 									$('.rcp-detail-scrap').css('color','white');
@@ -93,13 +94,15 @@ $(function(){
 							$(".rcp-body").remove();
 							$(".rcp-main").remove();
 							$(".rcp-detail-step").remove();
+							$(".rcp-detail-body").remove();
 							$(".bx-wrapper").remove();
 							$(".rcp-720").html('<div class="rcp-header">'
 									+'<h2 class="title">매콤 대패삼겹살 볶음</h2>'
 									+'<p class="hash">#돼지고기 #대패삼겹살 #야식 #간단고기요리 #매콤고기</p>'
 									+'<p class="date">2016.07.21</p><hr /></div>'
 									+'<div class="rcp-detail-body"></div>');
-						}
+//							$("#detail_pop_up_reload").attr('id','detail_pop_up');
+							}
 
 					});
 

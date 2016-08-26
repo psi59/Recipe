@@ -11,7 +11,8 @@
   $(function(){
 	  Main1List();
 	  likeLogin();
-	  comList();	  
+	  comList();	
+	  goMyPage();
   });
   
 
@@ -252,4 +253,12 @@ function mouseHover(){
 
 	  })
   }
-  
+  function goMyPage(){
+	  $('#profileView .goMyPageBtn').on('click',function(event){
+		  event.preventDefault();
+		  if(eval(jsonData) != null){
+			  $(location).attr('href','/mypage.html?'+ eval(jsonData)[0].email);
+		  }
+	  })
+  }
+

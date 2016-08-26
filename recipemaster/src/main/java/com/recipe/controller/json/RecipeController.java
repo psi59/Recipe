@@ -266,7 +266,6 @@ public class RecipeController {
     HashMap<String,Object> result = new HashMap<>();
     Recipe recipe = new Recipe();
     try{
-      System.out.println("오냐??"+userNo);
     //구독한 사람 뽑는다.
       List<Recipe> userNoList = recipeService.selectSubscribeUno(userNo);
       
@@ -287,6 +286,7 @@ public class RecipeController {
     }catch (Exception e){
       result.put("status", "false");
     }
+    System.out.println(result);
     return new Gson().toJson(result);
   }
   
@@ -335,10 +335,10 @@ public class RecipeController {
     
     //toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
     User user = new User();
-    int toUserNo=(int)session.getAttribute("userNo");
+    int toUserNo=(int)session.getAttribute("loginUser");
     System.out.println(user.getUserNo());
     
-    recipeService.deleteScrap(toUserNo, fromUserNo );
+    recipeService.addSubscribe(toUserNo, fromUserNo);
     try{
       result.put("status","success");
     }catch(Exception e){
@@ -387,9 +387,9 @@ public class RecipeController {
 	@ResponseBody
 	public String rank(
 			@RequestParam(defaultValue="1") int pageNo, 
-			@RequestParam(defaultValue="10") int pageSize,int request){
+			@RequestParam(defaultValue="10") int pageSize){
 		HashMap<String,Object> result = new HashMap<>();
-		List<Recipe> list = recipeService.getRecipeList(pageNo, pageSize,request);
+		List<Recipe> list = recipeService.getRecipeRankList(pageNo, pageSize);
 		try{
 			result.put("status","success");
 			result.put("data", list);
@@ -494,10 +494,11 @@ public class RecipeController {
   }
 
   public int getSession(int userNo,HttpSession session){  
-    if(session.getAttribute("userNo") == null){
+   // User user = new User();
+    if(session.getAttribute("loginUser") == null){
       userNo = 0;
     }else{
-      userNo = (int)session.getAttribute("userNo");
+      userNo = ((User) session.getAttribute("loginUser")).getUserNo();
     }
     return userNo;
   }
@@ -537,10 +538,11 @@ public class RecipeController {
       result.put("status","success");
       result.put("data", myRecipeList);
       result.put("pageNo",pageNo);
+      System.out.println("pageNo::"+result.get("pageNo"));
+      System.out.println("data::"+result.get("data"));
     }catch (Exception e){ 
       result.put("status", "false");
-    }
-    System.out.println(result);
+    } 
     return new Gson().toJson(result);
   }
     }
