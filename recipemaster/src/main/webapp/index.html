@@ -89,7 +89,7 @@
 											class="btn btn-default rcp-btn-nav">로그아웃</button>
 									</div>
 								</div>
-								<a href="/mypage.html"><button
+								<a href="#" class="rcp-goMyPage"><button
 										class="goMyPageBtn btn btn-default rcp-btn-nav">MyPage</button></a>
 								<a href="/writerecipe.html"><button
 										class="goWriteRcpBtn btn btn-default rcp-btn-nav">Recipe
@@ -345,8 +345,8 @@
 	<!------------------------- Rank List ------------------------------>
 	<div id="footer"></div>
 	<script id="recipe-detail-template" type="text/x-handlebars-template">
-    {{#each data}}
-              <div class="rcp-body">
+    {{#each data.recipeProcedure}}
+              <div class="rcp-body" name="rcp-body">
               <div>
                 <div class="rcp-title-size">
                   <h6 class="rcp-bodyTitle"> MAIN</h6>
@@ -355,9 +355,9 @@
                   <a href="#" class="glyphicon glyphicon-star"></a>
                 </div>
                </div>
-                <img src="img/food01.jpg" class="rcp-images">
-               <div class="rcp-explanation">
-                  <p>{{recipeProcedure}}</p>
+                <img src="img/profileImg/{{recipeProduceImage}}" class="rcp-images">
+               <div class="rcp-explanation" name="rcp-explanation">
+                  <p>{{recipeProduce}}</p>
                 </div>
                <div class="rcp-nav-down">
                    <a href="#" class="glyphicon glyphicon-chevron-down rcp-detail-move"></a>
@@ -458,7 +458,7 @@
     <div class="rcp-list">
       <div class="rcp-1024 list1" >
         <h3>최신 레시피</h3>
-        <div class="row"></div>
+        <div class="row rcp-order"></div>
       </div>
     </div>
   </section>
