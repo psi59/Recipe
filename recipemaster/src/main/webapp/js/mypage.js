@@ -1,14 +1,11 @@
-
-
   $(function(){
 	  console.log(location.href.split('?')[1]);
-	  
 	  $.ajax({
 		  url :'recipe/userPage.json',
 		  dataType : 'json',
 		  method : 'post',
 		  data:{
-			 email:location.href.split('?')[1],
+			email:location.href.split('?')[1],
 	  		request:1
 		  },
 		  success : function(result) {

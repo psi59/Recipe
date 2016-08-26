@@ -4,6 +4,15 @@
 .navbar{
 	height: 51px;
 }
+.rcp-forDelete-xButton{
+	position:absolute;
+	width : 30px;
+	    left: 250px;
+    bottom: 0px;
+}
+.rcp-x-button{
+	border:0.5px solid #cecece ! important;
+}
 .rcp-profile-img {
 	/* 	margin-top: 20%; */
 	width: 50%;

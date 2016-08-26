@@ -178,7 +178,7 @@ public class UserController {
 		// index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
 		HashMap<String, Object> result = new HashMap<>();
 
-		User loginUser = userService.loginUser(user);
+		User loginUser = userService.loginUser(user); 
 
 		try {
 			result.put("status", "success");

@@ -82,8 +82,8 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public int deleteRecipe(int no) {
-		return 0;
+	public int deleteRecipe(int recipeNo) {
+		return recipeDao.deleteRecipe(recipeNo);
 	}
 
 	@Override
@@ -198,6 +198,18 @@ public class RecipeServiceImpl implements RecipeService {
     public List<Recipe> selectSubscribeMypage(int userNo) {
       // TODO Auto-generated method stub
       return recipeDao.selectSubscribeMypage(userNo);
+    }
+
+    @Override
+    public List<Recipe> recipeComment(int recipeNo) {
+      // TODO Auto-generated method stub
+      return recipeDao.recipeComment(recipeNo);
+    }
+
+    @Override
+    public List<Recipe> recipeCommentUserInfo(String userNums) {
+      // TODO Auto-generated method stub
+      return recipeDao.recipeCommentUserInfo(userNums);
     }
 	
 }
