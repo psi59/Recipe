@@ -485,4 +485,20 @@ public class RecipeController {
 		}
 		return recipe;
 	}
+	
+	@RequestMapping(path = "imageDelete", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String imageDelete(@RequestParam("category") String category, @RequestParam("imageName") String imageName, HttpServletRequest request) {
+		HashMap<String, Object> result = new HashMap<>();
+		File file = new File(CommonUtil.getImageFolderPath(category, request)+"/"+imageName);
+
+		if(file.exists()){
+			file.delete();
+			result.put("status", "success");
+		} else {
+			result.put("status", "fail");
+		}
+		
+		return new Gson().toJson(result);
+	}
 }
