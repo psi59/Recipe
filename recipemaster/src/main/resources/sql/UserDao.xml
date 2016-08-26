@@ -45,7 +45,7 @@
 		LIMIT #{startIndex}, #{len}) vt
 	</select>
 	
-	<!-- 레시피 *5, 구독자 * 3 , 좋아요 * 2 -->
+	<!-- 레시피 *10, 구독자 * 5-->
 	<select id="selectRankList" resultMap="userMap" parameterType="Map">
 		SELECT @rownum:=@rownum+1 rownum,vt.* FROM(
     SELECT r1.uno,r1.name,r1.email,r1.intro,IFNULL(r2.cnt,0)
