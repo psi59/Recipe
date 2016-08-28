@@ -1,0 +1,98 @@
+ul.category-accordion-menu {
+	list-style:none;
+	padding:0;
+	font-family:'consolas',sans-serif;
+	font-weight:400;
+	font-size:16px;
+	margin: 115px auto 0px;
+	width: 90%;
+}
+
+ul.category-accordion-menu li {
+
+	background:none;
+
+	margin:7px 0;
+
+	padding:0;
+
+}
+
+
+ul.category-accordion-menu li #category-click {
+
+	background-color:#DDD;
+
+	border:1px solid #CCC;
+
+	cursor:pointer;
+
+	padding:10px 20px;
+
+	text-align:left;
+
+	transition:all 200ms ease;
+
+	user-select:none;
+  
+    font-family:'segoe ui',sans-serif;
+
+	-khtml-user-select:none;
+
+	-moz-user-select:none;
+
+	-ms-user-select:none;
+
+	-webkit-touch-callout:none;
+
+	-webkit-user-select:none;
+
+}
+
+ul.category-accordion-menu li #category-click:hover {
+
+	background-color:#CECECE;
+
+	border-color:#C0C0C0;
+
+}
+
+ul.category-accordion-menu li section.content {
+
+	border-bottom:1px solid #CCC;
+
+	border-left:1px solid #CCC;
+
+	border-right:1px solid #CCC;
+
+	max-height:180px;
+
+	overflow:hidden;
+
+	padding:20px;
+
+	transition:all 200ms linear;
+
+}
+
+ul.category-accordion-menu li.closed section.content {
+
+	max-height:0;
+
+	padding:0 20px;
+
+}
+
+ul.category-accordion-menu li.open #category-click {
+
+	background-color:#d93434;
+
+	border:1px solid #b02929;
+
+}
+
+ul.category-accordion-menu li.open #category-click span.title {
+
+	color:#FFF;
+
+}
