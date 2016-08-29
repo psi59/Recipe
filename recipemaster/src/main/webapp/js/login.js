@@ -82,9 +82,9 @@ function loginCheck(event) {
 				
 				/*eval 사용 방법, eval(jsonData)[0].email*/
 				if(jsonData!=null){
-					$('#signUpBtn').hide();
-					$('#loginBtn').hide();
-					$('#signUpTopBtn').hide();
+					$('#signUpBtn').remove();
+					$('#loginBtn').remove();
+					$('#signUpTopBtn').remove();
 					$('#loginIcon').html('<img id="loginIconAction1" class="rcp-barimg dropdown-trigger img-circle" src="img/Chef3.jpg" />');
 					$('#topbarUserImg').html('<img id="loginIconAction2" class="rcp-barimg dropdown-trigger img-circle" src="img/Chef3.jpg" />');
 				}
