@@ -15,31 +15,27 @@
 
 <!-- mypage 정보 가지고 오기 -->
 	<select id="loadMyPageLike" resultType="int" parameterType="int">
-		select count(r2.lc_dt)
+		select ifnull(count(r2.lc_dt),0)
 		from rcps r1,rcp_lik r2
 		where r1.rcpno=r2.rcpno and r1.uno=${value}
-		group by r1.uno
 	</select>
 
 	<select id="loadMyPageScr" resultType="int" parameterType="int">
-		select count(r2.scc_dt)
+		select ifnull(count(r2.scc_dt),0)
 		from rcps r1,rcp_scr r2
 		where r1.rcpno=r2.rcpno and r1.uno=${value}
-		group by r1.uno
 	</select>
 
 	<select id="loadMyPageSum" resultType="int" parameterType="int">
-		select SUM(r1.hits)
+		select ifnull(SUM(r1.hits),0)
 		from rcps r1
 		where r1.uno=${value}
-		group by r1.uno
 	</select>
 
 	<select id="loadMyPageAvg" resultType="int" parameterType="int">
-		select avg(r1.gpa)
+		select ifnull(avg(r1.gpa),0)
 		from rcps r1
 		where r1.uno=${value}
-		group by r1.uno
 	</select>
 	
 	

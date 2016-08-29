@@ -352,6 +352,15 @@ public class RecipeController {
 	  public String addSubscribe(HttpSession session,String email){
 	    HashMap<String,Object> result = new HashMap<>();
 	    //toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
+	    
+	    if(((User)session.getAttribute("loginUser"))==null){
+	      
+	      result.put("status", "failure");
+	      System.out.println("login안함");
+	      System.out.println(result);
+	      return new Gson().toJson(result);
+	     }
+	    
 	    User user = new User();
 	    int toUserNo=((User)session.getAttribute("loginUser")).getUserNo();
 	    System.out.println("toUserNo::"+toUserNo);
@@ -396,6 +405,12 @@ public class RecipeController {
      HashMap<String,Object> result = new HashMap<>();
      //toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
      User user = new User();
+     
+     if(((User)session.getAttribute("loginUser"))==null){
+       result.put("status","false");
+       return new Gson().toJson(result);
+     }
+     
      //login한 사람 userNo
      int toUserNo=((User)session.getAttribute("loginUser")).getUserNo();
      //참조하고 있는 사람 userNo
@@ -612,5 +627,5 @@ public class RecipeController {
     } 
     return new Gson().toJson(result);
   }
-    }
+}
 

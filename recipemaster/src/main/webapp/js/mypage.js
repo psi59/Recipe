@@ -1,6 +1,4 @@
-
-
-  $(function(){
+$(function(){
 	  console.log(location.href.split('?')[1]);
 	  
 	  $.ajax({
@@ -35,83 +33,96 @@
 			  }
 		  },
 		  error : function() {
-			 alert('community 서버 요청 오류!...')
+			 //alert('community 서버 요청 오류!...')
 		  }
 	  });
 	
-	  
-	//checkSubscribe
-	  $.ajax({
-		  url:'recipe/checkSubscribe.json',
-			datatype:'json',
-			data:{
-				email:location.href.split('?')[1]
-			},
-			method:'post',
-	        success : function(result) {
-	          if (result.status != 'success') {
-	            //swal('실행 중 오류 발생');
-	            return;
-	          }
-	          $('.rcp-topbtn').text('구독하기 완료');
-	          $('.rcp-topbtn').attr('id','subscribeComplete');
-	        },
-	        error : function() {
-	          swal('서버 요청 오류!...')
-	        }
-	      }); 
-	  
-    	$('.rcp-topbtn').on('click',function(evnet){
-    		if($(event.target).is('#subscribeComplete')){
-    			$.ajax({
-	    			url:'recipe/deleteSubscribe.json',
-	    			datatype:'json',
-	    			data:{
-	    				email:location.href.split('?')[1]
-	    			},
-	    			method:'post',
-	    			success:(function(){
-	    				console.log('구독하기 해제 성공성공')
-	    				$('.rcp-topbtn').text('구독하기');
-	    				$('.rcp-topbtn').attr('id','');
-	    			}),
-	    			error:(function(){
-	    				console.log('구독하기 서버요청 error');
-	    			})
-	    		});    			
-    		}else{
-	    		$.ajax({
-	    			url:'recipe/addSubscribe.json',
-	    			datatype:'json',
-	    			data:{
-	    				email:location.href.split('?')[1]
-	    			},
-	    			method:'post',
-	    			success:(function(){
-	    				console.log('구독하기 성공성')
-	    				$('.rcp-topbtn').text('구독하기 완료');
-	    				$('.rcp-topbtn').attr('id','subscribeComplete');
-	    			}),
-	    			error:(function(){
-	    				console.log('구독하기 서버요청 error');
-	    			})
-	    		});
-    	}
-    	})
+
+		  
+		  //checkSubscribe
+		  $.ajax({
+			  url:'recipe/checkSubscribe.json',
+			  datatype:'json',
+			  data:{
+				  email:location.href.split('?')[1]
+			  },
+			  method:'post',
+			  success : function(result) {
+				  if (result.status == 'false') {
+					  //swal('실행 중 오류 발생');
+					  return;
+				  }
+				  $('.rcp-topbtn').text('구독하기 완료');
+				  $('.rcp-topbtn').attr('id','subscribeComplete');
+			  },
+			  error : function() {
+				  swal('서버 요청 오류!...')
+			  }
+		  }); 
+
+		  $('.rcp-topbtn').on('click',function(evnet){
+			  if($(event.target).is('#subscribeComplete')){
+				  $.ajax({
+					  url:'recipe/deleteSubscribe.json',
+					  datatype:'json',
+					  data:{
+						  email:location.href.split('?')[1]
+					  },
+					  method:'post',
+					  success:(function(){
+						 
+						  console.log('구독하기 해제 성공성공')
+						  $('.rcp-topbtn').text('구독하기');
+						  $('.rcp-topbtn').attr('id','');
+					  }),
+					  error:(function(){
+						  console.log('구독하기 서버요청 error');
+					  })
+				  });    			
+			  }else{
+				  $.ajax({
+					  url:'recipe/addSubscribe.json',
+					  datatype:'json',
+					  data:{
+						  email:location.href.split('?')[1]
+					  },
+					  method:'post',
+					  success:(function(result){
+						  if(result.status == 'failure'){
+							  console.log(result);
+							  swal('로그인 후 이용가능합니다.');
+							  return;
+						  }else{
+						  console.log('구독하기 성공성')
+						  $('.rcp-topbtn').text('구독하기 완료');
+						  $('.rcp-topbtn').attr('id','subscribeComplete');
+						  }
+					  }),
+					  error:(function(result){
+						  console.log('구독하기 서버요청 error');
+					  })
+				  });
+			  }
+
+		  });
+
+	 
     	
  pageTabs();
     })
     
 
+
+
   
 
 
-/*탑바 js(common.js 에 공통적으로 들어갈부분 일단 넣음*/
+/*탑바 js(common.js 에 공통적으로 들어갈부분 일단 넣음
    $(function() {
       //getWeather();
       //getRealTimeRank();
 
-      /* 준모3 */
+       준모3 
       if (eval(sessionStorage.getItem('data')) != null) {
 
         $('#topbarUserImg')
@@ -135,7 +146,7 @@
                 event.preventDefault();
                 dropdownClick('.profile-dropdown',
                     '.mobile-menu-dropdown');
-                /* 용이 추가() */
+                 용이 추가() 
                 if (eval(sessionStorage.getItem('data'))[0].userNo != null) {
                   $('#profileEmail')
                       .text(
@@ -149,7 +160,7 @@
                       .text(
                           eval(sessionStorage
                               .getItem('data'))[0].recipeUrl);
-                  /* 용이 추가() */
+                   용이 추가() 
                   $('#introduce')
                       .text(
                           eval(sessionStorage
@@ -163,7 +174,7 @@
       $('.dropdown-trigger--mobile').on('click', function() {
         dropdownClick('.mobile-menu-dropdown', '.profile-dropdown');
       });
-  });
+  });*/
 	/*탑바 js 끝*/
 
 	var sourceVisitor = $('#visitor-template').html();
@@ -371,3 +382,35 @@ function pageTabs(){
 		  });
 	})
 }
+
+$(function(){
+	loadMyPage(); 
+});
+
+function loadMyPage(){
+  
+	
+	
+    $.ajax({
+      url : '/visitor/loadMyPage.json',
+      datatype:'json',
+	  data:{
+		  email:location.href.split('?')[1]
+	  },
+	  method:'post',
+      success : function(result) {
+        if (result.status == 'false') {
+          //swal('로그인 해주시기 바랍니다.');
+          return;
+        }
+        $('#visitNum').text(result.sum+"명");
+        $('#likeNum').text(result.like+"개");
+        $('#scrapNum').text(result.scr+"개");
+        $('#gradeNum').text(result.avg+"점");
+      
+      },
+      error : function() {
+        //swal('더이상 데이터가 없습니다.')
+      }
+    })  
+ };
