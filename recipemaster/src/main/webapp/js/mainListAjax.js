@@ -248,7 +248,7 @@ function mouseHover(){
   function comList(){
 	  $(document).on('click', '.rcp-userName',function(event){
 		  event.preventDefault();
-
+		  
 		  $(location).attr('href','http://localhost:8080/mypage.html?'+$(event.target).parent().children('input[type="hidden"]').val() ); 	 
 
 	  })

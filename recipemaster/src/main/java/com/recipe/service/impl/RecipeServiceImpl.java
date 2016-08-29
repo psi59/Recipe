@@ -164,6 +164,14 @@ public class RecipeServiceImpl implements RecipeService {
       params.put("fromUserNo", fromUserNo);
       return recipeDao.addSubscribe(params);
     }
+    
+    @Override
+    public Map<String, Object> checkSubscribe(int toUserNo, int fromUserNo) {
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("toUserNo", toUserNo);
+      params.put("fromUserNo", fromUserNo);
+      return recipeDao.checkSubscribe(params);
+    }
 
     @Override
     public List<Recipe> selectMypage(int userNo) {

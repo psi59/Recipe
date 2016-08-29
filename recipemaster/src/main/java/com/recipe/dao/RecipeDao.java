@@ -1,5 +1,6 @@
 package com.recipe.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +18,8 @@ public interface RecipeDao {
   List<String> selectRecipeName(String searchValue); //Recipe Name List 성현
   List<Recipe> selectSubscribe2(Map<String,Object> params); //준모
   int addSubscribe(Map<String,Object> params); //구독하기 추가 고재현
-  int  deleteSubscribe(Map<String,Object> params);
+  int deleteSubscribe(Map<String,Object> params);
+  Map<String,Object> checkSubscribe(Map<String,Object> params);//구독 Check 준모
   int deleteRecipe(int recipeNo);
   List<Recipe> selectSubscribeUno(int userNo); //구독하기한 userNo추출  고재현
   List<Recipe> selectSubscribe(Map<String,Object> params); //구독한 리스트 고재현 //준모 수정

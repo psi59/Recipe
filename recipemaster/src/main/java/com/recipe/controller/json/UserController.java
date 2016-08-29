@@ -216,8 +216,7 @@ public class UserController {
 	        System.out.println("login");
 	        result.put("status", "success");
 	        result.put("data", loginUser);
-	        System.out.println("들어오냐??");
-	        System.out.println(loginUser);
+	        System.out.println("loginUser::"+loginUser);
 	      } else {
 	        result.put("status", "failure");
 	      }

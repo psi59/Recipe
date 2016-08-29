@@ -174,9 +174,17 @@
 	</insert>
 
 	<delete id="deleteSubscribe" parameterType="Map">
-		DELETE from scs where
-		${fromUserNo}
+		DELETE FROM scs 
+		WHERE uno=${toUserNo} AND uno2=${fromUserNo}
 	</delete>
+	
+	<!--Check 추가 -->
+	<select id="checkSubscribe" parameterType="Map" resultType="Map">
+	   SELECT *
+		 FROM scs
+		 WHERE uno=${toUserNo} and uno2=${fromUserNo}
+	</select>
+	
 
 	<select id="selectSubscribeUno" resultMap="recipeMap"
 		parameterType="INTEGER">

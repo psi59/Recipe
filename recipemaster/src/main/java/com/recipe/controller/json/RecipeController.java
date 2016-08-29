@@ -36,6 +36,7 @@ public class RecipeController {
 	@Autowired RecipeService recipeService;
 	@Autowired UserService userService;
 	
+	
 	// 리스트 검색 -이성현
 	@RequestMapping(path="listSearch",produces="application/json;charset=UTF-8")
   @ResponseBody
@@ -317,7 +318,7 @@ public class RecipeController {
     HashMap<String,Object> result = new HashMap<>();
     
     User userNo = new User();
-    userNo.setUserNo((int)session.getAttribute("userNo"));
+    userNo.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
     
     recipeService.deleteScrap(userNo.getUserNo(), recipeNo);
     try{
@@ -328,16 +329,15 @@ public class RecipeController {
     return new Gson().toJson(result);
   }
 	
-	@RequestMapping(path="addSubscribe",produces="application/json;charset=UTF-8")
+/*	@RequestMapping(path="addSubscribe",produces="application/json;charset=UTF-8")
   @ResponseBody
   public String addSubscribe(HttpSession session,int fromUserNo){
     HashMap<String,Object> result = new HashMap<>();
-    
     //toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
     User user = new User();
-    int toUserNo=(int)session.getAttribute("loginUser");
-    System.out.println(user.getUserNo());
-    
+    int toUserNo=((User)session.getAttribute("loginUser")).getUserNo();
+    System.out.println("toUserNo::"+toUserNo);
+    System.out.println("fromUserNo::"+fromUserNo);
     recipeService.addSubscribe(toUserNo, fromUserNo);
     try{
       result.put("status","success");
@@ -345,8 +345,75 @@ public class RecipeController {
       result.put("status", "false");
     }
     return new Gson().toJson(result);
-  }
+  }*/
 	
+	 @RequestMapping(path="addSubscribe",produces="application/json;charset=UTF-8")
+	  @ResponseBody
+	  public String addSubscribe(HttpSession session,String email){
+	    HashMap<String,Object> result = new HashMap<>();
+	    //toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
+	    User user = new User();
+	    int toUserNo=((User)session.getAttribute("loginUser")).getUserNo();
+	    System.out.println("toUserNo::"+toUserNo);
+	    System.out.println("fromUserNo_email::"+email);
+	    
+	    int fromUserNo=userService.selectFromEmail(email).getUserNo();
+	    
+	    recipeService.addSubscribe(toUserNo, fromUserNo);
+	    try{
+	      result.put("status","success");
+	    }catch(Exception e){
+	      result.put("status", "false");
+	    }
+	    return new Gson().toJson(result);
+	  }
+	 
+	 @RequestMapping(path="deleteSubscribe",produces="application/json;charset=UTF-8")
+   @ResponseBody
+   public String deleteSubscribe(HttpSession session,String email){
+     HashMap<String,Object> result = new HashMap<>();
+     //toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
+     User user = new User();
+     int toUserNo=((User)session.getAttribute("loginUser")).getUserNo();
+     System.out.println("toUserNo::"+toUserNo);
+     System.out.println("fromUserNo_email::"+email);
+     
+     int fromUserNo=userService.selectFromEmail(email).getUserNo();
+     
+     recipeService.deleteSubscribe(toUserNo, fromUserNo);
+     
+     try{
+       result.put("status","success");
+     }catch(Exception e){
+       result.put("status", "false");
+     }
+     return new Gson().toJson(result);
+   }
+	 
+	 @RequestMapping(path="checkSubscribe",produces="application/json;charset=UTF-8")
+   @ResponseBody
+   public String checkSubscribe(HttpSession session,String email){
+     HashMap<String,Object> result = new HashMap<>();
+     //toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
+     User user = new User();
+     //login한 사람 userNo
+     int toUserNo=((User)session.getAttribute("loginUser")).getUserNo();
+     //참조하고 있는 사람 userNo
+     user=userService.selectFromEmail(email);
+     int fromUserNo=user.getUserNo();
+     try{
+       
+       if (recipeService.checkSubscribe(toUserNo, fromUserNo)!=null) {
+        result.put("status","success");
+      }else{
+        result.put("status","false");
+      }
+       
+     }catch(Exception e){
+       result.put("status", "false");
+     }
+     return new Gson().toJson(result);
+   }
 	
 //	---------------------고재현 -------------------------
 	@RequestMapping(path="materialSearch",produces="application/json;charset=UTF-8")

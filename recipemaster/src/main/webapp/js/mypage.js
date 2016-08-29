@@ -38,8 +38,28 @@
 			 alert('community 서버 요청 오류!...')
 		  }
 	  });
+	
 	  
-	  
+	//checkSubscribe
+	  $.ajax({
+		  url:'recipe/checkSubscribe.json',
+			datatype:'json',
+			data:{
+				email:location.href.split('?')[1]
+			},
+			method:'post',
+	        success : function(result) {
+	          if (result.status != 'success') {
+	            //swal('실행 중 오류 발생');
+	            return;
+	          }
+	          $('.rcp-topbtn').text('구독하기 완료');
+	          $('.rcp-topbtn').attr('id','subscribeComplete');
+	        },
+	        error : function() {
+	          swal('서버 요청 오류!...')
+	        }
+	      }); 
 	  
     	$('.rcp-topbtn').on('click',function(evnet){
     		if($(event.target).is('#subscribeComplete')){
@@ -47,7 +67,7 @@
 	    			url:'recipe/deleteSubscribe.json',
 	    			datatype:'json',
 	    			data:{
-	    				fromUserNo:5
+	    				email:location.href.split('?')[1]
 	    			},
 	    			method:'post',
 	    			success:(function(){
@@ -64,7 +84,7 @@
 	    			url:'recipe/addSubscribe.json',
 	    			datatype:'json',
 	    			data:{
-	    				fromUserNo:5
+	    				email:location.href.split('?')[1]
 	    			},
 	    			method:'post',
 	    			success:(function(){

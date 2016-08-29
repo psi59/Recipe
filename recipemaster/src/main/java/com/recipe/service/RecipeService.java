@@ -18,8 +18,9 @@ public interface RecipeService {
   List<Recipe> getRecipeSearchList(int pageNo, int pageSize, Search search, int userNo); //레시피 페이지 검색 -이성현
   int getRecipeCount(int pageNo, int pageSize, Search search, int userNo);
   List<Recipe> selectSbuscribe2(String userNo, int pageNo, int pageSize); //준모,용이형
-  int addSubscribe(int toUserNo, int fromUserNo);
+  int addSubscribe(int toUserNo, int fromUserNo); //구독수정
   int deleteSubscribe(int toUserNo, int fromUserNo);  
+  Map<String, Object> checkSubscribe(int toUserNo, int fromUserNo);//구독 check
   List<Recipe> selectSubscribeUno(int userNo);
   List<Recipe> selectSbuscribe(String scsUserNo, int pageNo, int pageSize); //준모 수정
   List<Recipe> selectMypage(int userNo);    
