@@ -20,6 +20,7 @@
 			  var templateCRList = Handlebars.compile(sourceCRList);
 			  
 			  	$('.rcp-userName').text(result.user.userName);
+			  	$('#mypage-userNo').val(result.user.userNo);
 		    	
 			  $('#tabs-1 .hs-content .container .row .rcp-mypage-section').append(templateCRList(result));
 			  console.log(result.data);

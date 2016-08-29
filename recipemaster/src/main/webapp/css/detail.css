@@ -249,6 +249,14 @@
   font-size:18pt;
 }
 
+.rcp-body{
+	float: none;
+    list-style: none;
+    position: relative;
+    width: 710px ! important;
+    height : 550px ! important;
+}
+
 .rcp-detail-form .title{
   color:#383838;
   font-size:25pt;

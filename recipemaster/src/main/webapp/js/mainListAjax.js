@@ -8,6 +8,12 @@
   var source = $('#recipe-card-template').html();
   var template = Handlebars.compile(source); 
   
+  var mainSubscribe = $('#temp').html();
+  var commainSubscribe = Handlebars.compile(mainSubscribe); 
+  
+  
+  
+  
   $(function(){
 	  Main1List();
 	  likeLogin();
@@ -24,10 +30,11 @@
 	  var userNo = 0;
 	  var a = eval(jsonData);
 	  
-	  
 	  if( a != null ){
 		  userNo = a[0].userNo;
+		
 	  }
+	  
 	  
 	  $.ajax({	  		  
 		  url:'recipe/list.json',
@@ -46,7 +53,7 @@
 			  
 			  $('#main-list > div').append( comMainSection(result) );
 			  $('.list0 > .row').append( template(result) );
-
+			  
 			  	console.log(result.data);
 //			 
 				  for(var i=0; i<result.data.length; i++){
@@ -59,6 +66,13 @@
 			  
 			  methods();
 			  Main2List();
+		
+			  console.log(jsonData)
+			  if(a == null)
+				  main3List();
+			  
+			 
+			  
 		  },
 		  error : function(){
 			  console.log('ajax list1: 서버 요청 오류');
@@ -120,6 +134,41 @@
 		  }
 	  });
   }  
+  
+  function main3List(){
+	  console.log("여기오나")
+	  var a = eval(jsonData);
+	  console.log(a);
+	  $.ajax({
+		  url :'recipe/userPage.json',
+		  dataType : 'json',
+		  method : 'post',
+		  data:{
+			  email: 'bbb@naver.com',
+			  request:3
+		  },
+		  success : function(result) {
+			 
+			  if (result.status != 'success') {
+				  alert('comList 실행 중 오류 발생');
+				  return;
+			  }
+			  console.log(result.data);
+			  console.log(eval(jsonData)[0].email)
+			  $('#tabs-1 .hs-content .container .row .rcp-mypage-section').append(commainSubscribe(result));
+			  for(var i=0; i<result.data.length; i++){
+//				  for(var j=0; j<result.data[i].representImages.length; j++){
+			  $('div[name="recipe-subscribe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');
+
+//				  }
+	  }
+  },
+  error : function() {
+	 alert('Main 구독 서버 요청 오류!...')
+  }
+});
+}
+
 
   function methods(){
   	  idOptions();	
@@ -128,7 +177,6 @@
   }
 
   Handlebars.registerHelper('isLike', function(options) {
-		 
 	  if (this.likeUser!=0) {
 	    return options.fn(this);
 	  } else {
@@ -144,6 +192,16 @@
 	    return options.fn(this);
 	  }
 });
+
+  
+  Handlebars.registerHelper('sessionUser', function(options) {
+	  if (eval(jsonData) != null) {		  
+	    return options.fn(this);
+	  } 
+});
+  
+  
+  
 	  
   
 //--------------------좋아요 등록, 해제 로직-------------------------------  

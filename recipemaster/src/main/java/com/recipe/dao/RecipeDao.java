@@ -18,6 +18,8 @@ public interface RecipeDao {
   List<Recipe> selectSubscribe2(Map<String,Object> params); //준모
   List<Recipe> recipeComment(int recipeNo);
   List<Recipe> recipeCommentUserInfo(String userNums);
+  Integer addComment(Map map);
+  Integer deleteComment(int commentNo);
   int addSubscribe(Map<String,Object> params); //구독하기 추가 고재현
   int  deleteSubscribe(Map<String,Object> params);
   int deleteRecipe(int recipeNo);

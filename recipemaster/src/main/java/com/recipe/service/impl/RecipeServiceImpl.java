@@ -211,5 +211,21 @@ public class RecipeServiceImpl implements RecipeService {
       // TODO Auto-generated method stub
       return recipeDao.recipeCommentUserInfo(userNums);
     }
+
+    @Override
+    public void addComment(Recipe recipe, int userNo) {
+      // TODO Auto-generated method stub
+      Map<String,Object > map = new HashMap<>();
+      map.put("recipe", recipe);
+      map.put("userNo", userNo);
+      System.out.println("service");
+      recipeDao.addComment(map);
+    }
+
+    @Override
+    public void deleteComment(int commentNo) {
+      // TODO Auto-generated method stub
+      recipeDao.deleteComment(commentNo);
+    }
 	
 }

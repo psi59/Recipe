@@ -429,18 +429,22 @@ public class RecipeController {
 			userNumbers = recipeService.selectScrapUserNoMypage(user.getUserNo());
 			Recipe recipe = functionForUserNumbers(userNumbers, request);
 			getSession(userNo, session);
-
+			System.out.println("userNumbers : " +userNumbers);
 			if (request == 1) {
 				recipeList = recipeService.selectMypageRecipe(String.valueOf(user.getUserNo()), userNo, request);
 			} else if (request == 2) {
 				recipeList = recipeService.selectMypageRecipe(recipe.getScrap(), userNo, request);
 			} else if (request == 3) {
+			  System.out.println("request3  ");
 				userNumbers = recipeService.selectSubscribeMypage(user.getUserNo());
+				System.out.println("req 3 userNumber : "+userNumbers);
 				Recipe subscribeRecipe = functionForUserNumbers(userNumbers, request);
+				System.out.println("sub number : "+subscribeRecipe.getScrap());
 				getSession(userNo, session);
 				recipeList = recipeService.selectMypageRecipe(subscribeRecipe.getScrap(), userNo, request);
+				System.out.println("recipeList : "+recipeList);
 			}
-
+			
 			result.put("status", "success");
 			result.put("data", recipeList);
 			result.put("user", user);
@@ -485,6 +489,35 @@ public class RecipeController {
 		}
 		return recipe;
 	}
+	
+	@RequestMapping(path="addComment" , produces ="application/json; charset=UTF-8")
+	@ResponseBody
+	public String addComment(int recipeNo,String recipeComment , HttpSession session){
+	  HashMap<String, Object> result = new HashMap<>();
+	  Recipe recipe = new Recipe();
+	  recipe.setRecipeNo(recipeNo);
+	  recipe.setRecipeComment(recipeComment);
+	   
+	  if ( (User)session.getAttribute("loginUser") == null ) {
+	    result.put("status", "notLogin");
+	  }else{	  
+	    recipeService.addComment(recipe, ((User)session.getAttribute("loginUser")).getUserNo());
+	  }
+	  result.put("status", "success");
+	  return new Gson().toJson(result);
+	}
+	
+	@RequestMapping(path="deleteComment" , produces ="application/json; charset=UTF-8")
+  @ResponseBody
+  public String deleteComment(int commentNo){
+	  HashMap<String, Object> result = new HashMap<>();
+	  recipeService.deleteComment(commentNo);
+	  
+	  result.put("status", "success");
+	  
+	  return new Gson().toJson(result);
+	}
+	
 	
 	@RequestMapping(path = "imageDelete", produces = "application/json;charset=UTF-8")
 	@ResponseBody

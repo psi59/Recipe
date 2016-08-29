@@ -34,7 +34,16 @@ public class Recipe {
 	private String recipeComment;
 	private Date recipeCommentDate;
 	private String commentUsers;
-	public String getRecipeComment() {
+	private int commentNo;
+	public int getCommentNo() {
+    return commentNo;
+  }
+
+  public void setCommentNo(int commentNo) {
+    this.commentNo = commentNo;
+  }
+
+  public String getRecipeComment() {
     return recipeComment;
   }
 
@@ -289,8 +298,8 @@ public class Recipe {
         + ", likeDate=" + likeDate + ", likeUser=" + likeUser + ", countLike=" + countLike + ", subscribeNum="
         + subscribeNum + ", subscribe=" + subscribe + ", countComment=" + countComment + ", countScrap=" + countScrap
         + ", scrapUser=" + scrapUser + ", scrap=" + scrap + ", rpimg=" + rpimg + ", recipeComment=" + recipeComment
-        + ", recipeCommentDate=" + recipeCommentDate + ", commentUsers=" + commentUsers + ", rownum=" + rownum
-        + ", totalPoint=" + totalPoint + "]";
+        + ", recipeCommentDate=" + recipeCommentDate + ", commentUsers=" + commentUsers + ", commentNo=" + commentNo
+        + ", rownum=" + rownum + ", totalPoint=" + totalPoint + "]";
   }
 
 }

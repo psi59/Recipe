@@ -12,8 +12,10 @@
 <link rel="stylesheet"
 	href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/template/font-awesome.min.css">
-<link rel="stylesheet" href="css/template/animate.css">
-<link rel="stylesheet" href="css/template/main.css">
+<link rel="stylesheet" href="css/template/main.css"> 
+<link rel="stylesheet" href="css/template/commentTemp.css">
+
+
 <link rel="stylesheet"
 	href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
 
@@ -28,6 +30,7 @@
 <link rel="stylesheet" href="css/mainlist.css">
 <link rel="stylesheet" href="css/detail.css">
 <link rel="stylesheet" href="css/updateImg.css">
+<link rel="stylesheet" href="css/mypage.css">
 <!-- <link rel="stylesheet" href="css/rankingpage.css"> -->
 <link rel="stylesheet" href="css/mainrankingpage.css">
 <!-- 성현 -->
@@ -42,6 +45,9 @@
 <!-- --- 아이콘 CDN ----- -->
 <!-- <script src="js/template/d9e67edb08.js"></script> -->
 
+<link rel="stylesheet" href="css/template/animate.css"> 
+<link rel="stylesheet" href="css/template/styles.css">
+<link rel="stylesheet" href="css/template/plugins.css">
 </head>
 <body>
 	<div id="topBtn" class="navbar navbar-inverse navbar-fixed-top">
@@ -342,20 +348,123 @@
 			</div>
 		</div>
 	</section>
+	
+	<section id ="forLoginSubscribePages">
+	 <div>
+	 
+	 </div>
+	</section>
+	<section class="ht-section hs-recipes grid">
+	 
+      <div id="tabs-1">
+        <div class="rcp-main-right">
+          <div class="rcp-subscribe"></div>
+          <div class="hs-content">
+            <div class="container">
+              <div class="row">
+                  <div class="rcp-mypage-section">       
+                            
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+	
+	</section>
+	
 	<!------------------------- Rank List ------------------------------>
 	<div id="footer"></div>
-	<script id="recipe-detail-template" type="text/x-handlebars-template">
-    {{#rcpBody data.recipeProcedure data.representImages}}
+
+
+<script id="temp" type="text/x-handlebars-template">
+{{#sessionUser}}
+{{#each data}}
+
+<div class="isotope-grid" id="grid-2">
+          <div class="entry filter-food filter-pudding">
+            <div class="entry-inner">
+              
+              <div class="entry-media" name="recipe-subscribe-image">
+               
+                <div class="entry-action">
+                  <div class="entry-action-inner">
+                    <span>
+                       <div class="rcp-forDelete-xButton"><a class="rcp-x-button" href="#">&#10006;</a></div>
+                    </span>
+                    <span>
+                      <a href="recipe_single.html">상세보기</a>
+                    </span>
+                    <span>
+                      <a href="#">BOOKMARK RECIPE</a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <!-- ./ entry-media -->
+              <div class="content-wrapper">
+                <h3 class="entry-name"><a href="recipe_single.html">{{recipeName}}</a></h3>
+                <p class="entry-author">{{user.userName}}</p>
+                <div class="entry-meta">
+                  <div class="foo-wrapper">
+                    <span>좋아요 {{countLike}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="meta-time">{{cookTime}}분 소요</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span>스크랩하기</span>
+                  </div>
+                </div>
+              </div>
+              <!-- ./ entry-content -->
+            </div>
+            <!-- /.entry-inner -->
+          </div>
+        
+          </div>
+
+{{/each}}
+{{/sessionUser}}
+</script>
+
+
+
+  <script id="recipe-detail-main-template" type="text/x-handlebars-template">
+    {{#representImages}}
               <div class="rcp-body" name="rcp-body">
               <div>
                 <div class="rcp-title-size">
-                  <h6 class="rcp-bodyTitle"> MAIN</h6>
+                   
+                  <h6 class="rcp-bodyTitle">Main</h6>
+                    
                 </div>
                 <div>
-                  <a href="#" class="glyphicon glyphicon-star"></a>
+                  
                 </div>
                </div>
-                <img src="img/profileImg/{{recipeProduceImage}}" class="rcp-images">
+                <img src="img/representImg/{{this}}" class="rcp-images">
+               <div class="rcp-explanation" name="rcp-explanation">
+                  <p></p>
+                </div>
+               <div class="rcp-nav-down">
+                   
+               </div>
+            </div>
+{{/representImages}}
+</script>
+
+
+  <script id="recipe-detail-template" type="text/x-handlebars-template">
+    {{#recipeProcedure}}
+              <div class="rcp-body" name="rcp-body">
+              <div>
+                <div class="rcp-title-size">
+                    
+                  <h6 class="rcp-bodyTitle">STEP{{inc @index}}</h6>
+                    
+                </div>
+                <div>
+               
+                </div>
+               </div>
+                <img src="img/recipeImg/{{recipeProduceImage}}" class="rcp-images">
                <div class="rcp-explanation" name="rcp-explanation">
                   <p>{{recipeProduce}}</p>
                 </div>
@@ -363,9 +472,12 @@
                    
                </div>
             </div>
-{{/rcpBody}}
-
+{{/recipeProcedure}}
 </script>
+
+
+
+
 
 
   <script id="recipe-comment" type="text/x-handlebars-template">
@@ -373,12 +485,17 @@
 <div class="cs-comments-area">           
  <span class="rcp-comment-indexNum"></span> 
                 <article>
+                  
                   <div class="cs-comment-author">
                    <img class="avatar" src="img/profileImg/{{user.image}}" alt=""> 
                       <b><a href="#">{{user.userName}}</a></b> 
                           <a class="cs-comment-metadata" href="#"> 
                          <span class="rcp-comment-date">{{recipeCommentDate}}</span>
                     </a>
+                    <input type="hidden" id="commentNo" name="commentNo" value={{commentNo}}>
+                    {{#x-button}}
+                    <a href="#" id="deleteComment">✖</a>                     
+                    {{/x-button}}
                   </div>
                   <div class="cs-comment-content">
                     <p>{{recipeComment}}</p>                    
@@ -432,30 +549,30 @@
 
 	<script id="recipe-detail-main-images-template"
 		type="text/x-handlebars-template">
-
+{{#representImages}}
     <div class="rcp-main"> 
-      <a href="#">MAIN</a>
+      <a href="#">MAIN {{inc @index}}</a>
       <div style="float:right">
          <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
       </div>
-    <a href="#"><img src="img/food01.jpg" class="rcp-info-images-emts"></a>
+    <a href="#"><img src="img/representImg/{{this}}" class="rcp-info-images-emts"></a>
     </div>
   <div class="rcp-detail-step">
   </div>
-
+{{/representImages}}
 </script>
 
 	<script id="recipe-detail-step-images-template"
 		type="text/x-handlebars-template">
-{{#each data}}
+{{#recipeProcedure}}
      <div class="rcp-main dd"> 
       <a href="#">STEP {{inc @index}}</a>
       <div style="float:right">
          <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
       </div>
-     <img src="img/food02.jpg" class="rcp-info-images-emts"> 
+     <img src="img/recipeImg/{{recipeProduceImage}}" class="rcp-info-images-emts"> 
     </div>
-{{/each}}
+{{/recipeProcedure}}
 </script>
 
 	<!--  Main List -->
@@ -484,6 +601,30 @@
   </section>
 
 </script>
+
+<script id="recipe-comment-addForm" type="text/x-handlebars-template">
+        <!-- <h2>Leave a Reply</h2> -->
+        <div id="respond" class="comment-respond clearfix">
+          <div class="grid-container">
+            
+              <input type="hidden" name="recipeNo" id="forCommentRecipeNumber" value="">
+              <div class="grid desk-12 alpha omega">
+                <div class="label">Comment</div>
+                <textarea name="recipeComment"></textarea>
+              </div>
+
+              <p class="form-submit clearfix">
+                <input name="rcp-submit" class="button primary" type="button" value="Post Comment" />                
+                <div class="form-allowed-tags" style="display: none;">
+                 
+                </div>
+              </p>
+              
+          
+          </div>
+        </div><!-- #respond -->
+</script>
+
 
 	<!------------------------- Rank List ------------------------------>
 
@@ -544,7 +685,7 @@
                 <!--  레시피 내용 시작  -->
                 <div class="carousel-inner" role="listbox">
                   <div class="item active">
-                    <div class="rcp-comment col-md-offset-1 col-md-10">
+                    <div class="rcp-comment">
                       <p>{{intro}}</p>
                     </div>
                     <div class="col-md-1"></div>
@@ -611,6 +752,7 @@
 
 {{/each}}
 </script>
+
 	<!--쉐프 랭킹카드 수정  -->
 	<script id="chef-card-template" type="text/x-handlebars-template">
 {{#each data}}
@@ -663,13 +805,15 @@
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="js/template/main.js"></script>
 	<script src="js/template/wow.min.js"></script>
+	<script src="js/template/main.js"></script>
+	<script src="js/template/plugin.js"></script>	   
+  <script src="js/template/plugin.js"></script>
+  <script src="js/template/custom.js"></script>
 	<script src="js/template/jquery-slider-rolling.js"></script>
 	<script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
-	<script src="js/mouseover.js"></script>
+	<script src="js/mouseover.js"></script>	
 
 	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
-
-
 	<script src="node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
 	<script
 		src="node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js"></script>
@@ -703,6 +847,7 @@
   <script src="js/common/signup.js"></script>
   <script src="js/rankingpage.js"></script>    
   <script src="js/index_listPageMove.js"></script>
+  
   
 	<script>
 		$(function() {
