@@ -33,7 +33,6 @@ import com.recipe.util.CommonUtil;
 @Controller
 @RequestMapping("/recipe/")
 public class RecipeController {
-
 	@Autowired
 	RecipeService recipeService;
 	@Autowired
@@ -174,7 +173,7 @@ public class RecipeController {
 	@ResponseBody
 	public String checkMyRecipe(int recipeNo, HttpSession session){
 		Map<String, Object> result = new HashMap<>();
-		
+
 		try{
 			User user = CommonUtil.getSessionUser(session);
 
@@ -189,7 +188,7 @@ public class RecipeController {
 		} catch(Exception e){
 			result.put("status", "nologin");
 		}
-		
+
 		return new Gson().toJson(result);		
 	}
 
@@ -376,37 +375,6 @@ public class RecipeController {
 		return new Gson().toJson(result);
 	}
 
-	// 준모수정
-	@RequestMapping(path = "subscribe", produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public String subscribe(@RequestParam(defaultValue = "1") int pageNo,
-			@RequestParam(defaultValue = "4") int pageSize, HttpSession session, int userNo) {
-		HashMap<String, Object> result = new HashMap<>();
-		Recipe recipe = new Recipe();
-		try {
-			// 구독한 사람 뽑는다.
-			List<Recipe> userNoList = recipeService.selectSubscribeUno(userNo);
-
-			for (int i = 0; i < userNoList.size(); i++) {
-				if (recipe.getSubscribe() == null) {
-					recipe.setSubscribe(String.valueOf(userNoList.get(0).getSubscribeNum()));
-				} else {
-
-					recipe.setSubscribe(recipe.getSubscribe() + "," + userNoList.get(i).getSubscribeNum());
-				}
-			}
-			String scsUserNo = recipe.getSubscribe();
-			List<Recipe> subscribe = recipeService.selectSbuscribe(scsUserNo, pageNo, pageSize);
-			result.put("status", "success");
-			result.put("data", subscribe);
-			result.put("pageNo", pageNo);
-		} catch (Exception e) {
-			result.put("status", "false");
-		}
-		System.out.println(result);
-		return new Gson().toJson(result);
-	}
-
 	@RequestMapping(path = "scrap", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String scrap(int recipeNo, HttpSession session) {
@@ -444,28 +412,160 @@ public class RecipeController {
 		}
 		return new Gson().toJson(result);
 	}
+//
+//	@RequestMapping(path = "addSubscribe", produces = "application/json;charset=UTF-8")
+//	@ResponseBody
+//	public String addSubscribe(HttpSession session, int fromUserNo) {
+//		HashMap<String, Object> result = new HashMap<>();
+//
+//		// toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
+//		User user = new User();
+//		int toUserNo = (int) session.getAttribute("loginUser");
+//		System.out.println(user.getUserNo());
+//
+//		recipeService.addSubscribe(toUserNo, fromUserNo);
+//		try {
+//			result.put("status", "success");
+//		} catch (Exception e) {
+//			result.put("status", "false");
+//		}
+//		return new Gson().toJson(result);
+//	}
 
-	@RequestMapping(path = "addSubscribe", produces = "application/json;charset=UTF-8")
+	//준모수정
+	@RequestMapping(path="subscribe",produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public String addSubscribe(HttpSession session, int fromUserNo) {
-		HashMap<String, Object> result = new HashMap<>();
+	public String subscribe(@RequestParam(defaultValue="1") int pageNo,
+			@RequestParam(defaultValue="4") int pageSize,HttpSession session,int userNo ){
+		HashMap<String,Object> result = new HashMap<>();
+		Recipe recipe = new Recipe();
+		try{
+			//구독한 사람 뽑는다.
+			List<Recipe> userNoList = recipeService.selectSubscribeUno(userNo);
 
-		// toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
+
+			for(int i =0; i<userNoList.size(); i++){ 
+				if(recipe.getSubscribe() == null){    
+					recipe.setSubscribe(String.valueOf(userNoList.get(0).getSubscribeNum()));
+				}else{
+
+					recipe.setSubscribe(recipe.getSubscribe()+","+userNoList.get(i).getSubscribeNum());
+				}
+			}
+			String scsUserNo=recipe.getSubscribe();
+			List<Recipe> subscribe = recipeService.selectSbuscribe(scsUserNo,pageNo,pageSize);
+			result.put("status","success");
+			result.put("data", subscribe);
+			result.put("pageNo", pageNo);
+		}catch (Exception e){
+			result.put("status", "false");
+		}
+		System.out.println(result);
+		return new Gson().toJson(result);
+	}
+
+	/*	@RequestMapping(path="addSubscribe",produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String addSubscribe(HttpSession session,int fromUserNo){
+    HashMap<String,Object> result = new HashMap<>();
+    //toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
+    User user = new User();
+    int toUserNo=((User)session.getAttribute("loginUser")).getUserNo();
+    System.out.println("toUserNo::"+toUserNo);
+    System.out.println("fromUserNo::"+fromUserNo);
+    recipeService.addSubscribe(toUserNo, fromUserNo);
+    try{
+      result.put("status","success");
+    }catch(Exception e){
+      result.put("status", "false");
+    }
+    return new Gson().toJson(result);
+  }*/
+
+	@RequestMapping(path="addSubscribe",produces="application/json;charset=UTF-8")
+    @ResponseBody
+    public String addSubscribe(HttpSession session,String email){
+      HashMap<String,Object> result = new HashMap<>();
+      //toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
+      
+      if(((User)session.getAttribute("loginUser"))==null){
+        
+        result.put("status", "failure");
+        System.out.println("login안함");
+        System.out.println(result);
+        return new Gson().toJson(result);
+       }
+      
+      int toUserNo=((User)session.getAttribute("loginUser")).getUserNo();
+      System.out.println("toUserNo::"+toUserNo);
+      System.out.println("fromUserNo_email::"+email);
+      
+      int fromUserNo=userService.selectFromEmail(email).getUserNo();
+      
+      recipeService.addSubscribe(toUserNo, fromUserNo);
+      try{
+        result.put("status","success");
+      }catch(Exception e){
+        result.put("status", "false");
+      }
+      return new Gson().toJson(result);
+    }
+
+	@RequestMapping(path="deleteSubscribe",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public String deleteSubscribe(HttpSession session,String email){
+		HashMap<String,Object> result = new HashMap<>();
+		//toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
 		User user = new User();
-		int toUserNo = (int) session.getAttribute("loginUser");
-		System.out.println(user.getUserNo());
+		int toUserNo=((User)session.getAttribute("loginUser")).getUserNo();
+		System.out.println("toUserNo::"+toUserNo);
+		System.out.println("fromUserNo_email::"+email);
 
-		recipeService.addSubscribe(toUserNo, fromUserNo);
-		try {
-			result.put("status", "success");
-		} catch (Exception e) {
+		int fromUserNo=userService.selectFromEmail(email).getUserNo();
+
+		recipeService.deleteSubscribe(toUserNo, fromUserNo);
+
+		try{
+			result.put("status","success");
+		}catch(Exception e){
 			result.put("status", "false");
 		}
 		return new Gson().toJson(result);
 	}
 
-	// ---------------------고재현 -------------------------
-	@RequestMapping(path = "materialSearch", produces = "application/json;charset=UTF-8")
+	@RequestMapping(path="checkSubscribe",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public String checkSubscribe(HttpSession session,String email){
+		HashMap<String,Object> result = new HashMap<>();
+		//toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
+		User user = new User();
+
+		if(((User)session.getAttribute("loginUser"))==null){
+			result.put("status","false");
+			return new Gson().toJson(result);
+		}
+
+		//login한 사람 userNo
+		int toUserNo=((User)session.getAttribute("loginUser")).getUserNo();
+		//참조하고 있는 사람 userNo
+		user=userService.selectFromEmail(email);
+		int fromUserNo=user.getUserNo();
+		try{
+
+			if (recipeService.checkSubscribe(toUserNo, fromUserNo)!=null) {
+				result.put("status","success");
+			}else{
+				result.put("status","false");
+			}
+
+		}catch(Exception e){
+			result.put("status", "false");
+		}
+		return new Gson().toJson(result);
+	}
+
+	//	---------------------고재현 -------------------------
+	@RequestMapping(path="materialSearch",produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String mts(@RequestParam("searchValue") String materialName, Model model) {
 		System.out.println(materialName);
@@ -514,42 +614,117 @@ public class RecipeController {
 		return new Gson().toJson(result);
 	}
 
-	// 커뮤니티 레시피 리스트 : 용 ---- 고재현 수정.
-	@RequestMapping(path = "userPage", produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public String userPage(String email, int request, HttpSession session) {
-		HashMap<String, Object> result = new HashMap<>();
+	//
+	////커뮤니티 레시피 리스트 : 용  ----  고재현 수정. 
+	//  @RequestMapping(path="userPage",produces="application/json;charset=UTF-8")
+	//  @ResponseBody 
+	//  public String userPage(String email, int request,HttpSession session){
+	//    HashMap<String,Object> result = new HashMap<>();
+	//    Recipe recipe = new Recipe();
+	//    int userNo;
+	//    try{
+	//      List<Recipe> recipeList = new ArrayList<Recipe>();
+	//      List<Recipe> userNumbers = new ArrayList<Recipe>();
+	//      System.out.println("parameter email : "+email);
+	//      
+	//      User user = userService.selectFromEmail(email);
+	//      System.out.println("email로 뽑아온 User정보 : "+user);
+	//      if(request == 1){
+	//      userNumbers = recipeService.selectScrapUserNoMypage(user.getUserNo());     
+	//      }else if(request == 2){
+	//        
+	//      }    
+	//      System.out.println("user정보로 뽑은 구독하기 누른 사람 넘버 : "+userNumbers);
+	//      if(session.getAttribute("userNo") == null){
+	//        userNo = 0;
+	//      }else{
+	//        userNo = (int)session.getAttribute("userNo");
+	//      }
+	//      
+	//      System.out.println("myrecipe parameter 1 - user.getUserNo : "+user.getUserNo());
+	//      System.out.println("myrecipe parameter 2 - session : "+userNo);
+	//      if(request == 1){     
+	//        recipeList = recipeService.selectMypageRecipe(String.valueOf(user.getUserNo()), userNo,request);      
+	//      }else if(request == 2){
+	//        System.out.println("여기옴?"+recipe.getScrap()+" : "+userNo+"  : "+request);
+	//        recipeList = recipeService.selectMypageRecipe(recipe.getScrap(), userNo,request);
+	//      }else if(request == 3){
+	//        
+	//      }
+	//      System.out.println("결과값 : "+recipeList);
+	//      result.put("status","success");
+	//      result.put("data",recipeList);
+	//      result.put("user", user);
+	//    }catch (Exception e){
+	//      e.printStackTrace();
+	//      result.put("status", "false");
+	//    }
+	// 
+	//    return new Gson().toJson(result);
+	//  }
 
-		try {
+	//커뮤니티 레시피 리스트 : 용  ----  고재현 수정. 
+	@RequestMapping(path="userPage",produces="application/json;charset=UTF-8")
+	@ResponseBody 
+	public String userPage(String email, int request, HttpSession session){
+		HashMap<String,Object> result = new HashMap<>();
+
+
+		try{
 			List<Recipe> recipeList = new ArrayList<Recipe>();
 			List<Recipe> userNumbers = new ArrayList<Recipe>();
-			int userNo = 0;
+			int userNo = CommonUtil.getSessionUser(session).getUserNo(); 
 			User user = userService.selectFromEmail(email);
-			System.out.println("email로 뽑아온 User정보 : " + user);
+			System.out.println("email로 뽑아온 User정보 : "+user);
 
 			userNumbers = recipeService.selectScrapUserNoMypage(user.getUserNo());
-			Recipe recipe = functionForUserNumbers(userNumbers, request);
-			getSession(userNo, session);
+			Recipe recipe = functionForUserNumbers(userNumbers,request);
+			//getSession(userNo, session);
 
-			if (request == 1) {
-				recipeList = recipeService.selectMypageRecipe(String.valueOf(user.getUserNo()), userNo, request);
-			} else if (request == 2) {
-				recipeList = recipeService.selectMypageRecipe(recipe.getScrap(), userNo, request);
-			} else if (request == 3) {
+			if(request == 1){
+				recipeList = recipeService.selectMypageRecipe(String.valueOf(user.getUserNo()), userNo,request);      
+			}else if(request == 2){
+				recipeList = recipeService.selectMypageRecipe(recipe.getScrap(), userNo,request);
+			}else if(request == 3){
 				userNumbers = recipeService.selectSubscribeMypage(user.getUserNo());
-				Recipe subscribeRecipe = functionForUserNumbers(userNumbers, request);
-				getSession(userNo, session);
-				recipeList = recipeService.selectMypageRecipe(subscribeRecipe.getScrap(), userNo, request);
+				System.out.println("request3 userNumbers : "+ userNumbers);
+				Recipe subscribeRecipe = functionForUserNumbers(userNumbers,request);
+				System.out.println("subscribeRecipeNumbers : "+subscribeRecipe);
+				//getSession(userNo, session);
+				recipeList = recipeService.selectMypageRecipe(subscribeRecipe.getScrap(), userNo,request);
 			}
 
-			result.put("status", "success");
-			result.put("data", recipeList);
+
+
+			System.out.println("결과값 : "+recipeList);
+			result.put("status","success");
+			result.put("data",recipeList);
 			result.put("user", user);
-		} catch (Exception e) {
+		}catch (Exception e){
 			e.printStackTrace();
 			result.put("status", "false");
 		}
 
+		return new Gson().toJson(result);
+	}
+
+	//community준모,용이형
+	@RequestMapping(path="comList",produces="application/json;charset=UTF-8")
+	@ResponseBody 
+	public String comList( @RequestParam(defaultValue="1") int pageNo,
+			@RequestParam(defaultValue="4") int pageSize,HttpSession session){
+
+		HashMap<String,Object> result = new HashMap<>();    
+		try{
+			List<Recipe> myRecipeList = recipeService.selectSbuscribe2((session.getAttribute("userNo")).toString(),pageNo,pageSize);
+			result.put("status","success");
+			result.put("data", myRecipeList);
+			result.put("pageNo",pageNo);
+			System.out.println("pageNo::"+result.get("pageNo"));
+			System.out.println("data::"+result.get("data"));
+		}catch (Exception e){ 
+			result.put("status", "false");
+		} 
 		return new Gson().toJson(result);
 	}
 

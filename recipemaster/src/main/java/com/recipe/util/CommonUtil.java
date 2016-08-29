@@ -18,7 +18,11 @@ public class CommonUtil {
 	}
 	
 	public static User getSessionUser(HttpSession session){
-		return (User) session.getAttribute("loginUser");
+		User user = (User) session.getAttribute("loginUser");
+		if(user==null){
+			user = new User();
+		}
+		return user;
 	}
 	
 	public static String getImageFolderPath(String folderName, HttpServletRequest request){

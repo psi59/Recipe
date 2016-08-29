@@ -48,14 +48,22 @@ public class VisitorServiceImpl implements VisitorService {
   @Override
   public HashMap<String,Object> loadMyPage(int userNo) {
     
-    HashMap<String,Object> params = new HashMap<>();
-    params.put("sum", visitorDao.loadMyPageSum(userNo));
-    params.put("avg", visitorDao.loadMyPageAvg(userNo));
-    params.put("scr", visitorDao.loadMyPageScr(userNo));
-    params.put("like", visitorDao.loadMyPageLike(userNo));
+    System.out.println("loadMyPageServiceImpl안"+userNo);
     
-    System.out.println("service"+params);
+    HashMap<String,Object> result = new HashMap<>();
     
-    return params;
+    System.out.println("1::"+visitorDao.loadMyPageSum(userNo));
+    System.out.println("2::"+visitorDao.loadMyPageAvg(userNo));
+    System.out.println("3::"+visitorDao.loadMyPageScr(userNo));
+    System.out.println("4::"+visitorDao.loadMyPageLike(userNo));
+    
+    result.put("sum", visitorDao.loadMyPageSum(userNo));
+    result.put("avg", visitorDao.loadMyPageAvg(userNo));
+    result.put("scr", visitorDao.loadMyPageScr(userNo));
+    result.put("like", visitorDao.loadMyPageLike(userNo));
+    
+    System.out.println("service나와라 ㅅㅂ::"+result);
+    
+    return result;
   }
 }

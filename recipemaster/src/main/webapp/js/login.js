@@ -1,5 +1,9 @@
 var jsonData;
 window.onload = function () {
+	
+	$('#signUpBtn').html("<span class='rcp-btn-default-2'>회원가입</span>");
+	$('#loginBtn').html("<span class='rcp-btn-default-2'>로그인</span>");
+	
 	loginCheck(event);
 };
 
@@ -27,13 +31,19 @@ $("#userEmail").keyup(function(){
 	if(event.keyCode == 9){
 		document.getElementById("userPassword").focus();
 	}
+	if(event.keyCode == 13){
+		if($('#userPassword').val() == ''){
+			swal('패스워드를 입력해주세요.');		
+			document.getElementById("userPassword").focus();
+		}
+	}
 });
 
 $('#userPassword').keyup(function(){
 	if(event.keyCode == 13){
 		if($('#userPassword').val() == ''){
 			swal('패스워드를 입력해주세요.');		
-			return;
+			document.getElementById("userPassword").focus();
 		}
 		login(event);
 	}
@@ -72,10 +82,10 @@ function loginCheck(event) {
 				
 				/*eval 사용 방법, eval(jsonData)[0].email*/
 				if(jsonData!=null){
-					$('#signUpBtn').hide();
-					$('#loginBtn').hide();
-					$('#signUpTopBtn').hide();
-					$('#loginIcon').html('<img id="loginIconAction1" class="rcp-barimg rcp-barimg-r dropdown-trigger img-circle" src="img/Chef3.jpg" />');
+					$('#signUpBtn').remove();
+					$('#loginBtn').remove();
+					$('#signUpTopBtn').remove();
+					$('#loginIcon').html('<img id="loginIconAction1" class="rcp-barimg dropdown-trigger img-circle" src="img/Chef3.jpg" />');
 					$('#topbarUserImg').html('<img id="loginIconAction2" class="rcp-barimg dropdown-trigger img-circle" src="img/Chef3.jpg" />');
 				}
 			} else {
