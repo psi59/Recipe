@@ -25,7 +25,7 @@ $(function(){
 			console.log(result.data);
 			
 			$('.rcp-Vst').remove();
-			$('.rcp-Vst-write').remove();
+			/*$('.rcp-Vst-write').remove();*/
 			
 			for(var i=0; i<result.data.length; i++){
 //				for(var j=0; j<result.data[i].representImages.length; j++){
@@ -297,6 +297,7 @@ $(function() {
 });
 
 function pageTabs(){
+	$('.rcp-Vst-write').hide();
 	$('.isotope-filter a').on('click', function(event){
 		event.preventDefault();
 		var request;
@@ -305,11 +306,14 @@ function pageTabs(){
 
 		if($(event.target).is('#searchRecipe')){
 			request=1;
+			$('.rcp-Vst-write').hide();
 		}
 		else if($(event.target).is('#searchScrap')){
 			request=2;
+			$('.rcp-Vst-write').hide();
 		}else if($(event.target).is('#searchSubscribe')){
 			request=3;
+			$('.rcp-Vst-write').hide();
 		}else{
 			request = 4;
 		}
@@ -339,7 +343,6 @@ function pageTabs(){
 				$('#tabs-'+request+' .hs-content .container .row .rcp-mypage-section').append(templateCRList(result));
 				$('#tabId').val(request);
 				$('.rcp-Vst').remove();
-				$('.rcp-Vst-write').remove();
 
 				console.log(result.data);
 				for(var i=0; i<result.data.length; i++){

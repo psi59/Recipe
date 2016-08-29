@@ -278,6 +278,15 @@
 					<div class="hs-content hs-content-visit">
 						<div class="container">
 							<div class="row">
+							<div class="rcp-Vst-write" id="quick"
+                    style="margin-left: 2%; position: fixed; background-color: #FFD9EC; top: 88%; left: 19%; border: solid 2px #FFB2D9; height: 96px; width: 55%; text-align: center; color: #6799FF;">
+                    <div class="inputWrite">
+                      <textarea id="rcp-rpcontent" rows="3" cols="100"
+                        style="resize: none;" placeholder="방명록을 입력해주세요"></textarea>
+                      <button id="rcp-rpBtn"
+                        class="rcp-Vst-inputBtn btn btn-default">등록</button>
+                    </div>
+                  </div>
 									<section class="Vst" id="Vst">
 										<!-- 방명록  -->
 									</section>
@@ -386,15 +395,6 @@
               <!---->
             </div>
           </div>
-                <div class="rcp-Vst-write" id="quick"
-                    style="margin-left: 2%; position: fixed; background-color: #FFD9EC; top: 88%; left: 19%; border: solid 2px #FFB2D9; height: 96px; width: 55%; text-align: center; color: #6799FF;">
-                    <div class="inputWrite">
-                      <textarea id="rcp-rpcontent" rows="3" cols="100"
-                        style="resize: none;" placeholder="방명록을 입력해주세요"></textarea>
-                      <button id="rcp-rpBtn"
-                        class="rcp-Vst-inputBtn btn btn-default">등록</button>
-                    </div>
-                  </div>
         </div>
   {{/each}}
   </script>
@@ -541,7 +541,8 @@
 	<script>
 	 $('#visitorWrite').on('click',function(){
 		 $('.rcp-Vst').remove();
-		 $('.rcp-Vst-write').remove();
+		 $('.rcp-Vst-write').show();
+		 /* $('.rcp-Vst-write').remove(); */
 		 loadVisitor();
 	 })
 	</script>
