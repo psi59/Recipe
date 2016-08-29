@@ -1,5 +1,9 @@
 var jsonData;
 window.onload = function () {
+	
+	$('#signUpBtn').html("<span class='rcp-btn-default-2'>회원가입</span>");
+	$('#loginBtn').html("<span class='rcp-btn-default-2'>로그인</span>");
+	
 	loginCheck(event);
 };
 
