@@ -1,11 +1,26 @@
 /*  */
 @import url('https://fonts.googleapis.com/css?family=Baloo+Tamma');
-@import url('https://fonts.googleapis.com/css?family=Baloo+Tamma|Nunito');
+
+@import
+	url('https://fonts.googleapis.com/css?family=Baloo+Tamma|Nunito');
+
 * {
 	margin: 0;
 	padding: 0;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+}
+
+.rcp-btn-default-2 {
+	position: relative;
+	right: -1224px;
+	top: -14px;
+	border: 1px solid rgba(255, 255, 255, 0.7);
+	border-radius: 0.3em;
+	color: rgba(255, 255, 255, 1);
+	background: rgba(255, 255, 255, 0.0);
+	padding: 7px;
+	font-size: 17px !important;
 }
 
 .top-main-nav__dropdown {
@@ -35,9 +50,9 @@
 }
 
 .rcp-userName1 {
-	font-size: 15pt; color : #000000;
+	font-size: 15pt !important;
+	color: #000000 !important;
 	text-decoration: blink !important;
-	color: #000000;
 }
 
 .rcp-rcpName {
@@ -177,9 +192,11 @@ section {
 	text-align: center;
 	background-color: #ecf0f1;
 }
-.visitbtn{
+
+.visitbtn {
 	font-size: 10pt;
 }
+
 section:nth-child(1) {
 	margin-top: 100px;
 }
@@ -543,7 +560,7 @@ body {
 .fresh-ui .header .social .list a {
 	width: 37px;
 	height: 30px;
- 	color: inherit;
+	color: inherit;
 	display: block;
 	margin: 23px 0;
 	background: #fff;

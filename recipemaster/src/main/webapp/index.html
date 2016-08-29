@@ -627,20 +627,20 @@
           <div class="name">
                    <p class="rcp-userName1">{{userName}}</p></div>
                     <p class="text">{{email}}</p>      
-                  <div class="rcp-ranking">랭킹 : {{rownum}}등</div>
+                  <div class="rcp-ranking"><h4>랭킹 : {{rownum}}등</h4></div>
           <div class="list clearfix">
         <p class="introfont">{{intro}}</p>
         </div>
         <div class="cardbtn">
-         <button type="button" class="btn btn-default">
+         <button type="button" class="btn btn-default rcp-imp">
               <input type="hidden" value="{{email}}">
               <a href="#" class="rcp-userName visitbtn">방문하기</a></button>
-              <button type="button" class="btn btn-default">구독하기</button>
+              <button type="button" class="btn btn-default rcp-imp">구독하기</button>
         </div>
     </div>
   </div>
 </div>
-  {{/each}}
+  {{/each}} 
   </script>
 	<!-- 쉐프랭킹카드 수정 -->
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
