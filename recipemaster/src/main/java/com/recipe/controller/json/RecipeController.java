@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -34,7 +33,6 @@ import com.recipe.util.CommonUtil;
 @Controller
 @RequestMapping("/recipe/")
 public class RecipeController {
-
 	@Autowired
 	RecipeService recipeService;
 	@Autowired
@@ -102,8 +100,6 @@ public class RecipeController {
 			@RequestParam("representImgNames") List<String> representImgNames,
 			@RequestParam("produceImgNames") List<String> produceImgNames, HttpServletRequest request,
 			HttpSession session) {
-		// int userNo = (Integer)session.getAttribute("userNo");
-		// System.out.println(userNo);
 
 		Map<String, Object> result = new HashMap<>();
 		Map<String, Object> map = new HashMap<>();
@@ -134,10 +130,11 @@ public class RecipeController {
 
 		try {
 			for (int i = 0; i < representImgNames.size(); i++) {
+				Thread.sleep(1);
 				// MultipartFile image = null;
 				String[] fileInfo = representImgNames.get(i).split("/");
 				// image = CommonUtil.findImageFile(fileInfo, imageFiles);
-				String fileName = recipeNo + "_" + user.getUserNo() + "_" + CommonUtil.nowData() + "_" + i + ".png";
+				String fileName = recipe.getRecipeNo() + "_" + user.getUserNo() + "_" + System.currentTimeMillis() + ".png";
 				// File newFile = new
 				// File(CommonUtil.getImageFolderPath("representImg", request) +
 				// "/" + fileName);
@@ -150,9 +147,10 @@ public class RecipeController {
 
 			/* 조리과정 등록 */
 			for (int i = 0; i < produceImgNames.size(); i++) {
+				Thread.sleep(1);
 				String[] fileInfo = produceImgNames.get(i).split("/");
 				JsonObject obj = new JsonObject();
-				String fileName = recipeNo + "_" + user.getUserNo() + "_" + CommonUtil.nowData() + "_" + i + ".png";
+				String fileName = recipe.getRecipeNo() + "_" + user.getUserNo() + "_" + System.currentTimeMillis() + ".png";
 				obj.addProperty("recipeProduceImage", fileName);
 				obj.addProperty("recipeProduce", recipeProduce[i]);
 				recipeProduceDatas.add(obj);
@@ -168,6 +166,104 @@ public class RecipeController {
 			e.printStackTrace();
 			result.put("status", "false");
 		}
+		return new Gson().toJson(result);
+	}
+
+	@RequestMapping(path = "checkMyRecipe")
+	@ResponseBody
+	public String checkMyRecipe(int recipeNo, HttpSession session){
+		Map<String, Object> result = new HashMap<>();
+
+		try{
+			User user = CommonUtil.getSessionUser(session);
+
+			Map<String, Object> dataForCheckMyRecipe = new HashMap<>();
+			dataForCheckMyRecipe.put("userNo", user.getUserNo());
+			dataForCheckMyRecipe.put("recipeNo", recipeNo);
+			if(recipeService.checkMyRecipe(dataForCheckMyRecipe) != null) {
+				result.put("status", "success");
+			} else {
+				result.put("status", "fail");
+			}
+		} catch(Exception e){
+			result.put("status", "nologin");
+		}
+
+		return new Gson().toJson(result);		
+	}
+
+	@RequestMapping(path = "updateRecipe")
+	@ResponseBody
+	public String updateRecipe(Recipe recipe, @RequestParam("materialNo") String[] materialNos,
+			@RequestParam("materialAmount") String[] materialAmounts,
+			@RequestParam("recipeProduce") String[] recipeProduce,
+			@RequestParam("imageFiles") List<MultipartFile> imageFiles,
+			@RequestParam("representImgNames") List<String> representImgNames,
+			@RequestParam("produceImgNames") List<String> produceImgNames, HttpServletRequest request,
+			HttpSession session) {
+
+		Map<String, Object> result = new HashMap<>();
+		User user = CommonUtil.getSessionUser(session);
+
+		Map<String, Object> recipeDatas = new HashMap<>();
+		List<Map> materialList = new ArrayList<>();
+		JsonArray recipeProduceDatas = new JsonArray();
+		JsonArray recipeRepresentImages = new JsonArray();
+
+		for (int i = 0; i < materialNos.length; i++) {
+			Map<String, String> matertialInfo = new HashMap<>();
+			System.out.println(materialNos.toString());
+			System.out.println(materialAmounts.toString());
+			matertialInfo.put("materialNo", materialNos[i]);
+			matertialInfo.put("materialAmount", materialAmounts[i]);
+			materialList.add(matertialInfo);
+		}
+
+		try {
+			for (int i = 0; i < representImgNames.size(); i++) {
+				// MultipartFile image = null;
+				Thread.sleep(1);
+				String[] fileInfo = representImgNames.get(i).split("/");
+				String fileName = recipe.getRecipeNo() + "_" + user.getUserNo() + "_" + System.currentTimeMillis() + ".png";
+				if(fileInfo.length>1){
+					FileCopyUtils.copy(CommonUtil.findImageFile(fileInfo, imageFiles).getBytes(),
+							new FileOutputStream(CommonUtil.getImageFolderPath("representImg", request) + "/" + fileName));
+				}
+				recipeRepresentImages.add(fileName);
+			} // end of for
+
+			/* 조리과정 등록 */
+			for (int i = 0; i < produceImgNames.size(); i++) {
+				Thread.sleep(1);
+				String[] fileInfo = produceImgNames.get(i).split("/");
+				JsonObject obj = new JsonObject();
+				String fileName = recipe.getRecipeNo() + "_" + user.getUserNo() + "_" + System.currentTimeMillis() + ".png";
+				obj.addProperty("recipeProduceImage", produceImgNames.get(i));
+				if(fileInfo.length>1){
+					FileCopyUtils.copy(CommonUtil.findImageFile(fileInfo, imageFiles).getBytes(),
+							new FileOutputStream(CommonUtil.getImageFolderPath("recipeImg", request) + "/" + fileName));
+					obj.addProperty("recipeProduceImage", fileName);
+				}					
+				obj.addProperty("recipeProduce", recipeProduce[i]);
+				recipeProduceDatas.add(obj);
+			} // end of for
+
+			recipe.setRecipeProcedure(recipeProduceDatas);
+			recipe.setRepresentImages(recipeRepresentImages);				
+			recipeService.updateRecipe(recipe);
+			recipeService.deleteMaterials(recipe.getRecipeNo());
+
+			recipeDatas.put("materialList", materialList);
+			recipeDatas.put("recipeNo", recipe.getRecipeNo());
+
+			recipeService.addMaterials(recipeDatas);
+
+			//recipeService.addMaterials(recipeDatas);
+			result.put("status", "success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.put("status", "false");
+		} 
 		return new Gson().toJson(result);
 	}
 
@@ -193,14 +289,17 @@ public class RecipeController {
 	@RequestMapping(path = "recipeDetail", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String recipeDetail(int recipeNo, HttpSession session) {
-		HashMap<String, Object> result = new HashMap<>();
-
+		HashMap<String, Object> result = new HashMap<>(); 
+		List<Material> materials = new ArrayList<>();
 		Recipe recipe = new Recipe();
 		if (session.getAttribute("userNo") != null) {
 			recipe = recipeService.getRecipe(recipeNo, (int) session.getAttribute("userNo"));
 		} else {
 			recipe = recipeService.getRecipe(recipeNo, 0);
 		}
+		materials = recipeService.getRecipeMaterial(recipeNo);
+		System.out.println("재료 : "+materials);
+
 		// System.out.println("controller :
 		// "+recipeNo+(int)session.getAttribute("userNo") );
 		recipe.setHits(recipe.getHits() + 1);
@@ -208,6 +307,7 @@ public class RecipeController {
 		try {
 			result.put("status", "success");
 			result.put("data", recipe);
+			result.put("materials", materials);
 			System.out.println(recipe);
 		} catch (Exception e) {
 			result.put("status", "false");
@@ -275,37 +375,6 @@ public class RecipeController {
 		return new Gson().toJson(result);
 	}
 
-	// 준모수정
-	@RequestMapping(path = "subscribe", produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public String subscribe(@RequestParam(defaultValue = "1") int pageNo,
-			@RequestParam(defaultValue = "4") int pageSize, HttpSession session, int userNo) {
-		HashMap<String, Object> result = new HashMap<>();
-		Recipe recipe = new Recipe();
-		try {
-			// 구독한 사람 뽑는다.
-			List<Recipe> userNoList = recipeService.selectSubscribeUno(userNo);
-
-			for (int i = 0; i < userNoList.size(); i++) {
-				if (recipe.getSubscribe() == null) {
-					recipe.setSubscribe(String.valueOf(userNoList.get(0).getSubscribeNum()));
-				} else {
-
-					recipe.setSubscribe(recipe.getSubscribe() + "," + userNoList.get(i).getSubscribeNum());
-				}
-			}
-			String scsUserNo = recipe.getSubscribe();
-			List<Recipe> subscribe = recipeService.selectSbuscribe(scsUserNo, pageNo, pageSize);
-			result.put("status", "success");
-			result.put("data", subscribe);
-			result.put("pageNo", pageNo);
-		} catch (Exception e) {
-			result.put("status", "false");
-		}
-		System.out.println(result);
-		return new Gson().toJson(result);
-	}
-
 	@RequestMapping(path = "scrap", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String scrap(int recipeNo, HttpSession session) {
@@ -343,28 +412,160 @@ public class RecipeController {
 		}
 		return new Gson().toJson(result);
 	}
+//
+//	@RequestMapping(path = "addSubscribe", produces = "application/json;charset=UTF-8")
+//	@ResponseBody
+//	public String addSubscribe(HttpSession session, int fromUserNo) {
+//		HashMap<String, Object> result = new HashMap<>();
+//
+//		// toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
+//		User user = new User();
+//		int toUserNo = (int) session.getAttribute("loginUser");
+//		System.out.println(user.getUserNo());
+//
+//		recipeService.addSubscribe(toUserNo, fromUserNo);
+//		try {
+//			result.put("status", "success");
+//		} catch (Exception e) {
+//			result.put("status", "false");
+//		}
+//		return new Gson().toJson(result);
+//	}
 
-	@RequestMapping(path = "addSubscribe", produces = "application/json;charset=UTF-8")
+	//준모수정
+	@RequestMapping(path="subscribe",produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public String addSubscribe(HttpSession session, int fromUserNo) {
-		HashMap<String, Object> result = new HashMap<>();
+	public String subscribe(@RequestParam(defaultValue="1") int pageNo,
+			@RequestParam(defaultValue="4") int pageSize,HttpSession session,int userNo ){
+		HashMap<String,Object> result = new HashMap<>();
+		Recipe recipe = new Recipe();
+		try{
+			//구독한 사람 뽑는다.
+			List<Recipe> userNoList = recipeService.selectSubscribeUno(userNo);
 
-		// toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
+
+			for(int i =0; i<userNoList.size(); i++){ 
+				if(recipe.getSubscribe() == null){    
+					recipe.setSubscribe(String.valueOf(userNoList.get(0).getSubscribeNum()));
+				}else{
+
+					recipe.setSubscribe(recipe.getSubscribe()+","+userNoList.get(i).getSubscribeNum());
+				}
+			}
+			String scsUserNo=recipe.getSubscribe();
+			List<Recipe> subscribe = recipeService.selectSbuscribe(scsUserNo,pageNo,pageSize);
+			result.put("status","success");
+			result.put("data", subscribe);
+			result.put("pageNo", pageNo);
+		}catch (Exception e){
+			result.put("status", "false");
+		}
+		System.out.println(result);
+		return new Gson().toJson(result);
+	}
+
+	/*	@RequestMapping(path="addSubscribe",produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String addSubscribe(HttpSession session,int fromUserNo){
+    HashMap<String,Object> result = new HashMap<>();
+    //toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
+    User user = new User();
+    int toUserNo=((User)session.getAttribute("loginUser")).getUserNo();
+    System.out.println("toUserNo::"+toUserNo);
+    System.out.println("fromUserNo::"+fromUserNo);
+    recipeService.addSubscribe(toUserNo, fromUserNo);
+    try{
+      result.put("status","success");
+    }catch(Exception e){
+      result.put("status", "false");
+    }
+    return new Gson().toJson(result);
+  }*/
+
+	@RequestMapping(path="addSubscribe",produces="application/json;charset=UTF-8")
+    @ResponseBody
+    public String addSubscribe(HttpSession session,String email){
+      HashMap<String,Object> result = new HashMap<>();
+      //toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
+      
+      if(((User)session.getAttribute("loginUser"))==null){
+        
+        result.put("status", "failure");
+        System.out.println("login안함");
+        System.out.println(result);
+        return new Gson().toJson(result);
+       }
+      
+      int toUserNo=((User)session.getAttribute("loginUser")).getUserNo();
+      System.out.println("toUserNo::"+toUserNo);
+      System.out.println("fromUserNo_email::"+email);
+      
+      int fromUserNo=userService.selectFromEmail(email).getUserNo();
+      
+      recipeService.addSubscribe(toUserNo, fromUserNo);
+      try{
+        result.put("status","success");
+      }catch(Exception e){
+        result.put("status", "false");
+      }
+      return new Gson().toJson(result);
+    }
+
+	@RequestMapping(path="deleteSubscribe",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public String deleteSubscribe(HttpSession session,String email){
+		HashMap<String,Object> result = new HashMap<>();
+		//toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
 		User user = new User();
-		int toUserNo = (int) session.getAttribute("loginUser");
-		System.out.println(user.getUserNo());
+		int toUserNo=((User)session.getAttribute("loginUser")).getUserNo();
+		System.out.println("toUserNo::"+toUserNo);
+		System.out.println("fromUserNo_email::"+email);
 
-		recipeService.addSubscribe(toUserNo, fromUserNo);
-		try {
-			result.put("status", "success");
-		} catch (Exception e) {
+		int fromUserNo=userService.selectFromEmail(email).getUserNo();
+
+		recipeService.deleteSubscribe(toUserNo, fromUserNo);
+
+		try{
+			result.put("status","success");
+		}catch(Exception e){
 			result.put("status", "false");
 		}
 		return new Gson().toJson(result);
 	}
 
-	// ---------------------고재현 -------------------------
-	@RequestMapping(path = "materialSearch", produces = "application/json;charset=UTF-8")
+	@RequestMapping(path="checkSubscribe",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public String checkSubscribe(HttpSession session,String email){
+		HashMap<String,Object> result = new HashMap<>();
+		//toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
+		User user = new User();
+
+		if(((User)session.getAttribute("loginUser"))==null){
+			result.put("status","false");
+			return new Gson().toJson(result);
+		}
+
+		//login한 사람 userNo
+		int toUserNo=((User)session.getAttribute("loginUser")).getUserNo();
+		//참조하고 있는 사람 userNo
+		user=userService.selectFromEmail(email);
+		int fromUserNo=user.getUserNo();
+		try{
+
+			if (recipeService.checkSubscribe(toUserNo, fromUserNo)!=null) {
+				result.put("status","success");
+			}else{
+				result.put("status","false");
+			}
+
+		}catch(Exception e){
+			result.put("status", "false");
+		}
+		return new Gson().toJson(result);
+	}
+
+	//	---------------------고재현 -------------------------
+	@RequestMapping(path="materialSearch",produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String mts(@RequestParam("searchValue") String materialName, Model model) {
 		System.out.println(materialName);
@@ -422,37 +623,58 @@ public class RecipeController {
 		try {
 			List<Recipe> recipeList = new ArrayList<Recipe>();
 			List<Recipe> userNumbers = new ArrayList<Recipe>();
-			int userNo = 0;
+			int userNo = CommonUtil.getSessionUser(session).getUserNo(); 
 			User user = userService.selectFromEmail(email);
-			System.out.println("email로 뽑아온 User정보 : " + user);
+			System.out.println("email로 뽑아온 User정보 : "+user);
 
 			userNumbers = recipeService.selectScrapUserNoMypage(user.getUserNo());
-			Recipe recipe = functionForUserNumbers(userNumbers, request);
-			getSession(userNo, session);
-			System.out.println("userNumbers : " +userNumbers);
-			if (request == 1) {
-				recipeList = recipeService.selectMypageRecipe(String.valueOf(user.getUserNo()), userNo, request);
-			} else if (request == 2) {
-				recipeList = recipeService.selectMypageRecipe(recipe.getScrap(), userNo, request);
-			} else if (request == 3) {
-			  System.out.println("request3  ");
+			Recipe recipe = functionForUserNumbers(userNumbers,request);
+			//getSession(userNo, session);
+
+			if(request == 1){
+				recipeList = recipeService.selectMypageRecipe(String.valueOf(user.getUserNo()), userNo,request);      
+			}else if(request == 2){
+				recipeList = recipeService.selectMypageRecipe(recipe.getScrap(), userNo,request);
+			}else if(request == 3){
 				userNumbers = recipeService.selectSubscribeMypage(user.getUserNo());
-				System.out.println("req 3 userNumber : "+userNumbers);
-				Recipe subscribeRecipe = functionForUserNumbers(userNumbers, request);
-				System.out.println("sub number : "+subscribeRecipe.getScrap());
-				getSession(userNo, session);
-				recipeList = recipeService.selectMypageRecipe(subscribeRecipe.getScrap(), userNo, request);
-				System.out.println("recipeList : "+recipeList);
+				System.out.println("request3 userNumbers : "+ userNumbers);
+				Recipe subscribeRecipe = functionForUserNumbers(userNumbers,request);
+				System.out.println("subscribeRecipeNumbers : "+subscribeRecipe);
+				//getSession(userNo, session);
+				recipeList = recipeService.selectMypageRecipe(subscribeRecipe.getScrap(), userNo,request);
 			}
-			
-			result.put("status", "success");
-			result.put("data", recipeList);
+
+
+
+			System.out.println("결과값 : "+recipeList);
+			result.put("status","success");
+			result.put("data",recipeList);
 			result.put("user", user);
-		} catch (Exception e) {
+		}catch (Exception e){
 			e.printStackTrace();
 			result.put("status", "false");
 		}
 
+		return new Gson().toJson(result);
+	}
+
+	//community준모,용이형
+	@RequestMapping(path="comList",produces="application/json;charset=UTF-8")
+	@ResponseBody 
+	public String comList( @RequestParam(defaultValue="1") int pageNo,
+			@RequestParam(defaultValue="4") int pageSize,HttpSession session){
+
+		HashMap<String,Object> result = new HashMap<>();    
+		try{
+			List<Recipe> myRecipeList = recipeService.selectSbuscribe2((session.getAttribute("userNo")).toString(),pageNo,pageSize);
+			result.put("status","success");
+			result.put("data", myRecipeList);
+			result.put("pageNo",pageNo);
+			System.out.println("pageNo::"+result.get("pageNo"));
+			System.out.println("data::"+result.get("data"));
+		}catch (Exception e){ 
+			result.put("status", "false");
+		} 
 		return new Gson().toJson(result);
 	}
 
@@ -518,7 +740,6 @@ public class RecipeController {
 	  return new Gson().toJson(result);
 	}
 	
-	
 	@RequestMapping(path = "imageDelete", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String imageDelete(@RequestParam("category") String category, @RequestParam("imageName") String imageName, HttpServletRequest request) {
@@ -531,7 +752,7 @@ public class RecipeController {
 		} else {
 			result.put("status", "fail");
 		}
-		
+
 		return new Gson().toJson(result);
 	}
 }

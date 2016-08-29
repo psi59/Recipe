@@ -2,6 +2,11 @@ body {
   background-image: url("../../img/light-wooden-background.jpg");
 }
 
+.preview{
+	width: 150px;
+	height: 150px;
+}
+
 .rpimg{
 	height: 150px;
 	width: 150px;
@@ -88,6 +93,11 @@ body {
 	height: 150px !important;
 	width: 430px !important;
 	margin-right: 10px; 
+}
+
+.mtWrapper{
+	width: 100%;
+  height: 24px;
 }
 
 #materialList{
