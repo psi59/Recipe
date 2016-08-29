@@ -361,7 +361,6 @@ public class RecipeController {
 	      return new Gson().toJson(result);
 	     }
 	    
-	    User user = new User();
 	    int toUserNo=((User)session.getAttribute("loginUser")).getUserNo();
 	    System.out.println("toUserNo::"+toUserNo);
 	    System.out.println("fromUserNo_email::"+email);
