@@ -209,9 +209,7 @@ function loadVisitor() {
 				$('.rcp-Vst').remove();
 /* Add */
 $(document).on('click', '#rcp-rpBtn', function() {
-	/*
-	 * swal({ title: "방명록 작성 완료!", html: true });
-	 */
+	alert('d0');
 	$.ajax({
 		url : 'visitor/add.json',
 		method : 'post',
