@@ -614,63 +614,13 @@ public class RecipeController {
 		return new Gson().toJson(result);
 	}
 
-	//
-	////커뮤니티 레시피 리스트 : 용  ----  고재현 수정. 
-	//  @RequestMapping(path="userPage",produces="application/json;charset=UTF-8")
-	//  @ResponseBody 
-	//  public String userPage(String email, int request,HttpSession session){
-	//    HashMap<String,Object> result = new HashMap<>();
-	//    Recipe recipe = new Recipe();
-	//    int userNo;
-	//    try{
-	//      List<Recipe> recipeList = new ArrayList<Recipe>();
-	//      List<Recipe> userNumbers = new ArrayList<Recipe>();
-	//      System.out.println("parameter email : "+email);
-	//      
-	//      User user = userService.selectFromEmail(email);
-	//      System.out.println("email로 뽑아온 User정보 : "+user);
-	//      if(request == 1){
-	//      userNumbers = recipeService.selectScrapUserNoMypage(user.getUserNo());     
-	//      }else if(request == 2){
-	//        
-	//      }    
-	//      System.out.println("user정보로 뽑은 구독하기 누른 사람 넘버 : "+userNumbers);
-	//      if(session.getAttribute("userNo") == null){
-	//        userNo = 0;
-	//      }else{
-	//        userNo = (int)session.getAttribute("userNo");
-	//      }
-	//      
-	//      System.out.println("myrecipe parameter 1 - user.getUserNo : "+user.getUserNo());
-	//      System.out.println("myrecipe parameter 2 - session : "+userNo);
-	//      if(request == 1){     
-	//        recipeList = recipeService.selectMypageRecipe(String.valueOf(user.getUserNo()), userNo,request);      
-	//      }else if(request == 2){
-	//        System.out.println("여기옴?"+recipe.getScrap()+" : "+userNo+"  : "+request);
-	//        recipeList = recipeService.selectMypageRecipe(recipe.getScrap(), userNo,request);
-	//      }else if(request == 3){
-	//        
-	//      }
-	//      System.out.println("결과값 : "+recipeList);
-	//      result.put("status","success");
-	//      result.put("data",recipeList);
-	//      result.put("user", user);
-	//    }catch (Exception e){
-	//      e.printStackTrace();
-	//      result.put("status", "false");
-	//    }
-	// 
-	//    return new Gson().toJson(result);
-	//  }
-
-	//커뮤니티 레시피 리스트 : 용  ----  고재현 수정. 
-	@RequestMapping(path="userPage",produces="application/json;charset=UTF-8")
-	@ResponseBody 
-	public String userPage(String email, int request, HttpSession session){
-		HashMap<String,Object> result = new HashMap<>();
-
-
-		try{
+	// 커뮤니티 레시피 리스트 : 용 ---- 고재현 수정.
+	@RequestMapping(path = "userPage", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String userPage(String email, int request, HttpSession session) {
+		HashMap<String, Object> result = new HashMap<>();
+		  System.out.println("email : "+email);
+		try {
 			List<Recipe> recipeList = new ArrayList<Recipe>();
 			List<Recipe> userNumbers = new ArrayList<Recipe>();
 			int userNo = CommonUtil.getSessionUser(session).getUserNo(); 
@@ -761,7 +711,35 @@ public class RecipeController {
 		}
 		return recipe;
 	}
-
+	
+	@RequestMapping(path="addComment" , produces ="application/json; charset=UTF-8")
+	@ResponseBody
+	public String addComment(int recipeNo,String recipeComment , HttpSession session){
+	  HashMap<String, Object> result = new HashMap<>();
+	  Recipe recipe = new Recipe();
+	  recipe.setRecipeNo(recipeNo);
+	  recipe.setRecipeComment(recipeComment);
+	   
+	  if ( (User)session.getAttribute("loginUser") == null ) {
+	    result.put("status", "notLogin");
+	  }else{	  
+	    recipeService.addComment(recipe, ((User)session.getAttribute("loginUser")).getUserNo());
+	  }
+	  result.put("status", "success");
+	  return new Gson().toJson(result);
+	}
+	
+	@RequestMapping(path="deleteComment" , produces ="application/json; charset=UTF-8")
+  @ResponseBody
+  public String deleteComment(int commentNo){
+	  HashMap<String, Object> result = new HashMap<>();
+	  recipeService.deleteComment(commentNo);
+	  
+	  result.put("status", "success");
+	  
+	  return new Gson().toJson(result);
+	}
+	
 	@RequestMapping(path = "imageDelete", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String imageDelete(@RequestParam("category") String category, @RequestParam("imageName") String imageName, HttpServletRequest request) {

@@ -40,4 +40,6 @@ public interface RecipeDao {
 	int deleteScrap(Map<String, Object> Numbers); //스크랩 취소 고재현
 	int deleteMaterials(int recipeNo); // 박상일 - 레시피 재료삭제
 	Map<String,Object> checkSubscribe(Map<String,Object> params);//구독 Check 준모
+	Integer addComment(Map map);
+	Integer deleteComment(int commentNo);
 }

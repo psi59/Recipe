@@ -1,5 +1,3 @@
-var detailTemp = $('#recipe-detail-template').html();
-var comDetailTemp = Handlebars.compile(detailTemp); 
 
 var detailInfoTemp = $('#recipe-detail-304-info-template').html();
 var comDetailInfoTemp = Handlebars.compile(detailInfoTemp);   
@@ -11,24 +9,38 @@ var detailImageStep = $('#recipe-detail-step-images-template').html();
 var comDetailImageStep = Handlebars.compile(detailImageStep); 
 
 var recipeComment = $('#recipe-comment').html();
-var comRecipeComment = Handlebars.compile(recipeComment); 
+var comRecipeComment = Handlebars.compile(recipeComment);
+
+var recipeAddComment = $('#recipe-comment-addForm').html();
+var comRecipeAddComment = Handlebars.compile(recipeAddComment); 
 
 var slider;
 
-
 $(function(){
-	handlebarsIndexNumbering();
+
 	recipeDetail();
 	comment();
+	addComment();
+	deleteComment();
+	recipeScrap();
 })
 
 
-function handlebarsIndexNumbering(){
-	Handlebars.registerHelper("inc", function(value, options)
+	Handlebars.registerHelper("inc", function(value, options){
 			{
 		return parseInt(value) + 1;
-			});
-}
+			}
+	});
+
+Handlebars.registerHelper('x-button', function(options) {
+	console.log("userNo : "+this.userNo)
+	if(eval(jsonData) != null && eval(jsonData)[0].userNo == this.userNo){
+	
+	    return options.fn(this); 
+	}
+	});
+
+
 
 
 function recipeDetail(){	
@@ -49,14 +61,24 @@ function recipeDetail(){
 				$('.rcp-header > .title').text(result.data.recipeName);
 				$('.rcp-header > .date').text(result.data.recipeDate);
 				$('.hash').text(result.data.intro);
+				$('div[name="rcp-explanation"]:eq(1)').text(result.data.intro);
+				
 				$('#detail_pop_up').bPopup({
 					follow: [false, false], //x, y
 					onOpen:function(){
+						var detailMainTemp = $('#recipe-detail-main-template').html();
+						var comDetailMainTemp = Handlebars.compile(detailMainTemp); 
+
+						var detailTemp = $('#recipe-detail-template').html();
+						var comDetailTemp = Handlebars.compile(detailTemp); 
+
+ 						
 						$("body").css("overflow", "hidden");						
 						$('.rcp-304').append( comDetailInfoTemp(result) );
-						$('.rcp-info-images').append( comDetailImageMain(result) );
-						$('.rcp-detail-step').append( comDetailImageStep(result) );
-						$('.rcp-detail-body').append( comDetailTemp(result) );
+						$('.rcp-info-images').append( comDetailImageMain(result.data) );
+						$('.rcp-detail-step').append( comDetailImageStep(result.data) );						
+						$('.rcp-detail-body').append( comDetailMainTemp(result.data) );
+						$('.rcp-detail-body').append( comDetailTemp(result.data) );
 						slider = $('.rcp-detail-body').bxSlider({
 							mode:'vertical',
 							pager: false,
@@ -64,17 +86,6 @@ function recipeDetail(){
 
 						});
 						console.log("result data ll : "+result.data);
-//						for(var i = 0 ; i < result.data.representImages.length; i++){
-//							console.log("result Data : "+result.data.representImages);
-//							$('div[name="rcp-body"]:eq('+i+') .rcp-images').attr('src','img/representImg/'+result.data.representImages[i]);
-//				
-//						}
-						for(var i = 0; i <result.data.recipeProcedure.length; i++){
-
-							$('div[name="rcp-body"]:eq('+(i)+') .rcp-images').attr('src','img/recipeImg/'+result.data.recipeProcedure[i].recipeProduceImage);
-							$('div[name="rcp-body"]:eq('+(i)+') .rcp-explanation p').text(result.data.recipeProcedure[i].recipeProduce);
-
-						}
 
 
 
@@ -90,16 +101,17 @@ function recipeDetail(){
 								$('.rcp-detail-scrap').css('color','white');
 								$('.rcp-detail-scrap i').css('color','white');	
 							}
-						}
-					},
+							
+					}
+						},
 					onClose:function(){ 
 						$("body").css("overflow", "auto");
 						$(".detail-images").remove();
 						$(".rcp-body").remove();
 						$(".rcp-main").remove();
 						$(".rcp-detail-step").remove();
-						$(".rcp-detail-body").remove();
-						$(".bx-wrapper").remove();
+						$(".rcp-detail-body").remove()
+						$(".bx-wrapper").remove();;
 						$(".rcp-720").html('<div class="rcp-header">'
 								+'<h2 class="title">매콤 대패삼겹살 볶음</h2>'
 								+'<p class="hash">#돼지고기 #대패삼겹살 #야식 #간단고기요리 #매콤고기</p>'
@@ -122,35 +134,95 @@ function recipeDetail(){
 function comment(){
 	$(document).on('click','.rcp-seconde-info',function(evnet){
 		evnet.preventDefault();
-		$.ajax({
-			url : 'recipe/recipeComment.json',
-			method : 'post',
-			data:{
-				recipeNo:$('.rcp-hidden-recipeNo').val()
-			},
-			dataType : 'json',
-			success : function(result) {
-				$(".rcp-detail-body").remove();
+		commentFunction();
+		
+	})
+}
 
-				console.log(result.data);
-				console.log(result.user);
-				$(".rcp-720").html('<div class="rcp-header">'
-						+'<h2 class="title">댓글</h2>'
-						+'<h3 class="rcp-comment-count"></h3>'
-						+'</div>'
-						+'<div class="rcp-detail-body"></div>');
-						
+function commentFunction(){
+	$.ajax({
+		url : 'recipe/recipeComment.json',
+		method : 'post',
+		data:{
+			recipeNo:$('.rcp-hidden-recipeNo').val()
+		},
+		dataType : 'json',
+		success : function(result) {
+			$(".rcp-detail-body").remove();
+			$(".rcp-720").html('<div class="rcp-header">'
+					+'<h2 class="title">댓글</h2>'
+					+'<h3 class="rcp-comment-count"></h3>'
+					+'</div>'
+					+'<div class="rcp-detail-body"></div>');
+		
+			if(result.data.length <1) {
+				$('.rcp-comment-count').text("등록된 댓글이 아직 없습니다.");
+			}else{					
 				$('.rcp-comment-count').text(result.data[0].countComment+" Comments");
-				$('.rcp-detail-body').append( comRecipeComment(result) );
-
-			},error : function(){
-				swal('서버 요청 오류');
+				
 			}		
+		
+			$('.rcp-detail-body').append( comRecipeComment(result) );				
+			$('.rcp-detail-body').append( comRecipeAddComment(result) );
+			$('#forCommentRecipeNumber').val( $('.rcp-hidden-recipeNo').val());
+			
+		},error : function(){
+			swal('서버 요청 오류');
+		}		
+	})
+}
+
+function addComment(){
+	$(document).on('click','input[name="rcp-submit"]',function(){
+		$.ajax({
+			url:'recipe/addComment.json',
+			dataType:'json',
+			method:'post',
+			data:{
+				recipeNo:$('#forCommentRecipeNumber').val(),
+				recipeComment:$('textarea[name="recipeComment"').val()
+			},
+			success:function(result){
+				if(eval(jsonData) == null){
+					swal('로그인 부탁염 ^오^');
+					return ;
+				}
+				console.log('커맨트 성공성공')
+				commentFunction();
+			},
+			error:function(){
+				alert('addComment 에러욤 !!')
+			}
 		})
 	})
 }
 
+function deleteComment(){
+	$(document).on('click','#deleteComment',function(event){
+	event.preventDefault();
+	deleteCommentFunction(event);
+	})
+}
 
+function deleteCommentFunction(event){
+	console.log('펑션왔나요 ')
+		$.ajax({
+			url:'recipe/deleteComment.json',
+			dataType:'json',
+			method:'post',		
+			data:{
+				commentNo : $(event.target).parent().children('#commentNo').val()
+			},
+			success:function(result){
+				console.log('comment delete 성공성공 ^^');
+				commentFunction();
+			},
+			error:function(){
+				console.log('comment delete 실패실패 ㅠㅠ');
+			}
+		
+		})	
+}
 
 function recipeScrap(){
 	$(document).on('click','.rcp-detail-scrap',function(event){

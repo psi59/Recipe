@@ -305,17 +305,7 @@
 					<hr />
 				</div>
 				<div class="rcp-detail-body"></div>
-				
 			</div>
-			
-			<div class="rcp-720" id="rcp-720">
-        <div class="rcp-header">
-          
-        </div>
-        <div class="rcp-detail-body">
-				</div> 
-      </div>
-	
 
 			<div class="rcp-304"></div>
 
@@ -355,7 +345,7 @@
 	<!------------------------- Rank List ------------------------------>
 	<div id="footer"></div>
 	<script id="recipe-detail-template" type="text/x-handlebars-template">
-    {{#each data.recipeProcedure}}
+    {{#rcpBody "data.recipeProcedure" "data.representImages"}}
               <div class="rcp-body" name="rcp-body">
               <div>
                 <div class="rcp-title-size">
@@ -377,6 +367,26 @@
 
 </script>
 
+
+  <script id="recipe-comment" type="text/x-handlebars-template">
+{{#each data}}
+<div class="cs-comments-area">           
+ <span class="rcp-comment-indexNum"></span> 
+                <article>
+                  <div class="cs-comment-author">
+                   <img class="avatar" src="img/profileImg/{{user.image}}" alt=""> 
+                      <b><a href="#">{{user.userName}}</a></b> 
+                          <a class="cs-comment-metadata" href="#"> 
+                         <span class="rcp-comment-date">{{recipeCommentDate}}</span>
+                    </a>
+                  </div>
+                  <div class="cs-comment-content">
+                    <p>{{recipeComment}}</p>                    
+                  </div>
+                </article>   
+          </div>
+{{/each}}
+  </script>
 	<script id="recipe-detail-304-info-template"
 		type="text/x-handlebars-template">
 
@@ -479,11 +489,8 @@
 
 	<script id="recipe-card-template" type="text/x-handlebars-template"> 
 {{#each data}}
- 
-      
           <div
             class="col-xs-3 col-sm-3 col-md-3 rcp-listSize rcp-list-margin">
-      
             <div class="thumbnail row relative">
               <div class="rcp-profile-position">
                   {{#defaultImage}}
@@ -604,31 +611,6 @@
 
 {{/each}}
 </script>
-
-  <script id="recipe-comment" type="text/x-handlebars-template">
-<div class="cs-comments-area">
-            <h3>12 Comments</h3>
-            <ol class="cs-comment-list">
-              <li class="cs-comment">
-                <article>
-                  <div class="cs-comment-author">
-                    <img class="avatar" src="demo/avatars/4.jpg" alt=""> <b><a
-                      href="#">Robert Jackons</a></b> <a class="cs-comment-metadata"
-                      href="#"> <time datetime="2015-09-14T09:34:28+00:00">July
-                        28, 2015 at 02:13 am</time>
-                    </a>
-                  </div>
-                  <div class="cs-comment-content">
-                    <p>Phasellus vel nunc at leo commodo condimentum non vel
-                      felis. Donec blandit nisl at velit eleifend, vel tincidunt
-                      felis semper. Sed aliquet, lorem vel euismod faucibus, metus.</p>
-                    <a class="cs-reply" href="#">Reply</a>
-                  </div>
-                </article>
-              </li>
-            </ol>
-          </div>
-  </script>
 	<!--쉐프 랭킹카드 수정  -->
 	<script id="chef-card-template" type="text/x-handlebars-template">
 {{#each data}}
@@ -714,7 +696,7 @@
 	<script src="js/common.js"></script>
 	<script src="js/login.js"></script>  
   <script src="js/mainListAjax.js"></script>
-  <script src="js/recipeDetail.js"></script> 
+  <script src="js/recipeDetail.js"></script>
 	<script src="js/updateUser.js"></script>
   <script src="js/common/popup.js"></script>
   <script src="js/common/chefCard.js"></script>

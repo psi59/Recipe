@@ -34,6 +34,7 @@
 		<result column="userName" property="user.userName" />
 		<result column="rrpct" property="recipeComment" />
 		<result column="rrpc_dt" property="recipeCommentDate" />
+		<result column="rrpno" property="commentNo"/>
 	</resultMap>
 
 
@@ -49,6 +50,15 @@
     (select count(rcpno) from rcp_rp where rcpno=${value}) countComment
     from rcp_rp r inner join users u on r.uno = u.uno and r.rcpno = ${value}    
 </select>
+
+<select id="addComment" parameterType="MAP">
+  INSERT INTO rcp_rp  ( `UNO`, `RCPNO`, `RRPCT`, `RRPC_DT`)  
+  VALUES (${userNo},${recipe.recipeNo},#{recipe.recipeComment},now() );
+</select>
+<delete id="deleteComment" parameterType="INTEGER" >
+DELETE FROM rcp_rp WHERE RRPNO=${value};
+
+</delete>
 
 
 	<select id="recipeSearch" resultMap="recipeMap" parameterType="Map">
@@ -241,7 +251,7 @@
 		LEFT OUTER JOIN(select rcpno rno, count(*) countLike from rcp_lik
 		group by rcpno) likecnt
 		ON r.rcpno=likecnt.rno
-		ORDER BY scr.scc_dt asc
+		ORDER BY r.rcp_dt asc
 	</select>
 
 	<select id="selectSbuscribe2" resultMap="recipeMap"

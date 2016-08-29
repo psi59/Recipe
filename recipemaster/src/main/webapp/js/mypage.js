@@ -216,6 +216,7 @@ $(document).on('click', '#rcp-rpBtn', function() {
 			swal('서버 요청 오류 !')
 		}
 	})
+	
 	$('#rcp-rpcontent').val("");
 });
 
