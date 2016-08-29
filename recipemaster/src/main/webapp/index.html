@@ -618,21 +618,25 @@
         <div class="list">
           <a data-title="Recipe">{{recipeCount}}</a>
           <a data-title="구독자">{{subsCount}}</a>
-          <a data-title="좋아요">{{likeCount}}</a>
+          <!--<a data-title="좋아요">{{likeCount}}</a>-->
           <a data-title="Total">{{totalPoint}}</a>
         </div>
       </div>
     </div>
-    <div class="content">
-          
-      <div class="name"><input type="hidden" value="{{email}}">
-                   <a href="#" class="rcp-userName">{{userName}}</a></div>
-      <div class="job-title">Master Chef </div>
-      <p class="text">{{email}}</p>
-      <div class="list clearfix">
-        <p>소개</p>
-        <p>- {{intro}}</p>
-      </div>
+        <div class="content introBox">
+          <div class="name">
+                   <p class="rcp-userName1">{{userName}}</p></div>
+                    <p class="text">{{email}}</p>      
+                  <div class="rcp-ranking">랭킹 : {{rownum}}등</div>
+          <div class="list clearfix">
+        <p class="introfont">{{intro}}</p>
+        </div>
+        <div class="cardbtn">
+         <button type="button" class="btn btn-default">
+              <input type="hidden" value="{{email}}">
+              <a href="#" class="rcp-userName visitbtn">방문하기</a></button>
+              <button type="button" class="btn btn-default">구독하기</button>
+        </div>
     </div>
   </div>
 </div>
