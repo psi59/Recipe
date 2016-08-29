@@ -1,4 +1,6 @@
-@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+@import	url('https://fonts.googleapis.com/css?family=Baloo+Tamma|Nunito');
+
 
 .nav-container {
 	z-index: 10000;
@@ -7,8 +9,42 @@
 	text-align: center;
 }
 
+.rcp-userName1 {
+	font-size: 15pt !important;
+	color: #000000 !important;
+	text-decoration: blink !important;
+}
+
+.cardbtn {
+	position: relative;
+	top: 25%;
+}
+
 .nav-container ul {
 	
+}
+
+.visitbtn {
+	font-size: 10pt;
+}
+
+.rcp-imp {
+	border: 1px solid #000000 !important;
+	border-color: #adadad !important;
+}
+
+.introBox {
+	margin-top: 5%;
+	border: 1px solid #b6b4b5;
+	height: 215px;
+	background-color: #ffffec;
+	border-radius: 20px;
+}
+
+.introfont {
+	padding-top: 10pt;
+	font-size: 10pt;
+	font-family: 'Nunito', sans-serif;
 }
 
 .nav-container ul li {
@@ -186,6 +222,24 @@ footer a:hover {
 }
 
 @media ( max-width :1024px) {
+	.fresh-ui .header .social .list a {
+		width: 37px;
+		height: 30px;
+		color: inherit;
+		display: block;
+		margin: 7px 0 !important;
+		background: #fff;
+		line-height: 30px;
+		text-align: center;
+		margin-left: 10px;
+		position: relative;
+		-webkit-transform: translateX(30px);
+		transform: translateX(30px);
+		-webkit-transition: all .4s ease-in-out 0s;
+		transition: all .4s ease-in-out 0s;
+		box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0
+			rgba(0, 0, 0, .19);
+	}
 	.fresh-ui-wrap {
 		z-index: 1000;
 		width: 260px;
@@ -210,6 +264,17 @@ footer a:hover {
 		z-index: 88888;
 		width: 60px;
 		height: 77px;
+	}
+	.cardbtn {
+		position: relative;
+		top: 4%;
+	}
+	.introBox {
+		margin-top: 5%;
+		border: 1px solid #b6b4b5;
+		height: 171px;
+		background-color: #ffffec;
+		border-radius: 20px;
 	}
 }
 
@@ -272,21 +337,22 @@ footer a:hover {
 }
 
 .fresh-ui .header .social .list a {
-  width: 45px;
-  height: 30px;
-  color: inherit;
-  display: block;
-  margin: 23px 0;
-  background: #fff;
-  line-height: 30px;
-  text-align: center;
-  margin-left:10px;
-  position: relative;
-  -webkit-transform: translateX(30px);
-  transform: translateX(30px);
-  -webkit-transition: all .4s ease-in-out 0s;
-  transition: all .4s ease-in-out 0s;
-  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19)
+	width: 37px;
+	height: 30px;
+	color: inherit;
+	display: block;
+	margin: 33px 0;
+	background: #fff;
+	line-height: 30px;
+	text-align: center;
+	margin-left: 10px;
+	position: relative;
+	-webkit-transform: translateX(30px);
+	transform: translateX(30px);
+	-webkit-transition: all .4s ease-in-out 0s;
+	transition: all .4s ease-in-out 0s;
+	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0
+		rgba(0, 0, 0, .19)
 }
 
 .fresh-ui .header .social .list a:before {
@@ -343,7 +409,9 @@ footer a:hover {
 }
 
 .fresh-ui .content .text {
-	line-height: 24px;
+	font-size: 17px;
+	line-height: 24px !important;
+	font-family: 'Nunito', sans-serif !important;
 }
 
 .fresh-ui .content .list a {

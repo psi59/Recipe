@@ -61,13 +61,13 @@
 
 @media(min-width:1025px){
 .tab-content .tab-pane {
-  display: none;
-  width: 88%;
-  margin-left:6%;
-  background-color: #FFFED7;
-  overflow-y: auto;
-  padding-top: 50px;
-  padding-bottom: 50px;
+ display: none;
+    width: 88%;
+    margin-left: 6% !important;
+    background-color: #FFFED7;
+    overflow-y: auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 }
 @media(max-width:1024px){

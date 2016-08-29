@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,7 @@ import com.recipe.util.CommonUtil;
 @Controller
 @RequestMapping("/user/")
 public class UserController {
+	
 	@Autowired
 	UserService userService;
 
@@ -99,32 +101,16 @@ public class UserController {
 		return new Gson().toJson(result);
 	}
 
-	@RequestMapping(path ="update")
+	@RequestMapping(path = "update")
 	@ResponseBody
-	public String update(User user, @RequestParam("beforePassword") String beforePassword,
-			@RequestParam("profileImage") MultipartFile profileImage, HttpServletRequest request) {
+	public String update(
+			User user,
+			@RequestParam(value="beforePassword", defaultValue="") String beforePassword,
+			//@RequestParam(value="profileImage", defaultValue="") MultipartFile profileImage,
+			HttpServletRequest request) {
 		HashMap<String, Object> result = new HashMap<>();
-		try {
-			User dbUser = userService.getUser(user.getUserNo());
-			System.out.println(user);
-			if (beforePassword.equals(dbUser.getPassword())) {
-				/* 파일업로드 추가 */
-				if (null != profileImage) {
-					String fileName = "userprofile_" + user.getUserNo() + ".png";
-					user.setImage(fileName);
-					System.out.println(profileImage.getOriginalFilename());
-					File recipeUrl = new File(CommonUtil.getImageFolderPath("profileImg", request) + "/" + fileName);
-					profileImage.transferTo(recipeUrl);
-				} /* 파일업로드 추가 끝 */
-				userService.updateUser(user);
-				result.put("status", "success");
-			} else {
-				result.put("status", "pwdFail");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			result.put("status", "failure");
-		}
+		System.out.println("여기여기여기 + "+user);
+		System.out.println("여기여기여기 + "+ beforePassword);
 
 		return new Gson().toJson(result);
 	}
@@ -141,29 +127,25 @@ public class UserController {
 		}
 		return new Gson().toJson(result);
 	}
-	@RequestMapping(path = "best", produces = "application/json;charset=UTF-8")
-  @ResponseBody
-  public String best(
-      @RequestParam(defaultValue = "1") int pageNo
-      , @RequestParam(defaultValue = "3") int pageSize) {
-    HashMap<String, Object> result = new HashMap<>();
-    try {
-      List<User> list = userService.getUserRankList(pageNo, pageSize);
-      result.put("status", "success");
-      result.put("data", list);
-    } catch (Exception e) {
-      result.put("status", "failure");
-    }
 
-    return new Gson().toJson(result);
-  }
-	
-	
+	@RequestMapping(path = "best", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String best(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "3") int pageSize) {
+		HashMap<String, Object> result = new HashMap<>();
+		try {
+			List<User> list = userService.getUserRankList(pageNo, pageSize);
+			result.put("status", "success");
+			result.put("data", list);
+		} catch (Exception e) {
+			result.put("status", "failure");
+		}
+
+		return new Gson().toJson(result);
+	}
+
 	@RequestMapping(path = "rank", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String rank(
-	    @RequestParam(defaultValue = "1") int pageNo
-	    , @RequestParam(defaultValue = "10") int pageSize) {
+	public String rank(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "10") int pageSize) {
 		HashMap<String, Object> result = new HashMap<>();
 		try {
 			List<User> list = userService.getUserRankList(pageNo, pageSize);
@@ -182,14 +164,19 @@ public class UserController {
 		// index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
 		HashMap<String, Object> result = new HashMap<>();
 
-		User loginUser = userService.loginUser(user);
+		User loginUser = userService.loginUser(user); 
 
 		try {
-			result.put("status", "success");
-			result.put("data", loginUser);
-			// server sessionStorage에 유저 정보 저장 ------------------
-			session.setAttribute("loginUser", loginUser);
-			// ----------------------------------------------------------
+		  if (loginUser!=null) {
+		    result.put("status", "success");
+	      result.put("data", loginUser);
+	      // server sessionStorage에 유저 정보 저장 ------------------
+	      session.setAttribute("loginUser", loginUser);
+	      // ----------------------------------------------------------
+      }else{
+        result.put("status", "failure");
+      }
+			
 		} catch (Exception e) {
 			result.put("status", "failure");
 		}
@@ -211,8 +198,7 @@ public class UserController {
 	        System.out.println("login");
 	        result.put("status", "success");
 	        result.put("data", loginUser);
-	        System.out.println("들어오냐??");
-	        System.out.println(loginUser);
+	        System.out.println("loginUser::"+loginUser);
 	      } else {
 	        result.put("status", "failure");
 	      }

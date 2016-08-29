@@ -6,6 +6,22 @@
   bottom:0px;
   margin-top: 50px;
 }
+.rcp-comment-date{
+	font-size:7pt;
+}
+.cs-comments-area{
+	height: 100px;
+}
+.cs-comment-content{
+	margin-top:6px;
+}
+.rcp-comment-indexNum{
+	float:left;
+}
+.avatar{
+	width: 50px;
+	height:50px;	
+}
 
 .rcp-scrap-button-text{
 	width:110px;
@@ -234,6 +250,14 @@
   font-size:18pt;
 }
 
+.rcp-body{
+	float: none;
+    list-style: none;
+    position: relative;
+    width: 710px ! important;
+    height : 550px ! important;
+}
+
 .rcp-detail-form .title{
   color:#383838;
   font-size:25pt;
@@ -280,4 +304,8 @@
   
   text-align: center;
   color: white;
+  }
+
+  .bx-viewport{
+    height: 500px ! important;
   }

@@ -34,6 +34,7 @@
 	overflow-y: hidden;
 	width: 100%;
 	white-space: nowrap;
+	float: left;
 }
 
 .navbar {
@@ -51,8 +52,9 @@
 }
 
 .mtName {
-	width: 44%;
-  text-align: right;
+    width: 40%;
+    text-align: right;
+    padding-right: 6px;
 }
 
 .mtAmount{
@@ -198,18 +200,15 @@
 				</div>
 			</div>
 			<div class="rcp-sign-membership">
-				<!-- <button id="updateUserInfo" type="submit">확인</button> -->
 				<a href="#"><span id="updateUserInfo">확인</span></a> <a href="#"><span
 					id="updateUserReset">취소</span></a>
 			</div>
 		</form>
 	</div>
-	<!--  -->
-
 
 	<form id="addRecipe" action="recipe/addRecipe.json" method="post"
 		enctype="multipart/form-data">
-
+    <input type="hidden" value="0" name="recipeNo" />
 		<input type="hidden" value="0" name="regiStatus" />
 		<div class="row wrapper">
 			<div class="rcp-title">
@@ -231,7 +230,7 @@
 				<div class="form-group">
 					<p>
 					  <label for="cookTime">조리시간(min) : </label>
-					  <input type="text" id="cookTime" OnKeypress="onlyNumber();" style="border: 1px solid #ccc; color: #f6931f; font-weight: bold; width: 50px; text-align: center;">
+					  <input type="text" id="cookTime" name="cookTime" OnKeypress="onlyNumber();" style="border: 1px solid #ccc; color: #f6931f; font-weight: bold; width: 50px; text-align: center;">
 					</p>
 					<div id="cookTime-slider"></div>
 				</div>
@@ -308,6 +307,35 @@
 			</div>
 		</div>
 	</form>
+	
+ <script id="represent-image-template" type="text/x-handlebars-template">
+  {{#each representImages}}
+    <div class="scroll width_180px">
+      <span><img class="rpimg" src="img/representImg/{{this}}"></span>
+      <a href="#">
+        <span class="closeBtn thick rpImgRemove"></span>
+        <input name="representImgNames" type="hidden" value="{{this}}"/>
+      </a>
+    </div>
+  {{/each}}
+ </script>
+ 
+ <script id="recipe-produce-template" type="text/x-handlebars-template">
+  {{#each recipeProcedure}}
+    <div>
+      <div class="row padding_10px">
+        <div class="float_left margin_right_10px">
+          <img class="preview" src="img/recipeImg/{{recipeProduceImage}}">
+        </div>
+        <div class="height_150px float_left">
+          <textarea name="recipeProduce" class="height_150px" placeholder="조리과정을 설명해주세요.">{{recipeProduce}}</textarea>
+        </div>
+        <a href="#"><div class="float_left closeBtn thick pdImg"></div></a>
+      </div>
+      <input type="hidden" name="produceImgNames" value="{{recipeProduceImage}}">
+     </div>
+  {{/each}}
+ </script>
 
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -329,6 +357,7 @@
 		src="node_modules/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
 	<script
 		src="node_modules/easy-autocomplete/dist/jquery.easy-autocomplete.min.js"></script>
+	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
 	<script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
 
@@ -341,76 +370,7 @@
 	<script src="js/writerecipe.js"></script>
 
 	<script type="text/javascript">
-	var options = {
-		  url: function(phrase) {
-			  console.log(phrase);
-		    return "recipe/materialSearch.json?searchValue="+phrase;
-		  },
-
-		  getValue: function(element) {
-		    return element.name;
-		  },
-
-		  ajaxSettings: {
-		    dataType: "json",
-		    method: "GET"
-		  },
-		  requestDelay: 400,
-		  
-		  categories: [
-	                   {   //Category fruits
-	                       listLocation: "foodstuff",
-	                       header: "-- 식재료 --"
-	                   }, 
-	                   {   //Category vegetables
-	                       listLocation: "seasoning",
-	                       header: "-- 조미료 --"
-	                   }
-	      ],
-	      list: {
-	          showAnimation: {
-	            type: "slide", //normal|slide|fade
-	            time: 200
-	          },
-
-	          hideAnimation: {
-	            type: "slide", //normal|slide|fade
-	            time: 200
-	          },
-	          onChooseEvent: function() {
-	              var name = $('input[name="materialName"]').getSelectedItemData().name;
-	              var no = $('input[name="materialName"]').getSelectedItemData().no;
-	              var category = $('input[name="materialName"]').getSelectedItemData().category;
-	              var existMt = $('input[name="materialNo"]');
-	              for(i=0; i<existMt.length; i++){
-	            	  if($(existMt[i]).val()==no){
-	                      alert('재료를 중복으로 등록하실 수 없습니다.');
-	                      return;
-	                }
-	              }
-	              
-	              if(category=='1'){
-	            	  $('#materialList').append(
-	                          $('<div class="mtWrapper"><div class="mtName float_left">'+name+'</div>'
-	                           +'<div class="float_left">&nbsp;:&nbsp;</div>'
-	                           +'<div class="float_left mtAmount"><input name="materialAmount" type="text" placeholder="분량 (예:400g)" /></div>'
-	                           +'<input type="hidden" name="materialNo" value="'+no+'">'
-	                           +'</div>'));
-	              } else {
-	            	  $('#seasoningList').append(
-	                            $('<div class="mtWrapper"><div class="mtName float_left">'+name+'</div>'
-	                             +'<div class="float_left">&nbsp;:&nbsp;</div>'
-	                             +'<div class="float_left mtAmount"><input name="materialAmount" type="text" placeholder="분량 (예:400g)" /></div>'
-	                             +'<input type="hidden" name="materialNo" value="'+no+'">'
-	                             +'</div>'));
-	              }
-	              
-	              
-            }
-	       }
-	};
 	
-	$('input[name="materialName"]').easyAutocomplete(options);
 	
 	</script>
 </body>

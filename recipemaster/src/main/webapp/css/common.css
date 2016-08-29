@@ -414,6 +414,10 @@ header .header-content {
 	float: left;
 }
 
+.margin_right_10px{
+  margin-right: 10px !important;
+}
+
 .margin_bottom_30px{
 	margin-bottom: 30px !important;
 }
@@ -433,4 +437,13 @@ header .header-content {
 .margin_bottom_70px{
   margin-bottom: 70px !important;
 }
+
+.padding_10px{
+  padding: 10px;
+}
+
+.width_180px{
+	width: 180px !important;
+}
+
 

@@ -4,7 +4,25 @@
   .active{
   color:#337ab7;
   }
+  .row{
+ margin-left: -7.5px ! important;
+ margin-right: -7.5px ! important; 
+ }
 
+.rcp-mypage-section .entry, .hs-recipes.grid .we{
+	margin-left: 0px ! important;
+ 
+}
+
+.rcp-mypage-section .entry, .hs-recipes.grid .we {
+    line-height: 30px;
+    /* margin-bottom: 30px; */
+    margin-bottom: 30px;
+    width: 283px;
+    margin-right: 20px;
+    margin-left: 20px;
+    float: left;
+}
 
 .active {
   border-bottom: 0px solid #ecf0f1 !important;
@@ -448,10 +466,6 @@
   margin-left:15%;
   margin-right:15%;
 }
-
-.rcp-relative{
-  position:relative;
-}
 .rcp-profile-position{
   position:absolute; 
   margin-top:44%;
@@ -483,9 +497,10 @@
 }
 
 .rcp-recipeGrade{
-  position:relative;
-  text-align:right;
-  left:1em;
+     position: absolute;
+    text-align: right;
+    left: 1em;
+    right: 5%;
   margin-bottom:5%;
 }
 
@@ -589,7 +604,21 @@
 
 
 @media (min-width:1023px) and (max-width : 1199px){
-
+	
+.rcp-relative{
+  position:relative;
+  width: 290px;
+}
+	
+.rcp-right-slideButton{
+	  left: 210px;
+    width: 20px;
+}
+	.rcp-comment{
+	margin-left: 10px;
+    width: 210px;
+	}
+	
 .rcp-image-scale{
   width : 100%;
   height : 141px;
@@ -688,6 +717,9 @@
 
 /* ------------------ min 1024px defalut font size --------------- */
 @media (min-width:1401px){
+  ..rcp-relative{
+  width: 100% ! important;
+  }
   
   .rcp-list h3{
     font-size:19pt;

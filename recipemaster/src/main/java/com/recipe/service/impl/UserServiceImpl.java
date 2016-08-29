@@ -75,14 +75,20 @@ public class UserServiceImpl implements UserService {
   public User loginUser(User user) {
     // TODO Auto-generated method stub
     User dbUser=userDao.findUser(user.getEmail());
-    if(! dbUser.getPassword().equals(user.getPassword())){
+    System.out.println("dbUser"+dbUser);
+    if (dbUser==null) {
+      System.out.println("ID가 부적합합니다.");
+      dbUser=null;
+      return dbUser;
+    }else if(! dbUser.getPassword().equals(user.getPassword())&&dbUser.getPassword()!=null){
       System.out.println("비밀번호가 부적합합니다.");
-      
-      return null;
+      dbUser=null;
+      return dbUser;
+    }else{
+    dbUser.setPassword("");
     }
-    dbUser.setPassword(null);
-    
     return dbUser;
+    
   }
   
   @Override

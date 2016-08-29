@@ -4,8 +4,9 @@ public class Material {
 
 	private int materialNo;
 	private String materialName;
+	private String materiaQuantity;
 	private int materialStatement;
-	
+
 	public Material() {	}
 
 	public int getMaterialNo() {
@@ -18,6 +19,14 @@ public class Material {
 
 	public String getMaterialName() {
 		return materialName;
+	}
+
+	public String getMateriaQuantity() {
+		return materiaQuantity;
+	}
+
+	public void setMateriaQuantity(String materiaQuantity) {
+		this.materiaQuantity = materiaQuantity;
 	}
 
 	public void setMaterialName(String materialName) {
@@ -34,7 +43,7 @@ public class Material {
 
 	@Override
 	public String toString() {
-		return "Material [materialNo=" + materialNo + ", materialName=" + materialName + ", materialStatement="
-				+ materialStatement + "]";
+		return "Material [materialNo=" + materialNo + ", materialName=" + materialName + ", materiaQuantity="
+				+ materiaQuantity + ", materialStatement=" + materialStatement + "]";
 	}
 }
