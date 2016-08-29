@@ -1,18 +1,22 @@
 @CHARSET "UTF-8";
 
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
-.navbar{
+
+.navbar {
 	height: 51px;
 }
-.rcp-forDelete-xButton{
-	position:absolute;
-	width : 30px;
-	    left: 250px;
-    bottom: 0px;
+
+.rcp-forDelete-xButton {
+	position: absolute;
+	width: 30px;
+	left: 250px;
+	bottom: 0px;
 }
-.rcp-x-button{
-	border:0.5px solid #cecece ! important;
+
+.rcp-x-button {
+	border: 0.5px solid #cecece ! important;
 }
+
 .rcp-profile-img {
 	/* 	margin-top: 20%; */
 	width: 50%;
@@ -233,7 +237,7 @@ body {
 .rcp-topbtn {
 	position: relative;
 	top: 16px;
-  right: -87%;
+	right: -87%;
 }
 
 .rcp-pagemiddle {
@@ -241,10 +245,11 @@ body {
 	height: 10%;
 }
 
-.hs-content > .container{
-	width:970px;
+.hs-content>.container {
+	width: 970px;
 }
-#tabs{
+
+#tabs {
 	border: 0px;
 	background-color: #f0f0f0;
 	margin: auto;
@@ -270,10 +275,10 @@ body {
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 	background: white !important;
 } */
-#Vst{
-	width: 80%;
-	margin-left: 10%;
+#Vst {
+	width: 100%;
 }
+
 rcp-Vst-id {
 	font-color: #d5d8dd;
 }
@@ -300,26 +305,34 @@ rcp-Vst-id {
 }
 
 .rcp-Vst-contents-rep>hr {
-  margin: 0;
+	margin: 0;
+}
+
+.hs-content-visit {
+	margin-bottom: 110px;
+	margin-top: -40px;
 }
 
 .rcp-Vst {
-  margin: 10px;
-  margin-top: 0;
-  width: 100%;
-  height: 150px;
-  box-shadow: 5px 5px 5px #888888;
+	margin: 10px;
+	margin-top: 0;
+	width: 30%;
+	height: 280px;
+	box-shadow: 5px 5px 5px #888888;
+	float: left;
 }
+
 .rcp-Vst-top {
 	background-color: #FAF4C0;;
 	border: 1px solid #BDBDBD;
 	width: 100%;
-	height: 40%; 
+	height: 30%;
 }
+
 .rcp-Vst-bottom {
 	background-color: #fff;
 	width: 100%;
-	height: 60%;
+	height: 70%;
 	border: 1px solid #BDBDBD;
 }
 
@@ -375,13 +388,13 @@ rcp-Vst-id {
 
 .vstUpdateBtn {
 	position: relative;
-	left: 91%;
+	left: 81%;
 	top: 10%;
 }
 
 .vstConfirmBtn {
 	position: relative;
-	left: 91%;
+	left: 81%;
 	top: 10%;
 }
 
@@ -393,7 +406,7 @@ rcp-Vst-id {
 
 .vstDeleteBtn {
 	position: relative;
-	left: 93%;
+	left: 83%;
 	top: 11%;
 }
 

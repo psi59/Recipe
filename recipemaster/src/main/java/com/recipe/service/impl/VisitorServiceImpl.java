@@ -20,11 +20,11 @@ public class VisitorServiceImpl implements VisitorService {
   }
 
   @Override
-  public List<Visitor> getVisitorList(int pageNo, int pageSize) {
+  public List<Visitor> getVisitorList(int userNo,int pageNo, int pageSize) {
     HashMap<String,Object> params= new HashMap<>();    
     params.put("startIndex", (pageNo - 1) * pageSize);
     params.put("len", pageSize);    
-    
+    params.put("userNo", userNo);
     return visitorDao.selectList(params);
   }
 
