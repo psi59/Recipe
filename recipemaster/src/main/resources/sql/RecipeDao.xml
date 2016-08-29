@@ -242,7 +242,7 @@ DELETE FROM rcp_rp WHERE RRPNO=${value};
 		LEFT OUTER JOIN(select rcpno rno, count(*) countLike from rcp_lik
 		group by rcpno) likecnt
 		ON r.rcpno=likecnt.rno
-		ORDER BY scr.scc_dt asc
+		ORDER BY r.rcp_dt asc
 	</select>
 
 	<select id="selectSbuscribe2" resultMap="recipeMap"

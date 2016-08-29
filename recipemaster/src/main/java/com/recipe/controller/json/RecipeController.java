@@ -418,7 +418,7 @@ public class RecipeController {
 	@ResponseBody
 	public String userPage(String email, int request, HttpSession session) {
 		HashMap<String, Object> result = new HashMap<>();
-
+		  System.out.println("email : "+email);
 		try {
 			List<Recipe> recipeList = new ArrayList<Recipe>();
 			List<Recipe> userNumbers = new ArrayList<Recipe>();

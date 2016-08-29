@@ -19,6 +19,7 @@
 	  likeLogin();
 	  comList();	
 	  goMyPage();
+	 
   });
   
 
@@ -54,7 +55,7 @@
 			  $('#main-list > div').append( comMainSection(result) );
 			  $('.list0 > .row').append( template(result) );
 			  
-			  	console.log(result.data);
+
 //			 
 				  for(var i=0; i<result.data.length; i++){
 //					  for(var j=0; j<result.data[i].representImages.length; j++){
@@ -66,11 +67,6 @@
 			  
 			  methods();
 			  Main2List();
-		
-			  console.log(jsonData)
-			  if(a == null)
-				  main3List();
-			  
 			 
 			  
 		  },
@@ -109,8 +105,7 @@
 			  var list = result.data;
 			  $('#main-list > div').append( comMain2Section(result) );
 			  $('.list1 > .row').append( template(result) );
-			  console.log(result.data)
-				console.log(result.data[0].representImages[0]);
+			 
 			  
 			  for(var i=0; i<result.data.length; i++){
 //				  for(var j=0; j<result.data[i].representImages.length; j++){
@@ -128,6 +123,8 @@
 //				  }
 //				  
 			  methods();
+			  if(eval(jsonData) != null)
+			  main3List();
 		  },
 		  error : function(){
 			  console.log('ajax list2:서버 요청 오류');
@@ -135,16 +132,14 @@
 	  });
   }  
   
-  function main3List(){
-	  console.log("여기오나")
-	  var a = eval(jsonData);
-	  console.log(a);
+  function main3List(){	  
+	  console.log(eval(jsonData)[0].email)
 	  $.ajax({
 		  url :'recipe/userPage.json',
 		  dataType : 'json',
 		  method : 'post',
 		  data:{
-			  email: 'bbb@naver.com',
+			  email: eval(jsonData)[0].email,
 			  request:3
 		  },
 		  success : function(result) {
@@ -153,8 +148,7 @@
 				  alert('comList 실행 중 오류 발생');
 				  return;
 			  }
-			  console.log(result.data);
-			  console.log(eval(jsonData)[0].email)
+		
 			  $('#tabs-1 .hs-content .container .row .rcp-mypage-section').append(commainSubscribe(result));
 			  for(var i=0; i<result.data.length; i++){
 //				  for(var j=0; j<result.data[i].representImages.length; j++){
@@ -195,7 +189,8 @@
 
   
   Handlebars.registerHelper('sessionUser', function(options) {
-	  if (eval(jsonData) != null) {		  
+	  if ( eval(jsonData) != null) {
+		  if( eval(jsonData)[0].email != null)
 	    return options.fn(this);
 	  } 
 });
