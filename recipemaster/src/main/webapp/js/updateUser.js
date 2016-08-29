@@ -43,7 +43,7 @@ $(function(){
 		var formData = new FormData(this);
 		var formURL = $(this).attr("action");
 		
-		if (profileImage.length > 0) {
+		if (profileImage != null) {
 			event.preventDefault();
 			$('#profileImage').fileupload('send', {
 				files : profileImage
@@ -51,23 +51,40 @@ $(function(){
 		} 
 	});
 
-	$('#updateUserInfo').on('click', function(event){
+	$(document).on('click', '#updateUserInfo', function(event){
 		/* 폼 입력 유무 확인 */
-		if( $('#beforePwd').val() == ""){
-			swal('이전비밀번호를 입력해주세요');
-			return;
-		}else if( $('#afterPwd').val() == ""){
-			swal('변경할 비밀번호를 입력해주세요');
-			return;
-		}else if( $('#afterPwdcf').val() == ""){
-			swal('변경할 비밀번호확인을 입력해주세요');
-			return;
-		}
-		/* 일치 불일치 확인 */
-		if($('#afterPwd').val()!=$('#afterPwdcf').val()){
-			swal('변경 비밀번호 불일치');
-			return;
-		}
+//		if( $('#beforePwd').val() == ""){
+//			swal('이전비밀번호를 입력해주세요');
+//			return;
+//		}else if( $('#afterPwd').val() == ""){
+//			swal('변경할 비밀번호를 입력해주세요');
+//			return;
+//		}else if( $('#afterPwdcf').val() == ""){
+//			swal('변경할 비밀번호확인을 입력해주세요');
+//			return;
+//		}
+//		/* 일치 불일치 확인 */
+//		if($('#afterPwd').val()!=$('#afterPwdcf').val()){
+//			swal('변경 비밀번호 불일치');
+//			return;
+//		}
+		
+		console.log($('#beforePassword').val());
+		console.log($('#afterPwd').val());
+		console.log($('#afterPwdcf').val());
+		
+//		if($('#afterPwd').val()!== undefined || $('#afterPwd').val()!== null || $('#beforePassword').val()!== undefined|| $('#beforePassword').val()!== null|| $('#afterPwdcf').val()!== undefined || $('#afterPwdcf').val()!== null){
+//			if($('#beforePassword').val() === undefined){
+//				swal('이전비밀번호를 입력해주세요');
+//				return;
+//			} else if( $('#afterPwd').val()=== undefined){
+//				swal('변경할 비밀번호를 입력해주세요');
+//				return;
+//			} else if( $('#afterPwdcf').val()===undefined){
+//				swal('변경할 비밀번호를 다시 한번 입력해주세요');
+//				return;
+//			}
+//		}
 
 		$('#updateUserForm').submit();
 	});

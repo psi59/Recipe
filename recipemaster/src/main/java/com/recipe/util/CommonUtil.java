@@ -5,13 +5,20 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.web.multipart.MultipartFile;
+
+import com.recipe.domain.User;
 
 public class CommonUtil {
 
 	public CommonUtil() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public static User getSessionUser(HttpSession session){
+		return (User) session.getAttribute("loginUser");
 	}
 	
 	public static String getImageFolderPath(String folderName, HttpServletRequest request){

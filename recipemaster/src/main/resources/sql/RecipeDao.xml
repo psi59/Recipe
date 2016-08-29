@@ -41,6 +41,7 @@
 		<id column="mtno" property="materialNo" />
 		<result column="name" property="materialName" />
 		<result column="mtst" property="materialStatement" />
+		<result column="rcpqt" property="materiaQuantity" />
 	</resultMap>
 
 <select id="recipeComment" resultMap="recipeMap" parameterType="INTEGER">
@@ -293,11 +294,21 @@
 		WHERE name LIKE '%${value}%'
 		ORDER BY mtno
 	</select>
+	
+	<select id="selectRecipeMaterial" resultMap="materialMap"
+    parameterType="int">
+    SELECT rcpmt.mtno, rcpmt.rcpqt, mt.name, mt.mtst 
+    FROM rcp_mt rcpmt 
+    INNER JOIN mts mt ON rcpmt.mtno=mt.mtno AND rcpmt.rcpno=#{value}
+  </select>
 
 	<update id="updateHits" parameterType="recipe">
 		UPDATE rcps set hits=${hits} where rcpno=${recipeNo};
 	</update>
 
+  <update id="updateRecipe" parameterType="recipe">
+    UPDATE rcps set name=#{recipeName}, intro=#{intro}, c_time=#{cookTime}, ptn=#{portion}, rpimg=#{representImages}, rcp_pd=#{recipeProcedure} where rcpno=${recipeNo};
+  </update>
 
 	<!-- 좋아요 *3 스크랩 *3 조회수 *1 -->
 	<select id="recipeRankList" resultMap="recipeMap" parameterType="Map">
@@ -321,4 +332,15 @@
 		ORDER
 		BY vt.totalPoint DESC
 	</select>
+	
+	<select id="checkMyRecipe" resultMap="recipeMap" parameterType="Map">
+    SELECT rcpno 
+    FROM rcps 
+    WHERE uno=#{userNo} AND rcpno=#{recipeNo}
+  </select>
+  
+  <delete id="deleteMaterials" parameterType="int">
+    DELETE FROM rcp_mt WHERE rcpno=#{value}
+  </delete>
+  
 </mapper>

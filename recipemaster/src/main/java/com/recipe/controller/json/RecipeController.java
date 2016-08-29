@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -102,8 +101,6 @@ public class RecipeController {
 			@RequestParam("representImgNames") List<String> representImgNames,
 			@RequestParam("produceImgNames") List<String> produceImgNames, HttpServletRequest request,
 			HttpSession session) {
-		// int userNo = (Integer)session.getAttribute("userNo");
-		// System.out.println(userNo);
 
 		Map<String, Object> result = new HashMap<>();
 		Map<String, Object> map = new HashMap<>();
@@ -134,10 +131,11 @@ public class RecipeController {
 
 		try {
 			for (int i = 0; i < representImgNames.size(); i++) {
+				Thread.sleep(1);
 				// MultipartFile image = null;
 				String[] fileInfo = representImgNames.get(i).split("/");
 				// image = CommonUtil.findImageFile(fileInfo, imageFiles);
-				String fileName = recipeNo + "_" + user.getUserNo() + "_" + CommonUtil.nowData() + "_" + i + ".png";
+				String fileName = recipe.getRecipeNo() + "_" + user.getUserNo() + "_" + System.currentTimeMillis() + ".png";
 				// File newFile = new
 				// File(CommonUtil.getImageFolderPath("representImg", request) +
 				// "/" + fileName);
@@ -150,9 +148,10 @@ public class RecipeController {
 
 			/* 조리과정 등록 */
 			for (int i = 0; i < produceImgNames.size(); i++) {
+				Thread.sleep(1);
 				String[] fileInfo = produceImgNames.get(i).split("/");
 				JsonObject obj = new JsonObject();
-				String fileName = recipeNo + "_" + user.getUserNo() + "_" + CommonUtil.nowData() + "_" + i + ".png";
+				String fileName = recipe.getRecipeNo() + "_" + user.getUserNo() + "_" + System.currentTimeMillis() + ".png";
 				obj.addProperty("recipeProduceImage", fileName);
 				obj.addProperty("recipeProduce", recipeProduce[i]);
 				recipeProduceDatas.add(obj);
@@ -168,6 +167,104 @@ public class RecipeController {
 			e.printStackTrace();
 			result.put("status", "false");
 		}
+		return new Gson().toJson(result);
+	}
+
+	@RequestMapping(path = "checkMyRecipe")
+	@ResponseBody
+	public String checkMyRecipe(int recipeNo, HttpSession session){
+		Map<String, Object> result = new HashMap<>();
+		
+		try{
+			User user = CommonUtil.getSessionUser(session);
+
+			Map<String, Object> dataForCheckMyRecipe = new HashMap<>();
+			dataForCheckMyRecipe.put("userNo", user.getUserNo());
+			dataForCheckMyRecipe.put("recipeNo", recipeNo);
+			if(recipeService.checkMyRecipe(dataForCheckMyRecipe) != null) {
+				result.put("status", "success");
+			} else {
+				result.put("status", "fail");
+			}
+		} catch(Exception e){
+			result.put("status", "nologin");
+		}
+		
+		return new Gson().toJson(result);		
+	}
+
+	@RequestMapping(path = "updateRecipe")
+	@ResponseBody
+	public String updateRecipe(Recipe recipe, @RequestParam("materialNo") String[] materialNos,
+			@RequestParam("materialAmount") String[] materialAmounts,
+			@RequestParam("recipeProduce") String[] recipeProduce,
+			@RequestParam("imageFiles") List<MultipartFile> imageFiles,
+			@RequestParam("representImgNames") List<String> representImgNames,
+			@RequestParam("produceImgNames") List<String> produceImgNames, HttpServletRequest request,
+			HttpSession session) {
+
+		Map<String, Object> result = new HashMap<>();
+		User user = CommonUtil.getSessionUser(session);
+
+		Map<String, Object> recipeDatas = new HashMap<>();
+		List<Map> materialList = new ArrayList<>();
+		JsonArray recipeProduceDatas = new JsonArray();
+		JsonArray recipeRepresentImages = new JsonArray();
+
+		for (int i = 0; i < materialNos.length; i++) {
+			Map<String, String> matertialInfo = new HashMap<>();
+			System.out.println(materialNos.toString());
+			System.out.println(materialAmounts.toString());
+			matertialInfo.put("materialNo", materialNos[i]);
+			matertialInfo.put("materialAmount", materialAmounts[i]);
+			materialList.add(matertialInfo);
+		}
+
+		try {
+			for (int i = 0; i < representImgNames.size(); i++) {
+				// MultipartFile image = null;
+				Thread.sleep(1);
+				String[] fileInfo = representImgNames.get(i).split("/");
+				String fileName = recipe.getRecipeNo() + "_" + user.getUserNo() + "_" + System.currentTimeMillis() + ".png";
+				if(fileInfo.length>1){
+					FileCopyUtils.copy(CommonUtil.findImageFile(fileInfo, imageFiles).getBytes(),
+							new FileOutputStream(CommonUtil.getImageFolderPath("representImg", request) + "/" + fileName));
+				}
+				recipeRepresentImages.add(fileName);
+			} // end of for
+
+			/* 조리과정 등록 */
+			for (int i = 0; i < produceImgNames.size(); i++) {
+				Thread.sleep(1);
+				String[] fileInfo = produceImgNames.get(i).split("/");
+				JsonObject obj = new JsonObject();
+				String fileName = recipe.getRecipeNo() + "_" + user.getUserNo() + "_" + System.currentTimeMillis() + ".png";
+				obj.addProperty("recipeProduceImage", produceImgNames.get(i));
+				if(fileInfo.length>1){
+					FileCopyUtils.copy(CommonUtil.findImageFile(fileInfo, imageFiles).getBytes(),
+							new FileOutputStream(CommonUtil.getImageFolderPath("recipeImg", request) + "/" + fileName));
+					obj.addProperty("recipeProduceImage", fileName);
+				}					
+				obj.addProperty("recipeProduce", recipeProduce[i]);
+				recipeProduceDatas.add(obj);
+			} // end of for
+
+			recipe.setRecipeProcedure(recipeProduceDatas);
+			recipe.setRepresentImages(recipeRepresentImages);				
+			recipeService.updateRecipe(recipe);
+			recipeService.deleteMaterials(recipe.getRecipeNo());
+
+			recipeDatas.put("materialList", materialList);
+			recipeDatas.put("recipeNo", recipe.getRecipeNo());
+
+			recipeService.addMaterials(recipeDatas);
+
+			//recipeService.addMaterials(recipeDatas);
+			result.put("status", "success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.put("status", "false");
+		} 
 		return new Gson().toJson(result);
 	}
 
@@ -193,14 +290,17 @@ public class RecipeController {
 	@RequestMapping(path = "recipeDetail", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String recipeDetail(int recipeNo, HttpSession session) {
-		HashMap<String, Object> result = new HashMap<>();
-
+		HashMap<String, Object> result = new HashMap<>(); 
+		List<Material> materials = new ArrayList<>();
 		Recipe recipe = new Recipe();
 		if (session.getAttribute("userNo") != null) {
 			recipe = recipeService.getRecipe(recipeNo, (int) session.getAttribute("userNo"));
 		} else {
 			recipe = recipeService.getRecipe(recipeNo, 0);
 		}
+		materials = recipeService.getRecipeMaterial(recipeNo);
+		System.out.println("재료 : "+materials);
+
 		// System.out.println("controller :
 		// "+recipeNo+(int)session.getAttribute("userNo") );
 		recipe.setHits(recipe.getHits() + 1);
@@ -208,6 +308,7 @@ public class RecipeController {
 		try {
 			result.put("status", "success");
 			result.put("data", recipe);
+			result.put("materials", materials);
 			System.out.println(recipe);
 		} catch (Exception e) {
 			result.put("status", "false");
@@ -485,7 +586,7 @@ public class RecipeController {
 		}
 		return recipe;
 	}
-	
+
 	@RequestMapping(path = "imageDelete", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String imageDelete(@RequestParam("category") String category, @RequestParam("imageName") String imageName, HttpServletRequest request) {
@@ -498,7 +599,7 @@ public class RecipeController {
 		} else {
 			result.put("status", "fail");
 		}
-		
+
 		return new Gson().toJson(result);
 	}
 }

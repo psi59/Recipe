@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,7 @@ import com.recipe.util.CommonUtil;
 @Controller
 @RequestMapping("/user/")
 public class UserController {
+	
 	@Autowired
 	UserService userService;
 
@@ -101,30 +103,14 @@ public class UserController {
 
 	@RequestMapping(path = "update")
 	@ResponseBody
-	public String update(User user, @RequestParam("beforePassword") String beforePassword,
-			@RequestParam("profileImage") MultipartFile profileImage, HttpServletRequest request) {
+	public String update(
+			User user,
+			@RequestParam(value="beforePassword", defaultValue="") String beforePassword,
+			//@RequestParam(value="profileImage", defaultValue="") MultipartFile profileImage,
+			HttpServletRequest request) {
 		HashMap<String, Object> result = new HashMap<>();
-		System.out.println("여기여기여기 + " + user);
-		try {
-			User dbUser = userService.getUser(user.getUserNo());
-			if (beforePassword.equals(dbUser.getPassword())) {
-				/* 파일업로드 추가 */
-				if (null != profileImage) {
-					String fileName = "userprofile_" + user.getUserNo() + ".png";
-					user.setImage(fileName);
-					System.out.println(profileImage.getOriginalFilename());
-					File recipeUrl = new File(CommonUtil.getImageFolderPath("profileImg", request) + "/" + fileName);
-					profileImage.transferTo(recipeUrl);
-				} /* 파일업로드 추가 끝 */
-				userService.updateUser(user);
-				result.put("status", "success");
-			} else {
-				result.put("status", "pwdFail");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			result.put("status", "failure");
-		}
+		System.out.println("여기여기여기 + "+user);
+		System.out.println("여기여기여기 + "+ beforePassword);
 
 		return new Gson().toJson(result);
 	}

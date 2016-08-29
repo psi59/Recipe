@@ -296,64 +296,6 @@ function mouseHover(){
 		  });
 	  }
 }
-//--------------------------  음식사진 커서 올리면 바뀌게 되는 로직 끝 ---------------------------------
-
-function comList(){
-	  $(document).on('click', '.rcp-userName',function(event){
-		  event.preventDefault();
-
-		  $(location).attr('href','http://localhost:8080/community.html');
-
-		  if($(event.target).is('b[name="like"]') ){
-			  $.ajax({
-				  url:'recipe/likeDown.json?recipeNo=' + $(event.target).parent()
-				  .parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
-				  + eval(sessionStorage.getItem('data'))[0].userNo,
-				  dataType:'json',
-				  method:'get',
-				  success:function(){
-					  console.log("like down 성공성공");
-					  $(event.target).css('color','#231f20');
-					  $(event.target).parent().parent().css('color','#231f20');
-					 if($(event.target).is('b[name="like"]') ){
-						 $(event.target).parent().append('<b class="rcp-like" id="rcp-like">좋아요</b>');
-						 $(event.target).remove();
-						 
-					 }
-					 
-				  },
-				  error:function(){
-					  swal('like : 서버 요청 오류');
-				
-				  }
-			  });
-		  }
-		  else{
-			  $.ajax({
-				  url:'recipe/likeUp.json?recipeNo=' + $(event.target).parent()
-				  .parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
-				  +  eval(sessionStorage.getItem('data'))[0].userNo,
-				  dataType:'json',
-				  method:'get',
-				  success:function(){
-					  console.log("like up 성공성공");
-					  $(event.target).css('color','#337ab7');
-					  $(event.target).parent().parent().css('color','#337ab7');
-					  $(event.target).parent().append('<b class="rcp-like" id="rcp-like" name="like" style="color:#337ab7">좋아요</b>');
-					  $(event.target).remove();
-					  
-				  },
-				  error:function(){
-					  swal('ajax likeclick: 서버 요청 오류');
-				  }
-			  });
-		  }
-	  })
-}
-
-
-
-
 
 //
 ////----------------------------------------고재현 부분--------------------------------------------//
