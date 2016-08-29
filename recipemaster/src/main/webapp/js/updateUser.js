@@ -1,10 +1,5 @@
 $(function(){
 	
-
-	if(sessionStorage.getItem('data') != null){
-	$('#updateFormUserNo').val(eval(jsonData)[0].userNo);
-	$('#updateFormEmail').val(eval(jsonData)[0].email);
-	}
 	var profileImage;
 
 	$('#userInfoEditBtn').on('click', function() {
@@ -40,59 +35,58 @@ $(function(){
 		location.reload();
 		    	
     }).on('fileuploadfail', function (e, data) {
-    	console.log(data)
-    });
+    	console.log(data);
+    }).prop('disabled', !$.support.fileInput)
+	.parent().addClass($.support.fileInput ? undefined : 'disabled');
 
 	$("#updateUserForm").submit(function(event) {
 		var formData = new FormData(this);
 		var formURL = $(this).attr("action");
-		event.preventDefault();
-		$('#profileImage').fileupload('send', {
-			files : profileImage
-		});
+		
+		if (profileImage != null) {
+			event.preventDefault();
+			$('#profileImage').fileupload('send', {
+				files : profileImage
+			});
+		} 
 	});
 
-	$('#updateUserInfo').click(function(event){
+	$(document).on('click', '#updateUserInfo', function(event){
 		/* 폼 입력 유무 확인 */
-		event.preventDefault();
-		if( $('#beforePwd').val() == ""){
-			swal('이전비밀번호를 입력해주세요');
-			return;
-		}else if( $('#afterPwd').val() == ""){
-			swal('변경할 비밀번호를 입력해주세요');
-			return;
-		}else if( $('#afterPwdcf').val() == ""){
-			swal('변경할 비밀번호확인을 입력해주세요');
-			return;
-		}
-		/* 일치 불일치 확인 */
-		if($('#afterPwd').val()!=$('#afterPwdcf').val()){
-			swal('변경 비밀번호 불일치');
-			return;
-		}
-
-		$("#updateUserForm").submit();
-
-//		$.post('/user/update.json', {
-//			sUno : eval(sessionStorage.getItem('data'))[0].userNo,
-//			email : $('#updateBoxEmail').text(),
-//			bfPwd : $('#beforePwd').val(),
-//			password : $('#afterPwd').val(),
-//			intro : $('#introduce').val(),
-//		}, function(result) {   	  
-//			if (result.status == 'pwdFail'){
-//				$('#beforePwd-div').removeClass().addClass("rcp-mar rcp-info form-group form-group-md has-error has-feedback");
-//				swal('이전 비밀번호 불일치');
-//				$('#beforePwd').focus();
+//		if( $('#beforePwd').val() == ""){
+//			swal('이전비밀번호를 입력해주세요');
+//			return;
+//		}else if( $('#afterPwd').val() == ""){
+//			swal('변경할 비밀번호를 입력해주세요');
+//			return;
+//		}else if( $('#afterPwdcf').val() == ""){
+//			swal('변경할 비밀번호확인을 입력해주세요');
+//			return;
+//		}
+//		/* 일치 불일치 확인 */
+//		if($('#afterPwd').val()!=$('#afterPwdcf').val()){
+//			swal('변경 비밀번호 불일치');
+//			return;
+//		}
+		
+		console.log($('#beforePassword').val());
+		console.log($('#afterPwd').val());
+		console.log($('#afterPwdcf').val());
+		
+//		if($('#afterPwd').val()!== undefined || $('#afterPwd').val()!== null || $('#beforePassword').val()!== undefined|| $('#beforePassword').val()!== null|| $('#afterPwdcf').val()!== undefined || $('#afterPwdcf').val()!== null){
+//			if($('#beforePassword').val() === undefined){
+//				swal('이전비밀번호를 입력해주세요');
 //				return;
-//			} else if(result.status == 'failure'){
-//				swal('서버 오류');
+//			} else if( $('#afterPwd').val()=== undefined){
+//				swal('변경할 비밀번호를 입력해주세요');
 //				return;
-//			} else {
-//				swal('정보수정 완료');
-//				$('#editUserInfo-pop-up-banner').bPopup().close();
+//			} else if( $('#afterPwdcf').val()===undefined){
+//				swal('변경할 비밀번호를 다시 한번 입력해주세요');
+//				return;
 //			}
-//		}, 'json');
+//		}
+
+		$('#updateUserForm').submit();
 	});
 
 	/* 비밀번호 폼 색상변화 */

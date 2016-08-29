@@ -20,7 +20,7 @@ public class VisitorController {
                      @RequestParam(defaultValue="4")int pageSize,
                      Model model){
     
-    model.addAttribute("list", visitorService.getVisitorList(pageNo, pageSize));
+//    model.addAttribute("list", visitorService.getVisitorList(pageNo, pageSize));
     
     return "visitor/list";
   }

@@ -21,9 +21,9 @@ import com.recipe.service.VisitorService;
 @Controller
 @RequestMapping("/visitor/")
 public class VisitorController {
-  @Autowired UserService userService;
   @Autowired VisitorService visitorService;
-
+  @Autowired UserService userService;
+  
   @RequestMapping(path="list", produces="application/json;charset=UTF-8")
   @ResponseBody
   public String list(@RequestParam(defaultValue="1")int pageNo, 
@@ -102,19 +102,22 @@ public class VisitorController {
     return new Gson().toJson(result);
   }
   
-  @RequestMapping(path="loadMyPage",produces="application/json;charset=UTF-8")
+  @RequestMapping(path="loadMyPage",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
   @ResponseBody 
-  public String loadMyPage(HttpSession session){
-
+  public String loadMyPage(String email){
+    System.out.println("나와ㅅㅂ"+email);
     HashMap<String,Object> result = new HashMap<>();
-    
+    //참조하고 있는 사람 userNo
+    User user=userService.selectFromEmail(email);
+    System.out.println("ㅋㅋㅋㅋㅋㅋㅋㅋuser::"+user.getUserNo());
+    int userNo=user.getUserNo();
     try{
-      result = visitorService.loadMyPage((int)((User)session.getAttribute("loginUser")).getUserNo());
+      result = visitorService.loadMyPage(userNo);
       result.put("status","success");
     }catch (Exception e){ 
       result.put("status", "false");
     }
-    System.out.println(result);
+    System.out.println("loadMyPage 중::"+result);
     return new Gson().toJson(result);
   }
   

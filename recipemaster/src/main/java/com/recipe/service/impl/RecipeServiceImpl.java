@@ -78,7 +78,7 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public int updateRecipe(Recipe recipe) {
-		return 0;
+		return recipeDao.updateRecipe(recipe);
 	}
 
 	@Override
@@ -164,16 +164,22 @@ public class RecipeServiceImpl implements RecipeService {
       params.put("fromUserNo", fromUserNo);
       return recipeDao.addSubscribe(params);
     }
+    
+    @Override
+    public Map<String, Object> checkSubscribe(int toUserNo, int fromUserNo) {
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("toUserNo", toUserNo);
+      params.put("fromUserNo", fromUserNo);
+      return recipeDao.checkSubscribe(params);
+    }
 
     @Override
     public List<Recipe> selectMypage(int userNo) {
-      // TODO Auto-generated method stub
       return recipeDao.selectMypage(userNo);
     }
 
     @Override
     public List<Recipe> selectScrapUserNoMypage(int userNo) {
-      // TODO Auto-generated method stub
       return recipeDao.selectScrapUserNoMypage(userNo);
     }
 
@@ -196,8 +202,47 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public List<Recipe> selectSubscribeMypage(int userNo) {
-      // TODO Auto-generated method stub
       return recipeDao.selectSubscribeMypage(userNo);
     }
+
+    @Override
+    public List<Recipe> recipeComment(int recipeNo) {
+      return recipeDao.recipeComment(recipeNo);
+    }
+
+    @Override
+    public List<Recipe> recipeCommentUserInfo(String userNums) {
+      return recipeDao.recipeCommentUserInfo(userNums);
+    }
+
+	@Override
+	public List<Material> getRecipeMaterial(int recipeNo) {
+		return recipeDao.selectRecipeMaterial(recipeNo);
+	}
+
+	@Override
+	public Recipe checkMyRecipe(Map map) {
+		return recipeDao.checkMyRecipe(map);
+	}
+
+	@Override
+	public int deleteMaterials(int recipeNo) {
+		return recipeDao.deleteMaterials(recipeNo);
+	}
 	
+    @Override
+    public void addComment(Recipe recipe, int userNo) {
+      // TODO Auto-generated method stub
+      Map<String,Object > map = new HashMap<>();
+      map.put("recipe", recipe);
+      map.put("userNo", userNo);
+      System.out.println("service");
+      recipeDao.addComment(map);
+    }
+
+    @Override
+    public void deleteComment(int commentNo) {
+      // TODO Auto-generated method stub
+      recipeDao.deleteComment(commentNo);
+    }	
 }
