@@ -495,9 +495,9 @@
 }
 
 .rcp-recipeGrade{
-     position: absolute;
+     position: relative;
     text-align: right;
-    left: 1em;
+    
     right: 5%;
   margin-bottom:5%;
 }
