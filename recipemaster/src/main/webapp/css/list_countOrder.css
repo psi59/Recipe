@@ -20,7 +20,7 @@
 	font-size: 25px;
 } 
 
-#recipe-count{
+#recipe-count{	
 	margin-left: 100px;
 }
 
@@ -36,19 +36,15 @@
 
 #rcp-list-count-order h2 {	
 	color: #000000;	
-	margin: 0px;
-	font-family: 'Jeju Gothic', serif;
+	margin: 0px;	
 }
-
-
 
 
 #rcp-list-count-order button {	
   cursor: pointer;
   overflow: hidden;
   position: relative;
-  background: transparent;
-  font-family: Geneva, sans-serif;
+  background: transparent;  
   color: #b51515;
   border: 1px solid #000000;
   border-radius: 2px;

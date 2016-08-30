@@ -1,4 +1,7 @@
 @CHARSET "UTF-8";
+
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 .rcp-subscribe{
 /* background-color:#f3f3f3; */
 padding-top:25px;

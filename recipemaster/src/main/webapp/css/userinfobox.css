@@ -1,4 +1,7 @@
 @CHARSET "UTF-8";
+
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 $main: #7b7de5;
 
 :root {
