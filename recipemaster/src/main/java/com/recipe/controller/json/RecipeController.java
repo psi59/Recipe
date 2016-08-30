@@ -644,8 +644,6 @@ public class RecipeController {
 				recipeList = recipeService.selectMypageRecipe(subscribeRecipe.getScrap(), userNo,request);
 			}
 
-
-
 			result.put("status","success");
 			result.put("data",recipeList);
 			result.put("user", user);

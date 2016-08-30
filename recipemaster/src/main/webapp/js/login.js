@@ -79,7 +79,7 @@ function loginCheck(event) {
 				});
 
 				jsonData = JSON.stringify(data);
-				console.log (jsonData)
+				
 				/*eval 사용 방법, eval(jsonData)[0].email*/
 				if(jsonData!=null){
 					$('#signUpBtn').remove();

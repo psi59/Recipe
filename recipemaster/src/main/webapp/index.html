@@ -47,7 +47,7 @@
 
 <link rel="stylesheet" href="css/template/animate.css">
 <link rel="stylesheet" href="css/template/styles.css">
-<link rel="stylesheet" href="css/template/plugins.css">
+<link rel="stylesheet" href="css/template/plugins.css"> 
 </head>
 <body>
 	<div id="topBtn" class="navbar navbar-inverse navbar-fixed-top">
@@ -317,7 +317,7 @@
 			<div class="rcp-taps">
 				<div class="rcp-first-info"></div>
 
-				<a href="#"><div class="rcp-seconde-info"></div></a>
+				<div class="rcp-seconde-info"><a href="#">댓글</a></div>
 
 				<div class="rcp-third-info"></div>
 
@@ -389,7 +389,8 @@
                        <div class="rcp-forDelete-xButton"><a class="rcp-x-button" href="#">&#10006;</a></div>
                     </span>
                     <span>
-                      <a href="recipe_single.html">상세보기</a>
+                      <input type="hidden" value={{recipeNo}} name="recipeNo" class="rcp-subscribe-recipe-detail">
+                      <a href="#" class="rcp-subscribe-recipe-detail detail">상세보기</a>
                     </span>
                     <span>
                       <a href="#">BOOKMARK RECIPE</a>
@@ -425,7 +426,7 @@
 	<script id="recipe-detail-main-template"
 		type="text/x-handlebars-template">
     {{#representImages}}
-              <div class="rcp-body" name="rcp-body">
+              <div class="rcp-body" name="rcp-body" id="rcp-body{{@key}}">
               <div>
                 <div class="rcp-title-size">
                    
@@ -436,12 +437,12 @@
                   
                 </div>
                </div>
-                <img src="img/representImg/{{this}}" class="rcp-images">
+                <img src="img/representImg/{{this}}" class="rcp-images" name="rcp-images-position" id="rcp-images-position">
                <div class="rcp-explanation" name="rcp-explanation">
                   <p></p>
                 </div>
                <div class="rcp-nav-down">
-                   
+              
                </div>
             </div>
 {{/representImages}}
@@ -450,7 +451,7 @@
 
 	<script id="recipe-detail-template" type="text/x-handlebars-template">
     {{#recipeProcedure}}
-              <div class="rcp-body" name="rcp-body">
+              <div class="rcp-body" name="rcp-body" >
               <div>
                 <div class="rcp-title-size">
                     
@@ -502,8 +503,9 @@
 <div class="detail-images">
 <input type="hidden" class="rcp-hidden-userNo" value="{{data.userNo}}">
 <input type="hidden" class="rcp-hidden-recipeNo" value="{{data.recipeNo}}">
+<input type="hidden" class="rcp-hidden-email" value="{{data.user.email}}">
 <img src="img/profile.jpg" class="rcp-right-profile img-circle">
-<p class="rcp-nickName">{{data.user.userName}}</p>
+<a class="rcp-userName" href="#">{{data.user.userName}}</a>
 <h4 class="rcp-detail-title">{{data.recipeName}}</h4>
 <div align="center">
 <div class="rcp-scrap-button-text" >
@@ -536,6 +538,9 @@
 </div>
 <div class="rcp-info-images">
 </div>
+<div class="rcp-detail-step">
+  </div>
+
 </div>
 </script>
 
@@ -543,26 +548,26 @@
 		type="text/x-handlebars-template">
 {{#representImages}}
     <div class="rcp-main"> 
-      <a href="#">MAIN {{inc @index}}</a>
+      <a href="#" name="rcp-nav-images">MAIN {{inc @index}}</a>
       <div style="float:right">
          <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
       </div>
-    <a href="#"><img src="img/representImg/{{this}}" class="rcp-info-images-emts"></a>
-    </div>
-  <div class="rcp-detail-step">
-  </div>
+    <a href="#" name="rcp-nav-bgImages-button" role="button" ><div style= background-image:url("img/representImg/{{this}}") class="rcp-info-images-emts"></div></a>
+    
+  
 {{/representImages}}
 </script>
 
 	<script id="recipe-detail-step-images-template"
 		type="text/x-handlebars-template">
 {{#recipeProcedure}}
-     <div class="rcp-main dd"> 
-      <a href="#">STEP {{inc @index}}</a>
+     <div class="rcp-main"> 
+      <a href="#" name="rcp-nav-images">STEP {{inc @index}}</a>
       <div style="float:right">
          <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
       </div>
-     <img src="img/recipeImg/{{recipeProduceImage}}" class="rcp-info-images-emts"> 
+     <a href="#" name="rcp-nav-bgImages-button" role="button" >
+      <div style= background-image:url("img/recipeImg/{{recipeProduceImage}}") class="rcp-info-images-emts"></div></a> 
     </div>
 {{/recipeProcedure}}
 </script>
@@ -626,10 +631,13 @@
             class="col-xs-3 col-sm-3 col-md-3 rcp-listSize rcp-list-margin">
             <div class="thumbnail row relative">
               <div class="rcp-profile-position">
+           
                   {{#defaultImage}}
-                <img src="img/profileImg/{{user.image}}" class="img-circle rcp-profile">
+              <a href="#" class="rcp-userName"><input type="hidden" name="email" value="{{user.email}}">
+              <img src="img/profileImg/{{user.image}}" class="img-circle rcp-profile"></a>
                     {{else}}
-                <img src="img/profileImg/default.jpg" class="img-circle rcp-profile">
+                <a href="#" class="rcp-userName"><input type="hidden" name="email" value="{{user.email}}">
+                <img src="img/profileImg/default.jpg" class="img-circle rcp-profile"></a>
                     {{/defaultImage}}
               </div>
             <div class="rcp-image-scale" name="recipe-image" > <!--style="background-image : url('img/representImg/{{rpimg}}');"-->
@@ -640,7 +648,7 @@
                 <h5 class="pluu-left rcp-relative rcp-profileName">
 
                   <span class="glyphicon glyphicon-star"></span>
-                  <input type="hidden" value="{{user.email}}">
+                  <input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
                    <a href="#" class="rcp-userName">{{user.userName}}</a>
                 </h5>
                 <!-- 두번째 줄 (레시피명, 점수)  -->
