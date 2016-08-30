@@ -132,8 +132,6 @@ $(function() {
 	.html(
 	"<img class='rcp-barimg dropdown-trigger img-circle' src='img/Chef3.jpg' />");
 
-
-
 	$('.profile-dropdown:has(.active)').bind('click', function() {
 
 	});
