@@ -293,12 +293,7 @@ function mouseHover(){
 }
 //--------------------------  음식사진 커서 올리면 바뀌게 되는 로직 끝 ---------------------------------
   
-  function comList(){
-	  $(document).on('click', '.rcp-userName',function(event){
-		  event.preventDefault();
-		  $(location).attr('href','/mypage.html?'+$(event.target).parent().children('.rcp-hidden-email').val() ); 	 
-	  })
-  }
+ 
   function goMyPage(){
 	  $('#profileView .goMyPageBtn').on('click',function(event){
 		  event.preventDefault();

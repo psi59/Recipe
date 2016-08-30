@@ -94,4 +94,10 @@ Handlebars.registerHelper('defaultImage', function(options) {
 	  }
 });
 
+function comList(){
+	  $(document).on('click', '.rcp-userName, .rcp-nickname , .rcp-profile',function(event){
+		  event.preventDefault();
+		  $(location).attr('href','/mypage.html?'+$(event.target).parent().children('.rcp-hidden-email').val() ); 	 
+	  })
+}
 

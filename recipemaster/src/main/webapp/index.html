@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="css/mainlist.css">
 <link rel="stylesheet" href="css/detail.css">
 <link rel="stylesheet" href="css/updateImg.css">
-<link rel="stylesheet" href="css/mypage.css">
+<!-- <link rel="stylesheet" href="css/mypage.css"> -->
 <!-- <link rel="stylesheet" href="css/rankingpage.css"> -->
 <link rel="stylesheet" href="css/mainrankingpage.css">
 <!-- 성현 -->
@@ -46,7 +46,7 @@
 <!-- <script src="js/template/d9e67edb08.js"></script> -->
 
 <link rel="stylesheet" href="css/template/animate.css">
-<link rel="stylesheet" href="css/template/styles.css">
+<link rel="stylesheet" href="css/template/styles.css"> 
 <link rel="stylesheet" href="css/template/plugins.css"> 
 </head>
 <body>
@@ -82,7 +82,7 @@
 										class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a
 										id="profileEmail" href="#"
 										class="dropdown__header rcp-infobox-text"></a>
-									<h6 id="profileName" class="rcp-nickname"></h6>
+									<h6 id="profileName" class="rcp-userName rcp-nickname"></h6>
 									<a href="#0" class="dropdown__header"> <span
 										id="profileGrade" class="dropdown__title rcp-infobox-text">
 											<img src="img/star.png"> Master Chef
@@ -504,8 +504,8 @@
 <input type="hidden" class="rcp-hidden-userNo" value="{{data.userNo}}">
 <input type="hidden" class="rcp-hidden-recipeNo" value="{{data.recipeNo}}">
 <input type="hidden" class="rcp-hidden-email" value="{{data.user.email}}">
-<img src="img/profile.jpg" class="rcp-right-profile img-circle">
-<a class="rcp-userName" href="#">{{data.user.userName}}</a>
+<a href="#"><img src="img/profile.jpg" class="rcp-right-profile  rcp-profile img-circle"></a>
+<a class="rcp-nickname" href="#">{{data.user.userName}}</a>
 <h4 class="rcp-detail-title">{{data.recipeName}}</h4>
 <div align="center">
 <div class="rcp-scrap-button-text" >
@@ -633,7 +633,7 @@
               <div class="rcp-profile-position">
            
                   {{#defaultImage}}
-              <a href="#" class="rcp-userName"><input type="hidden" name="email" value="{{user.email}}">
+              <a href="#" class="rcp-userName"><input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
               <img src="img/profileImg/{{user.image}}" class="img-circle rcp-profile"></a>
                     {{else}}
                 <a href="#" class="rcp-userName"><input type="hidden" name="email" value="{{user.email}}">
@@ -794,9 +794,8 @@
         <p class="introfont">{{intro}}</p>
         </div>
         <div class="cardbtn">
-         <button type="button" class="btn btn-default rcp-imp">
-              <input type="hidden" value="{{email}}">
-              <a href="#" class="rcp-userName visitbtn">방문하기</a></button>
+          <a href="/mypage.html?{{email}}" class="visitbtn">
+          <button type="button" class="btn btn-default rcp-imp">방문하기</button></a>
               <button type="button" class="btn btn-default rcp-imp">구독하기</button>
         </div>
     </div>
@@ -810,7 +809,6 @@
 	<script src="js/template/main.js"></script>
 	<script src="js/template/wow.min.js"></script>
 	<script src="js/template/main.js"></script>
-	<script src="js/template/plugin.js"></script>
 	<script src="js/template/plugin.js"></script>
 	<script src="js/template/custom.js"></script>
 	<script src="js/template/jquery-slider-rolling.js"></script>

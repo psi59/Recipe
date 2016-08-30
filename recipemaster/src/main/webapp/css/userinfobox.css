@@ -73,7 +73,8 @@ $main: #7b7de5;
   padding: 1rem;
 }
 .rcp-nickname {
-  color: #fff; font-size : 17pt;
+	    margin-left: 130px;
+  color: #fff; font-size : 12pt !important;
   font-weight: bold;
   text-align: center;
   font-size: 1.5em;

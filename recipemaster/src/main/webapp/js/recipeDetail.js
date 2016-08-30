@@ -1,4 +1,4 @@
-document.write('<script type"text/javascript" src="js/mainListAjax.js"></script>')
+document.write('<script type"text/javascript" src="js/common.js"></script>')
 
 
 var detailInfoTemp = $('#recipe-detail-304-info-template').html();
