@@ -8,7 +8,9 @@
 	height: 51px;
 }
 
-.rcp-forDelete-xButton {
+margin: 10px ; margin-top: 10px ; width: 30%; height: 280px ;
+	/* box-shadow: 5px 5px 5px #888888; */ float: left ;
+	.rcp-forDelete-xButton {
 	position: absolute;
 	width: 30px;
 	left: 250px;
@@ -327,7 +329,7 @@ body {
 
 .rcp-Vst {
 	margin: 10px;
-	margin-top: 0;
+	margin-top: 10px;
 	width: 30%;
 	height: 280px;
 	/* box-shadow: 5px 5px 5px #888888; */

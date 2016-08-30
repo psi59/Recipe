@@ -67,6 +67,138 @@
 			</div>
 		</div>
 	</nav>
+	<div id='signup-pop-up-banner'>
+    <div class="rcp-section">
+      <span>회원 가입</span>
+    </div>
+    <div class="rcp-laytop rcp-laytop2"></div>
+    <div class="rcp-innnersec">
+      <div class="rcp-mar rcp-info">
+
+        <div id="signup-e-mail-div"
+          class="form-group has-warning has-feedback">
+          <input id="signup-e-mail" type="text" class="form-control"
+            placeholder="E-mail 입력"> <span id="signup-e-mail-span"
+            class="glyphicon glyphicon-warning-sign form-control-feedback"
+            aria-hidden="true"></span> <label id="signup-e-mail-label"
+            class="control-label"></label>
+        </div>
+
+        <div id="signup-userName-div"
+          class="form-group has-warning has-feedback">
+          <input id="signup-userName" type="text" class="form-control"
+            placeholder="닉네임 입력"> <span id="signup-userName-span"
+            class="glyphicon glyphicon-warning-sign form-control-feedback"
+            aria-hidden="true"></span> <label id="signup-userName-label"
+            class="control-label"></label>
+        </div>
+
+        <div id="signup-password-div"
+          class="form-group has-error has-feedback">
+          <input id="signup-password" type="password" class="form-control"
+            placeholder="비밀번호 입력"> <span id="signup-password-span"
+            class="glyphicon glyphicon-remove form-control-feedback"
+            aria-hidden="true"></span> <label id="signup-password-label"
+            class="control-label"></label>
+        </div>
+
+        <div id="signup-passwordCheck-div"
+          class="form-group has-error has-feedback">
+          <input id="signup-passwordCheck" type="password"
+            class="form-control" placeholder="비밀번호 확인"> <span
+            id="signup-passwordCheck-span"
+            class="glyphicon glyphicon-remove form-control-feedback"
+            aria-hidden="true"></span> <label id="signup-passwordCheck-label"
+            class="control-label"></label>
+        </div>
+
+      </div>
+
+      <div class="rcp-bottext">
+        <label class="checkbox-inline"> <input type="checkbox"
+          id="agrchk" value="option1">서비스약관과 개인정보수집이용에 동의합니다.
+        </label>
+      </div>
+    </div>
+    <div class="rcp-sign-membership">
+      <span id="signup-addBtn">가입</span> <span id="signup-resetBtn">취소</span>
+    </div>
+  </div>
+  <!--준모_login------------------------------------------------------------------------------- -->
+  <div id='login-pop-up-banner'>
+    <div class="rcp-section">
+      <span>로그인</span>
+    </div>
+    <div class="rcp-laytop rcp-laytop2"></div>
+    <div class="rcp-innnersec">
+      <div id="loginInputBox" class="rcp-mar rcp-info"
+        style="height: 110px;">
+        <input class="form-control" type="text" id="userEmail" name="email"
+          placeholder="아이디 입력" /> <br /> <input class="form-control"
+          type="password" id="userPassword" name="password"
+          placeholder="비밀번호 입력" />
+      </div>
+    </div>
+    <div class="rcp-sign-membership" style="margin-top: 50px;">
+      <a href="#" id="userLogin"><span>로그인</span></a>
+    </div>
+  </div>
+  <!--  -->
+  <div id='editUserInfo-pop-up-banner'>
+    <form action="user/update.json" method="post" id="updateUserForm"
+      enctype="multipart/form-data">
+      <input type="hidden" name="userNo" id="updateFormUserNo"> <input
+        type="hidden" name="email" id="updateFormEmail">
+      <div class="rcp-laytop">
+        <!--유저 이미지 업로드 --용이  !!!!!enctype?????16.08.12-->
+        <div class="rcp-up-preview img-wrapper col-md-1"></div>
+        <div class="file-upload-wrapper">
+          <input id="profileImage" type="file" name="profileImage"
+            class="file-upload-native" accept="image/*" /> <input type="text"
+            disabled placeholder="이미지" class="file-upload-text" />
+        </div>
+        <!--유저 이미지 업로드 끝--용이  -->
+        <div class="col-md-11 rcp-laytext">
+          <h4 id="updateBoxName"></h4>
+          <h5 id="updateBoxGrade">Master Chef</h5>
+          <h5 id="updateBoxEmail"></h5>
+        </div>
+      </div>
+      <div class="rcp-section">
+        <span>회원정보수정</span>
+      </div>
+      <div class="rcp-innnersec">
+        <div id="beforePwd-div"
+          class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
+          <input class="form-control" type="password" id="beforePwd"
+            name="beforePassword" placeholder="이전비밀번호 입력">
+        </div>
+
+        <div id="afterPwd-div"
+          class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
+          <input class="form-control" type="password" id="afterPwd"
+            name="password" placeholder="변경비밀번호 입력">
+        </div>
+
+        <div id="afterPwdcf-div"
+          class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
+          <input class="form-control" type="password" id="afterPwdcf"
+            placeholder="변경비밀번호 확인">
+        </div>
+
+        <div
+          class="rcp-mar rcp-info form-group form-group-md has-success has-feedback">
+          <textarea class="form-control rcp-tara" rows="5rem" cols="30rem"
+            id="introduce" name="intro" placeholder="자기소개를 입력해주세요"></textarea>
+        </div>
+      </div>
+      <div class="rcp-sign-membership">
+        <!-- <button id="updateUserInfo" type="submit">확인</button> -->
+        <a href="#"><span id="updateUserInfo">확인</span></a> <a href="#"><span
+          id="updateUserReset">취소</span></a>
+      </div>
+    </form>
+  </div>
 	<!-------------------------------- Rank List --------------------------------->
 	<section id="1" class="home">
 		<h1>Best Chef</h1>
@@ -121,9 +253,6 @@
 				<hr />
 			</div>
 			<div id="recipeRanking"></div>
-			<!-- <img class="rcp-rankmedal-small4" src="/img/medal1.png"/>
-      <img class="rcp-rankmedal-small5" src="/img/medal2.png"/>
-      <img class="rcp-rankmedal-small6" src="/img/medal3.png"/> -->
 		</div>
 		<div>
 			<br />
