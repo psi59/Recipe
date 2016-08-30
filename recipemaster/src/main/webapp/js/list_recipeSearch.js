@@ -1,17 +1,26 @@
 /* 검색 및 정렬 이벤트 -성현 */
-$(function() {
-		
-	$('#searchKeyword').focus();
+$(document).ready(function(){	
+	
+	// url에 QueryString의 검색어로 검색결과 보여줌
+	urlParams = getUrlParams();	
+	if(urlParams.sk != undefined){		
+		$('#searchKeyword').val(decodeURIComponent(urlParams.sk));
+	}	
+	if(urlParams.sc != undefined){		
+		$('#searchCondition-select').val(decodeURIComponent(urlParams.sc));
+	}
 	
 	// 처음화면에 모든 레시피들을 보여준다
 	search('newest', $('#order-latest-btn').val());
+	
+	// 검색창에 포커스
+	$('#searchKeyword').focus();
 	
 	// 검색버튼 클릭 검색 이벤트
 	$('#searchBtn').click(function() {
 		$("body").scrollTop(0);
 		search('newest', $('#order-latest-btn').val());			    
 	});
-	
 	// 키보드에서 뗐을때의 검색 이벤트	
 	$('#searchKeyword').keyup(function(){
 		$("body").scrollTop(0);
@@ -250,19 +259,22 @@ function searchScrollAppend(){
 	}
 }
 
+// url QueryString 가져오는 function
+function getUrlParams() {
+    var params = {};
+    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
+    return params;
+} 
 
-function methods(){
-	  idOptions();	
-	  mouseHover();
-
-// 자동완성 기능
 
 
 
 
 
 //----------------------------------------고재현 부분--------------------------------------------//
-
+function methods(){
+	  idOptions();	
+	  mouseHover();
 }
 
 Handlebars.registerHelper('isLike', function(options) {
