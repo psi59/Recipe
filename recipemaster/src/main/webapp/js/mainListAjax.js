@@ -1,7 +1,5 @@
 document.write('<script type"text/javascript" src="js/common.js"></script>')
-
-
-
+document.write('<script type"text/javascript" src="js/login.js"></script>')
 
   var mainSection = $('#recipe-1-section').html();
   var comMainSection = Handlebars.compile(mainSection); 
@@ -14,7 +12,7 @@ document.write('<script type"text/javascript" src="js/common.js"></script>')
   
   var mainSubscribe = $('#temp').html();
   var commainSubscribe = Handlebars.compile(mainSubscribe); 
-  
+  var userInfo = getUserInfo();
   
   
   
@@ -33,10 +31,10 @@ document.write('<script type"text/javascript" src="js/common.js"></script>')
   function Main1List(){
 	  
 	  var userNo = 0;
-	  var a = eval(jsonData);
+	  var a = userInfo.userNo;
 	  
 	  if( a != null ){
-		  userNo = a[0].userNo;
+		  userNo = a;
 		
 	  }
 	  
@@ -86,11 +84,11 @@ document.write('<script type"text/javascript" src="js/common.js"></script>')
 	  
 
 	  var userNo = 0;
-	  var a = eval(jsonData);
+	  var a = userInfo.userNo;
 	  
 	  
 	  if( a != null ){
-		  userNo = a[0].userNo;
+		  userNo = a;
 	  }
 	  
 	  $.ajax({
@@ -127,7 +125,7 @@ document.write('<script type"text/javascript" src="js/common.js"></script>')
 //				  }
 //				  
 			  methods();
-			  if(eval(jsonData) != null)
+			  if(userInfo != null)
 			  main3List();
 		  },
 		  error : function(){
@@ -137,13 +135,12 @@ document.write('<script type"text/javascript" src="js/common.js"></script>')
   }  
   
   function main3List(){	  
-	  console.log(eval(jsonData)[0].email)
 	  $.ajax({
 		  url :'recipe/userPage.json',
 		  dataType : 'json',
 		  method : 'post',
 		  data:{
-			  email: eval(jsonData)[0].email,
+			  email: userInfo.email,
 			  request:3
 		  },
 		  success : function(result) {
@@ -184,8 +181,8 @@ document.write('<script type"text/javascript" src="js/common.js"></script>')
 
   
   Handlebars.registerHelper('sessionUser', function(options) {
-	  if ( eval(jsonData) != null) {
-		  if( eval(jsonData)[0].email != null)
+	  if ( userInfo != null) {
+		  if( userInfo.email != null)
 	    return options.fn(this);
 	  } 
 });
@@ -202,7 +199,7 @@ function likeLogin(){
 			  $.ajax({
 				  url:'recipe/likeDown.json?recipeNo=' + $(event.target).parent()
 				  .parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
-				  + eval(jsonData)[0].userNo,
+				  + userInfo.userNo,
 				  dataType:'json',
 				  method:'get',
 				  success:function(){
@@ -224,7 +221,7 @@ function likeLogin(){
 			  $.ajax({
 				  url:'recipe/likeUp.json?recipeNo=' + $(event.target).parent()
 				  .parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
-				  +  eval(jsonData)[0].userNo,
+				  +  userInfo.userNo,
 				  dataType:'json',
 				  method:'get',
 				  success:function(){
@@ -302,8 +299,8 @@ function mouseHover(){
   function goMyPage(){
 	  $('#profileView .goMyPageBtn').on('click',function(event){
 		  event.preventDefault();
-		  if(eval(jsonData) != null){
-			  $(location).attr('href','/mypage.html?'+ eval(jsonData)[0].email);
+		  if(userInfo != null){
+			  $(location).attr('href','/mypage.html?'+ userInfo.email);
 		  }
 	  })
   }

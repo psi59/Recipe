@@ -1,6 +1,6 @@
-//document.write('<script type"text/javascript" src="js/mainlist.js"></script>')
+document.write('<script type"text/javascript" src="js/login.js"></script>')
 
-
+var userInfo = getUserInfo();
 var detailInfoTemp = $('#recipe-detail-304-info-template').html();
 var comDetailInfoTemp = Handlebars.compile(detailInfoTemp);   
 
@@ -36,7 +36,7 @@ $(function(){
 
 Handlebars.registerHelper('x-button', function(options) {
 	console.log("userNo : "+this.userNo)
-	if(eval(jsonData) != null && eval(jsonData)[0].userNo == this.userNo){
+	if(userInfo != null && userInfo.userNo == this.userNo){
 	
 	    return options.fn(this); 
 	}
@@ -45,8 +45,7 @@ Handlebars.registerHelper('x-button', function(options) {
 
 
 
-function recipeDetail(){	
-	console.log("jsonData : "+jsonData)
+function recipeDetail(){
 	$(document).on('click','.detail',function(event) {		
 		event.preventDefault();
 		$.ajax({
@@ -108,8 +107,8 @@ function recipeDetail(){
 //						})
 
 
-						if( eval(jsonData) != null ){										
-							if(result.data.scrapUser == eval(jsonData)[0].userNo){
+						if( userInfo != null ){										
+							if(result.data.scrapUser == userInfo.userNo){
 								$('.rcp-scrap-button-text').attr('name','scrap');
 								$('.rcp-scrap-button-text').css('border','1px solid #ffce6e');
 								$('.rcp-detail-scrap').attr('style','color:#ffce6e');
@@ -202,7 +201,7 @@ function addComment(){
 				recipeComment:$('textarea[name="recipeComment"').val()
 			},
 			success:function(result){
-				if(eval(jsonData) == null){
+				if(userInfo == null){
 					swal('로그인 부탁염 ^오^');
 					return ;
 				}
