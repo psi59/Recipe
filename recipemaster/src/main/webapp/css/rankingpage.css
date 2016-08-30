@@ -10,7 +10,6 @@
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
-
 .rcp-btn-default-2 {
 	position: relative;
 	right: -1224px;
@@ -28,13 +27,16 @@
 	right: -20em !important;
 }
 
-.rcp-barimg-r {
+.ranking-barimg>.rcp-barimg{
 	cursor: pointer;
 	position: fixed;
 	top: 5px;
 	right: 162px;
 }
-
+.ranking-bar-infobox>.bottom-main-nav__dropdown {
+    top: 4em;
+    right: -20em;
+}
 .introBox {
 	margin-top: 5%;
 	border: 1px solid #b6b4b5;
