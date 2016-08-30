@@ -1,3 +1,5 @@
+document.write('<script type"text/javascript" src="js/mainlist.js"></script>')
+
 
 var detailInfoTemp = $('#recipe-detail-304-info-template').html();
 var comDetailInfoTemp = Handlebars.compile(detailInfoTemp);   
@@ -44,6 +46,7 @@ Handlebars.registerHelper('x-button', function(options) {
 
 
 function recipeDetail(){	
+	console.log("jsonData : "+jsonData)
 	$(document).on('click','.detail',function(event) {		
 		event.preventDefault();
 		$.ajax({
@@ -64,6 +67,8 @@ function recipeDetail(){
 				$('div[name="rcp-explanation"]:eq(1)').text(result.data.intro);
 				
 				$('#detail_pop_up').bPopup({
+					position: (['auto','auto']),
+					positionStyle :[('fixed')],
 					follow: [false, false], //x, y
 					onOpen:function(){
 						var detailMainTemp = $('#recipe-detail-main-template').html();
@@ -75,18 +80,32 @@ function recipeDetail(){
  						
 						$("body").css("overflow", "hidden");						
 						$('.rcp-304').append( comDetailInfoTemp(result) );
-						$('.rcp-info-images').append( comDetailImageMain(result.data) );
-						$('.rcp-detail-step').append( comDetailImageStep(result.data) );						
+						$('.rcp-info-images').append( comDetailImageMain(result.data) );										
 						$('.rcp-detail-body').append( comDetailMainTemp(result.data) );
 						$('.rcp-detail-body').append( comDetailTemp(result.data) );
+						$('.rcp-info-images').append( comDetailImageStep(result.data) );		
 						slider = $('.rcp-detail-body').bxSlider({
+							startSlide:0,
 							mode:'vertical',
 							pager: false,
-							moveSlides: 1
-
+							moveSlides: 1,
+							infiniteLoop:false
 						});
 						console.log("result data ll : "+result.data);
-
+						
+						
+						for(var i=0; i<$('.rcp-body').length; i++){
+							$('div[name="rcp-body"]:eq('+i+')').attr('id',"div"+i);
+							$('a[name="rcp-nav-images"]:eq('+i+')').attr('href','#div'+i);
+							$('a[name="rcp-nav-bgImages-button"]:eq('+i+')').attr('href','#div'+i);
+						}
+//						
+//						$(document).on('click','.rcp-info-images-emts',function(event){
+//							event.preventDefault();
+//							var div = $(event.target).parent().attr('href');
+//							console.log(div);
+//							$(location).attr('href',div);
+//						})
 
 
 						if( eval(jsonData) != null ){										

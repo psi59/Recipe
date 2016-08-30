@@ -1,3 +1,6 @@
+document.write('<script type"text/javascript" src="js/common.js"></script>')
+
+
 $(function() {
 	console.log(location.href.split('?')[1]);
 
@@ -21,8 +24,13 @@ $(function() {
 			var sourceCRList = $('#temp').text();
 			var templateCRList = Handlebars.compile(sourceCRList);
 
-			$('.rcp-userName').text(result.user.userName);
-
+			$('.rcp-userPage-userName').text(result.user.userName);
+			console.log("userProfile : "+result.user.image);
+			
+			if(result.user.image != null && result.user.image !=''){
+			$('.rcp-topimg').attr('src','img/profileImg/'+result.user.image);
+			}
+			
 			$('#tabs-1 .hs-content .container .row .rcp-mypage-section')
 					.append(templateCRList(result));
 			console.log(result.data);

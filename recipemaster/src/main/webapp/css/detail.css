@@ -222,7 +222,11 @@
 
 }
 .rcp-info-images-emts{
-  width:184px;
+    width: 100%;
+    height: 92px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 169px;
   
 }
 

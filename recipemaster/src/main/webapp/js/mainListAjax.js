@@ -1,3 +1,7 @@
+document.write('<script type"text/javascript" src="js/common.js"></script>')
+
+
+
 
   var mainSection = $('#recipe-1-section').html();
   var comMainSection = Handlebars.compile(mainSection); 
@@ -177,15 +181,6 @@
 	    return options.inverse(this);
 	  }
 });
-  
-  Handlebars.registerHelper('defaultImage', function(options) {
-		 
-	  if (this.user.image == null || this.user.image =='') {
-		  return options.inverse(this);
-	  } else {
-	    return options.fn(this);
-	  }
-});
 
   
   Handlebars.registerHelper('sessionUser', function(options) {
@@ -301,7 +296,7 @@ function mouseHover(){
   function comList(){
 	  $(document).on('click', '.rcp-userName',function(event){
 		  event.preventDefault();
-		  $(location).attr('href','/mypage.html?'+$(event.target).parent().children('input[type="hidden"]').val() ); 	 
+		  $(location).attr('href','/mypage.html?'+$(event.target).parent().children('.rcp-hidden-email').val() ); 	 
 	  })
   }
   function goMyPage(){

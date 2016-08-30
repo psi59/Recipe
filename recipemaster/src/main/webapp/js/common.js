@@ -82,3 +82,16 @@ $('#topLoginBtn').on('click', function(event){
 	event.preventDefault();
 	$('#login-pop-up-banner').bPopup();
 });
+
+
+
+Handlebars.registerHelper('defaultImage', function(options) {
+		 
+	  if (this.user.image == null || this.user.image =='') {
+		  return options.inverse(this);
+	  } else {
+	    return options.fn(this);
+	  }
+});
+
+
