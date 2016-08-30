@@ -338,6 +338,7 @@ $(function() {
 });
 
 function pageTabs() {
+	$('.rcp-Vst-write').hide();
 	$('.isotope-filter a')
 			.on(
 					'click',
@@ -348,12 +349,16 @@ function pageTabs() {
 
 						if ($(event.target).is('#searchRecipe')) {
 							request = 1;
+							$('.rcp-Vst-write').hide();
 						} else if ($(event.target).is('#searchScrap')) {
 							request = 2;
+							$('.rcp-Vst-write').hide();
 						} else if ($(event.target).is('#searchSubscribe')) {
 							request = 3;
+							$('.rcp-Vst-write').hide();
 						} else {
 							request = 4;
+							$('.rcp-Vst-write').hide();
 						}
 
 						$

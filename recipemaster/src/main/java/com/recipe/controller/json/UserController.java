@@ -1,6 +1,7 @@
 package com.recipe.controller.json;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -104,14 +105,43 @@ public class UserController {
 	@RequestMapping(path = "update")
 	@ResponseBody
 	public String update(
-			User user,
-			@RequestParam(value="beforePassword", defaultValue="") String beforePassword,
-			//@RequestParam(value="profileImage", defaultValue="") MultipartFile profileImage,
-			HttpServletRequest request) {
+			@RequestParam(value="userNo", defaultValue="0") int userNo,
+			@RequestParam(value="email", defaultValue="") String email,
+			@RequestParam(value="bfPwd", defaultValue="") String beforePassword,
+			@RequestParam(value="password", defaultValue="") String password,
+			@RequestParam(value="intro", defaultValue="") String intro,
+			@RequestParam(value="profileImage") List<MultipartFile> profileImage,
+			HttpSession session, HttpServletRequest request) {
+		
+		User user = CommonUtil.getSessionUser(session);
 		HashMap<String, Object> result = new HashMap<>();
-		System.out.println("여기여기여기 + "+user);
-		System.out.println("여기여기여기 + "+ beforePassword);
-
+				
+		try {
+			if(user.getUserNo()!=0){			
+				if(user.getUserNo()==userNo){
+					String fileName = "userprofile_"+user.getUserNo()+".png";
+					if(!profileImage.get(0).getOriginalFilename().equals("")){
+						System.out.println("이미지 변경");
+						File recipeUrl= new File(CommonUtil.getImageFolderPath("profileImg", request)+"/"+fileName);
+						profileImage.get(0).transferTo(recipeUrl);
+					}
+					
+					if(beforePassword.equals(userService.getUser(userNo))){
+						user.setPassword(password);
+					}
+					
+					user.setIntro(intro);
+					user.setImage(fileName);
+					System.out.println(user.getPassword().equals(""));
+					userService.updateUser(user);
+					result.put("status", "success");
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.put("status", "fail");
+		}
+		
 		return new Gson().toJson(result);
 	}
 

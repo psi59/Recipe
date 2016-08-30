@@ -1,13 +1,22 @@
+document.write('<script type"text/javascript" src="js/login.js"></script>')
 $(function(){
 	
-	var profileImage;
-
+	var userInfo = getUserInfo();
+	
+	var profileImage = new Array();
+	var tempFile = new File([""], "");
+	profileImage[0] = tempFile;
+	
 	$('#userInfoEditBtn').on('click', function() {
+		console.log(userInfo);
 		$('#editUserInfo-pop-up-banner').bPopup();
-		if (eval(jsonData)[0].userNo != null) {
-			$('#updateBoxEmail').text(eval(jsonData)[0].email);
-			$('#updateBoxName').text(eval(jsonData)[0].userName);
-			$('#profileGrade').text(eval(jsonData)[0].recipeUrl);
+		if (userInfo.userNo != null) {
+			$('#updateBoxEmail').text(userInfo.email);
+			$('#updateBoxName').text(userInfo.userName);
+			$('#profileGrade').text(userInfo.recipeUrl);
+			$('#updateFormUserNo').val(userInfo.userNo);
+			$('#updateFormEmail').val(userInfo.email);
+			$('.rcp-up-preview').append($('<img class="rcp-up-preview" src="img/profileImg/'+userInfo.image+'">'));
 		}
 	});
 
@@ -20,7 +29,9 @@ $(function(){
 		// which actually support image resizing, but fail to
 		// send Blob objects via XHR requests:
 	}).on('fileuploadadd', function (e, data) {
-		profileImage = data.files[0];
+		profileImage[0] = data.files[0];
+		$('.rcp-up-preview').html('');
+		$('.rcp-up-preview').append($('<img class="rcp-up-preview" src="'+URL.createObjectURL(profileImage[0])+'">'));
 	}).on('fileuploaddone', function (e, data) {
 		if (data.result.status == 'pwdFail'){
 			$('#beforePwd-div').removeClass().addClass("rcp-mar rcp-info form-group form-group-md has-error has-feedback");
@@ -35,7 +46,7 @@ $(function(){
 		location.reload();
 		    	
     }).on('fileuploadfail', function (e, data) {
-    	console.log(data);
+    	alert('여기다여기!!!');
     }).prop('disabled', !$.support.fileInput)
 	.parent().addClass($.support.fileInput ? undefined : 'disabled');
 
@@ -43,7 +54,7 @@ $(function(){
 		var formData = new FormData(this);
 		var formURL = $(this).attr("action");
 		
-		if (profileImage != null) {
+		if (profileImage.length > 0) {
 			event.preventDefault();
 			$('#profileImage').fileupload('send', {
 				files : profileImage
@@ -52,41 +63,51 @@ $(function(){
 	});
 
 	$(document).on('click', '#updateUserInfo', function(event){
-		/* 폼 입력 유무 확인 */
-//		if( $('#beforePwd').val() == ""){
-//			swal('이전비밀번호를 입력해주세요');
-//			return;
-//		}else if( $('#afterPwd').val() == ""){
-//			swal('변경할 비밀번호를 입력해주세요');
-//			return;
-//		}else if( $('#afterPwdcf').val() == ""){
-//			swal('변경할 비밀번호확인을 입력해주세요');
-//			return;
-//		}
-//		/* 일치 불일치 확인 */
-//		if($('#afterPwd').val()!=$('#afterPwdcf').val()){
-//			swal('변경 비밀번호 불일치');
-//			return;
-//		}
 		
-		console.log($('#beforePassword').val());
-		console.log($('#afterPwd').val());
-		console.log($('#afterPwdcf').val());
+		console.log($('#beforePwd').val()=="");
+		console.log($('#afterPwd').val()=="");
+		console.log($('#afterPwdcf').val()=="");
 		
-//		if($('#afterPwd').val()!== undefined || $('#afterPwd').val()!== null || $('#beforePassword').val()!== undefined|| $('#beforePassword').val()!== null|| $('#afterPwdcf').val()!== undefined || $('#afterPwdcf').val()!== null){
-//			if($('#beforePassword').val() === undefined){
-//				swal('이전비밀번호를 입력해주세요');
-//				return;
-//			} else if( $('#afterPwd').val()=== undefined){
-//				swal('변경할 비밀번호를 입력해주세요');
-//				return;
-//			} else if( $('#afterPwdcf').val()===undefined){
-//				swal('변경할 비밀번호를 다시 한번 입력해주세요');
-//				return;
-//			}
-//		}
-
+		if($('#beforePwd').val()==""  && $('#afterPwd').val()=="" && $('#afterPwdcf').val()==""){
+			console.log('드디덩');
+		} else {
+			if( $('#beforePwd').val() == "" || $('#beforePwd').val() == null){
+				swal('이전비밀번호를 입력해주세요');
+				return;
+			}else if( $('#afterPwd').val() == "" || $('#afterPwd').val() == null){
+				swal('변경할 비밀번호를 입력해주세요');
+				return;
+			}else if( $('#afterPwdcf').val() == "" || $('#afterPwdcf').val() == null){
+				swal('변경할 비밀번호확인을 입력해주세요');
+				return;
+			} else if($('#afterPwd').val()!=$('#afterPwdcf').val()){
+				swal('변경 비밀번호 불일치');
+				return;
+			}
+		}
+		
 		$('#updateUserForm').submit();
+
+//		$.post('/user/update.json', {
+//			userNo : $('#updateFormUserNo').val(),
+//			email : $('#updateFormEmail').val(),
+//			bfPwd : $('#beforePwd').val(),
+//			password : $('#afterPwd').val(),
+//			intro : $('#introduce').val(),
+//		}, function(result) {   	  
+//			if (result.status == 'pwdFail'){
+//				$('#beforePwd-div').removeClass().addClass("rcp-mar rcp-info form-group form-group-md has-error has-feedback");
+//				alert('이전 비밀번호 불일치');
+//				$('#beforePwd').focus();
+//				return;
+//			} else if(result.status == 'failure'){
+//				alert('서버 오류');
+//				return;
+//			} else {
+//				alert('정보수정 완료');
+//				$('#editUserInfo-pop-up-banner').bPopup().close();
+//			}
+//		}, 'json');
 	});
 
 	/* 비밀번호 폼 색상변화 */

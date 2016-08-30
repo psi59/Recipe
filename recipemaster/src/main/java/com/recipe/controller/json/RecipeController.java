@@ -176,14 +176,18 @@ public class RecipeController {
 
 		try{
 			User user = CommonUtil.getSessionUser(session);
-
-			Map<String, Object> dataForCheckMyRecipe = new HashMap<>();
-			dataForCheckMyRecipe.put("userNo", user.getUserNo());
-			dataForCheckMyRecipe.put("recipeNo", recipeNo);
-			if(recipeService.checkMyRecipe(dataForCheckMyRecipe) != null) {
-				result.put("status", "success");
-			} else {
-				result.put("status", "fail");
+			
+			if(user.getUserNo()==0){
+				result.put("status", "nologin");
+			} else{
+				Map<String, Object> dataForCheckMyRecipe = new HashMap<>();
+				dataForCheckMyRecipe.put("userNo", user.getUserNo());
+				dataForCheckMyRecipe.put("recipeNo", recipeNo);
+				if(recipeService.checkMyRecipe(dataForCheckMyRecipe) != null) {
+					result.put("status", "success");
+				} else {
+					result.put("status", "fail");
+				}
 			}
 		} catch(Exception e){
 			result.put("status", "nologin");

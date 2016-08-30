@@ -103,11 +103,11 @@
 	<update id="update" parameterType="user">
 		UPDATE users
 		<set>
-			pwd = #{password},
-			intro = #{intro},
+		  <if test="password != '' and password != null">pwd = #{password},</if>
+      <if test="intro != '' and intro != null">intro = #{intro},</if>
 			img = #{image}
 		</set>
-		WHERE email = #{email}
+		WHERE uno = #{userNo}
 	</update>
 	
 </mapper>

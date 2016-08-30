@@ -246,7 +246,7 @@ a:hover, a:focus {
 }
 
 .navbar.open {
-    top: 0;
+    top: 0px !important;
 }
 
 .navbar-inverse .navbar-nav > li > a, .navbar-nav a {

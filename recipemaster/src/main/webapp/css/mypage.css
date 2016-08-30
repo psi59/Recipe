@@ -318,22 +318,22 @@ rcp-Vst-id {
 	margin-top: 0;
 	width: 30%;
 	height: 280px;
-	box-shadow: 5px 5px 5px #888888;
+/* 	box-shadow: 5px 5px 5px #888888; */
 	float: left;
 }
 
 .rcp-Vst-top {
 	background-color: #FAF4C0;;
-	border: 1px solid #BDBDBD;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 	width: 100%;
-	height: 30%;
+	height: 20%;
 }
 
 .rcp-Vst-bottom {
 	background-color: #fff;
 	width: 100%;
-	height: 70%;
-	border: 1px solid #BDBDBD;
+	height: 80%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .rcp-Vst-footer {
