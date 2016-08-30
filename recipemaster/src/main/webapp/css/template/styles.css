@@ -337,7 +337,8 @@ hr {
   overflow: visible;
   clip: auto; }
 
-
+html, body {
+  overflow-x: hidden; }
 
 /*** 1.2. BASE > TYPOGRAPHY */
 /*** 1.2.1 BASE > TYPOGRAPHY > Heading
