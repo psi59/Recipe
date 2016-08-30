@@ -360,5 +360,4 @@ DELETE FROM rcp_rp WHERE RRPNO=${value};
   <delete id="deleteMaterials" parameterType="int">
     DELETE FROM rcp_mt WHERE rcpno=#{value}
   </delete>
-  
 </mapper>

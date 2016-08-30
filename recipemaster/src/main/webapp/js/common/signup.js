@@ -1,9 +1,9 @@
 // 이성현
-
-$(function() {
+$(document).ready(function(){
 
 	///// 회원가입 팝업창 가입 버튼 이벤트 /////
-	$('#signup-addBtn').click(function() {
+	/*$('#signup-addBtn').click(function() {*/
+	$(document).on('click', '#signup-addBtn', function() {
 		if( $('#signup-e-mail').val() == ""){
 			swal('이메일을 입력해주세요');			
 		}else if( $('#signup-userName').val() == ""){
@@ -151,8 +151,7 @@ $(function() {
         if ( $('#signup-passwordCheck').val() == $('#signup-password').val() ) {
 			$('#signup-passwordCheck-div').removeClass().addClass("form-group has-success has-feedback");
 			$('#signup-passwordCheck-span').removeClass().addClass("glyphicon glyphicon-ok form-control-feedback");
-			$('#signup-passwordCheck-label').text("");          				
-			
+			$('#signup-passwordCheck-label').text("");
         } else {
 			$('#signup-passwordCheck-div').removeClass().addClass("form-group has-error has-feedback");
 			$('#signup-passwordCheck-span').removeClass().addClass("glyphicon glyphicon-remove form-control-feedback");

@@ -136,7 +136,7 @@
 .rcp-recipeGrade{
 	position:relative;
 	text-align:right;
-	right:5%;
+	left:1em;
 	margin-bottom:5%;
 }
 

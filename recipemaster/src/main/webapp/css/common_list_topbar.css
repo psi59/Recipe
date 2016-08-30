@@ -1,6 +1,12 @@
-  .active{
-  color:#337ab7;
-  }
+/* @import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+*{
+	font-family: 'Jeju Gothic', serif;
+} */
+
+.active{
+color:#337ab7;
+}
   
 .rcp-listSize{
 	height:416.22px;
@@ -16,14 +22,6 @@
 }
 #searchBar-input #searchKeyword{
   width: 80%;
-}
-
-h1, h2, h3, h4, h5, h6, p, .btn, .navbar-nav a, .form-control, .list-inline, small, #pricing {
-  font-family: 'Montserrat', sans-serif;
-}
-
-p, .lead {
-	font-family: 'Raleway', sans-serif;
 }
 
 h1 {
