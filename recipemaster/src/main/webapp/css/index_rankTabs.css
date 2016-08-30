@@ -1,3 +1,4 @@
+
 .badge {
 	background-color: #777;
 }
@@ -86,6 +87,7 @@
 
 .list-group {
 	width: 100%;
+	color: white;
 }
 
 .list-group .list-group-item {

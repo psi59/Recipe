@@ -1,9 +1,18 @@
 /********** main header css 시작 ***********/
+
 #footer{
 	text-align: center;
 }
 header{
 	margin-bottom: 2em;
+}
+
+#searchBar2 #searchCondition-select {
+	width: 30%;
+}
+
+#searchBar2 .searchKeyword {
+  width: 70%;
 }
 
 .rcp-container {

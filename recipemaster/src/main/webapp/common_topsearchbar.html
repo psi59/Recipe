@@ -1,0 +1,155 @@
+
+<div class="container rcp-container-top">
+  <div class="navbar-header">
+    <div class="row">
+      <div class="row col-md-7 col-sm-7 col-xs-12">
+        <a class="logo col-md-3 col-sm-3 hidden-xs rt-navbar-top-logo"
+          href="index.html"><img src="img/logo.svg" alt="Logo"></a>
+        
+        <div id="searchBar-input" class="input-group col-md-5 col-sm-5 col-xs-11 col-xs-offset-1 rcp-navbar-searchbar-size rt-navbar-top-searchbar">
+								
+					<select id="searchCondition-select" class="form-control">
+						<option value="recipe" selected="selected">레시피</option>
+						<option value="chef">쉐프</option>
+						<option value="material">재료</option>
+					</select>
+					
+					<input id="searchKeyword" type="text" class="searchKeyword form-control rcp-navbar-searchbar-size"
+		            placeholder="검색어를 입력해주세요" aria-describedby="basic-addon1">
+		          
+		      <span id="searchBarKeyword" class="input-group-addon">검색</span>             
+          
+        </div>
+        
+      </div>
+      <div class="col-md-4 col-sm-4 hidden-xs" style="margin-right: 2em;">
+        <div class="navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span id="signUpTopBtn"
+                class="rcp-btn-default-top">회원가입</span></a></li>
+            <li id="topbarUserImg"><a href="#"><span id="topLoginBtn"
+                class="rcp-btn-default-top">로그인</span></a></li>
+          </ul>
+        </div>
+        <!-- 준모2 -->
+        <div id="profileView" class="main-nav__dropdown profile-dropdown">
+          <div class="rcp-outline">
+            <div>
+              <a href="#0" class="dropdown__header"><img id="profileImg"
+                class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a
+                id="profileEmail" href="#"
+                class="dropdown__header rcp-infobox-text"></a>
+              <h6 id="profileName" class="rcp-nickname"></h6>
+              <a href="#0" class="dropdown__header"> <span
+                id="profileGrade" class="dropdown__title rcp-infobox-text">
+                  <img src="img/star.png"> Master Chef
+              </span>
+              </a>
+              <div id=Btn align="center">
+                <button id="userInfoEditBtn" type="button"
+                  class="btn btn-default rcp-btn-nav">정보수정</button>
+                <button id="logoutBtn" type="button"
+                  class="btn btn-default rcp-btn-nav">로그아웃</button>
+              </div>
+            </div>
+            
+            <a href="/mypage.html"><button class="goMyPageBtn btn btn-default rcp-btn-nav">MyPage</button></a>
+            <a href="/writerecipe.html"><button class="goWriteRcpBtn btn btn-default rcp-btn-nav">Recipe 작성</button></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id='signup-pop-up-banner'>
+    <div class="rcp-section">
+      <span>회원 가입</span>
+    </div>
+    <div class="rcp-laytop rcp-laytop2"></div>
+    <div class="rcp-innnersec">
+      <div class="rcp-mar rcp-info">
+
+        <div id="signup-e-mail-div"
+          class="form-group has-warning has-feedback">
+          <input id="signup-e-mail" type="text" class="form-control"
+            placeholder="E-mail 입력"> <span id="signup-e-mail-span"
+            class="glyphicon glyphicon-warning-sign form-control-feedback"
+            aria-hidden="true"></span> <label id="signup-e-mail-label"
+            class="control-label"></label>
+        </div>
+
+        <div id="signup-userName-div"
+          class="form-group has-warning has-feedback">
+          <input id="signup-userName" type="text" class="form-control"
+            placeholder="닉네임 입력"> <span id="signup-userName-span"
+            class="glyphicon glyphicon-warning-sign form-control-feedback"
+            aria-hidden="true"></span> <label id="signup-userName-label"
+            class="control-label"></label>
+        </div>
+
+        <div id="signup-password-div"
+          class="form-group has-error has-feedback">
+          <input id="signup-password" type="password" class="form-control"
+            placeholder="비밀번호 입력"> <span id="signup-password-span"
+            class="glyphicon glyphicon-remove form-control-feedback"
+            aria-hidden="true"></span> <label id="signup-password-label"
+            class="control-label"></label>
+        </div>
+
+        <div id="signup-passwordCheck-div"
+          class="form-group has-error has-feedback">
+          <input id="signup-passwordCheck" type="password"
+            class="form-control" placeholder="비밀번호 확인"> <span
+            id="signup-passwordCheck-span"
+            class="glyphicon glyphicon-remove form-control-feedback"
+            aria-hidden="true"></span> <label id="signup-passwordCheck-label"
+            class="control-label"></label>
+        </div>
+
+      </div>
+
+      <div class="rcp-bottext">
+        <label class="checkbox-inline"> <input type="checkbox"
+          id="agrchk" value="option1">서비스약관과 개인정보수집이용에 동의합니다.
+        </label>
+      </div>
+    </div>
+    <div class="rcp-sign-membership">
+      <span id="signup-addBtn">가입</span> <span id="signup-resetBtn">취소</span>
+    </div>
+  </div>
+  
+  <!--준모_login------------------------------------------------------------------------------- -->
+  <div id='login-pop-up-banner'>
+    <div class="rcp-section">
+      <span>로그인</span>
+    </div>
+    <div class="rcp-laytop rcp-laytop2"></div>
+    <div class="rcp-innnersec">
+      <div id="loginInputBox" class="rcp-mar rcp-info"
+        style="height: 110px;">
+        <input class="form-control" type="text" id="userEmail" name="email"
+          placeholder="아이디 입력" /> <br /> <input class="form-control"
+          type="password" id="userPassword" name="password"
+          placeholder="비밀번호 입력" />
+      </div>
+    </div>
+    <div class="rcp-sign-membership" style="margin-top: 50px;">
+      <a href="#" id="userLogin"><span>로그인</span></a>
+    </div>
+  </div>
+  <!--  -->
+
+<script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+<script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
+<script src="js/common/signup.js"></script>
+<script src="js/login.js"></script>
+<script src="js/common.js"></script>
+<!-- <script src="js/list_recipeSearch.js"></script> -->
+<script src="js/listPageMove.js"></script>
+<script>
+  var userInfo = getUserInfo();
+
+</script>

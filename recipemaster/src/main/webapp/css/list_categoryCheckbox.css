@@ -1,30 +1,43 @@
-#rcp-list-category {
+#rcp-category-section {
 	color: #000000;
-	font-size: 30px;
+	font-size: 20px;	
 	text-align: center;
 	box-shadow: 0px 5px 5px lightgray;
-	margin-bottom: 10px;
-	margin-top: 110px;
+	width: 1400px;
+	margin: 110px auto 10px;
+	height: 160px;
 }
 
-#rcp-list-category input[type="checkbox"],
-#rcp-list-category input[type="radio"] {
+#rcp-category-div {
+  text-align: left;	
+}
+
+.category-name {	
+	border-style: solid;
+	border-radius: 6px;
+	border-color: #b51515;
+	margin-right: 10px;	
+	padding: 2px;		
+}
+
+.rcp-category input[type="checkbox"],
+.rcp-category input[type="radio"] {
   position: absolute;
   opacity: 0;
   z-index: -1;
 }
-#rcp-list-category label {	
-  font-family: 'Jeju Gothic', serif;
+.rcp-category label {
+	font-weight: 0; !important;
   position: relative;
   display: inline-block;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  /* margin-right: 10px;
+  margin-bottom: 10px; */
   padding-left: 30px;
   padding-right: 10px;
   line-height: 36px;
   cursor: pointer;
 }
-#rcp-list-category label::before {
+.rcp-category label::before {
   content: " ";
   position: absolute;
   top: 6px;
@@ -36,25 +49,25 @@
   border-radius: 4px;
   z-index: -1;
 }
-#rcp-list-category input[type="radio"] + label::before {
+.rcp-category input[type="radio"] + label::before {
   border-radius: 18px;
 }
 /* Checked */
-#rcp-list-category input[type="checkbox"]:checked + label,
-#rcp-list-category input[type="radio"]:checked + label {
+.rcp-category input[type="checkbox"]:checked + label,
+.rcp-category input[type="radio"]:checked + label {
   padding-left: 10px;
   color: #fff;
 }
-#rcp-list-category input[type="checkbox"]:checked + label::before,
-#rcp-list-category input[type="radio"]:checked + label::before {
+.rcp-category input[type="checkbox"]:checked + label::before,
+.rcp-category input[type="radio"]:checked + label::before {
   top: 0;
   width: 100%;
   height: 100%;
   background: #b51515;
 }
 /* Transition */
-#rcp-list-category label,
-#rcp-list-category label::before {
+.rcp-category label,
+.rcp-category label::before {
   -webkit-transition: .25s all ease;
   -o-transition: .25s all ease;
   transition: .25s all ease;

@@ -7,21 +7,13 @@
 <meta name="description" content="">
 
 <!-- Template css -->
-<link rel="stylesheet"
-	href="/node_modules/sweetalert/dist/sweetalert.css">
-<link rel="stylesheet"
-	href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/node_modules/sweetalert/dist/sweetalert.css">
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/template/font-awesome.min.css">
 <link rel="stylesheet" href="css/template/main.css">
 <link rel="stylesheet" href="css/template/commentTemp.css">
-
-
-<link rel="stylesheet"
-	href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
-
-<link rel="stylesheet"
-	href="node_modules/bxslider/dist/jquery.bxslider.css">
-
+<link rel="stylesheet" href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
+<link rel="stylesheet" href="node_modules/bxslider/dist/jquery.bxslider.css">
 
 <!-- 사용자 정의 css -->
 <link rel="stylesheet" href="css/common.css">
@@ -30,7 +22,6 @@
 <link rel="stylesheet" href="css/mainlist.css">
 <link rel="stylesheet" href="css/detail.css">
 <link rel="stylesheet" href="css/updateImg.css">
-<link rel="stylesheet" href="css/mypage.css">
 <!-- <link rel="stylesheet" href="css/rankingpage.css"> -->
 <link rel="stylesheet" href="css/mainrankingpage.css">
 <!-- 성현 -->
@@ -47,7 +38,7 @@
 
 <link rel="stylesheet" href="css/template/animate.css">
 <link rel="stylesheet" href="css/template/styles.css">
-<link rel="stylesheet" href="css/template/plugins.css"> 
+<link rel="stylesheet" href="css/template/plugins.css">
 </head>
 <body>
 	<div id="topBtn" class="navbar navbar-inverse navbar-fixed-top">
@@ -62,7 +53,7 @@
 							<input id="searchKeyword" type="text"
 								class="searchKeyword form-control rcp-navbar-searchbar-size"
 								placeholder="레시피명, 쉐프명, 재료명" aria-describedby="basic-addon1">
-							<span class="input-group-addon" id="searchBarKeyword">검색</span>
+							<span class="rcp-search-button input-group-addon" id="searchBarKeyword">검색</span>
 						</div>
 					</div>
 					<div class="col-md-4 col-sm-4 hidden-xs" style="margin-right: 2em;">
@@ -142,12 +133,19 @@
 						<!-- row 태그 종료 -->
 
 						<div class="row">
-							<div
-								class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4 wow fadeInUp">
-								<div class="input-group wow fadeIn" data-wow-delay="0.5s">
+							<div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4 wow fadeInUp">
+								<div id="searchBar2" class="input-group wow fadeIn" data-wow-delay="0.5s">
+								
+								  <select id="searchCondition-select" class="form-control">
+		                <option value="recipe" selected="selected">레시피</option>
+		                <option value="chef">쉐프</option>
+		                <option value="material">재료</option>
+		              </select>
+								
 									<input type="text" class="form-control searchKeyword"
 										placeholder="레시피명, 쉐프명, 재료명" aria-describedby="basic-addon2">
-									<span class="input-group-addon" id="basic-addon2">검색</span>
+									<span class="rcp-search-button input-group-addon" id="basic-addon2">검색</span>
+									
 								</div>
 							</div>
 						</div>
@@ -240,6 +238,7 @@
 			<a href="#" id="userLogin"><span>로그인</span></a>
 		</div>
 	</div>
+	
 	<!--  -->
 	<div id='editUserInfo-pop-up-banner'>
 		<form action="user/update.json" method="post" id="updateUserForm"
@@ -248,11 +247,10 @@
 				type="hidden" name="email" id="updateFormEmail">
 			<div class="rcp-laytop">
 				<!--유저 이미지 업로드 --용이  !!!!!enctype?????16.08.12-->
-				<div class="rcp-up-preview img-wrapper col-md-1"></div>
+				<div class="rcp-up-preview img-wrapper"></div>
 				<div class="file-upload-wrapper">
 					<input id="profileImage" type="file" name="profileImage"
-						class="file-upload-native" accept="image/*" /> <input type="text"
-						disabled placeholder="이미지" class="file-upload-text" />
+						class="file-upload-native" accept="image/*" />
 				</div>
 				<!--유저 이미지 업로드 끝--용이  -->
 				<div class="col-md-11 rcp-laytext">
@@ -368,7 +366,6 @@
 
 	</section>
 
-	<input type="hidden" value="" id="sessionEmail">
 	<!------------------------- Rank List ------------------------------>
 	<div id="footer"></div>
 
@@ -804,18 +801,9 @@
 </div>
   {{/each}} 
   </script>
-	<!-- 쉐프랭킹카드 수정 -->
-	<script src="node_modules/jquery/dist/jquery.min.js"></script>
-	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="js/template/main.js"></script>
-	<script src="js/template/wow.min.js"></script>
-	<script src="js/template/main.js"></script>
-	<script src="js/template/plugin.js"></script>
-	<script src="js/template/custom.js"></script>
-	<script src="js/template/jquery-slider-rolling.js"></script>
-	<script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
-	<script src="js/mouseover.js"></script>
 
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
 	<script src="node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
 	<script
@@ -836,7 +824,13 @@
 	<script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
 
 	<!--  사용자 js -->
-	<script src="js/jquery.bpopup.min.js"></script>
+  <script src="js/jquery.bpopup.min.js"></script>
+  <script src="js/template/main.js"></script>
+  <script src="js/template/wow.min.js"></script>
+  <script src="js/template/plugin.js"></script>
+  <script src="js/template/custom.js"></script>
+  <script src="js/template/jquery-slider-rolling.js"></script>
+	<script src="js/waypoints.min.js"></script>
 	<script src="js/common.js"></script>
 	<script src="js/login.js"></script>
 	<script src="js/recipeDetail.js"></script>
@@ -845,11 +839,15 @@
 	<script src="js/common/chefCard.js"></script>
 	<script src="js/common/signup.js"></script>
 	<script src="js/rankingpage.js"></script>
-	<script src="js/index_listPageMove.js"></script>
+	<script src="js/listPageMove.js"></script>
 	<script src="js/mainListAjax.js"></script>
+  <script src="js/mouseover.js"></script>
+
 
 	<script>
 		$(function() {
+						
+			getUserInfo();
 			getWeather();
 			getRealTimeRank();
 			$('#footer').load("../copyright.html");

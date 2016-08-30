@@ -23,8 +23,8 @@ public class RecipeServiceImpl implements RecipeService {
 	  params.put("startIndex", (pageNo - 1) * pageSize);
 	  params.put("len", pageSize);
 	  params.put("search", search);
-	  params.put("userNo", userNo);
-    
+	  params.put("userNo", userNo);	  
+	  params.put("categorySize",search.getCategoryList().size());	  
     return recipeDao.recipeSearch(params);
   }
 			
@@ -40,6 +40,7 @@ public class RecipeServiceImpl implements RecipeService {
     params.put("len", pageSize);
     params.put("search", search);
     params.put("userNo", userNo);
+    params.put("categorySize",search.getCategoryList().size());
     return recipeDao.recipeCount(params);
   }
 

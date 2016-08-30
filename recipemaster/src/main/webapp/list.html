@@ -11,126 +11,204 @@
 	href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/template/font-awesome.min.css">
 <link rel="stylesheet" href="css/template/animate.css">
-<link rel="stylesheet" href="css/template/main.css">
+<!-- <link rel="stylesheet" href="css/template/main.css"> -->
 
 <link rel="stylesheet" href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
-
+ 
 
 <!-- 사용자 정의 css -->
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/userinfobox.css">
 <link rel="stylesheet" href="css/mainlist.css">
 <link rel="stylesheet" href="css/detail.css">
+
+<!-- 용이 -->
+<link rel="stylesheet" href="/node_modules/sweetalert/dist/sweetalert.css">
+
 <!-- 성현 -->
 <link rel="stylesheet" href="css/common/chefCard.css">
 <link rel="stylesheet" href="css/common/popup.css">
 <link rel="stylesheet" href="css/common/signup.css">
 <link rel="stylesheet" href="css/index_rankTabs.css">
-<link rel="stylesheet" href="css/list.css">
+<link rel="stylesheet" href="css/list_topbar.css">
 <link rel="stylesheet" href="css/list_categoryCheckbox.css">
 <link rel="stylesheet" href="css/list_countOrder.css">
 <link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.min.css">
 <link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.themes.min.css">
+
 <!-- --- 아이콘 CDN ----- -->
 <!-- <script src="js/template/d9e67edb08.js"></script> -->
 
 </head>
 <body>
-	<div id="topBtn" class="navbar navbar-inverse navbar-fixed-top open">
-		<div class="container rcp-container-top">
-      <div class="navbar-header">
-        <div class="row">
-          <div class="row col-md-7 col-sm-7 col-xs-12">
-            <a class="logo col-md-3 col-sm-3 hidden-xs rt-navbar-top-logo"
-              href="index.html"><img src="img/logo.svg" alt="Logo"></a>
-            
-            <div id="searchBar-input" class="input-group col-md-5 col-sm-5 col-xs-11 col-xs-offset-1 rcp-navbar-searchbar-size rt-navbar-top-searchbar">
-												
-							<select id="searchCondition-select" class="form-control">
-								<option value="recipe" selected="selected">레시피</option>
-								<option value="chef">쉐프</option>
-								<option value="material">재료</option>
-							</select>
-							
-							<input id="searchKeyword" type="text" class="searchKeyword form-control rcp-navbar-searchbar-size"
-                placeholder="검색어를 입력해주세요" aria-describedby="basic-addon1">
-              
-              <span id="searchBarKeyword" class="input-group-addon">검색</span>             
-              
-            </div>
-            
-          </div>
-          <div class="col-md-4 col-sm-4 hidden-xs" style="margin-right: 2em;">
-            <div class="navbar-collapse">
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span id="signUpTopBtn"
-                    class="rcp-btn-default-top">회원가입</span></a></li>
-                <li id="topbarUserImg"><a href="#"><span id="topLoginBtn"
-                    class="rcp-btn-default-top">로그인</span></a></li>
-              </ul>
-            </div>
-            <!-- 준모2 -->
-            <div id="profileView" class="main-nav__dropdown profile-dropdown">
-              <div class="rcp-outline">
-                <div>
-                  <a href="#0" class="dropdown__header"><img id="profileImg"
-                    class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a
-                    id="profileEmail" href="#"
-                    class="dropdown__header rcp-infobox-text"></a>
-                  <h6 id="profileName" class="rcp-nickname"></h6>
-                  <a href="#0" class="dropdown__header"> <span
-                    id="profileGrade" class="dropdown__title rcp-infobox-text">
-                      <img src="img/star.png"> Master Chef
-                  </span>
-                  </a>
-                  <div id=Btn align="center">
-                    <button id="userInfoEditBtn" type="button"
-                      class="btn btn-default rcp-btn-nav">정보수정</button>
-                    <button id="logoutBtn" type="button"
-                      class="btn btn-default rcp-btn-nav">로그아웃</button>
-                  </div>
-                </div>
-                
-                <a href="/mypage.html"><button class="goMyPageBtn btn btn-default rcp-btn-nav">MyPage</button></a>
-                <a href="/writerecipe.html"><button class="goWriteRcpBtn btn btn-default rcp-btn-nav">Recipe 작성</button></a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
+ 
+  <div id="topBtn" class="navbar navbar-inverse navbar-fixed-top open">  
   </div>
   
 	<div class="mouse-icon hidden-xs">
 		<div class="scroll"></div>
-	</div>	
-
-	<!-- ------------------------------------------------------------------------------- -->
+	</div>
 
   <!----------------------- 리스트 카테고리 ----------------------->
-	<section id="rcp-list-category">
-	 <div>
-	   <input type="checkbox" name="cb" id="cb1" />
-	   <label for="cb1">한식</label>
-	   <input type="checkbox" name="cb" id="cb2" />
-	   <label for="cb2">일식</label>
-	   <input type="checkbox" name="cb" id="cb3" />
-	   <label for="cb3">중식</label>
-	   <input type="checkbox" name="cb" id="cb4" />
-	   <label for="cb4">분식</label>
-	   <input type="checkbox" name="cb" id="cb5" />
-	   <label for="cb5">찜</label>    
-	   <input type="checkbox" name="cb" id="cb6" />
-	   <label for="cb6">탕</label>    
-	   <input type="checkbox" name="cb" id="cb7" />
-	   <label for="cb7">면요리</label>
-	   <input type="checkbox" name="cb" id="cb8" />
-	   <label for="cb8">야식</label>
-	   <input type="checkbox" name="cb" id="cb9" />
-	   <label for="cb9">초간단</label>
-    </div>
-	</section>
+  					
+		<section id="rcp-category-section" class="rcp-category">    
+      <div id="rcp-category-div">
+	      <div>
+			    <span class="category-name">나라별</span>
+			                          
+			    <span>
+			      <input type="checkbox" name="cb1" id="cb1" value="한식"/>
+			      <label class="rcp-category-click" for="cb1">한식</label>
+			    </span>	    
+			    <span>
+			      <input type="checkbox" name="cb1" id="cb2" value="일식"/>
+			      <label class="rcp-category-click" for="cb2">일식</label>
+			    </span>	    
+			    <span>
+			      <input type="checkbox" name="cb1" id="cb3" value="중식"/>
+			      <label class="rcp-category-click" for="cb3">중식</label>    
+			    </span>	    	    
+			    <span>
+		        <input type="checkbox" name="cb1" id="cb4" value="동남아/인도"/>
+		        <label class="rcp-category-click" for="cb4">동남아/인도</label>    
+		      </span>
+		      <span>
+		        <input type="checkbox" name="cb1" id="cb5" value="멕시칸"/>
+		        <label class="rcp-category-click" for="cb5">멕시칸</label>    
+		      </span>
+		      <span>
+		        <input type="checkbox" name="cb1" id="cb6" value="양식"/>
+		        <label class="rcp-category-click" for="cb6">양식</label>    
+		      </span>
+		      <span>
+		        <input type="checkbox" name="cb1" id="cb7" value="퓨전"/>
+		        <label class="rcp-category-click" for="cb7">퓨전</label>    
+		      </span>
+	      </div>
+	      
+	      <div>
+		      <span class="category-name">상황별</span>
+		                            
+		      <span>
+		        <input type="checkbox" name="cb1" id="cb8" value="간식/야식"/>
+		        <label class="rcp-category-click" for="cb8">간식/야식</label>
+		      </span>     
+		      <span>
+		        <input type="checkbox" name="cb1" id="cb9" value="술안주"/>
+		        <label class="rcp-category-click" for="cb9">술안주</label>
+		      </span>     
+		      <span>
+		        <input type="checkbox" name="cb1" id="cb10" value="해장"/>
+		        <label class="rcp-category-click" for="cb10">해장</label>    
+		      </span>           
+		      <span>
+		        <input type="checkbox" name="cb1" id="cb11" value="손님접대"/>
+		        <label class="rcp-category-click" for="cb11">손님접대</label>    
+		      </span>
+		      <span>
+		        <input type="checkbox" name="cb1" id="cb12" value="나들이"/>
+		        <label class="rcp-category-click" for="cb12">나들이</label>    
+		      </span>
+		      <span>
+		        <input type="checkbox" name="cb1" id="cb13" value="파티/명절"/>
+		        <label class="rcp-category-click" for="cb13">파티/명절</label>    
+		      </span>
+	      </div>
+	      
+	      <div>
+	        <span class="category-name">재료별</span>
+	                              
+	        <span>
+	          <input type="checkbox" name="cb1" id="cb14" value="육류"/>
+	          <label class="rcp-category-click" for="cb14">육류</label>
+	        </span>     
+	        <span>
+	          <input type="checkbox" name="cb1" id="cb15" value="채소류"/>
+	          <label class="rcp-category-click" for="cb15">채소류</label>
+	        </span>     
+	        <span>
+	          <input type="checkbox" name="cb1" id="cb16" value="해산물"/>
+	          <label class="rcp-category-click" for="cb16">해산물</label>    
+	        </span>           
+	        <span>
+	          <input type="checkbox" name="cb1" id="cb17" value="콩/두부"/>
+	          <label class="rcp-category-click" for="cb17">콩/두부</label>    
+	        </span>
+	        <span>
+	          <input type="checkbox" name="cb1" id="cb18" value="과일"/>
+	          <label class="rcp-category-click" for="cb18">과일</label>    
+	        </span>
+	        <span>
+	          <input type="checkbox" name="cb1" id="cb19" value="달걀/유제품"/>
+	          <label class="rcp-category-click" for="cb19">달걀/유제품</label>    
+	        </span>
+	        <span>
+	          <input type="checkbox" name="cb1" id="cb20" value="면/만두"/>
+	          <label class="rcp-category-click" for="cb20">면/만두</label>    
+	        </span>
+	        <span>
+	          <input type="checkbox" name="cb1" id="cb21" value="김치"/>
+	          <label class="rcp-category-click" for="cb21">김치</label>    
+	        </span>
+	        <span>
+	          <input type="checkbox" name="cb1" id="cb22" value="제철재료"/>
+	          <label class="rcp-category-click" for="cb22">제철재료</label>    
+	        </span>
+	        <span>
+	          <input type="checkbox" name="cb1" id="cb23" value="가공식품"/>
+	          <label class="rcp-category-click" for="cb23">가공식품</label>    
+	        </span>
+	      </div>     
+	      
+	      <div>
+	        <span class="category-name">방법별</span>
+	                              
+	        <span>
+	          <input type="checkbox" name="cb1" id="cb24" value="밥"/>
+	          <label class="rcp-category-click" for="cb24">밥</label>
+	        </span>     
+	        <span>
+	          <input type="checkbox" name="cb1" id="cb25" value="면"/>
+	          <label class="rcp-category-click" for="cb25">면</label>
+	        </span>     
+	        <span>
+	          <input type="checkbox" name="cb1" id="cb26" value="국물"/>
+	          <label class="rcp-category-click" for="cb26">국물</label>    
+	        </span>           
+	        <span>
+	          <input type="checkbox" name="cb1" id="cb27" value="찜/조림/구이"/>
+	          <label class="rcp-category-click" for="cb27">찜/조림/구이</label>    
+	        </span>
+	        <span>
+	          <input type="checkbox" name="cb1" id="cb28" value="볶음/튀김/부침"/>
+	          <label class="rcp-category-click" for="cb28">볶음/튀김/부침</label>    
+	        </span>
+	        <span>
+	          <input type="checkbox" name="cb1" id="cb29" value="나물/샐러드"/>
+	          <label class="rcp-category-click" for="cb29">나물/샐러드</label>    
+	        </span>
+	        <span>
+	          <input type="checkbox" name="cb1" id="cb30" value="김장/절임"/>
+	          <label class="rcp-category-click" for="cb30">김장/절임</label>    
+	        </span>
+	        <span>
+	          <input type="checkbox" name="cb1" id="cb31" value="베이킹/디저트"/>
+	          <label class="rcp-category-click" for="cb31">베이킹/디저트</label>    
+	        </span>
+	        <span>
+	          <input type="checkbox" name="cb1" id="cb32" value="양념/소스/잼"/>
+	          <label class="rcp-category-click" for="cb32">양념/소스/잼</label>    
+	        </span>
+	        <span>
+	          <input type="checkbox" name="cb1" id="cb33" value="음료/차/커피"/>
+	          <label class="rcp-category-click" for="cb33">음료/차/커피</label>    
+	        </span>
+	      </div>
+      </div>                     
+    </section>
+		
+		
+     
 	<!----------------------- /리스트 카테고리 ----------------------->
 	<!----------------------- 리스트 레시피 카운트 및 정렬 ----------------------->
 	<section id="rcp-list-count-order">	
@@ -154,82 +232,7 @@
 	</section>
 	<!----------------------- /리스트 레시피 카운트 및 정렬 ----------------------->
 
-	<div id='signup-pop-up-banner'>
-		<div class="rcp-section">
-			<span>회원 가입</span>
-		</div>
-		<div class="rcp-laytop rcp-laytop2"></div>
-		<div class="rcp-innnersec">
-			<div class="rcp-mar rcp-info">
 
-				<div id="signup-e-mail-div"
-					class="form-group has-warning has-feedback">
-					<input id="signup-e-mail" type="text" class="form-control"
-						placeholder="E-mail 입력"> <span id="signup-e-mail-span"
-						class="glyphicon glyphicon-warning-sign form-control-feedback"
-						aria-hidden="true"></span> <label id="signup-e-mail-label"
-						class="control-label"></label>
-				</div>
-
-				<div id="signup-userName-div"
-					class="form-group has-warning has-feedback">
-					<input id="signup-userName" type="text" class="form-control"
-						placeholder="닉네임 입력"> <span id="signup-userName-span"
-						class="glyphicon glyphicon-warning-sign form-control-feedback"
-						aria-hidden="true"></span> <label id="signup-userName-label"
-						class="control-label"></label>
-				</div>
-
-				<div id="signup-password-div"
-					class="form-group has-error has-feedback">
-					<input id="signup-password" type="password" class="form-control"
-						placeholder="비밀번호 입력"> <span id="signup-password-span"
-						class="glyphicon glyphicon-remove form-control-feedback"
-						aria-hidden="true"></span> <label id="signup-password-label"
-						class="control-label"></label>
-				</div>
-
-				<div id="signup-passwordCheck-div"
-					class="form-group has-error has-feedback">
-					<input id="signup-passwordCheck" type="password"
-						class="form-control" placeholder="비밀번호 확인"> <span
-						id="signup-passwordCheck-span"
-						class="glyphicon glyphicon-remove form-control-feedback"
-						aria-hidden="true"></span> <label id="signup-passwordCheck-label"
-						class="control-label"></label>
-				</div>
-
-			</div>
-
-			<div class="rcp-bottext">
-				<label class="checkbox-inline"> <input type="checkbox"
-					id="agrchk" value="option1">서비스약관과 개인정보수집이용에 동의합니다.
-				</label>
-			</div>
-		</div>
-		<div class="rcp-sign-membership">
-			<span id="signup-addBtn">가입</span> <span id="signup-resetBtn">취소</span>
-		</div>
-	</div>
-	<!--준모_login------------------------------------------------------------------------------- -->
-	<div id='login-pop-up-banner'>
-		<div class="rcp-section">
-			<span>로그인</span>
-		</div>
-		<div class="rcp-laytop rcp-laytop2"></div>
-		<div class="rcp-innnersec">
-			<div id="loginInputBox" class="rcp-mar rcp-info" style="height:110px;">
-				<input class="form-control" type="text" id="userEmail" name="email"
-					placeholder="아이디 입력"></input><br /> <input class="form-control"
-					type="text" id="userPassword" name="password" placeholder="비밀번호 입력"></input>
-				
-			</div>
-		</div>
-		<div class="rcp-sign-membership" id="userLogin" style="margin-top:50px;">
-			<span>로그인</span>
-		</div>
-	</div>
-	<!--  -->
 
 	<div id='editUserInfo-pop-up-banner'>
 		<div class="rcp-laytop">
@@ -433,70 +436,67 @@
 
 	<!--  사용자 js -->
 	<script src="js/jquery.bpopup.min.js"></script>
-	<script src="js/common.js"></script>
-	<script src="js/detail.js"></script>
-<!-- 	<script src="js/recipeDetail.js"></script> -->
-	<script src="js/login.js"></script>
+	<script src="js/common.js"></script>	
+  <!-- <script src="js/recipeDetail.js"></script> -->
+	<!-- <script src="js/login.js"></script> -->
 	<!-- 용이 userUpdate -->
-<!-- 	<script src="js/updateUser.js"></script> -->
+	<!-- <script src="js/updateUser.js"></script> -->
 	<!-- 성현 -->	
 	<script src="js/common/popup.js"></script>
   <script src="js/common/chefCard.js"></script>
-  <script src="js/common/signup.js"></script>
-	<script src="js/list_recipeSearch.js"></script>
-	<script src="node_modules/easy-autocomplete/dist/jquery.easy-autocomplete.min.js"></script>
+  <!-- <script src="js/common/signup.js"></script> -->
+	<script src="node_modules/easy-autocomplete/dist/jquery.easy-autocomplete.min.js"></script>	
+	
 	<script>
-		$(function() {		
-			
-			getWeather();
-			getRealTimeRank();			
-
-			  /* 준모3 */				  
-				if(eval(sessionStorage.getItem('data'))!=null){
-				 
-				  $('#topbarUserImg').html("<img class='rcp-barimg dropdown-trigger img-circle' src='img/Chef3.jpg' />");
+	$(document).ready(function(){
 		
-				  
-				}
+		// 상단바 불러오기
+		$('#topBtn').load("topsearchbar.html");	  		
+		
+		getWeather();
+		getRealTimeRank();			
 
+	  /* 준모3 */				  
+		if(eval(sessionStorage.getItem('data'))!=null){		 
+		  $('#topbarUserImg').html("<img class='rcp-barimg dropdown-trigger img-circle' src='img/Chef3.jpg' />");		  
+		}
 
-			$('.profile-dropdown:has(.active)').bind('click', function() {
-
-			});
-
-			$(window).bind('scroll', function(e) {
-				$('.main-nav__dropdown').removeClass('active');
-			});
-
-			$('.dropdown-trigger').on('click', function() {
-		      dropdownClick('.profile-dropdown', '.mobile-menu-dropdown');
-				  /* 용이 추가() */    
-				    if(eval(sessionStorage.getItem('data'))[0].userNo!=null){
-			         $('#profileEmail').text(eval(sessionStorage.getItem('data'))[0].email);
-			         $('#profileName').text(eval(sessionStorage.getItem('data'))[0].userName);
-			         $('#profileGrade').text(eval(sessionStorage.getItem('data'))[0].recipeUrl);
-			  /* 용이 추가() */       
-			         $('#introduce').text(eval(sessionStorage.getItem('data'))[0].intro);
-			 	     }
-				   });
-			$('.dropdown-trigger').on('scroll', function() {
-				dropdownClick('.profile-dropdown', '.mobile-menu-dropdown');
-			});
-
-			$('.dropdown-trigger--mobile').on('click', function() {
-				dropdownClick('.mobile-menu-dropdown', '.profile-dropdown');
-			});
-
-			$('#userInfoEditBtn').on('click', function() {
-				$('#editUserInfo-pop-up-banner').bPopup();
-				if(eval(sessionStorage.getItem('data'))[0].userNo!=null){
-				         $('#updateBoxEmail').text(eval(sessionStorage.getItem('data'))[0].email);
-				         $('#updateBoxName').text(eval(sessionStorage.getItem('data'))[0].userName);
-				         $('#profileGrade').text(eval(sessionStorage.getItem('data'))[0].recipeUrl);
-
-				 }
-			});
+		$('.profile-dropdown:has(.active)').bind('click', function() {
 		});
+
+		$(window).bind('scroll', function(e) {
+			$('.main-nav__dropdown').removeClass('active');
+		});
+
+		$('.dropdown-trigger').on('click', function() {
+	      dropdownClick('.profile-dropdown', '.mobile-menu-dropdown');
+			  /* 용이 추가() */    
+			    if(eval(sessionStorage.getItem('data'))[0].userNo!=null){
+		         $('#profileEmail').text(eval(sessionStorage.getItem('data'))[0].email);
+		         $('#profileName').text(eval(sessionStorage.getItem('data'))[0].userName);
+		         $('#profileGrade').text(eval(sessionStorage.getItem('data'))[0].recipeUrl);
+		  /* 용이 추가() */       
+		         $('#introduce').text(eval(sessionStorage.getItem('data'))[0].intro);
+		 	     }
+			   });
+		$('.dropdown-trigger').on('scroll', function() {
+			dropdownClick('.profile-dropdown', '.mobile-menu-dropdown');
+		});
+
+		$('.dropdown-trigger--mobile').on('click', function() {
+			dropdownClick('.mobile-menu-dropdown', '.profile-dropdown');
+		});
+
+		$('#userInfoEditBtn').on('click', function() {
+			$('#editUserInfo-pop-up-banner').bPopup();
+			if(eval(sessionStorage.getItem('data'))[0].userNo!=null){
+			         $('#updateBoxEmail').text(eval(sessionStorage.getItem('data'))[0].email);
+			         $('#updateBoxName').text(eval(sessionStorage.getItem('data'))[0].userName);
+			         $('#profileGrade').text(eval(sessionStorage.getItem('data'))[0].recipeUrl);
+
+			 }
+		});
+	});
 	</script>
 </body>
 </html>
