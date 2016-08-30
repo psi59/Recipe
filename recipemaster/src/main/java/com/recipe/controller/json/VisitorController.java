@@ -17,6 +17,7 @@ import com.recipe.domain.User;
 import com.recipe.domain.Visitor;
 import com.recipe.service.UserService;
 import com.recipe.service.VisitorService;
+import com.recipe.util.CommonUtil;
 
 @Controller
 @RequestMapping("/visitor/")
@@ -49,7 +50,7 @@ public class VisitorController {
   public String add(Visitor visitor, int toUser, HttpSession session){    
     HashMap<String,Object> result = new HashMap<>();
     try{
-      visitor.setLoginUserNo(((User)session.getAttribute("loginUser")).getUserNo());
+      visitor.setLoginUserNo(CommonUtil.getSessionUser(session).getUserNo());
       visitor.setVisitorUserNo(toUser);
       System.out.println("로그인한 유저 NO : "+ visitor);
       visitorService.addVisitor(visitor);

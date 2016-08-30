@@ -61,7 +61,6 @@ public class JsonElementLazyWrapper extends JsonElement implements Serializable 
                 }
             }
         }
-        System.out.println(this.node.isJsonArray());
         return this.node;
     }
 

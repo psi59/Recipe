@@ -2,6 +2,8 @@
 
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 
+@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+
 .navbar {
 	height: 51px;
 }
@@ -279,8 +281,13 @@ body {
 	width: 100%;
 }
 
-rcp-Vst-id {
-	font-color: #d5d8dd;
+.rcp-Vst-vno {
+	margin-left: -7%;
+}
+
+.rcp-Vst-id {
+	font-color: #000000;
+	margin-left: 22%;
 }
 
 .rcp-Vst-write {
@@ -298,7 +305,7 @@ rcp-Vst-id {
 
 .rcp-Vst-inputBtn {
 	position: relative;
-	top: -22pt;
+	top: -25pt;
 	left: 19pt;
 	height: 53pt;
 	width: 74pt;
@@ -306,6 +313,11 @@ rcp-Vst-id {
 
 .rcp-Vst-contents-rep>hr {
 	margin: 0;
+}
+
+.rcp-Vst-contents>p {
+	font-family: 'Nanum Pen Script', serif;
+	font-size: 19pt;
 }
 
 .hs-content-visit {
@@ -323,37 +335,43 @@ rcp-Vst-id {
 }
 
 .rcp-Vst-top {
-	background-color: #FAF4C0;;
-	border: 1px solid rgba(0, 0, 0, 0.1);
+	background-color: 8C8C8C;
+	border: 1px solid rgba(0, 0, 0, 0.2);
 	width: 100%;
-	height: 20%;
+	height: 30%;
 }
 
 .rcp-Vst-bottom {
-	background-color: #fff;
+	background-color: #FFFF8F;
 	width: 100%;
-	height: 80%;
-	border: 1px solid rgba(0, 0, 0, 0.1);
+	height: 70%;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border
 }
+
 .rcp-Vst-footer {
 	width: 100%;
 	height: 60px;
 	border: 1px solid #BDBDBD;
 }
-#tabs-1 .hs-content .container .row .rcp-Vst-write{
+
+#tabs-1 .hs-content .container .row .rcp-Vst-write {
 	display: none;
 }
-#tabs-2 .hs-content .container .row .rcp-Vst-write{
-  display: none;
+
+#tabs-2 .hs-content .container .row .rcp-Vst-write {
+	display: none;
 }
-#tabs-3 .hs-content .container .row .rcp-Vst-write{
-  display: none;
+
+#tabs-3 .hs-content .container .row .rcp-Vst-write {
+	display: none;
 }
+
 .rcp-Vst-img {
 	position: absolute;
-	width: 50px;
-	height: 50px;
-	padding: 5px;
+	width: 65px;
+	height: 65px;
+	padding-top: 15px;
 }
 
 .rcp-Vst-img-rep {
@@ -395,13 +413,19 @@ rcp-Vst-id {
 
 .vstUpdateBtn {
 	position: relative;
-	left: 81%;
+	left: 72%;
 	top: 10%;
+}
+
+.vstResetBtn {
+	position: relative;
+	left: 73%;
+	top: 11%;
 }
 
 .vstConfirmBtn {
 	position: relative;
-	left: 81%;
+	left: 72%;
 	top: 10%;
 }
 
@@ -413,7 +437,7 @@ rcp-Vst-id {
 
 .vstDeleteBtn {
 	position: relative;
-	left: 83%;
+	left: 73%;
 	top: 11%;
 }
 

@@ -21,7 +21,7 @@ $(function() {
 			var sourceCRList = $('#temp').text();
 			var templateCRList = Handlebars.compile(sourceCRList);
 
-			$('.rcp-userName').text(result.user.userName);
+			$('.rcp-userPage-userName').text(result.user.userName);
 
 			$('#tabs-1 .hs-content .container .row .rcp-mypage-section')
 					.append(templateCRList(result));
@@ -123,13 +123,16 @@ $(function() {
 
 		if($(event.target).is('#searchRecipe')){
 			request=1;
+			$('.rcp-Vst').hide();
 			$('.rcp-Vst-write').hide();
 		}
 		else if($(event.target).is('#searchScrap')){
 			request=2;
+			$('.rcp-Vst').hide();
 			$('.rcp-Vst-write').hide();
 		}else if($(event.target).is('#searchSubscribe')){
 			request=3;
+			$('.rcp-Vst').hide();
 			$('.rcp-Vst-write').hide();
 		}else{
 			request = 4;
@@ -179,8 +182,6 @@ $(function() {
 var sourceVisitor = $('#visitor-template').html();
 var templateVisitor = Handlebars.compile(sourceVisitor);
 
-loadVisitor();
-
 function loadVisitor() {
 	$.ajax({
 		url : '/visitor/list.json',
@@ -203,13 +204,8 @@ function loadVisitor() {
 	});
 }
 
-				$('#tabs-'+$('#tabId').val()+' .hs-content .container .row .rcp-mypage-section div').remove();
-				$('#tabs-'+request+' .hs-content .container .row .rcp-mypage-section').append(templateCRList(result));
-				$('#tabId').val(request);
-				$('.rcp-Vst').remove();
 /* Add */
-$(document).on('click', '#rcp-rpBtn', function() {
-	alert('d0');
+$(document).on('click','#rcp-rpBtn', function() {
 	$.ajax({
 		url : 'visitor/add.json',
 		method : 'post',
@@ -262,25 +258,33 @@ $(document).on('click', '.vstDeleteBtn', function(event) {
 
 /* 업데이트 */
 
-$(document)
-		.on(
-				'click',
-				'.vstUpdateBtn',
-				function(event) {
-					event.preventDefault();
-					$(
-							'.vst-contents[data-index='
-									+ $(this).attr('data-index') + ']')
-							.html(
-									'<div class="rcp-Vst-contents"><textarea id="updatevContent" rows="3" cols="34" placeholder="편집해주세요" style="resize:none;"></textarea></div>');
-					$(
-							'.editBtn1[data-index='
-									+ $(this).attr('data-index') + ']').html(
-							'<img class="vstConfirmBtn" id="vstConfirmBtn" data-index="'
-									+ $(this).attr('data-index') + ' "'
-									+ 'src="/img/vstConfirmBtn.png">')
+$(document).on('click','.vstUpdateBtn',function(event) {
+	event.preventDefault();
+	$(
+		'.vst-contents[data-index='
+				+ $(this).attr('data-index') + ']')
+		.html(
+				'<div class="rcp-Vst-contents"><textarea id="updatevContent" rows="7" cols="43" placeholder="편집해주세요" style="resize:none;"></textarea></div>');
+	$(
+		'.editBtn1[data-index='
+				+ $(this).attr('data-index') + ']').html(
+		'<button type="button" class="btn btn-success btn-xs vstConfirmBtn" id="vstConfirmBtn" data-index="'
+				+ $(this).attr('data-index') + ' "'
+				+ '>완료</button>')
+	$(
+		'.editBtn2[data-index='
+				+ $(this).attr('data-index') + ']').html(
+		'<button type="button" class="btn btn-warning btn-xs vstResetBtn" id="vstResetBtn" data-index="'
+				+ $(this).attr('data-index') + ' "'
+				+ '>취소</button>')
 
-				});
+});
+
+$(document).on('click','.vstResetBtn',function(event) {
+	event.preventDefault();
+	$('#Vst>').remove();
+	loadVisitor();
+});
 
 $(document).on('click', '.vstConfirmBtn', function(event) {
 	event.preventDefault();
@@ -302,7 +306,7 @@ $(document).on('click', '.vstConfirmBtn', function(event) {
 });
 f
 
-$(document).on(
+/*$(document).on(
 		'mouseenter',
 		'.rcp-Vst-slotRp',
 		function() {
@@ -346,11 +350,11 @@ $(document).on('click', '#hideRp', function() {
 
 	$('#hideRp').parent().html('<span id="moreRp">댓글 더보기..(1)</span>');
 })
-
+*/
 /* 화면관리 */
-$(function() {
+/*$(function() {
 	$("#tabs").tabs();
-});
+});*/
 
 function pageTabs() {
     $('.rcp-Vst-write').hide();
@@ -376,6 +380,7 @@ function pageTabs() {
 
 						} else {
 							request = 4;
+							loadVisitor();
 						}
 
 						$
