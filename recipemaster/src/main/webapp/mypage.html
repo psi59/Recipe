@@ -174,7 +174,7 @@
 			<div class="rcp-profileCover">
 				<section class="rcp-pagetop">
 					<div class="rcp-topimg-position">
-						<a class="rcp-topimg-border"> <img src="/img/pika.jpg"
+						<a class="rcp-topimg-border"> <img src="img/profileImg/default.jpg"
 							class="rcp-topimg">
 						</a>
 						<div class="rcp-topinfo">
@@ -279,12 +279,11 @@
 						<div class="container">
 							<div class="row">
 								<div class="rcp-Vst-write" id="quick"
-									style="margin-left: 2%; position: fixed; background-color: #FFD9EC; top: 88%; left: 19%; border: solid 2px #FFB2D9; height: 96px; width: 55%; text-align: center; color: #6799FF;">
+									style="margin-left: 2%; position: fixed; background-color: #FCFCFC; top: 88%; left: 19%; border: 1px solid #BDBDBD; height: 96px; width: 55%; text-align: center; color: #6799FF;">
 									<div class="inputWrite">
 										<textarea id="rcp-rpcontent" rows="3" cols="100"
 											style="resize: none;" placeholder="방명록을 입력해주세요"></textarea>
-										<button id="rcp-rpBtn"
-											class="rcp-Vst-inputBtn btn btn-default">등록</button>
+										<button id="rcp-rpBtn" class="rcp-Vst-inputBtn btn btn-info">등록</button>
 									</div>
 								</div>
 								<section class="Vst" id="Vst">
@@ -376,14 +375,19 @@
 	<script id="visitor-template" type="text/x-handlebars-template">
   {{#each data}}
     <div class="rcp-Vst" name="rcp-Vst">
-          <div class="rcp-Vst-top">
-            <img class="rcp-Vst-img img-circle" src="/img/pika.jpg" />
+          <div class="rcp-Vst-top">            
+            <img class="rcp-Vst-img img-circle" src="img/pika.jpg" />            
             <div class="rcp-Vst-common">
-              <span class="editBtn1" data-index="{{visitorNo}}"><a href="#"><img class="vstUpdateBtn"
-                src="/img/vstUpdateBtn.png" data-index="{{visitorNo}}"></a></span> 
-              <a href="#"><img class="vstDeleteBtn" name="vstDeleteBtn" data-index="{{visitorNo}}"
-                src="/img/vstDeleteBtn.png"></a> <span id="rcp-Vst-id" class="rcp-Vst-id">{{user.userName}}</span><br>
-              &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<span id="rcp-Vst-time">{{visitorDate}}</span>
+            <span class="editBtn1" data-index="{{visitorNo}}">
+             <button type="button" class="btn btn-info btn-xs vstUpdateBtn" data-index="{{visitorNo}}">수정</button>
+            </span>
+            <span class="editBtn2" data-index="{{visitorNo}}">
+                <button type="button" class="btn btn-danger btn-xs vstDeleteBtn" name="vstDeleteBtn" data-index="{{visitorNo}}">삭제</button>
+            </span>  
+              <span class="rcp-Vst-vno">No. {{visitorNo}}</span><br/>
+              <span id="rcp-Vst-id" class="rcp-Vst-id">From. {{user.userName}}
+              </span><br/>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+              <span id="rcp-Vst-time">Date. {{visitorDate}}</span>
             </div>
           </div>
           <div class="rcp-Vst-bottom vst-contents" id="vst-contents" data-index="{{visitorNo}}">
@@ -464,6 +468,87 @@
       </div>
  {{/each}}
   </script>
+  
+	<script>
+		$(window).scroll(
+				function() {
+					if ($(window).scrollTop() == $(document).height()
+							- $(window).height()) {
+						rcpListScrollAppend();
+					}
+					/* 준모3 */
+				});
+	</script>
+
+	<script>
+		function rcpListScrollAppend() {
+			var userNo = 0;
+			var a = eval(sessionStorage.getItem('data'));
+			if (a != null) {
+				userNo = eval(sessionStorage.getItem('data'))[0].userNo;
+			}
+			if (isNaN(parseInt($('#rcpList-pageNo').val()) + 1)) {
+				return;
+			}
+			var source = $('#comRcpList-template').text();
+			var template = Handlebars.compile(source);
+
+			$.ajax({
+				url : 'recipe/comList.json',
+				method : 'post',
+				data : {
+					userNo : userNo,
+					pageNo : parseInt($('#rcpList-pageNo').val()) + 1
+				},
+				dataType : 'json',
+				success : function(result) {
+					if (result.status != 'success') {
+						//swal('실패 ~');
+						return;
+					}
+					$('#tabs-1 .rcp-subscribe').append(template(result));
+					$('#rcpList-pageNo').val(result.pageNo);
+				},
+				error : function() {
+					//swal('오호라~','더이상 데이터가 없습니다.')
+				}
+			})
+		}
+	</script>
+	<script>
+		$(function() {
+			loadMyPage();
+		});
+
+		function loadMyPage() {
+
+			$.ajax({
+				url : 'visitor/loadMyPage.json',
+				method : 'get',
+				dataType : 'json',
+				success : function(result) {
+					if (result.status != 'success') {
+						//swal('로그인 해주시기 바랍니다.');
+						return;
+					}
+					$('#visitNum').text(result.sum + "명");
+					$('#likeNum').text(result.like + "개");
+					$('#scrapNum').text(result.scr + "개");
+					$('#gradeNum').text(result.avg + "점");
+
+				},
+				error : function() {
+					//swal('더이상 데이터가 없습니다.')
+				}
+			})
+		}
+	</script>
+	<script>
+		$('#visitorWrite').on('click', function() {
+			$('.rcp-Vst').show();
+			$('.rcp-Vst-write').show();
+		})
+	</script>
 	<script src="js/subscribe.js"></script>
 	<script src="js/mypage.js"></script>
 

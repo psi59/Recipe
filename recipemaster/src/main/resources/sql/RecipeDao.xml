@@ -295,7 +295,7 @@ DELETE FROM rcp_rp WHERE RRPNO=${value};
 	<select id="selectOne" resultMap="recipeMap" parameterType="INTEGER">
 	    SELECT DISTINCT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn,
 	    r.rcp_dt, r.hits, r.rpimg,
-	    r.rgst, r.gpa, r.rcp_pd, u.uno, u.name userName,s.uno scrapUser, s.rcpno,
+	    r.rgst, r.gpa, r.rcp_pd, u.uno, u.email,u.name userName,s.uno scrapUser, s.rcpno,
 	    (select count(rcpno) from rcp_lik where rcpno=${recipeNo}) countLike,
 	    (select count(rrpno) from rcp_rp where rcpno=${recipeNo})
 	    countComment,
