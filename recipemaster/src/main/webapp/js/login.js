@@ -79,7 +79,7 @@ function loginCheck(event) {
 				});
 
 				jsonData = JSON.stringify(data);
-				
+				console.log (jsonData)
 				/*eval 사용 방법, eval(jsonData)[0].email*/
 				if(jsonData!=null){
 					$('#signUpBtn').remove();
@@ -87,6 +87,7 @@ function loginCheck(event) {
 					$('#signUpTopBtn').remove();
 					$('#loginIcon').html('<img id="loginIconAction1" class="rcp-barimg dropdown-trigger img-circle" src="img/Chef3.jpg" />');
 					$('#topbarUserImg').html('<img id="loginIconAction2" class="rcp-barimg dropdown-trigger img-circle" src="img/Chef3.jpg" />');
+					$('#sessionEmail').val(eval(jsonData)[0].email);
 				}
 			} else {
 						return

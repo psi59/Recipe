@@ -5,107 +5,155 @@
 <title>ranking</title>
 
 <link rel="stylesheet"
-  href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
+	href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
 <link rel="stylesheet"
-  href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+	href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 
 <!-- 사용자 정의 css -->
 <!-- <link rel="stylesheet" href="css/rank.css"> -->
 <link rel="stylesheet" href="css/rankingpage.css">
+<link rel="stylesheet" href="css/userinfobox.css">
+<link rel="stylesheet" href="css/common/signup.css">
+<link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <style>
 </style>
 </head>
-	<body>
-	  <nav>
-	  <div class="row">
-	   <div class="col-md-1"><a href="index.html"><img class="rcp-gomain" src="img/gohome.png"></a>
-      </div>
-	    <div class="nav-container col-md-11 rcp-topbar">
-	      <ul>
-	        <li><a id="s1" href="#1">Best Chef</a></li>
-	        <li><a id="s2" href="#2">Chef Ranking</a></li>
-	        <li><a id="s3" href="#3">Recipe Ranking</a></li>
-	      </ul>
-	    </div>
-	    </div>
-	  </nav>
- <!-------------------------------- Rank List --------------------------------->
-  <section id="1" class="home">
-    <h1>Best Chef</h1>
-    <div id="rcp-chef-rank">
-    
-    </div>
-    <!------------------------- Rank List ------------------------------>
-  </section>
-  <section id="2">
-    <h1>Chef Ranking</h1>
-    <div class="wrapper">
-      <div class="row rcp-font-title">
-       <br/><br/>
-        <div class="col-md-2">Rank</div>
-        <div class="col-md-2">Chef 이름</div>
-        <div class="col-md-2">레시피 수</div>
-        <div class="col-md-2">구독자 수</div>
-        <div class="col-md-2">좋아요 수</div>
-        <div class="col-md-2">Total Point</div>
-      </div>
-      <div class="rcp-title">
-        <hr />
-      </div>
-      <div id="chefRanking"></div>
-      <img class="rcp-rankmedal-small1" src="/img/medal1.png"/>
+<body>
+	<nav>
+		<div class="row">
+			<!-- <div class="col-md-1"><a href="index.html"><img class="rcp-gomain" src="img/gohome.png"></a> -->
+		</div>
+		<div class="nav-container col-md-11 rcp-topbar">
+			<ul>
+			  <li><a href="/index.html">Home</a></li>
+				<li><a id="s1" href="#1">Best Chef</a></li>
+				<li><a id="s2" href="#2">Chef Ranking</a></li>
+				<li><a id="s3" href="#3">Recipe Ranking</a></li>
+			</ul>
+			<div
+				class="col-md-4 col-sm-4 col-xs-4 signin rcp-signin text-right navbar-nav">
+				<a href="#" id="signUpBtn"><span class="rcp-btn-default-2">회원가입</span></a>&nbsp;
+				&nbsp; <a href="#" id="loginBtn"><span class="rcp-btn-default-2">로그인</span></a>
+				<a href="#" id="loginIcon"></a>
+			</div>
+			<div id="profileView" class="main-nav__dropdown profile-dropdown">
+				<div class="rcp-outline">
+					<div>
+						<a href="#0" class="dropdown__header"><img id="profileImg"
+							class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a
+							id="profileEmail" href="#"
+							class="dropdown__header rcp-infobox-text"></a>
+						<h6 id="profileName" class="rcp-nickname"></h6>
+						<a href="#0" class="dropdown__header"> <span id="profileGrade"
+							class="dropdown__title rcp-infobox-text"> <img
+								src="img/star.png"> Master Chef
+						</span>
+						</a>
+						<div id=Btn align="center">
+							<button id="userInfoEditBtn" type="button"
+								class="btn btn-default rcp-btn-nav">정보수정</button>
+							<button id="logoutBtn" type="button"
+								class="btn btn-default rcp-btn-nav">로그아웃</button>
+						</div>
+					</div>
+					<a href="#" class="rcp-goMyPage"><button
+							class="goMyPageBtn btn btn-default rcp-btn-nav"
+							style="margin-left: 50px;">MyPage</button></a> <a
+						href="/writerecipe.html"><button
+							class="goWriteRcpBtn btn btn-default rcp-btn-nav"
+							style="margin-left: 50px;">Recipe 작성</button></a>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<!-------------------------------- Rank List --------------------------------->
+	<section id="1" class="home">
+		<h1>Best Chef</h1>
+		<div id="rcp-chef-rank"></div>
+		<!------------------------- Rank List ------------------------------>
+	</section>
+	<section id="2">
+		<h1>Chef Ranking</h1>
+		<div class="wrapper">
+			<div class="row rcp-font-title">
+				<br /> <br />
+				<div class="col-md-2">Rank</div>
+				<div class="col-md-2">Chef 이름</div>
+				<div class="col-md-2">레시피 수</div>
+				<div class="col-md-2">구독자 수</div>
+				<div class="col-md-2">Total Point</div>
+				<div class="col-md-2">비고</div>
+			</div>
+			<div class="rcp-title">
+				<hr />
+			</div>
+			<div id="chefRanking"></div>
+			<!-- <img class="rcp-rankmedal-small1" src="/img/medal1.png"/>
       <img class="rcp-rankmedal-small2" src="/img/medal2.png"/>
-      <img class="rcp-rankmedal-small3" src="/img/medal3.png"/>
-    </div>
-    <div><br/><h4 style="color:black;">
-    Total Point : 레시피 1개 : 5 Point / 구독자수 1명 : 3 Point / 좋아요 1개 : 2 Point</h4></div>
-  </section>
-  <section id="3">
-    <h1>Recipe Ranking</h1>
-    <div class="wrapper">
+      <img class="rcp-rankmedal-small3" src="/img/medal3.png"/> -->
+		</div>
+		<div>
+			<br />
+			<h4 style="color: black;">Total Point : 레시피 1개 : 10 Point / 구독자수
+				1명 : 5 Point</h4>
+		</div>
+	</section>
+	<section id="3">
+		<h1>Recipe Ranking</h1>
+		<div class="wrapper">
 
-      <div class="row rcp-font-title">
-        <div class="col-md-12"><br/></div>
-        <div class="col-md-12"><br/></div>
-        <div class="col-md-2">Rank</div>
-        <div class="col-md-2">Recipe 이름</div>
-        <div class="col-md-2">좋아요</div>
-        <div class="col-md-2">스크랩</div>
-        <div class="col-md-2">조회수</div>
-        <div class="col-md-2">Total Point</div>
-      </div>
-      <div class="rcp-title">
-        <hr />
-      </div>
-      <div id="recipeRanking"></div>
-       <img class="rcp-rankmedal-small4" src="/img/medal1.png"/>
+			<div class="row rcp-font-title">
+				<div class="col-md-12">
+					<br />
+				</div>
+				<div class="col-md-12">
+					<br />
+				</div>
+				<div class="col-md-2">Rank</div>
+				<div class="col-md-2">Recipe 이름</div>
+				<div class="col-md-2">좋아요</div>
+				<div class="col-md-2">스크랩</div>
+				<div class="col-md-2">조회수</div>
+				<div class="col-md-2">Total Point</div>
+			</div>
+			<div class="rcp-title">
+				<hr />
+			</div>
+			<div id="recipeRanking"></div>
+			<!-- <img class="rcp-rankmedal-small4" src="/img/medal1.png"/>
       <img class="rcp-rankmedal-small5" src="/img/medal2.png"/>
-      <img class="rcp-rankmedal-small6" src="/img/medal3.png"/>
-    </div>
-    <div><br/><h4 style="color:black;">
-    Total Point : 좋아요 1개 : 3 Point / 스크랩 1개 : 3 Point / 조회수 1개 : 1 Point</h4></div>
-  </section>
-  <footer>
-    <h1>Thanks for Viewing!</h1>
-    <h3>yongyi1587@naver.com</h3>
-    <p>RecipeMaster</p>
-    <p>recipemaster.com</p>
-  </footer>
-  <a id="toTop" href="#1"><div class="to-top"></div></a>
-  <!-- js -->
-  <script src="node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
-  <script src="node_modules/handlebars/dist/handlebars.min.js"></script>
-  
-  <!--yongyi  -->
-  <script src="js/jquery.bpopup.min.js"></script>
-  <script src="js/common/chefCard.js"></script>
-  <script src="js/waypoints.min.js"></script>
-  <script src="js/recipeDetail.js"></script>
-  <script src="js/rankingpage.js"></script>
-  <script id="chef-card-template" type="text/x-handlebars-template">
+      <img class="rcp-rankmedal-small6" src="/img/medal3.png"/> -->
+		</div>
+		<div>
+			<br />
+			<h4 style="color: black;">Total Point : 좋아요 1개 : 3 Point / 스크랩
+				1개 : 3 Point / 조회수 1개 : 1 Point</h4>
+		</div>
+	</section>
+	<footer>
+		<h1>Thanks for Viewing!</h1>
+		<h3>yongyi1587@naver.com</h3>
+		<p>RecipeMaster</p>
+		<p>recipemaster.com</p>
+	</footer>
+	<a id="toTop" href="#1"><div class="to-top"></div></a>
+	<!-- js -->
+	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
+	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
+
+	<!--yongyi  -->
+	<script src="js/jquery.bpopup.min.js"></script>
+	<script src="js/common/chefCard.js"></script>
+	<script src="js/waypoints.min.js"></script>
+	<script src="js/login.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/updateUser.js"></script>
+	<script src="js/recipeDetail.js"></script>
+	<script src="js/rankingpage.js"></script>
+	<script id="chef-card-template" type="text/x-handlebars-template">
 {{#each data}}
 <div class="fresh-ui-wrap col-md-3">
  {{#if @first}}    
@@ -131,28 +179,32 @@
         <div class="list">
           <a data-title="Recipe">{{recipeCount}}</a>
           <a data-title="구독자">{{subsCount}}</a>
-          <a data-title="좋아요">{{likeCount}}</a>
+          <!--<a data-title="좋아요">{{likeCount}}</a>-->
           <a data-title="Total">{{totalPoint}}</a>
         </div>
       </div>
     </div>
-    <div class="content">
-          
-      <div class="name"><input type="hidden" value="{{email}}">
-                   <a href="#" class="rcp-userName">{{userName}}</a></div>
-      <div class="job-title">Master Chef </div>
-      <p class="text">{{email}}</p>
-      <div class="list clearfix">
-        <p>소개</p>
-        <p>- {{intro}}</p>
-      </div>
+        <div class="content introBox">
+          <div class="name">
+                   <p class="rcp-userName1">{{userName}}</p></div>
+                    <p class="text">{{email}}</p>      
+                  <div class="rcp-ranking">랭킹 : {{rownum}}등</div>
+          <div class="list clearfix">
+        <p class="introfont">{{intro}}</p>
+        </div>
+        <div class="cardbtn">
+         <button type="button" class="btn btn-default">
+              <input type="hidden" value="{{email}}">
+              <a href="#" class="rcp-userName visitbtn">방문하기</a></button>
+              <button type="button" class="btn btn-default">구독하기</button>
+        </div>
     </div>
   </div>
 </div>
   {{/each}} 
   </script>
-  
-  <script id="chef-rank-template" type="text/x-handlebars-template">
+
+	<script id="chef-rank-template" type="text/x-handlebars-template">
   {{#each data}}
       <div class="row rcp-font hover effect8">
         <div class="col-md-2">{{rownum}}</div>
@@ -162,12 +214,14 @@
         </div>
         <div class="col-md-2">{{recipeCount}} 개</div>
         <div class="col-md-2">{{subsCount}} 명</div>
-        <div class="col-md-2">{{likeCount}} 개</div>
         <div class="col-md-2">{{totalPoint}} 점</div>
+        <div class="col-md-2 medalDisplay">
+        <img class="rcp-rankmedal-small" src="/img/medal1.png"/>
+        </div>
 </div>
   {{/each}}
   </script>
-  <script>
+	<script>
     var sourceChef = $('#chef-rank-template').text();
     var templateChef = Handlebars.compile(sourceChef);
     loadChefRanking();
@@ -192,12 +246,12 @@
       });
     }
   </script>
-  <script id="recipe-rank-template" type="text/x-handlebars-template">
+	<script id="recipe-rank-template" type="text/x-handlebars-template">
     {{#each data}}
       <div class="row rcp-font hover effect8">
         <div class="col-md-2">{{rownum}}</div>
         <div class="col-md-2">
-          <a href="#" class="detail" style="z-index:9999">{{recipeName}} </a> 
+          <a href="#" class="detail rcp-rcpName" style="z-index:9999">{{recipeName}} </a> 
           <input type="hidden" name="recipeNo" value="{{recipeNo}}"></div>
         <div class="col-md-2">{{countLike}} 개</div>
         <div class="col-md-2">{{countScrap}} 개</div>
@@ -206,7 +260,7 @@
       </div>
   {{/each}}
   </script>
-  <script>
+	<script>
     var sourceRcp = $('#recipe-rank-template').text();
     var templateRcp = Handlebars.compile(sourceRcp);
     loadRcpRanking();
@@ -229,6 +283,29 @@
         }
       });
     }
+  </script>
+	<script>
+    $(function() {
+      getWeather();
+      getRealTimeRank();
+      $('#footer').load("../copyright.html");
+      
+      $('.profile-dropdown:has(.active)').bind('click', function() {
+
+      });
+
+      $(window).bind('scroll', function(e) {
+        $('.main-nav__dropdown').removeClass('active');
+      });
+
+      $('.dropdown-trigger').on('scroll', function() {
+        dropdownClick('.profile-dropdown', '.mobile-menu-dropdown');
+      });
+
+      $('.dropdown-trigger--mobile').on('click', function() {
+        dropdownClick('.mobile-menu-dropdown', '.profile-dropdown');
+      });
+    });
   </script>
 </body>
 </html>

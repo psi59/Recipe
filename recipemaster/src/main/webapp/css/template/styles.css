@@ -2059,7 +2059,7 @@ dd {
 
 /* 2.5.1 LAYOUT > RECIPES > Recipes Grid
 ---------------------------------------*/
-.hs-recipes.grid .entry,
+.rcp-mypage-section .entry,
 .hs-recipes.grid .we {
   line-height: 30px;
   margin-bottom: 30px;

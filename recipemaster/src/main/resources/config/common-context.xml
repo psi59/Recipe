@@ -13,7 +13,7 @@
     class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
     <property name="maxUploadSize" value="30720000" />
   </bean>
-
+  
   <!-- Service, Dao 객체 스캔  -->
   <context:component-scan base-package="com.recipe">
     <context:exclude-filter type="annotation"

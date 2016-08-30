@@ -27,14 +27,18 @@ public class VisitorController {
   @RequestMapping(path="list", produces="application/json;charset=UTF-8")
   @ResponseBody
   public String list(@RequestParam(defaultValue="1")int pageNo, 
-                      @RequestParam(defaultValue="10")int pageSize){
-
+                      @RequestParam(defaultValue="10")int pageSize,
+                      String email){
+    User user = userService.selectFromEmail(email);
+    
     HashMap<String,Object> result = new HashMap<>();
     try{
-      List<Visitor> list = visitorService.getVisitorList(pageNo, pageSize);
+      List<Visitor> list = visitorService.getVisitorList(user.getUserNo(),pageNo, pageSize);
       result.put("status", "success");
       result.put("data", list);
+      result.put("user", user);
     }catch(Exception e){
+      e.printStackTrace();
       result.put("status", "failure");
     }
     return new Gson().toJson(result);
@@ -42,12 +46,15 @@ public class VisitorController {
 
   @RequestMapping(path="add", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
   @ResponseBody
-  public String add(Visitor visitor,HttpSession session){    
+  public String add(Visitor visitor, int toUser, HttpSession session){    
     HashMap<String,Object> result = new HashMap<>();
     try{
-      visitor.setVisitorUserNo((Integer)session.getAttribute("userNo"));
+      visitor.setLoginUserNo(((User)session.getAttribute("loginUser")).getUserNo());
+      visitor.setVisitorUserNo(toUser);
+      System.out.println("로그인한 유저 NO : "+ visitor);
       visitorService.addVisitor(visitor);
-      result.put("status", "success");      
+      result.put("status", "success");    
+ 
     }catch(Exception e){
       result.put("status", "failure");
     }
