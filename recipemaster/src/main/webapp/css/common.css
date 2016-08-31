@@ -1,9 +1,9 @@
 /********** main header css 시작 ***********/
-
-#footer{
+#footer {
 	text-align: center;
 }
-header{
+
+header {
 	margin-bottom: 2em;
 }
 
@@ -12,7 +12,47 @@ header{
 }
 
 #searchBar2 .searchKeyword {
-  width: 70%;
+	width: 70%;
+}
+
+.rcp-random-recipe {
+	margin-top: 10px;
+}
+
+.rcp-re-recipe {
+	position: absolute;
+	margin: 2%;
+	margin-left: 38%;
+	margin-top: 0%;
+	bottom: 1%;
+}
+
+.rcp-roulette {
+	z-index: 99999;
+	cursor: pointer;
+	height: 50px;
+	-webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
+	-ms-transition: all 1s ease-in-out;
+	transition: all 1s ease-in-out;
+	position: absolute;
+	top: 100px;
+	right: 43%;
+	height: 50px;
+}
+
+.rcp-roulette:hover {
+	height: 250px;
+	right: 20%;
+	top: 45px; 
+	-webkit-transform : rotate( 720deg);
+	-moz-transform: rotate(720deg);
+	-o-transform: rotate(720deg);
+	-ms-transform: rotate(720deg);
+	transform: rotate(720deg);
+	-webkit-transform: rotate(720deg);
+	-webkit-transform: rotate(720deg);
 }
 
 .rcp-container {
@@ -35,14 +75,14 @@ header{
 	background: rgba(0, 0, 0, 0.3);
 }
 
-.rt-navbar-top-logo{
-	  width: 9em;
-    margin-left: 1.3em;
-    margin-right: 3em;
+.rt-navbar-top-logo {
+	width: 9em;
+	margin-left: 1.3em;
+	margin-right: 3em;
 }
 
 .rcp-navbar-searchbar-size {
-  width: 55%;
+	width: 55%;
 }
 
 .rcp-rt-recipe-btn {
@@ -57,100 +97,100 @@ header{
 }
 
 @media ( max-width : 769px) {
-  .rcp-rt-recipe-btn {
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    border-radius: 0.3em;
-    color: rgba(255, 255, 255, 1);
-    background: rgba(0, 0, 0, 0.35);
-    padding: 0.25em;
-    font-size: 0.6em;
-    width: 13em;
-    margin-left: 1.5em;
-    margin-bottom: 0.5em;
-  }
+	.rcp-rt-recipe-btn {
+		border: 2px solid rgba(255, 255, 255, 0.7);
+		border-radius: 0.3em;
+		color: rgba(255, 255, 255, 1);
+		background: rgba(0, 0, 0, 0.35);
+		padding: 0.25em;
+		font-size: 0.6em;
+		width: 13em;
+		margin-left: 1.5em;
+		margin-bottom: 0.5em;
+	}
 }
 
 @media ( min-width : 770px) {
-  .rcp-rt-recipe-btn {
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    border-radius: 0.3em;
-    color: rgba(255, 255, 255, 1);
-    background: rgba(0, 0, 0, 0.35);
-    padding: 0.25em;
-    font-size: 0.6em;
-    width: 13em;
-    margin-left: 1.5em;
-    margin-bottom: 0.5em;
-  }
+	.rcp-rt-recipe-btn {
+		border: 2px solid rgba(255, 255, 255, 0.7);
+		border-radius: 0.3em;
+		color: rgba(255, 255, 255, 1);
+		background: rgba(0, 0, 0, 0.35);
+		padding: 0.25em;
+		font-size: 0.6em;
+		width: 13em;
+		margin-left: 1.5em;
+		margin-bottom: 0.5em;
+	}
 }
 
 @media ( min-width : 1000px) {
 	.rcp-rt-recipe-btn {
 		border: 2px solid rgba(255, 255, 255, 0.7);
-    border-radius: 0.3em;
-    color: rgba(255, 255, 255, 1);
-    background: rgba(0, 0, 0, 0.35);
-    padding: 0.25em;
-    font-size: 0.6em;
-    width: 13em;
-    margin-left: 1.5em;
-    margin-bottom: 0.5em;
+		border-radius: 0.3em;
+		color: rgba(255, 255, 255, 1);
+		background: rgba(0, 0, 0, 0.35);
+		padding: 0.25em;
+		font-size: 0.6em;
+		width: 13em;
+		margin-left: 1.5em;
+		margin-bottom: 0.5em;
 	}
 }
 
 @media ( min-width : 1200px) {
-  .rcp-rt-recipe-btn {
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    border-radius: 0.3em;
-    color: rgba(255, 255, 255, 1);
-    background: rgba(0, 0, 0, 0.35);
-    padding: 3px;
-    font-size: 0.65em;
-    width: 13em;
-    margin-bottom: 0.5em;
-    margin-left: 3em;
-  }
+	.rcp-rt-recipe-btn {
+		border: 2px solid rgba(255, 255, 255, 0.7);
+		border-radius: 0.3em;
+		color: rgba(255, 255, 255, 1);
+		background: rgba(0, 0, 0, 0.35);
+		padding: 3px;
+		font-size: 0.65em;
+		width: 13em;
+		margin-bottom: 0.5em;
+		margin-left: 3em;
+	}
 }
 
 @media ( min-width : 1300px) {
-  .rcp-rt-recipe-btn {
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    border-radius: 0.3em;
-    color: rgba(255, 255, 255, 1);
-    background: rgba(0, 0, 0, 0.35);
-    padding: 3px;
-    font-size: 0.7em;
-    width: 12em;
-    margin-left: 4.5em;
-    margin-bottom: 0.5em;
-  }
+	.rcp-rt-recipe-btn {
+		border: 2px solid rgba(255, 255, 255, 0.7);
+		border-radius: 0.3em;
+		color: rgba(255, 255, 255, 1);
+		background: rgba(0, 0, 0, 0.35);
+		padding: 3px;
+		font-size: 0.7em;
+		width: 12em;
+		margin-left: 4.5em;
+		margin-bottom: 0.5em;
+	}
 }
 
 @media ( min-width : 1600px) {
-  .rcp-rt-recipe-btn {
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    border-radius: 0.3em;
-    color: rgba(255, 255, 255, 1);
-    background: rgba(0, 0, 0, 0.35);
-    padding: 3px;
-    font-size: 0.7em;
-    width: 14em;
-    margin-left: 7em;
-    margin-bottom: 0.5em;
-  }
+	.rcp-rt-recipe-btn {
+		border: 2px solid rgba(255, 255, 255, 0.7);
+		border-radius: 0.3em;
+		color: rgba(255, 255, 255, 1);
+		background: rgba(0, 0, 0, 0.35);
+		padding: 3px;
+		font-size: 0.7em;
+		width: 14em;
+		margin-left: 7em;
+		margin-bottom: 0.5em;
+	}
 }
 
 @media ( min-width : 1900px) {
 	.rcp-rt-recipe-btn {
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    border-radius: 0.3em;
-    color: rgba(255, 255, 255, 1);
-    background: rgba(0, 0, 0, 0.35);
-    padding: 5px;
-    font-size: 0.7em;
-    width: 14em;
-    margin-left: 11em;
-    margin-bottom: 0.5em;
+		border: 2px solid rgba(255, 255, 255, 0.7);
+		border-radius: 0.3em;
+		color: rgba(255, 255, 255, 1);
+		background: rgba(0, 0, 0, 0.35);
+		padding: 5px;
+		font-size: 0.7em;
+		width: 14em;
+		margin-left: 11em;
+		margin-bottom: 0.5em;
 	}
 }
 
@@ -165,81 +205,81 @@ header{
 }
 
 @media ( min-width : 770px) {
-  .rcp-rt-chef-btn {
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    border-radius: 0.3em;
-    color: rgba(255, 255, 255, 1);
-    background: rgba(0, 0, 0, 0.35);
-    padding: 0.25em;
-    font-size: 0.6em;
-    width: 13em;
-    margin-bottom: 0.5em;
-  }
+	.rcp-rt-chef-btn {
+		border: 2px solid rgba(255, 255, 255, 0.7);
+		border-radius: 0.3em;
+		color: rgba(255, 255, 255, 1);
+		background: rgba(0, 0, 0, 0.35);
+		padding: 0.25em;
+		font-size: 0.6em;
+		width: 13em;
+		margin-bottom: 0.5em;
+	}
 }
 
 @media ( min-width : 1000px) {
-  .rcp-rt-chef-btn {
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    border-radius: 0.3em;
-    color: rgba(255, 255, 255, 1);
-    background: rgba(0, 0, 0, 0.35);
-    padding: 0.25em;
-    font-size: 0.6em;
-    width: 13em;
-    margin-bottom: 0.5em;
-  }
+	.rcp-rt-chef-btn {
+		border: 2px solid rgba(255, 255, 255, 0.7);
+		border-radius: 0.3em;
+		color: rgba(255, 255, 255, 1);
+		background: rgba(0, 0, 0, 0.35);
+		padding: 0.25em;
+		font-size: 0.6em;
+		width: 13em;
+		margin-bottom: 0.5em;
+	}
 }
 
 @media ( min-width : 1200px) {
-  .rcp-rt-chef-btn {
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    border-radius: 0.3em;
-    color: rgba(255, 255, 255, 1);
-    background: rgba(0, 0, 0, 0.35);
-    padding: 3px;
-    font-size: 0.65em;
-    width: 13em;
-    margin-bottom: 0.5em;
-  }
+	.rcp-rt-chef-btn {
+		border: 2px solid rgba(255, 255, 255, 0.7);
+		border-radius: 0.3em;
+		color: rgba(255, 255, 255, 1);
+		background: rgba(0, 0, 0, 0.35);
+		padding: 3px;
+		font-size: 0.65em;
+		width: 13em;
+		margin-bottom: 0.5em;
+	}
 }
 
 @media ( min-width : 1300px) {
-  .rcp-rt-chef-btn {
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    border-radius: 0.3em;
-    color: rgba(255, 255, 255, 1);
-    background: rgba(0, 0, 0, 0.35);
-    padding: 3px;
-    font-size: 0.7em;
-    width: 12em;
-    margin-bottom: 0.5em;
-  }
+	.rcp-rt-chef-btn {
+		border: 2px solid rgba(255, 255, 255, 0.7);
+		border-radius: 0.3em;
+		color: rgba(255, 255, 255, 1);
+		background: rgba(0, 0, 0, 0.35);
+		padding: 3px;
+		font-size: 0.7em;
+		width: 12em;
+		margin-bottom: 0.5em;
+	}
 }
 
 @media ( min-width : 1600px) {
-  .rcp-rt-chef-btn {
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    border-radius: 0.3em;
-    color: rgba(255, 255, 255, 1);
-    background: rgba(0, 0, 0, 0.35);
-    padding: 3px;
-    font-size: 0.7em;
-    width: 14em;
-    margin-bottom: 0.5em;
-  }
+	.rcp-rt-chef-btn {
+		border: 2px solid rgba(255, 255, 255, 0.7);
+		border-radius: 0.3em;
+		color: rgba(255, 255, 255, 1);
+		background: rgba(0, 0, 0, 0.35);
+		padding: 3px;
+		font-size: 0.7em;
+		width: 14em;
+		margin-bottom: 0.5em;
+	}
 }
 
 @media ( min-width : 1900px) {
-  .rcp-rt-chef-btn {
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    border-radius: 0.3em;
-    color: rgba(255, 255, 255, 1);
-    background: rgba(0, 0, 0, 0.35);
-    padding: 5px;
-    font-size: 0.7em;
-    width: 14em;
-    margin-bottom: 0.5em;
-  }
+	.rcp-rt-chef-btn {
+		border: 2px solid rgba(255, 255, 255, 0.7);
+		border-radius: 0.3em;
+		color: rgba(255, 255, 255, 1);
+		background: rgba(0, 0, 0, 0.35);
+		padding: 5px;
+		font-size: 0.7em;
+		width: 14em;
+		margin-bottom: 0.5em;
+	}
 }
 
 .rcp-inputgroup-width-70 {
@@ -302,156 +342,153 @@ header .header-content {
 }
 
 @media ( min-width : 1000px) {
-  .rcp-rt-recipe-rank {
-    font-size: 0.7em;
-    text-align: left;
-    position: relative;
-    overflow: hidden;
-    height: 8.5em;
-    padding-left: 25%;
-    padding-right: 0%;
-  }
+	.rcp-rt-recipe-rank {
+		font-size: 0.7em;
+		text-align: left;
+		position: relative;
+		overflow: hidden;
+		height: 8.5em;
+		padding-left: 25%;
+		padding-right: 0%;
+	}
 }
 
 @media ( min-width : 1200px) {
-  .rcp-rt-recipe-rank {
-    font-size: 0.7em;
-    text-align: left;
-    position: relative;
-    overflow: hidden;
-    height: 8.5em;
-    padding-left: 36%;
-    padding-right: 0%;
-  }
+	.rcp-rt-recipe-rank {
+		font-size: 0.7em;
+		text-align: left;
+		position: relative;
+		overflow: hidden;
+		height: 8.5em;
+		padding-left: 36%;
+		padding-right: 0%;
+	}
 }
 
 @media ( min-width : 1600px) {
-  .rcp-rt-recipe-rank {
-    font-size: 0.7em;
-    text-align: left;
-    position: relative;
-    overflow: hidden;
-    height: 8.5em;
-    padding-left: 46%;
-    padding-right: 0%;
-  }
+	.rcp-rt-recipe-rank {
+		font-size: 0.7em;
+		text-align: left;
+		position: relative;
+		overflow: hidden;
+		height: 8.5em;
+		padding-left: 46%;
+		padding-right: 0%;
+	}
 }
 
 @media ( min-width : 1900px) {
-  .rcp-rt-recipe-rank {
-    font-size: 0.7em;
-    text-align: left;
-    position: relative;
-    overflow: hidden;
-    height: 8.5em;
-    padding-left: 55%;
-    padding-right: 0%;
-  }
+	.rcp-rt-recipe-rank {
+		font-size: 0.7em;
+		text-align: left;
+		position: relative;
+		overflow: hidden;
+		height: 8.5em;
+		padding-left: 55%;
+		padding-right: 0%;
+	}
 }
 
 .rcp-rt-chef-rank {
-  font-size: 0.8em;
-  text-align: left;
-  text-overflow: ellipsis;
-  position: relative;
-  overflow: hidden;
-  height: 7.5em;
-  padding-left: 25%;
-  padding-right: 25%;
+	font-size: 0.8em;
+	text-align: left;
+	text-overflow: ellipsis;
+	position: relative;
+	overflow: hidden;
+	height: 7.5em;
+	padding-left: 25%;
+	padding-right: 25%;
 }
 
 @media ( min-width : 1000px) {
-  .rcp-rt-chef-rank {
-    font-size: 0.7em;
-    text-align: left;
-    position: relative;
-    overflow: hidden;
-    height: 8.5em;
-    padding-left: 18%;
-    padding-right: 0%;
-  }
+	.rcp-rt-chef-rank {
+		font-size: 0.7em;
+		text-align: left;
+		position: relative;
+		overflow: hidden;
+		height: 8.5em;
+		padding-left: 18%;
+		padding-right: 0%;
+	}
 }
 
 @media ( min-width : 1200px) {
-  .rcp-rt-chef-rank {
-    font-size: 0.7em;
-    text-align: left;
-    position: relative;
-    overflow: hidden;
-    height: 8.5em;
-    padding-left: 16%;
-    padding-right: 0%;
-  }
+	.rcp-rt-chef-rank {
+		font-size: 0.7em;
+		text-align: left;
+		position: relative;
+		overflow: hidden;
+		height: 8.5em;
+		padding-left: 16%;
+		padding-right: 0%;
+	}
 }
 
 @media ( min-width : 1600px) {
-  .rcp-rt-chef-rank {
-    font-size: 0.7em;
-    text-align: left;
-    position: relative;
-    overflow: hidden;
-    height: 8.5em;
-    padding-left: 15%;
-    padding-right: 0%;
-  }
+	.rcp-rt-chef-rank {
+		font-size: 0.7em;
+		text-align: left;
+		position: relative;
+		overflow: hidden;
+		height: 8.5em;
+		padding-left: 15%;
+		padding-right: 0%;
+	}
 }
 
 @media ( min-width : 1900px) {
-  .rcp-rt-chef-rank {
-    font-size: 0.7em;
-    text-align: left;
-    position: relative;
-    overflow: hidden;
-    height: 8.5em;
-    padding-left: 13%;
-    padding-right: 0%;
-  }
+	.rcp-rt-chef-rank {
+		font-size: 0.7em;
+		text-align: left;
+		position: relative;
+		overflow: hidden;
+		height: 8.5em;
+		padding-left: 13%;
+		padding-right: 0%;
+	}
 }
 
-.rcp-signin{
-  z-index:99990;
+.rcp-signin {
+	z-index: 99990;
 }
 
-.rcp-header-info{
-  z-index:500;
+.rcp-header-info {
+	z-index: 500;
 }
 
 /********** main css 종료 - 박상일 ***********/
-
-.float_left{
+.float_left {
 	float: left;
 }
 
-.margin_right_10px{
-  margin-right: 10px !important;
+.margin_right_10px {
+	margin-right: 10px !important;
 }
 
-.margin_bottom_30px{
+.margin_bottom_30px {
 	margin-bottom: 30px !important;
 }
 
-.margin_bottom_40px{
-  margin-bottom: 40px !important;
+.margin_bottom_40px {
+	margin-bottom: 40px !important;
 }
 
-.margin_bottom_50px{
-  margin-bottom: 50px !important;
+.margin_bottom_50px {
+	margin-bottom: 50px !important;
 }
 
-.margin_bottom_60px{
-  margin-bottom: 60px !important;
+.margin_bottom_60px {
+	margin-bottom: 60px !important;
 }
 
-.margin_bottom_70px{
-  margin-bottom: 70px !important;
+.margin_bottom_70px {
+	margin-bottom: 70px !important;
 }
 
-.padding_10px{
-  padding: 10px;
+.padding_10px {
+	padding: 10px;
 }
 
-.width_180px{
+.width_180px {
 	width: 180px !important;
 }
-
-

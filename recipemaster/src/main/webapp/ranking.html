@@ -215,7 +215,7 @@
 				<div class="col-md-2">레시피 수</div>
 				<div class="col-md-2">구독자 수</div>
 				<div class="col-md-2">Total Point</div>
-				<div class="col-md-2">비고</div>
+				<div class="col-md-2">등급</div>
 			</div>
 			<div class="rcp-title">
 				<hr />
@@ -317,7 +317,7 @@
           <div class="name">
                    <p class="rcp-userName1">{{userName}}</p></div>
                     <p class="text">{{email}}</p>      
-                  <div class="rcp-ranking">랭킹 : {{rownum}}등</div>
+                  <div class="rcp-ranking">{{grade}}</div>
           <div class="list clearfix">
         <p class="introfont">{{intro}}</p>
         </div>
@@ -336,7 +336,8 @@
 	<script id="chef-rank-template" type="text/x-handlebars-template">
   {{#each data}}
       <div class="row rcp-font hover effect8">
-        <div class="col-md-2">{{rownum}}</div>
+        <div class="col-md-2">{{rownum}}
+      </div>
         <div class="col-md-2">
           <div class="name"><input type="hidden" value="{{email}}">
                    <a href="#" class="rcp-userName">{{userName}}</a></div>
@@ -344,9 +345,7 @@
         <div class="col-md-2">{{recipeCount}} 개</div>
         <div class="col-md-2">{{subsCount}} 명</div>
         <div class="col-md-2">{{totalPoint}} 점</div>
-        <div class="col-md-2 medalDisplay">
-        <img class="rcp-rankmedal-small" src="/img/medal1.png"/>
-        </div>
+        <div class="col-md-2 ">{{grade}}</div>
 </div>
   {{/each}}
   </script>

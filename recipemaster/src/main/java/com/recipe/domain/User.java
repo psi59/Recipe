@@ -22,7 +22,14 @@ public class User {
   private int likeCount;
   private int rownum;
   private int totalPoint;
+  private String grade;
   
+  public String getGrade() {
+    return grade;
+  }
+  public void setGrade(String grade) {
+    this.grade = grade;
+  }
   public int getTotalPoint() {
     return totalPoint;
   }
@@ -112,7 +119,8 @@ public class User {
     return "User [userNo=" + userNo + ", userName=" + userName + ", email=" + email + ", password=" + password
         + ", image=" + image + ", intro=" + intro + ", role=" + role + ", joinDate=" + joinDate + ", recipeUrl="
         + recipeUrl + ", recipeCount=" + recipeCount + ", subsCount=" + subsCount + ", likeCount=" + likeCount
-        + ", rownum=" + rownum + ", totalPoint=" + totalPoint + "]";
+        + ", rownum=" + rownum + ", totalPoint=" + totalPoint + ", grade=" + grade + "]";
   }
+  
   
 }

@@ -82,7 +82,11 @@ $('#topLoginBtn').on('click', function(event){
 	event.preventDefault();
 	$('#login-pop-up-banner').bPopup();
 });
-
+//랜덤 레시피 뽑기 
+$('#rcp-random-recipe').on('click', function(event){
+	event.preventDefault();
+	$('#random-pop-up-banner').bPopup();
+})
 
 
 Handlebars.registerHelper('defaultImage', function(options) {

@@ -145,8 +145,8 @@
 									<input type="text" class="form-control searchKeyword"
 										placeholder="레시피명, 쉐프명, 재료명" aria-describedby="basic-addon2">
 									<span class="rcp-search-button input-group-addon" id="basic-addon2">검색</span>
-									
 								</div>
+								    <img src="/img/art-roulette.png" class="rcp-roulette" id="rcp-random-recipe"/>
 							</div>
 						</div>
 						<!-- row 태그종료 -->
@@ -159,7 +159,10 @@
 	<div class="mouse-icon hidden-xs">
 		<div class="scroll"></div>
 	</div>
-
+  <!--  random recipe 용이 -->
+  <div id="random-pop-up-banner" class="random-pop-up-banner">
+    
+  </div>
 	<!-- ------------------------------------------------------------------------------- -->
 
 	<div id='signup-pop-up-banner'>
@@ -749,7 +752,6 @@
 
 {{/each}}
 </script>
-
 	<!--쉐프 랭킹카드 수정  -->
 	<script id="chef-card-template" type="text/x-handlebars-template">
 {{#each data}}
@@ -786,7 +788,7 @@
           <div class="name">
                    <p class="rcp-userName1">{{userName}}</p></div>
                     <p class="text">{{email}}</p>      
-                  <div class="rcp-ranking"><h4>랭킹 : {{rownum}}등</h4></div>
+                  <div class="rcp-ranking"><h4>{{grade}}</h4></div>
           <div class="list clearfix">
         <p class="introfont">{{intro}}</p>
         </div>

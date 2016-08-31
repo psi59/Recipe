@@ -96,13 +96,13 @@
 		rgba(181, 21, 21, 0.25) inset;
 }
 
-#chefRanking .row:nth-child(1) .medalDisplay {
+/* #chefRanking .row:nth-child(1) .medalDisplay {
 	display: block ! important;
 }
 
 .medalDisplay {
 	display: none;
-}
+} */
 
 h1 {
 	font-family: 'Baloo Tamma', cursive;

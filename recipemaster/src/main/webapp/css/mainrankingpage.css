@@ -1,6 +1,5 @@
-
-@import	url('https://fonts.googleapis.com/css?family=Baloo+Tamma|Nunito');
-
+@import
+	url('https://fonts.googleapis.com/css?family=Baloo+Tamma|Nunito');
 
 .nav-container {
 	z-index: 10000;
@@ -268,6 +267,8 @@ footer a:hover {
 	.cardbtn {
 		position: relative;
 		top: 4%;
+		width: 102%;
+		left: -1%;
 	}
 	.introBox {
 		margin-top: 5%;
