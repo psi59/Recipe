@@ -13,6 +13,10 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
   var mainSubscribe = $('#temp').html();
   var commainSubscribe = Handlebars.compile(mainSubscribe); 
 
+
+  
+  
+  
   var userInfo = getUserInfo();
   
   
@@ -32,10 +36,10 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
   function Main1List(){
 	  
 	  var userNo = 0;
-	  var a = userInfo.userNo;
+	  var a = userInfo;
 	  
 	  if( a != null ){
-		  userNo = a;
+		  userNo = a.userNo;
 		
 	  }
 	  
@@ -53,11 +57,13 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
 				  swal('실행중 오류 발생');
 				  return;
 			  }
-			  var list = result.data;
-			  
 			  $('#main-list > div').append( comMainSection(result) );
-			  $('.list0 > .row').append( template(result) );
+			  $('.list0 > .row').append( template(result) );		
+//			  for(var i = 0 ; i<result.data; i++){
+//			  $('.thumbnail:eq('+i+') .rcp-count-images').text( "1 / "+$( '.forBackgroundRepresentImg' ).length )
+//			  }
 			  
+			  mouseMoveEventForImage(result);
 
 //			 
 				  for(var i=0; i<result.data.length; i++){
@@ -85,11 +91,11 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
 	  
 
 	  var userNo = 0;
-	  var a = userInfo.userNo;
+	  var a = userInfo;
 	  
 	  
 	  if( a != null ){
-		  userNo = a;
+		  userNo = a.userNo;
 	  }
 	  
 	  $.ajax({
@@ -188,6 +194,13 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
 	  } 
 });
   
+	Handlebars.registerHelper("countImage", function(value, options){
+		{
+	return "1 / "+value.length;
+		}
+});
+ 
+  
   
   
 	  
@@ -273,21 +286,14 @@ function idOptions(){
 }
 //	  -------------------------------------for 문 끝 -------------------------------------
 
-function showCoords(event) {
-    var cX = event.clientX;
-    var sX = event.screenX;
-    var cY = event.clientY;
-    var sY = event.screenY;
-    var coords1 = "client - X: " + cX + ", Y coords: " + cY;
-    var coords2 = "screen - X: " + sX + ", Y coords: " + sY;
-    document.getElementById("demo").innerHTML = coords1 + "<br>" + coords2;
+function mouseMoveEventForImage(result){
+			$(document).on('mousemove','.rcp-image-scale',function(event){
+				var imageChange = $('.rcp-image-scale').width() / $(event.target).parent().children('input[type="hidden"]').length;				
+				var image = parseInt(event.offsetX / imageChange);				
+				this.style = "background-image:url(img/representImg/"+$(event.target).parent().children('input[type="hidden"]:eq('+image+')').val()+")";
+				$(event.target).parent().children('.rcp-count-images').text(image+1+" / "+$(event.target).parent().children('input[type="hidden"]').length);
+			})	
 }
-
-$(function (){
-	$(document).on('mouseover','.rcp-image-scale',function(event){
-		console.log(event.clientX);
-	})
-})
 
 //--------------------------  음식사진 커서 올리면 바뀌게 되는 로직 --------------------------------- 
 function mouseHover(){

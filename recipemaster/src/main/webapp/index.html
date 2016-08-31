@@ -9,7 +9,7 @@
 <!-- Template css -->
 
 <link rel="stylesheet" href="css/template/animate.css">
-<link rel="stylesheet" href="css/template/styles.css"> 
+<!-- <link rel="stylesheet" href="css/template/styles.css"> -->
 <link rel="stylesheet" href="css/template/plugins.css"> 
 <link rel="stylesheet"
 	href="/node_modules/sweetalert/dist/sweetalert.css">
@@ -641,7 +641,13 @@
                 <img src="img/profileImg/default.jpg" class="img-circle rcp-profile"></a>
                     {{/defaultImage}}
               </div>
+             {{#each representImages}}  
+              <input type="hidden" class="forBackgroundRepresentImg" value="{{this}}">
+              {{/each}}
+              <p class="rcp-count-images">{{countImage representImages}}</p>
+              <div class="rcp-count-images-bg"></div>
             <div class="rcp-image-scale" name="recipe-image" > <!--style="background-image : url('img/representImg/{{rpimg}}');"-->
+              <p class="rcp-preview-images-count"></p>
               <!--<img src="img/representImg/{{rpimg}}" class="image1"  name="rcp-list-images"> -->
              </div>
               <div class="rcp-caption">
@@ -753,6 +759,7 @@
 
 {{/each}}
 </script>
+
 
 	<!--쉐프 랭킹카드 수정  -->
 	<script id="chef-card-template" type="text/x-handlebars-template">
