@@ -38,6 +38,11 @@
 	font-family: 'Nanum Brush Script', serif;
 }
 
+.rcp-sign-membership {
+	margin-top: 25px;
+	text-align: center;
+}
+
 .rcp-sign-membership span {
 	margin: 25px;
 	border-style: solid;
