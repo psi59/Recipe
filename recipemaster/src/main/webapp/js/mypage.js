@@ -328,7 +328,7 @@ function pageTabs() {
 					method : 'post',
 					data : {
 						email : location.href.split('?')[1],
-//						request : request
+						request : request
 					},
 					success : function(result) {
 
