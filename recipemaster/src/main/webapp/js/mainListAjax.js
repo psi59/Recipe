@@ -47,11 +47,13 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
 				  swal('실행중 오류 발생');
 				  return;
 			  }
-			  var list = result.data;
-			  
 			  $('#main-list > div').append( comMainSection(result) );
-			  $('.list0 > .row').append( template(result) );
-
+			  $('.list0 > .row').append( template(result) );		
+//			  for(var i = 0 ; i<result.data; i++){
+//			  $('.thumbnail:eq('+i+') .rcp-count-images').text( "1 / "+$( '.forBackgroundRepresentImg' ).length )
+//			  }
+			  
+			  mouseMoveEventForImage(result);
 //			 
 				  for(var i=0; i<result.data.length; i++){
 //					  for(var j=0; j<result.data[i].representImages.length; j++){
@@ -178,6 +180,13 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
 	  } 
 });
   
+	Handlebars.registerHelper("countImage", function(value, options){
+		{
+	return "1 / "+value.length;
+		}
+});
+ 
+  
   
   
 	  
@@ -263,6 +272,15 @@ function idOptions(){
 }
 //	  -------------------------------------for 문 끝 -------------------------------------
 
+function mouseMoveEventForImage(result){
+			$(document).on('mousemove','.rcp-image-scale',function(event){
+				var imageChange = $('.rcp-image-scale').width() / $(event.target).parent().children('input[type="hidden"]').length;				
+				var image = parseInt(event.offsetX / imageChange);				
+				this.style = "background-image:url(img/representImg/"+$(event.target).parent().children('input[type="hidden"]:eq('+image+')').val()+")";
+				$(event.target).parent().children('.rcp-count-images').text(image+1+" / "+$(event.target).parent().children('input[type="hidden"]').length);
+			})	
+}
+
 //--------------------------  음식사진 커서 올리면 바뀌게 되는 로직 --------------------------------- 
 function mouseHover(){
 	  var time;
@@ -279,14 +297,11 @@ function mouseHover(){
 		  });
 	  }
 }
+
+
 //--------------------------  음식사진 커서 올리면 바뀌게 되는 로직 끝 ---------------------------------
   
-  function comList(){
-	  $(document).on('click', '.rcp-userName',function(event){
-		  event.preventDefault();
-		  $(location).attr('href','/mypage.html?'+$(event.target).parent().children('.rcp-hidden-email').val() ); 	 
-	  })
-  }
+ 
   function goMyPage(){
 	  $('#profileView .goMyPageBtn').on('click',function(event){
 		  event.preventDefault();

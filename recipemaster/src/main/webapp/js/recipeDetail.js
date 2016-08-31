@@ -1,4 +1,6 @@
+document.write('<script type"text/javascript" src="js/common.js"></script>')
 document.write('<script type"text/javascript" src="js/login.js"></script>')
+
 
 var userInfo = getUserInfo();
 var detailInfoTemp = $('#recipe-detail-304-info-template').html();

@@ -1,5 +1,4 @@
 @CHARSET "UTF-8";
-
 .rcp-detail-form{
   width:1024px;
   height:880px;
@@ -298,8 +297,9 @@
    
 }
 
-.rcp-304 .rcp-nickName{
-  font-size:10px;
+.rcp-304 .rcp-nickname{
+	 margin-left: 135px ! important;
+  font-size:12px;
   text-align: center;
   color: white;
 }
