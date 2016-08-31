@@ -19,6 +19,8 @@
 		<result column="lcnt" property="likeCount" />
 		<result column="total" property="totalPoint" />
 		<result column="rownum" property="rownum" />
+		<result column="grade" property="grade" />
+    
 	</resultMap>
 
 	<select id="findUser" resultMap="userMap" parameterType="String">
@@ -48,14 +50,22 @@
 	<!-- 레시피 *10, 구독자 * 5-->
 	<select id="selectRankList" resultMap="userMap" parameterType="Map">
 		SELECT @rownum:=@rownum+1 rownum,vt.* FROM(
-    SELECT r1.uno,r1.name,r1.email,r1.intro,IFNULL(r2.cnt,0)
+    SELECT r1.uno,r1.name,r1.email,r1.intro,r1.role,IFNULL(r2.cnt,0)
     rcpCount,IFNULL(r3.cnt,0) scnt,
-    SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) total
+    SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) total,
+    (CASE
+    WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 50 THEN '1. Head Chef'
+    WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 40 THEN '2. Sous Chef'
+    WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 30 THEN '3. Chef of Partie'
+    WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 20 THEN '4. Demi Chef'
+    WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 10 THEN '5. Commis Chef'
+    ELSE '6. kitchen Hand'
+    END) as grade
     FROM USERS r1
     LEFT OUTER JOIN (SELECT uno,COUNT(rcpno) cnt
     FROM RCPS GROUP BY uno) r2
     ON r1.uno=r2.uno
-        LEFT OUTER JOIN (SELECT uno,COUNT(uno2) cnt
+    LEFT OUTER JOIN (SELECT uno,COUNT(uno2) cnt
     FROM SCS GROUP BY uno) r3
     ON r2.uno=r3.uno
     INNER JOIN(select @rownum:=0) t

@@ -246,4 +246,11 @@ public class RecipeServiceImpl implements RecipeService {
       // TODO Auto-generated method stub
       recipeDao.deleteComment(commentNo);
     }	
+    
+    @Override
+    public List<Recipe> getRecipeRandomList(int pageSize) {
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("len", pageSize);
+      return recipeDao.recipeRandomList(params);
+    }
 }
