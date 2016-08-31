@@ -10,7 +10,6 @@
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
-
 .rcp-btn-default-2 {
 	position: relative;
 	right: -1224px;
@@ -28,13 +27,16 @@
 	right: -20em !important;
 }
 
-.rcp-barimg-r {
+.ranking-barimg>.rcp-barimg{
 	cursor: pointer;
 	position: fixed;
 	top: 5px;
 	right: 162px;
 }
-
+.ranking-bar-infobox>.bottom-main-nav__dropdown {
+    top: 4em;
+    right: -20em;
+}
 .introBox {
 	margin-top: 5%;
 	border: 1px solid #b6b4b5;
@@ -94,13 +96,13 @@
 		rgba(181, 21, 21, 0.25) inset;
 }
 
-#chefRanking .row:nth-child(1) .medalDisplay {
+/* #chefRanking .row:nth-child(1) .medalDisplay {
 	display: block ! important;
 }
 
 .medalDisplay {
 	display: none;
-}
+} */
 
 h1 {
 	font-family: 'Baloo Tamma', cursive;

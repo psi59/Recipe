@@ -1,3 +1,5 @@
+document.write('<script type"text/javascript" src="js/common.js"></script>')
+document.write('<script type"text/javascript" src="js/login.js"></script>')
 
   var mainSection = $('#recipe-1-section').html();
   var comMainSection = Handlebars.compile(mainSection); 
@@ -10,8 +12,7 @@
   
   var mainSubscribe = $('#temp').html();
   var commainSubscribe = Handlebars.compile(mainSubscribe); 
-  
-  
+  var userInfo = getUserInfo();
   
   
   $(function(){
@@ -23,19 +24,15 @@
   });
   
 
-  
 //--------------------------  인기 레시피 ---------------------------------
   
   function Main1List(){
 	  
 	  var userNo = 0;
-	  var a = eval(jsonData);
 	  
-	  if( a != null ){
-		  userNo = a[0].userNo;
-		
-	  }
-	  
+	  if(userInfo != null){
+		  userNo = userInfo.userNo;
+	  }	  
 	  
 	  $.ajax({	  		  
 		  url:'recipe/list.json',
@@ -50,12 +47,13 @@
 				  swal('실행중 오류 발생');
 				  return;
 			  }
-			  var list = result.data;
-			  
 			  $('#main-list > div').append( comMainSection(result) );
-			  $('.list0 > .row').append( template(result) );
+			  $('.list0 > .row').append( template(result) );		
+//			  for(var i = 0 ; i<result.data; i++){
+//			  $('.thumbnail:eq('+i+') .rcp-count-images').text( "1 / "+$( '.forBackgroundRepresentImg' ).length )
+//			  }
 			  
-
+			  mouseMoveEventForImage(result);
 //			 
 				  for(var i=0; i<result.data.length; i++){
 //					  for(var j=0; j<result.data[i].representImages.length; j++){
@@ -80,14 +78,11 @@
   
   function Main2List(){
 	  
-
 	  var userNo = 0;
-	  var a = eval(jsonData);
 	  
-	  
-	  if( a != null ){
-		  userNo = a[0].userNo;
-	  }
+	  if(userInfo != null){
+		  userNo = userInfo.userNo;
+	  }	  
 	  
 	  $.ajax({
 		  url:'recipe/list.json',
@@ -123,7 +118,7 @@
 //				  }
 //				  
 			  methods();
-			  if(eval(jsonData) != null)
+			  if(userInfo != null)
 			  main3List();
 		  },
 		  error : function(){
@@ -133,13 +128,12 @@
   }  
   
   function main3List(){	  
-	  console.log(eval(jsonData)[0].email)
 	  $.ajax({
 		  url :'recipe/userPage.json',
 		  dataType : 'json',
 		  method : 'post',
 		  data:{
-			  email: eval(jsonData)[0].email,
+			  email: userInfo.email,
 			  request:3
 		  },
 		  success : function(result) {
@@ -177,23 +171,21 @@
 	    return options.inverse(this);
 	  }
 });
-  
-  Handlebars.registerHelper('defaultImage', function(options) {
-		 
-	  if (this.user.image == null || this.user.image =='') {
-		  return options.inverse(this);
-	  } else {
-	    return options.fn(this);
-	  }
-});
 
   
   Handlebars.registerHelper('sessionUser', function(options) {
-	  if ( eval(jsonData) != null) {
-		  if( eval(jsonData)[0].email != null)
+	  if ( userInfo != null) {
+		  if( userInfo.email != null)
 	    return options.fn(this);
 	  } 
 });
+  
+	Handlebars.registerHelper("countImage", function(value, options){
+		{
+	return "1 / "+value.length;
+		}
+});
+ 
   
   
   
@@ -207,7 +199,7 @@ function likeLogin(){
 			  $.ajax({
 				  url:'recipe/likeDown.json?recipeNo=' + $(event.target).parent()
 				  .parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
-				  + eval(jsonData)[0].userNo,
+				  + userInfo.userNo,
 				  dataType:'json',
 				  method:'get',
 				  success:function(){
@@ -229,7 +221,7 @@ function likeLogin(){
 			  $.ajax({
 				  url:'recipe/likeUp.json?recipeNo=' + $(event.target).parent()
 				  .parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
-				  +  eval(jsonData)[0].userNo,
+				  +  userInfo.userNo,
 				  dataType:'json',
 				  method:'get',
 				  success:function(){
@@ -280,6 +272,15 @@ function idOptions(){
 }
 //	  -------------------------------------for 문 끝 -------------------------------------
 
+function mouseMoveEventForImage(result){
+			$(document).on('mousemove','.rcp-image-scale',function(event){
+				var imageChange = $('.rcp-image-scale').width() / $(event.target).parent().children('input[type="hidden"]').length;				
+				var image = parseInt(event.offsetX / imageChange);				
+				this.style = "background-image:url(img/representImg/"+$(event.target).parent().children('input[type="hidden"]:eq('+image+')').val()+")";
+				$(event.target).parent().children('.rcp-count-images').text(image+1+" / "+$(event.target).parent().children('input[type="hidden"]').length);
+			})	
+}
+
 //--------------------------  음식사진 커서 올리면 바뀌게 되는 로직 --------------------------------- 
 function mouseHover(){
 	  var time;
@@ -296,20 +297,55 @@ function mouseHover(){
 		  });
 	  }
 }
+
+
 //--------------------------  음식사진 커서 올리면 바뀌게 되는 로직 끝 ---------------------------------
   
-  function comList(){
-	  $(document).on('click', '.rcp-userName',function(event){
-		  event.preventDefault();
-		  $(location).attr('href','/mypage.html?'+$(event.target).parent().children('input[type="hidden"]').val() ); 	 
-	  })
-  }
+ 
   function goMyPage(){
 	  $('#profileView .goMyPageBtn').on('click',function(event){
 		  event.preventDefault();
-		  if(eval(jsonData) != null){
-			  $(location).attr('href','/mypage.html?'+ eval(jsonData)[0].email);
+		  if(userInfo != null){
+			  $(location).attr('href','/mypage.html?'+ userInfo.email);
 		  }
 	  })
   }
+  
+//-----------------------------랜덤 레시피 ---------------------------------
+  $('#rcp-random-recipe').on('click',function(){
+	  randomRecipe();
+	  function randomRecipe(){
+  	  $.ajax({	  		  
+  		  url:'recipe/randomList.json',
+  		  dataType:'json',
+  		  method:'post',
+  		  success:function(result){
+  			  if (result.status !='success'){
+  				  swal('실행중 오류 발생');
+  				  return;
+  			  }
+  			  var list = result.data;
+  			  $('#random-pop-up-banner').html('');
+  			  $('#random-pop-up-banner').html('<div class="todayMenu">Today Random Menu</div>'+
+  					  						  '<button type="button" class="btn btn-danger rcp-re-recipe"'+
+  					  						  'id="rcp-re-recipe">다시 뽑기</button>');
+  			  $('#random-pop-up-banner').append( template(result));
+  			  
+  				  for(var i=0; i<result.data.length; i++){
+  						  $('#random-pop-up-banner div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');
+  				  }
+  			  
+  			  methods();
+  			  
+  		  },
+  		  error : function(){
+  			  console.log('randomList: 서버 요청 오류');
+  		  }
+  	  });
+  	  
+	  }
+	  $(document).on('click','#rcp-re-recipe',function(){
+			randomRecipe();
+		})
+  })
 

@@ -1,5 +1,5 @@
 @CHARSET "UTF-8";
-
+@import url(http://fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
 #signup-pop-up-banner {
 	display: none;
 	width: 375px;
@@ -21,9 +21,21 @@
   background: #ffffff;
 }
 
-.rcp-sign-membership {
+#random-pop-up-banner {
+	display: none;
+	padding-top: 0.1%;
+	background: lemonchiffon;
+	width: 22%;
+	height: 56%;
+}
+
+#random-pop-up-banner>.rcp-list-margin {
+	width: 100%;
+}
+.todayMenu{
 	text-align: center;
-	margin-top: 1em;
+	font-size : 27pt;
+	font-family: 'Nanum Brush Script', serif;
 }
 
 .rcp-sign-membership span {
@@ -37,10 +49,6 @@
 	font-size: 20px;
 }
 
-.rcp-sign-membership span:hover {
-	color: white;
-	background: #b51515;
-} 
 
 .rcp-sign-membership >a {
 	border: 1px solid rgba(181, 21, 21, 0.7);
@@ -51,6 +59,11 @@
 	border-radius: 4px;
 	color: #51515;
 }
+
+.rcp-sign-membership span:hover {
+  color: white;
+  background: #b51515;
+} 
 
 .chefimg {
 	width: 6em;
@@ -112,7 +125,7 @@
 }
 
 .rcp-innersec {
-	padding: .3em;
+/* 	padding: .3em; */
 	padding-top: 0;
 }
 

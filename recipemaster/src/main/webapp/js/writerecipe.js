@@ -1,139 +1,56 @@
-document.write('<script type"text/javascript" src="js/login.js"></script>')
+var rpImageTemp = $('#represent-image-template').html();
+var rpImageTempImpl = Handlebars.compile(rpImageTemp);
+var rcpProduceTemp = $('#recipe-produce-template').html();
+var rcpProduceTempImpl = Handlebars.compile(rcpProduceTemp);
+var imageList = new Array();
+
 $(function() {
-	function getImageURL(imageFile) {
-		return URL.createObjectURL(imageFile);
-	}
+	
+	var recipeNo = location.href.split('?')[1]==null ? 0 : location.href.split('?')[1];
 
-	function getRecipeEditInfo(){
-		$.ajax({
-			url : 'recipe/recipeDetail.json',
-			method : 'post',
-			data : {
-				recipeNo : recipeNo
-			},
-			dataType : 'json',
-			success : function(result) {
-				if (result.status != 'success') {
-					swal('레시피 정보를 가져오는데 실패하였습니다.');
-					return;
-				}
-				var recipeData = result.data;
-				var recipeMaterials = result.materials;
-
-				$('input[name="recipeNo"]').val(recipeData.recipeNo);
-				$('#recipeName').val(recipeData.recipeName);
-				$('#recipeName').val(recipeData.recipeName);
-				$('#portion').val(recipeData.portion);
-				$('#cookTime').val(recipeData.cookTime);
-				$('#intro').val(recipeData.intro);
-				console.log(recipeData.representImages);
-				$('#representImgs').append(rpImageTempImpl(recipeData));
-				$('#files').append(rcpProduceTempImpl(recipeData));
-
-				$.each(
-						recipeMaterials,
-						function(index) {
-							var appendContent = $('<div class="mtWrapper"><div class="mtName float_left">'
-									+ recipeMaterials[index].materialName
-									+ '</div>'
-									+ '<div class="float_left">&nbsp;:&nbsp;</div>'
-									+ '<div class="float_left mtAmount"><input name="materialAmount" type="text" placeholder="분량 (예:400g)" /></div>'
-									+ '<input type="hidden" name="materialNo" value="'
-									+ recipeMaterials[index].materialNo
-									+ '">'
-									+ '<a href="#"><span class="closeBtn mtClose thick"></span></a>'
-									+ '</div>');
-
-							if (recipeMaterials[index].materialStatement == '1') {
-								$('#materialList').append(
-										appendContent);
-							} else {
-								$('#seasoningList').append(
-										appendContent);
-							}
-
-						});
-
-				$('#addBtn').text('수정');
-				$('#addBtn')
-				.attr('id', 'updateBtn');
-				$('#addRecipe').attr('action',
-				'recipe/updateRecipe.json');
-				$('#addRecipe').attr('id',
-				'updateRecipe');
-
-				$("#updateRecipe").submit(function(event) {
-					var formData = new FormData(this);
-					var formURL = $(this).attr("action");
-
-					if (imageList.length > 0) {
-						console.log("multi file submit");
-						event.preventDefault();
-						$('#fileupload').fileupload('send', {
-							files : imageList
-						});
-					}
-				});
-			},
-			error : function() {
-				swal('서버 요청 오류');
-			}
-		});
-	}
-
-	var imageList = new Array();
-
-	var recipeNo = location.href.split('?')[1];
-	var rpImageTemp = $('#represent-image-template').html();
-	var rpImageTempImpl = Handlebars.compile(rpImageTemp);
-	var rcpProduceTemp = $('#recipe-produce-template').html();
-	var rcpProduceTempImpl = Handlebars.compile(rcpProduceTemp);
-
-	if (recipeNo != null) {
-		$.ajax({
-			url : 'recipe/checkMyRecipe.json',
-			method : 'post',
-			data : {
-				recipeNo : recipeNo
-			},
-			dataType : 'json',
-			success : function(result) {
-				
-				if (result.status == 'nologin') {
-					swal({
-						title : "로그인 후 사용하실 수 있습니다.",
-						type : "warning",
-						confirmButtonClass : "btn-danger",
-						confirmButtonText : "확인",
-						closeOnConfirm : false
-					}, function(isConfirm) {
-						location.href = "index.html"
-					});
-					return;
-				}
-				
-				if (result.status != 'success') {
-					swal({
-						title : "레시피 권한이 없습니다.",
-						type : "warning",
-						confirmButtonClass : "btn-danger",
-						confirmButtonText : "확인",
-						closeOnConfirm : false
-					}, function(isConfirm) {
-						history.go(-1)();
-					});
-					return;
-				} else {
-					getRecipeEditInfo();
-				}
-			},
-			error : function() {
-				swal('서버 요청 오류');
-			}
-		});
-	}
-
+	checkMyRecipe(recipeNo);
+	
 	$(document).on('click', '#updateBtn', function() {
+		if ($('input[name="recipeName"]').val().length < 1) {
+			swal('레시피 제목을 입력해주세요.');
+			return;
+		} else if ($('#portion').val().length < 1) {
+			swal('몇 인분인지 입력해주세요.');
+			return;
+		} else if ($('#cookTime').val().length < 1) {
+			swal('조리시간을 입력해주세요.');
+			return;
+		} else if ($('input[name="intro"]').val().length < 1) {
+			swal('요리설명을 입력해주세요.');
+			return;
+		} else if ($('input[name="representImgNames"]').length < 1) {
+			swal('대표사진을 등록해주세요.');
+			return;
+		} else if ($('input[name="materialNo"]').length < 1) {
+			swal('재료를 등록해주세요.');
+			return;
+		} else if ($('input[name="produceImgNames"]').length < 1) {
+			swal('조리과정을 등록해주세요.');
+			return;
+		} else {
+			var materialAmount = $('input[name="materialAmount"]');
+			var recipeProduce = $('textarea[name="recipeProduce"]');
+
+			for (i = 0; i < materialAmount.length; i++) {
+				if ($(materialAmount[i]).val().length < 1) {
+					swal('재료의 분량을 입력해주세요.');
+					return;
+				}
+			}
+
+			for (i = 0; i < recipeProduce.length; i++) {
+				if ($(recipeProduce[i]).val().length < 1) {
+					swal((i + 1) + '번 조리과정을 입력해주세요.');
+					return;
+				}
+			}
+		}
+		
 		$("#updateRecipe").submit();
 	});
 
@@ -206,62 +123,7 @@ $(function() {
 	};
 
 	$('input[name="materialName"]').easyAutocomplete(options);
-
-	$
-	.ajax({
-		url : '/user/loginCheck.json',
-		method : 'get',
-		dataType : 'json',
-		success : function(result) {
-			if (result.status == 'failure') {
-				swal({
-					title : "로그인 후 사용하실 수 있습니다.",
-					type : "warning",
-					confirmButtonClass : "btn-danger",
-					confirmButtonText : "확인",
-					closeOnConfirm : false
-				}, function(isConfirm) {
-					location.href = "index.html"
-				});
-				return;
-			}
-			if (result.status == 'success') {
-
-				var data = [];
-				data.push({
-					userNo : result.data.userNo,
-					userName : result.data.userName,
-					email : result.data.email,
-					image : result.data.image,
-					intro : result.data.intro,
-					role : result.data.role,
-					joinDate : result.data.joinDate,
-					recipeUrl : result.data.recipeUrl,
-					recipeCount : result.data.recipeCount,
-					subsCount : result.data.subsCount
-				});
-
-				jsonData = JSON.stringify(data);
-
-				/* eval 사용 방법, eval(jsonData)[0].email */
-				if (jsonData != null) {
-					$('#signUpBtn').hide();
-					$('#loginBtn').hide();
-					$('#signUpTopBtn').hide();
-					$('#loginIcon')
-					.html(
-					'<img id="loginIconAction1" class="rcp-barimg dropdown-trigger img-circle" src="img/Chef3.jpg" />');
-					$('#topbarUserImg')
-					.html(
-					'<img id="loginIconAction2" class="rcp-barimg dropdown-trigger img-circle" src="img/Chef3.jpg" />');
-				}
-			}
-		},
-		error : function() {
-			swal('서버 요청 오류');
-		}
-	}); /* end of ajax */
-
+	
 	'use strict';
 
 	$("#representImgs").sortable({
@@ -283,11 +145,6 @@ $(function() {
 				dataType : 'json',
 				autoUpload : false,
 				acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i,
-				disableImageResize : /Android(?!.*Chrome)|Opera/
-					.test(window.navigator.userAgent),
-					previewMaxWidth : 150,
-					previewMaxHeight : 150,
-					previewCrop : true,
 					dropZone : $('#representImgDropzone')
 			})
 			.on(
@@ -331,12 +188,7 @@ $(function() {
 				dataType : 'json',
 				autoUpload : false,
 				acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i,
-				disableImageResize : /Android(?!.*Chrome)|Opera/
-					.test(window.navigator.userAgent),
-					previewMaxWidth : 150,
-					previewMaxHeight : 150,
-					previewCrop : true,
-					dropZone : $('#dropzone')
+				dropZone : $('#dropzone')
 			})
 			.on(
 					'fileuploadadd',
@@ -421,22 +273,6 @@ $(function() {
 	// swal('로그인 하고 오세욤 ㅎㅎ');
 	// location = "index.html";
 	// }
-
-	function imageDuplicationCheck(file) {
-		if (imageList.length > 0) {
-			for (i = 0; i < imageList.length; i++) {
-				if (file.name == imageList[i].name
-						&& file.size == imageList[i].size
-						&& file.lastModified == imageList[i].lastModified) {
-					// return false;
-					return false;
-				}
-			}
-			return true;
-		} else {
-			return true;
-		}
-	}
 
 	$('input').each(function() {
 		$(this).on('focus', function() {
@@ -576,3 +412,143 @@ $(function() {
 		min : 1
 	});
 });
+
+function getImageURL(imageFile) {
+	return URL.createObjectURL(imageFile);
+}
+
+function getRecipeEditInfo(recipeNo){
+	$.ajax({
+		url : 'recipe/recipeDetail.json',
+		method : 'post',
+		data : {
+			recipeNo : recipeNo
+		},
+		dataType : 'json',
+		success : function(result) {
+			if (result.status != 'success') {
+				swal('레시피 정보를 가져오는데 실패하였습니다.');
+				return;
+			}
+			var recipeData = result.data;
+			var recipeMaterials = result.materials;
+
+			$('input[name="recipeNo"]').val(recipeData.recipeNo);
+			$('#recipeName').val(recipeData.recipeName);
+			$('#recipeName').val(recipeData.recipeName);
+			$('#portion').val(recipeData.portion);
+			$('#cookTime').val(recipeData.cookTime);
+			$('#intro').val(recipeData.intro);
+			$('#representImgs').append(rpImageTempImpl(recipeData));
+			$('#files').append(rcpProduceTempImpl(recipeData));
+
+			$.each(
+					recipeMaterials,
+					function(index) {
+						var appendContent = $('<div class="mtWrapper"><div class="mtName float_left">'
+								+ recipeMaterials[index].materialName
+								+ '</div>'
+								+ '<div class="float_left">&nbsp;:&nbsp;</div>'
+								+ '<div class="float_left mtAmount"><input name="materialAmount" type="text" placeholder="분량 (예:400g)" /></div>'
+								+ '<input type="hidden" name="materialNo" value="'
+								+ recipeMaterials[index].materialNo
+								+ '">'
+								+ '<a href="#"><span class="closeBtn mtClose thick"></span></a>'
+								+ '</div>');
+
+						if (recipeMaterials[index].materialStatement == '1') {
+							$('#materialList').append(
+									appendContent);
+						} else {
+							$('#seasoningList').append(
+									appendContent);
+						}
+
+					});
+
+			$('#addBtn').text('수정');
+			$('#addBtn')
+			.attr('id', 'updateBtn');
+			$('#addRecipe').attr('action',
+			'recipe/updateRecipe.json');
+			$('#addRecipe').attr('id',
+			'updateRecipe');
+
+			$("#updateRecipe").submit(function(event) {
+				var formData = new FormData(this);
+				var formURL = $(this).attr("action");
+
+				if (imageList.length > 0) {
+					console.log("multi file submit");
+					event.preventDefault();
+					$('#fileupload').fileupload('send', {
+						files : imageList
+					});
+				}
+			});
+		},
+		error : function() {
+			swal('서버 요청 오류');
+		}
+	});
+}
+
+function checkMyRecipe(recipeNo){
+	$.ajax({
+		url : 'recipe/checkMyRecipe.json',
+		method : 'post',
+		data : {
+			recipeNo : recipeNo
+		},
+		dataType : 'json',
+		success : function(result) {
+			
+			if (result.status == 'nologin') {
+				swal({
+					title : "로그인 후 사용하실 수 있습니다.",
+					type : "warning",
+					confirmButtonClass : "btn-danger",
+					confirmButtonText : "확인",
+					closeOnConfirm : false
+				}, function(isConfirm) {
+					location.href = "index.html"
+				});
+				return;
+			}
+			
+			if (result.status == 'fail') {
+				swal({
+					title : "레시피 권한이 없습니다.",
+					type : "warning",
+					confirmButtonClass : "btn-danger",
+					confirmButtonText : "확인",
+					closeOnConfirm : false
+				}, function(isConfirm) {
+					history.go(-1)();
+				});
+				return;
+			} else if(result.status == 'success') {
+				getRecipeEditInfo(recipeNo);
+			}
+		},
+		error : function() {
+			swal('서버 요청 오류');
+		}
+	});
+}
+
+function imageDuplicationCheck(file) {
+	if (imageList.length > 0) {
+		for (i = 0; i < imageList.length; i++) {
+			if (file.name == imageList[i].name
+					&& file.size == imageList[i].size
+					&& file.lastModified == imageList[i].lastModified) {
+				// return false;
+				return false;
+			}
+		}
+		return true;
+	} else {
+		return true;
+	}
+}

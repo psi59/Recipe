@@ -82,3 +82,26 @@ $('#topLoginBtn').on('click', function(event){
 	event.preventDefault();
 	$('#login-pop-up-banner').bPopup();
 });
+//랜덤 레시피 뽑기 
+$('#rcp-random-recipe').on('click', function(event){
+	event.preventDefault();
+	$('#random-pop-up-banner').bPopup();
+})
+
+
+Handlebars.registerHelper('defaultImage', function(options) {
+		 
+	  if (this.user.image == null || this.user.image =='') {
+		  return options.inverse(this);
+	  } else {
+	    return options.fn(this);
+	  }
+});
+
+function comList(){
+	  $(document).on('click', '.rcp-userName, .rcp-nickname , .rcp-profile',function(event){
+		  event.preventDefault();
+		  $(location).attr('href','/mypage.html?'+$(event.target).parent().children('.rcp-hidden-email').val() ); 	 
+	  })
+}
+

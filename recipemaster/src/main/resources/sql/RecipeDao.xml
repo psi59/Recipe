@@ -62,93 +62,67 @@ DELETE FROM rcp_rp WHERE RRPNO=${value};
 
 
 	<select id="recipeSearch" resultMap="recipeMap" parameterType="Map">
-    SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.hits,
-           r.rgst, truncate(r.gpa,1) gpa, u.uno, u.name userName, l.rcpno, l.lc_dt, l.uno likeUser
-    FROM users u INNER JOIN rcps r on u.uno=r.uno         
-    LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=#{userNo}
-         
-         <if test="!categorySize eq 0">        
-           ,(SELECT rcpno , count(*) vc FROM
-           (SELECT c.ctgno, c.name, cn.rcpno from ctg c, ctg_no cn where c.ctgno = cn.ctgno and c.name IN (
-           <foreach collection="search.categoryList" item="item" separator=",">
-            #{item}
-           </foreach>
-           )) a
-           GROUP BY rcpno) d         
-           WHERE r.rcpno = d.rcpno AND vc = #{categorySize}
-         </if>
-                 
-    <if test="search.searchCondition == 'recipe' and categorySize eq 0">
-      WHERE r.name LIKE '%${search.searchKeyword}%'
-    </if>
-    <if test="search.searchCondition == 'recipe' and !categorySize eq 0">
-      AND r.name LIKE '%${search.searchKeyword}%'
-    </if>
-    <if test="search.searchCondition == 'chef' and categorySize eq 0">
-      WHERE u.name LIKE '%${search.searchKeyword}%'
-    </if>
-    <if test="search.searchCondition == 'recipe' and !categorySize eq 0">
-      AND r.name LIKE '%${search.searchKeyword}%'
-    </if> 
-    
-    <if test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'">
-      ORDER BY r.rcpno DESC
-    </if>
-    <if test="search.sortCondition == 'newest' and search.orderCondition == 'ASC'">
-      ORDER BY r.rcpno ASC
-    </if>
-    <if test="search.sortCondition == 'grade' and search.orderCondition == 'DESC'">
-      ORDER BY r.gpa DESC
-    </if>
-    <if test="search.sortCondition == 'grade' and search.orderCondition == 'ASC'">
-      ORDER BY r.gpa ASC
-    </if>
-    limit #{startIndex}, #{len}
-  </select>
-  
-   <select id="recipeCount" resultType="int" parameterType="Map">
-    SELECT count(*)
-    FROM users u INNER JOIN rcps r on u.uno=r.uno         
-    LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=#{userNo}    
-    
-    <if test="!categorySize eq 0">        
-      ,(SELECT rcpno , count(*) vc FROM
-      (SELECT c.ctgno, c.name, cn.rcpno from ctg c, ctg_no cn where c.ctgno = cn.ctgno and c.name IN (
-      <foreach collection="search.categoryList" item="item" separator=",">
-       #{item}
-      </foreach>
-      )) a
-      GROUP BY rcpno) d         
-      WHERE r.rcpno = d.rcpno AND vc = #{categorySize}
-    </if>
-                 
-    <if test="search.searchCondition == 'recipe' and categorySize eq 0">
-      WHERE r.name LIKE '%${search.searchKeyword}%'
-    </if>
-    <if test="search.searchCondition == 'recipe' and !categorySize eq 0">
-      AND r.name LIKE '%${search.searchKeyword}%'
-    </if>
-    <if test="search.searchCondition == 'chef' and categorySize eq 0">
-      WHERE u.name LIKE '%${search.searchKeyword}%'
-    </if>
-    <if test="search.searchCondition == 'recipe' and !categorySize eq 0">
-      AND r.name LIKE '%${search.searchKeyword}%'
-    </if> 
-    
-    <if test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'">
-      ORDER BY r.rcpno DESC
-    </if>
-    <if test="search.sortCondition == 'newest' and search.orderCondition == 'ASC'">
-      ORDER BY r.rcpno ASC
-    </if>
-    <if test="search.sortCondition == 'grade' and search.orderCondition == 'DESC'">
-      ORDER BY r.gpa DESC
-    </if>
-    <if test="search.sortCondition == 'grade' and search.orderCondition == 'ASC'">
-      ORDER BY r.gpa ASC
-    </if>
-    limit #{startIndex}, #{len}
-  </select> 
+		SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt,
+		r.hits,
+		r.rgst, truncate(r.gpa,1) gpa, u.uno, u.name userName, l.rcpno,
+		l.lc_dt,
+		l.uno likeUser
+		FROM users u INNER JOIN rcps r on u.uno=r.uno
+		LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=#{userNo}
+		<if test="search.searchCondition == 'recipe'">
+			WHERE r.name LIKE '%${search.searchKeyword}%'
+		</if>
+		<if test="search.searchCondition == 'chef'">
+			WHERE u.name LIKE '%${search.searchKeyword}%'
+		</if>
+		<if
+			test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'">
+			ORDER BY r.rcpno DESC
+		</if>
+		<if
+			test="search.sortCondition == 'newest' and search.orderCondition == 'ASC'">
+			ORDER BY r.rcpno ASC
+		</if>
+		<if
+			test="search.sortCondition == 'grade' and search.orderCondition == 'DESC'">
+			ORDER BY r.gpa DESC
+		</if>
+		<if
+			test="search.sortCondition == 'grade' and search.orderCondition == 'ASC'">
+			ORDER BY r.gpa ASC
+		</if>
+		limit #{startIndex}, #{len}
+	</select>
+
+	<select id="recipeCount" resultType="int" parameterType="Map">
+		SELECT count(*)
+		FROM users u INNER JOIN rcps r on u.uno=r.uno
+		LEFT OUTER
+		JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=#{userNo}
+		<if test="search.searchCondition == 'recipe'">
+			WHERE r.name LIKE '%${search.searchKeyword}%'
+		</if>
+		<if test="search.searchCondition == 'chef'">
+			WHERE u.name LIKE '%${search.searchKeyword}%'
+		</if>
+		<if
+			test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'">
+			ORDER BY r.rcpno DESC
+		</if>
+		<if
+			test="search.sortCondition == 'newest' and search.orderCondition == 'ASC'">
+			ORDER BY r.rcpno ASC
+		</if>
+		<if
+			test="search.sortCondition == 'grade' and search.orderCondition == 'DESC'">
+			ORDER BY r.gpa DESC
+		</if>
+		<if
+			test="search.sortCondition == 'grade' and search.orderCondition == 'ASC'">
+			ORDER BY r.gpa ASC
+		</if>
+		limit #{startIndex}, #{len}
+	</select>
 
 	<select id="selectRecipeName" parameterType="String" resultType="String">
 		SELECT name
@@ -321,7 +295,7 @@ DELETE FROM rcp_rp WHERE RRPNO=${value};
 	<select id="selectOne" resultMap="recipeMap" parameterType="INTEGER">
 	    SELECT DISTINCT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn,
 	    r.rcp_dt, r.hits, r.rpimg,
-	    r.rgst, r.gpa, r.rcp_pd, u.uno, u.name userName,s.uno scrapUser, s.rcpno,
+	    r.rgst, r.gpa, r.rcp_pd, u.uno, u.email,u.name userName,s.uno scrapUser, s.rcpno,
 	    (select count(rcpno) from rcp_lik where rcpno=${recipeNo}) countLike,
 	    (select count(rrpno) from rcp_rp where rcpno=${recipeNo})
 	    countComment,
@@ -357,24 +331,23 @@ DELETE FROM rcp_rp WHERE RRPNO=${value};
 	<!-- 좋아요 *3 스크랩 *3 조회수 *1 -->
 	<select id="recipeRankList" resultMap="recipeMap" parameterType="Map">
 		SELECT @rownum:=@rownum+1 rownum,vt.*
-		FROM (SELECT
-		rcpno,name,hits,IFNULL(r2.cnt,0) countLike,IFNULL(r3.cnt,0)
-		countScrap,
-		SUM((IFNULL(hits,0)*1)+(IFNULL(r2.cnt,0)*3)+(IFNULL(r3.cnt,0)*3))
-		totalPoint
-		FROM RCPS r1
-		LEFT OUTER JOIN (SELECT uno,COUNT(rcpno) cnt
-		FROM RCP_LIK GROUP BY uno) r2
-		ON r1.uno=r2.uno
-		LEFT OUTER JOIN (SELECT
-		uno,COUNT(rcpno) cnt
-		FROM RCP_SCR GROUP BY uno) r3
-		ON r2.uno=r3.uno
-		INNER JOIN(select @rownum:=0) t
-		GROUP BY r1.rcpno
-		limit #{len}) vt
-		ORDER
-		BY vt.totalPoint DESC
+    FROM (SELECT
+    r1.rcpno,r1.name,r1.hits,IFNULL(r2.cnt,0) countLike,IFNULL(r3.cnt,0)
+    countScrap,
+    SUM((IFNULL(hits,0)*1)+(IFNULL(r2.cnt,0)*3)+(IFNULL(r3.cnt,0)*3))
+    totalPoint
+    FROM RCPS r1
+    LEFT OUTER JOIN (SELECT rcpno,COUNT(uno) cnt
+    FROM RCP_LIK GROUP BY rcpno) r2
+    ON r1.rcpno=r2.rcpno
+    LEFT OUTER JOIN (SELECT
+    rcpno,COUNT(uno) cnt
+    FROM RCP_SCR GROUP BY rcpno) r3
+    ON r2.rcpno=r3.rcpno
+    INNER JOIN(select @rownum:=0) t
+    GROUP BY r1.rcpno
+    limit #{len}) vt
+		ORDER BY vt.totalPoint DESC
 	</select>
 	
 	<select id="checkMyRecipe" resultMap="recipeMap" parameterType="Map">
@@ -385,6 +358,20 @@ DELETE FROM rcp_rp WHERE RRPNO=${value};
   
   <delete id="deleteMaterials" parameterType="int">
     DELETE FROM rcp_mt WHERE rcpno=#{value}
-  </delete> 
-
+  </delete>
+  
+  <select id="recipeRandomList" resultMap="recipeMap" parameterType="Map">
+    SELECT * FROM (
+        SELECT @rownum:=@rownum+1 rownum,vt.*
+		    FROM (
+		        SELECT r.rcpno rcpno, r.uno uno, r.name, r.intro, r.c_time,r.rpimg,
+		    r.ptn, r.rcp_dt, r.hits,
+		    r.rgst, r.gpa, u.uno userNo, u.img, u.name userName, u.email
+		    FROM users u
+		    INNER JOIN rcps r on u.uno=r.uno
+		    INNER JOIN(select @rownum:=0) t
+		    ORDER BY RAND()) vt
+        ) vt1
+        WHERE rownum=1
+  </select>
 </mapper>

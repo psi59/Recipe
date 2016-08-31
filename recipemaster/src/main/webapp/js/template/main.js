@@ -4,8 +4,8 @@ $(document).ready(function(){
   //------------------------------------//
   //Navbar//
   //------------------------------------//
-    	var menu = $('.navbar');
-    	$(window).bind('scroll', function(e){
+	   	var menu = $('#topBtn');
+    	$(window).bind('scroll', function(e){	   		
     		if($(window).scrollTop() > $(document).height()*0.15){
     			if(!menu.hasClass('open')){
     				menu.addClass('open');

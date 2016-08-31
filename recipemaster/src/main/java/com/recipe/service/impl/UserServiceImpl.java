@@ -101,4 +101,14 @@ public class UserServiceImpl implements UserService {
     // TODO Auto-generated method stub
     return userDao.selectFromEmail(email);
   }
+  
+  @Override
+  public List<User> getUserRankListSCS(int pageNo, int pageSize, int uno) {
+    HashMap<String,Object> params= new HashMap<>();    
+    params.put("startIndex", (pageNo - 1) * pageSize);
+    params.put("len", pageSize);   
+    params.put("uno", uno);
+        
+    return userDao.selectRankListSCS(params);
+  }
 }

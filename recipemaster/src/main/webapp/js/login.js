@@ -1,108 +1,141 @@
-var jsonData;
 window.onload = function () {
+	var userInfo = getUserInfo();
 	
 	$('#signUpBtn').html("<span class='rcp-btn-default-2'>회원가입</span>");
 	$('#loginBtn').html("<span class='rcp-btn-default-2'>로그인</span>");
+	$('#profileView').removeClass().addClass("main-nav__dropdown top-main-nav__dropdown profile-dropdown");
+
+	/*로그아웃 버튼*/
+	$(document).on('click', '#logoutBtn', function(){
+		logout(event);
+		$(location).attr('href','/');
+	});
+		
+	$(window).on('scroll', function(event){
+		var lastScrollTop = 0;
+		var st = $(this).scrollTop();
+
+		if (st <= 50){
+			$('#profileView').removeClass().addClass("main-nav__dropdown top-main-nav__dropdown profile-dropdown");
+		} else {
+			$('#profileView').removeClass().addClass("main-nav__dropdown bottom-main-nav__dropdown profile-dropdown");
+		}
+		lastScrollTop = st;
+	});
 	
-	loginCheck(event);
+
+	$(document).on('click', '#userLogin', function(){
+		if($('#userEmail').val() == ''){
+			swal('이메일을 입력해주세요.');		
+			return;
+		} else if($('#userPassword').val() == ''){
+			swal('패스워드를 입력해주세요.');		
+			return;
+		}	
+		login(event);
+	});
+
+	//로그인 버튼 누를시 포커스
+	$(document).on('click', '#loginBtn', function(){
+		document.getElementById("userEmail").focus();
+	});
+	
+	$(document).on('click', '#topbarUserImg', function(){
+		document.getElementById("userEmail").focus();
+	});
+
+
+	$(document).on('keyup', '#userEmail', function(){
+		if(event.keyCode == 9){
+			document.getElementById("userPassword").focus();
+		}
+		if(event.keyCode == 13){
+			if($('#userPassword').val() == ''){
+				swal('패스워드를 입력해주세요.');		
+				document.getElementById("userPassword").focus();
+			}
+		}
+	});
+
+	$(document).on('keyup', '#userPassword', function(){
+		if(event.keyCode == 13){
+			if($('#userPassword').val() == ''){
+				swal('패스워드를 입력해주세요.');		
+				document.getElementById("userPassword").focus();
+			}
+			login(event);
+		}
+	});
+
+	
+
+	$(document)
+	.on(
+			'click', '.dropdown-trigger',
+			function(event) {
+				event.preventDefault();
+				dropdownClick('.profile-dropdown',
+				'.mobile-menu-dropdown');
+				/* 용이 추가() */
+				if (userInfo.userNo != null) {
+					$('#profileEmail')
+					.text(
+							userInfo.email);
+					$('#profileName')
+					.text(
+							userInfo.userName);
+					$('#profileGrade')
+					.text(
+							userInfo.recipeUrl);
+					/* 용이 추가() */
+					$('#introduce')
+					.text(
+							userInfo.intro);
+				}
+	});
 };
 
-$("#userLogin").click(function(){
-	if($('#userEmail').val() == ''){
-		swal('이메일을 입력해주세요.');		
+
+function getUserInfo(){
+	var obj = loginCheck().responseJSON;
+	if(obj.status!='success'){
 		return;
-	} else if($('#userPassword').val() == ''){
-		swal('패스워드를 입력해주세요.');		
-		return;
-	}	
-	login(event);
-});
-
-//로그인 버튼 누를시 포커스
-$("#loginBtn").click(function(){
-	document.getElementById("userEmail").focus();
-});
-$("#topbarUserImg").click(function(){
-	document.getElementById("userEmail").focus();
-});
-
-
-$("#userEmail").keyup(function(){
-	if(event.keyCode == 9){
-		document.getElementById("userPassword").focus();
 	}
-	if(event.keyCode == 13){
-		if($('#userPassword').val() == ''){
-			swal('패스워드를 입력해주세요.');		
-			document.getElementById("userPassword").focus();
-		}
-	}
-});
+	
+	var userInfo = {
+		userNo : obj.data.userNo,
+		userName : obj.data.userName,
+		email : obj.data.email,
+		image : obj.data.image,
+		intro : obj.data.intro,
+		role : obj.data.role,
+		joinDate : obj.data.joinDate,
+		recipeUrl : obj.data.recipeUrl,
+		recipeCount : obj.data.recipeCount,
+		subsCount : obj.data.subsCount
+	};
+	
+	$('#signUpBtn').remove();
+	$('#loginBtn').remove();
+	$('#signUpTopBtn').remove();
+	$('#loginIcon').html('<img id="loginIconAction1" class="rcp-barimg dropdown-trigger img-circle" src="img/Chef3.jpg" />');
+	$('#topbarUserImg').html('<img id="loginIconAction2" class="rcp-barimg dropdown-trigger img-circle" src="img/Chef3.jpg" />');
+	
+	return userInfo;
+}
 
-$('#userPassword').keyup(function(){
-	if(event.keyCode == 13){
-		if($('#userPassword').val() == ''){
-			swal('패스워드를 입력해주세요.');		
-			document.getElementById("userPassword").focus();
-		}
-		login(event);
-	}
-});
-
-//login check
-function loginCheck(event) {
-	event.preventDefault();
-
-	$.ajax({
+function loginCheck() {
+	return $.ajax({
 		url : '/user/loginCheck.json', 
 		method : 'get',
 		dataType : 'json',
-		success : function(result) {
-			if (result.status == 'failure') {
-				
-				return;
-			} 
-			if(result.status == 'success'){
-				
-				var data = [];
-				data.push({
-					userNo : result.data.userNo,
-					userName : result.data.userName,
-					email : result.data.email,
-					image : result.data.image,
-					intro : result.data.intro,
-					role : result.data.role,
-					joinDate : result.data.joinDate,
-					recipeUrl : result.data.recipeUrl,
-					recipeCount : result.data.recipeCount,
-					subsCount : result.data.subsCount
-				});
-
-				jsonData = JSON.stringify(data);
-				console.log (jsonData)
-				/*eval 사용 방법, eval(jsonData)[0].email*/
-				if(jsonData!=null){
-					$('#signUpBtn').remove();
-					$('#loginBtn').remove();
-					$('#signUpTopBtn').remove();
-					$('#loginIcon').html('<img id="loginIconAction1" class="rcp-barimg dropdown-trigger img-circle" src="img/Chef3.jpg" />');
-					$('#topbarUserImg').html('<img id="loginIconAction2" class="rcp-barimg dropdown-trigger img-circle" src="img/Chef3.jpg" />');
-					$('#sessionEmail').val(eval(jsonData)[0].email);
-				}
-			} else {
-						return
-					}
-					return jsonData;
-				},
-				error : function() {
-					swal('서버 요청 오류');
-				}
-			}); /* end of ajax */
+        async: false
+	});
 }; /* end of jquery */
+
 
 //logout
 function logout(event) {
-	
 	event.preventDefault();
 	$.ajax({
 		url : '/user/logout.json', 
@@ -110,22 +143,19 @@ function logout(event) {
 		dataType : 'json',
 		success : function(result) {
 			if (result.status == 'failure') {
-				
+				swal('로그아웃 실패!!');
 				return
-				
 			} 
 			if(result.status == 'success'){
-				
-				jsonData=null;
+				userInfo=null;
 			} else {
-						swal('서버 요청 오류');
-					}
-
-				},
-				error : function() {
-					swal('서버 요청 오류');
-				}
-			}); /* end of ajax */
+				swal('서버 요청 오류');
+			}
+		},
+		error : function() {
+			swal('서버 요청 오류');
+		}
+	}); /* end of ajax */
 }; /* end of jquery */
 
 function login(event) {
@@ -140,81 +170,26 @@ function login(event) {
 		}, 
 		success : function(result) {
 			if (result.status == 'failure') {
-				
+
 				swal('잘못입력하셨습니다.','아이디 또는 비밀번호를 다시 확인하여 주세요.',"error");
-				
+
 				return;
 			} 
 
 			if(result.status == 'success'){
+				location.reload();
+				$('#login-pop-up-banner').bPopup().close();
+			} else {
+				swal('비밀번호를 다시 입력해주세요');
+			}
 
-						location.reload();
-
-						$('#login-pop-up-banner').bPopup().close();
-					} else {
-						swal('비밀번호를 다시 입력해주세요');
-					}
-
-				},
-				error : function() {
-					swal('서버 요청 오류');
-				}
+		},
+		error : function() {
+			swal('서버 요청 오류');
+		}
 	}); /* end of ajax */
 }; /* end of jquery */
-
-
-
-$(function(){
-	$('#profileView').removeClass().addClass("main-nav__dropdown top-main-nav__dropdown profile-dropdown");
-	
-		/*로그아웃 버튼*/
-		$("#logoutBtn").click(
-				function(){
-					logout(event);
-					//location.reload();
-					$(location).attr('href','/');
-				});
-});
-
-var lastScrollTop = 0;
-$(window).scroll(function(event){
-	var st = $(this).scrollTop();
-
-	if (st <= 50){
-		$('#profileView').removeClass().addClass("main-nav__dropdown top-main-nav__dropdown profile-dropdown");
-	} else {
-		$('#profileView').removeClass().addClass("main-nav__dropdown bottom-main-nav__dropdown profile-dropdown");
-	}
-	lastScrollTop = st;
-
-
-});
 
 /*$('#TopBtn').on('click', function(){
 	$('#login-pop-up-banner').bPopup();
 });*/
-
-$(document)
-.on(
-		'click', '.dropdown-trigger',
-		function(event) {
-			event.preventDefault();
-			dropdownClick('.profile-dropdown',
-					'.mobile-menu-dropdown');
-			/* 용이 추가() */
-			if (eval(jsonData)[0].userNo != null) {
-				$('#profileEmail')
-						.text(
-								eval(jsonData)[0].email);
-				$('#profileName')
-						.text(
-								eval(jsonData)[0].userName);
-				$('#profileGrade')
-						.text(
-								eval(jsonData)[0].recipeUrl);
-				/* 용이 추가() */
-				$('#introduce')
-						.text(
-								eval(jsonData)[0].intro);
-			}
-		});

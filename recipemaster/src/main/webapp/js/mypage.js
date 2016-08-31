@@ -1,3 +1,4 @@
+document.write('<script type"text/javascript" src="js/common.js"></script>')
 $(function() {
 	console.log(location.href.split('?')[1]);
 
@@ -21,15 +22,20 @@ $(function() {
 			var sourceCRList = $('#temp').text();
 			var templateCRList = Handlebars.compile(sourceCRList);
 
-			$('.rcp-userName').text(result.user.userName);
-
-			$('#tabs-1 .hs-content .container .row .rcp-mypage-section')
-					.append(templateCRList(result));
-			console.log(result.data);
+			$('.rcp-userPage-userName').text(result.user.userName);
+			console.log("userProfile : "+result.user.image);
 			
+			if(result.user.image != null && result.user.image !=''){
+			$('.rcp-topimg').attr('src','img/profileImg/'+result.user.image);
+			}
+			
+			$('#tabs-1 .hs-content .container .row .rcp-mypage-section')
+			.append(templateCRList(result));
+			console.log(result.data);
+
 			$('.rcp-Vst').remove();
 			/*$('.rcp-Vst-write').remove();*/
-			
+
 			for(var i=0; i<result.data.length; i++){
 //				for(var j=0; j<result.data[i].representImages.length; j++){
 				$('div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');
@@ -55,7 +61,7 @@ $(function() {
 				// swal('실행 중 오류 발생');
 				return;
 			}
-			$('.rcp-topbtn').text('구독하기 완료');
+			$('.rcp-topbtn').text('구독중');
 			$('.rcp-topbtn').attr('id', 'subscribeComplete');
 		},
 		error : function() {
@@ -97,7 +103,7 @@ $(function() {
 						return;
 					} else {
 						console.log('구독하기 성공성')
-						$('.rcp-topbtn').text('구독하기 완료');
+						$('.rcp-topbtn').text('구독중');
 						$('.rcp-topbtn').attr('id', 'subscribeComplete');
 					}
 				}),
@@ -119,26 +125,10 @@ $(function() {
 	// getRealTimeRank();
 
 	/* 준모3 */
-	if (eval(sessionStorage.getItem('data')) != null) {
 
-		if($(event.target).is('#searchRecipe')){
-			request=1;
-			$('.rcp-Vst-write').hide();
-		}
-		else if($(event.target).is('#searchScrap')){
-			request=2;
-			$('.rcp-Vst-write').hide();
-		}else if($(event.target).is('#searchSubscribe')){
-			request=3;
-			$('.rcp-Vst-write').hide();
-		}else{
-			request = 4;
-		}
-		$('#topbarUserImg')
-				.html(
-						"<img class='rcp-barimg dropdown-trigger img-circle' src='img/Chef3.jpg' />");
-
-	}
+	$('#topbarUserImg')
+	.html(
+	"<img class='rcp-barimg dropdown-trigger img-circle' src='img/Chef3.jpg' />");
 
 	$('.profile-dropdown:has(.active)').bind('click', function() {
 
@@ -179,8 +169,6 @@ $(function() {
 var sourceVisitor = $('#visitor-template').html();
 var templateVisitor = Handlebars.compile(sourceVisitor);
 
-loadVisitor();
-
 function loadVisitor() {
 	$.ajax({
 		url : '/visitor/list.json',
@@ -203,13 +191,8 @@ function loadVisitor() {
 	});
 }
 
-				$('#tabs-'+$('#tabId').val()+' .hs-content .container .row .rcp-mypage-section div').remove();
-				$('#tabs-'+request+' .hs-content .container .row .rcp-mypage-section').append(templateCRList(result));
-				$('#tabId').val(request);
-				$('.rcp-Vst').remove();
 /* Add */
-$(document).on('click', '#rcp-rpBtn', function() {
-	alert('d0');
+$(document).on('click','#rcp-rpBtn', function() {
 	$.ajax({
 		url : 'visitor/add.json',
 		method : 'post',
@@ -220,8 +203,8 @@ $(document).on('click', '#rcp-rpBtn', function() {
 		dataType : 'json',
 		success : function(result) {
 			if (result.status != 'success') {
-				swal('등록 오류입니다.');
-				return;
+				swal('로그인해라.');
+				$('#login-pop-up-banner').bPopup();//20160830 용이 추가
 			}
 
 			$('#Vst>').remove();
@@ -231,7 +214,7 @@ $(document).on('click', '#rcp-rpBtn', function() {
 			swal('서버 요청 오류 !')
 		}
 	})
-	
+
 	$('#rcp-rpcontent').val("");
 });
 
@@ -262,25 +245,33 @@ $(document).on('click', '.vstDeleteBtn', function(event) {
 
 /* 업데이트 */
 
-$(document)
-		.on(
-				'click',
-				'.vstUpdateBtn',
-				function(event) {
-					event.preventDefault();
-					$(
-							'.vst-contents[data-index='
-									+ $(this).attr('data-index') + ']')
-							.html(
-									'<div class="rcp-Vst-contents"><textarea id="updatevContent" rows="3" cols="34" placeholder="편집해주세요" style="resize:none;"></textarea></div>');
-					$(
-							'.editBtn1[data-index='
-									+ $(this).attr('data-index') + ']').html(
-							'<img class="vstConfirmBtn" id="vstConfirmBtn" data-index="'
-									+ $(this).attr('data-index') + ' "'
-									+ 'src="/img/vstConfirmBtn.png">')
+$(document).on('click','.vstUpdateBtn',function(event) {
+	event.preventDefault();
+	$(
+			'.vst-contents[data-index='
+			+ $(this).attr('data-index') + ']')
+			.html(
+			'<div class="rcp-Vst-contents"><textarea id="updatevContent" rows="7" cols="43" placeholder="편집해주세요" style="resize:none;"></textarea></div>');
+	$(
+			'.editBtn1[data-index='
+			+ $(this).attr('data-index') + ']').html(
+					'<button type="button" class="btn btn-success btn-xs vstConfirmBtn" id="vstConfirmBtn" data-index="'
+					+ $(this).attr('data-index') + ' "'
+					+ '>완료</button>');
+	$(
+			'.editBtn2[data-index='
+			+ $(this).attr('data-index') + ']').html(
+					'<button type="button" class="btn btn-warning btn-xs vstResetBtn" id="vstResetBtn" data-index="'
+					+ $(this).attr('data-index') + ' "'
+					+ '>취소</button>');
 
-				});
+});
+
+$(document).on('click','.vstResetBtn',function(event) {
+	event.preventDefault();
+	$('#Vst>').remove();
+	loadVisitor();
+});
 
 $(document).on('click', '.vstConfirmBtn', function(event) {
 	event.preventDefault();
@@ -300,169 +291,119 @@ $(document).on('click', '.vstConfirmBtn', function(event) {
 	}, 'json');
 	event.preventDefault();
 });
-f
-
-$(document).on(
-		'mouseenter',
-		'.rcp-Vst-slotRp',
-		function() {
-			$('.addDelete')
-					.html(
-							'<img id="addDeleteBtn"'
-									+ 'src="/img/vstDeleteBtnWt.png">');
-		});
-
-$(document).on('mouseleave', '.rcp-Vst-slotRp', function() {
-	$('.addDelete').text('');
-});
-
-$(document).on('click', '#addDeleteBtn', function(evenet) {
-	event.preventDefault();
-	if (confirm("댓글을 삭제하시겠습니까?")) {
-		$(this).parent().parent().remove();
-	} else {
-		return;
-	}
-})
-
-$(document)
-		.on(
-				'click',
-				'#moreRp',
-				function() {
-					$('.rcp-Vst-slotRp')
-							.append(
-									'<div class="rcp-Vst-contents-rep">'
-											+ '<img class="rcp-Vst-img-rep1 img-circle" src="/img/pika.jpg" />'
-											+ '<span>박상일</span><span> &nbsp;</span> <span>잘보고갑니다.(Contents)</span>'
-											+ '<span>2016-08-12-13:00</span><span class="addDelete"></span><hr style="border:solid 1px #b51515;width:90%"/></div>');
-
-					$('#moreRp').parent().html(
-							'<span id="hideRp">댓글 숨기기</span>');
-				})
-
-$(document).on('click', '#hideRp', function() {
-	$('.rcp-Vst-slotRp').html('');
-
-	$('#hideRp').parent().html('<span id="moreRp">댓글 더보기..(1)</span>');
-})
-
-/* 화면관리 */
-$(function() {
-	$("#tabs").tabs();
-});
 
 function pageTabs() {
-    $('.rcp-Vst-write').hide();
+	$('.rcp-Vst-write').hide();
 	$('.isotope-filter a')
-			.on(
-					'click',
-					function(event) {
-						event.preventDefault();
-						var request;
-						var url = 'recipe/userPage.json';
+	.on(
+			'click',
+			function(event) {
+				event.preventDefault();
+				var request;
+				var url = 'recipe/userPage.json';
 
-						if ($(event.target).is('#searchRecipe')) {
-							request = 1;
-						    $('.rcp-Vst-write').hide();
+				if($(event.target).is('#searchRecipe')){
+					request=1;
+					$('.rcp-Vst').hide();
+					$('.rcp-Vst-write').hide();
+				}
+				else if($(event.target).is('#searchScrap')){
+					request=2;
+					$('.rcp-Vst').hide();
+					$('.rcp-Vst-write').hide();
+				}else if($(event.target).is('#searchSubscribe')){
+					request=3;
+					$('.rcp-Vst').hide();
+					$('.rcp-Vst-write').hide();
+				}else{
+					request = 4;
+					$('.rcp-Vst').remove();
+					loadVisitor();
+				}
 
-						} else if ($(event.target).is('#searchScrap')) {
-							request = 2;
-						    $('.rcp-Vst-write').hide();
+				$
+				.ajax({
+					url : url,
+					dataType : 'json',
+					method : 'post',
+					data : {
+						email : location.href.split('?')[1],
+						request : request
+					},
+					success : function(result) {
 
-						} else if ($(event.target).is('#searchSubscribe')) {
-							request = 3;
-						    $('.rcp-Vst-write').hide();
-
-						} else {
-							request = 4;
+						if (result.status != 'success') {
+							alert('comList 실행 중 오류 발생');
+							return;
 						}
 
-						$
-								.ajax({
-									url : url,
-									dataType : 'json',
-									method : 'post',
-									data : {
-										email : location.href.split('?')[1],
-										request : request
-									},
-									success : function(result) {
+						var sourceCRList = $('#temp').text();
+						var templateCRList = Handlebars
+						.compile(sourceCRList);
 
-										if (result.status != 'success') {
-											alert('comList 실행 중 오류 발생');
-											return;
-										}
+						console.log(result.data);
 
-										var sourceCRList = $('#temp').text();
-										var templateCRList = Handlebars
-												.compile(sourceCRList);
+						$(
+								'#tabs-'
+								+ $('#tabId').val()
+								+ ' .hs-content .container .row .rcp-mypage-section div')
+								.remove();
+						$(
+								'#tabs-'
+								+ request
+								+ ' .hs-content .container .row .rcp-mypage-section')
+								.append(templateCRList(result));
+						$('#tabId').val(request);
 
-										console.log(result.data);
+						console.log(result.data);
+						for (var i = 0; i < result.data.length; i++) {
+							// for(var j=0;
+							// j<result.data[i].representImages.length;
+							// j++){
+							$(
+									'div[name="recipe-image"]:eq('
+									+ i + ')')
+									.attr(
+											'style',
+											'background-image:url(img/representImg/'
+											+ result.data[i].representImages[0]
+											+ ')');
 
-										$(
-												'#tabs-'
-														+ $('#tabId').val()
-														+ ' .hs-content .container .row .rcp-mypage-section div')
-												.remove();
-										$(
-												'#tabs-'
-														+ request
-														+ ' .hs-content .container .row .rcp-mypage-section')
-												.append(templateCRList(result));
-										$('#tabId').val(request);
-										$('.rcp-Vst').remove();
-										/* $('.rcp-Vst-write').remove(); */
-
-										console.log(result.data);
-										for (var i = 0; i < result.data.length; i++) {
-											// for(var j=0;
-											// j<result.data[i].representImages.length;
-											// j++){
-											$(
-													'div[name="recipe-image"]:eq('
-															+ i + ')')
-													.attr(
-															'style',
-															'background-image:url(img/representImg/'
-																	+ result.data[i].representImages[0]
-																	+ ')');
-
-											// }
-										}
-									},
-									error : function() {
-										alert('community 서버 요청 오류!...')
-									}
-								});
-					})
+							// }
+						}
+					},
+					error : function() {
+						alert('community 서버 요청 오류!...')
+					}
+				});
+			})
 }
 
 
 function loadMyPage(){
- 
-    
-    
-   $.ajax({
-     url : '/visitor/loadMyPage.json',
-     datatype:'json',
-      data:{
-          email:location.href.split('?')[1]
-      },
-      method:'post',
-     success : function(result) {
-       if (result.status == 'false') {
-         //swal('로그인 해주시기 바랍니다.');
-         return;
-       }
-       $('#visitNum').text(result.sum+"명");
-       $('#likeNum').text(result.like+"개");
-       $('#scrapNum').text(result.scr+"개");
-       $('#gradeNum').text(result.avg+"점");
-     
-     },
-     error : function() {
-       //swal('더이상 데이터가 없습니다.')
-     }
-   })  
+
+
+
+	$.ajax({
+		url : '/visitor/loadMyPage.json',
+		datatype:'json',
+		data:{
+			email:location.href.split('?')[1]
+		},
+		method:'post',
+		success : function(result) {
+			if (result.status == 'false') {
+				//swal('로그인 해주시기 바랍니다.');
+				return;
+			}
+			$('#visitNum').text(result.sum+"명");
+			$('#likeNum').text(result.like+"개");
+			$('#scrapNum').text(result.scr+"개");
+			$('#gradeNum').text(result.avg+"점");
+
+		},
+		error : function() {
+			//swal('더이상 데이터가 없습니다.')
+		}
+	})  
 };

@@ -1,4 +1,8 @@
+document.write('<script type"text/javascript" src="js/common.js"></script>')
+document.write('<script type"text/javascript" src="js/login.js"></script>')
 
+
+var userInfo = getUserInfo();
 var detailInfoTemp = $('#recipe-detail-304-info-template').html();
 var comDetailInfoTemp = Handlebars.compile(detailInfoTemp);   
 
@@ -34,7 +38,7 @@ $(function(){
 
 Handlebars.registerHelper('x-button', function(options) {
 	console.log("userNo : "+this.userNo)
-	if(eval(jsonData) != null && eval(jsonData)[0].userNo == this.userNo){
+	if(userInfo != null && userInfo.userNo == this.userNo){
 	
 	    return options.fn(this); 
 	}
@@ -43,7 +47,7 @@ Handlebars.registerHelper('x-button', function(options) {
 
 
 
-function recipeDetail(){	
+function recipeDetail(){
 	$(document).on('click','.detail',function(event) {		
 		event.preventDefault();
 		$.ajax({
@@ -64,6 +68,8 @@ function recipeDetail(){
 				$('div[name="rcp-explanation"]:eq(1)').text(result.data.intro);
 				
 				$('#detail_pop_up').bPopup({
+					position: (['auto','auto']),
+					positionStyle :[('fixed')],
 					follow: [false, false], //x, y
 					onOpen:function(){
 						var detailMainTemp = $('#recipe-detail-main-template').html();
@@ -75,22 +81,36 @@ function recipeDetail(){
  						
 						$("body").css("overflow", "hidden");						
 						$('.rcp-304').append( comDetailInfoTemp(result) );
-						$('.rcp-info-images').append( comDetailImageMain(result.data) );
-						$('.rcp-detail-step').append( comDetailImageStep(result.data) );						
+						$('.rcp-info-images').append( comDetailImageMain(result.data) );										
 						$('.rcp-detail-body').append( comDetailMainTemp(result.data) );
 						$('.rcp-detail-body').append( comDetailTemp(result.data) );
+						$('.rcp-info-images').append( comDetailImageStep(result.data) );		
 						slider = $('.rcp-detail-body').bxSlider({
+							startSlide:0,
 							mode:'vertical',
 							pager: false,
-							moveSlides: 1
-
+							moveSlides: 1,
+							infiniteLoop:false
 						});
 						console.log("result data ll : "+result.data);
+						
+						
+						for(var i=0; i<$('.rcp-body').length; i++){
+							$('div[name="rcp-body"]:eq('+i+')').attr('id',"div"+i);
+							$('a[name="rcp-nav-images"]:eq('+i+')').attr('href','#div'+i);
+							$('a[name="rcp-nav-bgImages-button"]:eq('+i+')').attr('href','#div'+i);
+						}
+//						
+//						$(document).on('click','.rcp-info-images-emts',function(event){
+//							event.preventDefault();
+//							var div = $(event.target).parent().attr('href');
+//							console.log(div);
+//							$(location).attr('href',div);
+//						})
 
 
-
-						if( eval(jsonData) != null ){										
-							if(result.data.scrapUser == eval(jsonData)[0].userNo){
+						if( userInfo != null ){										
+							if(result.data.scrapUser == userInfo.userNo){
 								$('.rcp-scrap-button-text').attr('name','scrap');
 								$('.rcp-scrap-button-text').css('border','1px solid #ffce6e');
 								$('.rcp-detail-scrap').attr('style','color:#ffce6e');
@@ -183,7 +203,7 @@ function addComment(){
 				recipeComment:$('textarea[name="recipeComment"').val()
 			},
 			success:function(result){
-				if(eval(jsonData) == null){
+				if(userInfo == null){
 					swal('로그인 부탁염 ^오^');
 					return ;
 				}
