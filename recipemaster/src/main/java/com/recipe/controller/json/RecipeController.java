@@ -545,7 +545,6 @@ public class RecipeController {
 			result.put("status","false");
 			return new Gson().toJson(result);
 		}
-
 		//login한 사람 userNo
 		int toUserNo=((User)session.getAttribute("loginUser")).getUserNo();
 		//참조하고 있는 사람 userNo

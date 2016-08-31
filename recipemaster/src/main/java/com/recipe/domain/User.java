@@ -3,11 +3,7 @@ package com.recipe.domain;
 import java.util.Date;
 
 public class User {
-  
-  //Constructor
-  public User() {  
-  }
-  
+    
   private int userNo;
   private String userName;
   private String email;
@@ -22,6 +18,18 @@ public class User {
   private int likeCount;
   private int rownum;
   private int totalPoint;
+  private int subscribeUser; //구독한놈
+  
+  //Constructor
+  public User() {  
+  }
+    
+  public int getSubscribeUser() {
+    return subscribeUser;
+  }
+  public void setSubscribeUser(int subscribeUser) {
+    this.subscribeUser = subscribeUser;
+  }
   
   public int getTotalPoint() {
     return totalPoint;
@@ -107,12 +115,12 @@ public class User {
   public void setSubsCount(int subsCount) {
     this.subsCount = subsCount;
   }
+  
   @Override
   public String toString() {
     return "User [userNo=" + userNo + ", userName=" + userName + ", email=" + email + ", password=" + password
         + ", image=" + image + ", intro=" + intro + ", role=" + role + ", joinDate=" + joinDate + ", recipeUrl="
         + recipeUrl + ", recipeCount=" + recipeCount + ", subsCount=" + subsCount + ", likeCount=" + likeCount
-        + ", rownum=" + rownum + ", totalPoint=" + totalPoint + "]";
-  }
-  
+        + ", rownum=" + rownum + ", totalPoint=" + totalPoint + ", subscribeUser=" + subscribeUser + "]";
+  }  
 }

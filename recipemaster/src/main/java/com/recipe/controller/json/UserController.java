@@ -239,4 +239,27 @@ public class UserController {
 		return new Gson().toJson(result);
 		// result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
 	}
+	
+	 @RequestMapping(path = "top3", produces = "application/json;charset=UTF-8")
+	  @ResponseBody
+	  public String top3(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "3") int pageSize
+	      , HttpSession session) {
+	    HashMap<String, Object> result = new HashMap<>();
+	    User loginUser = new User();
+	    if(session.getAttribute("loginUser")==null){
+	      loginUser.setUserNo(0);
+	    }else{
+	      loginUser=(User) session.getAttribute("loginUser");  
+	    }
+	     System.out.println(loginUser);
+	    try {
+	      List<User> list = userService.getUserRankListSCS(pageNo, pageSize, loginUser.getUserNo());
+	      result.put("status", "success");
+	      result.put("data", list);
+	    } catch (Exception e) {
+	      result.put("status", "failure");
+	    }
+
+	    return new Gson().toJson(result);
+	  }
 }
