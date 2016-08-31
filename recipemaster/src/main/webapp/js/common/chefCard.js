@@ -101,14 +101,15 @@ $(document).ready(function(){
 	});
 	
 	// 쉐프카드
-	loadUsers();	
+	loadUsers();
+	
 	function loadUsers() {
 
 		var source = $('#chef-card-template').text();
 		var template = Handlebars.compile(source);
 
 		$.ajax({
-			url : 'user/best.json',
+			url : 'user/top3.json',
 			dataType : 'json',
 			method : 'get',
 			success : function(result) {
@@ -122,6 +123,83 @@ $(document).ready(function(){
 			error : function() {
 				swal('서버 요청 오류!...')
 			}
-		});
+		});		
 	}
+	
+	/*---------start of checkSubscribe----------*/
+	/*$.ajax({
+		url : 'recipe/checkSubscribe.json',
+		datatype : 'json',
+		data : {
+			email : $('#rankcard0').attr('data-email')
+		},
+		method : 'post',
+		success : function(result) {
+			if (result.status == 'false') {
+				// swal('실행 중 오류 발생');
+				return;
+			}
+			$('.rcp-imp').text('구독중');
+			$('.rcp-imp').attr('id', 'subscribeComplete');
+		},
+		error : function() {
+			swal('서버 요청 오류!...')
+		}
+	});*/
+	/*---------end of checkSubscribe----------*/
+	
+	
+	
+	$(document).on('click', '.rank-scs', function(evnet) {
+		var target =$(this); 
+		if ($(event.target).is('#subscribeComplete')) {
+			$.ajax({
+				url : 'recipe/deleteSubscribe.json',
+				datatype : 'json',
+				data : {
+					email : target.attr('data-email')
+				},
+				method : 'post',
+				success : (function() {
+
+					console.log('구독하기 해제 성공성공')
+					target.text('구독하기');
+					target.attr('id', '');
+				}),
+				error : (function() {
+					console.log('구독하기 서버요청 error');
+				})
+			});
+		} else {
+			$.ajax({
+				url : 'recipe/addSubscribe.json',
+				datatype : 'json',
+				data : {
+					email : target.attr('data-email')
+				},
+				method : 'post',
+				success : (function(result) {
+					if (result.status == 'failure') {
+						console.log(result);
+						swal('로그인 후 이용가능합니다.');
+						return;
+					} else {
+						console.log('구독하기 성공성')
+						
+						target.text('구독중');
+						target.attr('id', 'subscribeComplete');
+						
+					}
+				}),
+				error : (function(result) {
+					console.log('구독하기 서버요청 error');
+				})
+			});
+		}
+
+	});
+	/*----------------*/
+	
+	
+	
 });

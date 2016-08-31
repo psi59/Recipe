@@ -61,7 +61,7 @@ $(function() {
 				// swal('실행 중 오류 발생');
 				return;
 			}
-			$('.rcp-topbtn').text('구독하기 완료');
+			$('.rcp-topbtn').text('구독중');
 			$('.rcp-topbtn').attr('id', 'subscribeComplete');
 		},
 		error : function() {
@@ -103,7 +103,7 @@ $(function() {
 						return;
 					} else {
 						console.log('구독하기 성공성')
-						$('.rcp-topbtn').text('구독하기 완료');
+						$('.rcp-topbtn').text('구독중');
 						$('.rcp-topbtn').attr('id', 'subscribeComplete');
 					}
 				}),

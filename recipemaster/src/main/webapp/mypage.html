@@ -11,13 +11,13 @@
 <link rel="stylesheet" href="/css/subscribe.css">
 <link rel="stylesheet" href="/css/mypage.css">
 <link rel="stylesheet" href="/css/font-awesome.min.css">
-
+<link rel="stylesheet" href="/css/subscribe.css">
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 
 <!-- Template css -->
 <link rel="stylesheet" href="css/template/animate.css">
-<link rel="stylesheet" href="css/template/main.css">
+<link rel="stylesheet" href="css/template/main.css"> 
 <link rel="stylesheet" href="css/template/styles.css">
 <link rel="stylesheet" href="css/template/plugins.css">
 
@@ -35,10 +35,8 @@
 </style>
 </head>
 <body>
-	
 	<div id="topBtn" class="navbar navbar-inverse navbar-fixed-top open">  
   </div>
-	
 	<!-- 회원정보수정 bpopup -->
 	<div id='editUserInfo-pop-up-banner'>
 		<form action="user/update.json" method="post" id="updateUserForm"
@@ -96,7 +94,7 @@
 		</form>
 	</div>
 	<!--  -->
-
+	
 	<div>
 		<section class="rcp-fullpage">
 			<div class="rcp-profileCover">
@@ -108,7 +106,6 @@
 						<div class="rcp-topinfo">
 							<input type="hidden" id="mypage-userNo" value="">
 							<h2 class="rcp-userPage-userName"></h2>
-
 							<button class="btn btn-default rcp-topbtn">구독하기</button>
 						</div>
 					</div>
@@ -144,59 +141,84 @@
 
 		</section>
 
+		<!--  <section class="rcp-pageleft">
+      <div>
+        <div id="tabs" class="rcp-vst-tabs">
+          <ul>
+            <li><a href="#tabs-1" style="width: 243px;">My Recipe</a></li>
+            <li><a href="#tabs-2" style="width: 242px;" id="scsPage">구독중인
+                페이지</a></li>
+            <li><a href="#tabs-3" style="width: 242px;">스크랩</a></li>
+            <li><a href="#tabs-4" style="width: 242px;">방명록</a></li>
+          </ul>
+          <div id="tabs-1">
+            <div class="rcp-main-right">
+              <div class="rcp-subscribe">
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+                  </section> -->
+            
+
+
 		<section class="ht-section hs-recipes grid">
 			<div class="hs-header">
 				<div class="container"></div>
 				<input type="hidden" value="1" id="tabId">
-				<ul class="isotope-filter">
-					<li class="is-filtered"><a href="#" id="searchRecipe">레시피</a></li>
-					<li><a href="#" id="searchScrap">스크랩</a></li>
+				<ul class="isotope-filter" >
+					<li class="is-filtered"><a href="#" id="searchRecipe"  >레시피</a></li>
+					<li><a href="#" id="searchScrap" >스크랩</a></li>
 					<li><a href="#" id="searchSubscribe">구독중인 페이지</a></li>
-					<li><a href="#" data-toggle="tab" id="visitorWrite">방명록</a></li>
+					<li><a href="#" data-toggle="tab">방명록</a></li>
 				</ul>
 			</div>
 
 
-			<div id="tabs-1">
-				<div class="rcp-main-right">
-					<div class="rcp-subscribe"></div>
-					<div class="hs-content">
-						<div class="container">
-							<div class="row">
-								<div class="rcp-mypage-section"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+      <div id="tabs-1">
+        <div class="rcp-main-right">
+          <div class="rcp-subscribe"></div>
+          <div class="hs-content">
+            <div class="container">
+              <div class="row">
+                  <div class="rcp-mypage-section">                 
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
 
-			<div id="tabs-2">
-				<div class="rcp-main-right">
-					<div class="rcp-subscribe"></div>
-					<div class="hs-content">
-						<div class="container">
-							<div class="row">
-								<div class="rcp-mypage-section"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div id="tabs-3">
-				<div class="rcp-main-right">
-					<div class="rcp-subscribe"></div>
-					<div class="hs-content">
-						<div class="container">
-							<div class="row">
-								<div class="rcp-mypage-section"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+      <div id="tabs-2">
+        <div class="rcp-main-right">
+          <div class="rcp-subscribe"></div>
+          <div class="hs-content">
+            <div class="container">
+              <div class="row">
+                  <div class="rcp-mypage-section">                 
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="tabs-3">
+        <div class="rcp-main-right">
+          <div class="rcp-subscribe"></div>
+          <div class="hs-content">
+            <div class="container">
+              <div class="row">
+                  <div class="rcp-mypage-section">                 
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
 
@@ -221,11 +243,14 @@
 						</div>
 					</div>
 				</div>
+				<section class="Vst" id="Vst">
+					<!-- 방명록  -->
+				</section>
 			</div>
-
-		</section>
-	</div>
-	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+			
+			</section>
+			</div>
+			<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -253,7 +278,7 @@
 	<script src="js/login.js"></script>
 	<script src="js/updateUser.js"></script>
 
-	<script id="temp" type="text/x-handlebars-template">
+<script id="temp" type="text/x-handlebars-template">
 {{#each data}}
 
 <div>
@@ -405,15 +430,13 @@
   </script>
   
 	<script>
-		$(window).scroll(
-				function() {
-					if ($(window).scrollTop() == $(document).height()
-							- $(window).height()) {
-						rcpListScrollAppend();
-					}
-					/* 준모3 */
-				});
-	</script>
+$(window).scroll(function() { 
+    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+    	rcpListScrollAppend();
+    }
+      /* 준모3 */
+});
+</script>
 
 	<script>
 		function rcpListScrollAppend() {

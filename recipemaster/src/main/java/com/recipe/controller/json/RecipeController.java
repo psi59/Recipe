@@ -489,87 +489,85 @@ public class RecipeController {
     return new Gson().toJson(result);
   }*/
 
-  @RequestMapping(path="addSubscribe",produces="application/json;charset=UTF-8")
-  @ResponseBody
-  public String addSubscribe(HttpSession session,String email){
-    HashMap<String,Object> result = new HashMap<>();
-    //toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
-
-    if(((User)session.getAttribute("loginUser"))==null){
-
-      result.put("status", "failure");
-      System.out.println("login안함");
-      System.out.println(result);
-      return new Gson().toJson(result);
-    }
-
-    int toUserNo=((User)session.getAttribute("loginUser")).getUserNo();
-    System.out.println("toUserNo::"+toUserNo);
-    System.out.println("fromUserNo_email::"+email);
-
-    int fromUserNo=userService.selectFromEmail(email).getUserNo();
-
-    recipeService.addSubscribe(toUserNo, fromUserNo);
-    try{
-      result.put("status","success");
-    }catch(Exception e){
-      result.put("status", "false");
-    }
-    return new Gson().toJson(result);
-  }
-
-  @RequestMapping(path="deleteSubscribe",produces="application/json;charset=UTF-8")
-  @ResponseBody
-  public String deleteSubscribe(HttpSession session,String email){
-    HashMap<String,Object> result = new HashMap<>();
-    //toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
-    User user = new User();
-    int toUserNo=((User)session.getAttribute("loginUser")).getUserNo();
-    System.out.println("toUserNo::"+toUserNo);
-    System.out.println("fromUserNo_email::"+email);
-
-    int fromUserNo=userService.selectFromEmail(email).getUserNo();
-
-    recipeService.deleteSubscribe(toUserNo, fromUserNo);
-
-    try{
-      result.put("status","success");
-    }catch(Exception e){
-      result.put("status", "false");
-    }
-    return new Gson().toJson(result);
-  }
-
-  @RequestMapping(path="checkSubscribe",produces="application/json;charset=UTF-8")
-  @ResponseBody
-  public String checkSubscribe(HttpSession session,String email){
-    HashMap<String,Object> result = new HashMap<>();
-    //toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
-    User user = new User();
-
-    if(((User)session.getAttribute("loginUser"))==null){
-      result.put("status","false");
-      return new Gson().toJson(result);
-    }
-
-    //login한 사람 userNo
-    int toUserNo=((User)session.getAttribute("loginUser")).getUserNo();
-    //참조하고 있는 사람 userNo
-    user=userService.selectFromEmail(email);
-    int fromUserNo=user.getUserNo();
-    try{
-
-      if (recipeService.checkSubscribe(toUserNo, fromUserNo)!=null) {
+	@RequestMapping(path="addSubscribe",produces="application/json;charset=UTF-8")
+    @ResponseBody
+    public String addSubscribe(HttpSession session,String email){
+      HashMap<String,Object> result = new HashMap<>();
+      //toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
+      
+      if(((User)session.getAttribute("loginUser"))==null){
+        
+        result.put("status", "failure");
+        System.out.println("login안함");
+        System.out.println(result);
+        return new Gson().toJson(result);
+       }
+      
+      int toUserNo=((User)session.getAttribute("loginUser")).getUserNo();
+      System.out.println("toUserNo::"+toUserNo);
+      System.out.println("fromUserNo_email::"+email);
+      
+      int fromUserNo=userService.selectFromEmail(email).getUserNo();
+      
+      recipeService.addSubscribe(toUserNo, fromUserNo);
+      try{
         result.put("status","success");
-      }else{
-        result.put("status","false");
+      }catch(Exception e){
+        result.put("status", "false");
       }
-
-    }catch(Exception e){
-      result.put("status", "false");
+      return new Gson().toJson(result);
     }
-    return new Gson().toJson(result);
-  }
+
+	@RequestMapping(path="deleteSubscribe",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public String deleteSubscribe(HttpSession session,String email){
+		HashMap<String,Object> result = new HashMap<>();
+		//toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
+		int toUserNo=CommonUtil.getSessionUser(session).getUserNo();
+		System.out.println("toUserNo::"+toUserNo);
+		System.out.println("fromUserNo_email::"+email);
+
+		int fromUserNo=userService.selectFromEmail(email).getUserNo();
+
+		recipeService.deleteSubscribe(toUserNo, fromUserNo);
+
+		try{
+			result.put("status","success");
+		}catch(Exception e){
+			result.put("status", "false");
+		}
+		return new Gson().toJson(result);
+	}
+
+	@RequestMapping(path="checkSubscribe",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public String checkSubscribe(HttpSession session,String email){
+		HashMap<String,Object> result = new HashMap<>();
+		//toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
+		User user = new User();
+
+		if(((User)session.getAttribute("loginUser"))==null){
+			result.put("status","false");
+			return new Gson().toJson(result);
+		}
+		//login한 사람 userNo
+		int toUserNo=((User)session.getAttribute("loginUser")).getUserNo();
+		//참조하고 있는 사람 userNo
+		user=userService.selectFromEmail(email);
+		int fromUserNo=user.getUserNo();
+		try{
+
+			if (recipeService.checkSubscribe(toUserNo, fromUserNo)!=null) {
+				result.put("status","success");
+			}else{
+				result.put("status","false");
+			}
+
+		}catch(Exception e){
+			result.put("status", "false");
+		}
+		return new Gson().toJson(result);
+	}
 
   //	---------------------고재현 -------------------------
   @RequestMapping(path="materialSearch",produces="application/json;charset=UTF-8")

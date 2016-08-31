@@ -803,10 +803,10 @@
         <p class="introfont">{{intro}}</p>
         </div>
         <div class="cardbtn">
-          <a href="/mypage.html?{{email}}" class="visitbtn">
-          <button type="button" class="btn btn-default rcp-imp">방문하기</button></a>
-              <button type="button" class="btn btn-default rcp-imp"  style="position:relative; top:3px;">
-                      구독하기</button>
+         <button type="button" class="btn btn-default rcp-imp">
+              <input type="hidden" name="hiddenEmail" value="{{email}}">
+              <a href="#" class="rcp-userName visitbtn">방문하기</a></button>
+              <button type="button" class="btn btn-default rcp-imp rank-scs" data-email="{{email}}" scsflag="{{subscribeUser}}" grade="{{rownum}}">구독하기</button>
         </div>
     </div>
   </div>
