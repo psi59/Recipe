@@ -1,10 +1,3 @@
-	  $(document).on('click', '.rcp-userName',function(event){
-		  event.preventDefault();
-
-		  $(location).attr('href','/mypage.html?'+$(event.target).parent().children('input[type="hidden"]').val() ); 	 
-
-	  })
-
 //Default active on home
     $('#s1').addClass("active");
 

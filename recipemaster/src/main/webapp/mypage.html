@@ -171,10 +171,9 @@
 					<li class="is-filtered"><a href="#" id="searchRecipe"  >레시피</a></li>
 					<li><a href="#" id="searchScrap" >스크랩</a></li>
 					<li><a href="#" id="searchSubscribe">구독중인 페이지</a></li>
-					<li><a href="#" data-toggle="tab">방명록</a></li>
+					<li><a href="#" data-toggle="tab" id="visitorWrite">방명록</a></li>
 				</ul>
 			</div>
-
 
       <div id="tabs-1">
         <div class="rcp-main-right">
@@ -512,11 +511,5 @@ $(window).scroll(function() {
 	<script src="js/template/plugin.js"></script>
 	<script src="js/template/custom.js"></script>
 
-	<script>
-    $('#visitorWrite').on('click',function(){
-        $('.rcp-Vst').remove();
-        $('.rcp-Vst-write').show();
-    })
-   </script>
 </body>
 </html>

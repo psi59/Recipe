@@ -34,7 +34,6 @@ $(function() {
 			console.log(result.data);
 
 			$('.rcp-Vst').remove();
-			/*$('.rcp-Vst-write').remove();*/
 
 			for(var i=0; i<result.data.length; i++){
 //				for(var j=0; j<result.data[i].representImages.length; j++){
