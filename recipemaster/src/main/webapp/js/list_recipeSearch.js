@@ -161,8 +161,8 @@ function search(sort,order){
 	var template = Handlebars.compile(source);
 	
 	var categoryList = '';
-	$('input[type=checkbox]:checked').each(function(index){
-		if(index !== ($('input[type=checkbox]:checked').length-1)){
+	$('#rcp-category-section input[type=checkbox]:checked').each(function(index){
+		if(index !== ($('#rcp-category-section input[type=checkbox]:checked').length-1)){
 			categoryList += $(this).val()+','; 
 		} else {
 			categoryList += $(this).val();
@@ -215,7 +215,7 @@ function searchScrollAppend(){
 	}
 	
 	var categoryList = '';
-	$('input[type=checkbox]:checked').each(function(index){
+	$('#rcp-category-section input[type=checkbox]:checked').each(function(index){
 		if(index !== ($('input[type=checkbox]:checked').length-1)){
 			categoryList += $(this).val()+','; 
 		} else {

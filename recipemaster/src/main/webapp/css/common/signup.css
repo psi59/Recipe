@@ -3,19 +3,21 @@
 #signup-pop-up-banner {
 	display: none;
 	width: 375px;
-	height: 500px;
+	/* height: 38em; */
+	height: 550px;
+	border-radius: 7px;
 	background: #ffffff;
 }
 
 #warning{
-	font-style: #ff0000;
-	
+	font-style: #ff0000;	
 }
 
 #login-pop-up-banner {
   display: none;
   width: 375px;
   height: 310px;
+  border-radius: 7px;
   background: #ffffff;
 }
 
@@ -23,6 +25,22 @@
 	text-align: center;
 	margin-top: 1em;
 }
+
+.rcp-sign-membership span {
+	margin: 25px;
+	border-style: solid;
+	border-radius: 6px;
+	border-color: #b51515;
+	padding: 7px 30px 7px 30px;
+	cursor: pointer;
+	color: black;
+	font-size: 20px;
+}
+
+.rcp-sign-membership span:hover {
+	color: white;
+	background: #b51515;
+} 
 
 .rcp-sign-membership >a {
 	border: 1px solid rgba(181, 21, 21, 0.7);
@@ -90,6 +108,7 @@
 	padding: 1em;
 	padding-top: 0.5em;
 	text-align: center;
+	font-size: 12px;
 }
 
 .rcp-innersec {
