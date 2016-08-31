@@ -15,7 +15,6 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
   var userInfo = getUserInfo();
   
   
-  
   $(function(){
 	  Main1List();
 	  likeLogin();
@@ -31,13 +30,10 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
   function Main1List(){
 	  
 	  var userNo = 0;
-	  var a = userInfo.userNo;
 	  
-	  if( a != null ){
-		  userNo = a;
-		
-	  }
-	  
+	  if(userInfo != null){
+		  userNo = userInfo.userNo;
+	  }	  
 	  
 	  $.ajax({	  		  
 		  url:'recipe/list.json',
@@ -82,14 +78,11 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
   
   function Main2List(){
 	  
-
 	  var userNo = 0;
-	  var a = userInfo.userNo;
 	  
-	  
-	  if( a != null ){
-		  userNo = a;
-	  }
+	  if(userInfo != null){
+		  userNo = userInfo.userNo;
+	  }	  
 	  
 	  $.ajax({
 		  url:'recipe/list.json',

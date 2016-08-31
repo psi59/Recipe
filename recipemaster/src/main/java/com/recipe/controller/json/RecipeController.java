@@ -109,65 +109,66 @@ public class RecipeController {
 		List<Map> materialList = new ArrayList<>();
 		JsonArray recipeProduceDatas = new JsonArray();
 		JsonArray recipeRepresentImages = new JsonArray();
+		
+		User user = CommonUtil.getSessionUser(session);
+		if(user.getUserNo()==0){
+			result.put("status", "nologin");
+		} else {
+			for (int i = 0; i < materialNos.length; i++) {
+				Map<String, String> matertialInfo = new HashMap<>();
+				System.out.println(materialNos.toString());
+				System.out.println(materialAmounts.toString());
+				matertialInfo.put("materialNo", materialNos[i]);
+				matertialInfo.put("materialAmount", materialAmounts[i]);
+				materialList.add(matertialInfo);
+			}
 
-		System.out.println(recipe);
+			map.put("user", user);
+			map.put("recipe", recipe);
+			int recipeNo = recipeService.addRecipe(map);
+			recipeDatas.put("recipeNo", recipeNo);
+			recipeDatas.put("materialList", materialList);
 
-		User user = new User();
-		user.setUserNo(1);
+			try {
+				for (int i = 0; i < representImgNames.size(); i++) {
+					Thread.sleep(1);
+					// MultipartFile image = null;
+					String[] fileInfo = representImgNames.get(i).split("/");
+					// image = CommonUtil.findImageFile(fileInfo, imageFiles);
+					String fileName = recipe.getRecipeNo() + "_" + user.getUserNo() + "_" + System.currentTimeMillis() + ".png";
+					// File newFile = new
+					// File(CommonUtil.getImageFolderPath("representImg", request) +
+					// "/" + fileName);
+					// CommonUtil.findImageFile(fileInfo,
+					// imageFiles).transferTo(newFile);
+					FileCopyUtils.copy(CommonUtil.findImageFile(fileInfo, imageFiles).getBytes(),
+							new FileOutputStream(CommonUtil.getImageFolderPath("representImg", request) + "/" + fileName));
+					recipeRepresentImages.add(fileName);
+				} // end of for
 
-		for (int i = 0; i < materialNos.length; i++) {
-			Map<String, String> matertialInfo = new HashMap<>();
-			System.out.println(materialNos.toString());
-			System.out.println(materialAmounts.toString());
-			matertialInfo.put("materialNo", materialNos[i]);
-			matertialInfo.put("materialAmount", materialAmounts[i]);
-			materialList.add(matertialInfo);
+				/* 조리과정 등록 */
+				for (int i = 0; i < produceImgNames.size(); i++) {
+					Thread.sleep(1);
+					String[] fileInfo = produceImgNames.get(i).split("/");
+					JsonObject obj = new JsonObject();
+					String fileName = recipe.getRecipeNo() + "_" + user.getUserNo() + "_" + System.currentTimeMillis() + ".png";
+					obj.addProperty("recipeProduceImage", fileName);
+					obj.addProperty("recipeProduce", recipeProduce[i]);
+					recipeProduceDatas.add(obj);
+					FileCopyUtils.copy(CommonUtil.findImageFile(fileInfo, imageFiles).getBytes(),
+							new FileOutputStream(CommonUtil.getImageFolderPath("recipeImg", request) + "/" + fileName));
+				} // end of for
+				recipeDatas.put("recipeProduceDatas", recipeProduceDatas.toString());
+				recipeDatas.put("recipeRepresentImages", recipeRepresentImages.toString());
+				recipeService.registyImageAndProduce(recipeDatas);
+				recipeService.addMaterials(recipeDatas);
+				result.put("status", "success");
+			} catch (Exception e) {
+				e.printStackTrace();
+				result.put("status", "false");
+			}
 		}
-
-		map.put("user", user);
-		map.put("recipe", recipe);
-		int recipeNo = recipeService.addRecipe(map);
-		recipeDatas.put("recipeNo", recipeNo);
-		recipeDatas.put("materialList", materialList);
-
-		try {
-			for (int i = 0; i < representImgNames.size(); i++) {
-				Thread.sleep(1);
-				// MultipartFile image = null;
-				String[] fileInfo = representImgNames.get(i).split("/");
-				// image = CommonUtil.findImageFile(fileInfo, imageFiles);
-				String fileName = recipe.getRecipeNo() + "_" + user.getUserNo() + "_" + System.currentTimeMillis() + ".png";
-				// File newFile = new
-				// File(CommonUtil.getImageFolderPath("representImg", request) +
-				// "/" + fileName);
-				// CommonUtil.findImageFile(fileInfo,
-				// imageFiles).transferTo(newFile);
-				FileCopyUtils.copy(CommonUtil.findImageFile(fileInfo, imageFiles).getBytes(),
-						new FileOutputStream(CommonUtil.getImageFolderPath("representImg", request) + "/" + fileName));
-				recipeRepresentImages.add(fileName);
-			} // end of for
-
-			/* 조리과정 등록 */
-			for (int i = 0; i < produceImgNames.size(); i++) {
-				Thread.sleep(1);
-				String[] fileInfo = produceImgNames.get(i).split("/");
-				JsonObject obj = new JsonObject();
-				String fileName = recipe.getRecipeNo() + "_" + user.getUserNo() + "_" + System.currentTimeMillis() + ".png";
-				obj.addProperty("recipeProduceImage", fileName);
-				obj.addProperty("recipeProduce", recipeProduce[i]);
-				recipeProduceDatas.add(obj);
-				FileCopyUtils.copy(CommonUtil.findImageFile(fileInfo, imageFiles).getBytes(),
-						new FileOutputStream(CommonUtil.getImageFolderPath("recipeImg", request) + "/" + fileName));
-			} // end of for
-			recipeDatas.put("recipeProduceDatas", recipeProduceDatas.toString());
-			recipeDatas.put("recipeRepresentImages", recipeRepresentImages.toString());
-			recipeService.registyImageAndProduce(recipeDatas);
-			recipeService.addMaterials(recipeDatas);
-			result.put("status", "success");
-		} catch (Exception e) {
-			e.printStackTrace();
-			result.put("status", "false");
-		}
+		
 		return new Gson().toJson(result);
 	}
 
@@ -176,11 +177,13 @@ public class RecipeController {
 	public String checkMyRecipe(int recipeNo, HttpSession session){
 		Map<String, Object> result = new HashMap<>();
 
+		
 		try{
 			User user = CommonUtil.getSessionUser(session);
-			
 			if(user.getUserNo()==0){
 				result.put("status", "nologin");
+			} else if(recipeNo==0){
+				result.put("status", "write");
 			} else{
 				Map<String, Object> dataForCheckMyRecipe = new HashMap<>();
 				dataForCheckMyRecipe.put("userNo", user.getUserNo());
