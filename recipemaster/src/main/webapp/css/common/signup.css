@@ -21,17 +21,6 @@
   background: #ffffff;
 }
 
-#random-pop-up-banner {
-	display: none;
-	padding-top: 0.1%;
-	background: lemonchiffon;
-	width: 22%;
-	height: 56%;
-}
-
-#random-pop-up-banner>.rcp-list-margin {
-	width: 100%;
-}
 .todayMenu{
 	text-align: center;
 	font-size : 27pt;
