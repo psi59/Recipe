@@ -10,7 +10,7 @@
 
 <link rel="stylesheet" href="css/template/animate.css">
 <!-- <link rel="stylesheet" href="css/template/styles.css"> -->
-<link rel="stylesheet" href="css/template/plugins.css"> 
+<link rel="stylesheet" href="css/template/plugins.css">
 <link rel="stylesheet"
 	href="/node_modules/sweetalert/dist/sweetalert.css">
 <link rel="stylesheet"
@@ -18,8 +18,10 @@
 <link rel="stylesheet" href="css/template/font-awesome.min.css">
 <link rel="stylesheet" href="css/template/main.css">
 <link rel="stylesheet" href="css/template/commentTemp.css">
-<link rel="stylesheet" href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
-<link rel="stylesheet" href="node_modules/bxslider/dist/jquery.bxslider.css">
+<link rel="stylesheet"
+	href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
+<link rel="stylesheet"
+	href="node_modules/bxslider/dist/jquery.bxslider.css">
 
 <!-- 사용자 정의 css -->
 <link rel="stylesheet" href="css/common.css">
@@ -36,6 +38,7 @@
 <link rel="stylesheet" href="css/common/popup.css">
 <link rel="stylesheet" href="css/common/signup.css">
 <link rel="stylesheet" href="css/index_rankTabs.css">
+<link rel="stylesheet" href="css/common_list_topbar.css">
 <!-- alert css -->
 <link rel="stylesheet"
 	href="node_modules/sweetalert/dist/sweetalert.css">
@@ -46,24 +49,34 @@
 </head>
 <body>
 	<div id="topBtn" class="navbar navbar-inverse navbar-fixed-top">
+
 		<div class="container rcp-container-top">
 			<div class="navbar-header">
 				<div class="row">
 					<div class="row col-md-7 col-sm-7 col-xs-12">
 						<a class="logo col-md-3 col-sm-3 hidden-xs rt-navbar-top-logo"
 							href="index.html"><img src="img/logo.svg" alt="Logo"></a>
-						<div
+
+						<div id="searchBar-input"
 							class="input-group col-md-5 col-sm-5 col-xs-11 col-xs-offset-1 rcp-navbar-searchbar-size rt-navbar-top-searchbar">
-							<input id="searchKeyword" type="text"
+
+							<select id="searchCondition-select" class="form-control">
+								<option value="recipe" selected="selected">레시피</option>
+								<option value="chef">쉐프</option>
+								<option value="material">재료</option>
+							</select> <input id="searchKeyword" type="text"
 								class="searchKeyword form-control rcp-navbar-searchbar-size"
-								placeholder="레시피명, 쉐프명, 재료명" aria-describedby="basic-addon1">
-							<span class="rcp-search-button input-group-addon" id="searchBarKeyword">검색</span>
+								placeholder="검색어를 입력해주세요" aria-describedby="basic-addon1">
+
+							<span id="searchBarKeyword" class="input-group-addon">검색</span>
+
 						</div>
+
 					</div>
 					<div class="col-md-4 col-sm-4 hidden-xs" style="margin-right: 2em;">
 						<div class="navbar-collapse">
 							<ul class="nav navbar-nav navbar-right">
-								<li><a href="#" id="signUpTopBtn"><span
+								<li><a href="#"><span id="signUpTopBtn"
 										class="rcp-btn-default-top">회원가입</span></a></li>
 								<li id="topbarUserImg"><a href="#"><span
 										id="topLoginBtn" class="rcp-btn-default-top">로그인</span></a></li>
@@ -77,7 +90,7 @@
 										class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a
 										id="profileEmail" href="#"
 										class="dropdown__header rcp-infobox-text"></a>
-									<h6 id="profileName" class="rcp-userName rcp-nickname"></h6>
+									<h6 id="profileName" class="rcp-nickname"></h6>
 									<a href="#0" class="dropdown__header"> <span
 										id="profileGrade" class="dropdown__title rcp-infobox-text">
 											<img src="img/star.png"> Master Chef
@@ -90,7 +103,8 @@
 											class="btn btn-default rcp-btn-nav">로그아웃</button>
 									</div>
 								</div>
-								<a href="#" class="rcp-goMyPage"><button
+
+								<a href="/mypage.html"><button
 										class="goMyPageBtn btn btn-default rcp-btn-nav">MyPage</button></a>
 								<a href="/writerecipe.html"><button
 										class="goWriteRcpBtn btn btn-default rcp-btn-nav">Recipe
@@ -102,6 +116,7 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
 
 	<header>
@@ -137,20 +152,22 @@
 						<!-- row 태그 종료 -->
 
 						<div class="row">
-							<div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4 wow fadeInUp">
-								<div id="searchBar2" class="input-group wow fadeIn" data-wow-delay="0.5s">
-								
-								  <select id="searchCondition-select" class="form-control">
-		                <option value="recipe" selected="selected">레시피</option>
-		                <option value="chef">쉐프</option>
-		                <option value="material">재료</option>
-		              </select>
-								
-									<input type="text" class="form-control searchKeyword"
+							<div
+								class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4 wow fadeInUp">
+								<div id="searchBar2" class="input-group wow fadeIn"
+									data-wow-delay="0.5s">
+
+									<select id="searchCondition-select" class="form-control">
+										<option value="recipe" selected="selected">레시피</option>
+										<option value="chef">쉐프</option>
+										<option value="material">재료</option>
+									</select> <input type="text" class="form-control searchKeyword"
 										placeholder="레시피명, 쉐프명, 재료명" aria-describedby="basic-addon2">
-									<span class="rcp-search-button input-group-addon" id="basic-addon2">검색</span>
+									<span class="rcp-search-button input-group-addon"
+										id="basic-addon2">검색</span>
 								</div>
-								    <img src="/img/art-roulette.png" class="rcp-roulette" id="rcp-random-recipe"/>
+								<img src="/img/art-roulette.png" class="rcp-roulette"
+									id="rcp-random-recipe" />
 							</div>
 						</div>
 						<!-- row 태그종료 -->
@@ -163,10 +180,8 @@
 	<div class="mouse-icon hidden-xs">
 		<div class="scroll"></div>
 	</div>
-  <!--  random recipe 용이 -->
-  <div id="random-pop-up-banner" class="random-pop-up-banner">
-    
-  </div>
+	<!--  random recipe 용이 -->
+	<div id="random-pop-up-banner" class="random-pop-up-banner"></div>
 	<!-- ------------------------------------------------------------------------------- -->
 
 	<div id='signup-pop-up-banner'>
@@ -245,7 +260,7 @@
 			<span id="userLogin">로그인</span>
 		</div>
 	</div>
-	
+
 	<!--  -->
 	<div id='editUserInfo-pop-up-banner'>
 		<form action="user/update.json" method="post" id="updateUserForm"
@@ -322,7 +337,9 @@
 			<div class="rcp-taps">
 				<div class="rcp-first-info"></div>
 
-				<div class="rcp-seconde-info"><a href="#">댓글</a></div>
+				<div class="rcp-seconde-info">
+					<a href="#">댓글</a>
+				</div>
 
 				<div class="rcp-third-info"></div>
 
@@ -814,8 +831,8 @@
   </script>
 
 
-  <script src="node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
 	<script src="node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
 	<script
@@ -835,12 +852,12 @@
 	<script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
 
 	<!--  사용자 js -->
-  <script src="js/jquery.bpopup.min.js"></script>
-  <script src="js/template/main.js"></script>
-  <script src="js/template/wow.min.js"></script>
-  <script src="js/template/plugin.js"></script>
-  <script src="js/template/custom.js"></script>
-  <script src="js/template/jquery-slider-rolling.js"></script>
+	<script src="js/jquery.bpopup.min.js"></script>
+	<script src="js/template/main.js"></script>
+	<script src="js/template/wow.min.js"></script>
+	<script src="js/template/plugin.js"></script>
+	<script src="js/template/custom.js"></script>
+	<script src="js/template/jquery-slider-rolling.js"></script>
 	<script src="js/common.js"></script>
 	<script src="js/login.js"></script>
 	<script src="js/recipeDetail.js"></script>
@@ -850,7 +867,7 @@
 	<script src="js/common/signup.js"></script>
 	<script src="js/listPageMove.js"></script>
 	<script src="js/mainListAjax.js"></script>
-  <script src="js/mouseover.js"></script>
+	<script src="js/mouseover.js"></script>
 
 
 	<script>

@@ -77,7 +77,7 @@ window.onload = function () {
 				dropdownClick('.profile-dropdown',
 				'.mobile-menu-dropdown');
 				/* 용이 추가() */
-				if (userInfo.userNo != null) {
+				if (userInfo.userNo != null) {					
 					$('#profileEmail')
 					.text(
 							userInfo.email);
@@ -91,6 +91,8 @@ window.onload = function () {
 					$('#introduce')
 					.text(
 							userInfo.intro);
+					
+					$('#profileImg').attr('src', 'img/profileImg/'+userInfo.image);
 				}
 	});
 };
@@ -118,8 +120,8 @@ function getUserInfo(){
 	$('#signUpBtn').remove();
 	$('#loginBtn').remove();
 	$('#signUpTopBtn').remove();
-	$('#loginIcon').html('<img id="loginIconAction1" class="rcp-barimg dropdown-trigger img-circle" src="img/Chef3.jpg" />');
-	$('#topbarUserImg').html('<img id="loginIconAction2" class="rcp-barimg dropdown-trigger img-circle" src="img/Chef3.jpg" />');
+	$('#loginIcon').html('<img id="loginIconAction1" class="rcp-barimg dropdown-trigger img-circle" src="img/profileImg/'+userInfo.image+'" />');
+	$('#topbarUserImg').html('<img id="loginIconAction2" class="rcp-barimg dropdown-trigger img-circle" src="img/profileImg/'+userInfo.image+'" />');
 	
 	return userInfo;
 }
