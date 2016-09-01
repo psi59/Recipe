@@ -255,8 +255,6 @@ $(function() {
 						} else {
 							swal('레시피 등록 실패');
 						}
-						console.log(data.result.status)
-
 					}).on('fileuploadfail', function(e, data) {
 
 						console.log(data)
