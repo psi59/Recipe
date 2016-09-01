@@ -20,6 +20,7 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
 	  likeLogin();
 	  comList();	
 	  goMyPage();
+	  scroll();
 	 
   });
   
@@ -64,8 +65,7 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
 					
 			  
 			  methods();
-			  Main2List();
-			 
+			  Main2List();			 
 			  
 		  },
 		  error : function(){
@@ -134,7 +134,7 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
 		  method : 'post',
 		  data:{
 			  email: userInfo.email,
-			  request:3
+			  request:5
 		  },
 		  success : function(result) {
 			 
@@ -142,22 +142,30 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
 				  alert('comList 실행 중 오류 발생');
 				  return;
 			  }
-		
-			  $('#tabs-1 .hs-content .container .row .rcp-mypage-section').append(commainSubscribe(result));
+			  
 			  for(var i=0; i<result.data.length; i++){
-//				  for(var j=0; j<result.data[i].representImages.length; j++){
-			  $('div[name="recipe-subscribe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');
-
-//				  }
-	  }
-  },
+				  //console.log(result.data[i])
+				  if(result.data[i].length > 1){					  
+					  $('#tabs-1 .hs-content .container .row ').append(commainSubscribe( (result.data[i]) ) );
+					  $('.rcp-main-subscribe-userName0').attr('class','rcp-main-subscribe-userName'+i+1);
+					  $('.rcp-main-subscribe-userName'+i+1).text( (result.data[i] )[0].user.userName+"님의 레시피 정보");
+				  }
+			  }
+		  },
   error : function() {
 	 alert('Main 구독 서버 요청 오류!...')
   }
 });
 }
-
-
+  
+function scroll(){
+	$(window).scroll(function() { 
+	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+	    	console.log("scroll");
+	    }
+	});
+}
+  
   function methods(){
   	  idOptions();	
   	  mouseHover();
@@ -175,7 +183,7 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
   
   Handlebars.registerHelper('sessionUser', function(options) {
 	  if ( userInfo != null) {
-		  if( userInfo.email != null)
+		  if( userInfo.email != null)			  
 	    return options.fn(this);
 	  } 
 });
@@ -186,7 +194,12 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
 		}
 });
  
-  
+	Handlebars.registerHelper("representImages", function(value, options){
+		{			
+	return value[0];
+		}
+});  
+	
   
   
 	  

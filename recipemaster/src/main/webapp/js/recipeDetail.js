@@ -94,6 +94,7 @@ function recipeDetail(){
 						});
 						console.log("result data ll : "+result.data);
 						
+						$('.rcp-detail-body').css('transform', 'translate3d(0px, 0px, 0px)');
 						
 						for(var i=0; i<$('.rcp-body').length; i++){
 							$('div[name="rcp-body"]:eq('+i+')').attr('id',"div"+i);
@@ -248,7 +249,7 @@ function recipeScrap(){
 	$(document).on('click','.rcp-detail-scrap',function(event){
 		event.preventDefault();
 		if($(event.target).parent().is('[name="scrap"]')){
-			console.log('여기옴?');			
+			console.log(' 딜리트 여기옴?');			
 			$.ajax({
 				url:'recipe/deleteScrap.json',
 				method:'post',

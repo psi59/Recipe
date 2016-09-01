@@ -106,11 +106,16 @@
 }
 
 .rcp-icons-names {
+	color:white;
   float: left;
   
 }
 .rcp-icons-names p{
   font-size:15px;
+}
+
+.rcp-icons-info{
+	color:white;
 }
 
 .fa-eye{

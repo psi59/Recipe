@@ -30,13 +30,13 @@ header {
   transition: all 1s ease-in-out;
   position: absolute;
   top: 100px;
-  right: 43%;
+  right: 44%;
   height: 50px;
 }
 
 .rcp-roulette:hover {
   height: 250px;
-  right: 20%;
+  right: 23%;
   top: 45px; 
   -webkit-transform : rotate( 720deg);
   -moz-transform: rotate(720deg);

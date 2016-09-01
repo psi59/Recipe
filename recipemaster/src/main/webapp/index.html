@@ -39,6 +39,7 @@
 <link rel="stylesheet" href="css/common/signup.css">
 <link rel="stylesheet" href="css/index_rankTabs.css">
 <link rel="stylesheet" href="css/common_list_topbar.css">
+<link rel="stylesheet" href="css/common/loading.css">
 <!-- alert css -->
 <link rel="stylesheet"
 	href="node_modules/sweetalert/dist/sweetalert.css">
@@ -110,7 +111,6 @@
 										작성</button></a>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
@@ -357,7 +357,7 @@
 	<!-------------------------------- Rank List --------------------------------->
 	<section id="rcp-main-rank">
 		<div class="tabs-left rcp-list h3 rcp-1024 list1">
-			<div class="tab-content " style="padding-bottom: 200px">
+			<div class="tab-content " >
 				<h3 id="rcp-ranking">
 					<a href="/ranking.html">Best Chef</a>
 				</h3>
@@ -380,28 +380,35 @@
 				<div class="hs-content">
 					<div class="container">
 						<div class="row">
-							<div class="rcp-mypage-section"></div>
+						<h2 class="rcp-h2-25px"><b>구독정보</b></h2>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+
 
 	</section>
 
 	<!------------------------- Rank List ------------------------------>
 	<div id="footer"></div>
 
+  <!-- 로딩시 뜨는 이미지 -->
+  <div class="wrap-loading display-none">
+    <div><img src="img/img_loading.gif"></div>
+  </div>
 
 	<script id="temp" type="text/x-handlebars-template">
 {{#sessionUser}}
-{{#each data}}
+  <div class="rcp-mypage-section">               
+<h4 class="rcp-main-subscribe-userName0"></h4>
+{{#each this}}
 
 <div class="isotope-grid" id="grid-2">
           <div class="entry filter-food filter-pudding">
             <div class="entry-inner">
               
-              <div class="entry-media" name="recipe-subscribe-image">
+              <div class="entry-media" name="recipe-subscribe-image" style="background-image:url(img/representImg/{{representImages representImages}}">
                
                 <div class="entry-action">
                   <div class="entry-action-inner">
@@ -420,8 +427,13 @@
               </div>
               <!-- ./ entry-media -->
               <div class="content-wrapper">
-                <h3 class="entry-name"><a href="recipe_single.html">{{recipeName}}</a></h3>
-                <p class="entry-author">{{user.userName}}</p>
+                <h3 class="entry-name"><a href="#">
+                <input type="hidden" name="recipeNo" value="{{recipeNo}}">
+                <p class="detail">{{recipeName}}</p></a></h3>                
+                <a href="mypage.html?{{user.email}}">
+                <input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
+                <p class="entry-author rcp-userName">{{user.userName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{recipeDate}}</p>
+                </a>
                 <div class="entry-meta">
                   <div class="foo-wrapper">
                     <span>좋아요 {{countLike}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -438,6 +450,7 @@
           </div>
 
 {{/each}}
+</div>
 {{/sessionUser}}
 </script>
 
@@ -446,7 +459,7 @@
 	<script id="recipe-detail-main-template"
 		type="text/x-handlebars-template">
     {{#representImages}}
-              <div class="rcp-body" name="rcp-body" id="rcp-body{{@key}}">
+              <div class="rcp-body" name="rcp-body" >
               <div>
                 <div class="rcp-title-size">
                    
@@ -461,9 +474,7 @@
                <div class="rcp-explanation" name="rcp-explanation">
                   <p></p>
                 </div>
-               <div class="rcp-nav-down">
-              
-               </div>
+             
             </div>
 {{/representImages}}
 </script>
@@ -757,14 +768,14 @@
                    {{/isLike}}
                   <input type="hidden" name="recipeNo" value="{{recipeNo}}">                    
                   <a href="#">
-                  {{#isLike}}<b class="rcp-like active" name="rcp-like">좋아요</b>
-                  {{else}}<b class="rcp-like" name="rcp-like">좋아요</b>
+                  {{#isLike}}<b class="rcp-like active" name="rcp-like">좋아요 {{countLike}}</b>
+                  {{else}}<b class="rcp-like" name="rcp-like">좋아요 {{countLike}}</b>
                    {{/isLike}}</a>
                 </div> 
                 <div class="rcp-cookTime col-xs-4"
                   align="center">
                   <div class="glyphicon glyphicon-pushpin rcp-scrap"></div>
-                  <a href="#">  <input type="hidden" name="recipeNo" value="{{recipeNo}}"><b>스크랩</b></a>
+                  <a href="#">  <input type="hidden" name="recipeNo" value="{{recipeNo}}"><b>스크랩 {{countScrap}}</b></a>
                 </div>
               </div>
               <!--  버튼 끝  -->
