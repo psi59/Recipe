@@ -268,7 +268,7 @@ DELETE FROM rcp_rp WHERE RRPNO=${value};
 		SELECT @rownum:=@rownum+1 rownum,vt.*
 		FROM (SELECT r.rcpno rcpno, r.uno uno, r.name, r.intro, r.c_time,r.rpimg,
 		r.ptn, r.rcp_dt, r.hits,
-		r.rgst, r.gpa, u.uno userNo, u.img, u.name userName, u.email,l.rcpno
+		r.rgst, truncate(r.gpa,1), u.uno userNo, u.img, u.name userName, u.email,l.rcpno
 		likeRecipe, l.lc_dt, l.uno likeUser,
 		(select count(lk.uno) from rcp_lik lk where lk.uno = ${userNo}) as countLike
 		FROM users u

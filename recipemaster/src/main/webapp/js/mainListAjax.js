@@ -20,6 +20,7 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
 	  likeLogin();
 	  comList();	
 	  goMyPage();
+	  scroll();
 	 
   });
   
@@ -144,20 +145,22 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
 			  }
 		
 			  $('#tabs-1 .hs-content .container .row .rcp-mypage-section').append(commainSubscribe(result));
-			  for(var i=0; i<result.data.length; i++){
-//				  for(var j=0; j<result.data[i].representImages.length; j++){
-			  $('div[name="recipe-subscribe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');
-
-//				  }
-	  }
+			  
   },
   error : function() {
 	 alert('Main 구독 서버 요청 오류!...')
   }
 });
 }
-
-
+  
+function scroll(){
+	$(window).scroll(function() { 
+	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+	    	console.log("scroll");
+	    }
+	});
+}
+  
   function methods(){
   	  idOptions();	
   	  mouseHover();
@@ -186,7 +189,13 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
 		}
 });
  
-  
+	Handlebars.registerHelper("representImages", function(value, options){
+		{
+			console.log(value[0])
+	return value[0];
+		}
+});  
+	
   
   
 	  

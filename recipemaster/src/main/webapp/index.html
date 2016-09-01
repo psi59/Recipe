@@ -9,7 +9,7 @@
 <!-- Template css -->
 
 <link rel="stylesheet" href="css/template/animate.css">
-<!-- <link rel="stylesheet" href="css/template/styles.css"> -->
+<!-- <link rel="stylesheet" href="css/template/styles.css">  -->
 <link rel="stylesheet" href="css/template/plugins.css"> 
 <link rel="stylesheet"
 	href="/node_modules/sweetalert/dist/sweetalert.css">
@@ -341,7 +341,7 @@
 	<!-------------------------------- Rank List --------------------------------->
 	<section id="rcp-main-rank">
 		<div class="tabs-left rcp-list h3 rcp-1024 list1">
-			<div class="tab-content " style="padding-bottom: 200px">
+			<div class="tab-content " >
 				<h3 id="rcp-ranking">
 					<a href="/ranking.html">Best Chef</a>
 				</h3>
@@ -364,7 +364,9 @@
 				<div class="hs-content">
 					<div class="container">
 						<div class="row">
-							<div class="rcp-mypage-section"></div>
+							<div class="rcp-mypage-section">
+							 <h2 class="rcp-h2-25px"><b>구독정보</b></h2>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -385,7 +387,7 @@
           <div class="entry filter-food filter-pudding">
             <div class="entry-inner">
               
-              <div class="entry-media" name="recipe-subscribe-image">
+              <div class="entry-media" name="recipe-subscribe-image" style="background-image:url(img/representImg/{{representImages representImages}}">
                
                 <div class="entry-action">
                   <div class="entry-action-inner">
@@ -404,8 +406,13 @@
               </div>
               <!-- ./ entry-media -->
               <div class="content-wrapper">
-                <h3 class="entry-name"><a href="mypage.html?{{email}}">{{recipeName}}</a></h3>
-                <p class="entry-author">{{user.userName}}</p>
+                <h3 class="entry-name"><a href="#">
+                <input type="hidden" name="recipeNo" value="{{recipeNo}}">
+                <p class="detail">{{recipeName}}</p></a></h3>                
+                <a href="mypage.html?{{user.email}}">
+                <input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
+                <p class="entry-author rcp-userName">{{user.userName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{recipeDate}}</p>
+                </a>
                 <div class="entry-meta">
                   <div class="foo-wrapper">
                     <span>좋아요 {{countLike}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -430,7 +437,7 @@
 	<script id="recipe-detail-main-template"
 		type="text/x-handlebars-template">
     {{#representImages}}
-              <div class="rcp-body" name="rcp-body" id="rcp-body{{@key}}">
+              <div class="rcp-body" name="rcp-body" >
               <div>
                 <div class="rcp-title-size">
                    
@@ -445,9 +452,7 @@
                <div class="rcp-explanation" name="rcp-explanation">
                   <p></p>
                 </div>
-               <div class="rcp-nav-down">
-              
-               </div>
+             
             </div>
 {{/representImages}}
 </script>

@@ -298,8 +298,9 @@ public class RecipeController {
     HashMap<String, Object> result = new HashMap<>(); 
     List<Material> materials = new ArrayList<>();
     Recipe recipe = new Recipe();
-    if (session.getAttribute("userNo") != null) {
-      recipe = recipeService.getRecipe(recipeNo, (int) session.getAttribute("userNo"));
+    if ((User)session.getAttribute("loginUser") != null) {
+      System.out.println(((User)session.getAttribute("loginUser")).getUserNo());
+      recipe = recipeService.getRecipe(recipeNo, ((User)session.getAttribute("loginUser")).getUserNo());
     } else {
       recipe = recipeService.getRecipe(recipeNo, 0);
     }
@@ -389,10 +390,10 @@ public class RecipeController {
 
     try {
 
-      if (session.getAttribute("userNo") == null) {
+      if (session.getAttribute("loginUser") == null) {
         result.put("status", "notLogin");
       } else {
-        userNo.setUserNo((int) session.getAttribute("userNo"));
+        userNo.setUserNo(  ((User) session.getAttribute("loginUser")).getUserNo() );
         recipeService.addScrap(userNo.getUserNo(), recipeNo);
         result.put("status", "success");
       }
@@ -408,7 +409,7 @@ public class RecipeController {
     HashMap<String, Object> result = new HashMap<>();
 
     User userNo = new User();
-    userNo.setUserNo((int) session.getAttribute("userNo"));
+    userNo.setUserNo( ((User) session.getAttribute("loginUser")).getUserNo() );
 
     recipeService.deleteScrap(userNo.getUserNo(), recipeNo);
     try {
@@ -641,12 +642,12 @@ public class RecipeController {
       }else if(request == 2){
         recipeList = recipeService.selectMypageRecipe(recipe.getScrap(), userNo,request);
       }else if(request == 3){
-        userNumbers = recipeService.selectSubscribeMypage(user.getUserNo());
-        System.out.println("request3 userNumbers : "+ userNumbers);
-        Recipe subscribeRecipe = functionForUserNumbers(userNumbers,request);
-        System.out.println("subscribeRecipeNumbers : "+subscribeRecipe);
+        userNumbers = recipeService.selectSubscribeMypage(user.getUserNo());        
+        Recipe subscribeRecipe = functionForUserNumbers(userNumbers,request);        
         //getSession(userNo, session);
         recipeList = recipeService.selectMypageRecipe(subscribeRecipe.getScrap(), userNo,request);
+        System.out.println("구독 레시피들 정보 : "+recipeList );
+        
       }
 
       result.put("status","success");
