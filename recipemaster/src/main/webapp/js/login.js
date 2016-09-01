@@ -33,6 +33,7 @@ window.onload = function () {
 			return;
 		}	
 		login(event);
+		loadUsers();
 	});
 
 	//로그인 버튼 누를시 포커스
@@ -95,6 +96,44 @@ window.onload = function () {
 					$('#profileImg').attr('src', 'img/profileImg/'+userInfo.image);
 				}
 	});
+	
+	
+	//start of 쉐프카드
+	loadUsers();
+	
+	function loadUsers() {
+
+		var source = $('#chef-card-template').text();
+		var template = Handlebars.compile(source);
+
+		$.ajax({
+			url : 'user/top3.json',
+			dataType : 'json',
+			method : 'get',
+			success : function(result) {
+				if (result.status != 'success') {
+					swal('chefCard.js 오류');
+					return;
+				}
+				
+				for (var i = 0; i < result.data.length; i++) {
+					if (result.data[i].subscribeUser==0) {
+						result.data[i].status = null;
+						console.log('unlogin::'+result.data[i].status);
+					}else {result.data[i].status = Boolean(true);
+					console.log('login::'+result.data[i].status);
+					}
+				}
+				
+				$('#rcp-chef-rank').append(template(result));
+			},
+			error : function() {
+				swal('서버 요청 오류!...')
+			}
+		});		
+	}//end of 쉐프카드
+	
+	
 };
 
 
@@ -162,6 +201,7 @@ function logout(event) {
 
 function login(event) {
 	event.preventDefault();
+	
 	$.ajax({
 		url : '/user/login.json', 
 		method : 'post',
