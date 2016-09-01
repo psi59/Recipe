@@ -779,7 +779,17 @@
 		background-size: 350px;
 	}
 }
-
+.rcp-scsinfo{
+	position: relative;
+	left:-8%;
+}
+.More{
+  font-size: 13pt
+}
+.More:hover{
+  color:#ff8000;
+  font-size: 13pt
+}
 /* -------------------- font size end ------------------------ */
 
 /* .rcp-list rcp-container{

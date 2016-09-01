@@ -2021,10 +2021,12 @@ dd {
   /* Isotope filter
   --------------------------- */ }
   .hs-recipes .isotope-filter {
+    position: relative;
     display: block;
     text-align: center;
     margin-bottom: 50px;
-    font-weight: 700; }
+    font-weight: 700;
+    right: 16%; }
     .hs-recipes .isotope-filter li {
       display: inline-block;
       border-bottom: 1px solid #cfcfcf;

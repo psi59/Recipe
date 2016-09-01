@@ -124,7 +124,7 @@
 	 <!-- 레시피 *10, 구독자 * 5-->
   <select id="selectRankListSCS" resultMap="userMap" parameterType="Map">
     SELECT @rownum:=@rownum+1 rownum, vt.* FROM(
-    SELECT r1.uno,r1.name,r1.email,r1.intro,IFNULL(r2.cnt,0) rcpCount,IFNULL(r3.cnt,0) scnt, 
+    SELECT r1.uno,r1.name,r1.img image,r1.email,r1.intro,IFNULL(r2.cnt,0) rcpCount,IFNULL(r3.cnt,0) scnt, 
     SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) total, IFNULL(vt2.scsuno,0) scsuno,
     (CASE
     WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 50 THEN '1. Head Chef'
