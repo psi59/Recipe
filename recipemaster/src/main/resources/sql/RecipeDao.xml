@@ -4,333 +4,331 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.recipe.dao.RecipeDao">
 
-	<resultMap type="recipe" id="recipeMap">
-		<id column="rcpno" property="recipeNo" />
-		<result column="uno" property="userNo" />
-		<result column="name" property="recipeName" />
-		<result column="intro" property="intro" />
-		<result column="rcp_pd" property="recipeProcedure"
-			typeHandler="com.github.javaplugs.mybatis.JsonElementTypeHandler" />
-		<result column="c_time" property="cookTime" />
-		<result column="ptn" property="portion" />
-		<result column="rcp_dt" property="recipeDate" />
-		<result column="hits" property="hits" />
-		<result column="rgst" property="regiStatus" />
-		<result column="gpa" property="gradePoint" />
-		<result column="userName" property="user.userName" />
-		<result column="lc_dt" property="likeDate" />
-		<result column="likeUser" property="likeUser" />
-		<result column="countLike" property="countLike" />
-		<result column="uno2" property="subscribeNum" />
-		<result column="countComment" property="countComment" />
-		<result column="countScrap" property="countScrap" />
-		<result column="scrapUser" property="scrapUser" />
-		<result column="email" property="user.email" /> 
-		<result column="rownum" property="rownum" />
-		<result column="totalPoint" property="totalPoint" />
-		<result column="rpimg" property="representImages"
-			typeHandler="com.github.javaplugs.mybatis.JsonElementTypeHandler" />
-		<result column="img" property="user.image" />
-		<result column="userName" property="user.userName" />
-		<result column="rrpct" property="recipeComment" />
-		<result column="rrpc_dt" property="recipeCommentDate" />
-		<result column="rrpno" property="commentNo"/>
-	</resultMap>
+  <resultMap type="recipe" id="recipeMap">
+    <id column="rcpno" property="recipeNo" />
+    <result column="uno" property="userNo" />
+    <result column="name" property="recipeName" />
+    <result column="intro" property="intro" />
+    <result column="rcp_pd" property="recipeProcedure"
+      typeHandler="com.github.javaplugs.mybatis.JsonElementTypeHandler" />
+    <result column="c_time" property="cookTime" />
+    <result column="ptn" property="portion" />
+    <result column="rcp_dt" property="recipeDate" />
+    <result column="hits" property="hits" />
+    <result column="rgst" property="regiStatus" />
+    <result column="gpa" property="gradePoint" />
+    <result column="userName" property="user.userName" />
+    <result column="lc_dt" property="likeDate" />
+    <result column="likeUser" property="likeUser" />
+    <result column="countLike" property="countLike" />
+    <result column="uno2" property="subscribeNum" />
+    <result column="countComment" property="countComment" />
+    <result column="countScrap" property="countScrap" />
+    <result column="scrapUser" property="scrapUser" />
+    <result column="email" property="user.email" /> 
+    <result column="rownum" property="rownum" />
+    <result column="totalPoint" property="totalPoint" />
+    <result column="rpimg" property="representImages"
+      typeHandler="com.github.javaplugs.mybatis.JsonElementTypeHandler" />
+    <result column="img" property="user.image" />
+    <result column="userName" property="user.userName" />
+    <result column="rrpct" property="recipeComment" />
+    <result column="rrpc_dt" property="recipeCommentDate" />
+    <result column="rrpno" property="commentNo"/>
+  </resultMap>
 
 
-	<resultMap type="material" id="materialMap">
-		<id column="mtno" property="materialNo" />
-		<result column="name" property="materialName" />
-		<result column="mtst" property="materialStatement" />
-		<result column="rcpqt" property="materiaQuantity" />
-	</resultMap>
+  <resultMap type="material" id="materialMap">
+    <id column="mtno" property="materialNo" />
+    <result column="name" property="materialName" />
+    <result column="mtst" property="materialStatement" />
+    <result column="rcpqt" property="materiaQuantity" />
+  </resultMap>
 
-<select id="recipeComment" resultMap="recipeMap" parameterType="INTEGER">
-    select r.rrpno, r.rrpct, r.rrpc_dt, u.uno, u.name userName,u.img,
-    (select count(rcpno) from rcp_rp where rcpno=${value}) countComment
-    from rcp_rp r inner join users u on r.uno = u.uno and r.rcpno = ${value}    
-</select>
-
-<select id="addComment" parameterType="MAP">
-  INSERT INTO rcp_rp  ( `UNO`, `RCPNO`, `RRPCT`, `RRPC_DT`)  
-  VALUES (${userNo},${recipe.recipeNo},#{recipe.recipeComment},now() );
-</select>
-<delete id="deleteComment" parameterType="INTEGER" >
-DELETE FROM rcp_rp WHERE RRPNO=${value};
-
-</delete>
-
-
-	<select id="recipeSearch" resultMap="recipeMap" parameterType="Map">
-		SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt,
-		r.hits,
-		r.rgst, truncate(r.gpa,1) gpa, u.uno, u.name userName, l.rcpno,
-		l.lc_dt,
-		l.uno likeUser
-		FROM users u INNER JOIN rcps r on u.uno=r.uno
-		LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=#{userNo}
-		<if test="search.searchCondition == 'recipe'">
-			WHERE r.name LIKE '%${search.searchKeyword}%'
-		</if>
-		<if test="search.searchCondition == 'chef'">
-			WHERE u.name LIKE '%${search.searchKeyword}%'
-		</if>
-		<if
-			test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'">
-			ORDER BY r.rcpno DESC
-		</if>
-		<if
-			test="search.sortCondition == 'newest' and search.orderCondition == 'ASC'">
-			ORDER BY r.rcpno ASC
-		</if>
-		<if
-			test="search.sortCondition == 'grade' and search.orderCondition == 'DESC'">
-			ORDER BY r.gpa DESC
-		</if>
-		<if
-			test="search.sortCondition == 'grade' and search.orderCondition == 'ASC'">
-			ORDER BY r.gpa ASC
-		</if>
-		limit #{startIndex}, #{len}
-	</select>
-
-	<select id="recipeCount" resultType="int" parameterType="Map">
-		SELECT count(*)
-		FROM users u INNER JOIN rcps r on u.uno=r.uno
-		LEFT OUTER
-		JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=#{userNo}
-		<if test="search.searchCondition == 'recipe'">
-			WHERE r.name LIKE '%${search.searchKeyword}%'
-		</if>
-		<if test="search.searchCondition == 'chef'">
-			WHERE u.name LIKE '%${search.searchKeyword}%'
-		</if>
-		<if
-			test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'">
-			ORDER BY r.rcpno DESC
-		</if>
-		<if
-			test="search.sortCondition == 'newest' and search.orderCondition == 'ASC'">
-			ORDER BY r.rcpno ASC
-		</if>
-		<if
-			test="search.sortCondition == 'grade' and search.orderCondition == 'DESC'">
-			ORDER BY r.gpa DESC
-		</if>
-		<if
-			test="search.sortCondition == 'grade' and search.orderCondition == 'ASC'">
-			ORDER BY r.gpa ASC
-		</if>
-		limit #{startIndex}, #{len}
-	</select>
-
-	<select id="selectRecipeName" parameterType="String" resultType="String">
-		SELECT name
-		FROM rcps
-		WHERE name LIKE '${value}%'
-		ORDER BY LENGTH(name)
-		ASC;
-	</select>
-
-	<insert id="likeUp" parameterType="Recipe">
-		INSERT INTO RCP_LIK
-		(UNO,RCPNO,LC_DT)
-		VALUES (${userNo}, ${recipeNo}, now())
-
-	</insert>
-
-	<insert id="addScrap" parameterType="Map">
-		INSERT INTO rcp_scr
-		VALUES (
-		${userNo}, ${recipeNo}, now() )
-	</insert>
-
-	<delete id="deleteScrap" parameterType="Map">
-		DELETE FROM
-		rcp_scr WHERE
-		uno=${userNo} and rcpno=${recipeNo}
-	</delete>
-
-	<insert id="likeDown" parameterType="Recipe">
-		DELETE FROM
-		rcp_lik WHERE
-		uno=${userNo} and rcpno=${recipeNo}
-	</insert>
-
-	<insert id="insert" parameterType="map">
-		INSERT INTO rcps(uno, name, intro, c_time, ptn, rcp_pd, rpimg, rcp_dt,
-		rgst)
-		VALUES(#{user.userNo}, #{recipe.recipeName}, #{recipe.intro},
-		#{recipe.cookTime},
-		#{recipe.portion}, 'rcp_pd', 'rpimg', now(), 1)
-		<selectKey keyProperty="recipeNo" resultType="int" order="AFTER">
-			SELECT LAST_INSERT_ID();
-		</selectKey>
-	</insert>
-
-	<insert id="insertMaterials" parameterType="map">
-		insert into rcp_mt(rcpno, mtno, rcpqt)
-		values <!-- (#{recipeNo}, #{materialName}, 
-			#{materialAmount}) -->
-		<foreach collection="materialList" item="item" separator=" , ">
-			(#{recipeNo}, #{item.materialNo}, #{item.materialAmount})
-		</foreach>
-	</insert>
-
-	<update id="insertImageAndProduce" parameterType="map">
-		UPDATE rcps
-		SET
-		rcp_pd=#{recipeProduceDatas}, rpimg=#{recipeRepresentImages}
-		WHERE
-		rcpno=#{recipeNo};
-	</update>
-
-
-	<insert id="addSubscribe" parameterType="Map">
-		INSERT INTO scs(uno,
-		uno2, sc_dt)
-		values(${toUserNo}, ${fromUserNo}, now() )
-	</insert>
-
-	<delete id="deleteSubscribe" parameterType="Map">
-		DELETE FROM scs 
-		WHERE uno=${toUserNo} AND uno2=${fromUserNo}
-	</delete>
-	
-	<!--Check 추가 -->
-	<select id="checkSubscribe" parameterType="Map" resultType="Map">
-	   SELECT *
-		 FROM scs
-		 WHERE uno=${toUserNo} and uno2=${fromUserNo}
-	</select>
-	
-
-	<select id="selectSubscribeUno" resultMap="recipeMap"
-		parameterType="INTEGER">
-		SELECT * FROM scs WHERE uno=#{value}
-	</select>
-
-	<select id="selectSubscribe" resultMap="recipeMap"
-		parameterType="string">
-		SELECT *
-		FROM rcps
-		WHERE uno in( ${userNo} )
-		order by
-		rcp_dt desc
-		limit #{startIndex}, #{len}
-	</select>
-
-	<select id="selectMypage" resultMap="recipeMap" parameterType="INTEGER">
-		SELECT *,
-		(SELECT count(uno) FROM scs WHERE uno = ${value})
-		scsCountUser
-		FROM rcps r
-		INNER JOIN users u ON r.uno=u.uno AND u.uno
-		=${value}
-	</select>
-
-	<select id="selectScrapUserNoMypage" resultMap="recipeMap"
-		parameterType="INTEGER">
-		select * from rcp_scr where uno = ${value}
-	</select>
-
-	<select id="selectSubscribeMypage" resultMap="recipeMap"
-		parameterType="INTEGER">
-		select * from scs where uno = ${value}
-	</select>
-
-
-	<select id="selectMypageRecipe" resultMap="recipeMap"
-		parameterType="map">
-		select *, u.name userName,likecnt.countLike from rcps r
-		INNER JOIN users u on r.uno=u.uno and
-		<if test="request == 1 or request == 3">u.uno </if>
-		<if test="request == 2">r.rcpno </if>
-		in ( ${userNumbers} )
-		LEFT OUTER JOIN rcp_scr scr on r.rcpno=scr.rcpno and scr.uno = ${userNo}
-		LEFT OUTER JOIN(select rcpno rno, count(*) countLike from rcp_lik
-		group by rcpno) likecnt
-		ON r.rcpno=likecnt.rno
-		ORDER BY r.rcp_dt asc
-	</select>
-
-	<select id="selectSbuscribe2" resultMap="recipeMap"
-		parameterType="string">
-
-		SELECT *
-		FROM rcps
-		WHERE uno = ${userNo}
-		order by uno desc
-		limit #{startIndex}, #{len}
-	</select>
-
-	<select id="recipeList" resultMap="recipeMap" parameterType="Map">
-		SELECT @rownum:=@rownum+1 rownum,vt.*
-		FROM (SELECT r.rcpno rcpno, r.uno uno, r.name, r.intro, r.c_time,r.rpimg,
-		r.ptn, r.rcp_dt, r.hits,
-		r.rgst, r.gpa, u.uno userNo, u.img, u.name userName, u.email,l.rcpno
-		likeRecipe, l.lc_dt, l.uno likeUser,
-		(select count(lk.uno) from rcp_lik lk where lk.uno = ${userNo}) as countLike
-		FROM users u
-		INNER JOIN rcps r on u.uno=r.uno
-		INNER JOIN(select @rownum:=0) t
-		LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=${userNo}
-		<if test="request == 1">
-			ORDER BY r.hits desc
-		</if>
-		<if test="request == 2">
-			ORDER BY r.rcp_dt desc
-		</if>
-		limit #{len}
-		) vt
-	</select>
-
-
-	<select id="selectMts" resultMap="materialMap" parameterType="INTEGER">
-
-		select * from mts m, rcp_mt mt, rcps r
-		where m.mtno=mt.mtno and r.rcpno = mt.rcpno and r.rcpno =${value}
-	</select>
-	
-	<select id="selectOne" resultMap="recipeMap" parameterType="INTEGER">
-	    SELECT DISTINCT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn,
-	    r.rcp_dt, r.hits, r.rpimg,
-	    r.rgst, r.gpa, r.rcp_pd, u.uno, u.email,u.name userName,s.uno scrapUser, s.rcpno,
-	    (select count(rcpno) from rcp_lik where rcpno=${recipeNo}) countLike,
-	    (select count(rrpno) from rcp_rp where rcpno=${recipeNo})
-	    countComment,
-	    (select count(rcpno) from rcp_scr where rcpno=${recipeNo}) countScrap
-	    FROM users u INNER JOIN rcps r on u.uno=r.uno and r.rcpno=${recipeNo}
-	    LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno
-	    LEFT OUTER JOIN rcp_scr s ON r.rcpno=s.rcpno and s.uno=${userNo}
+  <select id="recipeComment" resultMap="recipeMap" parameterType="INTEGER">
+      select r.rrpno, r.rrpct, r.rrpc_dt, u.uno, u.name userName,u.img,
+      (select count(rcpno) from rcp_rp where rcpno=${value}) countComment
+      from rcp_rp r inner join users u on r.uno = u.uno and r.rcpno = ${value}    
+  </select>
+  
+  <select id="addComment" parameterType="MAP">
+    INSERT INTO rcp_rp  ( `UNO`, `RCPNO`, `RRPCT`, `RRPC_DT`)  
+    VALUES (${userNo},${recipe.recipeNo},#{recipe.recipeComment},now() );
+  </select>
+  <delete id="deleteComment" parameterType="INTEGER" >
+  DELETE FROM rcp_rp WHERE RRPNO=${value};
+  
+  </delete>
+  
+  <select id="recipeSearch" parameterType="Map" resultMap="recipeMap">
+    SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt,
+    r.hits, r.rgst, truncate(r.gpa,1) gpa, u.uno, u.name userName, l.rcpno,
+    l.lc_dt, l.uno likeUser FROM users u INNER JOIN rcps r on u.uno=r.uno
+    LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=#{userNo}
+    <if test="!categorySize eq 0">
+      ,(SELECT rcpno , count(*) vc FROM (SELECT c.ctgno, c.name, cn.rcpno
+      from ctg c, ctg_no cn where c.ctgno = cn.ctgno and c.name IN (
+      <foreach separator="," item="item" collection="search.categoryList"> 
+        #{item}
+      </foreach>
+      )) a GROUP BY rcpno) d WHERE r.rcpno = d.rcpno AND vc = #{categorySize}
+    </if>
+    <if test="search.searchCondition == 'recipe' and categorySize eq 0">
+     WHERE r.name LIKE '%${search.searchKeyword}%' </if>
+    <if test="search.searchCondition == 'recipe' and !categorySize eq 0">
+     AND r.name LIKE '%${search.searchKeyword}%' </if>
+    <if test="search.searchCondition == 'chef' and categorySize eq 0"> 
+     WHERE u.name LIKE '%${search.searchKeyword}%' </if>
+    <if test="search.searchCondition == 'recipe' and !categorySize eq 0"> 
+     AND r.name LIKE '%${search.searchKeyword}%' </if>
+    <if test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'"> 
+     ORDER BY r.rcpno DESC </if>
+    <if test="search.sortCondition == 'newest' and search.orderCondition == 'ASC'"> 
+     ORDER BY r.rcpno ASC </if>
+    <if test="search.sortCondition == 'grade' and search.orderCondition == 'DESC'"> 
+     ORDER BY r.gpa DESC </if>
+    <if test="search.sortCondition == 'grade' and search.orderCondition == 'ASC'"> 
+     ORDER BY r.gpa ASC </if>
+     limit #{startIndex}, #{len}
   </select>
 
-	<select id="selectMaterialName" resultMap="materialMap"
-		parameterType="string">
-		SELECT *
-		FROM mts
-		WHERE name LIKE '%${value}%'
-		ORDER BY mtno
-	</select>
-	
-	<select id="selectRecipeMaterial" resultMap="materialMap"
+  <select id="recipeCount" parameterType="Map" resultType="int">
+    SELECT count(*) FROM users u INNER JOIN rcps r on u.uno=r.uno LEFT
+    OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=#{userNo}
+    <if test="!categorySize eq 0">
+      ,(SELECT rcpno , count(*) vc FROM (SELECT c.ctgno, c.name, cn.rcpno
+      from ctg c, ctg_no cn where c.ctgno = cn.ctgno and c.name IN (
+      <foreach separator="," item="item" collection="search.categoryList"> #{item}
+      </foreach>
+      )) a GROUP BY rcpno) d WHERE r.rcpno = d.rcpno AND vc =
+      #{categorySize}
+    </if>
+    <if test="search.searchCondition == 'recipe' and categorySize eq 0"> 
+      WHERE r.name LIKE '%${search.searchKeyword}%' </if>
+    <if test="search.searchCondition == 'recipe' and !categorySize eq 0"> 
+      AND r.name LIKE '%${search.searchKeyword}%' </if>
+    <if test="search.searchCondition == 'chef' and categorySize eq 0"> 
+      WHERE u.name LIKE '%${search.searchKeyword}%' </if>
+    <if test="search.searchCondition == 'recipe' and !categorySize eq 0"> 
+      AND r.name LIKE '%${search.searchKeyword}%' </if>
+    <if test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'"> 
+      ORDER BY r.rcpno DESC </if>
+    <if test="search.sortCondition == 'newest' and search.orderCondition == 'ASC'"> 
+      ORDER BY r.rcpno ASC </if>
+    <if test="search.sortCondition == 'grade' and search.orderCondition == 'DESC'">
+      ORDER BY r.gpa DESC </if>
+    <if test="search.sortCondition == 'grade' and search.orderCondition == 'ASC'">
+      ORDER BY r.gpa ASC </if>
+      limit #{startIndex}, #{len}
+  </select>
+
+  <select id="selectRecipeName" parameterType="String" resultType="String">
+    SELECT name
+    FROM rcps
+    WHERE name LIKE '${value}%'
+    ORDER BY LENGTH(name)
+    ASC;
+  </select>
+
+  <insert id="likeUp" parameterType="Recipe">
+    INSERT INTO RCP_LIK
+    (UNO,RCPNO,LC_DT)
+    VALUES (${userNo}, ${recipeNo}, now())
+
+  </insert>
+
+  <insert id="addScrap" parameterType="Map">
+    INSERT INTO rcp_scr
+    VALUES (
+    ${userNo}, ${recipeNo}, now() )
+  </insert>
+
+  <delete id="deleteScrap" parameterType="Map">
+    DELETE FROM
+    rcp_scr WHERE
+    uno=${userNo} and rcpno=${recipeNo}
+  </delete>
+
+  <insert id="likeDown" parameterType="Recipe">
+    DELETE FROM
+    rcp_lik WHERE
+    uno=${userNo} and rcpno=${recipeNo}
+  </insert>
+
+  <insert id="insert" parameterType="map">
+    INSERT INTO rcps(uno, name, intro, c_time, ptn, rcp_pd, rpimg, rcp_dt,
+    rgst)
+    VALUES(#{user.userNo}, #{recipe.recipeName}, #{recipe.intro},
+    #{recipe.cookTime},
+    #{recipe.portion}, 'rcp_pd', 'rpimg', now(), 1)
+    <selectKey keyProperty="recipeNo" resultType="int" order="AFTER">
+      SELECT LAST_INSERT_ID();
+    </selectKey>
+  </insert>
+
+  <insert id="insertMaterials" parameterType="map">
+    insert into rcp_mt(rcpno, mtno, rcpqt)
+    values <!-- (#{recipeNo}, #{materialName}, 
+      #{materialAmount}) -->
+    <foreach collection="materialList" item="item" separator=" , ">
+      (#{recipeNo}, #{item.materialNo}, #{item.materialAmount})
+    </foreach>
+  </insert>
+
+  <update id="insertImageAndProduce" parameterType="map">
+    UPDATE rcps
+    SET
+    rcp_pd=#{recipeProduceDatas}, rpimg=#{recipeRepresentImages}
+    WHERE
+    rcpno=#{recipeNo};
+  </update>
+
+
+  <insert id="addSubscribe" parameterType="Map">
+    INSERT INTO scs(uno,
+    uno2, sc_dt)
+    values(${toUserNo}, ${fromUserNo}, now() )
+  </insert>
+
+  <delete id="deleteSubscribe" parameterType="Map">
+    DELETE FROM scs 
+    WHERE uno=${toUserNo} AND uno2=${fromUserNo}
+  </delete>
+  
+  <!--Check 추가 -->
+  <select id="checkSubscribe" parameterType="Map" resultType="Map">
+     SELECT *
+     FROM scs
+     WHERE uno=${toUserNo} and uno2=${fromUserNo}
+  </select>
+  
+
+  <select id="selectSubscribeUno" resultMap="recipeMap"
+    parameterType="INTEGER">
+    SELECT * FROM scs WHERE uno=#{value}
+  </select>
+
+  <select id="selectSubscribe" resultMap="recipeMap"
+    parameterType="string">
+    SELECT *
+    FROM rcps
+    WHERE uno in( ${userNo} )
+    order by
+    rcp_dt desc
+    limit #{startIndex}, #{len}
+  </select>
+
+  <select id="selectMypage" resultMap="recipeMap" parameterType="INTEGER">
+    SELECT *,
+    (SELECT count(uno) FROM scs WHERE uno = ${value})
+    scsCountUser
+    FROM rcps r
+    INNER JOIN users u ON r.uno=u.uno AND u.uno
+    =${value}
+  </select>
+
+  <select id="selectScrapUserNoMypage" resultMap="recipeMap"
+    parameterType="INTEGER">
+    select * from rcp_scr where uno = ${value}
+  </select>
+
+  <select id="selectSubscribeMypage" resultMap="recipeMap"
+    parameterType="INTEGER">
+    select * from scs where uno = ${value}
+  </select>
+
+
+  <select id="selectMypageRecipe" resultMap="recipeMap"
+    parameterType="map">
+    select *, u.name userName,likecnt.countLike from rcps r
+    INNER JOIN users u on r.uno=u.uno and
+    <if test="request == 1 or request == 3">u.uno </if>
+    <if test="request == 2">r.rcpno </if>
+    in ( ${userNumbers} )
+    LEFT OUTER JOIN rcp_scr scr on r.rcpno=scr.rcpno and scr.uno = ${userNo}
+    LEFT OUTER JOIN(select rcpno rno, count(*) countLike from rcp_lik
+    group by rcpno) likecnt
+    ON r.rcpno=likecnt.rno
+    ORDER BY r.rcp_dt asc
+  </select>
+
+  <select id="selectSbuscribe2" resultMap="recipeMap"
+    parameterType="string">
+
+    SELECT *
+    FROM rcps
+    WHERE uno = ${userNo}
+    order by uno desc
+    limit #{startIndex}, #{len}
+  </select>
+
+  <select id="recipeList" resultMap="recipeMap" parameterType="Map">
+    SELECT @rownum:=@rownum+1 rownum,vt.*
+    FROM (SELECT r.rcpno rcpno, r.uno uno, r.name, r.intro, r.c_time,r.rpimg,
+    r.ptn, r.rcp_dt, r.hits,
+    r.rgst, r.gpa, u.uno userNo, u.img, u.name userName, u.email,l.rcpno
+    likeRecipe, l.lc_dt, l.uno likeUser,
+    (select count(lk.uno) from rcp_lik lk where lk.uno = ${userNo}) as countLike
+    FROM users u
+    INNER JOIN rcps r on u.uno=r.uno
+    INNER JOIN(select @rownum:=0) t
+    LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=${userNo}
+    <if test="request == 1">
+      ORDER BY r.hits desc
+    </if>
+    <if test="request == 2">
+      ORDER BY r.rcp_dt desc
+    </if>
+    limit #{len}
+    ) vt
+  </select>
+
+
+  <select id="selectMts" resultMap="materialMap" parameterType="INTEGER">
+
+    select * from mts m, rcp_mt mt, rcps r
+    where m.mtno=mt.mtno and r.rcpno = mt.rcpno and r.rcpno =${value}
+  </select>
+  
+  <select id="selectOne" resultMap="recipeMap" parameterType="INTEGER">
+      SELECT DISTINCT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn,
+      r.rcp_dt, r.hits, r.rpimg,
+      r.rgst, r.gpa, r.rcp_pd, u.uno, u.email,u.name userName,s.uno scrapUser, s.rcpno,
+      (select count(rcpno) from rcp_lik where rcpno=${recipeNo}) countLike,
+      (select count(rrpno) from rcp_rp where rcpno=${recipeNo})
+      countComment,
+      (select count(rcpno) from rcp_scr where rcpno=${recipeNo}) countScrap
+      FROM users u INNER JOIN rcps r on u.uno=r.uno and r.rcpno=${recipeNo}
+      LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno
+      LEFT OUTER JOIN rcp_scr s ON r.rcpno=s.rcpno and s.uno=${userNo}
+  </select>
+
+  <select id="selectMaterialName" resultMap="materialMap"
+    parameterType="string">
+    SELECT *
+    FROM mts
+    WHERE name LIKE '%${value}%'
+    ORDER BY mtno
+  </select>
+  
+  <select id="selectRecipeMaterial" resultMap="materialMap"
     parameterType="int">
     SELECT rcpmt.mtno, rcpmt.rcpqt, mt.name, mt.mtst 
     FROM rcp_mt rcpmt 
     INNER JOIN mts mt ON rcpmt.mtno=mt.mtno AND rcpmt.rcpno=#{value}
   </select>
 
-	<update id="updateHits" parameterType="recipe">
-		UPDATE rcps set hits=${hits} where rcpno=${recipeNo};
-	</update>
+  <update id="updateHits" parameterType="recipe">
+    UPDATE rcps set hits=${hits} where rcpno=${recipeNo};
+  </update>
 
   <update id="updateRecipe" parameterType="recipe">
     UPDATE rcps set name=#{recipeName}, intro=#{intro}, c_time=#{cookTime}, ptn=#{portion}, rpimg=#{representImages}, rcp_pd=#{recipeProcedure} where rcpno=${recipeNo};
   </update>
 
-	<!-- 좋아요 *3 스크랩 *3 조회수 *1 -->
-	<select id="recipeRankList" resultMap="recipeMap" parameterType="Map">
-		SELECT @rownum:=@rownum+1 rownum,vt.*
+  <!-- 좋아요 *3 스크랩 *3 조회수 *1 -->
+  <select id="recipeRankList" resultMap="recipeMap" parameterType="Map">
+    SELECT @rownum:=@rownum+1 rownum,vt.*
     FROM (SELECT
     r1.rcpno,r1.name,r1.hits,IFNULL(r2.cnt,0) countLike,IFNULL(r3.cnt,0)
     countScrap,
@@ -347,10 +345,10 @@ DELETE FROM rcp_rp WHERE RRPNO=${value};
     INNER JOIN(select @rownum:=0) t
     GROUP BY r1.rcpno
     limit #{len}) vt
-		ORDER BY vt.totalPoint DESC
-	</select>
-	
-	<select id="checkMyRecipe" resultMap="recipeMap" parameterType="Map">
+    ORDER BY vt.totalPoint DESC
+  </select>
+  
+  <select id="checkMyRecipe" resultMap="recipeMap" parameterType="Map">
     SELECT rcpno 
     FROM rcps 
     WHERE uno=#{userNo} AND rcpno=#{recipeNo}
@@ -363,14 +361,14 @@ DELETE FROM rcp_rp WHERE RRPNO=${value};
   <select id="recipeRandomList" resultMap="recipeMap" parameterType="Map">
     SELECT * FROM (
         SELECT @rownum:=@rownum+1 rownum,vt.*
-		    FROM (
-		        SELECT r.rcpno rcpno, r.uno uno, r.name, r.intro, r.c_time,r.rpimg,
-		    r.ptn, r.rcp_dt, r.hits,
-		    r.rgst, r.gpa, u.uno userNo, u.img, u.name userName, u.email
-		    FROM users u
-		    INNER JOIN rcps r on u.uno=r.uno
-		    INNER JOIN(select @rownum:=0) t
-		    ORDER BY RAND()) vt
+        FROM (
+            SELECT r.rcpno rcpno, r.uno uno, r.name, r.intro, r.c_time,r.rpimg,
+        r.ptn, r.rcp_dt, r.hits,
+        r.rgst, r.gpa, u.uno userNo, u.img, u.name userName, u.email
+        FROM users u
+        INNER JOIN rcps r on u.uno=r.uno
+        INNER JOIN(select @rownum:=0) t
+        ORDER BY RAND()) vt
         ) vt1
         WHERE rownum=1
   </select>
