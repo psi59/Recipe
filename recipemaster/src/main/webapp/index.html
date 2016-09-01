@@ -758,14 +758,14 @@
                    {{/isLike}}
                   <input type="hidden" name="recipeNo" value="{{recipeNo}}">                    
                   <a href="#">
-                  {{#isLike}}<b class="rcp-like active" name="rcp-like">좋아요</b>
-                  {{else}}<b class="rcp-like" name="rcp-like">좋아요</b>
+                  {{#isLike}}<b class="rcp-like active" name="rcp-like">좋아요 {{countLike}}</b>
+                  {{else}}<b class="rcp-like" name="rcp-like">좋아요 {{countLike}}</b>
                    {{/isLike}}</a>
                 </div> 
                 <div class="rcp-cookTime col-xs-4"
                   align="center">
                   <div class="glyphicon glyphicon-pushpin rcp-scrap"></div>
-                  <a href="#">  <input type="hidden" name="recipeNo" value="{{recipeNo}}"><b>스크랩</b></a>
+                  <a href="#">  <input type="hidden" name="recipeNo" value="{{recipeNo}}"><b>스크랩 {{countScrap}}</b></a>
                 </div>
               </div>
               <!--  버튼 끝  -->
