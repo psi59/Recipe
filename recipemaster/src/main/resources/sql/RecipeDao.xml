@@ -270,32 +270,33 @@
 
 	<select id="recipeList" resultMap="recipeMap" parameterType="Map">
 		SELECT r1.rcpno rcpno,r1.uno
-			uno,r1.rcp_dt,r1.name,r1.intro,r1.c_time,r1.rpimg,r1.ptn,
-			r1.hits,r1.rgst,r1.gpa, u.uno userNo,l.uno likeUser,u.name
-			userName,u.email,u.img,
-			IFNULL(r4.cnt,0) tCountLike,
-			IFNULL(r5.cnt,0) tCountScrap, 
-			IFNULL(r2.cnt,0) countLike,
-			IFNULL(r3.cnt,0) countScrap,
-			SUM((IFNULL(r4.cnt,0)*3)+(IFNULL(r5.cnt,0)*3)) ttotalPoint,
-			SUM((IFNULL(r2.cnt,0)*3)+(IFNULL(r3.cnt,0)*3)) totalPoint 
-			FROM RCPS r1
-			LEFT OUTER JOIN (SELECT rcpno,COUNT(uno) cnt FROM rcp_lik 
-			GROUP BY rcpno) r2 ON r1.rcpno = r2.rcpno 
-			LEFT OUTER JOIN (SELECT rcpno,COUNT(uno) cnt FROM rcp_scr 
-			GROUP BY rcpno) r3 ON r2.rcpno = r3.rcpno 
-			LEFT OUTER JOIN (SELECT rcpno,COUNT(uno) cnt,
-			DATE_FORMAT(lc_dt,'%y-%m-%d') lc_dt 
-			FROM rcp_lik WHERE DATE_FORMAT(lc_dt,'%y-%m-%d') = DATE_FORMAT(NOW(),'%y-%m-%d') 
-			GROUP BY rcpno) r4 ON r3.rcpno=r4.rcpno 
-			LEFT OUTER JOIN (SELECT rcpno,COUNT(uno) cnt,
-			DATE_FORMAT(scc_dt,'%y-%m-%d') scc_dt 
-			FROM rcp_scr WHERE DATE_FORMAT(scc_dt,'%y-%m-%d') = DATE_FORMAT(NOW(),'%y-%m-%d')
-			GROUP BY rcpno) r5 ON r4.rcpno=r5.rcpno
-			LEFT OUTER JOIN RCP_LIK l ON
-			    r5.rcpno=l.rcpno and l.uno = ${userNo}
-			INNER JOIN USERS u ON u.uno = r1.uno
-			GROUP BY r1.rcpno
+	    uno,r1.rcp_dt,r1.name,r1.intro,r1.c_time,r1.rpimg,r1.ptn,
+	    r1.hits,r1.rgst,r1.gpa, u.uno userNo,u.name
+	    userName,u.email,u.img,
+	    IFNULL(l.uno,0) likeUser,
+	    IFNULL(r2.cnt,0) tCountLike,
+	    IFNULL(r4.cnt,0) tCountScrap, 
+	    IFNULL(r3.cnt,0) countLike,
+	    IFNULL(r5.cnt,0) countScrap,
+	    SUM((IFNULL(r2.cnt,0)*3)+(IFNULL(r4.cnt,0)*3)) ttotalPoint,
+	    SUM((IFNULL(r3.cnt,0)*3)+(IFNULL(r5.cnt,0)*3)) totalPoint 
+	    FROM RCPS r1
+	    LEFT OUTER JOIN (SELECT rcpno,COUNT(uno) cnt,
+	    DATE_FORMAT(lc_dt,'%y-%m-%d') lc_dt 
+	    FROM rcp_lik WHERE DATE_FORMAT(lc_dt,'%y-%m-%d') = DATE_FORMAT(NOW(),'%y-%m-%d') 
+	    GROUP BY rcpno) r2 ON r1.rcpno=r2.rcpno 
+	    LEFT OUTER JOIN (SELECT rcpno,COUNT(uno) cnt FROM rcp_lik 
+	    GROUP BY rcpno) r3 ON r2.rcpno = r3.rcpno 
+	    LEFT OUTER JOIN (SELECT rcpno,COUNT(uno) cnt,
+	    DATE_FORMAT(scc_dt,'%y-%m-%d') scc_dt 
+	    FROM rcp_scr WHERE DATE_FORMAT(scc_dt,'%y-%m-%d') = DATE_FORMAT(NOW(),'%y-%m-%d')
+	    GROUP BY rcpno) r4 ON r3.rcpno=r4.rcpno
+	    LEFT OUTER JOIN (SELECT rcpno,COUNT(uno) cnt FROM rcp_scr 
+	    GROUP BY rcpno) r5 ON r4.rcpno = r5.rcpno 
+	    LEFT OUTER JOIN RCP_LIK l ON
+	    r5.rcpno=l.rcpno and l.uno = #{uno}
+	    INNER JOIN USERS u ON u.uno = r1.uno
+	    GROUP BY rcpno
 		<if test="request == 1">
 			ORDER BY ttotalPoint DESC
 		</if>
