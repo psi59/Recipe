@@ -36,6 +36,8 @@
 <link rel="stylesheet" href="css/common/popup.css">
 <link rel="stylesheet" href="css/common/signup.css">
 <link rel="stylesheet" href="css/index_rankTabs.css">
+<link rel="stylesheet" href="css/common/loading.css">
+
 <!-- alert css -->
 <link rel="stylesheet"
 	href="node_modules/sweetalert/dist/sweetalert.css">
@@ -97,7 +99,6 @@
 										작성</button></a>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
@@ -376,6 +377,10 @@
 	<!------------------------- Rank List ------------------------------>
 	<div id="footer"></div>
 
+  <!-- 로딩시 뜨는 이미지 -->
+  <div class="wrap-loading display-none">
+    <div><img src="img/img_loading.gif"></div>
+  </div>
 
 	<script id="temp" type="text/x-handlebars-template">
 {{#sessionUser}}

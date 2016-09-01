@@ -185,13 +185,23 @@ function search(sort,order){
 				swal('실패 ~');
 				return;
 			}
-			
+			$('.wrap-loading').removeClass('display-none');
 			$('#search-result > div').remove();			
 			$('.searchResult > .row').append(template(result));
 
 			methods();
 			$('#recipe-count').text('총 '+result.recipeCount+'개의 레시피가 검색되었습니다.');
-			$('#search-pageNo').attr('value', '1');
+			$('#search-pageNo').attr('value', '1');			
+		},
+		// 데이터 조회 중일때 로딩 이미지 보여주기
+		beforeSend:function(){			  
+		  $('.wrap-loading').removeClass('display-none');
+		  $('html').css("cursor","wait");
+		},
+		// 데이터 받아왔을때 로딩 이미지 감추기
+		complete:function(){
+		  $('.wrap-loading').addClass('display-none');
+		  $('html').css("cursor","auto");
 		},
 		error : function() {
 			swal('서버 요청 오류 !')
@@ -250,6 +260,16 @@ function searchScrollAppend(){
 					$('#search-pageNo').val('lastPage');
 				}
 				methods();
+			},
+			// 데이터 조회 중일때 로딩 이미지 보여주기
+			beforeSend:function(){	  
+			  $('.wrap-loading').removeClass('display-none');
+			  $('html').css("cursor","wait");
+			},
+			// 데이터 받아왔을때 로딩 이미지 감추기
+			complete:function(){
+			  $('.wrap-loading').addClass('display-none');
+			  $('html').css("cursor","auto");
 			},
 			error : function() {
 				swal('서버 요청 오류 !')
