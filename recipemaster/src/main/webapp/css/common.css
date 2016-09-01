@@ -492,3 +492,14 @@ header .header-content {
 .width_180px {
 	width: 180px !important;
 }
+#random-pop-up-banner {
+  display: none;
+  padding-top: 0.1%;
+  background: lemonchiffon;
+  width: 22%;
+  height: 56%;
+}
+
+#random-pop-up-banner>.rcp-list-margin {
+  width: 100%;
+}
