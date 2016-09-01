@@ -276,20 +276,20 @@ public class UserController {
 	      , HttpSession session) {
 	    HashMap<String, Object> result = new HashMap<>();
 	    User loginUser = new User();
-	    if(session.getAttribute("loginUser")==null){
-	      loginUser.setUserNo(0);
-	    }else{
+	    if(session.getAttribute("loginUser")!=null){
 	      loginUser=(User) session.getAttribute("loginUser");  
+	    }else{
+	      loginUser.setUserNo(0);
 	    }
-	     System.out.println(loginUser);
+	    
 	    try {
-	      List<User> list = userService.getUserRankListSCS(pageNo, pageSize, loginUser.getUserNo());
+	      int uno=loginUser.getUserNo();
+	      List<User> list = userService.selectRankListSCS(pageNo, pageSize, uno);
 	      result.put("status", "success");
 	      result.put("data", list);
 	    } catch (Exception e) {
 	      result.put("status", "failure");
 	    }
-
 	    return new Gson().toJson(result);
 	  }
 }
