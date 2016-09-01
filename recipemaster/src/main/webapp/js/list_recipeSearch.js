@@ -216,7 +216,7 @@ function searchScrollAppend(){
 	
 	var categoryList = '';
 	$('#rcp-category-section input[type=checkbox]:checked').each(function(index){
-		if(index !== ($('input[type=checkbox]:checked').length-1)){
+		if(index !== ($('#rcp-category-section input[type=checkbox]:checked').length-1)){
 			categoryList += $(this).val()+','; 
 		} else {
 			categoryList += $(this).val();

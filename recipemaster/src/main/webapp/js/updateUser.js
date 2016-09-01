@@ -4,8 +4,7 @@ $(function(){
 	var userInfo = getUserInfo();
 	
 	var profileImage = new Array();
-	var tempFile = new File([""], "");
-	profileImage[0] = tempFile;
+	profileImage[0] = new File([""], "");
 	
 	$('#userInfoEditBtn').on('click', function() {
 		console.log(userInfo);
