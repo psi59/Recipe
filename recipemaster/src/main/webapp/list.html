@@ -6,6 +6,13 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 
+<style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+*{
+  font-family: 'Noto Sans KR', sans-serif;
+}
+</style>
+
 <!-- Template css -->
 <link rel="stylesheet"
 	href="node_modules/bootstrap/dist/css/bootstrap.min.css">
@@ -35,6 +42,7 @@
 <link rel="stylesheet" href="css/list_countOrder.css">
 <link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.min.css">
 <link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.themes.min.css">
+<link rel="stylesheet" href="css/common/loading.css">
 
 <!-- --- 아이콘 CDN ----- -->
 <!-- <script src="js/template/d9e67edb08.js"></script> -->
@@ -198,18 +206,12 @@
 	        <span>
 	          <input type="checkbox" name="cb1" id="cb32" value="양념/소스/잼"/>
 	          <label class="rcp-category-click" for="cb32">양념/소스/잼</label>    
-	        </span>
-	        <span>
-	          <input type="checkbox" name="cb1" id="cb33" value="음료/차/커피"/>
-	          <label class="rcp-category-click" for="cb33">음료/차/커피</label>    
-	        </span>
+	        </span>	        
 	      </div>
       </div>                     
     </section>
-		
-		
-     
 	<!----------------------- /리스트 카테고리 ----------------------->
+	
 	<!----------------------- 리스트 레시피 카운트 및 정렬 ----------------------->
 	<section id="rcp-list-count-order">	
 	 <div id="rcp-list-count-order-first-div">
@@ -280,20 +282,27 @@
     <div>
       <section id="rcp-custom-list">
         <div class="rcp-list list0">
-          <div class="rcp-1024 searchResult">           
-          <div id="search-result" class="row rcp-pageNo0"></div>
+          <div class="rcp-1024 searchResult">
+	          <!-- 로딩시 뜨는 이미지 -->
+	          <div class="wrap-loading display-none">
+	            <div><img src="img/loading.gif"></div>
+	          </div>     
+            <div id="search-result" class="row rcp-pageNo0">              
+            </div>
           </div>
         </div>
       </section>
     </div>
   </section>
 
+  
+
   <input id="search-pageNo" type="hidden" value="1">
   <input id="sort-condition" type="hidden" value="newest">
 
 	<script id="recipe-card-search-template" type="text/x-handlebars-template"> 
-  {{#each data}} 
-      
+  {{#each data}}   
+
           <div
             class="col-xs-3 col-sm-3 col-md-3 rcp-listSize rcp-list-margin ">
       

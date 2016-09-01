@@ -64,8 +64,7 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
 					
 			  
 			  methods();
-			  Main2List();
-			 
+			  Main2List();			 
 			  
 		  },
 		  error : function(){
