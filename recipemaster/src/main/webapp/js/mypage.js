@@ -98,7 +98,7 @@ $(function() {
 				success : (function(result) {
 					if (result.status == 'failure') {
 						console.log(result);
-						swal('로그인 후 이용가능합니다.');
+						swal('잘못된 접근입니다.');
 						return;
 					} else {
 						console.log('구독하기 성공성')

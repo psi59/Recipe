@@ -514,10 +514,13 @@ public class RecipeController {
        }
       
       int toUserNo=((User)session.getAttribute("loginUser")).getUserNo();
-      System.out.println("toUserNo::"+toUserNo);
-      System.out.println("fromUserNo_email::"+email);
-      
       int fromUserNo=userService.selectFromEmail(email).getUserNo();
+       
+      if (toUserNo==fromUserNo) {
+        result.put("status", "failure");
+        System.out.println("지꺼구독 ㄴㄴ해");
+        return new Gson().toJson(result);
+      }
       
       recipeService.addSubscribe(toUserNo, fromUserNo);
       try{
