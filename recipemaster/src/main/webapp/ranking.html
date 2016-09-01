@@ -298,13 +298,8 @@
   <div class="fresh-ui">
     <div class="header">
       <div class="photo">     
-      {{#if @first}}
-        <img src="img/profileimg.jpg">
-      {{else if @last}}
-        <img src="img/profile.jpg">
-      {{else}}
-        <img src="img/profile2.jpg">
-      {{/if}}
+      <a href="#" class="rcp-userName"><input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
+             <img src="img/profileImg/{{image}}" class="img-circle rcp-profile"></a>
       </div>
       <div class="social">
         <div class="list">
