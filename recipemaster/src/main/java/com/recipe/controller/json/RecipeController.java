@@ -1,5 +1,6 @@
 package com.recipe.controller.json;
 
+import java.awt.font.ImageGraphicAttribute;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -206,6 +207,8 @@ public class RecipeController {
       @RequestParam("recipeProduce") String[] recipeProduce,
       @RequestParam("imageFiles") List<MultipartFile> imageFiles,
       @RequestParam("representImgNames") List<String> representImgNames,
+      @RequestParam(value="deleteRepresentImg", defaultValue="") List<String> deleteRepresentImg,
+      @RequestParam(value="deleteProduceImg", defaultValue="") List<String> deleteProduceImg,
       @RequestParam("produceImgNames") List<String> produceImgNames, HttpServletRequest request,
       HttpSession session) {
 
@@ -216,6 +219,20 @@ public class RecipeController {
     List<Map> materialList = new ArrayList<>();
     JsonArray recipeProduceDatas = new JsonArray();
     JsonArray recipeRepresentImages = new JsonArray();
+    
+    for(String imageName : deleteRepresentImg){
+    	if(!CommonUtil.imageDelete(CommonUtil.getImageFolderPath("representImg", request), imageName)){
+    		result.put("status", "false");
+    		return new Gson().toJson(result);
+    	}
+    }
+    
+    for(String imageName : deleteProduceImg){
+    	if(!CommonUtil.imageDelete(CommonUtil.getImageFolderPath("recipeImg", request), imageName)){
+    		result.put("status", "false");
+    		return new Gson().toJson(result);
+    	}
+    }
 
     for (int i = 0; i < materialNos.length; i++) {
       Map<String, String> matertialInfo = new HashMap<>();
@@ -231,7 +248,8 @@ public class RecipeController {
         // MultipartFile image = null;
         Thread.sleep(1);
         String[] fileInfo = representImgNames.get(i).split("/");
-        String fileName = recipe.getRecipeNo() + "_" + user.getUserNo() + "_" + System.currentTimeMillis() + ".png";
+        
+        String fileName = fileInfo.length>1 ? recipe.getRecipeNo() + "_" + user.getUserNo() + "_" + System.currentTimeMillis() + ".png" : fileInfo[0];
         if(fileInfo.length>1){
           FileCopyUtils.copy(CommonUtil.findImageFile(fileInfo, imageFiles).getBytes(),
               new FileOutputStream(CommonUtil.getImageFolderPath("representImg", request) + "/" + fileName));
@@ -305,17 +323,12 @@ public class RecipeController {
       recipe = recipeService.getRecipe(recipeNo, 0);
     }
     materials = recipeService.getRecipeMaterial(recipeNo);
-    System.out.println("재료 : "+materials);
-
-    // System.out.println("controller :
-    // "+recipeNo+(int)session.getAttribute("userNo") );
     recipe.setHits(recipe.getHits() + 1);
     recipeService.updateHits(recipe);
     try {
       result.put("status", "success");
       result.put("data", recipe);
       result.put("materials", materials);
-      System.out.println(recipe);
     } catch (Exception e) {
       result.put("status", "false");
     }
@@ -329,8 +342,6 @@ public class RecipeController {
     HashMap<String, Object> result = new HashMap<>();
     System.out.println(recipeNo);
     List<Recipe> recipeComment = recipeService.recipeComment(recipeNo);
-
-    System.out.println("comment : " + recipeComment);
 
     try {
 
@@ -389,7 +400,6 @@ public class RecipeController {
     User userNo = new User();
 
     try {
-
       if (session.getAttribute("userNo") == null) {
         result.put("status", "notLogin");
       } else {
@@ -467,7 +477,6 @@ public class RecipeController {
     }catch (Exception e){
       result.put("status", "false");
     }
-    System.out.println(result);
     return new Gson().toJson(result);
   }
 
@@ -743,21 +752,21 @@ public class RecipeController {
     return new Gson().toJson(result);
   }
 
-  @RequestMapping(path = "imageDelete", produces = "application/json;charset=UTF-8")
-  @ResponseBody
-  public String imageDelete(@RequestParam("category") String category, @RequestParam("imageName") String imageName, HttpServletRequest request) {
-    HashMap<String, Object> result = new HashMap<>();
-    File file = new File(CommonUtil.getImageFolderPath(category, request)+"/"+imageName);
-
-    if(file.exists()){
-      file.delete();
-      result.put("status", "success");
-    } else {
-      result.put("status", "fail");
-    }
-
-    return new Gson().toJson(result);
-  }
+//  @RequestMapping(path = "imageDelete", produces = "application/json;charset=UTF-8")
+//  @ResponseBody
+//  public String imageDelete(@RequestParam("category") String category, @RequestParam("imageName") String imageName, HttpServletRequest request) {
+//    HashMap<String, Object> result = new HashMap<>();
+//    File file = new File(CommonUtil.getImageFolderPath(category, request)+"/"+imageName);
+//
+//    if(file.exists()){
+//      file.delete();
+//      result.put("status", "success");
+//    } else {
+//      result.put("status", "fail");
+//    }
+//
+//    return new Gson().toJson(result);
+//  }
 
 
   @RequestMapping(path = "randomList", produces = "application/json;charset=UTF-8")

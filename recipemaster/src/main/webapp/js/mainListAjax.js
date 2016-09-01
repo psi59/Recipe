@@ -164,6 +164,7 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
   }
 
   Handlebars.registerHelper('isLike', function(options) {
+	  console.log(this.likeUser);
 	  if (this.likeUser!=0) {
 	    return options.fn(this);
 	  } else {

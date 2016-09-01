@@ -16,5 +16,5 @@ public interface UserService {
   int deleteUser(int no);
   User loginUser(User user); //login
   User selectFromEmail(String email);  
-  List<User> getUserRankListSCS(int pageNo, int pageSize, int uno);//준모추가
+  List<User> selectRankListSCS(int pageNo, int pageSize, int uno);//준모추가
 }

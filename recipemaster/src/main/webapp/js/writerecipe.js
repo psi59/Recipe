@@ -1,14 +1,25 @@
+document.write('<script type"text/javascript" src="js/login.js"></script>')
+
 var rpImageTemp = $('#represent-image-template').html();
 var rpImageTempImpl = Handlebars.compile(rpImageTemp);
 var rcpProduceTemp = $('#recipe-produce-template').html();
 var rcpProduceTempImpl = Handlebars.compile(rcpProduceTemp);
 var imageList = new Array();
+imageList[0] = new File([""], "");
 
 $(function() {
 	
+	var userInfo = getUserInfo();
+	if(userInfo==null){
+		loginAlert();
+		return;
+	}
+	
 	var recipeNo = location.href.split('?')[1]==null ? 0 : location.href.split('?')[1];
-
-	checkMyRecipe(recipeNo);
+	
+	if(recipeNo!=0){
+		checkMyRecipe(recipeNo);
+	}
 	
 	$(document).on('click', '#updateBtn', function() {
 		if ($('input[name="recipeName"]').val().length < 1) {
@@ -157,8 +168,12 @@ $(function() {
 								data.files,
 								function(index, file) {
 									if (imageDuplicationCheck(data.files[index])) {
-										imageList
-										.push(data.files[index]);
+										if(index==0 && imageList[0].name==""){
+											imageList[0] = data.files[0];
+										} else {
+											imageList
+											.push(data.files[index]);
+										}
 									}
 									var close = $('<a href="#"><span class="closeBtn thick rpImg"></span></a>');
 									var fileNameTag = $('<input type="hidden" name="representImgNames">');
@@ -199,9 +214,12 @@ $(function() {
 								data.files,
 								function(index, file) {
 									if (imageDuplicationCheck(data.files[index])) {
-										imageList
-										.push(data.files[index]);
-										console.log(imageList);
+										if(index==0 && imageList[0].name==""){
+											imageList[0] = data.files[0];
+										} else {
+											imageList
+											.push(data.files[index]);
+										}
 									}
 									var node = $('<div class="row padding_10px"/>');
 									var close = $('<a href="#"><div class="float_left closeBtn thick pdImg"></div></a>');
@@ -237,8 +255,6 @@ $(function() {
 						} else {
 							swal('레시피 등록 실패');
 						}
-						console.log(data.result.status)
-
 					}).on('fileuploadfail', function(e, data) {
 
 						console.log(data)
@@ -298,37 +314,14 @@ $(function() {
 
 	$(document).on('click', '.rpImgRemove', function(event) {
 		event.preventDefault();
-
-		$.ajax({
-			url : 'recipe/imageDelete.json',
-			method : 'post',
-			data : {
-				category : 'representImg',
-				imageName : $(event.target).next().val()
-			},
-			dataType : 'json',
-			success : function(result) {
-				if (result.status != 'success') {
-					swal('레시피 정보를 가져오는데 실패하였습니다.');
-					return;
-				}
-				var recipeData = result.data;
-				console.log(recipeData);
-
-				$('#recipeName').val(recipeData.recipeName);
-				$('#portion').val(recipeData.portion);
-				$('#cookTime').val(recipeData.cookTime);
-				$('#intro').val(recipeData.intro);
-				console.log(recipeData.representImages);
-				$('#representImgs').append(rpImageTempImpl(recipeData));
-
-			},
-			error : function() {
-				swal('서버 요청 오류');
-			}
-		});
-
+		$('#delRpImgs').append($('<input name="deleteRepresentImg" type="hidden" value="'+$(event.target).next().val()+'">'));	
 		$(this).parent().parent('.scroll').remove();
+	});
+	
+	$(document).on('click', '.pdImgRemove', function(event) {
+		event.preventDefault();
+		$('#delPdImgs').append($('<input name="deleteProduceImg" type="hidden" value="'+$(event.target).next().val()+'">'));	
+		$(this).parent().parent().parent().remove();
 	});
 
 	$(document).on('click', '.pdImg', function(event) {
@@ -442,6 +435,8 @@ function getRecipeEditInfo(recipeNo){
 			$('#representImgs').append(rpImageTempImpl(recipeData));
 			$('#files').append(rcpProduceTempImpl(recipeData));
 
+			console.log(recipeMaterials);
+			
 			$.each(
 					recipeMaterials,
 					function(index) {
@@ -504,15 +499,7 @@ function checkMyRecipe(recipeNo){
 		success : function(result) {
 			
 			if (result.status == 'nologin') {
-				swal({
-					title : "로그인 후 사용하실 수 있습니다.",
-					type : "warning",
-					confirmButtonClass : "btn-danger",
-					confirmButtonText : "확인",
-					closeOnConfirm : false
-				}, function(isConfirm) {
-					location.href = "index.html"
-				});
+				loginAlert();
 				return;
 			}
 			
@@ -551,4 +538,16 @@ function imageDuplicationCheck(file) {
 	} else {
 		return true;
 	}
+}
+
+function loginAlert(){
+	swal({
+		title : "로그인 후 사용하실 수 있습니다.",
+		type : "warning",
+		confirmButtonClass : "btn-danger",
+		confirmButtonText : "확인",
+		closeOnConfirm : false
+	}, function(isConfirm) {
+		location.href = "index.html"
+	});
 }

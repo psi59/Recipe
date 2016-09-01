@@ -8,7 +8,8 @@
 	href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
 <link rel="stylesheet"
 	href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-
+<link rel="stylesheet"
+  href="/node_modules/sweetalert/dist/sweetalert.css">
 <!-- 사용자 정의 css -->
 <!-- <link rel="stylesheet" href="css/rank.css"> -->
 <link rel="stylesheet" href="css/rankingpage.css">
@@ -272,7 +273,8 @@
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
 	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
-
+  <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
 	<!--yongyi  -->
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/common/chefCard.js"></script>
@@ -282,7 +284,7 @@
 	<script src="js/updateUser.js"></script>
 	<script src="js/recipeDetail.js"></script>
 	<script src="js/rankingpage.js"></script>
-	<script id="chef-card-template" type="text/x-handlebars-template">
+  <script id="chef-card-template" type="text/x-handlebars-template">
 {{#each data}}
 <div class="fresh-ui-wrap col-md-3">
  {{#if @first}}    
@@ -317,16 +319,23 @@
           <div class="name">
                    <p class="rcp-userName1">{{userName}}</p></div>
                     <p class="text">{{email}}</p>      
-                  <div class="rcp-ranking">{{grade}}</div>
+                  <div class="rcp-ranking"><h4>{{grade}}</h4></div>
           <div class="list clearfix">
         <p class="introfont">{{intro}}</p>
         </div>
         <div class="cardbtn">
-         <button type="button" class="btn btn-default">
-              <input type="hidden" value="{{email}}">
-              <a href="#" class="rcp-userName visitbtn">방문하기</a></button>
-              <button type="button" class="btn btn-default">구독하기</button>
-        </div>
+         <button type="button" class="btn btn-default rcp-imp">
+              <a href="/mypage.html?{{email}}" class="visitbtn">방문하기</a></button>
+
+              
+      
+              {{#if status}}
+              <button type="button" name="subscribeComplete" class="btn btn-default rcp-imp rank-scs" data-email="{{email}}" >구독중</button>
+              {{else}}
+              <button type="button" class="btn btn-default rcp-imp rank-scs" data-email="{{email}}" >구독하기</button>
+               {{/if}}
+  
+      </div>
     </div>
   </div>
 </div>
