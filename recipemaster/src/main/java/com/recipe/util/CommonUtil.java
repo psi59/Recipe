@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.recipe.domain.Recipe;
 import com.recipe.domain.User;
 
 public class CommonUtil {
@@ -46,4 +47,32 @@ public class CommonUtil {
 		return format.format(now);
 	}
 
+
+  public static Recipe functionForUserNumbers(List<Recipe> userNumbers, int request) {
+    Recipe recipe = new Recipe();
+    if (userNumbers.size() == 0 || userNumbers.equals("")) {
+      recipe.setScrap("0");
+    } else {
+      for (int i = 0; i < userNumbers.size(); i++) {
+        if (recipe.getScrap() == null) {
+          if (request == 3) {
+            recipe.setScrap(String.valueOf(userNumbers.get(0).getSubscribeNum()));
+          } else {
+            recipe.setScrap(String.valueOf(userNumbers.get(0).getRecipeNo()));
+          }
+        } else {
+          if (request == 3) {
+            recipe.setScrap(recipe.getScrap() + "," + userNumbers.get(i).getSubscribeNum());
+          } else {
+            recipe.setScrap(recipe.getScrap() + "," + userNumbers.get(i).getRecipeNo());
+          }
+        }
+      }
+    }
+    return recipe;
+  }
+	
 }
+
+
+

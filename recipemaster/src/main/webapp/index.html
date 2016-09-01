@@ -364,14 +364,13 @@
 				<div class="hs-content">
 					<div class="container">
 						<div class="row">
-							<div class="rcp-mypage-section">
-							 <h2 class="rcp-h2-25px"><b>구독정보</b></h2>
+						<h2 class="rcp-h2-25px"><b>구독정보</b></h2>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+
 
 	</section>
 
@@ -381,7 +380,9 @@
 
 	<script id="temp" type="text/x-handlebars-template">
 {{#sessionUser}}
-{{#each data}}
+  <div class="rcp-mypage-section">               
+<h4 class="rcp-main-subscribe-userName0"></h4>
+{{#each this}}
 
 <div class="isotope-grid" id="grid-2">
           <div class="entry filter-food filter-pudding">
@@ -429,6 +430,7 @@
           </div>
 
 {{/each}}
+</div>
 {{/sessionUser}}
 </script>
 
@@ -746,14 +748,14 @@
                    {{/isLike}}
                   <input type="hidden" name="recipeNo" value="{{recipeNo}}">                    
                   <a href="#">
-                  {{#isLike}}<b class="rcp-like active" name="rcp-like">좋아요</b>
-                  {{else}}<b class="rcp-like" name="rcp-like">좋아요</b>
+                  {{#isLike}}<b class="rcp-like active" name="rcp-like">좋아요 {{countLike}}</b>
+                  {{else}}<b class="rcp-like" name="rcp-like">좋아요 {{countLike}}</b>
                    {{/isLike}}</a>
                 </div> 
                 <div class="rcp-cookTime col-xs-4"
                   align="center">
                   <div class="glyphicon glyphicon-pushpin rcp-scrap"></div>
-                  <a href="#">  <input type="hidden" name="recipeNo" value="{{recipeNo}}"><b>스크랩</b></a>
+                  <a href="#">  <input type="hidden" name="recipeNo" value="{{recipeNo}}"><b>스크랩 {{countScrap}}</b></a>
                 </div>
               </div>
               <!--  버튼 끝  -->

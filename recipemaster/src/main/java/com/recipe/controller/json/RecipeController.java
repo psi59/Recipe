@@ -634,7 +634,7 @@ public class RecipeController {
       System.out.println("email로 뽑아온 User정보 : "+user);
 
       userNumbers = recipeService.selectScrapUserNoMypage(user.getUserNo());
-      Recipe recipe = functionForUserNumbers(userNumbers,request);
+      Recipe recipe = CommonUtil.functionForUserNumbers(userNumbers,request);
       //getSession(userNo, session);
 
       if(request == 1){
@@ -643,15 +643,31 @@ public class RecipeController {
         recipeList = recipeService.selectMypageRecipe(recipe.getScrap(), userNo,request);
       }else if(request == 3){
         userNumbers = recipeService.selectSubscribeMypage(user.getUserNo());        
-        Recipe subscribeRecipe = functionForUserNumbers(userNumbers,request);        
+        Recipe subscribeRecipe = CommonUtil.functionForUserNumbers(userNumbers,request);        
         //getSession(userNo, session);
         recipeList = recipeService.selectMypageRecipe(subscribeRecipe.getScrap(), userNo,request);
         System.out.println("구독 레시피들 정보 : "+recipeList );
         
       }
-
-      result.put("status","success");
+        
+      if(request == 5){
+        List<List> mainSubscribe = new ArrayList<List>();
+        userNumbers = recipeService.selectSubscribeMypage(user.getUserNo());
+        System.out.println("userNumbers : "+userNumbers);
+        for(int i=0; i<userNumbers.size(); i++){
+         
+          recipeList= recipeService.selectMypageRecipe(String.valueOf(userNumbers.get(i).getSubscribeNum()), userNo,request);
+          //System.out.println("request 5 : "+recipeList);
+          mainSubscribe.add(recipeList);  
+          
+        }
+        System.out.println("ddddd"+userNumbers.size());
+        result.put("data", mainSubscribe);
+        System.out.println("mainSubscribe"+mainSubscribe);
+      }else{
       result.put("data",recipeList);
+      }
+      result.put("status","success");
       result.put("user", user);
     }catch (Exception e){
       e.printStackTrace();
@@ -679,40 +695,6 @@ public class RecipeController {
       result.put("status", "false");
     } 
     return new Gson().toJson(result);
-  }
-
-  public int getSession(int userNo, HttpSession session) {
-    // User user = new User();
-    if (session.getAttribute("loginUser") == null) {
-      userNo = 0;
-    } else {
-      userNo = ((User) session.getAttribute("loginUser")).getUserNo();
-    }
-    return userNo;
-  }
-
-  public Recipe functionForUserNumbers(List<Recipe> userNumbers, int request) {
-    Recipe recipe = new Recipe();
-    if (userNumbers.size() == 0 || userNumbers.equals("")) {
-      recipe.setScrap("0");
-    } else {
-      for (int i = 0; i < userNumbers.size(); i++) {
-        if (recipe.getScrap() == null) {
-          if (request == 3) {
-            recipe.setScrap(String.valueOf(userNumbers.get(0).getSubscribeNum()));
-          } else {
-            recipe.setScrap(String.valueOf(userNumbers.get(0).getRecipeNo()));
-          }
-        } else {
-          if (request == 3) {
-            recipe.setScrap(recipe.getScrap() + "," + userNumbers.get(i).getSubscribeNum());
-          } else {
-            recipe.setScrap(recipe.getScrap() + "," + userNumbers.get(i).getRecipeNo());
-          }
-        }
-      }
-    }
-    return recipe;
   }
 
   @RequestMapping(path="addComment" , produces ="application/json; charset=UTF-8")
