@@ -2,8 +2,8 @@
 	color: #000000;
 	font-size: 20px;	
 	text-align: center;
-	box-shadow: 0px 5px 5px lightgray;
-	width: 1400px;
+	/* box-shadow: 0px 5px 5px lightgray; */
+	width: 1190px;
 	margin: 114px auto 10px;
 	height: 160px;
 }
