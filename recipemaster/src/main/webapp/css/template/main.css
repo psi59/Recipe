@@ -74,8 +74,6 @@ a:hover, a:focus {
   -moz-transition: all 0.35s ease-in-out;
   -o-transition: all 0.35s ease-in-out;
   transition: all 0.35s ease-in-out;
-  background-color: #ffffff;
-  border-radius: 2px;
   text-decoration: underline;
 }
 
