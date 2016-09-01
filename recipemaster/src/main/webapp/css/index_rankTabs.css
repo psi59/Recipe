@@ -1,4 +1,3 @@
-
 .badge {
 	background-color: #777;
 }
@@ -59,28 +58,30 @@
 	border: 0;
 }
 
-@media(min-width:1025px){
-.tab-content .tab-pane {
- display: none;
-    width: 88%;
-    margin-left: 6% !important;
-    background-color: #FFFED7;
-    overflow-y: auto;
-    padding-top: 50px;
-    padding-bottom: 50px;
+@media ( min-width :1025px) {
+	.tab-content .tab-pane {
+		display: none;
+		width: 88%;
+		margin-left: 6% !important;
+		/* background-color: #FFFED7; */
+		overflow-y: auto;
+		/* padding-top: 50px; */
+		/* padding-bottom: 50px; */
+	}
 }
+
+@media ( max-width :1024px) {
+	.tab-content .tab-pane {
+		display: none;
+		width: 100%;
+		margin-left: 0.1%;
+		background-color: #FFFED7;
+		overflow-y: auto;
+		padding-top: 50px;
+		padding-bottom: 50px;
+	}
 }
-@media(max-width:1024px){
-.tab-content .tab-pane {
-	display: none;
-	width: 100%;
-	margin-left:0.1%;
-	background-color: #FFFED7;
-	overflow-y: auto;
-	padding-top: 50px;
-	padding-bottom: 50px;
-}
-}
+
 .tab-content .active {
 	display: block;
 }

@@ -28,7 +28,7 @@
 		<div class="nav-container col-md-11 rcp-topbar ranking-bar-infobox">
 			<ul>
 			  <li><a href="/index.html">Home</a></li>
-				<li><a id="s1" href="#1">Best Chef</a></li>
+				<li><a id="s1" href="#1">Best Of Chef</a></li>
 				<li><a id="s2" href="#2">Chef Ranking</a></li>
 				<li><a id="s3" href="#3">Recipe Ranking</a></li>
 			</ul>
@@ -298,13 +298,8 @@
   <div class="fresh-ui">
     <div class="header">
       <div class="photo">     
-      {{#if @first}}
-        <img src="img/profileimg.jpg">
-      {{else if @last}}
-        <img src="img/profile.jpg">
-      {{else}}
-        <img src="img/profile2.jpg">
-      {{/if}}
+      <a href="#" class="rcp-userName"><input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
+             <img src="img/profileImg/{{image}}" class="img-circle rcp-profile"></a>
       </div>
       <div class="social">
         <div class="list">

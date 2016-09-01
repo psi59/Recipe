@@ -359,7 +359,8 @@
 		<div class="tabs-left rcp-list h3 rcp-1024 list1">
 			<div class="tab-content " >
 				<h3 id="rcp-ranking">
-					<a href="/ranking.html">Best Chef</a>
+					<a>Best Of Chef</a>
+					<a href="/ranking.html" class="More">more</a>
 				</h3>
 				<!---------------- Chef Rank --------------------->
 				<div class="row tab-pane active" id="rcp-chef-rank"></div>
@@ -380,7 +381,8 @@
 				<div class="hs-content">
 					<div class="container">
 						<div class="row">
-						<h2 class="rcp-h2-25px"><b>구독정보</b></h2>
+						<h2 class="rcp-h2-25px"><b class="rcp-scsinfo">구독정보 <a class="More">more</a></b>
+						</h2>
 							</div>
 						</div>
 					</div>
@@ -610,7 +612,7 @@
  <section name="rcp-custom-list">
     <div class="rcp-list">
       <div class="rcp-1024 list0" >
-        <h3>오늘의 인기 레시피</h3>
+        <h3>오늘의 인기 레시피 <a class="More">more</a></h3> 
         <div class="row rcp-order"></div>
       </div>
     </div>
@@ -622,7 +624,7 @@
  <section name="rcp-custom-list">
     <div class="rcp-list">
       <div class="rcp-1024 list1" >
-        <h3>최신 레시피</h3>
+        <h3>최신 레시피 <a class="More">more</a></h3>
         <div class="row rcp-order"></div>
       </div>
     </div>
@@ -804,13 +806,10 @@
   <div class="fresh-ui">
     <div class="header">
       <div class="photo">     
-      {{#if @first}}
-        <img src="img/profileimg.jpg">
-      {{else if @last}}
-        <img src="img/profile.jpg">
-      {{else}}
-        <img src="img/profile2.jpg">
-      {{/if}}
+      
+             <a href="#" class="rcp-userName"><input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
+             <img src="img/profileImg/{{image}}" class="img-circle rcp-profile"></a>
+
       </div>
       <div class="social">
         <div class="list">
@@ -823,7 +822,7 @@
     </div>
         <div class="content introBox">
           <div class="name">
-                   <p class="rcp-userName1">{{userName}}</p></div>
+                   <p class="rcp-userName2">{{userName}}</p></div>
                     <p class="text">{{email}}</p>      
                   <div class="rcp-ranking"><h4>{{grade}}</h4></div>
           <div class="list clearfix">
