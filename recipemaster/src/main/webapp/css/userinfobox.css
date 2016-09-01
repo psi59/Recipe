@@ -45,7 +45,7 @@ $main: #7b7de5;
 	z-index:99999;
   display: none;
   width: 375px;
-  height: 550px;
+  height: 575px;
   background: #ffffff;
 }
 
@@ -239,9 +239,8 @@ html, body {
 
 .bottom-main-nav__dropdown {
 
-  top: 4em;
-  right:-4.5em;
- 
+  top: 5em;
+  right: -7em;
 }
 
 
