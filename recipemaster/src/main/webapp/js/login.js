@@ -86,8 +86,7 @@ window.onload = function () {
 					.text(
 							userInfo.userName);
 					$('#profileGrade')
-					.text(
-							userInfo.recipeUrl);
+					.html(userInfo.grade);
 					/* 용이 추가() */
 					$('#introduce')
 					.text(
@@ -153,7 +152,8 @@ function getUserInfo(){
 		joinDate : obj.data.joinDate,
 		recipeUrl : obj.data.recipeUrl,
 		recipeCount : obj.data.recipeCount,
-		subsCount : obj.data.subsCount
+		subsCount : obj.data.subsCount,
+		grade:obj.data.grade
 	};
 	
 	$('#signUpBtn').remove();

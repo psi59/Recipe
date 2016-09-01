@@ -12,7 +12,8 @@ $(function(){
 		if (userInfo.userNo != null) {
 			$('#updateBoxEmail').text(userInfo.email);
 			$('#updateBoxName').text(userInfo.userName);
-			$('#profileGrade').text(userInfo.recipeUrl);
+			$('#updateBoxGrade').text(userInfo.grade);
+			$('#profileGrade').text(userInfo.grade);
 			$('#updateFormUserNo').val(userInfo.userNo);
 			$('#updateFormEmail').val(userInfo.email);
 			$('.rcp-up-preview').append($('<img class="rcp-up-preview" src="img/profileImg/'+userInfo.image+'">'));

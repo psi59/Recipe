@@ -195,7 +195,7 @@ public class UserController {
 		HashMap<String, Object> result = new HashMap<>();
 
 		User loginUser = userService.loginUser(user); 
-
+		System.out.println("로그인 한 정보::"+loginUser);
 		try {
 		  if (loginUser!=null) {
 		    result.put("status", "success");
