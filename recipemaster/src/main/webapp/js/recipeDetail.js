@@ -81,7 +81,9 @@ function recipeDetail(){
  						
 						$("body").css("overflow", "hidden");						
 						$('.rcp-304').append( comDetailInfoTemp(result) );
-						$('.rcp-info-images').append( comDetailImageMain(result.data) );										
+						$('.rcp-info-images').append( comDetailImageMain(result.data) );
+						console.log("data : "+result.data);
+						console.log("data : "+result.data.representImages[0]);
 						$('.rcp-detail-body').append( comDetailMainTemp(result.data) );
 						$('.rcp-detail-body').append( comDetailTemp(result.data) );
 						$('.rcp-info-images').append( comDetailImageStep(result.data) );		

@@ -143,6 +143,10 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
 				  alert('comList 실행 중 오류 발생');
 				  return;
 			  }
+			  console.log(result.data.length);
+			  if(result.data.length > 1  ){
+				  $('.rcp-h2-25px').text("구독정보");
+			  }
 			  
 			  for(var i=0; i<result.data.length; i++){
 				  //console.log(result.data[i])

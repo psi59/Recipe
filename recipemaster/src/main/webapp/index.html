@@ -364,7 +364,7 @@
 				<div class="hs-content">
 					<div class="container">
 						<div class="row">
-						<h2 class="rcp-h2-25px"><b>구독정보</b></h2>
+						<h2 class="rcp-h2-25px"></h2>
 							</div>
 						</div>
 					</div>
@@ -438,7 +438,7 @@
 
 	<script id="recipe-detail-main-template"
 		type="text/x-handlebars-template">
-    {{#representImages}}
+    
               <div class="rcp-body" name="rcp-body" >
               <div>
                 <div class="rcp-title-size">
@@ -450,13 +450,15 @@
                   
                 </div>
                </div>
+                   {{#each representImages}}
                 <img src="img/representImg/{{this}}" class="rcp-images" name="rcp-images-position" id="rcp-images-position">
+                    {{/each}}
                <div class="rcp-explanation" name="rcp-explanation">
                   <p></p>
                 </div>
              
             </div>
-{{/representImages}}
+
 </script>
 
 
@@ -557,7 +559,7 @@
 
 	<script id="recipe-detail-main-images-template"
 		type="text/x-handlebars-template">
-{{#representImages}}
+{{#each representImages}}
     <div class="rcp-main"> 
       <a href="#" name="rcp-nav-images">MAIN {{inc @index}}</a>
       <div style="float:right">
@@ -566,7 +568,7 @@
     <a href="#" name="rcp-nav-bgImages-button" role="button" ><div style= background-image:url("img/representImg/{{this}}") class="rcp-info-images-emts"></div></a>
     
   
-{{/representImages}}
+{{/each}}
 </script>
 
 	<script id="recipe-detail-step-images-template"
