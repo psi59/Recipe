@@ -52,11 +52,12 @@ public class RecipeController {
     if(session.getAttribute("userNo") != null){
       userNo = (Integer)(session.getAttribute("userNo"));
     }
+        
     //카테고리 list를 search 객체에 담는다.    
     search.setCategoryList(categoryList);
     List<Recipe> list = recipeService.getRecipeSearchList(pageNo, pageSize, search, userNo);
 
-    // 처음에만 레시피카드들을 카운트 한다.
+    // 검색결과 첫페이지를 갱신했을때만 레시피카드들을 카운트 한다.
     if(pageNo == 1){
       recipeCount = recipeService.getRecipeCount(pageNo, pageSize, search, userNo);
     }    
