@@ -28,6 +28,13 @@
 <link rel="stylesheet" href="css/common/popup.css">
 <link rel="stylesheet" href="css/updateImg.css">
 
+<!-- ------------------디테일 일시적 추가   - 변경 할 것임 ---------------------- -->
+<link rel="stylesheet" href="css/detail.css">
+<!-- ------------------디테일 일시적 추가   - 변경 할 것임 ---------------------- -->
+
+
+
+
 <!-- 성현 -->
 <link rel="stylesheet" href="css/common_list_topbar.css">
 
@@ -249,6 +256,46 @@
 			
 			</section>
 			</div>
+			
+			
+	<!-- ------------------디테일 일시적 추가   - 변경 할 것임 ---------------------- -->		
+			<div id='detail_pop_up'>
+    <div class="rcp-detail-form row">
+
+      <div class="rcp-720" id="rcp-720">
+        <div class="rcp-header">
+          <h2 class="title">매콤 대패삼겹살 볶음</h2>
+          <p class="hash">#돼지고기 #대패삼겹살 #야식 #간단고기요리 #매콤고기</p>
+          <p class="date">2016.07.21</p>
+          <hr />
+        </div>
+        <div class="rcp-detail-body"></div>
+      </div>
+
+      <div class="rcp-304"></div>
+
+      <div class="rcp-taps">
+        <div class="rcp-first-info">
+        <input type="hidden" value="" name="recipeNo">
+        </div>
+
+        <div class="rcp-seconde-info">
+          <a href="#">댓글</a>
+        </div>
+
+        <div class="rcp-third-info"></div>
+
+        <div class="rcp-fourth-info"></div>
+
+        <div class="rcp-fifth-info"></div>
+      </div>
+
+    </div>
+  </div>
+<!-- ------------------디테일 일시적 추가   - 변경 할 것임 ---------------------- -->  
+  
+  
+  
 			<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
@@ -277,6 +324,8 @@
 	<script src="js/login.js"></script>
 	<script src="js/updateUser.js"></script>
 
+
+
 <script id="temp" type="text/x-handlebars-template">
 {{#each data}}
 {{#regStatus}}
@@ -294,18 +343,19 @@
                     <span>
                        <div class="rcp-forDelete-xButton"><a class="rcp-x-button" href="#">&#10006;</a></div>
                     </span>
+                    
                     <span>
                       <a href="recipe_single.html">상세보기</a>
                     </span>
-                    <span>
-                      <a href="#">BOOKMARK RECIPE</a>
-                    </span>
+                    
                   </div>
                 </div>
               </div>
               <!-- ./ entry-media -->
               <div class="content-wrapper">
-                <h3 class="entry-name"><a href="recipe_single.html">{{recipeName}}</a></h3>
+                <h3 class="entry-name detail">
+                  <input type="hidden" name="recipeNo" value="{{recipeNo}}">
+                <a href="#">{{recipeName}}</a></h3>
                 <p class="entry-author">{{user.userName}}</p>
                 <div class="entry-meta">
                   <div class="foo-wrapper">
@@ -424,6 +474,187 @@
  {{/each}}
   </script>
   
+
+<!-- ------------------디테일 일시적 추가   - 변경 할 것임 ---------------------- -->
+  <script id="recipe-detail-main-template"
+    type="text/x-handlebars-template">
+    
+              <div class="rcp-body" name="rcp-body" >
+              <div>
+                <div class="rcp-title-size">
+                   
+                  <h6 class="rcp-bodyTitle">Main</h6>
+                    
+                </div>
+                <div>
+                  
+                </div>
+               </div>
+                   {{#each representImages}}
+                <img src="img/representImg/{{this}}" class="rcp-images" name="rcp-images-position" id="rcp-images-position">
+                    {{/each}}
+               <div class="rcp-explanation" name="rcp-explanation">
+                  <p></p>
+                </div>
+             
+            </div>
+
+</script>
+
+
+  <script id="recipe-detail-template" type="text/x-handlebars-template">
+    {{#recipeProcedure}}
+              <div class="rcp-body" name="rcp-body" >
+              <div>
+                <div class="rcp-title-size">
+                    
+                  <h6 class="rcp-bodyTitle">STEP{{inc @index}}</h6>
+                    
+                </div>
+                <div>
+               
+                </div>
+               </div>
+                <img src="img/recipeImg/{{recipeProduceImage}}" class="rcp-images">
+               <div class="rcp-explanation" name="rcp-explanation">
+                  <p>{{recipeProduce}}</p>
+                </div>
+               <div class="rcp-nav-down">
+                   
+               </div>
+            </div>
+{{/recipeProcedure}}
+</script>
+
+  <script id="recipe-comment" type="text/x-handlebars-template">
+{{#each data}}
+<div class="cs-comments-area">           
+ <span class="rcp-comment-indexNum"></span> 
+                <article>
+                  
+                  <div class="cs-comment-author">
+                   <img class="avatar" src="img/profileImg/{{user.image}}" alt=""> 
+                      <b><a href="#">{{user.userName}}</a></b> 
+                          <a class="cs-comment-metadata" href="#"> 
+                         <span class="rcp-comment-date">{{recipeCommentDate}}</span>
+                    </a>
+                    <input type="hidden" id="commentNo" name="commentNo" value={{commentNo}}>
+                    {{#x-button}}
+                    <a href="#" id="deleteComment">✖</a>                     
+                    {{/x-button}}
+                  </div>
+                  <div class="cs-comment-content">
+                    <p>{{recipeComment}}</p>                    
+                  </div>
+                </article>   
+          </div>
+{{/each}}
+  </script>
+  <script id="recipe-detail-304-info-template"
+    type="text/x-handlebars-template">
+
+<div class="detail-images">
+<input type="hidden" class="rcp-hidden-userNo" value="{{data.userNo}}">
+<input type="hidden" class="rcp-hidden-recipeNo" value="{{data.recipeNo}}">
+<input type="hidden" class="rcp-hidden-email" value="{{data.user.email}}">
+<a href="#"><img src="img/profile.jpg" class="rcp-right-profile  rcp-profile img-circle"></a>
+<a class="rcp-nickname" href="#">{{data.user.userName}}</a>
+<h4 class="rcp-detail-title">{{data.recipeName}}</h4>
+<div align="center">
+<a href="#" class="rcp-detail-scrap">
+<div class="rcp-scrap-button-text rcp-scrap-button-text-margin" >
+<i class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></i>  스크랩</div></a>
+</div>
+
+<a href="#" class="rcp-detail-like">
+<div class="rcp-scrap-button-text-like " name="">
+<i class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top" ></i>  좋아요</div></a>
+<div class="rcp-info-items">
+   <div class="rcp-icons">
+   <i class="fa fa-eye" aria-hidden="true"></i>
+   <i class="fa fa-heart" aria-hidden="true"></i>
+   <i class="fa fa-comments" aria-hidden="true"></i>
+   <i class="fa fa-external-link" aria-hidden="true"></i>
+  </div>
+  <div class="rcp-icons-names">
+    <p>조회수</p>
+    <p>좋아요</p>
+    <p>댓글</p>
+    <p>스크랩</p>  
+  </div>
+  <div class="rcp-icons-info" align="right">
+    <p>{{data.hits}}</p>
+    <p>{{data.countLike}}</p>
+    <p>{{data.countComment}}</p>
+    <p>{{data.countScrap}}</p>  
+  </div>
+</div>
+<div class="rcp-info-filter">
+    <hr class="rcp-info-next"/>
+    <a href="#">모아보기</a>
+</div>
+<div class="rcp-info-images">
+</div>
+<div class="rcp-detail-step">
+  </div>
+
+</div>
+</script>
+
+  <script id="recipe-detail-main-images-template"
+    type="text/x-handlebars-template">
+{{#each representImages}}
+    <div class="rcp-main"> 
+      <a href="#" name="rcp-nav-images">MAIN {{inc @index}}</a>
+      <div style="float:right">
+         <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+      </div>
+    <a href="#" name="rcp-nav-bgImages-button" role="button" ><div style= background-image:url("img/representImg/{{this}}") class="rcp-info-images-emts"></div></a>
+    
+  
+{{/each}}
+</script>
+
+  <script id="recipe-detail-step-images-template"
+    type="text/x-handlebars-template">
+{{#recipeProcedure}}
+     <div class="rcp-main"> 
+      <a href="#" name="rcp-nav-images">STEP {{inc @index}}</a>
+      <div style="float:right">
+         <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+      </div>
+     <a href="#" name="rcp-nav-bgImages-button" role="button" >
+      <div style= background-image:url("img/recipeImg/{{recipeProduceImage}}") class="rcp-info-images-emts"></div></a> 
+    </div>
+{{/recipeProcedure}}
+</script>
+
+  <script id="recipe-comment-addForm" type="text/x-handlebars-template">
+        <!-- <h2>Leave a Reply</h2> -->
+        <div id="respond" class="comment-respond clearfix">
+          <div class="grid-container">
+            
+              <input type="hidden" name="recipeNo" id="forCommentRecipeNumber" value="">
+              <div class="grid desk-12 alpha omega">
+                <div class="label">Comment</div>
+                <textarea name="recipeComment"></textarea>
+              </div>
+
+              <p class="form-submit clearfix">
+                <input name="rcp-submit" class="button primary" type="button" value="Post Comment" />                
+                <div class="form-allowed-tags" style="display: none;">
+                 
+                </div>
+              </p>
+              
+          
+          </div>
+        </div><!-- #respond -->
+</script>
+
+  <!-- ------------------디테일 일시적 추가   - 변경 할 것임 ---------------------- -->
+  
+  
   <script>
   $(document).ready(function(){
 	  //상단바 불러오기
@@ -488,6 +719,14 @@ $(window).scroll(function() {
 			$('.rcp-Vst-write').show();
 		})
 	</script>
+	
+	
+	<!-- ------------------디테일 일시적 추가   - 변경 할 것임 ---------------------- -->
+	<script src="node_modules/bxslider/dist/jquery.bxslider.min.js"></script>
+	<!-- ------------------디테일 일시적 추가   - 변경 할 것임 ---------------------- -->
+	
+	
+	
 	<script src="js/subscribe.js"></script>
 	<script src="js/mypage.js"></script>
 	<script src="js/template/plugin.js"></script>

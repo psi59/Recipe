@@ -24,8 +24,21 @@
 .rcp-scrap-button-text-margin{
 	margin-left:60px ! important;
 }
+.rcp-scrap-button-text-like{
+	font-size:12px;
+  text-align:center;
+  width: 90px;
+   float: left;
+   height: 40px;
+   border-radius: 2em;
+   border: 1px solid white;
+   margin-left:10px;
+   margin-bottom: 20px;
+  
+}
 
 .rcp-scrap-button-text{
+	font-size:12px;
 	text-align:center;
 	width: 90px;
    float: left;

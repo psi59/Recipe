@@ -290,10 +290,15 @@
 	}
 	.rcp-profile {
 		width: 48px;
-		height: 48px;
+	
 		border: 1px solid #aaaaaa;
 		left: 7%;
 	}
+	
+  .thumbnail a .rcp-profile{
+   height: 48px ! important;
+  }
+	
 	.rcp-caption {
 		margin-top: 3%;
 	}
@@ -572,10 +577,14 @@
 	}
 	.rcp-profile {
 		width: 48px;
-		height: 48px;
+		
 		border: 1px solid #aaaaaa;
 		left: 7%;
 	}
+	 .thumbnail a .rcp-profile{
+   height: 48px ! important;
+  }
+  
 	.rcp-caption {
 		margin-top: 10%;
 	}

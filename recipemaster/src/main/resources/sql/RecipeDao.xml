@@ -274,6 +274,7 @@
 	    r1.hits,r1.rgst,r1.gpa, u.uno userNo,u.name
 	    userName,u.email,u.img,
 	    IFNULL(l.uno,0) likeUser,
+	    IFNULL(scr.uno,0) scrapUser,
 	    IFNULL(r2.cnt,0) tCountLike,
 	    IFNULL(r4.cnt,0) tCountScrap, 
 	    IFNULL(r3.cnt,0) countLike,
@@ -294,7 +295,9 @@
 	    LEFT OUTER JOIN (SELECT rcpno,COUNT(uno) cnt FROM rcp_scr 
 	    GROUP BY rcpno) r5 ON r4.rcpno = r5.rcpno 
 	    LEFT OUTER JOIN RCP_LIK l ON
-	    r5.rcpno=l.rcpno and l.uno = #{uno}
+	    r1.rcpno=l.rcpno and l.uno = #{userNo}
+	    LEFT OUTER JOIN rcp_scr scr ON
+      r1.rcpno = scr.rcpno and scr.uno = #{userNo}
 	    INNER JOIN USERS u ON u.uno = r1.uno
 	    GROUP BY rcpno
 		<if test="request == 1">
@@ -318,7 +321,7 @@
 		r.rcp_dt, r.hits, r.rpimg,
 		r.rgst, r.gpa, r.rcp_pd, u.uno,
 		u.email,u.name userName,s.uno scrapUser,
-		s.rcpno,
+		s.rcpno,l.uno likeUser,
 		(select count(rcpno)
 		from rcp_lik where rcpno=${recipeNo}) countLike,
 		(select count(rrpno)
@@ -328,8 +331,8 @@
 		from rcp_scr where rcpno=${recipeNo}) countScrap
 		FROM users u INNER
 		JOIN rcps r on u.uno=r.uno and r.rcpno=${recipeNo}
-		LEFT OUTER JOIN
-		rcp_lik l ON r.rcpno=l.rcpno
+		LEFT OUTER JOIN rcp_lik l ON 
+		r.rcpno=l.rcpno  and l.uno=${userNo} 
 		LEFT OUTER JOIN rcp_scr s ON
 		r.rcpno=s.rcpno and s.uno=${userNo}
 	</select>
