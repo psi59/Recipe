@@ -7,6 +7,7 @@
 <meta name="description" content="">
 
 <!-- Template css -->
+
 <link rel="stylesheet" href="css/template/animate.css">
 <!-- <link rel="stylesheet" href="css/template/styles.css"> -->
 <link rel="stylesheet" href="css/template/plugins.css">
@@ -462,9 +463,8 @@
 </script>
 
 
-
-	<script id="recipe-detail-main-template"
-		type="text/x-handlebars-template">
+  <script id="recipe-detail-main-template"
+    type="text/x-handlebars-template">
     
               <div class="rcp-body" name="rcp-body" >
               <div>
@@ -485,6 +485,8 @@
             </div>
 
 </script>
+
+
 
 
 	<script id="recipe-detail-template" type="text/x-handlebars-template">
@@ -552,7 +554,7 @@
 </div>
 
 <a href="#" class="rcp-detail-like">
-<div class="rcp-scrap-button-text-like" name="">
+<div class="rcp-scrap-button-text-like " name="">
 <i class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top" ></i>  좋아요</div></a>
 <div class="rcp-info-items">
    <div class="rcp-icons">
@@ -829,8 +831,10 @@
   <div class="fresh-ui">
     <div class="header">
       <div class="photo">     
-         <a href="#" class="rcp-userName"><input type="hidden" class="rcp-hidden-email" value="{{email}}">
-         <img src="img/profileImg/{{image}}" class="img-circle rcp-profile"></a>
+      
+             <a href="#" class="rcp-userName"><input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
+             <img src="img/profileImg/{{image}}" class="img-circle rcp-profile"></a>
+
       </div>
       <div class="social">
         <div class="list">
