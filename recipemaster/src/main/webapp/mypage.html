@@ -279,14 +279,16 @@
 
 <script id="temp" type="text/x-handlebars-template">
 {{#each data}}
-
+{{#regStatus}}
 <div>
 <div class="isotope-grid" id="grid-2">
           <div class="entry filter-food filter-pudding">
             <div class="entry-inner">
               
               <div class="entry-media" name="recipe-image">
-               
+               {{#transientStorage}}{{else}}
+                <p>임시저장됨</p>
+              {{/transientStorage}}
                 <div class="entry-action">
                   <div class="entry-action-inner">
                     <span>
@@ -320,6 +322,7 @@
         
           </div>
 </div>
+{{/regStatus}}
 {{/each}}
 </script>
 

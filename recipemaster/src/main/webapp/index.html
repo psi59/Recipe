@@ -381,8 +381,12 @@
 				<div class="hs-content">
 					<div class="container">
 						<div class="row">
-						<h2 class="rcp-h2-25px"><b class="rcp-scsinfo">구독정보 <a class="More">more</a></b>
-						</h2>
+
+						<h2 class="rcp-h2-25px"><a class="More">more</a></h2>
+
+						
+						
+
 							</div>
 						</div>
 					</div>
@@ -460,7 +464,7 @@
 
 	<script id="recipe-detail-main-template"
 		type="text/x-handlebars-template">
-    {{#representImages}}
+    
               <div class="rcp-body" name="rcp-body" >
               <div>
                 <div class="rcp-title-size">
@@ -472,13 +476,15 @@
                   
                 </div>
                </div>
+                   {{#each representImages}}
                 <img src="img/representImg/{{this}}" class="rcp-images" name="rcp-images-position" id="rcp-images-position">
+                    {{/each}}
                <div class="rcp-explanation" name="rcp-explanation">
                   <p></p>
                 </div>
              
             </div>
-{{/representImages}}
+
 </script>
 
 
@@ -541,10 +547,13 @@
 <a class="rcp-nickname" href="#">{{data.user.userName}}</a>
 <h4 class="rcp-detail-title">{{data.recipeName}}</h4>
 <div align="center">
-<div class="rcp-scrap-button-text" >
+<div class="rcp-scrap-button-text rcp-scrap-button-text-margin" >
 <a href="#" class="rcp-detail-scrap">
-<i class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></i>  스크랩하기</a></div>
+<i class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></i>  스크랩</a></div>
 </div>
+<div class="rcp-scrap-button-text" name="" style="border: 1px solid white;">
+<a href="#" class="rcp-like" style="color: rgb(255, 255, 255);">
+<i class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top" style="color: rgb(255, 255, 255);"></i>  좋아요</a></div>
 <div class="rcp-info-items">
    <div class="rcp-icons">
    <i class="fa fa-eye" aria-hidden="true"></i>
@@ -579,7 +588,7 @@
 
 	<script id="recipe-detail-main-images-template"
 		type="text/x-handlebars-template">
-{{#representImages}}
+{{#each representImages}}
     <div class="rcp-main"> 
       <a href="#" name="rcp-nav-images">MAIN {{inc @index}}</a>
       <div style="float:right">
@@ -588,7 +597,7 @@
     <a href="#" name="rcp-nav-bgImages-button" role="button" ><div style= background-image:url("img/representImg/{{this}}") class="rcp-info-images-emts"></div></a>
     
   
-{{/representImages}}
+{{/each}}
 </script>
 
 	<script id="recipe-detail-step-images-template"

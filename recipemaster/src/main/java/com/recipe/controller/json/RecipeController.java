@@ -662,7 +662,7 @@ public class RecipeController {
         System.out.println("구독 레시피들 정보 : "+recipeList );
         
       }
-        
+       System.out.println("유저 페이지 메인 : "+recipeList); 
       if(request == 5){
         List<List> mainSubscribe = new ArrayList<List>();
         userNumbers = recipeService.selectSubscribeMypage(user.getUserNo());
