@@ -160,7 +160,7 @@
 		rgst)
 		VALUES(#{user.userNo}, #{recipe.recipeName}, #{recipe.intro},
 		#{recipe.cookTime},
-		#{recipe.portion}, 'rcp_pd', 'rpimg', now(), 1)
+		#{recipe.portion}, 'rcp_pd', 'rpimg', now(), #{recipe.regiStatus})
 		<selectKey keyProperty="recipeNo" resultType="int" order="AFTER">
 			SELECT LAST_INSERT_ID();
 		</selectKey>

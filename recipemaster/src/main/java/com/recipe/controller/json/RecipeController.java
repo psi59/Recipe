@@ -97,12 +97,12 @@ public class RecipeController {
 
   @RequestMapping(path = "addRecipe")
   @ResponseBody
-  public String addRecipe(Recipe recipe, @RequestParam("materialNo") String[] materialNos,
-      @RequestParam("materialAmount") String[] materialAmounts,
-      @RequestParam("recipeProduce") String[] recipeProduce,
-      @RequestParam("imageFiles") List<MultipartFile> imageFiles,
-      @RequestParam("representImgNames") List<String> representImgNames,
-      @RequestParam("produceImgNames") List<String> produceImgNames, HttpServletRequest request,
+  public String addRecipe(Recipe recipe, @RequestParam(value="materialNo", defaultValue="") String[] materialNos,
+      @RequestParam(value="materialAmount", defaultValue="") String[] materialAmounts,
+      @RequestParam(value="recipeProduce", defaultValue="") String[] recipeProduce,
+      @RequestParam(value="imageFiles", defaultValue="") List<MultipartFile> imageFiles,
+      @RequestParam(value="representImgNames", defaultValue="") List<String> representImgNames,
+      @RequestParam(value="produceImgNames", defaultValue="") List<String> produceImgNames, HttpServletRequest request,
       HttpSession session) {
 
     Map<String, Object> result = new HashMap<>();
@@ -111,11 +111,8 @@ public class RecipeController {
     List<Map> materialList = new ArrayList<>();
     JsonArray recipeProduceDatas = new JsonArray();
     JsonArray recipeRepresentImages = new JsonArray();
-
-    System.out.println(recipe);
-
-    User user = new User();
-    user.setUserNo(1);
+    
+    User user = CommonUtil.getSessionUser(session);
 
     for (int i = 0; i < materialNos.length; i++) {
       Map<String, String> matertialInfo = new HashMap<>();
@@ -164,7 +161,10 @@ public class RecipeController {
       recipeDatas.put("recipeProduceDatas", recipeProduceDatas.toString());
       recipeDatas.put("recipeRepresentImages", recipeRepresentImages.toString());
       recipeService.registyImageAndProduce(recipeDatas);
-      recipeService.addMaterials(recipeDatas);
+      if(materialNos.length>0){
+    	  recipeService.addMaterials(recipeDatas);
+      }
+      
       result.put("status", "success");
     } catch (Exception e) {
       e.printStackTrace();
