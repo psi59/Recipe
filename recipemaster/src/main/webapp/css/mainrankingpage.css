@@ -1,5 +1,5 @@
-/* @import */
-url ('https: //fonts.googleapis.com /css?family=Baloo+Tamma |Nunito');
+@import
+	url('https://fonts.googleapis.com/css?family=Baloo+Tamma|Nunito');
 
 .nav-container {
 	z-index: 10000;
@@ -208,11 +208,9 @@ footer a:hover {
 			rgba(0, 0, 0, .19);
 	}
 	.fresh-ui .header .photo img {
-		width: 71%;
-		height: 200px;
-		display: block;
-		position: relative;
-		left: 16%;
+		width: 100%;
+		height: 250px;
+		display: block
 	}
 	.rcp-rankmedal {
 		position: absolute;
@@ -321,7 +319,7 @@ footer a:hover {
 	top: 0;
 	left: 150px;
 	content: '';
-	width: 176%;
+	width: 200%;
 	height: 100%;
 	position: absolute;
 	background: rgba(0, 0, 0, .5);

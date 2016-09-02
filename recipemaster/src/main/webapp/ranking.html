@@ -10,8 +10,6 @@
 	href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet"
   href="/node_modules/sweetalert/dist/sweetalert.css">
-<link rel="stylesheet"
-  href="node_modules/bxslider/dist/jquery.bxslider.css">
 <!-- 사용자 정의 css -->
 <!-- <link rel="stylesheet" href="css/rank.css"> -->
 <link rel="stylesheet" href="css/rankingpage.css">
@@ -19,7 +17,6 @@
 <link rel="stylesheet" href="css/common/signup.css">
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="css/updateImg.css">
 <style>
 </style>
 </head>
@@ -42,30 +39,33 @@
 				<a href="#" id="loginIcon" class="ranking-barimg"></a>
 			</div>
 			<div id="profileView" class="main-nav__dropdown profile-dropdown">
-          <div class="rcp-outline">
-            <div>
-              <a href="#0" class="dropdown__header"><img id="profileImg"
-                class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a
-                id="profileEmail" href="#"
-                class="dropdown__header rcp-infobox-text"></a>
-              <h6 id="profileName" class="rcp-nickname"></h6>
-              <a href="#0" class="dropdown__header"> <span
-                id="profileGrade" class="dropdown__title rcp-infobox-text">
-                  <img src="img/star.png"> Master Chef
-              </span>
-              </a>
-              <div id=Btn align="center">
-                <button id="userInfoEditBtn" type="button"
-                  class="btn btn-default rcp-btn-nav">정보수정</button>
-                <button id="logoutBtn" type="button"
-                  class="btn btn-default rcp-btn-nav">로그아웃</button>
-              </div>
-            </div>
-            
-            <a href="/mypage.html"><button class="goMyPageBtn btn btn-default rcp-btn-nav">MyPage</button></a>
-            <a href="/writerecipe.html"><button class="goWriteRcpBtn btn btn-default rcp-btn-nav">Recipe 작성</button></a>
-          </div>
-        </div>
+				<div class="rcp-outline">
+					<div>
+						<a href="#0" class="dropdown__header"><img id="profileImg"
+							class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a
+							id="profileEmail" href="#"
+							class="dropdown__header rcp-infobox-text"></a>
+						<h6 id="profileName" class="rcp-nickname"></h6>
+						<a href="#0" class="dropdown__header"> <span id="profileGrade"
+							class="dropdown__title rcp-infobox-text"> <img
+								src="img/star.png"> Master Chef
+						</span>
+						</a>
+						<div id=Btn align="center">
+							<button id="userInfoEditBtn" type="button"
+								class="btn btn-default rcp-btn-nav">정보수정</button>
+							<button id="logoutBtn" type="button"
+								class="btn btn-default rcp-btn-nav">로그아웃</button>
+						</div>
+					</div>
+					<a href="#" class="rcp-goMyPage"><button
+							class="goMyPageBtn btn btn-default rcp-btn-nav"
+							style="margin-left: 50px;">MyPage</button></a> <a
+						href="/writerecipe.html"><button
+							class="goWriteRcpBtn btn btn-default rcp-btn-nav"
+							style="margin-left: 50px;">Recipe 작성</button></a>
+				</div>
+			</div>
 		</div>
 	</nav>
 	<div id='signup-pop-up-banner'>
@@ -203,11 +203,7 @@
 	<!-------------------------------- Rank List --------------------------------->
 	<section id="1" class="home">
 		<h1>Best Of Chef</h1>
-		<div class="rankingWrapper">
-			<div id="rcp-chef-rank"><h2>Total Ranking</h2></div>
-			<div id="rcp-chef-rank-today"><h2>Today Ranking</h2></div>
-			<div id="rcp-chef-rank-month"><h2>Month Ranking</h2></div>
-		</div>
+		<div id="rcp-chef-rank"></div>
 		<!------------------------- Rank List ------------------------------>
 	</section>
 	<section id="2">
@@ -225,7 +221,6 @@
 			<div class="rcp-title">
 				<hr />
 			</div>
-			<div id="chefMyRanking" class="rcp-myranking"></div>
 			<div id="chefRanking"></div>
 			<!-- <img class="rcp-rankmedal-small1" src="/img/medal1.png"/>
       <img class="rcp-rankmedal-small2" src="/img/medal2.png"/>
@@ -280,7 +275,6 @@
 	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
   <script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
-  <script src="node_modules/bxslider/dist/jquery.bxslider.min.js"></script>
 	<!--yongyi  -->
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/common/chefCard.js"></script>
@@ -327,11 +321,15 @@
         <div class="cardbtn">
          <button type="button" class="btn btn-default rcp-imp">
               <a href="/mypage.html?{{email}}" class="visitbtn">방문하기</a></button>
+
+              
+      
               {{#if status}}
               <button type="button" name="subscribeComplete" class="btn btn-default rcp-imp rank-scs" data-email="{{email}}" >구독중</button>
               {{else}}
               <button type="button" class="btn btn-default rcp-imp rank-scs" data-email="{{email}}" >구독하기</button>
                {{/if}}
+  
       </div>
     </div>
   </div>
@@ -355,22 +353,6 @@
 </div>
   {{/each}}
   </script>
-  <script id="chef-myrank-template" type="text/x-handlebars-template">
-  {{#each data}}
-      <div class="row rcp-font hover effect8">
-        <div class="col-md-2">{{rownum}}
-      </div>
-      <div class="col-md-2">
-        <div class="name"><input type="hidden" value="{{email}}">
-                   <a href="#" class="rcp-userName">{{userName}}</a></div>
-        </div>
-        <div class="col-md-2">{{recipeCount}} 개</div>
-        <div class="col-md-2">{{subsCount}} 명</div>
-        <div class="col-md-2">{{totalPoint}} 점</div>
-        <div class="col-md-2 ">{{grade}}</div>
-      </div>
-  {{/each}}
-  </script>
 	<script>
     var sourceChef = $('#chef-rank-template').text();
     var templateChef = Handlebars.compile(sourceChef);
@@ -388,7 +370,7 @@
           }
           var list = result.data;
           $('#chefRanking').append(templateChef(result));
-          console.log(result.data);
+          console.log(result.data)
         },
         error : function() {
           alert('서버 요청 오류');
@@ -430,44 +412,6 @@
         },
         error : function() {
            alert('서버 요청 오류');
-        }
-      });
-    }
-  </script>
-    <script>
-    var sourceMy = $('#chef-myrank-template').text();
-    var template1 = Handlebars.compile(sourceMy);
-    loadMyRanking();
-
-    function loadMyRanking() {
-      $.ajax({
-        url : 'user/myrank.json',
-        dataType : 'json',
-        method : 'get',
-        success : function(result) {
-          if (result.status != 'success') {
-        	  alert('실패');
-            return;
-          }
-          var list = result.data;
-          if(list!=null){
-        	  var appendData = '<div class="row rcp-font hover effect8">'
-                  +'<div class="col-md-2">My Ranking : '+list.rownum+'</div>'
-                  +'<div class="col-md-2"><div class="name">'
-                  +'<input type="hidden" value="'+list.email+'">'
-                  +'<a href="#" class="rcp-userName">'+list.userName+'</a></div>'
-                  +'</div><div class="col-md-2">'+list.recipeCount+' 개</div>'
-                  +'<div class="col-md-2">'+list.subsCount+' 명</div>'
-                  +'<div class="col-md-2">'+list.totalPoint+' 점</div>'
-                  +'<div class="col-md-2 ">'+list.grade+'</div></div>'
-                  
-                  $('#chefMyRanking').append($(appendData));
-          }
-          
-          console.log(result);
-        },
-        error : function() {
-          alert('서버 요청 오류');
         }
       });
     }

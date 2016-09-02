@@ -17,7 +17,4 @@ public interface UserService {
   User loginUser(User user); //login
   User selectFromEmail(String email);  
   List<User> selectRankListSCS(int pageNo, int pageSize, int uno);//준모추가
-  List<User> selectMonthRank(int uno);
-  List<User> selectTodayRank(int uno);
-  User selectMyRank(int uno);
 }

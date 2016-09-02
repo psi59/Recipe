@@ -14,8 +14,6 @@
 <link rel="stylesheet" href="/css/subscribe.css">
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-<link rel="stylesheet"
-  href="node_modules/bxslider/dist/jquery.bxslider.css">
 
 <!-- Template css -->
 <link rel="stylesheet" href="css/template/animate.css">
@@ -488,15 +486,17 @@
                   <h6 class="rcp-bodyTitle">Main</h6>
                     
                 </div>
-                <ul class="rcp-mainSlider">
-                  {{#each representImages}}
-                <li class="rcp-mainImg"><img class="rcp-images rcp-mainImg1" src="img/representImg/{{this}}" class="rcp-images" name="rcp-images-position" id="rcp-images-position"></li>
-                    {{/each}}
-                </ul>
+                <div>
+                  
+                </div>
                </div>
+                   {{#each representImages}}
+                <img src="img/representImg/{{this}}" class="rcp-images" name="rcp-images-position" id="rcp-images-position">
+                    {{/each}}
                <div class="rcp-explanation" name="rcp-explanation">
                   <p></p>
                 </div>
+             
             </div>
 
 </script>
