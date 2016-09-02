@@ -11,7 +11,16 @@
 /* ==========================================================================
    Global styles
    ========================================================================== */
-   
+#rt_rank_recipe a, #rt_rank_chef a {
+  font-weight: bold;
+}
+
+#rt_rank_recipe a:hover, #rt_rank_chef a:hover {
+	background-color: white;
+	color: black;
+	border-radius: 3px;
+}
+
 h1, h2, h3, h4, h5, h6, p, .btn, .navbar-nav a, .form-control, .list-inline, small, #pricing {
   font-family: 'Montserrat', sans-serif;
 }
