@@ -21,13 +21,32 @@
 	width: 50px;
 	height:50px;	
 }
+.rcp-scrap-button-text-margin{
+	margin-left:60px ! important;
+}
+.rcp-scrap-button-text-like{
+	font-size:12px;
+  text-align:center;
+  width: 90px;
+   float: left;
+   height: 40px;
+   border-radius: 2em;
+   border: 1px solid white;
+   margin-left:10px;
+   margin-bottom: 20px;
+  
+}
 
 .rcp-scrap-button-text{
-	width:110px;
-	height: 40px;
-	border-radius:5em;
-	border : 1px solid white;
-	margin-top: 10px;
+	font-size:12px;
+	text-align:center;
+	width: 90px;
+   float: left;
+   height: 40px;
+   border-radius: 2em;
+   border: 1px solid white;
+   margin-left:10px;
+   margin-bottom: 20px;
 	
 }
 .rcp-scrap-button-text{
@@ -318,3 +337,22 @@
   .bx-viewport{
     height: 500px ! important;
   }
+  
+.bx-wrapper .bx-next {
+  right: 129px;
+  top: 35% !important;
+}
+
+.bx-wrapper .bx-prev {
+  left: -75px;
+  top: 35% !important;
+}
+
+.rcp-mainImg{
+  width: 578px !important;
+  margin-right: 70px;
+}  
+
+.rcp-mainSlider{
+  padding: 0;
+}  

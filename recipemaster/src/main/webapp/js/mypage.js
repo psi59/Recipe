@@ -1,5 +1,11 @@
 document.write('<script type"text/javascript" src="js/common.js"></script>')
+document.write('<script type"text/javascript" src="js/recipeDetail.js"></script>')
+
 $(function() {
+	//recipeDetail();
+	var userInfo = getUserInfo();
+
+	
 	console.log(location.href.split('?')[1]);
 
 	$.ajax({
@@ -116,7 +122,27 @@ $(function() {
 
 	pageTabs();
 	loadMyPage();
+		
+Handlebars.registerHelper('transientStorage', function(options) {
+		  if (this.regiStatus == 0) {
+		    return options.fn(this);
+		  } else {
+		    return options.inverse(this);
+		  }
 });
+
+Handlebars.registerHelper('regStatus', function(options) {
+	  if ( userInfo == null || location.href.split('?')[1] != userInfo.email ) {
+		if(this.regiStatus == 0){
+			return options.fn(this);
+		}		  
+	  }else{
+		  return options.fn(this);
+	  }
+});
+
+});
+
 
 /* 탑바 js(common.js 에 공통적으로 들어갈부분 일단 넣음 */
 $(function() {

@@ -331,7 +331,9 @@
 			<div class="rcp-304"></div>
 
 			<div class="rcp-taps">
-				<div class="rcp-first-info"></div>
+				<div class="rcp-first-info">
+				<input type="hidden" value="" name="recipeNo">
+				</div>
 
 				<div class="rcp-seconde-info">
 					<a href="#">댓글</a>
@@ -378,8 +380,12 @@
 				<div class="hs-content">
 					<div class="container">
 						<div class="row">
-						<h2 class="rcp-h2-25px"><b class="rcp-scsinfo">구독정보 <a class="More">more</a></b>
-						</h2>
+
+						<h2 class="rcp-h2-25px"><a class="More">more</a></h2>
+
+						
+						
+
 							</div>
 						</div>
 					</div>
@@ -454,10 +460,9 @@
 </script>
 
 
-
-	<script id="recipe-detail-main-template"
-		type="text/x-handlebars-template">
-    {{#representImages}}
+  <script id="recipe-detail-main-template"
+    type="text/x-handlebars-template">
+    
               <div class="rcp-body" name="rcp-body" >
               <div>
                 <div class="rcp-title-size">
@@ -465,18 +470,20 @@
                   <h6 class="rcp-bodyTitle">Main</h6>
                     
                 </div>
-                <div>
-                  
-                </div>
+                <ul class="rcp-mainSlider">
+                  {{#each representImages}}
+                <li class="rcp-mainImg"><img class="rcp-images rcp-mainImg1" src="img/representImg/{{this}}" class="rcp-images" name="rcp-images-position" id="rcp-images-position"></li>
+                    {{/each}}
+                </ul>
                </div>
-                <img src="img/representImg/{{this}}" class="rcp-images" name="rcp-images-position" id="rcp-images-position">
                <div class="rcp-explanation" name="rcp-explanation">
                   <p></p>
                 </div>
-             
             </div>
-{{/representImages}}
+
 </script>
+
+
 
 
 	<script id="recipe-detail-template" type="text/x-handlebars-template">
@@ -538,10 +545,14 @@
 <a class="rcp-nickname" href="#">{{data.user.userName}}</a>
 <h4 class="rcp-detail-title">{{data.recipeName}}</h4>
 <div align="center">
-<div class="rcp-scrap-button-text" >
 <a href="#" class="rcp-detail-scrap">
-<i class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></i>  스크랩하기</a></div>
+<div class="rcp-scrap-button-text rcp-scrap-button-text-margin" >
+<i class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></i>  스크랩</div></a>
 </div>
+
+<a href="#" class="rcp-detail-like">
+<div class="rcp-scrap-button-text-like " name="">
+<i class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top" ></i>  좋아요</div></a>
 <div class="rcp-info-items">
    <div class="rcp-icons">
    <i class="fa fa-eye" aria-hidden="true"></i>
@@ -576,7 +587,7 @@
 
 	<script id="recipe-detail-main-images-template"
 		type="text/x-handlebars-template">
-{{#representImages}}
+{{#each representImages}}
     <div class="rcp-main"> 
       <a href="#" name="rcp-nav-images">MAIN {{inc @index}}</a>
       <div style="float:right">
@@ -585,7 +596,7 @@
     <a href="#" name="rcp-nav-bgImages-button" role="button" ><div style= background-image:url("img/representImg/{{this}}") class="rcp-info-images-emts"></div></a>
     
   
-{{/representImages}}
+{{/each}}
 </script>
 
 	<script id="recipe-detail-step-images-template"
@@ -761,21 +772,35 @@
                 <div
                   class="rcp-cookTime col-xs-4 rcp-heart"
                   align="center">
+
                  {{#isLike}}          
                   <div class="glyphicon glyphicon-heart-empty active"></div>
-                   {{else}}<div class="glyphicon glyphicon-heart-empty"></div>
+                   {{else}}
+                    <div class="glyphicon glyphicon-heart-empty"></div>
                    {{/isLike}}
-                  <input type="hidden" name="recipeNo" value="{{recipeNo}}">                    
-                  <a href="#">
-                  {{#isLike}}<b class="rcp-like active" name="rcp-like">좋아요 {{countLike}}</b>
-                  {{else}}<b class="rcp-like" name="rcp-like">좋아요 {{countLike}}</b>
-                   {{/isLike}}</a>
+
+                  <input type="hidden" name="recipeNo" value="{{recipeNo}}">
+
+                  {{#isLike}}                    
+                  <a href="#" class="active">
+                  <b class="rcp-like" name="rcp-like">좋아요 <span>{{countLike}}</span></b>
+                  {{else}}
+                    <a href="#">
+                    <b class="rcp-like" name="rcp-like">좋아요 <span>{{countLike}}</span></b>
+                   </a>{{/isLike}}
+
                 </div> 
                 <div class="rcp-cookTime col-xs-4"
                   align="center">
+                   {{#isScrap}}
+                  <a href="#" class="rcp-scrap active">
+                    {{else}}
+                  <a href="#" class="rcp-scrap">
+                    {{/isScrap}}
                   <div class="glyphicon glyphicon-pushpin rcp-scrap"></div>
-                  <a href="#">  <input type="hidden" name="recipeNo" value="{{recipeNo}}"><b>스크랩 {{countScrap}}</b></a>
-                </div>
+                  <input type="hidden" name="recipeNo" value="{{recipeNo}}"><b>스크랩 <span>{{countScrap}}</span></b>
+                </div></a>
+          
               </div>
               <!--  버튼 끝  -->
             </div>

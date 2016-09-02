@@ -11,17 +11,16 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
   var template = Handlebars.compile(source); 
   
   var mainSubscribe = $('#temp').html();
-  var commainSubscribe = Handlebars.compile(mainSubscribe); 
-  var userInfo = getUserInfo();
-  
-  
+  var commainSubscribe = Handlebars.compile(mainSubscribe);   
+  var userInfo;
   $(function(){
+	  userInfo = getUserInfo();
 	  Main1List();
-	  likeLogin();
+	  likeLogic();
 	  comList();	
 	  goMyPage();
 	  scroll();
-	 
+	  scrapLogic();
   });
   
 
@@ -49,18 +48,13 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
 				  return;
 			  }
 			  $('#main-list > div').append( comMainSection(result) );
-			  $('.list0 > .row').append( template(result) );		
-//			  for(var i = 0 ; i<result.data; i++){
-//			  $('.thumbnail:eq('+i+') .rcp-count-images').text( "1 / "+$( '.forBackgroundRepresentImg' ).length )
-//			  }
+			  $('.list0 > .row').append( template(result) );
 			  
 			  mouseMoveEventForImage(result);
-//			 
+			 
+			  console.log(result);
 				  for(var i=0; i<result.data.length; i++){
-//					  for(var j=0; j<result.data[i].representImages.length; j++){
-						  $('.list0 div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');
-
-//					  }
+						  $('.list0 div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');		  
 				  }
 					
 			  
@@ -109,14 +103,6 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
 //				  }
 			  }
 				
-				
-				
-//			  for(var i = 0 ; i<result.data.length; i++){
-//				  var list=JSON.stringify(result.data[i].rpimg);
-//					var firstParse= list.substring(4,(list.length-4));					
-//					$('.list1 div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+firstParse+')');
-//				  }
-//				  
 			  methods();
 			  if(userInfo != null)
 			  main3List();
@@ -141,6 +127,10 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
 			  if (result.status != 'success') {
 				  alert('comList 실행 중 오류 발생');
 				  return;
+			  }
+			  console.log(result.data.length);
+			  if(result.data.length > 1  ){
+				  $('.rcp-h2-25px').text("구독정보");
 			  }
 			  
 			  for(var i=0; i<result.data.length; i++){
@@ -179,6 +169,15 @@ function scroll(){
 	    return options.inverse(this);
 	  }
 });
+  
+  Handlebars.registerHelper('isScrap', function(options) {
+	  if (this.scrapUser!=0) {
+	    return options.fn(this);
+	  } else {
+	    return options.inverse(this);
+	  }
+});
+  
 
   
   Handlebars.registerHelper('sessionUser', function(options) {
@@ -205,10 +204,10 @@ function scroll(){
 	  
   
 //--------------------좋아요 등록, 해제 로직-------------------------------  
-function likeLogin(){
+function likeLogic(){
 	$(document).on('click',('.rcp-like'),function(event){
 		  event.preventDefault();
-		  if($(event.target).is('.active') ){
+		  if($(event.target).parent().is('.active') ){
 			  $.ajax({
 				  url:'recipe/likeDown.json?recipeNo=' + $(event.target).parent()
 				  .parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
@@ -220,9 +219,9 @@ function likeLogin(){
 					  $(event.target).css('color','#231f20');
 					  $(event.target).parent().parent().css('color','#231f20');
 					  $(event.target).parent().parent().children('.glyphicon-heart-empty').attr('class','glyphicon glyphicon-heart-empty')
-					  $(event.target).parent().append('<b class="rcp-like" name="rcp-like">좋아요</b>');
-					  $(event.target).remove();
-					  
+					  $(event.target).parent().removeClass('active');
+					  $(event.target).children('span').text( parseInt($(event.target).children('span').text())-1);
+
 				  },
 				  error:function(){
 					  swal('like : 서버 요청 오류');
@@ -241,9 +240,66 @@ function likeLogin(){
 					  console.log("like up 성공성공");
 					  $(event.target).css('color','#337ab7');
 					  $(event.target).parent().parent().css('color','#337ab7');
-					  $(event.target).parent().append('<b class="rcp-like active" name="rcp-like">좋아요</b>');
-					  $(event.target).remove();
-					  
+					  $(event.target).parent().addClass('active');
+					  $(event.target).children('span').text( parseInt($(event.target).children('span').text())+1 );
+//					  $('[name="rcp-custom-list"]').remove();
+//					  Main1List();
+//					  
+				  },
+				  error:function(){
+					  swal('ajax likeclick: 서버 요청 오류');
+				  }
+			  });
+		  }
+	  });
+}
+
+function scrapLogic(){
+	$(document).on('click','.rcp-scrap',function(event){
+		console.log("ddddddd"+$(event.target).parent().attr('class'));
+		  event.preventDefault();
+		  if($(event.target).parent().is('.active') ){
+			  console.log("scrap if")
+			  $.ajax({
+				  url:'recipe/deleteScrap.json',
+				  dataType:'json',
+				  data:{
+					recipeNo:$(event.target).parent().children('input[name="recipeNo"]').val() 
+				  },
+				  method:'post',
+				  success:function(){
+					  console.log("scrap down 성공성공");
+					  $(event.target).css('color','#231f20');
+					  $(event.target).parent().parent().css('color','#231f20');
+					//  $(event.target).parent().parent().children('.glyphicon-heart-empty').attr('class','glyphicon glyphicon-heart-empty')
+					  $(event.target).parent().removeClass('active');
+					  $(event.target).children('span').text( parseInt($(event.target).children('span').text())-1);
+
+				  },
+				  error:function(){
+					  swal('like : 서버 요청 오류');
+				
+				  }
+			  });
+		  }
+		  else{
+			  console.log("scrap else")
+			  $.ajax({
+				  url:'recipe/scrap.json',
+				  dataType:'json',
+				  data:{
+					  recipeNo:$(event.target).parent().children('input[name="recipeNo"]').val() 
+				  },
+				  method:'post',
+				  success:function(){
+					  console.log("scrap up 성공성공");
+					  $(event.target).css('color','#337ab7');
+					  $(event.target).parent().parent().css('color','#337ab7');
+					  $(event.target).parent().addClass('active');
+					  $(event.target).children('span').text( parseInt($(event.target).children('span').text())+1 );
+//					  $('[name="rcp-custom-list"]').remove();
+//					  Main1List();
+//					  
 				  },
 				  error:function(){
 					  swal('ajax likeclick: 서버 요청 오류');

@@ -298,8 +298,8 @@ public class RecipeController {
   public String list(@RequestParam int userNo, @RequestParam(defaultValue = "4") int pageSize, int request) {
     HashMap<String, Object> result = new HashMap<>();
     List<Recipe> list = recipeService.getRecipeList(userNo, pageSize, request);
-    for (int i = 0; i < list.size(); i++) {
-    }
+System.out.println("session userNo : "+userNo);
+
     try {
       result.put("status", "success");
       result.put("data", list);
@@ -327,6 +327,7 @@ public class RecipeController {
     recipe.setHits(recipe.getHits() + 1);
     recipeService.updateHits(recipe);
     try {
+      System.out.println("recipe : "+recipe);
       result.put("status", "success");
       result.put("data", recipe);
       result.put("materials", materials);
@@ -662,7 +663,7 @@ public class RecipeController {
         System.out.println("구독 레시피들 정보 : "+recipeList );
         
       }
-        
+       System.out.println("유저 페이지 메인 : "+recipeList); 
       if(request == 5){
         List<List> mainSubscribe = new ArrayList<List>();
         userNumbers = recipeService.selectSubscribeMypage(user.getUserNo());
