@@ -1,6 +1,8 @@
 document.write('<script type"text/javascript" src="js/common.js"></script>')
+document.write('<script type"text/javascript" src="js/recipeDetail.js"></script>')
 
 $(function() {
+	//recipeDetail();
 	var userInfo = getUserInfo();
 
 	
