@@ -10,6 +10,7 @@
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
+
 .rcp-btn-default-2 {
 	position: relative;
 	right: -1224px;
@@ -27,21 +28,21 @@
 	right: -20em !important;
 }
 
-.ranking-barimg>.rcp-barimg{
+.ranking-barimg>.rcp-barimg {
 	cursor: pointer;
 	position: fixed;
 	top: 5px;
 	right: 162px;
 }
+
 .ranking-bar-infobox>.bottom-main-nav__dropdown {
-    top: 4em;
-    right: -20em;
+	top: 4em;
+	right: -20em;
 }
+
 .introBox {
 	margin-top: 5%;
-	border: 1px solid #b6b4b5;
 	height: 215px;
-	background-color: #ffffec;
 	border-radius: 20px;
 }
 
@@ -103,7 +104,6 @@
 .medalDisplay {
 	display: none;
 } */
-
 h1 {
 	font-family: 'Baloo Tamma', cursive;
 	margin-top: 27px;
@@ -213,7 +213,7 @@ section:nth-child(1) {
 
 .cardbtn {
 	position: relative;
-	top: 28%;
+	top: 23%;
 }
 
 footer {
@@ -372,7 +372,6 @@ body {
 		margin: 8% auto;
 		margin-left: 8.2%;
 		overflow: hidden;
-		background: #D9E5FF;
 		position: relative;
 		box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
 			rgba(0, 0, 0, .19);
@@ -384,7 +383,6 @@ body {
 		margin: 4% auto;
 		margin-left: 2.2%;
 		overflow: hidden;
-		background: #D9E5FF;
 		position: relative;
 		box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
 			rgba(0, 0, 0, .19);
@@ -397,7 +395,6 @@ body {
 		margin: 4% auto;
 		margin-left: 2.2%;
 		overflow: hidden;
-		background: #D9E5FF;
 		position: relative;
 		box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
 			rgba(0, 0, 0, .19);
@@ -413,7 +410,6 @@ body {
 		margin: 4% auto;
 		margin-left: 2.2%;
 		overflow: hidden;
-		background: #D9E5FF;
 		position: relative;
 		box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
 			rgba(0, 0, 0, .19);
@@ -428,7 +424,6 @@ body {
 		margin: 4% auto;
 		margin-left: 4.8%;
 		overflow: hidden;
-		background: #D9E5FF;
 		position: relative;
 		box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
 			rgba(0, 0, 0, .19);
@@ -443,7 +438,6 @@ body {
 		margin: 4% auto;
 		margin-left: 5%;
 		overflow: hidden;
-		background: #D9E5FF;
 		position: relative;
 		box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
 			rgba(0, 0, 0, .19);
@@ -458,7 +452,6 @@ body {
 		margin: 4% auto;
 		margin-left: 6.2%;
 		overflow: hidden;
-		background: #D9E5FF;
 		position: relative;
 		box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
 			rgba(0, 0, 0, .19);
@@ -473,7 +466,6 @@ body {
 		margin: 4% auto;
 		margin-left: 6%;
 		overflow: hidden;
-		background: #D9E5FF;
 		position: relative;
 		box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
 			rgba(0, 0, 0, .19);
@@ -488,7 +480,6 @@ body {
 		margin: 4% auto;
 		margin-left: 6.6%;
 		overflow: hidden;
-		background: #D9E5FF;
 		position: relative;
 		box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
 			rgba(0, 0, 0, .19);
@@ -502,7 +493,7 @@ body {
 }
 
 .fresh-ui:hover .header .social .list {
-	right: 0px
+	right: 14px
 }
 
 .fresh-ui:hover .header .social .list a {
@@ -536,13 +527,13 @@ body {
 	top: 0;
 	left: 150px;
 	content: '';
-	width: 300px;
-	height: 214px;
+	width: 200%;
+	height: 100%;
 	position: absolute;
 	background: rgba(0, 0, 0, .5);
-	border-top-left-radius: 50%;
-	border-bottom-left-radius: 50%;
-	transition: all .35s ease-in-out 0s
+	border-top-right-radius: 50%;
+	border-bottom-right-radius: 50%;
+	transition: all .35s ease-in-out 0s;
 }
 
 .fresh-ui .header:hover .social:after {

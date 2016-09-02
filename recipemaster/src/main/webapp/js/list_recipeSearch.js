@@ -195,7 +195,7 @@ function search(sort,order){
 				methods();
 				$('#recipe-count').text('총 '+result.recipeCount+'개의 레시피가 검색되었습니다.');
 				$('#search-pageNo').attr('value', '1');	
-			}, 2000)
+			}, 1300)
 		},
 		// 데이터 조회 중일때 로딩 이미지 보여주기
 		beforeSend:function(){			  
@@ -207,7 +207,7 @@ function search(sort,order){
 			setTimeout(function() {
 				$('.wrap-loading').addClass('display-none');
 				$('html').css("cursor","auto");
-			}, 2000)
+			}, 1300)
 		},
 		error : function() {
 			swal('서버 요청 오류 !')
@@ -267,7 +267,7 @@ function searchScrollAppend(){
 						$('#search-pageNo').val('lastPage');
 					}
 					methods();
-				}, 1000)
+				}, 500)
 			},
 			// 데이터 조회 중일때 로딩 이미지 보여주기
 			beforeSend:function(){			  
@@ -279,7 +279,7 @@ function searchScrollAppend(){
 				setTimeout(function() {
 					$('.wrap-loading').addClass('display-none');
 					$('html').css("cursor","auto");
-				}, 1000)
+				}, 500)
 			},
 			error : function() {
 				swal('서버 요청 오류 !')

@@ -14,9 +14,15 @@
 	text-decoration: blink !important;
 }
 
+.rcp-userName2 {
+	font-size: 15pt !important;
+	color: #000000 !important;
+	text-decoration: blink !important;
+}
+
 .cardbtn {
 	position: relative;
-	top: 25%;
+	top: 19%;
 }
 
 .nav-container ul {
@@ -34,7 +40,6 @@
 
 .introBox {
 	margin-top: 5%;
-	border: 1px solid #b6b4b5;
 	height: 215px;
 	background-color: #ffffec;
 	border-radius: 20px;
@@ -314,13 +319,13 @@ footer a:hover {
 	top: 0;
 	left: 150px;
 	content: '';
-	width: 300px;
-	height: 260px;
+	width: 200%;
+	height: 100%;
 	position: absolute;
 	background: rgba(0, 0, 0, .5);
-	border-top-left-radius: 50%;
-	border-bottom-left-radius: 50%;
-	transition: all .35s ease-in-out 0s
+	border-top-right-radius: 50%;
+	border-bottom-right-radius: 50%;
+	transition: all .35s ease-in-out 0s;
 }
 
 .fresh-ui .header:hover .social:after {
@@ -424,4 +429,5 @@ footer a:hover {
 	display: inline-block;
 	text-decoration: none
 }
+
 /*  */
