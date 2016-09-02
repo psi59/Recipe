@@ -9,8 +9,8 @@
 <!-- Template css -->
 
 <link rel="stylesheet" href="css/template/animate.css">
-<!-- <link rel="stylesheet" href="css/template/styles.css">  -->
-<link rel="stylesheet" href="css/template/plugins.css"> 
+<!-- <link rel="stylesheet" href="css/template/styles.css"> -->
+<link rel="stylesheet" href="css/template/plugins.css">
 <link rel="stylesheet"
 	href="/node_modules/sweetalert/dist/sweetalert.css">
 <link rel="stylesheet"
@@ -18,8 +18,10 @@
 <link rel="stylesheet" href="css/template/font-awesome.min.css">
 <link rel="stylesheet" href="css/template/main.css">
 <link rel="stylesheet" href="css/template/commentTemp.css">
-<link rel="stylesheet" href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
-<link rel="stylesheet" href="node_modules/bxslider/dist/jquery.bxslider.css">
+<link rel="stylesheet"
+	href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
+<link rel="stylesheet"
+	href="node_modules/bxslider/dist/jquery.bxslider.css">
 
 <!-- 사용자 정의 css -->
 <link rel="stylesheet" href="css/common.css">
@@ -36,6 +38,8 @@
 <link rel="stylesheet" href="css/common/popup.css">
 <link rel="stylesheet" href="css/common/signup.css">
 <link rel="stylesheet" href="css/index_rankTabs.css">
+<link rel="stylesheet" href="css/common_list_topbar.css">
+<link rel="stylesheet" href="css/common/loading.css">
 <!-- alert css -->
 <link rel="stylesheet"
 	href="node_modules/sweetalert/dist/sweetalert.css">
@@ -46,24 +50,34 @@
 </head>
 <body>
 	<div id="topBtn" class="navbar navbar-inverse navbar-fixed-top">
+
 		<div class="container rcp-container-top">
 			<div class="navbar-header">
 				<div class="row">
 					<div class="row col-md-7 col-sm-7 col-xs-12">
 						<a class="logo col-md-3 col-sm-3 hidden-xs rt-navbar-top-logo"
 							href="index.html"><img src="img/logo.svg" alt="Logo"></a>
-						<div
+
+						<div id="searchBar-input"
 							class="input-group col-md-5 col-sm-5 col-xs-11 col-xs-offset-1 rcp-navbar-searchbar-size rt-navbar-top-searchbar">
-							<input id="searchKeyword" type="text"
+
+							<select id="searchCondition-select" class="form-control">
+								<option value="recipe" selected="selected">레시피</option>
+								<option value="chef">쉐프</option>
+								<option value="material">재료</option>
+							</select> <input id="searchKeyword" type="text"
 								class="searchKeyword form-control rcp-navbar-searchbar-size"
-								placeholder="레시피명, 쉐프명, 재료명" aria-describedby="basic-addon1">
-							<span class="rcp-search-button input-group-addon" id="searchBarKeyword">검색</span>
+								placeholder="검색어를 입력해주세요" aria-describedby="basic-addon1">
+
+							<span id="searchBarKeyword" class="input-group-addon">검색</span>
+
 						</div>
+
 					</div>
 					<div class="col-md-4 col-sm-4 hidden-xs" style="margin-right: 2em;">
 						<div class="navbar-collapse">
 							<ul class="nav navbar-nav navbar-right">
-								<li><a href="#" id="signUpTopBtn"><span
+								<li><a href="#"><span id="signUpTopBtn"
 										class="rcp-btn-default-top">회원가입</span></a></li>
 								<li id="topbarUserImg"><a href="#"><span
 										id="topLoginBtn" class="rcp-btn-default-top">로그인</span></a></li>
@@ -77,10 +91,9 @@
 										class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a
 										id="profileEmail" href="#"
 										class="dropdown__header rcp-infobox-text"></a>
-									<h6 id="profileName" class="rcp-userName rcp-nickname"></h6>
+									<h6 id="profileName" class="rcp-nickname"></h6>
 									<a href="#0" class="dropdown__header"> <span
 										id="profileGrade" class="dropdown__title rcp-infobox-text">
-											<img src="img/star.png"> Master Chef
 									</span>
 									</a>
 									<div id=Btn align="center">
@@ -90,18 +103,19 @@
 											class="btn btn-default rcp-btn-nav">로그아웃</button>
 									</div>
 								</div>
-								<a href="#" class="rcp-goMyPage"><button
+
+								<a href="/mypage.html"><button
 										class="goMyPageBtn btn btn-default rcp-btn-nav">MyPage</button></a>
 								<a href="/writerecipe.html"><button
 										class="goWriteRcpBtn btn btn-default rcp-btn-nav">Recipe
 										작성</button></a>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
 		</div>
+
 	</div>
 
 	<header>
@@ -137,20 +151,22 @@
 						<!-- row 태그 종료 -->
 
 						<div class="row">
-							<div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4 wow fadeInUp">
-								<div id="searchBar2" class="input-group wow fadeIn" data-wow-delay="0.5s">
-								
-								  <select id="searchCondition-select" class="form-control">
-		                <option value="recipe" selected="selected">레시피</option>
-		                <option value="chef">쉐프</option>
-		                <option value="material">재료</option>
-		              </select>
-								
-									<input type="text" class="form-control searchKeyword"
+							<div
+								class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4 wow fadeInUp">
+								<div id="searchBar2" class="input-group wow fadeIn"
+									data-wow-delay="0.5s">
+
+									<select id="searchCondition-select" class="form-control">
+										<option value="recipe" selected="selected">레시피</option>
+										<option value="chef">쉐프</option>
+										<option value="material">재료</option>
+									</select> <input type="text" class="form-control searchKeyword"
 										placeholder="레시피명, 쉐프명, 재료명" aria-describedby="basic-addon2">
-									<span class="rcp-search-button input-group-addon" id="basic-addon2">검색</span>
+									<span class="rcp-search-button input-group-addon"
+										id="basic-addon2">검색</span>
 								</div>
-								    <img src="/img/art-roulette.png" class="rcp-roulette" id="rcp-random-recipe"/>
+								<img src="/img/art-roulette.png" class="rcp-roulette"
+									id="rcp-random-recipe" />
 							</div>
 						</div>
 						<!-- row 태그종료 -->
@@ -163,10 +179,8 @@
 	<div class="mouse-icon hidden-xs">
 		<div class="scroll"></div>
 	</div>
-  <!--  random recipe 용이 -->
-  <div id="random-pop-up-banner" class="random-pop-up-banner">
-    
-  </div>
+	<!--  random recipe 용이 -->
+	<div id="random-pop-up-banner" class="random-pop-up-banner"></div>
 	<!-- ------------------------------------------------------------------------------- -->
 
 	<div id='signup-pop-up-banner'>
@@ -242,10 +256,10 @@
 			</div>
 		</div>
 		<div class="rcp-sign-membership" style="margin-top: 50px;">
-			<a href="#" id="userLogin"><span>로그인</span></a>
+			<span id="userLogin">로그인</span>
 		</div>
 	</div>
-	
+
 	<!--  -->
 	<div id='editUserInfo-pop-up-banner'>
 		<form action="user/update.json" method="post" id="updateUserForm"
@@ -262,7 +276,7 @@
 				<!--유저 이미지 업로드 끝--용이  -->
 				<div class="col-md-11 rcp-laytext">
 					<h4 id="updateBoxName"></h4>
-					<h5 id="updateBoxGrade">Master Chef</h5>
+					<h5 id="updateBoxGrade"></h5>
 					<h5 id="updateBoxEmail"></h5>
 				</div>
 			</div>
@@ -322,7 +336,9 @@
 			<div class="rcp-taps">
 				<div class="rcp-first-info"></div>
 
-				<div class="rcp-seconde-info"><a href="#">댓글</a></div>
+				<div class="rcp-seconde-info">
+					<a href="#">댓글</a>
+				</div>
 
 				<div class="rcp-third-info"></div>
 
@@ -343,7 +359,8 @@
 		<div class="tabs-left rcp-list h3 rcp-1024 list1">
 			<div class="tab-content " >
 				<h3 id="rcp-ranking">
-					<a href="/ranking.html">Best Chef</a>
+					<a>Best Of Chef</a>
+					<a href="/ranking.html" class="More">more</a>
 				</h3>
 				<!---------------- Chef Rank --------------------->
 				<div class="row tab-pane active" id="rcp-chef-rank"></div>
@@ -364,7 +381,12 @@
 				<div class="hs-content">
 					<div class="container">
 						<div class="row">
-						<h2 class="rcp-h2-25px"></h2>
+
+						<h2 class="rcp-h2-25px"><a class="More">more</a></h2>
+
+						
+						
+
 							</div>
 						</div>
 					</div>
@@ -377,6 +399,10 @@
 	<!------------------------- Rank List ------------------------------>
 	<div id="footer"></div>
 
+  <!-- 로딩시 뜨는 이미지 -->
+  <div class="wrap-loading display-none">
+    <div><img src="img/img_loading.gif"></div>
+  </div>
 
 	<script id="temp" type="text/x-handlebars-template">
 {{#sessionUser}}
@@ -521,10 +547,13 @@
 <a class="rcp-nickname" href="#">{{data.user.userName}}</a>
 <h4 class="rcp-detail-title">{{data.recipeName}}</h4>
 <div align="center">
-<div class="rcp-scrap-button-text" >
+<div class="rcp-scrap-button-text rcp-scrap-button-text-margin" >
 <a href="#" class="rcp-detail-scrap">
-<i class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></i>  스크랩하기</a></div>
+<i class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></i>  스크랩</a></div>
 </div>
+<div class="rcp-scrap-button-text" name="" style="border: 1px solid white;">
+<a href="#" class="rcp-like" style="color: rgb(255, 255, 255);">
+<i class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top" style="color: rgb(255, 255, 255);"></i>  좋아요</a></div>
 <div class="rcp-info-items">
    <div class="rcp-icons">
    <i class="fa fa-eye" aria-hidden="true"></i>
@@ -592,7 +621,7 @@
  <section name="rcp-custom-list">
     <div class="rcp-list">
       <div class="rcp-1024 list0" >
-        <h3>오늘의 인기 레시피</h3>
+        <h3>오늘의 인기 레시피 <a class="More">more</a></h3> 
         <div class="row rcp-order"></div>
       </div>
     </div>
@@ -604,7 +633,7 @@
  <section name="rcp-custom-list">
     <div class="rcp-list">
       <div class="rcp-1024 list1" >
-        <h3>최신 레시피</h3>
+        <h3>최신 레시피 <a class="More">more</a></h3>
         <div class="row rcp-order"></div>
       </div>
     </div>
@@ -786,13 +815,10 @@
   <div class="fresh-ui">
     <div class="header">
       <div class="photo">     
-      {{#if @first}}
-        <img src="img/profileimg.jpg">
-      {{else if @last}}
-        <img src="img/profile.jpg">
-      {{else}}
-        <img src="img/profile2.jpg">
-      {{/if}}
+      
+             <a href="#" class="rcp-userName"><input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
+             <img src="img/profileImg/{{image}}" class="img-circle rcp-profile"></a>
+
       </div>
       <div class="social">
         <div class="list">
@@ -805,7 +831,7 @@
     </div>
         <div class="content introBox">
           <div class="name">
-                   <p class="rcp-userName1">{{userName}}</p></div>
+                   <p class="rcp-userName2">{{userName}}</p></div>
                     <p class="text">{{email}}</p>      
                   <div class="rcp-ranking"><h4>{{grade}}</h4></div>
           <div class="list clearfix">
@@ -814,8 +840,16 @@
         <div class="cardbtn">
          <button type="button" class="btn btn-default rcp-imp">
               <a href="/mypage.html?{{email}}" class="rcp-userName1 visitbtn">방문하기</a></button>
-              <button type="button" class="btn btn-default rcp-imp rank-scs" data-email="{{email}}" scsflag="{{subscribeUser}}" grade="{{rownum}}">구독하기</button>
-        </div>
+
+              
+      
+              {{#if status}}
+              <button type="button" name="subscribeComplete" class="btn btn-default rcp-imp rank-scs" data-email="{{email}}" >구독중</button>
+              {{else}}
+              <button type="button" class="btn btn-default rcp-imp rank-scs" data-email="{{email}}" >구독하기</button>
+               {{/if}}
+  
+      </div>
     </div>
   </div>
 </div>
@@ -823,8 +857,8 @@
   </script>
 
 
-  <script src="node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
 	<script src="node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
 	<script
@@ -844,12 +878,12 @@
 	<script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
 
 	<!--  사용자 js -->
-  <script src="js/jquery.bpopup.min.js"></script>
-  <script src="js/template/main.js"></script>
-  <script src="js/template/wow.min.js"></script>
-  <script src="js/template/plugin.js"></script>
-  <script src="js/template/custom.js"></script>
-  <script src="js/template/jquery-slider-rolling.js"></script>
+	<script src="js/jquery.bpopup.min.js"></script>
+	<script src="js/template/main.js"></script>
+	<script src="js/template/wow.min.js"></script>
+	<script src="js/template/plugin.js"></script>
+	<script src="js/template/custom.js"></script>
+	<script src="js/template/jquery-slider-rolling.js"></script>
 	<script src="js/common.js"></script>
 	<script src="js/login.js"></script>
 	<script src="js/recipeDetail.js"></script>
@@ -859,7 +893,7 @@
 	<script src="js/common/signup.js"></script>
 	<script src="js/listPageMove.js"></script>
 	<script src="js/mainListAjax.js"></script>
-  <script src="js/mouseover.js"></script>
+	<script src="js/mouseover.js"></script>
 
 
 	<script>

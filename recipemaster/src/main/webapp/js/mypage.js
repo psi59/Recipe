@@ -1,5 +1,9 @@
 document.write('<script type"text/javascript" src="js/common.js"></script>')
+
 $(function() {
+	var userInfo = getUserInfo();
+
+	
 	console.log(location.href.split('?')[1]);
 
 	$.ajax({
@@ -98,7 +102,7 @@ $(function() {
 				success : (function(result) {
 					if (result.status == 'failure') {
 						console.log(result);
-						swal('로그인 후 이용가능합니다.');
+						swal('잘못된 접근입니다.');
 						return;
 					} else {
 						console.log('구독하기 성공성')
@@ -116,7 +120,27 @@ $(function() {
 
 	pageTabs();
 	loadMyPage();
+		
+Handlebars.registerHelper('transientStorage', function(options) {
+		  if (this.regiStatus == 1) {
+		    return options.fn(this);
+		  } else {
+		    return options.inverse(this);
+		  }
 });
+
+Handlebars.registerHelper('regStatus', function(options) {
+	  if ( userInfo == null || location.href.split('?')[1] != userInfo.email ) {
+		if(this.regiStatus == 1){
+			return options.fn(this);
+		}		  
+	  }else{
+		  return options.fn(this);
+	  }
+});
+
+});
+
 
 /* 탑바 js(common.js 에 공통적으로 들어갈부분 일단 넣음 */
 $(function() {

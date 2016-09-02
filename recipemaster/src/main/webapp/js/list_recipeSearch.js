@@ -150,7 +150,9 @@ $(document).ready(function(){
 	  });
 
 });
-
+/*	setTimeout(function() {
+		
+	}, ms)*/
 // 처음 검색했을때의 1페이지 결과 가져오기 -이성현
 function search(sort,order){ 
 			
@@ -178,20 +180,34 @@ function search(sort,order){
 			sortCondition : sort,
 			orderCondition : order,
 			categoryList : categoryList	
-		},
+		},		
 		dataType : 'json',
 		success : function(result) {
-			if (result.status != 'success') {
-				swal('실패 ~');
-				return;
-			}
-			
-			$('#search-result > div').remove();			
-			$('.searchResult > .row').append(template(result));
-
-			methods();
-			$('#recipe-count').text('총 '+result.recipeCount+'개의 레시피가 검색되었습니다.');
-			$('#search-pageNo').attr('value', '1');
+			setTimeout(function() {
+				if (result.status != 'success') {
+					swal('실패 ~');
+					return;
+				}
+				$('.wrap-loading').removeClass('display-none');
+				$('#search-result > div').remove();			
+				$('.searchResult > .row').append(template(result));
+	
+				methods();
+				$('#recipe-count').text('총 '+result.recipeCount+'개의 레시피가 검색되었습니다.');
+				$('#search-pageNo').attr('value', '1');	
+			}, 1300)
+		},
+		// 데이터 조회 중일때 로딩 이미지 보여주기
+		beforeSend:function(){			  
+			$('.wrap-loading').removeClass('display-none');
+			$('html').css("cursor","wait");
+		},
+		// 데이터 받아왔을때 로딩 이미지 감추기
+		complete:function(){
+			setTimeout(function() {
+				$('.wrap-loading').addClass('display-none');
+				$('html').css("cursor","auto");
+			}, 1300)
 		},
 		error : function() {
 			swal('서버 요청 오류 !')
@@ -216,7 +232,7 @@ function searchScrollAppend(){
 	
 	var categoryList = '';
 	$('#rcp-category-section input[type=checkbox]:checked').each(function(index){
-		if(index !== ($('input[type=checkbox]:checked').length-1)){
+		if(index !== ($('#rcp-category-section input[type=checkbox]:checked').length-1)){
 			categoryList += $(this).val()+','; 
 		} else {
 			categoryList += $(this).val();
@@ -238,18 +254,32 @@ function searchScrollAppend(){
 			},
 			dataType : 'json',
 			success : function(result) {
-				if (result.status != 'success') {
-					swal('실패 ~');
-					return;
-				}
-				$('.searchResult > .row').append(template(result));
-				
-				if(result.data != 'lastPage'){
-					$('#search-pageNo').val(result.pageNo);
-				} else {
-					$('#search-pageNo').val('lastPage');
-				}
-				methods();
+				setTimeout(function() {
+					if (result.status != 'success') {
+						swal('실패 ~');
+						return;
+					}
+					$('.searchResult > .row').append(template(result));
+					
+					if(result.data != 'lastPage'){
+						$('#search-pageNo').val(result.pageNo);
+					} else {
+						$('#search-pageNo').val('lastPage');
+					}
+					methods();
+				}, 500)
+			},
+			// 데이터 조회 중일때 로딩 이미지 보여주기
+			beforeSend:function(){			  
+				$('.wrap-loading').removeClass('display-none');
+				$('html').css("cursor","wait");
+			},
+			// 데이터 받아왔을때 로딩 이미지 감추기
+			complete:function(){
+				setTimeout(function() {
+					$('.wrap-loading').addClass('display-none');
+					$('html').css("cursor","auto");
+				}, 500)
 			},
 			error : function() {
 				swal('서버 요청 오류 !')

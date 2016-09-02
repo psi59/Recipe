@@ -1,5 +1,4 @@
 // 이성현
-
 $(document).ready(function(){
 	
 	// Lift card and show stats on Mouseover
@@ -100,59 +99,14 @@ $(document).ready(function(){
 		setTimeout(function(){isAnimating = false;}, 300);			
 	});
 	
-	// 쉐프카드
-	loadUsers();
+
 	
-	function loadUsers() {
-
-		var source = $('#chef-card-template').text();
-		var template = Handlebars.compile(source);
-
-		$.ajax({
-			url : 'user/top3.json',
-			dataType : 'json',
-			method : 'get',
-			success : function(result) {
-				if (result.status != 'success') {
-					swal('chefCard.js 오류');
-					return;
-				}
-
-				$('#rcp-chef-rank').append(template(result));
-			},
-			error : function() {
-				swal('서버 요청 오류!...')
-			}
-		});		
-	}
-	
-	/*---------start of checkSubscribe----------*/
-	/*$.ajax({
-		url : 'recipe/checkSubscribe.json',
-		datatype : 'json',
-		data : {
-			email : $('#rankcard0').attr('data-email')
-		},
-		method : 'post',
-		success : function(result) {
-			if (result.status == 'false') {
-				// swal('실행 중 오류 발생');
-				return;
-			}
-			$('.rcp-imp').text('구독중');
-			$('.rcp-imp').attr('id', 'subscribeComplete');
-		},
-		error : function() {
-			swal('서버 요청 오류!...')
-		}
-	});*/
-	/*---------end of checkSubscribe----------*/
 	
 	
 	
 	$(document).on('click', '.rank-scs', function(evnet) {
 		var target =$(this); 
-		if ($(event.target).is('#subscribeComplete')) {
+		if ($(event.target).is('[name=subscribeComplete]')) {
 			$.ajax({
 				url : 'recipe/deleteSubscribe.json',
 				datatype : 'json',
@@ -164,7 +118,7 @@ $(document).ready(function(){
 
 					console.log('구독하기 해제 성공성공')
 					target.text('구독하기');
-					target.attr('id', '');
+					target.attr('name', '');
 				}),
 				error : (function() {
 					console.log('구독하기 서버요청 error');
@@ -181,13 +135,13 @@ $(document).ready(function(){
 				success : (function(result) {
 					if (result.status == 'failure') {
 						console.log(result);
-						swal('로그인 후 이용가능합니다.');
+						swal('잘못된 접근입니다.');
 						return;
 					} else {
 						console.log('구독하기 성공성')
 						
 						target.text('구독중');
-						target.attr('id', 'subscribeComplete');
+						target.attr('name', 'subscribeComplete');
 						
 					}
 				}),
@@ -198,8 +152,6 @@ $(document).ready(function(){
 		}
 
 	});
-	/*----------------*/
-	
-	
 	
 });
+

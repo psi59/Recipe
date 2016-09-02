@@ -62,18 +62,19 @@ h3 {
 /*------------------Utilities---------------------*/
 a {
   color: inherit;
-  font-weight: inherit;
+  font-weight: bold;
   font-size: inherit;
-  text-decoration: none;
+  text-decoration: none;  
 }
 
 a:hover, a:focus {
   text-decoration: none;
-  color: #231f20;
+  color: #000000;
   -webkit-transition: all 0.35s ease-in-out;
   -moz-transition: all 0.35s ease-in-out;
   -o-transition: all 0.35s ease-in-out;
   transition: all 0.35s ease-in-out;
+  text-decoration: underline;
 }
 
 .fa-lg {

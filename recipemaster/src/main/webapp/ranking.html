@@ -8,7 +8,8 @@
 	href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
 <link rel="stylesheet"
 	href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-
+<link rel="stylesheet"
+  href="/node_modules/sweetalert/dist/sweetalert.css">
 <!-- 사용자 정의 css -->
 <!-- <link rel="stylesheet" href="css/rank.css"> -->
 <link rel="stylesheet" href="css/rankingpage.css">
@@ -27,7 +28,7 @@
 		<div class="nav-container col-md-11 rcp-topbar ranking-bar-infobox">
 			<ul>
 			  <li><a href="/index.html">Home</a></li>
-				<li><a id="s1" href="#1">Best Chef</a></li>
+				<li><a id="s1" href="#1">Best Of Chef</a></li>
 				<li><a id="s2" href="#2">Chef Ranking</a></li>
 				<li><a id="s3" href="#3">Recipe Ranking</a></li>
 			</ul>
@@ -201,7 +202,7 @@
   </div>
 	<!-------------------------------- Rank List --------------------------------->
 	<section id="1" class="home">
-		<h1>Best Chef</h1>
+		<h1>Best Of Chef</h1>
 		<div id="rcp-chef-rank"></div>
 		<!------------------------- Rank List ------------------------------>
 	</section>
@@ -272,7 +273,8 @@
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
 	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
-
+  <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
 	<!--yongyi  -->
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/common/chefCard.js"></script>
@@ -282,7 +284,7 @@
 	<script src="js/updateUser.js"></script>
 	<script src="js/recipeDetail.js"></script>
 	<script src="js/rankingpage.js"></script>
-	<script id="chef-card-template" type="text/x-handlebars-template">
+  <script id="chef-card-template" type="text/x-handlebars-template">
 {{#each data}}
 <div class="fresh-ui-wrap col-md-3">
  {{#if @first}}    
@@ -296,13 +298,8 @@
   <div class="fresh-ui">
     <div class="header">
       <div class="photo">     
-      {{#if @first}}
-        <img src="img/profileimg.jpg">
-      {{else if @last}}
-        <img src="img/profile.jpg">
-      {{else}}
-        <img src="img/profile2.jpg">
-      {{/if}}
+      <a href="#" class="rcp-userName"><input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
+             <img src="img/profileImg/{{image}}" class="img-circle rcp-profile"></a>
       </div>
       <div class="social">
         <div class="list">
@@ -317,16 +314,23 @@
           <div class="name">
                    <p class="rcp-userName1">{{userName}}</p></div>
                     <p class="text">{{email}}</p>      
-                  <div class="rcp-ranking">{{grade}}</div>
+                  <div class="rcp-ranking"><h4>{{grade}}</h4></div>
           <div class="list clearfix">
         <p class="introfont">{{intro}}</p>
         </div>
         <div class="cardbtn">
-         <button type="button" class="btn btn-default">
-              <input type="hidden" value="{{email}}">
-              <a href="#" class="rcp-userName visitbtn">방문하기</a></button>
-              <button type="button" class="btn btn-default">구독하기</button>
-        </div>
+         <button type="button" class="btn btn-default rcp-imp">
+              <a href="/mypage.html?{{email}}" class="visitbtn">방문하기</a></button>
+
+              
+      
+              {{#if status}}
+              <button type="button" name="subscribeComplete" class="btn btn-default rcp-imp rank-scs" data-email="{{email}}" >구독중</button>
+              {{else}}
+              <button type="button" class="btn btn-default rcp-imp rank-scs" data-email="{{email}}" >구독하기</button>
+               {{/if}}
+  
+      </div>
     </div>
   </div>
 </div>

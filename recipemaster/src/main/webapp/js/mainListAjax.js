@@ -17,7 +17,7 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
   
   $(function(){
 	  Main1List();
-	  likeLogin();
+	  likeLogic();
 	  comList();	
 	  goMyPage();
 	  scroll();
@@ -65,8 +65,7 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
 					
 			  
 			  methods();
-			  Main2List();
-			 
+			  Main2List();			 
 			  
 		  },
 		  error : function(){
@@ -178,7 +177,6 @@ function scroll(){
   }
 
   Handlebars.registerHelper('isLike', function(options) {
-	  //console.log(this.likeUser);
 	  if (this.likeUser!=0) {
 	    return options.fn(this);
 	  } else {
@@ -211,7 +209,7 @@ function scroll(){
 	  
   
 //--------------------좋아요 등록, 해제 로직-------------------------------  
-function likeLogin(){
+function likeLogic(){
 	$(document).on('click',('.rcp-like'),function(event){
 		  event.preventDefault();
 		  if($(event.target).is('.active') ){

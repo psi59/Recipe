@@ -279,14 +279,16 @@
 
 <script id="temp" type="text/x-handlebars-template">
 {{#each data}}
-
+{{#regStatus}}
 <div>
 <div class="isotope-grid" id="grid-2">
           <div class="entry filter-food filter-pudding">
             <div class="entry-inner">
               
               <div class="entry-media" name="recipe-image">
-               
+               {{#transientStorage}}{{else}}
+                <p>임시저장됨</p>
+              {{/transientStorage}}
                 <div class="entry-action">
                   <div class="entry-action-inner">
                     <span>
@@ -320,6 +322,7 @@
         
           </div>
 </div>
+{{/regStatus}}
 {{/each}}
 </script>
 
@@ -449,27 +452,6 @@ $(window).scroll(function() {
 			}
 			var source = $('#comRcpList-template').text();
 			var template = Handlebars.compile(source);
-
-			$.ajax({
-				url : 'recipe/comList.json',
-				method : 'post',
-				data : {
-					userNo : userNo,
-					pageNo : parseInt($('#rcpList-pageNo').val()) + 1
-				},
-				dataType : 'json',
-				success : function(result) {
-					if (result.status != 'success') {
-						//swal('실패 ~');
-						return;
-					}
-					$('#tabs-1 .rcp-subscribe').append(template(result));
-					$('#rcpList-pageNo').val(result.pageNo);
-				},
-				error : function() {
-					//swal('오호라~','더이상 데이터가 없습니다.')
-				}
-			})
 		}
 	</script>
 	<script>

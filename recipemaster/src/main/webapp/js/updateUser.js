@@ -4,8 +4,7 @@ $(function(){
 	var userInfo = getUserInfo();
 	
 	var profileImage = new Array();
-	var tempFile = new File([""], "");
-	profileImage[0] = tempFile;
+	profileImage[0] = new File([""], "");
 	
 	$('#userInfoEditBtn').on('click', function() {
 		console.log(userInfo);
@@ -13,7 +12,8 @@ $(function(){
 		if (userInfo.userNo != null) {
 			$('#updateBoxEmail').text(userInfo.email);
 			$('#updateBoxName').text(userInfo.userName);
-			$('#profileGrade').text(userInfo.recipeUrl);
+			$('#updateBoxGrade').text(userInfo.grade);
+			$('#profileGrade').text(userInfo.grade);
 			$('#updateFormUserNo').val(userInfo.userNo);
 			$('#updateFormEmail').val(userInfo.email);
 			$('.rcp-up-preview').append($('<img class="rcp-up-preview" src="img/profileImg/'+userInfo.image+'">'));

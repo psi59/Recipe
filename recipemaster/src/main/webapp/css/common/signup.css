@@ -27,6 +27,11 @@
 	font-family: 'Nanum Brush Script', serif;
 }
 
+.rcp-sign-membership {
+	margin-top: 25px;
+	text-align: center;
+}
+
 .rcp-sign-membership span {
 	margin: 25px;
 	border-style: solid;
@@ -40,7 +45,6 @@
 
 
 .rcp-sign-membership >a {
-	border: 1px solid rgba(181, 21, 21, 0.7);
 	padding-top: .5em;
 	padding-bottom: .5em;
 	padding-left: 1em;

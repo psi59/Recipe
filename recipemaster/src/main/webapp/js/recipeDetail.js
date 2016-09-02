@@ -82,8 +82,6 @@ function recipeDetail(){
 						$("body").css("overflow", "hidden");						
 						$('.rcp-304').append( comDetailInfoTemp(result) );
 						$('.rcp-info-images').append( comDetailImageMain(result.data) );
-						console.log("data : "+result.data);
-						console.log("data : "+result.data.representImages[0]);
 						$('.rcp-detail-body').append( comDetailMainTemp(result.data) );
 						$('.rcp-detail-body').append( comDetailTemp(result.data) );
 						$('.rcp-info-images').append( comDetailImageStep(result.data) );		
@@ -246,6 +244,58 @@ function deleteCommentFunction(event){
 		
 		})	
 }
+
+function recipeDetailLike(){
+	
+	$(document).on('click','.rcp-like',function(event){
+		event.preventDefault();
+		if($(event.target).is('.active') ){
+			  $.ajax({
+				  url:'recipe/likeDown.json?recipeNo=' + $(event.target).parent()
+				  .parent().children('input[name="rcp-hidden-recipeNo"]').val()+"&userNo="
+				  + userInfo.userNo,
+				  dataType:'json',
+				  method:'get',
+				  success:function(){
+					  console.log("like down 성공성공");
+					  $(event.target).css('color','#231f20');
+					  $(event.target).parent().parent().css('color','#231f20');
+					  $(event.target).parent().parent().children('.glyphicon-heart-empty').attr('class','glyphicon glyphicon-heart-empty')
+					  $(event.target).parent().append('<b class="rcp-like" name="rcp-like">좋아요</b>');
+					  $(event.target).remove();
+					  
+				  },
+				  error:function(){
+					  swal('like : 서버 요청 오류');
+				
+				  }
+			  });
+		  }
+		  else{
+			  $.ajax({
+				  url:'recipe/likeDown.json?recipeNo=' + $(event.target).parent()
+				  .parent().children('input[name="rcp-hidden-recipeNo"]').val()+"&userNo="
+				  + userInfo.userNo,
+				  dataType:'json',
+				  method:'get',
+				  success:function(){
+					  console.log("like up 성공성공");
+					  $(event.target).css('color','#337ab7');
+					  $(event.target).parent().parent().css('color','#337ab7');
+					  $(event.target).parent().append('<b class="rcp-like active" name="rcp-like">좋아요</b>');
+					  $(event.target).remove();
+					  
+				  },
+				  error:function(){
+					  swal('ajax likeclick: 서버 요청 오류');
+				  }
+			  });
+		  }
+	  });
+	
+}
+
+//----------------------Like function 끝--------------------
 
 function recipeScrap(){
 	$(document).on('click','.rcp-detail-scrap',function(event){
