@@ -2,11 +2,11 @@ window.onload = function () {
 	
 	loadUsers();
 	$('.rankingWrapper').bxSlider({
-	      startSlide:0,
+//	      startSlide:0,
 	      pager: false,
 	      moveSlides: 1,
-	      infiniteLoop:false
-	    });
+	      infiniteLoop:true
+	});
 	loadMonthRank();
 	loadTodayRank();
 	

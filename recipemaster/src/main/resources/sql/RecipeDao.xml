@@ -299,6 +299,7 @@
 	    LEFT OUTER JOIN rcp_scr scr ON
       r1.rcpno = scr.rcpno and scr.uno = #{userNo}
 	    INNER JOIN USERS u ON u.uno = r1.uno
+	    WHERE rgst = 0
 	    GROUP BY rcpno
 		<if test="request == 1">
 			ORDER BY ttotalPoint DESC
@@ -370,13 +371,15 @@
 	<!-- 좋아요 *3 스크랩 *3 조회수 *1 -->
 	<select id="recipeRankList" resultMap="recipeMap" parameterType="Map">
 		SELECT @rownum:=@rownum+1 rownum,vt.* FROM (SELECT
-		r1.rcpno,r1.name,r1.hits,IFNULL(r2.cnt,0) countLike,IFNULL(r3.cnt,0)
+		r1.rcpno,r1.name,r1.hits,r1.rgst,IFNULL(r2.cnt,0) countLike,IFNULL(r3.cnt,0)
 		countScrap,
 		SUM((IFNULL(hits,0)*1)+(IFNULL(r2.cnt,0)*3)+(IFNULL(r3.cnt,0)*3))
 		totalPoint FROM RCPS r1 LEFT OUTER JOIN (SELECT rcpno,COUNT(uno) cnt
 		FROM RCP_LIK GROUP BY rcpno) r2 ON r1.rcpno=r2.rcpno LEFT OUTER JOIN
 		(SELECT rcpno,COUNT(uno) cnt FROM RCP_SCR GROUP BY rcpno) r3 ON
-		r2.rcpno=r3.rcpno INNER JOIN(select @rownum:=0) t GROUP BY r1.rcpno
+		r2.rcpno=r3.rcpno INNER JOIN(select @rownum:=0) t 
+		WHERE rgst = 0
+		GROUP BY r1.rcpno
 		limit #{len}) vt ORDER BY vt.totalPoint DESC
 	</select>
 
@@ -409,6 +412,6 @@
 		INNER JOIN(select @rownum:=0) t
 		ORDER BY RAND()) vt
 		) vt1
-		WHERE rownum=1
+		WHERE rownum=1 and rgst = 0
 	</select>
 </mapper>
