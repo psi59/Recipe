@@ -292,4 +292,67 @@ public class UserController {
 	    }
 	    return new Gson().toJson(result);
 	  }
+	 @RequestMapping(path = "monthtop3", produces = "application/json;charset=UTF-8")
+   @ResponseBody
+   public String monthtop3(HttpSession session) {
+     HashMap<String, Object> result = new HashMap<>();
+     User loginUser = new User();
+     if(session.getAttribute("loginUser")!=null){
+       loginUser=(User) session.getAttribute("loginUser");  
+     }else{
+       loginUser.setUserNo(0);
+     }
+     
+     try {
+       int uno=loginUser.getUserNo();
+       List<User> list = userService.selectMonthRank(uno);
+       result.put("status", "success");
+       result.put("data", list);
+     } catch (Exception e) {
+       result.put("status", "failure");
+     }
+     return new Gson().toJson(result);
+   }
+	 @RequestMapping(path = "todaytop3", produces = "application/json;charset=UTF-8")
+   @ResponseBody
+   public String todaytop3(HttpSession session) {
+     HashMap<String, Object> result = new HashMap<>();
+     User loginUser = new User();
+     if(session.getAttribute("loginUser")!=null){
+       loginUser=(User) session.getAttribute("loginUser");  
+     }else{
+       loginUser.setUserNo(0);
+     }
+     
+     try {
+       int uno=loginUser.getUserNo();
+       List<User> list = userService.selectTodayRank(uno);
+       result.put("status", "success");
+       result.put("data", list);
+     } catch (Exception e) {
+       result.put("status", "failure");
+     }
+     return new Gson().toJson(result);
+   }
+	 
+	 @RequestMapping(path = "myrank", produces = "application/json;charset=UTF-8")
+	  @ResponseBody
+	  public String selectMyRank(HttpSession session) {
+	    HashMap<String, Object> result = new HashMap<>();
+	    User loginUser = new User();
+      if(session.getAttribute("loginUser")!=null){
+        loginUser=(User) session.getAttribute("loginUser");  
+      }else{
+        loginUser.setUserNo(0);
+      }
+	    try {
+	      int uno=loginUser.getUserNo();
+	      System.out.println("uno:"+uno);
+	      result.put("data", userService.selectMyRank(uno));
+	      result.put("status", "success");
+	    } catch (Exception e) {
+	      result.put("status", "failure");
+	    }
+	    return new Gson().toJson(result);
+	  }
 }
