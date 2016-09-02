@@ -30,19 +30,19 @@ $(function(){
 })
 
 
-	Handlebars.registerHelper("inc", function(value, options){
-			{
+Handlebars.registerHelper("inc", function(value, options){
+	{
 		return parseInt(value) + 1;
-			}
-	});
+	}
+});
 
 Handlebars.registerHelper('x-button', function(options) {
 	console.log("userNo : "+this.userNo)
 	if(userInfo != null && userInfo.userNo == this.userNo){
-	
-	    return options.fn(this); 
+
+		return options.fn(this); 
 	}
-	});
+});
 
 
 
@@ -66,7 +66,7 @@ function recipeDetail(){
 				$('.rcp-header > .date').text(result.data.recipeDate);
 				$('.hash').text(result.data.intro);
 				$('div[name="rcp-explanation"]:eq(1)').text(result.data.intro);
-				
+
 				$('#detail_pop_up').bPopup({
 					position: (['auto','auto']),
 					positionStyle :[('fixed')],
@@ -78,35 +78,50 @@ function recipeDetail(){
 						var detailTemp = $('#recipe-detail-template').html();
 						var comDetailTemp = Handlebars.compile(detailTemp); 
 
- 						
+
 						$("body").css("overflow", "hidden");						
 						$('.rcp-304').append( comDetailInfoTemp(result) );
 						$('.rcp-info-images').append( comDetailImageMain(result.data) );
 						$('.rcp-detail-body').append( comDetailMainTemp(result.data) );
 						$('.rcp-detail-body').append( comDetailTemp(result.data) );
 						$('.rcp-info-images').append( comDetailImageStep(result.data) );		
+						
 						slider = $('.rcp-detail-body').bxSlider({
 							startSlide:0,
 							mode:'vertical',
 							pager: false,
 							moveSlides: 1,
-							infiniteLoop:false
+							infiniteLoop:false, 
+							controls:false
 						});
+						
 						console.log("result data ll : "+result.data);
-						
+
 						$('.rcp-detail-body').css('transform', 'translate3d(0px, 0px, 0px)');
-						
+
 						for(var i=0; i<$('.rcp-body').length; i++){
 							$('div[name="rcp-body"]:eq('+i+')').attr('id',"div"+i);
 							$('a[name="rcp-nav-images"]:eq('+i+')').attr('href','#div'+i);
 							$('a[name="rcp-nav-bgImages-button"]:eq('+i+')').attr('href','#div'+i);
 						}
-//						
+						
+						$('.rcp-mainSlider').bxSlider({
+							startSlide:0,
+							pager: false,
+							moveSlides: 1,
+							infiniteLoop:false, 
+						});
+
+						$('.rcp-detail-body').on("mousewheel", function (event) {
+							var delta = event.originalEvent.wheelDelta || -event.originalEvent.detail;
+							init_scroll(event, delta, slider)
+						});
+
 //						$(document).on('click','.rcp-info-images-emts',function(event){
-//							event.preventDefault();
-//							var div = $(event.target).parent().attr('href');
-//							console.log(div);
-//							$(location).attr('href',div);
+//						event.preventDefault();
+//						var div = $(event.target).parent().attr('href');
+//						console.log(div);
+//						$(location).attr('href',div);
 //						})
 
 
@@ -122,9 +137,8 @@ function recipeDetail(){
 								$('.rcp-detail-scrap').css('color','white');
 								$('.rcp-detail-scrap i').css('color','white');	
 							}
-							
-					}
-						},
+						}
+					},
 					onClose:function(){ 
 						$("body").css("overflow", "auto");
 						$(".detail-images").remove();
@@ -156,7 +170,7 @@ function comment(){
 	$(document).on('click','.rcp-seconde-info',function(evnet){
 		evnet.preventDefault();
 		commentFunction();
-		
+
 	})
 }
 
@@ -175,18 +189,18 @@ function commentFunction(){
 					+'<h3 class="rcp-comment-count"></h3>'
 					+'</div>'
 					+'<div class="rcp-detail-body"></div>');
-		
+
 			if(result.data.length <1) {
 				$('.rcp-comment-count').text("등록된 댓글이 아직 없습니다.");
 			}else{					
 				$('.rcp-comment-count').text(result.data[0].countComment+" Comments");
-				
+
 			}		
-		
+
 			$('.rcp-detail-body').append( comRecipeComment(result) );				
 			$('.rcp-detail-body').append( comRecipeAddComment(result) );
 			$('#forCommentRecipeNumber').val( $('.rcp-hidden-recipeNo').val());
-			
+
 		},error : function(){
 			swal('서버 요청 오류');
 		}		
@@ -220,79 +234,79 @@ function addComment(){
 
 function deleteComment(){
 	$(document).on('click','#deleteComment',function(event){
-	event.preventDefault();
-	deleteCommentFunction(event);
+		event.preventDefault();
+		deleteCommentFunction(event);
 	})
 }
 
 function deleteCommentFunction(event){
 	console.log('펑션왔나요 ')
-		$.ajax({
-			url:'recipe/deleteComment.json',
-			dataType:'json',
-			method:'post',		
-			data:{
-				commentNo : $(event.target).parent().children('#commentNo').val()
-			},
-			success:function(result){
-				console.log('comment delete 성공성공 ^^');
-				commentFunction();
-			},
-			error:function(){
-				console.log('comment delete 실패실패 ㅠㅠ');
-			}
-		
-		})	
+	$.ajax({
+		url:'recipe/deleteComment.json',
+		dataType:'json',
+		method:'post',		
+		data:{
+			commentNo : $(event.target).parent().children('#commentNo').val()
+		},
+		success:function(result){
+			console.log('comment delete 성공성공 ^^');
+			commentFunction();
+		},
+		error:function(){
+			console.log('comment delete 실패실패 ㅠㅠ');
+		}
+
+	})	
 }
 
 function recipeDetailLike(){
-	
+
 	$(document).on('click','.rcp-like',function(event){
 		event.preventDefault();
 		if($(event.target).is('.active') ){
-			  $.ajax({
-				  url:'recipe/likeDown.json?recipeNo=' + $(event.target).parent()
-				  .parent().children('input[name="rcp-hidden-recipeNo"]').val()+"&userNo="
-				  + userInfo.userNo,
-				  dataType:'json',
-				  method:'get',
-				  success:function(){
-					  console.log("like down 성공성공");
-					  $(event.target).css('color','#231f20');
-					  $(event.target).parent().parent().css('color','#231f20');
-					  $(event.target).parent().parent().children('.glyphicon-heart-empty').attr('class','glyphicon glyphicon-heart-empty')
-					  $(event.target).parent().append('<b class="rcp-like" name="rcp-like">좋아요</b>');
-					  $(event.target).remove();
-					  
-				  },
-				  error:function(){
-					  swal('like : 서버 요청 오류');
-				
-				  }
-			  });
-		  }
-		  else{
-			  $.ajax({
-				  url:'recipe/likeDown.json?recipeNo=' + $(event.target).parent()
-				  .parent().children('input[name="rcp-hidden-recipeNo"]').val()+"&userNo="
-				  + userInfo.userNo,
-				  dataType:'json',
-				  method:'get',
-				  success:function(){
-					  console.log("like up 성공성공");
-					  $(event.target).css('color','#337ab7');
-					  $(event.target).parent().parent().css('color','#337ab7');
-					  $(event.target).parent().append('<b class="rcp-like active" name="rcp-like">좋아요</b>');
-					  $(event.target).remove();
-					  
-				  },
-				  error:function(){
-					  swal('ajax likeclick: 서버 요청 오류');
-				  }
-			  });
-		  }
-	  });
-	
+			$.ajax({
+				url:'recipe/likeDown.json?recipeNo=' + $(event.target).parent()
+				.parent().children('input[name="rcp-hidden-recipeNo"]').val()+"&userNo="
+				+ userInfo.userNo,
+				dataType:'json',
+				method:'get',
+				success:function(){
+					console.log("like down 성공성공");
+					$(event.target).css('color','#231f20');
+					$(event.target).parent().parent().css('color','#231f20');
+					$(event.target).parent().parent().children('.glyphicon-heart-empty').attr('class','glyphicon glyphicon-heart-empty')
+					$(event.target).parent().append('<b class="rcp-like" name="rcp-like">좋아요</b>');
+					$(event.target).remove();
+
+				},
+				error:function(){
+					swal('like : 서버 요청 오류');
+
+				}
+			});
+		}
+		else{
+			$.ajax({
+				url:'recipe/likeDown.json?recipeNo=' + $(event.target).parent()
+				.parent().children('input[name="rcp-hidden-recipeNo"]').val()+"&userNo="
+				+ userInfo.userNo,
+				dataType:'json',
+				method:'get',
+				success:function(){
+					console.log("like up 성공성공");
+					$(event.target).css('color','#337ab7');
+					$(event.target).parent().parent().css('color','#337ab7');
+					$(event.target).parent().append('<b class="rcp-like active" name="rcp-like">좋아요</b>');
+					$(event.target).remove();
+
+				},
+				error:function(){
+					swal('ajax likeclick: 서버 요청 오류');
+				}
+			});
+		}
+	});
+
 }
 
 //----------------------Like function 끝--------------------
@@ -358,3 +372,22 @@ function recipeScrap(){
 //		----------------------스크랩 요청 AJAX 끝--------------------
 	})
 };
+
+var lastAnimation =0;
+
+function init_scroll(event, delta, slider) {
+    deltaOfInterest = delta;
+    var timeNow = new Date().getTime();
+    // Cancel scroll if currently animating or within quiet period
+    if(timeNow - lastAnimation < 500 + 700) {
+        event.preventDefault();
+        return;
+    }
+
+    if (deltaOfInterest < 0) {
+      slider.goToNextSlide();
+    } else {
+      slider.goToPrevSlide();
+    }
+    lastAnimation = timeNow;
+}

@@ -7,7 +7,7 @@
 <meta name="description" content="">
 
 <!-- Template css -->
-
+<link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="css/template/animate.css">
 <!-- <link rel="stylesheet" href="css/template/styles.css"> -->
 <link rel="stylesheet" href="css/template/plugins.css">
@@ -472,17 +472,15 @@
                   <h6 class="rcp-bodyTitle">Main</h6>
                     
                 </div>
-                <div>
-                  
-                </div>
-               </div>
-                   {{#each representImages}}
-                <img src="img/representImg/{{this}}" class="rcp-images" name="rcp-images-position" id="rcp-images-position">
+                <ul class="rcp-mainSlider">
+                  {{#each representImages}}
+                <li class="rcp-mainImg"><img class="rcp-images rcp-mainImg1" src="img/representImg/{{this}}" class="rcp-images" name="rcp-images-position" id="rcp-images-position"></li>
                     {{/each}}
+                </ul>
+               </div>
                <div class="rcp-explanation" name="rcp-explanation">
                   <p></p>
                 </div>
-             
             </div>
 
 </script>
@@ -894,6 +892,7 @@
 	<script src="js/listPageMove.js"></script>
 	<script src="js/mainListAjax.js"></script>
 	<script src="js/mouseover.js"></script>
+	  <script src="js/main.js"></script>
 
 
 	<script>

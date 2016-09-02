@@ -122,7 +122,7 @@ $(function() {
 	loadMyPage();
 		
 Handlebars.registerHelper('transientStorage', function(options) {
-		  if (this.regiStatus == 1) {
+		  if (this.regiStatus == 0) {
 		    return options.fn(this);
 		  } else {
 		    return options.inverse(this);
@@ -131,7 +131,7 @@ Handlebars.registerHelper('transientStorage', function(options) {
 
 Handlebars.registerHelper('regStatus', function(options) {
 	  if ( userInfo == null || location.href.split('?')[1] != userInfo.email ) {
-		if(this.regiStatus == 1){
+		if(this.regiStatus == 0){
 			return options.fn(this);
 		}		  
 	  }else{
