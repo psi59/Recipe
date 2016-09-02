@@ -108,10 +108,9 @@ window.onload = function () {
 	
 	
 	//start of 쉐프카드
-	loadUsers();
+	
 	
 	function loadUsers() {
-
 		var source = $('#chef-card-template').text();
 		var template = Handlebars.compile(source);
 
@@ -119,6 +118,7 @@ window.onload = function () {
 			url : 'user/top3.json',
 			dataType : 'json',
 			method : 'get',
+	        async: false,
 			success : function(result) {
 				if (result.status != 'success') {
 					swal('chefCard.js 오류');
@@ -142,6 +142,67 @@ window.onload = function () {
 		});		
 	}//end of 쉐프카드
 	
+	function loadMonthRank() {
+		var source = $('#chef-card-template').text();
+		var template = Handlebars.compile(source);
+
+		$.ajax({
+			url : 'user/monthtop3.json',
+			dataType : 'json',
+			method : 'get',
+			success : function(result) {
+				if (result.status != 'success') {
+					swal('chefCard.js 오류');
+					return;
+				}
+				
+				for (var i = 0; i < result.data.length; i++) {
+					if (result.data[i].subscribeUser==0) {
+						result.data[i].status = null;
+						console.log('unlogin::'+result.data[i].status);
+					}else {result.data[i].status = Boolean(true);
+					console.log('login::'+result.data[i].status);
+					}
+				}
+				console.log("month rank : "+result.data);
+				$('#rcp-chef-rank-month').append(template(result));
+			},
+			error : function() {
+				swal('서버 요청 오류!...')
+			}
+		});		
+	}//end of 쉐프카드
+	
+	function loadTodayRank() {
+		var source = $('#chef-card-template').text();
+		var template = Handlebars.compile(source);
+
+		$.ajax({
+			url : 'user/todaytop3.json',
+			dataType : 'json',
+			method : 'get',
+			success : function(result) {
+				if (result.status != 'success') {
+					swal('chefCard.js 오류');
+					return;
+				}
+				
+				for (var i = 0; i < result.data.length; i++) {
+					if (result.data[i].subscribeUser==0) {
+						result.data[i].status = null;
+						console.log('unlogin::'+result.data[i].status);
+					}else {result.data[i].status = Boolean(true);
+					console.log('login::'+result.data[i].status);
+					}
+				}
+				console.log("today rank : "+result);
+				$('#rcp-chef-rank-today').append(template(result));
+			},
+			error : function() {
+				swal('서버 요청 오류!...')
+			}
+		});		
+	}//end of 쉐프카드
 	
 };
 

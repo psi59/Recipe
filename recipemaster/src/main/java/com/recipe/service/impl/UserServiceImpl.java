@@ -104,12 +104,31 @@ public class UserServiceImpl implements UserService {
   
   @Override
   public List<User> selectRankListSCS(int pageNo, int pageSize, int uno) {
-    HashMap<String,Object> params= new HashMap<>();    
-    System.out.println("이곳은  service impl입니다."+pageNo+"?"+pageSize+"?"+uno);
+    HashMap<String,Object> params= new HashMap<>();
     params.put("startIndex", (pageNo - 1) * pageSize);
-    params.put("len", pageSize);   
+    params.put("len", pageSize);
     params.put("uno", uno);
         
     return userDao.selectRankListSCS(params);
+  }
+  
+  @Override
+  public List<User> selectMonthRank(int uno) {
+    HashMap<String,Object> params= new HashMap<>();  
+    params.put("uno", uno);
+        
+    return userDao.selectMonthRank(params);
+  }
+  
+  @Override
+  public List<User> selectTodayRank(int uno) {
+    HashMap<String,Object> params= new HashMap<>();
+    params.put("uno", uno);
+    return userDao.selectTodayRank(params);
+  }
+  
+  @Override
+  public User selectMyRank(int uno) {    
+    return userDao.selectMyRank(uno);
   }
 }
