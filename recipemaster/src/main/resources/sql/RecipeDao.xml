@@ -271,7 +271,7 @@
 	<select id="recipeList" resultMap="recipeMap" parameterType="Map">
 		SELECT r1.rcpno rcpno,r1.uno
 	    uno,r1.rcp_dt,r1.name,r1.intro,r1.c_time,r1.rpimg,r1.ptn,
-	    r1.hits,r1.rgst,r1.gpa, u.uno userNo,u.name
+	    r1.hits,r1.rgst,truncate(r1.gpa,1) gpa, u.uno userNo,u.name
 	    userName,u.email,u.img,
 	    IFNULL(l.uno,0) likeUser,
 	    IFNULL(scr.uno,0) scrapUser,
@@ -319,7 +319,7 @@
 	<select id="selectOne" resultMap="recipeMap" parameterType="INTEGER">
 		SELECT DISTINCT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn,
 		r.rcp_dt, r.hits, r.rpimg,
-		r.rgst, r.gpa, r.rcp_pd, u.uno,
+		r.rgst, truncate(r.gpa,1) gpa, r.rcp_pd, u.uno,
 		u.email,u.name userName,s.uno scrapUser,
 		s.rcpno,l.uno likeUser,
 		(select count(rcpno)
@@ -399,7 +399,7 @@
 		SELECT r.rcpno rcpno, r.uno uno, r.name, r.intro, r.c_time,r.rpimg,
 		r.ptn, r.rcp_dt, r.hits,IFNULL(r2.cnt,0) countLike,IFNULL(r3.cnt,0)
 		countScrap,
-		r.rgst, r.gpa, u.uno userNo, u.img, u.name userName, u.email
+		r.rgst, truncate(r.gpa,1) gpa, u.uno userNo, u.img, u.name userName, u.email
 		FROM users u
 		INNER JOIN rcps r on u.uno=r.uno
 		LEFT OUTER JOIN (SELECT rcpno,COUNT(uno) cnt FROM rcp_lik GROUP BY

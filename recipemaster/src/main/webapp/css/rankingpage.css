@@ -307,8 +307,7 @@ footer a:hover {
 	left: 0%;
 	top: 1%;
 	z-index: 88888;
-	width: 67px;
-	height: 78px;
+	width: 100px;
 }
 
 .rcp-rankmedal-small {
@@ -491,7 +490,7 @@ body {
 .fresh-ui {
 	padding: 20px;
 	height: 500px;
-	border-top: 5px solid #F15F5F;
+	border-top: 5px solid #b51515;
 }
 
 .fresh-ui:hover .header .social .list {
