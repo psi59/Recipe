@@ -40,22 +40,12 @@
 	border-radius: 50px;
 	border: 1px dashed transparent;
 }
-
+/* 
 .hs-recipes.grid .entry .entry-action a:hover {
 	background: #f8a631;
 	color: #fff;
 	border-color: #fff;
-}
-
-.entry-inner:hover .entry-action {
-	background: rgba(248, 166, 49, 0.5);
-}
-
-.entry-inner:hover .entry-action span
-	{
-	opacity: 1;
-	filter: alpha(opacity = 100);
-}
+} */
 
 .entry-inner:hover .entry-action span:first-child
 	{
@@ -98,7 +88,7 @@
 	height: 160px;
 	background-position: center center;
 	background-repeat: no-repeat;
-	background-size: 350px;
+	background-size: cover;
 }
 
 .rcp-mypage-section .entry {
@@ -132,9 +122,6 @@
 	text-align: center;
 }
 
-.hs-recipes.grid .entry .entry-inner:hover .entry-action {
-	background: rgba(248, 166, 49, 0.5);
-}
 
 .hs-recipes.grid .entry .entry-action a {
 	line-height: 34px;

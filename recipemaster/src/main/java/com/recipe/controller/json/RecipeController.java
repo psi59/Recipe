@@ -83,8 +83,7 @@ public class RecipeController {
   public String recipeSearchAutoComplete(@RequestParam String searchValue) {
     HashMap<String, Object> result = new HashMap<>();
     List<String> recipeNameList = recipeService.getRecipeNameList(searchValue);
-    for (String recipeName : recipeNameList) {
-      System.out.println("Recipe Name : " + recipeName);
+    for (String recipeName : recipeNameList) {      
     }
     try {
       result.put("status", "success");
@@ -111,16 +110,12 @@ public class RecipeController {
     List<Map> materialList = new ArrayList<>();
     JsonArray recipeProduceDatas = new JsonArray();
     JsonArray recipeRepresentImages = new JsonArray();
-
-    System.out.println(recipe);
-
+    
     User user = new User();
     user.setUserNo(1);
 
     for (int i = 0; i < materialNos.length; i++) {
       Map<String, String> matertialInfo = new HashMap<>();
-      System.out.println(materialNos.toString());
-      System.out.println(materialAmounts.toString());
       matertialInfo.put("materialNo", materialNos[i]);
       matertialInfo.put("materialAmount", materialAmounts[i]);
       materialList.add(matertialInfo);
@@ -235,9 +230,7 @@ public class RecipeController {
     }
 
     for (int i = 0; i < materialNos.length; i++) {
-      Map<String, String> matertialInfo = new HashMap<>();
-      System.out.println(materialNos.toString());
-      System.out.println(materialAmounts.toString());
+      Map<String, String> matertialInfo = new HashMap<>();      
       matertialInfo.put("materialNo", materialNos[i]);
       matertialInfo.put("materialAmount", materialAmounts[i]);
       materialList.add(matertialInfo);
@@ -298,8 +291,6 @@ public class RecipeController {
   public String list(@RequestParam int userNo, @RequestParam(defaultValue = "4") int pageSize, int request) {
     HashMap<String, Object> result = new HashMap<>();
     List<Recipe> list = recipeService.getRecipeList(userNo, pageSize, request);
-System.out.println("session userNo : "+userNo);
-
     try {
       result.put("status", "success");
       result.put("data", list);
@@ -510,8 +501,6 @@ System.out.println("session userNo : "+userNo);
       if(((User)session.getAttribute("loginUser"))==null){
         
         result.put("status", "failure");
-        System.out.println("login안함");
-        System.out.println(result);
         return new Gson().toJson(result);
        }
       
@@ -520,7 +509,7 @@ System.out.println("session userNo : "+userNo);
        
       if (toUserNo==fromUserNo) {
         result.put("status", "failure");
-        System.out.println("지꺼구독 ㄴㄴ해");
+        
         return new Gson().toJson(result);
       }
       
@@ -539,8 +528,6 @@ System.out.println("session userNo : "+userNo);
 		HashMap<String,Object> result = new HashMap<>();
 		//toUserNo = 구독자, fromUserNo = 회원번호 (해당 회원 페이지)
 		int toUserNo=CommonUtil.getSessionUser(session).getUserNo();
-		System.out.println("toUserNo::"+toUserNo);
-		System.out.println("fromUserNo_email::"+email);
 
 		int fromUserNo=userService.selectFromEmail(email).getUserNo();
 
@@ -587,13 +574,11 @@ System.out.println("session userNo : "+userNo);
   //	---------------------고재현 -------------------------
   @RequestMapping(path="materialSearch",produces="application/json;charset=UTF-8")
   @ResponseBody
-  public String mts(@RequestParam("searchValue") String materialName, Model model) {
-    System.out.println(materialName);
+  public String mts(@RequestParam("searchValue") String materialName, Model model) {    
     Map<String, Object> result = new HashMap<>();
     List<Material> list = recipeService.getMaterial(materialName);
     List<Map<String, Object>> foodstuffList = new ArrayList<>();
-    List<Map<String, Object>> seasoningList = new ArrayList<>();
-    System.out.println(list);
+    List<Map<String, Object>> seasoningList = new ArrayList<>();    
     try {
       for (Material mt : list) {
         Map<String, Object> seasoning = new HashMap<>();
@@ -615,7 +600,7 @@ System.out.println("session userNo : "+userNo);
     } catch (Exception e) {
       result.put("status", "false");
     }
-    System.out.println(new Gson().toJson(result));
+    
     return new Gson().toJson(result);
   }
 
@@ -639,13 +624,13 @@ System.out.println("session userNo : "+userNo);
   @ResponseBody
   public String userPage(String email, int request, HttpSession session) {
     HashMap<String, Object> result = new HashMap<>();
-    System.out.println("email : "+email);
+   
     try {
       List<Recipe> recipeList = new ArrayList<Recipe>();
       List<Recipe> userNumbers = new ArrayList<Recipe>();
       int userNo = CommonUtil.getSessionUser(session).getUserNo(); 
       User user = userService.selectFromEmail(email);
-      System.out.println("email로 뽑아온 User정보 : "+user);
+      
 
       userNumbers = recipeService.selectScrapUserNoMypage(user.getUserNo());
       Recipe recipe = CommonUtil.functionForUserNumbers(userNumbers,request);
@@ -659,25 +644,19 @@ System.out.println("session userNo : "+userNo);
         userNumbers = recipeService.selectSubscribeMypage(user.getUserNo());        
         Recipe subscribeRecipe = CommonUtil.functionForUserNumbers(userNumbers,request);        
         //getSession(userNo, session);
-        recipeList = recipeService.selectMypageRecipe(subscribeRecipe.getScrap(), userNo,request);
-        System.out.println("구독 레시피들 정보 : "+recipeList );
-        
-      }
-       System.out.println("유저 페이지 메인 : "+recipeList); 
+        recipeList = recipeService.selectMypageRecipe(subscribeRecipe.getScrap(), userNo,request);              
+      }       
       if(request == 5){
         List<List> mainSubscribe = new ArrayList<List>();
-        userNumbers = recipeService.selectSubscribeMypage(user.getUserNo());
-        System.out.println("userNumbers : "+userNumbers);
+        userNumbers = recipeService.selectSubscribeMypage(user.getUserNo());       
         for(int i=0; i<userNumbers.size(); i++){
          
           recipeList= recipeService.selectMypageRecipe(String.valueOf(userNumbers.get(i).getSubscribeNum()), userNo,request);
           //System.out.println("request 5 : "+recipeList);
           mainSubscribe.add(recipeList);  
           
-        }
-        System.out.println("ddddd"+userNumbers.size());
-        result.put("data", mainSubscribe);
-        System.out.println("mainSubscribe"+mainSubscribe);
+        }        
+        result.put("data", mainSubscribe);        
       }else{
       result.put("data",recipeList);
       }
@@ -703,8 +682,6 @@ System.out.println("session userNo : "+userNo);
       result.put("status","success");
       result.put("data", myRecipeList);
       result.put("pageNo",pageNo);
-      System.out.println("pageNo::"+result.get("pageNo"));
-      System.out.println("data::"+result.get("data"));
     }catch (Exception e){ 
       result.put("status", "false");
     } 
@@ -763,8 +740,7 @@ System.out.println("session userNo : "+userNo);
     List<Recipe> list = recipeService.getRecipeRandomList(pageSize);
     try {
       result.put("status", "success");
-      result.put("data", list);
-      System.out.println(list);
+      result.put("data", list);      
     } catch (Exception e) {
       result.put("status", "false");
     }

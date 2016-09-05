@@ -66,6 +66,7 @@
 		LIMIT #{startIndex}, #{len}) vt
 	</select>
 	
+	
 	<!-- 레시피 *10, 구독자 * 5-->
 	<select id="selectRankList" resultMap="userMap" parameterType="Map">
 		SELECT @rownum:=@rownum+1 rownum,vt.* FROM(
@@ -270,4 +271,10 @@
     GROUP BY r1.uno) vt
     ORDER BY vt.total DESC) myrank WHERE uno=#{uno}
   </select>
+  
+  <insert id="addUserInNaver" parameterType="user">
+    insert into users(name,email,pwd,img,role,join_dt) values (#{userName}, #{email},0,'default.jpg','user',now());    
+  </insert>
+  
+  
 </mapper>

@@ -120,8 +120,7 @@ public class UserController {
 			if(user.getUserNo()!=0){			
 				if(user.getUserNo()==userNo){
 					String fileName = "userprofile_"+user.getUserNo()+".png";
-					if(!profileImage.get(0).getOriginalFilename().equals("")){
-						System.out.println("이미지 변경");
+					if(!profileImage.get(0).getOriginalFilename().equals("")){						
 						File recipeUrl= new File(CommonUtil.getImageFolderPath("profileImg", request)+"/"+fileName);
 						profileImage.get(0).transferTo(recipeUrl);
 					}
@@ -194,8 +193,7 @@ public class UserController {
 		// index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
 		HashMap<String, Object> result = new HashMap<>();
 
-		User loginUser = userService.loginUser(user); 
-		System.out.println("로그인 한 정보::"+loginUser);
+		User loginUser = userService.loginUser(user);		
 		try {
 		  if (loginUser!=null) {
 		    result.put("status", "success");
@@ -214,6 +212,44 @@ public class UserController {
 		// result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
 	}
 	
+	@RequestMapping(path = "loginNaver", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+  @ResponseBody // URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
+  public String loginNaver(User user, HttpSession session) {
+    // index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
+    HashMap<String, Object> result = new HashMap<>();
+    
+    User loginUser = new User(); 
+    System.out.println();
+    loginUser = userService.loginUser(user);   
+    
+    System.out.println("loginUser : "+loginUser);
+    System.out.println("컨트롤러 오는건가 : user 정보 :: "+ user);
+    if(loginUser == null){
+      System.out.println("설마 if문까지 ?? 확인");
+      userService.addUserInNaver(user);
+      loginUser = userService.loginUser(user);
+    }
+    try {
+      if (loginUser!=null ) {
+        result.put("status", "success");
+        result.put("data", loginUser);
+        // server sessionStorage에 유저 정보 저장 ------------------
+        session.setAttribute("loginUser", loginUser);
+        // ----------------------------------------------------------
+        System.out.println("session : "+session.getAttribute("loginUser"));
+      }else{
+        
+        result.put("status", "failure");
+      }
+      
+    } catch (Exception e) {
+      result.put("status", "failure");
+    }
+    return new Gson().toJson(result);
+    // result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
+  }
+	
+	
 	 @RequestMapping(path = "loginCheck", produces = "application/json;charset=UTF-8")
 	  @ResponseBody // URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
 	  public String loginCheck(HttpSession session) {
@@ -221,14 +257,11 @@ public class UserController {
 	    HashMap<String, Object> result = new HashMap<>();
 	    User loginUser=(User) session.getAttribute("loginUser");
       if(session.isNew()){
-        result.put("status", "failure");
-        System.out.println("unLogin");
+        result.put("status", "failure");        
       } else {
-        if(loginUser!=null){
-	        System.out.println("login");
+        if(loginUser!=null){	        
 	        result.put("status", "success");
-	        result.put("data", loginUser);
-	        System.out.println("loginUser::"+loginUser);
+	        result.put("data", loginUser);	        
 	      } else {
 	        result.put("status", "failure");
 	      }
@@ -244,8 +277,7 @@ public class UserController {
      HashMap<String, Object> result = new HashMap<>();
      
      try {
-       session.removeAttribute("loginUser");
-       System.out.println("session.removeAttribute()"+session);
+       session.removeAttribute("loginUser");       
        result.put("status", "success");
      } catch (Exception e) {
        result.put("status", "failure");

@@ -32,12 +32,12 @@
 	text-align: center;
 }
 
-.rcp-sign-membership span {
+.rcp-sign-membership #userLogin {
 	margin: 25px;
 	border-style: solid;
 	border-radius: 6px;
 	border-color: #b51515;
-	padding: 7px 30px 7px 30px;
+	padding: 9px 30px 9px 30px;
 	cursor: pointer;
 	color: black;
 	font-size: 15px;
@@ -53,7 +53,7 @@
 	color: #51515;
 }
 
-.rcp-sign-membership span:hover {
+.rcp-sign-membership #userLogin:hover {
   color: white;
   background: #b51515;
 } 

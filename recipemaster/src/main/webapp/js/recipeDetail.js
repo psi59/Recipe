@@ -83,19 +83,30 @@ function clickDetailInDetailFunction(){
 				$('.hash').text(result.data.intro);
 				$('div[name="rcp-explanation"]:eq(1)').text(result.data.intro);
 				
-				$('.rcp-304').append( comDetailInfoTemp(result) );
-				$('.rcp-info-images').append( comDetailImageMain(result.data) );
 				$('.rcp-detail-body').append( comDetailMainTemp(result.data) );
 				$('.rcp-detail-body').append( comDetailTemp(result.data) );
-				$('.rcp-info-images').append( comDetailImageStep(result.data) );
+				
 				
 				slider = $('.rcp-detail-body').bxSlider({
 					startSlide:0,
 					mode:'vertical',
 					pager: false,
 					moveSlides: 1,
-					infiniteLoop:false
+					infiniteLoop:false,
+					controls:false
 				});
+				$('.rcp-mainSlider').bxSlider({
+					startSlide:0,
+					pager: false,
+					moveSlides: 1,
+					infiniteLoop:false, 
+				});
+
+				$('.rcp-detail-body').on("mousewheel", function (event) {
+					var delta = event.originalEvent.wheelDelta || -event.originalEvent.detail;
+					init_scroll(event, delta, slider)
+				});
+				
 				console.log("result data ll : "+result.data);
 				
 				$('.rcp-detail-body').css('transform', 'translate3d(0px, 0px, 0px)');
@@ -104,36 +115,6 @@ function clickDetailInDetailFunction(){
 					$('div[name="rcp-body"]:eq('+i+')').attr('id',"div"+i);
 					$('a[name="rcp-nav-images"]:eq('+i+')').attr('href','#div'+i);
 					$('a[name="rcp-nav-bgImages-button"]:eq('+i+')').attr('href','#div'+i);
-				}
-				
-				if( userInfo != null ){										
-					if(result.data.scrapUser == userInfo.userNo){
-						$('.rcp-scrap-button-text').attr('name','scrap');
-						$('.rcp-scrap-button-text').css('border','1px solid #ffce6e');
-						$('.rcp-scrap-button-text').css('color',' #ffce6e');
-						$('.rcp-detail-scrap').attr('style','color:#ffce6e');
-						$('.rcp-detail-scrap i').attr('style','color:#ffce63');
-					}else{									
-						$('.rcp-scrap-button-text').attr('name','');
-						$('.rcp-scrap-button-text').css('border','1px solid white');
-						$('.rcp-scrap-button-text').css('color','white');
-						$('.rcp-detail-scrap').css('color','white');
-						$('.rcp-detail-scrap i').css('color','white');	
-					}
-					
-					if(result.data.likeUser != 0 ){
-						$('.rcp-scrap-button-text-like').attr('name','like');
-						$('.rcp-scrap-button-text-like').css('border','1px solid #ffce6e');
-						$('.rcp-scrap-button-text-like').css('color',' #ffce6e');
-						$('.rcp-detail-like').attr('style','color:#ffce6e');
-						$('.rcp-detail-like i').attr('style','color:#ffce63');
-					}else{									
-						$('.rcp-scrap-button-text-like').attr('name','');
-						$('.rcp-scrap-button-text-like').css('border','1px solid white');
-						$('.rcp-scrap-button-text-like').css('color','white');
-						$('.rcp-detail-like').css('color','white');
-						$('.rcp-detail-like i').css('color','white');	
-					}			
 				}
 		}
 	,
@@ -196,7 +177,7 @@ function recipeDetail(){
 							$('a[name="rcp-nav-images"]:eq('+i+')').attr('href','#div'+i);
 							$('a[name="rcp-nav-bgImages-button"]:eq('+i+')').attr('href','#div'+i);
 						}
-						$('.rcp-mainSlider').bxSlider({
+					$('.rcp-mainSlider').bxSlider({
 						startSlide:0,
 						pager: false,
 						moveSlides: 1,

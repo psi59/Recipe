@@ -61,7 +61,7 @@
 	</delete>
 	
 	<select id="recipeSearch" parameterType="Map" resultMap="recipeMap">
-		SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt,
+		SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt,r.rpimg rpimg,
 		r.hits, r.rgst, truncate(r.gpa,1) gpa, u.uno, u.name userName, l.rcpno,
 		l.lc_dt, l.uno likeUser FROM users u INNER JOIN rcps r on u.uno=r.uno
 		LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=#{userNo}
@@ -250,9 +250,10 @@
 		LEFT OUTER JOIN rcp_scr scr on r.rcpno=scr.rcpno
 		and scr.uno = ${userNo}
 		LEFT OUTER JOIN(select rcpno rno, count(*)
-		countLike from rcp_lik
+		countLike from rcp_lik		
 		group by rcpno) likecnt
 		ON r.rcpno=likecnt.rno
+		where r.rgst = 1
 		ORDER BY r.rcp_dt desc
 		<if test="request == 5"> limit 4</if>
 	</select>
@@ -320,7 +321,7 @@
 		SELECT DISTINCT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn,
 		r.rcp_dt, r.hits, r.rpimg,
 		r.rgst, r.gpa, r.rcp_pd, u.uno,
-		u.email,u.name userName,s.uno scrapUser,
+		u.email,u.name userName,u.img img,s.uno scrapUser,
 		s.rcpno,l.uno likeUser,
 		(select count(rcpno)
 		from rcp_lik where rcpno=${recipeNo}) countLike,
