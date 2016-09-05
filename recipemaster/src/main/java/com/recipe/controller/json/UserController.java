@@ -2,8 +2,11 @@ package com.recipe.controller.json;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -48,12 +51,37 @@ public class UserController {
 	@RequestMapping(path = "add", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String add(User user, String passwordCheck) {
+	 
 		HashMap<String, Object> result = new HashMap<>();
 		try {
+		  User addUser=user;
+		  //unique key 생성
+		  addUser.setAuthenticationKEY(UUID.randomUUID().toString());
+		  addUser.setAuthentication(0);
+		  
 			// 이메일 중복 확인
 			if (userService.checkDuplication(user.getEmail()) && user.getPassword().equals(passwordCheck)) {
-				userService.addUser(user);
+  			 ////password SHA1 암호화 끝
+  	      try {
+  	        // Create MD5 Hash
+  	        MessageDigest digest = MessageDigest.getInstance("SHA-1");
+  	        digest.update(user.getPassword().getBytes());
+  	        byte messageDigest[] = digest.digest();
+  	  
+  	        // Create Hex String
+  	        StringBuffer hexString = new StringBuffer();
+  	        for (int i = 0; i < messageDigest.length; i++)
+  	            hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+  	        user.setPassword(hexString.toString());
+  	  
+  	    } catch (NoSuchAlgorithmException e) {
+  	        e.printStackTrace();
+  	    }
+  	    //password SHA1 암호화 끝
+				userService.addUser(addUser);
 				result.put("status", "success");
+				result.put("authKEY", addUser.getAuthenticationKEY());
+				System.out.println(result);
 			}
 		} catch (Exception e) {
 			result.put("status", "failure");
@@ -105,6 +133,7 @@ public class UserController {
 	@RequestMapping(path = "update")
 	@ResponseBody
 	public String update(
+	    //value="name"
 			@RequestParam(value="userNo", defaultValue="0") int userNo,
 			@RequestParam(value="email", defaultValue="") String email,
 			@RequestParam(value="bfPwd", defaultValue="") String beforePassword,
@@ -113,6 +142,8 @@ public class UserController {
 			@RequestParam(value="profileImage") List<MultipartFile> profileImage,
 			HttpSession session, HttpServletRequest request) {
 		
+	  System.out.println("::userNo::"+userNo+"::email::"+email+"::beforePassword::"+beforePassword+"::password::"+password+"::intro::"+intro);
+	  
 		User user = CommonUtil.getSessionUser(session);
 		HashMap<String, Object> result = new HashMap<>();
 				
@@ -125,6 +156,24 @@ public class UserController {
 						File recipeUrl= new File(CommonUtil.getImageFolderPath("profileImg", request)+"/"+fileName);
 						profileImage.get(0).transferTo(recipeUrl);
 					}
+					
+		       ////password SHA1 암호화 끝
+          try {
+            // Create MD5 Hash
+            MessageDigest digest = MessageDigest.getInstance("SHA-1");
+            digest.update(user.getPassword().getBytes());
+            byte messageDigest[] = digest.digest();
+      
+            // Create Hex String
+            StringBuffer hexString = new StringBuffer();
+            for (int i = 0; i < messageDigest.length; i++)
+                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+            user.setPassword(hexString.toString());
+      
+              } catch (NoSuchAlgorithmException e) {
+                  e.printStackTrace();
+              }
+           //password SHA1 암호화 끝
 					
 					if(beforePassword.equals(userService.getUser(userNo))){
 						user.setPassword(password);
@@ -193,19 +242,46 @@ public class UserController {
 	public String login(User user, HttpSession session) {
 		// index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
 		HashMap<String, Object> result = new HashMap<>();
-
-		User loginUser = userService.loginUser(user); 
+		User loginUser=new User();
+		
+		loginUser = userService.selectFromEmail(user.getEmail()); 
+		//
 		System.out.println("로그인 한 정보::"+loginUser);
+		if(loginUser.getEmail()==null) {
+      result.put("status", "null");
+      System.out.println("loginUser.getEmail()==null");
+      
+      return new Gson().toJson(result);
+    }else if (loginUser.getAuthentication()==0) {
+		  result.put("status", "authError");
+		  System.out.println("getAuthentication==0");
+		  
+		  return new Gson().toJson(result);
+    }
 		try {
-		  if (loginUser!=null) {
-		    result.put("status", "success");
-	      result.put("data", loginUser);
-	      // server sessionStorage에 유저 정보 저장 ------------------
-	      session.setAttribute("loginUser", loginUser);
-	      // ----------------------------------------------------------
-      }else{
-        result.put("status", "failure");
-      }
+    	////password SHA1 암호화 끝
+          try {
+            // Create MD5 Hash
+            MessageDigest digest = MessageDigest.getInstance("SHA-1");
+            digest.update(user.getPassword().getBytes());
+            byte messageDigest[] = digest.digest();
+      
+            // Create Hex String
+            StringBuffer hexString = new StringBuffer();
+            for (int i = 0; i < messageDigest.length; i++)
+                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+            user.setPassword(hexString.toString());
+      
+              } catch (NoSuchAlgorithmException e) {
+                  e.printStackTrace();
+              }
+      //password SHA1 암호화 끝
+      System.out.println("password SHA1 암호화::"+user.getPassword().toString().trim().equals(loginUser.getPassword().toString().trim()));
+      loginUser = userService.loginUser(user); 
+		  result.put("status", "success");
+      result.put("data", loginUser);
+      // server sessionStorage에 유저 정보 저장 ------------------
+      session.setAttribute("loginUser", loginUser);
 			
 		} catch (Exception e) {
 			result.put("status", "failure");
@@ -291,5 +367,33 @@ public class UserController {
 	      result.put("status", "failure");
 	    }
 	    return new Gson().toJson(result);
+	  }
+	 
+	 @RequestMapping(path = "auth", produces = "application/json;charset=UTF-8")
+	 public String auth(String authKEY, int auth, String inputEmail){   
+	    
+	    HashMap<String, Object> result = new HashMap<>();
+      User authUser = new User();
+      authUser=userService.selectFromEmail(inputEmail);;
+      try {
+        
+        System.out.println("authKEY::"+authKEY);
+        System.out.println("authUser.getAuthenticationKEY()::"+authUser.getAuthenticationKEY());
+        System.out.println(authKEY.toString().trim().equals(authUser.getAuthenticationKEY().toString().trim()));
+        if (authKEY.toString().trim().equals(authUser.getAuthenticationKEY().toString().trim())) {
+          userService.authUpdate(authKEY, auth, inputEmail);
+          result.put("status", "success");
+          System.out.println("성공");
+          System.out.println("왜 안들어오냐1111??"+authKEY+"::"+auth+"::"+inputEmail+"::");
+        }else{
+          System.out.println("실패");
+        }
+      } catch (Exception e) {
+        e.printStackTrace();
+        System.out.println("실패");
+        result.put("status", "failure");
+      }
+      return "index.html";
+      
 	  }
 }

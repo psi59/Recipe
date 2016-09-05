@@ -112,4 +112,13 @@ public class UserServiceImpl implements UserService {
         
     return userDao.selectRankListSCS(params);
   }
+  
+  public void authUpdate(String authKEY, int auth, String inputEmail) {
+    HashMap<String,Object> params= new HashMap<>();    
+    System.out.println("이곳은 authUpdat을 하는  service impl입니다."+authKEY+"?"+auth);
+    params.put("authKEY", authKEY);
+    params.put("auth", auth);   
+    params.put("inputEmail", inputEmail); 
+    userDao.authUpdate(params);
+  }
 }

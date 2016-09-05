@@ -17,4 +17,6 @@ public interface UserDao {
   User findUser(String email);//Read or Retrieve
   User selectFromEmail(String email);    //Mypage 이메일로 유저정보 가져오
   List<User> selectRankListSCS(Map<String,Object> params); //랭크 리스트+구독 정보 추가
+  void authUpdate(Map<String,Object> params); //인증update
+  
 }

@@ -216,13 +216,19 @@ function login(event) {
 				swal('잘못입력하셨습니다.','아이디 또는 비밀번호를 다시 확인하여 주세요.',"error");
 
 				return;
-			} 
+			}else if (result.status == 'authError') {
+				swal('인증이 되지 않은 ID입니다.','email 인증을 확인하여 주세요.',"error");
 
-			if(result.status == 'success'){
+				return;
+			}else if (result.status == 'null') {
+				swal('등록되지 않은 ID입니다.','email을 다시 확인하여 주세요.',"error");
+
+				return;
+			}else if(result.status == 'success'){
 				location.reload();
 				$('#login-pop-up-banner').bPopup().close();
 			} else {
-				swal('비밀번호를 다시 입력해주세요');
+				swal('error');
 			}
 
 		},

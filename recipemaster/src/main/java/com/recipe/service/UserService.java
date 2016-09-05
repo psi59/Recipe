@@ -17,4 +17,5 @@ public interface UserService {
   User loginUser(User user); //login
   User selectFromEmail(String email);  
   List<User> selectRankListSCS(int pageNo, int pageSize, int uno);//준모추가
+  void authUpdate(String authKEY, int auth, String inputEmail);//인증update
 }

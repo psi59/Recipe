@@ -21,8 +21,9 @@
 		<result column="rownum" property="rownum" />
 		<result column="grade" property="grade" />
 		<result column="scsuno" property="subscribeUser" />
+		<result column="auth_key" property="authenticationKEY" />
+		<result column="auth" property="authentication" />
 	</resultMap>
-	
 
 	<select id="findUser" resultMap="userMap" parameterType="String">
 		SELECT vt.* FROM(
@@ -124,9 +125,9 @@
 
 	<insert id="insert" parameterType="user">
 		insert into users(name, email,
-		pwd, role, join_dt)
+		pwd, role, join_dt,auth_key,auth)
 		values ( #{userName}, #{email}, #{password},
-		'user', now())
+		'user', now(),#{authenticationKEY},#{authentication})
 	</insert>
 
 	<update id="update" parameterType="user">
@@ -168,4 +169,9 @@
     ORDER BY vt.total DESC
   </select>
 	
+	<update id="authUpdate" parameterType="user">
+    UPDATE users
+    SET auth=#{auth}
+    WHERE email = #{inputEmail}
+  </update>
 </mapper>

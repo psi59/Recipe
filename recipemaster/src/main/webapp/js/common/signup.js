@@ -1,6 +1,8 @@
-// 이성현
-$(document).ready(function(){
+var authKEY;
+var email;
 
+$(document).ready(function(){
+	
 	///// 회원가입 팝업창 가입 버튼 이벤트 /////
 	/*$('#signup-addBtn').click(function() {*/
 	$(document).on('click', '#signup-addBtn', function() {
@@ -36,14 +38,33 @@ $(document).ready(function(){
 						swal('이메일과 비밀번호를 확인해주세요.');
 						return;
 					} 				
+					authKEY=result.authKEY;
 					swal($('#signup-userName').val()+'님 환영합니다 !')						
-					$('#signup-pop-up-banner').bPopup().close(); // 팝업창 닫기												
+					
+					
+					//인증추가
+					 email = $('#signup-e-mail').val();
+					swal(email+'에 이메일 전송ajax실행 시작');
+					if (authKEY!=null) {
+						$.ajax({
+				            	type : 'GET',
+				                url : 'http://192.168.0.23:8888/user/authentication.do?email='+email+'&authKEY='+authKEY,
+				                success : function(result) {					
+									swal('이메일 전송완료');
+				                } // end success
+								
+				           	 }); // end ajax
+					
+					}
+					$('#signup-pop-up-banner').bPopup().close(); // 팝업창 닫기	
 				},
 				error : function() {
 					alert('서버 요청 오류 !')
 				}
 			})	
+			            
 		}
+		
 	});
 	
 	///// 회원가입 팝업창 취소 이벤트 /////
@@ -71,7 +92,7 @@ $(document).ready(function(){
 	          var email = $(this).val();
 	            $.ajax({
 	            	type : 'GET',
-	                url : 'http://192.168.0.50:9999/user/checkDuplication.do?email='+email,
+	                url : 'http://192.168.0.23:9999/user/checkDuplication.do?email='+email,
 	                success : function(result) {					
 	                    if (result == 'true') {
 							// 사용가능한 이메일
@@ -164,4 +185,8 @@ function email_check( email ) {
     var regex=/([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     return (email != '' && email != 'undefined' && regex.test(email) === true); 
 }
+
+
+
+
 
