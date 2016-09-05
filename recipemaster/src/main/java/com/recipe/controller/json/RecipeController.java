@@ -76,6 +76,26 @@ public class RecipeController {
     }
     return new Gson().toJson(result);
   }
+  
+  // 별점 매기기
+  @RequestMapping(path="starRate",produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String starRate(int recipeNo, double grade, HttpSession session){
+
+    User user = CommonUtil.getSessionUser(session);
+    
+    System.out.println("userNo : "+user.getUserNo()+", recipeNo : "+recipeNo+", grade : "+grade);
+    
+    
+    HashMap<String,Object> result = new HashMap<>();     
+    recipeService.addGrade(user.getUserNo(), recipeNo, grade);
+    try{      
+      result.put("status","success");         
+    }catch (Exception e){
+      result.put("status", "false");
+    }
+    return new Gson().toJson(result);
+  }
 
   // 리스트 페이지 레시피 검색 자동완성 -이성현
   @RequestMapping(path = "recipeSearchAutoComplete", produces = "application/json;charset=UTF-8")

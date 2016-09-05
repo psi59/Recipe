@@ -1,5 +1,5 @@
 /* 검색 및 정렬 이벤트 -성현 */
-$(document).ready(function(){	
+$(document).ready(function(){
 	
 	// url에 QueryString의 검색어로 검색결과 보여줌
 	urlParams = getUrlParams();	
@@ -150,9 +150,7 @@ $(document).ready(function(){
 	  });
 
 });
-/*	setTimeout(function() {
-		
-	}, ms)*/
+
 // 처음 검색했을때의 1페이지 결과 가져오기 -이성현
 function search(sort,order){ 
 			
@@ -195,7 +193,7 @@ function search(sort,order){
 				methods();
 				$('#recipe-count').text('총 '+result.recipeCount+'개의 레시피가 검색되었습니다.');
 				$('#search-pageNo').attr('value', '1');	
-			}, 1300)
+			}, 1100)
 		},
 		// 데이터 조회 중일때 로딩 이미지 보여주기
 		beforeSend:function(){			  
@@ -207,7 +205,7 @@ function search(sort,order){
 			setTimeout(function() {
 				$('.wrap-loading').addClass('display-none');
 				$('html').css("cursor","auto");
-			}, 1300)
+			}, 1100)
 		},
 		error : function() {
 			swal('서버 요청 오류 !')

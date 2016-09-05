@@ -74,10 +74,12 @@ function clickDetailInDetailFunction(){
 				}
 				//$('.rcp-720').remove();
 				$(".rcp-720").html('<div class="rcp-header">'
-						+'<h2 class="title">매콤 대패삼겹살 볶음</h2>'
-						+'<p class="hash">#돼지고기 #대패삼겹살 #야식 #간단고기요리 #매콤고기</p>'
-						+'<p class="date">2016.07.21</p><hr /></div>'
-						+'<div class="rcp-detail-body"></div>');
+									+'<h2 class="title"></h2>'
+									+'<p class="hash"></p>'
+									+'<p class="date"></p>'
+									+'<p class="gpa">평점</p><p class="gpa">몇점</p>'
+									+'<span class="rcp-star-rating">별점주기</span><hr /></div>'
+									+'<div class="rcp-detail-body"></div>');
 				$('.rcp-header > .title').text(result.data.recipeName);
 				$('.rcp-header > .date').text(result.data.recipeDate);
 				$('.hash').text(result.data.intro);
@@ -88,6 +90,11 @@ function clickDetailInDetailFunction(){
 				$('.rcp-detail-body').append( comDetailMainTemp(result.data) );
 				$('.rcp-detail-body').append( comDetailTemp(result.data) );
 				$('.rcp-info-images').append( comDetailImageStep(result.data) );
+				
+				// 별점주기 팝업
+				$('.rcp-star-rating').on('click', function(){
+					$('.rcp-starrating').bPopup();
+				})
 				
 				slider = $('.rcp-detail-body').bxSlider({
 					startSlide:0,
@@ -254,13 +261,20 @@ function recipeDetail(){
 						$(".rcp-main").remove();
 						$(".rcp-detail-step").remove();
 						$(".rcp-detail-body").remove()
-						$(".bx-wrapper").remove();;
+						$(".bx-wrapper").remove();
 						$(".rcp-720").html('<div class="rcp-header">'
-								+'<h2 class="title">매콤 대패삼겹살 볶음</h2>'
-								+'<p class="hash">#돼지고기 #대패삼겹살 #야식 #간단고기요리 #매콤고기</p>'
-								+'<p class="date">2016.07.21</p><hr /></div>'
-								+'<div class="rcp-detail-body"></div>');
+											+'<h2 class="title"></h2>'
+											+'<p class="hash"></p>'
+											+'<p class="date"></p>'
+											+'<p class="gpa">평점</p><p class="gpa">몇점</p>'
+											+'<span class="rcp-star-rating">별점주기</span><hr /></div>'
+											+'<div class="rcp-detail-body"></div>');		
 //						$("#detail_pop_up_reload").attr('id','detail_pop_up');
+						
+						// 별점주기 팝업
+						$('.rcp-star-rating').on('click', function(){
+							$('.rcp-starrating').bPopup();
+						})
 					}
 
 				});

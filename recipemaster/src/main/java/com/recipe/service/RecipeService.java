@@ -43,4 +43,5 @@ public interface RecipeService {
 	int deleteMaterials(int recipeNo);
 	void addComment(Recipe recipe, int userNo);
 	void deleteComment(int commentNo);
+	int addGrade(int userNo, int recipeNo, double grade);
 }

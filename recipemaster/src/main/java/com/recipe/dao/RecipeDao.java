@@ -43,4 +43,5 @@ public interface RecipeDao {
 	Map<String,Object> checkSubscribe(Map<String,Object> params);//구독 Check 준모
 	Integer addComment(Map map);
 	Integer deleteComment(int commentNo);
+	int insertGrade(Map<String, Object> params); // 이성현 별점매기기
 }
