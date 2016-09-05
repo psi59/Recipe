@@ -434,6 +434,7 @@ function MainRecomCtList(){
 			  }
 			  var list = result.data;
 			  $('#main-list > div').append( comMainRecomCtSection(result) );
+			  $('#sss').html('추천 카테고리 : '+result.data[0].ctgName+' <a class="More">more</a>');
 			  $('.list3 > .row').append( template(result) );
 			 
 			  
