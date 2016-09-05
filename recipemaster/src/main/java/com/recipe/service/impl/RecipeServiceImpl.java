@@ -17,8 +17,17 @@ import com.recipe.service.RecipeService;
 @Service
 public class RecipeServiceImpl implements RecipeService {
 	@Autowired RecipeDao recipeDao;
-	
+		
 	@Override
+  public int addGrade(int userNo, int recipeNo, double grade) {
+	  Map<String,Object> params = new HashMap<>();
+	  params.put("uno", userNo);
+	  params.put("rcpno", recipeNo);
+	  params.put("gpa", grade);
+    return recipeDao.insertGrade(params);
+  }
+
+  @Override
   public List<Recipe> getRecipeSearchList(int pageNo, int pageSize, Search search, int userNo) {	
 	  Map<String,Object> params = new HashMap<>();
 	  params.put("startIndex", (pageNo - 1) * pageSize);

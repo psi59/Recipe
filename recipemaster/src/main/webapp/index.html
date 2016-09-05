@@ -38,6 +38,7 @@
 <link rel="stylesheet" href="css/index_rankTabs.css">
 <link rel="stylesheet" href="css/common_list_topbar.css">
 <link rel="stylesheet" href="css/common/loading.css">
+<link rel="stylesheet" href="css/common/starrating.css">
 <!-- alert css -->
 <link rel="stylesheet"
 	href="node_modules/sweetalert/dist/sweetalert.css">
@@ -342,11 +343,16 @@
 
 			<div class="rcp-720" id="rcp-720">
 				<div class="rcp-header">
-					<h2 class="title">매콤 대패삼겹살 볶음</h2>
-					<p class="hash">#돼지고기 #대패삼겹살 #야식 #간단고기요리 #매콤고기</p>
-					<p class="date">2016.07.21</p>
-					<hr />
+					<h2 class="title"></h2>
+					<p class="hash"></p>
+					<p class="date"></p>
+					<p class="gpa">평점</p>
+					<p class="gpa">몇점</p>
+					<span class="rcp-star-rating">별점주기</span>
+				  <hr/>
 				</div>
+				
+								
 				<div class="rcp-detail-body"></div>
 			</div>
 
@@ -354,7 +360,7 @@
 
 			<div class="rcp-taps">
 				<div class="rcp-first-info">
-					<input type="hidden" value="" name="recipeNo">
+				  <input id="detail-recipeNo" type="hidden" value="" name="recipeNo">
 				</div>
 
 				<div class="rcp-seconde-info">
@@ -419,6 +425,36 @@
 
 	</section>
 
+  <!------------------------- 별점 주기 --------------------------------->
+  <div class="rcp-starrating">
+    <span class="rcp-starrating-text">별점주기</span>
+    <div class="ratingControl">
+        <input type="radio" id="rating-5" name="rating" value="5.0">
+        <label class="ratingControl-stars ratingControl-stars--5" for="rating-5">5</label>
+        <input type="radio" id="rating-45" name="rating" value="4.5">
+        <label class="ratingControl-stars ratingControl-stars--45 ratingControl-stars--half" for="rating-45">45</label>
+        <input type="radio" id="rating-4" name="rating" value="4.0">
+        <label class="ratingControl-stars ratingControl-stars--4" for="rating-4">4</label>
+        <input type="radio" id="rating-35" name="rating" value="3.5">
+        <label class="ratingControl-stars ratingControl-stars--35 ratingControl-stars--half" for="rating-35">35</label>
+        <input type="radio" id="rating-3" name="rating" value="3.0">
+        <label class="ratingControl-stars ratingControl-stars--3" for="rating-3">3</label>
+        <input type="radio" id="rating-25" name="rating" value="2.5">
+        <label class="ratingControl-stars ratingControl-stars--25 ratingControl-stars--half" for="rating-25">25</label>
+        <input type="radio" id="rating-2" name="rating" value="2.0">
+        <label class="ratingControl-stars ratingControl-stars--2" for="rating-2">2</label>
+        <input type="radio" id="rating-15" name="rating" value="1.5">
+        <label class="ratingControl-stars ratingControl-stars--15 ratingControl-stars--half" for="rating-15">15</label>
+        <input type="radio" id="rating-1" name="rating" value="1.0">
+        <label class="ratingControl-stars ratingControl-stars--1" for="rating-1">1</label>
+        <input type="radio" id="rating-05" name="rating" value="0.5">
+        <label class="ratingControl-stars ratingControl-stars--05 ratingControl-stars--half" for="rating-05">05</label>
+    </div>
+    <div id="rcp-starrating-grade">&nbsp;</div>
+    <span id="rcp-starrating-btn-apply" class="rcp-starrating-btn">등록</span>
+    <span id="rcp-starrating-btn-close" class="rcp-starrating-btn">취소</span>
+  </div>
+  
 	<!------------------------- Rank List ------------------------------>
 	<div id="footer"></div>
 
@@ -665,7 +701,7 @@
 
 </script>
 
-	<script id="recipe-4-section" type="text/x-handlebars-template">
+<script id="recipe-4-section" type="text/x-handlebars-template">
  <section name="rcp-custom-list">
     <div class="rcp-list">
       <div class="rcp-1024 list3" >
@@ -942,11 +978,13 @@
 	<script src="js/listPageMove.js"></script>
 	<script src="js/mainListAjax.js"></script>
 	<script src="js/mouseover.js"></script>
+	<script src="js/common/starrating.js"></script>
 
 
 	<script>
-		$(function() {
 
+		$(function(){
+						
 			getUserInfo();
 			getWeather();
 			getRealTimeRank();

@@ -49,4 +49,5 @@ public interface RecipeService {
 	void deleteCategoryList(int recipeNo);
 	List<Recipe> getRecipeRecomList(int pageSize);
 	List<Recipe> getRecipeRecomCtList(int pageSize);
+	int addGrade(int userNo, int recipeNo, double grade);
 }

@@ -49,4 +49,5 @@ public interface RecipeDao {
 	void deleteRecipeCategory(int recipeNo);
 	List<Recipe> recipeRecomList(Map<String,Object> params);
 	List<Recipe> recipeRecomCtList(Map<String,Object> params);
+	int insertGrade(Map<String, Object> params); // 이성현 별점매기기
 }
