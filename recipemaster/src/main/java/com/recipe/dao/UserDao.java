@@ -20,4 +20,5 @@ public interface UserDao {
   List<User> selectMonthRank(Map<String,Object> params);
   List<User> selectTodayRank(Map<String,Object> params);
   User selectMyRank(int uno);
+  int addUserInNaver(User user);
 }

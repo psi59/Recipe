@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
       System.out.println("ID가 부적합합니다.");
       dbUser=null;
       return dbUser;
-    }else if(! dbUser.getPassword().equals(user.getPassword())&&dbUser.getPassword()!=null){
+    }else if(! dbUser.getPassword().equals(user.getPassword())&&dbUser.getPassword()!=null && dbUser.getPassword() == "0"){
       System.out.println("비밀번호가 부적합합니다.");
       dbUser=null;
       return dbUser;
@@ -130,5 +130,11 @@ public class UserServiceImpl implements UserService {
   @Override
   public User selectMyRank(int uno) {    
     return userDao.selectMyRank(uno);
+  }
+
+  @Override
+  public int addUserInNaver(User user) {
+    // TODO Auto-generated method stub
+    return userDao.addUserInNaver(user);
   }
 }

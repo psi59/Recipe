@@ -25,6 +25,7 @@
 	margin-left:60px ! important;
 }
 .rcp-scrap-button-text-like{
+	color:white;
 	font-size:12px;
   text-align:center;
   width: 90px;
@@ -90,9 +91,12 @@
 .rcp-detail-body{
 	  margin-left : 80px;
   margin-right : 80px;
-  margin-top : 20px;
+  margin-top : 50px;
 }
 
+.bx-wrapper{
+	box-shadow:0 0 0px ! important;
+}
 /* 
 .rcp-detail-form .rcp-body{
   
@@ -356,3 +360,7 @@
 .rcp-mainSlider{
   padding: 0;
 }  
+
+.rcp-explanation p {
+	width:550px;
+}

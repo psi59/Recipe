@@ -1,5 +1,6 @@
 document.write('<script type"text/javascript" src="js/common.js"></script>')
 document.write('<script type"text/javascript" src="js/login.js"></script>')
+document.write('<script type"text/javascript" src="js/template/naverLogin_implicit-1.0.2.js"></script>')
 
   var mainSection = $('#recipe-1-section').html();
   var comMainSection = Handlebars.compile(mainSection); 
@@ -20,6 +21,10 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
   var commainSubscribe = Handlebars.compile(mainSubscribe);   
   var userInfo;
   $(function(){
+
+	  // 네이버 사용자 프로필 조회
+	  //naver_id_login.get_naver_userprofile("naverSignInCallback()");
+	  
 	  userInfo = getUserInfo();
 	  Main1List();
 	  likeLogic();
@@ -29,6 +34,19 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
 	  scrapLogic();
   });
   
+  
+  function naverSignInCallback() {
+	    // naver_id_login.getProfileData('프로파일항목명');
+	    // 프로필 항목은 개발가이드를 참고하시기 바랍니다.
+	    
+	    console.log("id : "+naver_id_login.getProfileData('id'));
+	    console.log("name : "+naver_id_login.getProfileData('name'));
+	    console.log("email : "+naver_id_login.getProfileData('email'));
+	    console.log("nickname : "+naver_id_login.getProfileData('nickname'));    
+	    console.log("profile_image : "+naver_id_login.getProfileData('profile_image'));
+	    
+	  }
+
 
 //--------------------------  인기 레시피 ---------------------------------
   
@@ -57,7 +75,7 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
 			  $('.list0 > .row').append( template(result) );
 			  
 			  mouseMoveEventForImage(result);
-			 
+			  mouseMoveEventForSubscribeImage(result);
 			  console.log(result);
 				  for(var i=0; i<result.data.length; i++){
 						  $('.list0 div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');		  
@@ -188,6 +206,7 @@ function scroll(){
 
   
   Handlebars.registerHelper('sessionUser', function(options) {
+	  console.log("session : "+userInfo.email);
 	  if ( userInfo != null) {
 		  if( userInfo.email != null)			  
 	    return options.fn(this);
@@ -349,14 +368,40 @@ function idOptions(){
 //	  -------------------------------------for 문 끝 -------------------------------------
 
 function mouseMoveEventForImage(result){
-			$(document).on('mousemove','.rcp-image-scale',function(event){
-				var imageChange = $('.rcp-image-scale').width() / $(event.target).parent().children('input[type="hidden"]').length;				
-				var image = parseInt(event.offsetX / imageChange);				
+			$(document).on('mousemove','.rcp-image-scale',function(event){			
+				var imageChange = parseInt( $('.rcp-image-scale').width() + 1)  / $(event.target).parent().children('input[type="hidden"]').length;				
+				var image = parseInt(event.offsetX / imageChange);								
 				this.style = "background-image:url(img/representImg/"+$(event.target).parent().children('input[type="hidden"]:eq('+image+')').val()+")";
+				
+				if(image != $(event.target).parent().children('input[type="hidden"]').length + 1){
 				$(event.target).parent().children('.rcp-count-images').text(image+1+" / "+$(event.target).parent().children('input[type="hidden"]').length);
+				}else{
+					return;
+				}
 			})	
 }
 
+
+function mouseMoveEventForSubscribeImage(result){
+			$(document).on('mousemove','.entry-action, .entry-action-inner',function(event){
+				if( $(event.target).attr('class') == 'entry-action' ){					
+					var imageChange = parseInt( $('.entry-action').width() + 1)  / $(event.target).parent().parent().children('input[type="hidden"]').length;					
+					var image = parseInt(event.offsetX / imageChange);					
+					$(event.target).parent().attr("style", "background-image:url(img/representImg/"
+						+$(event.target).parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
+					
+					
+					
+				}else{
+					console.log('여기옴 ? actioninner');
+					var imageChange = parseInt( $('.entry-action-inner').width() + 1)  / $(event.target).parent().parent().parent().children('input[type="hidden"]').length;
+					var image = parseInt(event.offsetX / imageChange);								
+					$(event.target).parent().attr("style", "background-image:url(img/representImg/"
+							+$(event.target).parent().parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
+					
+				}
+			})
+}
 //--------------------------  음식사진 커서 올리면 바뀌게 되는 로직 --------------------------------- 
 function mouseHover(){
 	  var time;
@@ -382,8 +427,10 @@ function mouseHover(){
 	  $('#profileView .goMyPageBtn').on('click',function(event){
 		  event.preventDefault();
 		  if(userInfo != null){
+			 
 			  $(location).attr('href','/mypage.html?'+ userInfo.email);
 		  }
+		  
 	  })
   }
   

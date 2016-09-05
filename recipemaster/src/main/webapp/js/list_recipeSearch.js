@@ -1,3 +1,8 @@
+
+//document.write('<script type"text/javascript" src="js/recipeDetail.js"></script>')
+
+
+
 /* 검색 및 정렬 이벤트 -성현 */
 $(document).ready(function(){	
 	
@@ -159,7 +164,7 @@ function search(sort,order){
 	var page = $('#recipe-card-searchPage-template').text();
 	var compilePage = Handlebars.compile(page);
 	
-	var source = $('#recipe-card-search-template').text();
+	var source = $('#temp').text();
 	var template = Handlebars.compile(source);
 	
 	var categoryList = '';
@@ -189,10 +194,10 @@ function search(sort,order){
 					return;
 				}
 				$('.wrap-loading').removeClass('display-none');
-				$('#search-result > div').remove();			
-				$('.searchResult > .row').append(template(result));
+				$('#tabs-1 .hs-content .container .row div').remove();			
+				$('#tabs-1 .hs-content .container .row').append(template(result));
 	
-				methods();
+				mouseMoveEventForSubscribeImage(result);
 				$('#recipe-count').text('총 '+result.recipeCount+'개의 레시피가 검색되었습니다.');
 				$('#search-pageNo').attr('value', '1');	
 			}, 1300)
@@ -221,7 +226,7 @@ function searchScrollAppend(){
 	var page = $('#recipe-card-searchPage-template').text();
 	var compilePage = Handlebars.compile(page);
 	
-	var source = $('#recipe-card-search-template').text();
+	var source = $('#temp').text();
 	var template = Handlebars.compile(source);
 		
 	if($('#sort-condition').val() == 'newest'){
@@ -259,7 +264,9 @@ function searchScrollAppend(){
 						swal('실패 ~');
 						return;
 					}
-					$('.searchResult > .row').append(template(result));
+					$('#tabs-1 .hs-content .container .row').append(template(result));
+					
+					mouseMoveEventForSubscribeImage(result);
 					
 					if(result.data != 'lastPage'){
 						$('#search-pageNo').val(result.pageNo);
@@ -302,10 +309,7 @@ function getUrlParams() {
 
 
 //----------------------------------------고재현 부분--------------------------------------------//
-function methods(){
-	  idOptions();	
-	  mouseHover();
-}
+
 
 Handlebars.registerHelper('isLike', function(options) {
 	 
@@ -316,177 +320,42 @@ Handlebars.registerHelper('isLike', function(options) {
 	  }
 });
 	  
-	  
-//-------------------------- 화살표, 좋아요, 음식사진 ID로직 ---------------------------------
-
-function idOptions(){
-	  
-	    for(var i=0; i<$('.thumbnail').length; i++){
-	    	
-//			Name태그는 동일한 이름이 있을 시, 먼저 있는것부터 index 값을 주게된다.  
-//	    	eq로 몇번째의 타겟인지 판별해주면 그 것을 캐치해낼 수 있다.
-	   
-//	    	--------------------- 왼쪽, 오른쪽 화살표를 클릭하면 내용이 변동되는 부분 -----------------------	    	
-	    	$('div[name="myCarousel"]:eq('+i+') > a').attr('href','div[name="myCarousel"]:eq('+i+')');
-//	    	--------------------- 화살표 부분 끝 ---------------------------
-	    	
-//	    	--------------------- 화면이(width) 일정 이상 작아지면 리스트가 3,2,1개로 줄어드는 로직 ---------------- 	
-	    	var index = i % 4;
-	    	
-	    	 if(index == 2){
-				  $('.rcp-order > div:nth-child(2)').attr("class","col-xs-3 col-sm-3 col-md-3 visible-sm rcp-list-margin rcp-list-margin");
-			  }
-			  if(index == 3){
-				  $('.rcp-order > div:nth-child(3)').attr("class","col-sm-3 col-md-3 visible-md rcp-list-margin rcp-list-margin");
-			  }			  
-			  if(index == 0 ){
-				  $('.rcp-order > div:nth-child(4)').attr("class","col-md-3 visible-lg rcp-list-margin rcp-list-margin");
-			  }
-	    	
-	    }
-}
-//	  -------------------------------------for 문 끝 -------------------------------------
-
-//--------------------------  음식사진 커서 올리면 바뀌게 되는 로직 --------------------------------- 
-function mouseHover(){
-	  var time;
-	  for(var j=0;  j<$('.thumbnail').length; j++){
-		  $("img[name='rcp-list-images']:eq("+j+")").hover(function(event){
-			  this.src = "img/3.jpg";
-			  time= setTimeout(function(){
-				  $(event.target).attr('src',"img/4.jpg");
-			  },1500);
-		  }, function(){
-			  this.src = "img/2.jpg";
-		  }).mouseleave(function(){
-			  clearTimeout(time);
-		  });
-	  }
-}
-
-//
-////----------------------------------------고재현 부분--------------------------------------------//
-//function mathods(listNum,result){
-//	  idOptions(result);	
-//	  mouseHover(result,listNum);
-//	  likeUp(listNum,result);
-//	  likeLogic(listNum,result);
-//}
-//
-//
-////-------------------------- 메인 펼쳐졌을 때 좋아요 누른 게시글 파랗게 보이게 하는 펑션 -----------------------
-//
-//function likeUp(listNum, result){
-//
-//
-//	  for(var j=0; j< result.data.length; j++){
-//		 
-//		  if(result.data[j].likeDate != null &&  eval(sessionStorage.getItem('data'))[0].userNo == result.data[j].likeUser){
-//			  $('#list'+listNum+'240'+j+' .rcp-heart b').attr('name','like');
-//			  $('#list'+listNum+'240'+j+' .rcp-heart b').css('color','#337ab7');
-//			  $('#list'+listNum+'240'+j+' .rcp-heart b').parent().parent().css('color','#337ab7');		
-//		  }else{
-//			  $('#list'+listNum+'240'+j+' .rcp-heart b').attr('name','');
-//		  }
-//	  }
-//
-//}
-//
-//
-//
-////-------------------------- 좋아요 등록, 해제 로직---------------------------------
-//
-//function likeLogic(listNum, result){
-//	  
-//	  $(document).on('click',('.list'+listNum+' .rcp-like'),function(event){
-//		  event.preventDefault();
-//		  if($(event.target).is('b[name="like"]') ){
-//			  $.ajax({
-//				  url:'recipe/likeDown.json?recipeNo=' + $(event.target).parent()
-//				  .parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
-//				  + eval(sessionStorage.getItem('data'))[0].userNo,
-//				  dataType:'json',
-//				  method:'get',
-//				  success:function(){
-//					  console.log("like down 성공성공");
-//					  $(event.target).css('color','#231f20');
-//					  $(event.target).parent().parent().css('color','#231f20');
-//					 if($(event.target).is('b[name="like"]') ){
-//						 $(event.target).parent().append('<b class="rcp-like" id="rcp-like">좋아요</b>');
-//						 $(event.target).remove();
-//						 
-//					 }
-//					 
-//				  },
-//				  error:function(){
-//					  alert('like : 서버 요청 오류');
-//				
-//				  }
-//			  });
-//		  }
-//		  else{
-//			  $.ajax({
-//				  url:'recipe/likeUp.json?recipeNo=' + $(event.target).parent()
-//				  .parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
-//				  +  eval(sessionStorage.getItem('data'))[0].userNo,
-//				  dataType:'json',
-//				  method:'get',
-//				  success:function(){
-//					  console.log("like up 성공성공");
-//					  $(event.target).css('color','#337ab7');
-//					  $(event.target).parent().parent().css('color','#337ab7');
-//					  $(event.target).parent().append('<b class="rcp-like" id="rcp-like" name="like" style="color:#337ab7">좋아요</b>');
-//					  $(event.target).remove();
-//					  
-//				  },
-//				  error:function(){
-//					  alert('ajax likeclick: 서버 요청 오류');
-//				  }
-//			  });
-//		  }
-//	  })
-//}
-//
-//
-////-------------------------- 화살표, 좋아요, 음식사진 ID로직 ---------------------------------
-//
-//function idOptions(result){
-//	  
-//	  var list= result.data;
-//	  
-//	  for(var k=0; k<$('.rcp-list').length; k++){		  
-//		  for(var j=0; j<result.data.length; j++){
-//
-//			  $('.list'+k+' .row > div:nth-child('+(j+1)+') .rcp-240').attr("id","list"+k+"240"+j);
-//			  $('.list'+k+' #search-result > div:nth-child('+(j+1)+') #myCarousel').attr("id","list"+k+"myCarousel"+j);
-//			  $('.list'+k+' #search-result > div:nth-child('+(j+1)+') .rcp-left-slideButton').attr("href","#list"+k+"myCarousel"+j);
-//			  $('.list'+k+' #search-result > div:nth-child('+(j+1)+') .rcp-right-slideButton').attr("href","#list"+k+"myCarousel"+j);
-//			  $('.list'+k+' .row > div:nth-child('+(j+1)+') .image1').attr("id","list"+k+"image"+j);
-//
-//		  }
-//	  }
-//}
-// 
-//
-////--------------------------  음식사진 커서 올리면 바뀌게 --------------------------------- 
-//function mouseHover(result,listNum){
-//	  var time;
-//	  for(var j=0; j<result.data.length; j++){
-//		  $("#list"+listNum+" #list"+listNum+"image"+j).hover(function(event){
-//			  console.log("여기옴 ?");
-//		  this.src = "img/3.jpg";
-//		  time= setTimeout(function(){
-//			  $(event.target).attr('src',"img/4.jpg");
-//		  },1500);
-//	  }, function(){
-//		  this.src = "img/2.jpg";
-//	  }).mouseleave(function(){
-//		  clearTimeout(time);
-//	  });
-//	  }
-//}
 
 
+//-------------고재현 09-05 수정-----------------------
+$(function(){
+	
+	Handlebars.registerHelper("representImages", function(value, options){
+		{			
+	return value[0];
+		}
+});  	
+	
+})
+
+function mouseMoveEventForSubscribeImage(result){
+				$(document).on('mousemove','.entry-action',function(event){
+					if( $(event.target).attr('class') == 'entry-action' ){					
+						var imageChange = parseInt( $('.entry-action').width() + 1)  / $(event.target).parent().parent().children('input[type="hidden"]').length;					
+						var image = parseInt(event.offsetX / imageChange);					
+						$(event.target).parent().attr("style", "background-image:url(img/representImg/"
+							+$(event.target).parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
+						
+						
+						
+					}else{
+						console.log('여기옴 ? actioninner');
+						var imageChange = parseInt( $('.entry-action-inner').width() + 1)  / $(event.target).parent().parent().parent().children('input[type="hidden"]').length;
+						var image = parseInt(event.offsetX / imageChange);								
+						$(event.target).parent().attr("style", "background-image:url(img/representImg/"
+								+$(event.target).parent().parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
+						
+					}
+				})
+	}
+
+
+	
 
 
 

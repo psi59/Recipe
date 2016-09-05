@@ -127,10 +127,8 @@ window.onload = function () {
 				
 				for (var i = 0; i < result.data.length; i++) {
 					if (result.data[i].subscribeUser==0) {
-						result.data[i].status = null;
-						console.log('unlogin::'+result.data[i].status);
-					}else {result.data[i].status = Boolean(true);
-					console.log('login::'+result.data[i].status);
+						result.data[i].status = null;						
+					}else {result.data[i].status = Boolean(true);					
 					}
 				}
 				
@@ -279,7 +277,7 @@ function login(event) {
 		dataType : 'json',
 		data : {
 			email : $('#userEmail').val(),
-			password : $('#userPassword').val()
+			password : $('#userPassword').val()			
 		}, 
 		success : function(result) {
 			if (result.status == 'failure') {

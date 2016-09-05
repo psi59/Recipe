@@ -20,4 +20,5 @@ public interface UserService {
   List<User> selectMonthRank(int uno);
   List<User> selectTodayRank(int uno);
   User selectMyRank(int uno);
+  int addUserInNaver(User user);
 }
