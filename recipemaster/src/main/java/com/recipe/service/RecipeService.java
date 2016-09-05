@@ -47,4 +47,6 @@ public interface RecipeService {
 	void addCategory(Map map);
 	List<Category> getCategoryList(int recipeNo);
 	void deleteCategoryList(int recipeNo);
+	List<Recipe> getRecipeRecomList(int pageSize);
+	List<Recipe> getRecipeRecomCtList(int pageSize);
 }

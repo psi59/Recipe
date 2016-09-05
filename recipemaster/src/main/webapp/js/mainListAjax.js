@@ -7,6 +7,12 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
   var main2Section = $('#recipe-2-section').html();
   var comMain2Section = Handlebars.compile(main2Section); 
   
+  var mainRecomSection = $('#recipe-3-section').html();
+  var comMainRecomSection = Handlebars.compile(mainRecomSection); 
+
+  var mainRecomCtSection = $('#recipe-4-section').html();
+  var comMainRecomCtSection = Handlebars.compile(mainRecomCtSection);   
+  
   var source = $('#recipe-card-template').html();
   var template = Handlebars.compile(source); 
   
@@ -106,6 +112,7 @@ document.write('<script type"text/javascript" src="js/login.js"></script>')
 			  methods();
 			  if(userInfo != null)
 			  main3List();
+			  MainRecomList()
 		  },
 		  error : function(){
 			  console.log('ajax list2:서버 요청 오류');
@@ -381,3 +388,66 @@ function mouseHover(){
   }
   
 
+  
+  
+  function MainRecomList(){
+	  
+	  $.ajax({
+		  url:'recipe/recomList.json',
+		  dataType:'json',
+		  method:'post',
+		  success:function(result){
+			  if (result.status !='success'){
+				  swal('실행중 오류 발생');
+				  return;
+			  }
+			  var list = result.data;
+			  $('#main-list > div').append( comMainRecomSection(result) );
+			  $('.list2 > .row').append( template(result) );
+			 
+			  
+			  for(var i=0; i<result.data.length; i++){
+//				  for(var j=0; j<result.data[i].representImages.length; j++){
+					  $('.list2 div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');
+
+//				  }
+			  }
+			  MainRecomCtList();
+			  methods();
+		  },
+		  error : function(){
+			  console.log('ajax list2:서버 요청 오류');
+		  }
+	  });
+  }  
+  
+function MainRecomCtList(){
+	  
+	  $.ajax({
+		  url:'recipe/recomCtList.json',
+		  dataType:'json',
+		  method:'post',
+		  success:function(result){
+			  if (result.status !='success'){
+				  swal('실행중 오류 발생');
+				  return;
+			  }
+			  var list = result.data;
+			  $('#main-list > div').append( comMainRecomCtSection(result) );
+			  $('.list3 > .row').append( template(result) );
+			 
+			  
+			  for(var i=0; i<result.data.length; i++){
+//				  for(var j=0; j<result.data[i].representImages.length; j++){
+					  $('.list3 div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');
+
+//				  }
+			  }
+				
+			  methods();
+		  },
+		  error : function(){
+			  console.log('ajax list2:서버 요청 오류');
+		  }
+	  });
+}

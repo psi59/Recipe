@@ -780,4 +780,34 @@ System.out.println("session userNo : "+userNo);
 
     return new Gson().toJson(result);
   }
+  
+  @RequestMapping(path = "recomList", produces = "application/json;charset=UTF-8")
+  @ResponseBody
+  public String recomlist(@RequestParam(defaultValue = "1") int pageSize) {
+    HashMap<String, Object> result = new HashMap<>();
+    List<Recipe> list = recipeService.getRecipeRecomList(pageSize);
+    try {
+      result.put("status", "success");
+      result.put("data", list);
+    } catch (Exception e) {
+      result.put("status", "false");
+    }
+    return new Gson().toJson(result);
+  }
+  
+  @RequestMapping(path = "recomCtList", produces = "application/json;charset=UTF-8")
+  @ResponseBody
+  public String recomCtlist(@RequestParam(defaultValue = "1") int pageSize) {
+    HashMap<String, Object> result = new HashMap<>();
+    List<Recipe> list = recipeService.getRecipeRecomCtList(pageSize);
+    try {
+      result.put("status", "success");
+      result.put("data", list);
+      System.out.println(list);
+    } catch (Exception e) {
+      result.put("status", "false");
+    }
+
+    return new Gson().toJson(result);
+  }
 }

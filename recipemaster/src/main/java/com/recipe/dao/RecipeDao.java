@@ -47,4 +47,6 @@ public interface RecipeDao {
 	void insertCategoty(Map map);
 	List<Category> selectRecipeCategory(int recipeNo);
 	void deleteRecipeCategory(int recipeNo);
+	List<Recipe> recipeRecomList(Map<String,Object> params);
+	List<Recipe> recipeRecomCtList(Map<String,Object> params);
 }

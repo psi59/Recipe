@@ -35,7 +35,18 @@ public class Recipe {
 	private Date recipeCommentDate;
 	private String commentUsers;
 	private int commentNo;
-	public int getCommentNo() {
+	private String ctgName;
+	
+
+  public String getCtgName() {
+    return ctgName;
+  }
+
+  public void setCtgName(String ctgName) {
+    this.ctgName = ctgName;
+  }
+
+  public int getCommentNo() {
     return commentNo;
   }
 
@@ -289,7 +300,7 @@ public class Recipe {
 		this.countLike = countLike;
 	}
 
-	@Override
+  @Override
   public String toString() {
     return "Recipe [recipeNo=" + recipeNo + ", userNo=" + userNo + ", recipeName=" + recipeName + ", intro=" + intro
         + ", recipeDetail=" + recipeDetail + ", representImages=" + representImages + ", materials=" + materials
@@ -299,7 +310,7 @@ public class Recipe {
         + subscribeNum + ", subscribe=" + subscribe + ", countComment=" + countComment + ", countScrap=" + countScrap
         + ", scrapUser=" + scrapUser + ", scrap=" + scrap + ", rpimg=" + rpimg + ", recipeComment=" + recipeComment
         + ", recipeCommentDate=" + recipeCommentDate + ", commentUsers=" + commentUsers + ", commentNo=" + commentNo
-        + ", rownum=" + rownum + ", totalPoint=" + totalPoint + "]";
+        + ", ctgName=" + ctgName + ", rownum=" + rownum + ", totalPoint=" + totalPoint + "]";
   }
 
 }
