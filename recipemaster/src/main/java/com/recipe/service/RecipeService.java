@@ -44,4 +44,6 @@ public interface RecipeService {
 	void addComment(Recipe recipe, int userNo);
 	void deleteComment(int commentNo);
 	int addGrade(int userNo, int recipeNo, double grade);
+	List<Recipe> getRecipeRecomList(int pageSize);
+	List<Recipe> getRecipeRecomCtList(int pageSize);
 }
