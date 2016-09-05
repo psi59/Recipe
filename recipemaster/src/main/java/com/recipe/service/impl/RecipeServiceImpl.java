@@ -253,4 +253,18 @@ public class RecipeServiceImpl implements RecipeService {
       params.put("len", pageSize);
       return recipeDao.recipeRandomList(params);
     }
+    
+    @Override
+    public List<Recipe> getRecipeRecomList(int pageSize) {
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("len", pageSize);
+      return recipeDao.recipeRecomList(params);
+    }
+    
+    @Override
+    public List<Recipe> getRecipeRecomCtList(int pageSize) {
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("len", pageSize);
+      return recipeDao.recipeRecomCtList(params);
+    }
 }

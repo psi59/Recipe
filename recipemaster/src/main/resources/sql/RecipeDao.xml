@@ -35,6 +35,7 @@
 		<result column="rrpct" property="recipeComment" />
 		<result column="rrpc_dt" property="recipeCommentDate" />
 		<result column="rrpno" property="commentNo" />
+		<result column="ctgname" property="ctgName" />
 	</resultMap>
 
 
@@ -414,4 +415,55 @@
 		) vt1
 		WHERE rownum=1 and rgst = 0
 	</select>
+	
+	<select id="recipeRecomList" resultMap="recipeMap"
+    parameterType="Map">
+    SELECT * FROM (
+    SELECT @rownum:=@rownum+1 rownum,vt.*
+    FROM (
+    SELECT r.rcpno rcpno, r.uno uno, r.name, r.intro, r.c_time,r.rpimg,
+    r.ptn, r.rcp_dt, r.hits,IFNULL(r2.cnt,0) countLike,IFNULL(r3.cnt,0)
+    countScrap,
+    r.rgst, r.gpa, u.uno userNo, u.img, u.name userName, u.email,r4.ctgname ctgname,r4.ctgno
+    FROM users u
+    INNER JOIN rcps r on u.uno=r.uno
+    LEFT OUTER JOIN (SELECT rcpno,COUNT(uno) cnt FROM rcp_lik GROUP BY
+    rcpno) r2 ON r.rcpno = r2.rcpno
+    LEFT OUTER JOIN (SELECT rcpno,COUNT(uno) cnt FROM rcp_scr GROUP BY
+    rcpno) r3 ON r2.rcpno = r3.rcpno
+        INNER JOIN(select cn.rcpno,c.ctgno,c.name ctgname from ctg c
+        inner join ctg_no cn on c.ctgno=cn.ctgno 
+                ) r4 ON r3.rcpno = r4.rcpno
+    INNER JOIN(select @rownum:=0) t
+    ORDER BY RAND()) vt
+    ) vt1
+    WHERE (rownum between 1 and 4) and rgst = 0
+  </select>
+  
+  <select id="recipeRecomCtList" resultMap="recipeMap"
+    parameterType="Map">
+     SELECT * FROM (
+    SELECT @rownum:=@rownum+1 rownum,vt.*
+    FROM (
+    SELECT r.rcpno rcpno, r.uno uno, r.name, r.intro, r.c_time,r.rpimg,
+    r.ptn, r.rcp_dt, r.hits,IFNULL(r2.cnt,0) countLike,IFNULL(r3.cnt,0)
+    countScrap,
+    r.rgst, r.gpa, u.uno userNo, u.img, u.name userName, u.email,r1.ctgname ctgname,r1.ctgno
+    FROM users u
+    INNER JOIN rcps r on u.uno=r.uno
+    
+        LEFT OUTER JOIN(select cn.rcpno,c.ctgno ctgno,c.name ctgname from ctg c
+        inner join ctg_no cn on c.ctgno=cn.ctgno
+                ) r1 ON r.rcpno = r1.rcpno
+  LEFT OUTER JOIN (SELECT rcpno,COUNT(uno) cnt FROM rcp_lik GROUP BY
+    rcpno) r2 ON r1.rcpno = r2.rcpno
+    LEFT OUTER JOIN (SELECT rcpno,COUNT(uno) cnt FROM rcp_scr GROUP BY
+    rcpno) r3 ON r2.rcpno = r3.rcpno 
+    INNER JOIN(select @rownum:=0) t
+
+    ORDER BY RAND()) vt
+    ) vt1
+    WHERE rgst = 0
+    limit 4
+  </select>
 </mapper>

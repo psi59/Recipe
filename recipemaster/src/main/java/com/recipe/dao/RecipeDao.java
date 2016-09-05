@@ -43,4 +43,6 @@ public interface RecipeDao {
 	Map<String,Object> checkSubscribe(Map<String,Object> params);//구독 Check 준모
 	Integer addComment(Map map);
 	Integer deleteComment(int commentNo);
+	List<Recipe> recipeRecomList(Map<String,Object> params);
+	List<Recipe> recipeRecomCtList(Map<String,Object> params);
 }

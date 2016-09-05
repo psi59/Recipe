@@ -43,4 +43,6 @@ public interface RecipeService {
 	int deleteMaterials(int recipeNo);
 	void addComment(Recipe recipe, int userNo);
 	void deleteComment(int commentNo);
+	List<Recipe> getRecipeRecomList(int pageSize);
+	List<Recipe> getRecipeRecomCtList(int pageSize);
 }
