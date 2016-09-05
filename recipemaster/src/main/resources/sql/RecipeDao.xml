@@ -44,6 +44,11 @@
 		<result column="mtst" property="materialStatement" />
 		<result column="rcpqt" property="materiaQuantity" />
 	</resultMap>
+	
+	<resultMap type="category" id="categoryMap">
+    <id column="ctgno" property="categoryNo" />
+    <result column="ctgname" property="categoryName" />
+  </resultMap>
 
 	<select id="recipeComment" resultMap="recipeMap" parameterType="INTEGER">
 	    select r.rrpno, r.rrpct, r.rrpc_dt, u.uno, u.name userName,u.img,
@@ -411,4 +416,23 @@
 		) vt1
 		WHERE rownum=1
 	</select>
+	
+	<insert id="insertCategoty" parameterType="map">
+    INSERT INTO ctg_no(rcpno, ctgno)
+    VALUES
+    <foreach collection="categoryValue" item="item" separator=" , ">
+      (#{recipeNo}, #{item})
+    </foreach>
+  </insert>
+  
+  <select id="selectRecipeCategory" resultMap="categoryMap"
+    parameterType="int">
+    SELECT cn.rcpno,c.ctgno,c.name ctgname 
+		FROM ctg c INNER JOIN ctg_no cn ON c.ctgno=cn.ctgno
+		AND cn.rcpno=#{value}
+  </select>	
+  
+  <delete id="deleteRecipeCategory" parameterType="int">
+    DELETE  FROM ctg_no WHERE rcpno=#{value}
+  </delete>
 </mapper>

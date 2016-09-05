@@ -1,7 +1,5 @@
 package com.recipe.controller.json;
 
-import java.awt.font.ImageGraphicAttribute;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.recipe.domain.Category;
 import com.recipe.domain.Material;
 import com.recipe.domain.Recipe;
 import com.recipe.domain.Search;
@@ -99,6 +98,7 @@ public class RecipeController {
   @ResponseBody
   public String addRecipe(Recipe recipe, @RequestParam("materialNo") String[] materialNos,
       @RequestParam("materialAmount") String[] materialAmounts,
+      @RequestParam("categoryValue") List<Integer> categoryValue,
       @RequestParam("recipeProduce") String[] recipeProduce,
       @RequestParam("imageFiles") List<MultipartFile> imageFiles,
       @RequestParam("representImgNames") List<String> representImgNames,
@@ -111,11 +111,10 @@ public class RecipeController {
     List<Map> materialList = new ArrayList<>();
     JsonArray recipeProduceDatas = new JsonArray();
     JsonArray recipeRepresentImages = new JsonArray();
+    
+    System.out.println(categoryValue.toString());
 
-    System.out.println(recipe);
-
-    User user = new User();
-    user.setUserNo(1);
+    User user = CommonUtil.getSessionUser(session);
 
     for (int i = 0; i < materialNos.length; i++) {
       Map<String, String> matertialInfo = new HashMap<>();
@@ -131,6 +130,7 @@ public class RecipeController {
     int recipeNo = recipeService.addRecipe(map);
     recipeDatas.put("recipeNo", recipeNo);
     recipeDatas.put("materialList", materialList);
+    recipeDatas.put("categoryValue", categoryValue);
 
     try {
       for (int i = 0; i < representImgNames.size(); i++) {
@@ -165,6 +165,7 @@ public class RecipeController {
       recipeDatas.put("recipeRepresentImages", recipeRepresentImages.toString());
       recipeService.registyImageAndProduce(recipeDatas);
       recipeService.addMaterials(recipeDatas);
+      recipeService.addCategory(recipeDatas);
       result.put("status", "success");
     } catch (Exception e) {
       e.printStackTrace();
@@ -205,6 +206,7 @@ public class RecipeController {
   public String updateRecipe(Recipe recipe, @RequestParam("materialNo") String[] materialNos,
       @RequestParam("materialAmount") String[] materialAmounts,
       @RequestParam("recipeProduce") String[] recipeProduce,
+      @RequestParam("categoryValue") List<Integer> categoryValue,
       @RequestParam("imageFiles") List<MultipartFile> imageFiles,
       @RequestParam("representImgNames") List<String> representImgNames,
       @RequestParam(value="deleteRepresentImg", defaultValue="") List<String> deleteRepresentImg,
@@ -219,6 +221,8 @@ public class RecipeController {
     List<Map> materialList = new ArrayList<>();
     JsonArray recipeProduceDatas = new JsonArray();
     JsonArray recipeRepresentImages = new JsonArray();
+    
+    System.out.println(categoryValue);    
     
     for(String imageName : deleteRepresentImg){
     	if(!CommonUtil.imageDelete(CommonUtil.getImageFolderPath("representImg", request), imageName)){
@@ -277,11 +281,14 @@ public class RecipeController {
       recipe.setRepresentImages(recipeRepresentImages);				
       recipeService.updateRecipe(recipe);
       recipeService.deleteMaterials(recipe.getRecipeNo());
+      recipeService.deleteCategoryList(recipe.getRecipeNo());
 
       recipeDatas.put("materialList", materialList);
+      recipeDatas.put("categoryValue", categoryValue);
       recipeDatas.put("recipeNo", recipe.getRecipeNo());
 
       recipeService.addMaterials(recipeDatas);
+      recipeService.addCategory(recipeDatas);
 
       //recipeService.addMaterials(recipeDatas);
       result.put("status", "success");
@@ -316,6 +323,7 @@ System.out.println("session userNo : "+userNo);
   public String recipeDetail(int recipeNo, HttpSession session) {
     HashMap<String, Object> result = new HashMap<>(); 
     List<Material> materials = new ArrayList<>();
+    List<Category> categories = new ArrayList<>();
     Recipe recipe = new Recipe();
     if ((User)session.getAttribute("loginUser") != null) {
       System.out.println(((User)session.getAttribute("loginUser")).getUserNo());
@@ -324,13 +332,14 @@ System.out.println("session userNo : "+userNo);
       recipe = recipeService.getRecipe(recipeNo, 0);
     }
     materials = recipeService.getRecipeMaterial(recipeNo);
+    categories = recipeService.getCategoryList(recipeNo);
     recipe.setHits(recipe.getHits() + 1);
     recipeService.updateHits(recipe);
     try {
-      System.out.println("recipe : "+recipe);
       result.put("status", "success");
       result.put("data", recipe);
       result.put("materials", materials);
+      result.put("categories", categories);
     } catch (Exception e) {
       result.put("status", "false");
     }

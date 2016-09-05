@@ -21,7 +21,7 @@
 	href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
 <link rel="stylesheet"
 	href="node_modules/bxslider/dist/jquery.bxslider.css">
-
+ 
 <!-- 사용자 정의 css -->
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/userinfobox.css">
@@ -177,7 +177,20 @@
 		<div class="scroll"></div>
 	</div>
 	<!--  random recipe 용이 -->
-	<div id="random-pop-up-banner" class="random-pop-up-banner"></div>
+	<div id="random-pop-up-banner" class="random-pop-up-banner">
+	 <div class="todayMenu">Today Random Menu</div>
+	 <div id="slot_box">
+		 <div id="rcp-randomRacipeCardWrapper-slot">
+		   <div class="slotCard"><img src="img/randomRcp/randomrecipe2.png"></div>
+		   <div id="rcp-randomRacipeCardWrapper" class="slotCard"></div>
+		   <div class="slotCard"><img src="img/randomRcp/randomrecipe2.png"></div>
+		   <div class="slotCard"><img src="img/randomRcp/randomrecipe3.png"></div>
+		 </div>
+	 </div>
+	 <div>
+	   <button type="button" class="btn btn-danger rcp-re-recipe" id="rcp-re-recipe">다시 뽑기</button>
+	 </div>
+	</div>
 	<!-- ------------------------------------------------------------------------------- -->
 
 	<div id='signup-pop-up-banner'>
@@ -889,7 +902,7 @@
 	<script src="node_modules/bxslider/dist/jquery.bxslider.min.js"></script>
 	<script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
-
+	
 	<!--  사용자 js -->
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/template/main.js"></script>

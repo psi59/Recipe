@@ -3,6 +3,7 @@ package com.recipe.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.recipe.domain.Category;
 import com.recipe.domain.Material;
 import com.recipe.domain.Recipe;
 
@@ -43,4 +44,7 @@ public interface RecipeDao {
 	Map<String,Object> checkSubscribe(Map<String,Object> params);//구독 Check 준모
 	Integer addComment(Map map);
 	Integer deleteComment(int commentNo);
+	void insertCategoty(Map map);
+	List<Category> selectRecipeCategory(int recipeNo);
+	void deleteRecipeCategory(int recipeNo);
 }

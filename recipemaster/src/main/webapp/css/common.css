@@ -12,7 +12,6 @@ header {
 }
 
 .rcp-re-recipe {
-  position: absolute;
   margin: 2%;
   margin-left: 38%;
   margin-top: 0%;
@@ -500,6 +499,28 @@ header .header-content {
   height: 56%;
 }
 
-#random-pop-up-banner>.rcp-list-margin {
+#random-pop-up-banner .rcp-list-margin {
   width: 100%;
+}
+
+#rcp-randomRacipeCardWrapper-slot {
+  overflow: hidden;  hide the stuff
+  height: 350px;  size the viewable window (equal to image height)
+  display: inline-block;
+}
+
+/************************ 랜덤 슬롯 ************************/
+/* 슬라이더 기본 위치 */
+#rcp-randomRacipeCardWrapper-slot .slotCard{ 
+	width: 100%;
+  height: 435px;
+  list-style: none;
+}
+
+#slot_box{
+   position: relative;
+   width: 100%;
+   height: 433px;
+   overflow: hidden;
+   display: inline-block;
 }

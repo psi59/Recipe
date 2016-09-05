@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.recipe.dao.RecipeDao;
+import com.recipe.domain.Category;
 import com.recipe.domain.Material;
 import com.recipe.domain.Recipe;
 import com.recipe.domain.Search;
@@ -253,4 +254,19 @@ public class RecipeServiceImpl implements RecipeService {
       params.put("len", pageSize);
       return recipeDao.recipeRandomList(params);
     }
+
+	@Override
+	public void addCategory(Map map) {
+	   recipeDao.insertCategoty(map);
+	}
+
+	@Override
+	public List<Category> getCategoryList(int recipeNo) {
+		return recipeDao.selectRecipeCategory(recipeNo);
+	}
+
+	@Override
+	public void deleteCategoryList(int recipeNo) {
+		recipeDao.deleteRecipeCategory(recipeNo);
+	}
 }

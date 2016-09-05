@@ -380,41 +380,4 @@ function mouseHover(){
 	  })
   }
   
-//-----------------------------랜덤 레시피 ---------------------------------
-  $('#rcp-random-recipe').on('click',function(){
-	  randomRecipe();
-	  function randomRecipe(){
-  	  $.ajax({	  		  
-  		  url:'recipe/randomList.json',
-  		  dataType:'json',
-  		  method:'post',
-  		  success:function(result){
-  			  if (result.status !='success'){
-  				  swal('실행중 오류 발생');
-  				  return;
-  			  }
-  			  var list = result.data;
-  			  $('#random-pop-up-banner').html('');
-  			  $('#random-pop-up-banner').html('<div class="todayMenu">Today Random Menu</div>'+
-  					  						  '<button type="button" class="btn btn-danger rcp-re-recipe"'+
-  					  						  'id="rcp-re-recipe">다시 뽑기</button>');
-  			  $('#random-pop-up-banner').append( template(result));
-  			  
-  				  for(var i=0; i<result.data.length; i++){
-  						  $('#random-pop-up-banner div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');
-  				  }
-  			  
-  			  methods();
-  			  
-  		  },
-  		  error : function(){
-  			  console.log('randomList: 서버 요청 오류');
-  		  }
-  	  });
-  	  
-	  }
-	  $(document).on('click','#rcp-re-recipe',function(){
-			randomRecipe();
-		})
-  })
 
