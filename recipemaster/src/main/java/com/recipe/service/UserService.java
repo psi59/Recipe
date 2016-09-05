@@ -21,4 +21,5 @@ public interface UserService {
   List<User> selectTodayRank(int uno);
   User selectMyRank(int uno);
   int addUserInNaver(User user);
+  void authUpdate(String authKEY, int auth, String inputEmail);//인증update
 }

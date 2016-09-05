@@ -21,7 +21,6 @@
 	href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
 <link rel="stylesheet"
 	href="node_modules/bxslider/dist/jquery.bxslider.css">
- 
 <!-- 사용자 정의 css -->
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/userinfobox.css">
@@ -135,14 +134,16 @@
 							style="width: 40%; height: 40%; margin-bottom: 1em;"> <br />
 
 						<div class="row lead wow fadeIn">
-							<div class="col-md-3 col-md-offset-3 col-sm-3 col-sm-offset-3 col-xs-4 col-xs-offset-4">
+							<div
+								class="col-md-3 col-md-offset-3 col-sm-3 col-sm-offset-3 col-xs-4 col-xs-offset-4">
 								<div class="rcp-rt-recipe-btn">실시간 인기 레시피</div>
 								<div id="rt_rank_recipe"
 									class="list-group scroll-img rcp-rt-recipe-rank"></div>
 							</div>
 							<div class="col-md-3 hidden-xs col-sm-3">
 								<div class="rcp-rt-chef-btn">실시간 인기 쉐프</div>
-								<div id="rt_rank_chef" class="list-group scroll-img rcp-rt-chef-rank"></div>
+								<div id="rt_rank_chef"
+									class="list-group scroll-img rcp-rt-chef-rank"></div>
 							</div>
 						</div>
 						<!-- row 태그 종료 -->
@@ -178,18 +179,25 @@
 	</div>
 	<!--  random recipe 용이 -->
 	<div id="random-pop-up-banner" class="random-pop-up-banner">
-	 <div class="todayMenu">Today Random Menu</div>
-	 <div id="slot_box">
-		 <div id="rcp-randomRacipeCardWrapper-slot">
-		   <div class="slotCard"><img src="img/randomRcp/randomrecipe2.png"></div>
-		   <div id="rcp-randomRacipeCardWrapper" class="slotCard"></div>
-		   <div class="slotCard"><img src="img/randomRcp/randomrecipe2.png"></div>
-		   <div class="slotCard"><img src="img/randomRcp/randomrecipe3.png"></div>
-		 </div>
-	 </div>
-	 <div>
-	   <button type="button" class="btn btn-danger rcp-re-recipe" id="rcp-re-recipe">다시 뽑기</button>
-	 </div>
+		<div class="todayMenu">Today Random Menu</div>
+		<div id="slot_box">
+			<div id="rcp-randomRacipeCardWrapper-slot">
+				<div class="slotCard">
+					<img src="img/randomRcp/randomrecipe2.png">
+				</div>
+				<div id="rcp-randomRacipeCardWrapper" class="slotCard"></div>
+				<div class="slotCard">
+					<img src="img/randomRcp/randomrecipe2.png">
+				</div>
+				<div class="slotCard">
+					<img src="img/randomRcp/randomrecipe3.png">
+				</div>
+			</div>
+		</div>
+		<div>
+			<button type="button" class="btn btn-danger rcp-re-recipe"
+				id="rcp-re-recipe">다시 뽑기</button>
+		</div>
 	</div>
 	<!-- ------------------------------------------------------------------------------- -->
 
@@ -268,7 +276,7 @@
 		<div class="rcp-sign-membership" style="margin-top: 50px;">
 			<span id="userLogin">로그인</span><span id="naver_id_login"></span>
 		</div>
-		
+
 	</div>
 
 	<!--  -->
@@ -346,7 +354,7 @@
 
 			<div class="rcp-taps">
 				<div class="rcp-first-info">
-				<input type="hidden" value="" name="recipeNo">
+					<input type="hidden" value="" name="recipeNo">
 				</div>
 
 				<div class="rcp-seconde-info">
@@ -364,7 +372,7 @@
 	</div>
 	<!-- -------------------------------recipe list-------------------------------- -->
 	<div id="naver_id_login"></div>
-	
+
 	<section id="main-list">
 		<div></div>
 	</section>
@@ -372,10 +380,9 @@
 	<!-------------------------------- Rank List --------------------------------->
 	<section id="rcp-main-rank">
 		<div class="tabs-left rcp-list h3 rcp-1024 list1">
-			<div class="tab-content " >
+			<div class="tab-content ">
 				<h3 id="rcp-ranking">
-					<a>Best Of Chef</a>
-					<a href="/ranking.html" class="More">more</a>
+					<a>Best Of Chef</a> <a href="/ranking.html" class="More">more</a>
 				</h3>
 				<!---------------- Chef Rank --------------------->
 				<div class="row tab-pane active" id="rcp-chef-rank"></div>
@@ -396,16 +403,18 @@
 					<div class="container">
 						<div class="row">
 
-						<h2 class="rcp-h2-25px"><a class="More">more</a></h2>
+							<h2 class="rcp-h2-25px">
+								<a class="More">more</a>
+							</h2>
 
-						
-						
 
-							</div>
+
+
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 
 
 	</section>
@@ -413,10 +422,12 @@
 	<!------------------------- Rank List ------------------------------>
 	<div id="footer"></div>
 
-  <!-- 로딩시 뜨는 이미지 -->
-  <div class="wrap-loading display-none">
-    <div><img src="img/img_loading.gif"></div>
-  </div>
+	<!-- 로딩시 뜨는 이미지 -->
+	<div class="wrap-loading display-none">
+		<div>
+			<img src="img/img_loading.gif">
+		</div>
+	</div>
 
 	<script id="temp" type="text/x-handlebars-template">
 {{#sessionUser}}
@@ -466,11 +477,9 @@
 {{/sessionUser}}
 </script>
 
-
-  <script id="recipe-detail-main-template"
-    type="text/x-handlebars-template">
-    
-              <div class="rcp-body" name="rcp-body" >
+	<script id="recipe-detail-main-template"
+		type="text/x-handlebars-template">
+           <div class="rcp-body" name="rcp-body" >
               <div>
                 <div class="rcp-title-size">
                    
@@ -489,9 +498,6 @@
             </div>
 
 </script>
-
-
-
 
 	<script id="recipe-detail-template" type="text/x-handlebars-template">
     {{#recipeProcedure}}
@@ -647,7 +653,7 @@
 
 </script>
 
-  <script id="recipe-3-section" type="text/x-handlebars-template">
+	<script id="recipe-3-section" type="text/x-handlebars-template">
  <section name="rcp-custom-list">
     <div class="rcp-list">
       <div class="rcp-1024 list2" >
@@ -659,7 +665,7 @@
 
 </script>
 
-<script id="recipe-4-section" type="text/x-handlebars-template">
+	<script id="recipe-4-section" type="text/x-handlebars-template">
  <section name="rcp-custom-list">
     <div class="rcp-list">
       <div class="rcp-1024 list3" >
@@ -859,10 +865,8 @@
   <div class="fresh-ui">
     <div class="header">
       <div class="photo">     
-      
-             <a href="#" class="rcp-userName"><input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
-             <img src="img/profileImg/{{image}}" class="img-circle rcp-profile"></a>
-
+         <a href="#" class="rcp-userName"><input type="hidden" class="rcp-hidden-email" value="{{email}}">
+         <img src="img/profileImg/{{image}}" class="img-circle rcp-profile"></a>
       </div>
       <div class="social">
         <div class="list">
@@ -900,7 +904,6 @@
   {{/each}} 
   </script>
 
-  
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
@@ -920,7 +923,7 @@
 	<script src="node_modules/bxslider/dist/jquery.bxslider.min.js"></script>
 	<script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
-	
+
 	<!--  사용자 js -->
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/template/main.js"></script>
@@ -928,7 +931,7 @@
 	<script src="js/template/plugin.js"></script>
 	<script src="js/template/custom.js"></script>
 	<script src="js/template/jquery-slider-rolling.js"></script>
-	<script src="js/template/naverLogin_implicit-1.0.2.js"></script>	
+	<script src="js/template/naverLogin_implicit-1.0.2.js"></script>
 	<script src="js/common.js"></script>
 	<script src="js/login.js"></script>
 	<script src="js/recipeDetail.js"></script>
@@ -943,12 +946,12 @@
 
 	<script>
 		$(function() {
-						
+
 			getUserInfo();
 			getWeather();
 			getRealTimeRank();
 			$('#footer').load("../copyright.html");
-			
+
 			$('.profile-dropdown:has(.active)').bind('click', function() {
 
 			});
@@ -966,57 +969,60 @@
 			});
 		});
 	</script>
-	
+
 	<script type="text/javascript">
-  var naver_id_login = new naver_id_login("oZ3ZBiNctenY6ix5st7G", "http://127.0.0.1:8080/index.html");
-  var state = naver_id_login.getUniqState();
-  naver_id_login.setButton("green", 2,40);
-  naver_id_login.setDomain(".service.com");
-  naver_id_login.setState(state);
-  naver_id_login.init_naver_id_login();
-</script>
-	
+		var naver_id_login = new naver_id_login("oZ3ZBiNctenY6ix5st7G",
+				"http://127.0.0.1:8080/index.html");
+		var state = naver_id_login.getUniqState();
+		naver_id_login.setButton("green", 2, 40);
+		naver_id_login.setDomain(".service.com");
+		naver_id_login.setState(state);
+		naver_id_login.init_naver_id_login();
+	</script>
+
 	<script type="text/javascript">
-  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-   function naverSignInCallback() {
-    // naver_id_login.getProfileData('프로파일항목명');
-    // 프로필 항목은 개발가이드를 참고하시기 바랍니다.
-	   console.log("nickName : "+naver_id_login.getProfileData('nickname'));             
-       console.log("email : "+naver_id_login.getProfileData('email'));
-         $.ajax({
-           url : '/user/loginNaver.json', 
-           method : 'post',
-           dataType : 'json',
-           data : {
-        	   userName : naver_id_login.getProfileData('nickname'),
-             email : naver_id_login.getProfileData('email')
-           }, 
-           success : function(result) {
-             if (result.status == 'failure') {
+		// 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+		function naverSignInCallback() {
+			// naver_id_login.getProfileData('프로파일항목명');
+			// 프로필 항목은 개발가이드를 참고하시기 바랍니다.
+			console.log("nickName : "
+					+ naver_id_login.getProfileData('nickname'));
+			console.log("email : " + naver_id_login.getProfileData('email'));
+			$
+					.ajax({
+						url : '/user/loginNaver.json',
+						method : 'post',
+						dataType : 'json',
+						data : {
+							userName : naver_id_login
+									.getProfileData('nickname'),
+							email : naver_id_login.getProfileData('email')
+						},
+						success : function(result) {
+							if (result.status == 'failure') {
 
-               swal('잘못입력하셨습니다.','아이디 또는 비밀번호를 다시 확인하여 주세요.',"error");
+								swal('잘못입력하셨습니다.', '아이디 또는 비밀번호를 다시 확인하여 주세요.',
+										"error");
 
-               return;
-             } 
+								return;
+							}
 
-             if(result.status == 'success'){
-            
-              
-             } else {
-               swal('비밀번호를 다시 입력해주세요');
-             }
+							if (result.status == 'success') {
 
-           },
-           error : function() {
-             swal('서버 요청 오류');
-           }
-         }); /* end of ajax */
-    
-  }
+							} else {
+								swal('비밀번호를 다시 입력해주세요');
+							}
 
-  // 네이버 사용자 프로필 조회
-  naver_id_login.get_naver_userprofile("naverSignInCallback()");  
-</script>
-	
+						},
+						error : function() {
+							swal('서버 요청 오류');
+						}
+					}); /* end of ajax */
+
+		}
+
+		// 네이버 사용자 프로필 조회
+		naver_id_login.get_naver_userprofile("naverSignInCallback()");
+	</script>
 </body>
 </html>

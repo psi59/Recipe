@@ -73,7 +73,6 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User loginUser(User user) {
-    // TODO Auto-generated method stub
     User dbUser=userDao.findUser(user.getEmail());
     System.out.println("dbUser"+dbUser);
     if (dbUser==null) {
@@ -98,7 +97,6 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User selectFromEmail(String email) {
-    // TODO Auto-generated method stub
     return userDao.selectFromEmail(email);
   }
   
@@ -134,7 +132,15 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public int addUserInNaver(User user) {
-    // TODO Auto-generated method stub
     return userDao.addUserInNaver(user);
+  }
+  
+  public void authUpdate(String authKEY, int auth, String inputEmail) {
+    HashMap<String,Object> params= new HashMap<>();    
+    System.out.println("이곳은 authUpdat을 하는  service impl입니다."+authKEY+"?"+auth);
+    params.put("authKEY", authKEY);
+    params.put("auth", auth);   
+    params.put("inputEmail", inputEmail); 
+    userDao.authUpdate(params);
   }
 }
