@@ -63,7 +63,8 @@
 	<select id="recipeSearch" parameterType="Map" resultMap="recipeMap">
 		SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt,r.rpimg rpimg,
 		r.hits, r.rgst, truncate(r.gpa,1) gpa, u.uno, u.name userName, l.rcpno,
-		l.lc_dt, l.uno likeUser FROM users u INNER JOIN rcps r on u.uno=r.uno
+		l.lc_dt, l.uno likeUser		 
+      FROM users u INNER JOIN rcps r on u.uno=r.uno
 		LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=#{userNo}
 		<if test="!categorySize eq 0">
 			,(SELECT rcpno , count(*) vc FROM (SELECT c.ctgno, c.name, cn.rcpno

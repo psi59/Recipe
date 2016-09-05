@@ -1,4 +1,7 @@
 
+//document.write('<script type"text/javascript" src="js/recipeDetail.js"></script>')
+
+
 
 /* 검색 및 정렬 이벤트 -성현 */
 $(document).ready(function(){	
