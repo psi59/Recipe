@@ -50,6 +50,4 @@ public interface RecipeService {
 	List<Recipe> getRecipeRecomList(int pageSize);
 	List<Recipe> getRecipeRecomCtList(int pageSize);
 	int addGrade(int userNo, int recipeNo, double grade);
-	List<Recipe> getRecipeRecomList(int pageSize);
-	List<Recipe> getRecipeRecomCtList(int pageSize);
 }
