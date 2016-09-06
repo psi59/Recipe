@@ -57,7 +57,7 @@ app.use(function (req, res, next) {
 
 
 app.get('/user/authentication.do', function (request, response) {
-	var inputEmail = request.query.email;
+	var email = request.query.email;
 	var authKEY = request.query.authKEY;
 	var auth=1;
 	
@@ -72,10 +72,10 @@ app.get('/user/authentication.do', function (request, response) {
 	// send mail 
 	transporter.sendMail({
 		from: "somangily@gmail.com",
-		  to: inputEmail,
+		  to: email,
 		  subject: "href",
 		  generateTextFromHTML: true,
-		  html: "<a href='http://127.0.0.1:8080/user/auth.json?authKEY="+authKEY+"&auth="+auth+"&inputEmail="+inputEmail+"'>"+inputEmail+"</a>"
+		  html: "<a href='http://127.0.0.1:7979/user/auth.do?authKEY="+authKEY+"&auth="+auth+"&email="+email+"'>"+email+"님 환영합니다."+"</a>"
 		
 	}, function(error, response) {
 	   if (error) {

@@ -457,7 +457,7 @@ public class UserController {
 	    return new Gson().toJson(result);
 	 }
 	 
-	 @RequestMapping(path = "auth", produces = "application/json;charset=UTF-8")
+	 /*@RequestMapping(path = "auth", produces = "application/json;charset=UTF-8")
 	 public String auth(String authKEY, int auth, String inputEmail){   
 	    
 	    HashMap<String, Object> result = new HashMap<>();
@@ -465,14 +465,9 @@ public class UserController {
       authUser=userService.selectFromEmail(inputEmail);;
       try {
         
-        System.out.println("authKEY::"+authKEY);
-        System.out.println("authUser.getAuthenticationKEY()::"+authUser.getAuthenticationKEY());
-        System.out.println(authKEY.toString().trim().equals(authUser.getAuthenticationKEY().toString().trim()));
         if (authKEY.toString().trim().equals(authUser.getAuthenticationKEY().toString().trim())) {
           userService.authUpdate(authKEY, auth, inputEmail);
           result.put("status", "success");
-          System.out.println("성공");
-          System.out.println("왜 안들어오냐1111??"+authKEY+"::"+auth+"::"+inputEmail+"::");
         }else{
           System.out.println("실패");
         }
@@ -482,5 +477,5 @@ public class UserController {
         result.put("status", "failure");
       }
       return "index.html";
-	  }
+	  }*/
 }
