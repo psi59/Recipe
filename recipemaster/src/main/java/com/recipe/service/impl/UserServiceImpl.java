@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
       dbUser=null;
       return dbUser;
     }else{
-    dbUser.setPassword("");
+      System.out.println(dbUser.getEmail()+"님이 login 시도 하였습니다.");
     }
     return dbUser;
     

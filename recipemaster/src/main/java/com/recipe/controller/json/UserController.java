@@ -136,18 +136,32 @@ public class UserController {
 	    //value="name"
 			@RequestParam(value="userNo", defaultValue="0") int userNo,
 			@RequestParam(value="email", defaultValue="") String email,
-			@RequestParam(value="bfPwd", defaultValue="") String beforePassword,
-			@RequestParam(value="password", defaultValue="") String password,
+			@RequestParam(value="beforePassword", defaultValue="") String beforePassword,
+			@RequestParam(value="afterpassword", defaultValue="") String afterpassword,
 			@RequestParam(value="intro", defaultValue="") String intro,
 			@RequestParam(value="profileImage") List<MultipartFile> profileImage,
 			HttpSession session, HttpServletRequest request) {
 		
-	  System.out.println("::userNo::"+userNo+"::email::"+email+"::beforePassword::"+beforePassword+"::password::"+password+"::intro::"+intro);
+	 
+	  
+	  System.out.println("::userNo::"+userNo+"::email::"+email+"::beforePassword::"+beforePassword+"::afterpassword::"+afterpassword+"::intro::"+intro);
 	  
 		User user = CommonUtil.getSessionUser(session);
 		HashMap<String, Object> result = new HashMap<>();
-				
+		System.out.println("session에 있는 user 정보::"+user);
+		
 		try {
+		  System.out.println(CommonUtil.sha1(beforePassword).toString().trim().equals(user.getPassword().toString().trim()));
+		  System.out.println("CommonUtil.sha1(beforePassword)"+CommonUtil.sha1(beforePassword));
+		  System.out.println("user.getPassword()::"+user.getPassword());
+		  if (!(CommonUtil.sha1(beforePassword).toString().trim().equals(user.getPassword().toString().trim()))) {
+		    result.put("status", "pwdFail");    
+        System.out.println("비밀번호 오류");
+        return new Gson().toJson(result);
+	    }
+		  
+		  beforePassword=CommonUtil.sha1(beforePassword);
+		  
 			if(user.getUserNo()!=0){			
 				if(user.getUserNo()==userNo){
 					String fileName = "userprofile_"+user.getUserNo()+".png";
@@ -155,41 +169,31 @@ public class UserController {
 						File recipeUrl= new File(CommonUtil.getImageFolderPath("profileImg", request)+"/"+fileName);
 						profileImage.get(0).transferTo(recipeUrl);
 					}
-					
-		       ////password SHA1 암호화 끝
-          try {
-            // Create MD5 Hash
-            MessageDigest digest = MessageDigest.getInstance("SHA-1");
-            digest.update(user.getPassword().getBytes());
-            byte messageDigest[] = digest.digest();
-      
-            // Create Hex String
-            StringBuffer hexString = new StringBuffer();
-            for (int i = 0; i < messageDigest.length; i++)
-                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
-            user.setPassword(hexString.toString());
-      
-              } catch (NoSuchAlgorithmException e) {
-                  e.printStackTrace();
-              }
-           //password SHA1 암호화 끝
-					
-					if(beforePassword.equals(userService.getUser(userNo))){
-						user.setPassword(password);
+					afterpassword=CommonUtil.sha1(afterpassword);
+			    
+          System.out.println("beforePassword.toString()::"+beforePassword.toString());
+          System.out.println("afterpassword::"+afterpassword);
+          System.out.println("user.getPassword().toString()::"+user.getPassword().toString());
+          System.out.println("beforePassword.equals(user.getPassword().toString())::"+beforePassword.toString().trim().equals(user.getPassword().toString().trim()));
+					if(beforePassword.toString().trim().equals(user.getPassword().toString().trim())){
+					                /*user=CommonUtil.sha1(user);*/
+					                user.setIntro(intro);
+                          user.setImage(fileName);
+                          user.setPassword(afterpassword);
+                          System.out.println("update User::"+user);
+                          userService.updateUser(user);
+                          result.put("status", "success");       
+					}else{
+					  result.put("status", "fail");    
+					  
+					  return new Gson().toJson(result);
 					}
-					
-					user.setIntro(intro);
-					user.setImage(fileName);
-					System.out.println(user.getPassword().equals(""));
-					userService.updateUser(user);
-					result.put("status", "success");
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			result.put("status", "fail");
 		}
-		
 		return new Gson().toJson(result);
 	}
 
@@ -241,11 +245,9 @@ public class UserController {
 	public String login(User user, HttpSession session) {
 		// index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
 		HashMap<String, Object> result = new HashMap<>();
-		
 		User loginUser=new User();
-		
 		loginUser = userService.selectFromEmail(user.getEmail()); 
-		//
+		try {
 		System.out.println("로그인 한 정보::"+loginUser);
 		if(loginUser.getEmail()==null) {
       result.put("status", "null");
@@ -258,27 +260,19 @@ public class UserController {
 		  
 		  return new Gson().toJson(result);
     }
-		try {
-    	////password SHA1 암호화 시작
-            // Create MD5 Hash
-            MessageDigest digest = MessageDigest.getInstance("SHA-1");
-            digest.update(user.getPassword().getBytes());
-            byte messageDigest[] = digest.digest();
-      
-            // Create Hex String
-            StringBuffer hexString = new StringBuffer();
-            for (int i = 0; i < messageDigest.length; i++)
-                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
-            user.setPassword(hexString.toString());
-      
-      //password SHA1 암호화 끝
+      user=CommonUtil.sha1(user);      
+            
+      System.out.println(user.getPassword().toString().trim());
+      System.out.println(loginUser.getPassword().toString().trim());
       System.out.println("password SHA1 암호화::"+user.getPassword().toString().trim().equals(loginUser.getPassword().toString().trim()));
-      loginUser = userService.loginUser(user); 
-		  result.put("status", "success");
-      result.put("data", loginUser);
-      // server sessionStorage에 유저 정보 저장 ------------------
-      session.setAttribute("loginUser", loginUser);
-			
+      if(user.getPassword().toString().trim().equals(loginUser.getPassword().toString().trim())){
+        loginUser = userService.loginUser(user); 
+        result.put("status", "success");
+        result.put("data", loginUser);
+        
+     // server sessionStorage에 유저 정보 저장 ------------------
+        session.setAttribute("loginUser", loginUser);
+      }
 		} catch (Exception e) {
 			result.put("status", "failure");
 		}
