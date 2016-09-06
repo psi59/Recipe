@@ -274,7 +274,7 @@
 		countLike from rcp_lik		
 		group by rcpno) likecnt
 		ON r.rcpno=likecnt.rno
-		where r.rgst = 1
+		where r.rgst = 0
 		ORDER BY r.rcp_dt desc
 		<if test="request == 5"> limit 4</if>
 	</select>
