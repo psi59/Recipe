@@ -389,7 +389,8 @@
             <span class="editBtn2" data-index="{{visitorNo}}">
                 <button type="button" class="btn btn-danger btn-xs vstDeleteBtn" name="vstDeleteBtn" data-index="{{visitorNo}}">삭제</button>
             </span>  
-              <span class="rcp-Vst-vno">No. {{visitorNo}}</span><br/>
+              <span class="rcp-Vst-vno"></span><br/>
+              <input type="hidden" class="fromNo" name="fromNo" value={{user.userNo}}>
               <span id="rcp-Vst-id" class="rcp-Vst-id">From. {{user.userName}}
               </span><br/>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
               <span id="rcp-Vst-time">Date. {{visitorDate}}</span>
