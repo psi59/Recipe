@@ -1,20 +1,20 @@
 ///////////////////////////////////////////
 	var nodemailer = require("nodemailer");
 
-	var smtpTransport = nodemailer.createTransport("SMTP", {
-	  service: "Gmail",
-	  auth: {
-	    XOAuth2: {
+	var generator = require('xoauth2').createXOAuth2Generator({
 	      user: "somangily@gmail.com", 
 	      
 	      clientId: "854303379765-qfo2qv1jb1me218j4j6ht6321siq5hrp.apps.googleusercontent.com",
 	      clientSecret: "6G1aI3dxZIgOVHcwb90mciqt",
 	      refreshToken: "1/H25r6ikpWsThkpi0S60c40hQ-iEYWZF7b8IFneady8U"
-	    }
-	  }
+	  
 	});
 
-	
+	// listen for token updates 
+	// you probably want to store these to a db 
+	generator.on('token', function(token){
+	    console.log('New token for %s: %s', token.user, token.refreshToken);
+	});
 	///////////////////////////////////////////
 
 /* GET/POST 파라미터 처리 => body-parser 모듈 사용! */
@@ -61,22 +61,30 @@ app.get('/user/authentication.do', function (request, response) {
 	var authKEY = request.query.authKEY;
 	var auth=1;
 	
-	var mailOptions = {
-			  from: "somangily@gmail.com",
-			  to: inputEmail,
-			  subject: "href",
-			  generateTextFromHTML: true,
-			  html: "<a href='http://127.0.0.1:8080/user/auth.json?authKEY="+authKEY+"&auth="+auth+"&inputEmail="+inputEmail+"'>"+inputEmail+"</a>"
-			};
+	// login 
+	var transporter = nodemailer.createTransport(({
+	    service: 'gmail',
+	    auth: {
+	        xoauth2: generator
+	    }
+	}));
+	 
+	// send mail 
+	transporter.sendMail({
+		from: "somangily@gmail.com",
+		  to: inputEmail,
+		  subject: "href",
+		  generateTextFromHTML: true,
+		  html: "<a href='http://127.0.0.1:8080/user/auth.json?authKEY="+authKEY+"&auth="+auth+"&inputEmail="+inputEmail+"'>"+inputEmail+"</a>"
+		
+	}, function(error, response) {
+	   if (error) {
+	        console.log(error);
+	   } else {
+	        console.log('Message sent');
+	   }
+	});
 	
-	smtpTransport.sendMail(mailOptions, function(error, response) {
-		  if (error) {
-		    console.log(error);
-		  } else {
-		    console.log(response);
-		  }
-		  smtpTransport.close();
-		});
 	
 	response.end();
 });
