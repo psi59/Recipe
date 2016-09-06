@@ -68,18 +68,19 @@ $('#signUpBtn').on('click', function(event){
 	$('#signup-pop-up-banner').bPopup();
 });
 
+//스크롤 내리면 생기는 signUpBtn 팝업 , 불투명 배경 띄우기
 $('#signUpTopBtn').on('click', function(event){
 	event.preventDefault();
 	$('#signup-pop-up-banner').bPopup();
 });
 
-//loginBtn팝업 , 불투명 배경 띄우기
+//loginBtn 팝업 , 불투명 배경 띄우기
 $('#loginBtn').on('click', function(event){
 	event.preventDefault();
 	$('#login-pop-up-banner').bPopup();
 });
 
-//스크롤 내리면 생기는 loginBtn팝업 , 불투명 배경 띄우기
+//스크롤 내리면 생기는 loginBtn 팝업 , 불투명 배경 띄우기
 $('#topLoginBtn').on('click', function(event){
 	event.preventDefault();
 	$('#login-pop-up-banner').bPopup();

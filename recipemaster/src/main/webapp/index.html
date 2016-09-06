@@ -38,7 +38,12 @@
 <link rel="stylesheet" href="css/index_rankTabs.css">
 <link rel="stylesheet" href="css/common_list_topbar.css">
 <link rel="stylesheet" href="css/common/loading.css">
-<link rel="stylesheet" href="css/common/starrating.css">
+<!-- <link rel="stylesheet" href="css/common/starrating1.css"> -->
+<link rel="stylesheet" href="css/common/starrating2.css">
+<link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css'>
+
+
+
 <!-- alert css -->
 <link rel="stylesheet"
 	href="node_modules/sweetalert/dist/sweetalert.css">
@@ -346,9 +351,33 @@
 					<h2 class="title"></h2>
 					<p class="hash"></p>
 					<p class="date"></p>
-					<p class="gpa">평점</p>
-					<p class="gpa">몇점</p>
-					<span class="rcp-star-rating">별점주기</span>
+					<div id="gpa-text">평점</div>
+					<div id="gpa">몇점</div>
+					<div id="rcp-star-rating">평가하기</div>
+					<!------------------------- 평기 주기 --------------------------------->
+				  <div class="rcp-rating">
+				    <input id="star5" name="rating" type="radio" value="5"/>
+				    <label for="star5" class="full"></label>
+				    <input id="star4.5" name="rating" type="radio" value="4.5"/>
+				    <label for="star4.5" class="half"></label>
+				    <input id="star4" name="rating" type="radio" value="4"/>
+				    <label for="star4" class="full"></label>
+				    <input id="star3.5" name="rating" type="radio" value="3.5"/>
+				    <label for="star3.5" class="half"></label>
+				    <input id="star3" name="rating" type="radio" value="3"/>
+				    <label for="star3" class="full"></label>
+				    <input id="star2.5" name="rating" type="radio" value="2.5"/>
+				    <label for="star2.5" class="half"></label>
+				    <input id="star2" name="rating" type="radio" value="2"/>
+				    <label for="star2" class="full"></label>
+				    <input id="star1.5"  name="rating" type="radio" value="1.5"/>
+				    <label for="star1.5" class="half"></label>
+				    <input id="star1"  name="rating" type="radio" value="1"/>
+				    <label for="star1" class="full"></label>
+				    <input id="star0.5"  name="rating" type="radio" value="0.5"/>
+				    <label for="star0.5" class="half"></label>
+				  </div>
+				  <span id="rcp-starrating-btn-apply" class="rcp-starrating-btn">등록</span>
 				  <hr/>
 				</div>
 				
@@ -413,21 +442,20 @@
 								<a class="More">more</a>
 							</h2>
 
-
-
-
 						</div>
 					</div>
 				</div>
 			</div>
+			
 		</div>
-
 
 	</section>
 
-  <!------------------------- 별점 주기 --------------------------------->
-  <div class="rcp-starrating">
-    <span class="rcp-starrating-text">별점주기</span>
+
+
+  <!------------------------- 평기 주기 --------------------------------->
+  <!-- <div class="rcp-starrating">
+    <span class="rcp-starrating-text">평가하기</span>
     <div class="ratingControl">
         <input type="radio" id="rating-5" name="rating" value="5.0">
         <label class="ratingControl-stars ratingControl-stars--5" for="rating-5">5</label>
@@ -453,7 +481,7 @@
     <div id="rcp-starrating-grade">&nbsp;</div>
     <span id="rcp-starrating-btn-apply" class="rcp-starrating-btn">등록</span>
     <span id="rcp-starrating-btn-close" class="rcp-starrating-btn">취소</span>
-  </div>
+  </div> -->
   
 	<!------------------------- Rank List ------------------------------>
 	<div id="footer"></div>
@@ -978,7 +1006,8 @@
 	<script src="js/listPageMove.js"></script>
 	<script src="js/mainListAjax.js"></script>
 	<script src="js/mouseover.js"></script>
-	<script src="js/common/starrating.js"></script>
+	<!-- <script src="js/common/starrating1.js"></script> -->
+	<script src="js/common/starrating2.js"></script>
 
 
 	<script>

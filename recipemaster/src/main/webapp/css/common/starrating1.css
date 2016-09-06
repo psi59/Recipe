@@ -11,8 +11,17 @@
 	padding-top: 23px;	
 }
 
-.rcp-star-rating {
-	cursor: pointer;
+#gpa-text {
+	font-size: 15px;
+}
+
+#gpa {
+	font-size: 15px;
+}
+
+#rcp-star-rating {
+	font-size: 15px;
+  cursor: pointer;
 }
 
 .rcp-starrating-text {

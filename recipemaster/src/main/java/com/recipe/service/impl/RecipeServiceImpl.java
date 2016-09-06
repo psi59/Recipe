@@ -19,12 +19,12 @@ public class RecipeServiceImpl implements RecipeService {
 	@Autowired RecipeDao recipeDao;
 		
 	@Override
-  public int addGrade(int userNo, int recipeNo, double grade) {
+  public void addGrade(int userNo, int recipeNo, double grade) {
 	  Map<String,Object> params = new HashMap<>();
 	  params.put("uno", userNo);
 	  params.put("rcpno", recipeNo);
 	  params.put("gpa", grade);
-    return recipeDao.insertGrade(params);
+    recipeDao.insertGrade(params);
   }
 
   @Override
@@ -292,4 +292,18 @@ public class RecipeServiceImpl implements RecipeService {
     params.put("len", pageSize);
     return recipeDao.recipeRecomCtList(params);
   }
+
+  @Override
+  public boolean getDuplicateGrade(int userNo, int recipeNo) {
+    boolean result = true;
+    HashMap<String,Object> params = new HashMap<>();    
+    params.put("uno", userNo);
+    params.put("rcpno", recipeNo);
+    if(recipeDao.checkDuplicateGrade(params) == 1){
+      result = false;
+    }    
+    return result;
+  }
+  
+  
 }

@@ -78,8 +78,31 @@ function clickDetailInDetailFunction(){
 									+'<h2 class="title"></h2>'
 									+'<p class="hash"></p>'
 									+'<p class="date"></p>'
-									+'<p class="gpa">평점</p><p class="gpa">몇점</p>'
-									+'<span class="rcp-star-rating">별점주기</span><hr /></div>'
+									+'<div id="gpa-text">평점</div><div id="gpa">몇점</div>'
+									+'<div id="rcp-star-rating">평가하기</div>'
+									+'<div class="rcp-rating">'
+									+'<input id="star5" name="rating" type="radio" value="5"/>'
+									+'<label for="star5" class="full"></label>'
+									+'<input id="star4.5" name="rating" type="radio" value="4.5"/>'
+									+'<label for="star4.5" class="half"></label>'
+									+'<input id="star4" name="rating" type="radio" value="4"/>'
+									+'<label for="star4" class="full"></label>'
+									+'<input id="star3.5" name="rating" type="radio" value="3.5"/>'
+									+'<label for="star3.5" class="half"></label>'
+									+'<input id="star3" name="rating" type="radio" value="3"/>'
+									+'<label for="star3" class="full"></label>'
+									+'<input id="star2.5" name="rating" type="radio" value="2.5"/>'
+									+'<label for="star2.5" class="half"></label>'
+									+'<input id="star2" name="rating" type="radio" value="2"/>'
+									+'<label for="star2" class="full"></label>'
+									+'<input id="star1.5"  name="rating" type="radio" value="1.5"/>'
+									+'<label for="star1.5" class="half"></label>'
+									+'<input id="star1"  name="rating" type="radio" value="1"/>'
+									+'<label for="star1" class="full"></label>'
+									+'<input id="star0.5"  name="rating" type="radio" value="0.5"/>'
+									+'<label for="star0.5" class="half"></label>'
+									+'</div>'
+									+'<hr /></div>'
 									+'<div class="rcp-detail-body"></div>');
 				$('.rcp-header > .title').text(result.data.recipeName);
 				$('.rcp-header > .date').text(result.data.recipeDate);
@@ -91,7 +114,7 @@ function clickDetailInDetailFunction(){
 				
 				
 				// 별점주기 팝업
-				$('.rcp-star-rating').on('click', function(){
+				$('#rcp-star-rating').on('click', function(){
 					$('.rcp-starrating').bPopup();
 				})
 				
@@ -248,13 +271,36 @@ function recipeDetail(){
 											+'<h2 class="title"></h2>'
 											+'<p class="hash"></p>'
 											+'<p class="date"></p>'
-											+'<p class="gpa">평점</p><p class="gpa">몇점</p>'
-											+'<span class="rcp-star-rating">별점주기</span><hr /></div>'
+											+'<div id="gpa-text">평점</div><div id="gpa">몇점</div>'
+											+'<div id="rcp-star-rating">평가하기</div>'
+											+'<div class="rcp-rating">'
+											+'<input id="star5" name="rating" type="radio" value="5"/>'
+											+'<label for="star5" class="full"></label>'
+											+'<input id="star4.5" name="rating" type="radio" value="4.5"/>'
+											+'<label for="star4.5" class="half"></label>'
+											+'<input id="star4" name="rating" type="radio" value="4"/>'
+											+'<label for="star4" class="full"></label>'
+											+'<input id="star3.5" name="rating" type="radio" value="3.5"/>'
+											+'<label for="star3.5" class="half"></label>'
+											+'<input id="star3" name="rating" type="radio" value="3"/>'
+											+'<label for="star3" class="full"></label>'
+											+'<input id="star2.5" name="rating" type="radio" value="2.5"/>'
+											+'<label for="star2.5" class="half"></label>'
+											+'<input id="star2" name="rating" type="radio" value="2"/>'
+											+'<label for="star2" class="full"></label>'
+											+'<input id="star1.5"  name="rating" type="radio" value="1.5"/>'
+											+'<label for="star1.5" class="half"></label>'
+											+'<input id="star1"  name="rating" type="radio" value="1"/>'
+											+'<label for="star1" class="full"></label>'
+											+'<input id="star0.5"  name="rating" type="radio" value="0.5"/>'
+											+'<label for="star0.5" class="half"></label>'
+											+'</div>'
+											+'<hr /></div>'
 											+'<div class="rcp-detail-body"></div>');		
 //						$("#detail_pop_up_reload").attr('id','detail_pop_up');
 						
-						// 별점주기 팝업
-						$('.rcp-star-rating').on('click', function(){
+						// 평가하기 팝업
+						$('#rcp-star-rating').on('click', function(){
 							$('.rcp-starrating').bPopup();
 						})
 					}
