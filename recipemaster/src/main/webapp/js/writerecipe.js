@@ -221,7 +221,7 @@ $(function() {
 											.push(data.files[index]);
 										}
 									}
-									var node = $('<div class="row padding_10px"/>');
+									var node = $('<div class="row padding_10px" style="position: relative;"/>');
 									var close = $('<a href="#"><div class="float_left closeBtn thick pdImg"></div></a>');
 									var img = $('<img class="preview"/>');
 									img
@@ -404,6 +404,16 @@ $(function() {
 	var spinner = $("#portion").spinner({
 		min : 1
 	});
+	
+	$('.rcp-category-btn').on('click', function() {
+		if($(this).hasClass('active')){
+			$(this).removeClass('active');
+			$(this).next().attr("name", "");
+		} else {
+			$(this).addClass('active')
+			$(this).next().attr("name", "categoryValue");
+		}		
+	});
 });
 
 function getImageURL(imageFile) {
@@ -425,6 +435,7 @@ function getRecipeEditInfo(recipeNo){
 			}
 			var recipeData = result.data;
 			var recipeMaterials = result.materials;
+			var recipeCategories = result.categories;
 
 			$('input[name="recipeNo"]').val(recipeData.recipeNo);
 			$('#recipeName').val(recipeData.recipeName);
@@ -434,8 +445,6 @@ function getRecipeEditInfo(recipeNo){
 			$('#intro').val(recipeData.intro);
 			$('#representImgs').append(rpImageTempImpl(recipeData));
 			$('#files').append(rcpProduceTempImpl(recipeData));
-
-			console.log(recipeMaterials);
 			
 			$.each(
 					recipeMaterials,
@@ -444,7 +453,7 @@ function getRecipeEditInfo(recipeNo){
 								+ recipeMaterials[index].materialName
 								+ '</div>'
 								+ '<div class="float_left">&nbsp;:&nbsp;</div>'
-								+ '<div class="float_left mtAmount"><input name="materialAmount" type="text" placeholder="분량 (예:400g)" /></div>'
+								+ '<div class="float_left mtAmount"><input name="materialAmount" type="text" value="'+recipeMaterials[index].materiaQuantity+'" placeholder="분량 (예:400g)" /></div>'
 								+ '<input type="hidden" name="materialNo" value="'
 								+ recipeMaterials[index].materialNo
 								+ '">'
@@ -460,6 +469,15 @@ function getRecipeEditInfo(recipeNo){
 						}
 
 					});
+			
+			$.each(recipeCategories, function(index) {
+				$.each($('.rcp-ctgno'), function(){
+					if($(this).val()==recipeCategories[index].categoryNo){
+						$(this).prev().addClass('active');
+						$(this).attr("name", "categoryValue");
+					}
+				});
+			});
 
 			$('#addBtn').text('수정');
 			$('#addBtn')

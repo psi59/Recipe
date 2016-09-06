@@ -1,3 +1,5 @@
+var source = $('#recipe-card-template').html();
+var template = Handlebars.compile(source);
 function onlyNumber()
 {
 	if ((event.keyCode<48)||(event.keyCode>57))
@@ -82,11 +84,50 @@ $('#topLoginBtn').on('click', function(event){
 	event.preventDefault();
 	$('#login-pop-up-banner').bPopup();
 });
-//랜덤 레시피 뽑기 
-$('#rcp-random-recipe').on('click', function(event){
-	event.preventDefault();
+
+//-----------------------------랜덤 레시피 ---------------------------------
+  $('#rcp-random-recipe').on('click',function(event){
+    event.preventDefault();
+    randomRecipe();    
 	$('#random-pop-up-banner').bPopup();
-})
+	var slot_roll1 = new Slot_roll('#rcp-randomRacipeCardWrapper-slot');
+	if( $('#rcp-randomRacipeCardWrapper-slot').is(':not(:animated)') ){
+		slot_roll1.dice();
+	}	
+  });
+  
+  $(document).on('click','#rcp-re-recipe',function(){
+	 randomRecipe();
+	 var slot_roll1 = new Slot_roll('#rcp-randomRacipeCardWrapper-slot');
+	 if( $('#rcp-randomRacipeCardWrapper-slot').is(':not(:animated)') ){
+			slot_roll1.dice();
+		}	 
+  });
+  
+  function randomRecipe(){
+  	  $.ajax({	  		  
+  		  url:'recipe/randomList.json',
+  		  dataType:'json',
+  		  method:'post',
+  		  async: false,
+  		  success:function(result){
+  			  if (result.status !='success'){
+  				  swal('실행중 오류 발생');
+  				  return;
+  			  }
+  			  var list = result.data;
+  			  $('#rcp-randomRacipeCardWrapper').html('');
+  			  $('#rcp-randomRacipeCardWrapper').append( template(result) );
+			  for(var i=0; i<result.data.length; i++){
+					  $('#rcp-randomRacipeCardWrapper div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');
+			  }
+  			  methods();  			  
+  		  },
+  		  error : function(){
+  			  console.log('randomList: 서버 요청 오류');
+  		  }
+  	  });
+  }
 
 
 Handlebars.registerHelper('defaultImage', function(options) {
@@ -105,3 +146,27 @@ function comList(){
 	  })
 }
 
+function slotRoller(spd, selector) {
+	var speed = 80; // slot 회전 속도
+	var firstChild = $("#rcp-randomRacipeCardWrapper-slot .slotCard:first-child");
+		lastChild = $("#rcp-randomRacipeCardWrapper-slot .slotCard:last-child");
+
+	// slot 목록을 순환
+	$(selector).animate({ 
+		marginTop: "-950px"
+		}, speed + (spd * 30 + spd), "linear", function(){
+			// 첫째 목록을 마지막으로 이동
+			firstChild = $("rcp-randomRacipeCardWrapper-slot:first-child", this);
+			$(this).append(firstChild);
+			$(this).css({ marginTop: "-425px"});
+	});
+}
+
+/* 슬롯 객체를 정의 */
+function Slot_roll(slotName){
+	this.dice = function(){
+		for (var i = 0; i < 8; i++) {
+			slotRoller(i, slotName);
+		}
+	}
+}

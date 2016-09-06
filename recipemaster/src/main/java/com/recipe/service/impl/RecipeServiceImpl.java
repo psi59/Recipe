@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.recipe.dao.RecipeDao;
+import com.recipe.domain.Category;
 import com.recipe.domain.Material;
 import com.recipe.domain.Recipe;
 import com.recipe.domain.Search;
@@ -125,105 +126,105 @@ public class RecipeServiceImpl implements RecipeService {
 		recipeDao.likeDown(recipe);
 	}
 	 
-	 @Override
-	  public List<Recipe> selectSubscribeUno(int userNo) {
-	   
-	    return recipeDao.selectSubscribeUno(userNo);
-	  }
+	@Override
+  public List<Recipe> selectSubscribeUno(int userNo) {
+   
+    return recipeDao.selectSubscribeUno(userNo);
+  }
  
-	  //준 수정
-	  @Override
-	  public List<Recipe> selectSbuscribe(String scsUserNo, int pageNo, int pageSize) {
-	    HashMap<String,Object> params = new HashMap<>();
-      params.put("userNo", scsUserNo);
-      params.put("startIndex", (pageNo - 1) * pageSize);
-      params.put("len", pageSize);
-      
-	    return recipeDao.selectSubscribe(params);
-	  }
-	  
-	  //준
-    @Override
-    public List<Recipe> selectSbuscribe2(String userNo, int pageNo, int pageSize) {
-      HashMap<String,Object> params = new HashMap<>();
-      params.put("userNo", userNo);
-      params.put("startIndex", (pageNo - 1) * pageSize);
-      params.put("len", pageSize);
-      return recipeDao.selectSubscribe2(params);
-    }
-    @Override
-    public int addScrap(int userNo, int recipeNo) {
-      HashMap<String,Object> params = new HashMap<>();
-      params.put("userNo", userNo);
-      params.put("recipeNo", recipeNo);
-      return recipeDao.addScrap(params);
-    }
-
-    @Override
-    public int deleteScrap(int userNo, int recipeNo) {
-      HashMap<String,Object> params = new HashMap<>();
-      params.put("userNo", userNo);
-      params.put("recipeNo", recipeNo);
-      return recipeDao.deleteScrap(params);
-    }
-
-    @Override
-    public int addSubscribe(int toUserNo, int fromUserNo) {
-      HashMap<String,Object> params = new HashMap<>();
-      params.put("toUserNo", toUserNo);
-      params.put("fromUserNo", fromUserNo);
-      return recipeDao.addSubscribe(params);
-    }
+  //준 수정
+  @Override
+  public List<Recipe> selectSbuscribe(String scsUserNo, int pageNo, int pageSize) {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("userNo", scsUserNo);
+    params.put("startIndex", (pageNo - 1) * pageSize);
+    params.put("len", pageSize);
     
-    @Override
-    public Map<String, Object> checkSubscribe(int toUserNo, int fromUserNo) {
-      HashMap<String,Object> params = new HashMap<>();
-      params.put("toUserNo", toUserNo);
-      params.put("fromUserNo", fromUserNo);
-      return recipeDao.checkSubscribe(params);
-    }
+    return recipeDao.selectSubscribe(params);
+  }
+  
+  //준
+  @Override
+  public List<Recipe> selectSbuscribe2(String userNo, int pageNo, int pageSize) {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("userNo", userNo);
+    params.put("startIndex", (pageNo - 1) * pageSize);
+    params.put("len", pageSize);
+    return recipeDao.selectSubscribe2(params);
+  }
+  @Override
+  public int addScrap(int userNo, int recipeNo) {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("userNo", userNo);
+    params.put("recipeNo", recipeNo);
+    return recipeDao.addScrap(params);
+  }
 
-    @Override
-    public List<Recipe> selectMypage(int userNo) {
-      return recipeDao.selectMypage(userNo);
-    }
+  @Override
+  public int deleteScrap(int userNo, int recipeNo) {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("userNo", userNo);
+    params.put("recipeNo", recipeNo);
+    return recipeDao.deleteScrap(params);
+  }
 
-    @Override
-    public List<Recipe> selectScrapUserNoMypage(int userNo) {
-      return recipeDao.selectScrapUserNoMypage(userNo);
-    }
+  @Override
+  public int addSubscribe(int toUserNo, int fromUserNo) {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("toUserNo", toUserNo);
+    params.put("fromUserNo", fromUserNo);
+    return recipeDao.addSubscribe(params);
+  }
+  
+  @Override
+  public Map<String, Object> checkSubscribe(int toUserNo, int fromUserNo) {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("toUserNo", toUserNo);
+    params.put("fromUserNo", fromUserNo);
+    return recipeDao.checkSubscribe(params);
+  }
 
-    @Override
-    public List<Recipe> selectMypageRecipe(String userNumbers, int userNo,int request) {
-      HashMap<String,Object> params = new HashMap<>();
-      params.put("userNumbers", userNumbers);
-      params.put("userNo", userNo);
-      params.put("request", request);
-      return recipeDao.selectMypageRecipe(params);
-    }
+  @Override
+  public List<Recipe> selectMypage(int userNo) {
+    return recipeDao.selectMypage(userNo);
+  }
 
-    @Override
-    public int deleteSubscribe(int toUserNo, int fromUserNo) {      
-      HashMap<String,Object> params = new HashMap<>();
-      params.put("toUserNo", toUserNo);
-      params.put("fromUserNo", fromUserNo);
-      return recipeDao.deleteSubscribe(params);
-    }
+  @Override
+  public List<Recipe> selectScrapUserNoMypage(int userNo) {
+    return recipeDao.selectScrapUserNoMypage(userNo);
+  }
 
-    @Override
-    public List<Recipe> selectSubscribeMypage(int userNo) {
-      return recipeDao.selectSubscribeMypage(userNo);
-    }
+  @Override
+  public List<Recipe> selectMypageRecipe(String userNumbers, int userNo,int request) {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("userNumbers", userNumbers);
+    params.put("userNo", userNo);
+    params.put("request", request);
+    return recipeDao.selectMypageRecipe(params);
+  }
 
-    @Override
-    public List<Recipe> recipeComment(int recipeNo) {
-      return recipeDao.recipeComment(recipeNo);
-    }
+  @Override
+  public int deleteSubscribe(int toUserNo, int fromUserNo) {      
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("toUserNo", toUserNo);
+    params.put("fromUserNo", fromUserNo);
+    return recipeDao.deleteSubscribe(params);
+  }
 
-    @Override
-    public List<Recipe> recipeCommentUserInfo(String userNums) {
-      return recipeDao.recipeCommentUserInfo(userNums);
-    }
+  @Override
+  public List<Recipe> selectSubscribeMypage(int userNo) {
+    return recipeDao.selectSubscribeMypage(userNo);
+  }
+
+  @Override
+  public List<Recipe> recipeComment(int recipeNo) {
+    return recipeDao.recipeComment(recipeNo);
+  }
+
+  @Override
+  public List<Recipe> recipeCommentUserInfo(String userNums) {
+    return recipeDao.recipeCommentUserInfo(userNums);
+  }
 
 	@Override
 	public List<Material> getRecipeMaterial(int recipeNo) {
@@ -240,40 +241,55 @@ public class RecipeServiceImpl implements RecipeService {
 		return recipeDao.deleteMaterials(recipeNo);
 	}
 	
-    @Override
-    public void addComment(Recipe recipe, int userNo) {
-      // TODO Auto-generated method stub
-      Map<String,Object > map = new HashMap<>();
-      map.put("recipe", recipe);
-      map.put("userNo", userNo);
-      System.out.println("service");
-      recipeDao.addComment(map);
-    }
+  @Override
+  public void addComment(Recipe recipe, int userNo) {
+    // TODO Auto-generated method stub
+    Map<String,Object > map = new HashMap<>();
+    map.put("recipe", recipe);
+    map.put("userNo", userNo);
+    System.out.println("service");
+    recipeDao.addComment(map);
+  }
 
-    @Override
-    public void deleteComment(int commentNo) {
-      // TODO Auto-generated method stub
-      recipeDao.deleteComment(commentNo);
-    }	
+  @Override
+  public void deleteComment(int commentNo) {
+    // TODO Auto-generated method stub
+    recipeDao.deleteComment(commentNo);
+  }	
+  
+  @Override
+  public List<Recipe> getRecipeRandomList(int pageSize) {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("len", pageSize);
+    return recipeDao.recipeRandomList(params);
+  }
     
-    @Override
-    public List<Recipe> getRecipeRandomList(int pageSize) {
-      HashMap<String,Object> params = new HashMap<>();
-      params.put("len", pageSize);
-      return recipeDao.recipeRandomList(params);
-    }
+	@Override
+	public void addCategory(Map map) {
+	   recipeDao.insertCategoty(map);
+	}
+
+	@Override
+	public List<Category> getCategoryList(int recipeNo) {
+		return recipeDao.selectRecipeCategory(recipeNo);
+	}
+
+	@Override
+	public void deleteCategoryList(int recipeNo) {
+		recipeDao.deleteRecipeCategory(recipeNo);
+	}
     
-    @Override
-    public List<Recipe> getRecipeRecomList(int pageSize) {
-      HashMap<String,Object> params = new HashMap<>();
-      params.put("len", pageSize);
-      return recipeDao.recipeRecomList(params);
-    }
+  @Override
+  public List<Recipe> getRecipeRecomList(int pageSize) {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("len", pageSize);
+    return recipeDao.recipeRecomList(params);
+  }
     
-    @Override
-    public List<Recipe> getRecipeRecomCtList(int pageSize) {
-      HashMap<String,Object> params = new HashMap<>();
-      params.put("len", pageSize);
-      return recipeDao.recipeRecomCtList(params);
-    }
+  @Override
+  public List<Recipe> getRecipeRecomCtList(int pageSize) {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("len", pageSize);
+    return recipeDao.recipeRecomCtList(params);
+  }
 }

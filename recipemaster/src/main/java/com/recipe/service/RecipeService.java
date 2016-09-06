@@ -3,6 +3,7 @@ package com.recipe.service;
 import java.util.List;
 import java.util.Map;
 
+import com.recipe.domain.Category;
 import com.recipe.domain.Material;
 import com.recipe.domain.Recipe;
 import com.recipe.domain.Search;
@@ -43,6 +44,11 @@ public interface RecipeService {
 	int deleteMaterials(int recipeNo);
 	void addComment(Recipe recipe, int userNo);
 	void deleteComment(int commentNo);
+	void addCategory(Map map);
+	List<Category> getCategoryList(int recipeNo);
+	void deleteCategoryList(int recipeNo);
+	List<Recipe> getRecipeRecomList(int pageSize);
+	List<Recipe> getRecipeRecomCtList(int pageSize);
 	int addGrade(int userNo, int recipeNo, double grade);
 	List<Recipe> getRecipeRecomList(int pageSize);
 	List<Recipe> getRecipeRecomCtList(int pageSize);
