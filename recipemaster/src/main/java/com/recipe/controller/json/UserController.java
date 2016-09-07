@@ -437,7 +437,7 @@ public class UserController {
    }
 	 
 	 @RequestMapping(path = "myrank", produces = "application/json;charset=UTF-8")
-	  @ResponseBody
+	  @ResponseBody//html을 보내지 않고 data 몸체(body만 보낸다는 것)
 	  public String selectMyRank(HttpSession session) {
 	    HashMap<String, Object> result = new HashMap<>();
 	    User loginUser = new User();
@@ -457,25 +457,28 @@ public class UserController {
 	    return new Gson().toJson(result);
 	 }
 	 
-	 /*@RequestMapping(path = "auth", produces = "application/json;charset=UTF-8")
-	 public String auth(String authKEY, int auth, String inputEmail){   
-	    
-	    HashMap<String, Object> result = new HashMap<>();
-      User authUser = new User();
-      authUser=userService.selectFromEmail(inputEmail);;
+	 @RequestMapping(path = "changePassword")
+   public String changePassword(String email){   
+      HashMap<String, Object> result = new HashMap<>();
+      User user = new User();
+      System.out.println(email);
+      user=userService.selectFromEmail(email);
+      System.out.println("changePassword비번변경전::"+user);
+      String uuid=UUID.randomUUID().toString();
       try {
-        
-        if (authKEY.toString().trim().equals(authUser.getAuthenticationKEY().toString().trim())) {
-          userService.authUpdate(authKEY, auth, inputEmail);
-          result.put("status", "success");
-        }else{
-          System.out.println("실패");
-        }
+        user.setPassword(CommonUtil.sha1(uuid));
+        userService.updateUser(user);
+        System.out.println("changePassword비번변경후::"+user);
+        System.out.println("user.getPassword()::"+user.getPassword());
+        System.out.println("user.getEmail()::"+user.getEmail());
+        result.put("status", "success");
+        result.put("password",uuid);
+        result.put("email", user.getEmail());
       } catch (Exception e) {
         e.printStackTrace();
         System.out.println("실패");
         result.put("status", "failure");
       }
-      return "index.html";
-	  }*/
+      return "redirect:http://127.0.0.1:2828/user/updatePassword.do?email="+email+"&password="+uuid;
+    }
 }
