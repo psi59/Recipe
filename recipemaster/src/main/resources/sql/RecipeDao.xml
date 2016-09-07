@@ -38,6 +38,7 @@
 		<result column="ctgname" property="ctgName" />
 	</resultMap>
 
+
 	<resultMap type="material" id="materialMap">
 		<id column="mtno" property="materialNo" />
 		<result column="name" property="materialName" />
@@ -68,8 +69,8 @@
 	</select>
 
 	<delete id="deleteComment" parameterType="INTEGER" >
-	 DELETE FROM rcp_rp WHERE RRPNO=${value};
-	</delete>	
+  	DELETE FROM rcp_rp WHERE RRPNO=${value};
+	</delete>
 	
 	<select id="recipeSearch" parameterType="Map" resultMap="recipeMap">
     SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.rpimg rpimg,
@@ -124,23 +125,15 @@
 			WHERE u.name LIKE '%${search.searchKeyword}%' </if>
 		<if test="search.searchCondition == 'recipe' and !categorySize eq 0">
 			AND r.name LIKE '%${search.searchKeyword}%' </if>
-		<if
-			test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'">
-			ORDER BY r.rcpno DESC
-		</if>
-		<if
-			test="search.sortCondition == 'newest' and search.orderCondition == 'ASC'">
-			ORDER BY r.rcpno ASC
-		</if>
-		<if
-			test="search.sortCondition == 'grade' and search.orderCondition == 'DESC'">
-			ORDER BY r.gpa DESC
-		</if>
-		<if
-			test="search.sortCondition == 'grade' and search.orderCondition == 'ASC'">
-			ORDER BY r.gpa ASC
-		</if>
-		limit #{startIndex}, #{len}
+		<if test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'">
+			ORDER BY r.rcpno DESC </if>
+		<if	test="search.sortCondition == 'newest' and search.orderCondition == 'ASC'">
+			ORDER BY r.rcpno ASC </if>
+		<if test="search.sortCondition == 'grade' and search.orderCondition == 'DESC'">
+			ORDER BY r.gpa DESC	</if>
+		<if test="search.sortCondition == 'grade' and search.orderCondition == 'ASC'">
+			ORDER BY r.gpa ASC </if>
+		  limit #{startIndex}, #{len}
 	</select>
 
 	<select id="selectRecipeName" parameterType="String" resultType="String">
@@ -292,7 +285,7 @@
 
 	<select id="recipeList" resultMap="recipeMap" parameterType="Map">
 		SELECT r1.rcpno rcpno,r1.uno,r1.rcp_dt,r1.name,r1.intro,r1.c_time,r1.rpimg,r1.ptn,
-    r1.hits,r1.rgst,truncate(r1.gpa,1) gpa, u.uno userNo,u.name
+    r1.hits,r1.rgst,truncate(avg(g.gpa),1) gpa, u.uno userNo,u.name
     userName,u.email,u.img,
     IFNULL(l.uno,0) likeUser,
     IFNULL(scr.uno,0) scrapUser,
@@ -318,7 +311,8 @@
     LEFT OUTER JOIN RCP_LIK l ON
     r1.rcpno=l.rcpno and l.uno = #{userNo}
     LEFT OUTER JOIN rcp_scr scr ON
-     r1.rcpno = scr.rcpno and scr.uno = #{userNo}
+    r1.rcpno = scr.rcpno and scr.uno = #{userNo}
+    LEFT OUTER JOIN rcp_gpa g ON r1.rcpno=g.rcpno
     INNER JOIN USERS u ON u.uno = r1.uno
     WHERE rgst = 0
     GROUP BY rcpno
@@ -330,8 +324,8 @@
 		</if>
 		limit #{len}
 	</select>
+	
 	<select id="selectMts" resultMap="materialMap" parameterType="INTEGER">
-
 		select * from mts m, rcp_mt mt, rcps r
 		where m.mtno=mt.mtno and r.rcpno
 		= mt.rcpno and r.rcpno =${value}
@@ -510,5 +504,11 @@
     ORDER BY RAND()) vt1
     WHERE rgst = 0
     limit 4
+	</select>
+	
+	<select id="checkDuplicateGrade" parameterType="map" resultType="int">
+		SELECT count(*) 
+		FROM rcp_gpa
+		WHERE uno=#{uno} AND rcpno=#{rcpno}
 	</select>
 </mapper>

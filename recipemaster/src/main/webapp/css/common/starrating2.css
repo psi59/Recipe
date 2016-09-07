@@ -1,0 +1,46 @@
+#gpa-text, #gpa, #starrating-finish {
+  font-size: 15px;
+}
+
+.rcp-starrating-btn {
+	font-size: 15px;
+	cursor: pointer;
+}
+
+#rcp-star-rating {
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.rcp-rating {
+  float: left;
+}
+
+.rcp-rating label.full, .rcp-rating label:before{
+  cursor: pointer;	
+}
+
+.rcp-rating input {
+  display: none;
+}
+.rcp-rating label {
+  color: #ddd;
+  float: right;
+}
+.rcp-rating label:before {
+  margin: 4px;
+  font-size: 23px;
+  font-family: fontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+.rcp-rating .half:before {
+  content: "\f089";
+  position: absolute;
+}
+
+.rcp-rating > input:checked ~ label,
+.rcp-rating:not(:checked) > label:hover,
+.rcp-rating:not(:checked) > label:hover ~ label {
+  color: #FFD700;
+}

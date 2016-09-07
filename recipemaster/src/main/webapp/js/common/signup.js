@@ -92,7 +92,7 @@ $(document).ready(function(){
 	          var email = $(this).val();
 	            $.ajax({
 	            	type : 'GET',
-	                url : 'http://192.168.0.50:9999/user/checkDuplication.do?email='+email,
+	                url : 'http://192.168.0.21:9999/user/checkDuplication.do?email='+email,
 	                success : function(result) {					
 	                    if (result == 'true') {
 							// 사용가능한 이메일

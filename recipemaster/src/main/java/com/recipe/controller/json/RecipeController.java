@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -21,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import com.recipe.domain.Category;
 import com.recipe.domain.Material;
 import com.recipe.domain.Recipe;
@@ -76,25 +78,54 @@ public class RecipeController {
     return new Gson().toJson(result);
   }
   
-  // 별점 매기기
+  // 별점 매기기 -이성현
   @RequestMapping(path="starRate",produces="application/json;charset=UTF-8")
   @ResponseBody
   public String starRate(int recipeNo, double grade, HttpSession session){
 
     User user = CommonUtil.getSessionUser(session);
-    
-    System.out.println("userNo : "+user.getUserNo()+", recipeNo : "+recipeNo+", grade : "+grade);
-    
-    
     HashMap<String,Object> result = new HashMap<>();     
-    recipeService.addGrade(user.getUserNo(), recipeNo, grade);
-    try{      
-      result.put("status","success");         
-    }catch (Exception e){
+    boolean loginCheck = true;
+    try{
+      // 로그인 확인
+      if(user.getUserNo() != 0){
+        recipeService.addGrade(user.getUserNo(), recipeNo, grade);
+      } else {
+        loginCheck = false;
+      }
+      result.put("loginCheck", loginCheck);
+      result.put("status","success");    
+    } catch (Exception e){
       result.put("status", "false");
     }
     return new Gson().toJson(result);
   }
+  
+// 이미 별점을 부여한 레시피인지 확인 -이성현
+ @RequestMapping(path="checkDuplicateGrade",produces="application/json;charset=UTF-8")
+ @ResponseBody
+ public String checkDuplicateGrade(int recipeNo, HttpSession session){
+
+   User user = CommonUtil.getSessionUser(session);
+   HashMap<String,Object> result = new HashMap<>();     
+   boolean loginCheck = true;
+   boolean checkDuplicateGrade = true; // true면 중복이 아님
+   try{
+     // 로그인 확인 (로그인 안했을대 에러 안나게 하기위해)
+     if(user.getUserNo() != 0){
+       // 이미 별점을 부여한 레시피인지 확인
+       checkDuplicateGrade = recipeService.getDuplicateGrade(user.getUserNo(), recipeNo);
+     } else {
+       loginCheck = false;
+     }
+     result.put("checkDuplicateGrade", checkDuplicateGrade);
+     result.put("loginCheck", loginCheck);
+     result.put("status","success");    
+   } catch (Exception e){
+     result.put("status", "false");
+   }
+   return new Gson().toJson(result);
+ }
 
   // 리스트 페이지 레시피 검색 자동완성 -이성현
   @RequestMapping(path = "recipeSearchAutoComplete", produces = "application/json;charset=UTF-8")
@@ -521,7 +552,6 @@ public class RecipeController {
   }
 
   /*	@RequestMapping(path="addSubscribe",produces="application/json;charset=UTF-8")
->>>>>>> 2f153b3b8c07f604b0c823f50c99729532af7304
   @ResponseBody
   public String addSubscribe(HttpSession session,int fromUserNo){
     HashMap<String,Object> result = new HashMap<>();

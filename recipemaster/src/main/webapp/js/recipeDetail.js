@@ -1,5 +1,6 @@
 document.write('<script type"text/javascript" src="js/common.js"></script>')
 document.write('<script type"text/javascript" src="js/login.js"></script>')
+document.write('<script type"text/javascript" src="js/common/starrating2.js"></script>')
 
 var detailInfoTemp = $('#recipe-detail-304-info-template').html();
 var comDetailInfoTemp = Handlebars.compile(detailInfoTemp);   
@@ -27,6 +28,7 @@ var slider;
 $(function(){
 
 	recipeDetail();
+	starRatingBtn();
 	comment();
 	addComment();
 	deleteComment();
@@ -103,8 +105,8 @@ function clickDetailInDetailFunction(){
 									+'<h2 class="title"></h2>'
 									+'<p class="hash"></p>'
 									+'<p class="date"></p>'
-									+'<p class="gpa">평점</p><p class="gpa">몇점</p>'
-									+'<span class="rcp-star-rating">별점주기</span><hr /></div>'
+									+'<div id="gpa-text">평점</div><div id="gpa">몇점</div>'
+									+'<div id="rcp-star-rating">별점주기</div></div><hr/>'
 									+'<div class="rcp-detail-body"></div>');
 				$('.rcp-header > .title').text(result.data.recipeName);
 				$('.rcp-header > .date').text(result.data.recipeDate);
@@ -116,7 +118,7 @@ function clickDetailInDetailFunction(){
 				
 				
 				// 별점주기 팝업
-				$('.rcp-star-rating').on('click', function(){
+				$('#rcp-star-rating').on('click', function(){
 					$('.rcp-starrating').bPopup();
 				})
 				
@@ -186,7 +188,7 @@ function recipeDetail(){
 					positionStyle :[('fixed')],
 					follow: [false, false], //x, y
 					onOpen:function(){
- 						
+						checkDuplicateGrade();
 						$("body").css("overflow", "hidden");						
 						$('.rcp-304').append( comDetailInfoTemp(result) );
 						$('.rcp-info-images').append( comDetailImageMain(result.data) );
@@ -210,6 +212,7 @@ function recipeDetail(){
 							$('a[name="rcp-nav-images"]:eq('+i+')').attr('href','#div'+i);
 							$('a[name="rcp-nav-bgImages-button"]:eq('+i+')').attr('href','#div'+i);
 						}
+						
 					$('.rcp-mainSlider').bxSlider({
 						startSlide:0,
 						pager: false,
@@ -277,11 +280,9 @@ function recipeDetail(){
 											+'<span class="rcp-star-rating">별점주기</span>'
 											+'<div class="timerZone"></div>'
 											+'<hr /></div>'
-											+'<div class="rcp-detail-body"></div>');		
-//						$("#detail_pop_up_reload").attr('id','detail_pop_up');
-						
+											+'<div class="rcp-detail-body"></div>');
 						// 별점주기 팝업
-						$('.rcp-star-rating').on('click', function(){
+						$('#rcp-star-rating').on('click', function(){
 							$('.rcp-starrating').bPopup();
 						})
 					}
