@@ -1,4 +1,4 @@
-#gpa-text, #gpa{
+#gpa-text, #gpa, #starrating-finish {
   font-size: 15px;
 }
 
@@ -28,8 +28,8 @@
   float: right;
 }
 .rcp-rating label:before {
-  margin: 5px;
-  font-size: 30px;
+  margin: 4px;
+  font-size: 23px;
   font-family: fontAwesome;
   display: inline-block;
   content: "\f005";

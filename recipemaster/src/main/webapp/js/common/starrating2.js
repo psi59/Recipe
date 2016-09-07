@@ -1,11 +1,6 @@
-$(function(){
-		
-	/*$('input[name="rating"]').change(function() {
-		$('#rcp-starrating-grade').html($('input[name="rating"]:checked').val()+' 점');
-	})*/
-	
-	// 별점 등록
-	$('#rcp-starrating-btn-apply').on('click', function(){		
+// 별점등록 버튼 이벤트
+function starRatingBtn(){
+	$(document).on('click','#rcp-starrating-btn-apply',function(){
 		if($('input[name="rating"]:checked').val() != undefined){
 			$.ajax({
 				url : 'recipe/starRate.json',
@@ -21,13 +16,10 @@ $(function(){
 						return;
 					}
 					if (result.loginCheck == true){
-						if(result.checkDuplicateGrade == true){
-							swal($('input[name="rating"]:checked').val()+'점을 주셨습니다 !');
-							// rating 라디오 버튼 체크 해제
-							$('input:radio[name="rating"]').removeAttr("checked");
-						} else if(result.checkDuplicateGrade == false) {
-							swal('이미 점수를 입력하셨습니다.');
-						}
+						swal($('input[name="rating"]:checked').val()+'점을 주셨습니다 !');
+						$('.rcp-rating').remove();
+						$('#rcp-starrating-btn-apply').remove();
+						checkDuplicateGrade();
 					} else if (result.loginCheck == false){
 						swal('로그인 하셔야 이용하실수 있습니다.');
 					}
@@ -40,4 +32,29 @@ $(function(){
 			swal('별점을 매겨주세요');
 		}
 	})
-});
+}
+
+// 이미 별점을 부여한 레시피인지 확인
+function checkDuplicateGrade(){
+	var starRating = $('#starrating-template').text();
+	var compileStarRating = Handlebars.compile(starRating);
+	
+	$.ajax({
+		url : 'recipe/checkDuplicateGrade.json',
+		method : 'post',
+		data : {
+			recipeNo : $('#detail-recipeNo').val()
+		},
+		dataType : 'json',
+		success : function(result) {				
+			if (result.status != 'success'){
+				swal('에러');
+				return;
+			}
+			$('.rcp-header').append(compileStarRating(result));
+		},
+		error : function(request,status,error) {
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	})
+}

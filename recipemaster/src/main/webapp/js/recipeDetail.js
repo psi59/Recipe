@@ -1,8 +1,6 @@
 document.write('<script type"text/javascript" src="js/common.js"></script>')
 document.write('<script type"text/javascript" src="js/login.js"></script>')
-
-
-
+document.write('<script type"text/javascript" src="js/common/starrating2.js"></script>')
 
 var detailInfoTemp = $('#recipe-detail-304-info-template').html();
 var comDetailInfoTemp = Handlebars.compile(detailInfoTemp);   
@@ -30,6 +28,7 @@ var slider;
 $(function(){
 
 	recipeDetail();
+	starRatingBtn();
 	comment();
 	addComment();
 	deleteComment();
@@ -79,30 +78,7 @@ function clickDetailInDetailFunction(){
 									+'<p class="hash"></p>'
 									+'<p class="date"></p>'
 									+'<div id="gpa-text">평점</div><div id="gpa">몇점</div>'
-									+'<div id="rcp-star-rating">평가하기</div>'
-									+'<div class="rcp-rating">'
-									+'<input id="star5" name="rating" type="radio" value="5"/>'
-									+'<label for="star5" class="full"></label>'
-									+'<input id="star4.5" name="rating" type="radio" value="4.5"/>'
-									+'<label for="star4.5" class="half"></label>'
-									+'<input id="star4" name="rating" type="radio" value="4"/>'
-									+'<label for="star4" class="full"></label>'
-									+'<input id="star3.5" name="rating" type="radio" value="3.5"/>'
-									+'<label for="star3.5" class="half"></label>'
-									+'<input id="star3" name="rating" type="radio" value="3"/>'
-									+'<label for="star3" class="full"></label>'
-									+'<input id="star2.5" name="rating" type="radio" value="2.5"/>'
-									+'<label for="star2.5" class="half"></label>'
-									+'<input id="star2" name="rating" type="radio" value="2"/>'
-									+'<label for="star2" class="full"></label>'
-									+'<input id="star1.5"  name="rating" type="radio" value="1.5"/>'
-									+'<label for="star1.5" class="half"></label>'
-									+'<input id="star1"  name="rating" type="radio" value="1"/>'
-									+'<label for="star1" class="full"></label>'
-									+'<input id="star0.5"  name="rating" type="radio" value="0.5"/>'
-									+'<label for="star0.5" class="half"></label>'
-									+'</div>'
-									+'<hr /></div>'
+									+'<div id="rcp-star-rating">별점주기</div></div><hr/>'
 									+'<div class="rcp-detail-body"></div>');
 				$('.rcp-header > .title').text(result.data.recipeName);
 				$('.rcp-header > .date').text(result.data.recipeDate);
@@ -184,7 +160,7 @@ function recipeDetail(){
 					positionStyle :[('fixed')],
 					follow: [false, false], //x, y
 					onOpen:function(){
- 						
+						checkDuplicateGrade();
 						$("body").css("overflow", "hidden");						
 						$('.rcp-304').append( comDetailInfoTemp(result) );
 						$('.rcp-info-images').append( comDetailImageMain(result.data) );
@@ -208,6 +184,7 @@ function recipeDetail(){
 							$('a[name="rcp-nav-images"]:eq('+i+')').attr('href','#div'+i);
 							$('a[name="rcp-nav-bgImages-button"]:eq('+i+')').attr('href','#div'+i);
 						}
+						
 					$('.rcp-mainSlider').bxSlider({
 						startSlide:0,
 						pager: false,
@@ -272,34 +249,9 @@ function recipeDetail(){
 											+'<p class="hash"></p>'
 											+'<p class="date"></p>'
 											+'<div id="gpa-text">평점</div><div id="gpa">몇점</div>'
-											+'<div id="rcp-star-rating">평가하기</div>'
-											+'<div class="rcp-rating">'
-											+'<input id="star5" name="rating" type="radio" value="5"/>'
-											+'<label for="star5" class="full"></label>'
-											+'<input id="star4.5" name="rating" type="radio" value="4.5"/>'
-											+'<label for="star4.5" class="half"></label>'
-											+'<input id="star4" name="rating" type="radio" value="4"/>'
-											+'<label for="star4" class="full"></label>'
-											+'<input id="star3.5" name="rating" type="radio" value="3.5"/>'
-											+'<label for="star3.5" class="half"></label>'
-											+'<input id="star3" name="rating" type="radio" value="3"/>'
-											+'<label for="star3" class="full"></label>'
-											+'<input id="star2.5" name="rating" type="radio" value="2.5"/>'
-											+'<label for="star2.5" class="half"></label>'
-											+'<input id="star2" name="rating" type="radio" value="2"/>'
-											+'<label for="star2" class="full"></label>'
-											+'<input id="star1.5"  name="rating" type="radio" value="1.5"/>'
-											+'<label for="star1.5" class="half"></label>'
-											+'<input id="star1"  name="rating" type="radio" value="1"/>'
-											+'<label for="star1" class="full"></label>'
-											+'<input id="star0.5"  name="rating" type="radio" value="0.5"/>'
-											+'<label for="star0.5" class="half"></label>'
-											+'</div>'
-											+'<hr /></div>'
-											+'<div class="rcp-detail-body"></div>');		
-//						$("#detail_pop_up_reload").attr('id','detail_pop_up');
-						
-						// 평가하기 팝업
+											+'<div id="rcp-star-rating">별점주기</div></div><hr/>'
+											+'<div class="rcp-detail-body"></div>');	
+						// 별점주기 팝업
 						$('#rcp-star-rating').on('click', function(){
 							$('.rcp-starrating').bPopup();
 						})

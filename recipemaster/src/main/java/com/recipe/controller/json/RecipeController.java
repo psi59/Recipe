@@ -85,24 +85,14 @@ public class RecipeController {
 
     User user = CommonUtil.getSessionUser(session);
     HashMap<String,Object> result = new HashMap<>();     
-    boolean loginCheck = true;    
-    boolean checkDuplicateGrade = true;
-    
-    System.out.println("UserNo : "+user.getUserNo());
-    System.out.println("DB 가기전");
-    
+    boolean loginCheck = true;
     try{
       // 로그인 확인
       if(user.getUserNo() != 0){
-        // 이미 별점을 부여한 레시피인지 확인
-        checkDuplicateGrade = recipeService.getDuplicateGrade(user.getUserNo(), recipeNo);
-        if(checkDuplicateGrade){
-          recipeService.addGrade(user.getUserNo(), recipeNo, grade);    
-        }
+        recipeService.addGrade(user.getUserNo(), recipeNo, grade);
       } else {
         loginCheck = false;
       }
-      result.put("checkDuplicateGrade", checkDuplicateGrade);
       result.put("loginCheck", loginCheck);
       result.put("status","success");    
     } catch (Exception e){
@@ -110,6 +100,32 @@ public class RecipeController {
     }
     return new Gson().toJson(result);
   }
+  
+// 이미 별점을 부여한 레시피인지 확인 -이성현
+ @RequestMapping(path="checkDuplicateGrade",produces="application/json;charset=UTF-8")
+ @ResponseBody
+ public String checkDuplicateGrade(int recipeNo, HttpSession session){
+
+   User user = CommonUtil.getSessionUser(session);
+   HashMap<String,Object> result = new HashMap<>();     
+   boolean loginCheck = true;
+   boolean checkDuplicateGrade = true; // true면 중복이 아님
+   try{
+     // 로그인 확인 (로그인 안했을대 에러 안나게 하기위해)
+     if(user.getUserNo() != 0){
+       // 이미 별점을 부여한 레시피인지 확인
+       checkDuplicateGrade = recipeService.getDuplicateGrade(user.getUserNo(), recipeNo);
+     } else {
+       loginCheck = false;
+     }
+     result.put("checkDuplicateGrade", checkDuplicateGrade);
+     result.put("loginCheck", loginCheck);
+     result.put("status","success");    
+   } catch (Exception e){
+     result.put("status", "false");
+   }
+   return new Gson().toJson(result);
+ }
 
   // 리스트 페이지 레시피 검색 자동완성 -이성현
   @RequestMapping(path = "recipeSearchAutoComplete", produces = "application/json;charset=UTF-8")
