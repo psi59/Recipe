@@ -54,8 +54,10 @@
 			<div class="navbar-header">
 				<div class="row">
 					<div class="row col-md-7 col-sm-7 col-xs-12">
-						<a class="logo col-md-3 col-sm-3 hidden-xs rt-navbar-top-logo"
-							href="index.html"><img src="img/logo.svg" alt="Logo"></a>
+						<a class="logo col-md-3 col-sm-3 hidden-xs rt-navbar-top-logo logo-cookle"
+							href="index.html">
+							<span id="logo-cookleHome">Cookle</span>
+							</a>
 
 						<div id="searchBar-input"
 							class="input-group col-md-5 col-sm-5 col-xs-11 col-xs-offset-1 rcp-navbar-searchbar-size rt-navbar-top-searchbar">
@@ -131,8 +133,8 @@
 
 				<div class="row header-info rcp-header-info">
 					<div class="col-md-10 col-md-offset-1 text-center">
-						<img src="img/logo.png" class="wow fadeIn"
-							style="width: 40%; height: 40%; margin-bottom: 1em;"> <br />
+						<p class="rcp-mainlogo">Cookle</p><br/><br/><br/>
+						 <span class="rcp-sublogo">by Team Ohora</span><br/><br/>
 
 						<div class="row lead wow fadeIn">
 							<div
@@ -745,7 +747,6 @@
             class="col-xs-3 col-sm-3 col-md-3 rcp-listSize rcp-list-margin">
             <div class="thumbnail row relative">
               <div class="rcp-profile-position">
-           
                   {{#defaultImage}}
               <a href="#" class="rcp-userName"><input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
               <img src="img/profileImg/{{user.image}}" class="img-circle rcp-profile"></a>
@@ -758,51 +759,45 @@
               <input type="hidden" class="forBackgroundRepresentImg" value="{{this}}">
               {{/each}}
               <p class="rcp-count-images">{{countImage representImages}}</p>
-              <div class="rcp-count-images-bg"></div>
-            <div class="rcp-image-scale" name="recipe-image" > <!--style="background-image : url('img/representImg/{{rpimg}}');"-->
+              <div class="rcp-count-images-bg">
+              </div>
+              <div class="rcp-recipeGradePointDiv">
+                 <span class="pull-right rcp-recipeGrade">★  {{gradePoint}}</span>
+              </div>
+            <div class="rcp-image-scale" name="recipe-image" > 
               <p class="rcp-preview-images-count"></p>
-              <!--<img src="img/representImg/{{rpimg}}" class="image1"  name="rcp-list-images"> -->
              </div>
               <div class="rcp-caption">
-                <h4 class="pull-right rcp-Grade">평점</h4>
-                <h5 class="pluu-left rcp-relative rcp-profileName">
-
-                  <span class="glyphicon glyphicon-star"></span>
-                  <input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
-                   <a href="#" class="rcp-userName">{{user.userName}}</a>
-                </h5>
-                <!-- 두번째 줄 (레시피명, 점수)  -->
                 <div class="rcp-relative rcp-height30">
-                  <h4 class="pull-right rcp-recipeGrade">{{gradePoint}}</h4>
                   <h4 class="pull-left rcp-left_position">
                     <span><a href="#" class="detail" style="z-index:9999">{{recipeName}} </a> 
                       <input type="hidden" name="recipeNo" value="{{recipeNo}}">
-                   
                   </h4>
-
+                  <div class="rcp-profileNameDiv">
+                  <!--<span class="pluu-left rcp-relative rcp-profileName">
+                    <input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
+                    <a href="#" class="rcp-userName">Chef : {{user.userName}}</a>
+                  </span>-->
+                  </div>
+                  <div class="rcp-rcpDateDiv">
+                     <span class="pluu-left rcp-relative rcp-profileName rcp-regdt">
+                    {{recipeDate}}<br/>
+                  </span>
+                  <span class="pluu-left rcp-relative rcp-profileName rcp-see">
+                   {{hits}} 명이 봄 ⊙.⊙
+                  </span>
+                  </div>
                 </div>
               </div>
-              <!--  레시피 정보 끝 -->
-
-              <!--  슬라이드 start -->
               <div name="myCarousel" class="carousel slide rcp-relative">
-
-                <!--  왼쪽 버튼 시작  -->
                 <a href="div[name='myCarousel']" role="button" data-slide="prev"
                   class="rcp-left-slideButton"> <span
                   class="glyphicon glyphicon-chevron-left" aria-hidden="false"></span>
                 </a>
-                <!--  왼쪽 버튼 끝  -->
-
-                <!--  오른쪽 버튼 시작  -->
                 <a href="div[name='myCarousel']" role="button" data-slide="next"
                   class="rcp-right-slideButton"> <span
                   class="glyphicon glyphicon-chevron-right" aria-hidden="false"></span>
-
                 </a>
-                <!--  오른쪽 버튼 끝   -->
-
-                <!--  레시피 내용 시작  -->
                 <div class="carousel-inner" role="listbox">
                   <div class="item active">
                     <div class="rcp-comment">

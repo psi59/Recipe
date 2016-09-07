@@ -12,6 +12,7 @@
 		<result column="uno2" property="loginUserNo" />
 		<result column="username" property="user.userName" />
 		<result column="userNo" property="user.userNo" />
+		<result column="image" property="user.image" />
     
 	</resultMap>
 	<!--uno - 방문자 / uno2 페이지주인  -->
@@ -49,7 +50,7 @@
 	
 	<!-- list 완료 -->
 	<select id="selectList" resultMap="visitorMap" parameterType="Map">
-		SELECT v.vno,u.uno,u.name username,v.uno2,v.vct,v.vc_dt,u.uno userNo
+		SELECT v.vno,u.uno,u.name username,v.uno2,v.vct,v.vc_dt,u.uno userNo,u.img image
 		FROM users u
 		LEFT OUTER JOIN VSTS v ON u.uno=v.uno
 		WHERE v.uno2=#{userNo}

@@ -381,7 +381,7 @@
   {{#each data}}
     <div class="rcp-Vst" name="rcp-Vst">
           <div class="rcp-Vst-top">            
-            <img class="rcp-Vst-img img-circle" src="img/pika.jpg" />            
+            <img class="rcp-Vst-img img-circle" src="img/profileImg/{{user.image}}" />            
             <div class="rcp-Vst-common">
             <span class="editBtn1" data-index="{{visitorNo}}">
              <button type="button" class="btn btn-info btn-xs vstUpdateBtn" data-index="{{visitorNo}}">수정</button>
@@ -390,7 +390,7 @@
                 <button type="button" class="btn btn-danger btn-xs vstDeleteBtn" name="vstDeleteBtn" data-index="{{visitorNo}}">삭제</button>
             </span>  
               <span class="rcp-Vst-vno"></span><br/>
-              <input type="hidden" class="fromNo" name="fromNo" value={{user.userNo}}>
+              <input type="hidden" class="fromNo" id="fromNo" value={{user.userNo}}>
               <span id="rcp-Vst-id" class="rcp-Vst-id">From. {{user.userName}}
               </span><br/>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
               <span id="rcp-Vst-time">Date. {{visitorDate}}</span>

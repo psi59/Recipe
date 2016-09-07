@@ -1,4 +1,5 @@
 /********** main header css 시작 ***********/
+@import 'https://fonts.googleapis.com/css?family=Audiowide|Bungee|Niconne|Sigmar+One';
 #footer {
 	text-align: center;
 }
@@ -8,50 +9,50 @@ header {
 }
 
 .rcp-random-recipe {
-  margin-top: 10px;
+	margin-top: 10px;
 }
 
 .rcp-re-recipe {
-  margin: 2%;
-  margin-left: 38%;
-  margin-top: 0%;
-  bottom: 1%;
+	margin: 2%;
+	margin-left: 38%;
+	margin-top: -4%;
+	bottom: 1%;
 }
 
 .rcp-roulette {
-  z-index: 99999;
-  cursor: pointer;
-  height: 50px;
-  -webkit-transition: all 1s ease-in-out;
-  -moz-transition: all 1s ease-in-out;
-  -o-transition: all 1s ease-in-out;
-  -ms-transition: all 1s ease-in-out;
-  transition: all 1s ease-in-out;
-  position: absolute;
-  top: 100px;
-  right: 45%;
-  height: 50px;
+	z-index: 99999;
+	cursor: pointer;
+	height: 50px;
+	-webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
+	-ms-transition: all 1s ease-in-out;
+	transition: all 1s ease-in-out;
+	position: absolute;
+	top: 100px;
+	right: 45%;
+	height: 50px;
 }
 
 .rcp-roulette:hover {
-  height: 250px;
-  right: 24%;
-  top: 45px; 
-  -webkit-transform : rotate( 720deg);
-  -moz-transform: rotate(720deg);
-  -o-transform: rotate(720deg);
-  -ms-transform: rotate(720deg);
-  transform: rotate(720deg);
-  -webkit-transform: rotate(720deg);
-  -webkit-transform: rotate(720deg);
+	height: 250px;
+	right: 24%;
+	top: 45px;
+	-webkit-transform: rotate(720deg);
+	-moz-transform: rotate(720deg);
+	-o-transform: rotate(720deg);
+	-ms-transform: rotate(720deg);
+	transform: rotate(720deg);
+	-webkit-transform: rotate(720deg);
+	-webkit-transform: rotate(720deg);
 }
 
 #searchBar2 #searchCondition-select {
-  width: 30%;
+	width: 30%;
 }
 
 #searchBar2 .searchKeyword {
-  width: 70%;
+	width: 70%;
 }
 
 .rcp-container {
@@ -75,9 +76,10 @@ header {
 }
 
 .rt-navbar-top-logo {
-	width: 9em;
+	width: 10em;
 	margin-left: 1.3em;
-	margin-right: 3em;
+	margin-right: 1em;
+	    margin-top: -5px;
 }
 
 .rcp-navbar-searchbar-size {
@@ -286,7 +288,7 @@ header {
 }
 
 .rcp-btn-default-2 {
-	border: 1px solid rgba(255, 255, 255, 0.7);
+	/* border: 1px solid rgba(255, 255, 255, 0.7); */
 	border-radius: 0.3em;
 	color: rgba(255, 255, 255, 1);
 	background: rgba(255, 255, 255, 0.0);
@@ -491,36 +493,77 @@ header .header-content {
 .width_180px {
 	width: 180px !important;
 }
+
 #random-pop-up-banner {
-  display: none;
-  padding-top: 0.1%;
-  background: lemonchiffon;
-  width: 22%;
-  height: 56%;
+	display: none;
+	padding-top: 0.1%;
+	background: lemonchiffon;
+	width: 22%;
+	height: 56%;
 }
 
 #random-pop-up-banner .rcp-list-margin {
-  width: 100%;
+	width: 100%;
 }
 
 #rcp-randomRacipeCardWrapper-slot {
-  overflow: hidden;  hide the stuff
-  height: 350px;  size the viewable window (equal to image height)
-  display: inline-block;
+	overflow: hidden;
+	hide
+	the
+	stuff
+	height
+	:
+	350px;
+	size
+	the
+	viewable
+	window
+	(equal
+	to
+	image
+	height)
+	display
+	:
+	inline-block;
 }
 
 /************************ 랜덤 슬롯 ************************/
 /* 슬라이더 기본 위치 */
-#rcp-randomRacipeCardWrapper-slot .slotCard{ 
+#rcp-randomRacipeCardWrapper-slot .slotCard {
 	width: 100%;
-  height: 435px;
-  list-style: none;
+	height: 435px;
+	list-style: none;
 }
 
-#slot_box{
-   position: relative;
-   width: 100%;
-   height: 433px;
-   overflow: hidden;
-   display: inline-block;
+#slot_box {
+	position: relative;
+	width: 100%;
+	height: 433px;
+	overflow: hidden;
+	display: inline-block;
+}
+
+#logo-cookleHome {
+	font-family: 'Niconne', cursive;
+	font-size: 30pt;
+	font-weight: bold;
+	color: white;
+}
+
+.logo-cookle {
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: -5px;
+}
+.rcp-mainlogo{
+	font-family: 'Niconne', cursive;
+	font-size: 150pt;
+	color : white;
+	cursor: context-menu;
+}
+.rcp-sublogo{
+	font-family: 'Niconne', cursive;
+  font-size: 30pt;
+  color : white;
+  cursor: context-menu;
 }
