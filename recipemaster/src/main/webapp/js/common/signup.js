@@ -1,6 +1,8 @@
-// 이성현
-$(document).ready(function(){
+var authKEY;
+var email;
 
+$(document).ready(function(){
+	
 	///// 회원가입 팝업창 가입 버튼 이벤트 /////
 	/*$('#signup-addBtn').click(function() {*/
 	$(document).on('click', '#signup-addBtn', function() {
@@ -36,14 +38,33 @@ $(document).ready(function(){
 						swal('이메일과 비밀번호를 확인해주세요.');
 						return;
 					} 				
+					authKEY=result.authKEY;
 					swal($('#signup-userName').val()+'님 환영합니다 !')						
-					$('#signup-pop-up-banner').bPopup().close(); // 팝업창 닫기												
+					
+					
+					//인증추가
+					 email = $('#signup-e-mail').val();
+					swal(email+'에 이메일 전송ajax실행 시작');
+					if (authKEY!=null) {
+						$.ajax({
+				            	type : 'GET',
+				                url : 'http://127.0.0.1:8888/user/authentication.do?email='+email+'&authKEY='+authKEY,
+				                success : function(result) {					
+									swal('이메일 전송완료');
+				                } // end success
+								
+				           	 }); // end ajax
+					
+					}
+					$('#signup-pop-up-banner').bPopup().close(); // 팝업창 닫기	
 				},
 				error : function() {
 					alert('서버 요청 오류 !')
 				}
 			})	
+			            
 		}
+		
 	});
 	
 	///// 회원가입 팝업창 취소 이벤트 /////
@@ -71,7 +92,7 @@ $(document).ready(function(){
 	          var email = $(this).val();
 	            $.ajax({
 	            	type : 'GET',
-	                url : 'http://192.168.0.50:9999/user/checkDuplication.do?email='+email,
+	                url : 'http://192.168.0.21:9999/user/checkDuplication.do?email='+email,
 	                success : function(result) {					
 	                    if (result == 'true') {
 							// 사용가능한 이메일
@@ -157,6 +178,37 @@ $(document).ready(function(){
 			$('#signup-passwordCheck-label').text('일치하지 않습니다.');              
 		} // end if
     }); // end keyup
+
+	//비밀번호 찾기
+	$(document).on('click', '#findPassword', function(){
+		$('#login-pop-up-name').html("<span>비밀번호 찾기</span>");
+		$('#loginInputBox').html("<input class='form-control' type='text' id='findInputEmail' name='findInputEmail' placeholder='이메일 입력'/>");
+		$('#rcp-sign-button').html("<span id='pushEmail' >확인</span>&nbsp;&nbsp;&nbsp;"+"<span id='cancelPushEmail' >취소</span>");
+		$('#login-pop-up-banner').css('height','200px');
+		$('.rcp-sign-membership').css('margin-top','-35px');
+		$(document).on('click', '#pushEmail', function(){
+			var password;
+			var email=$('#findInputEmail').val();
+			swal(email);
+			$.ajax({
+            	type : 'GET',
+                url : 'http://127.0.0.1:8282/user/pushEmail.do?email='+email,
+                success : function(result) {					
+					swal('이메일 전송완료');
+					$(document).on('click', '.confirm', function(){
+						location.reload();
+					});
+                },error : function() {
+					swal('error');
+					}
+           	 }); // end ajax
+
+		});
+		$(document).on('click', '#cancelPushEmail', function(){
+			$(location).attr('href','/');
+		});
+	});
+
 });
 
 ///// 정규표현식 검사 함수 /////
@@ -164,4 +216,7 @@ function email_check( email ) {
     var regex=/([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     return (email != '' && email != 'undefined' && regex.test(email) === true); 
 }
+
+
+
 

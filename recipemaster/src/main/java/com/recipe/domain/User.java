@@ -1,6 +1,7 @@
 package com.recipe.domain;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class User {
 
@@ -20,8 +21,27 @@ public class User {
 	private int totalPoint;
 	private String grade;
 	private int subscribeUser; //구독한놈
+	private String authenticationKEY;//가입 KEY
+	private int authentication;//login KEY ex)0이면 email인증 안한놈, 1이면 인증한놈 즉 사이트 이용가능
 
-	//Constructor
+
+  public String getAuthenticationKEY() {
+    return authenticationKEY;
+  }
+
+  public void setAuthenticationKEY(String authenticationKEY) {
+    this.authenticationKEY = authenticationKEY;
+  }
+
+  public int getAuthentication() {
+    return authentication;
+  }
+
+  public void setAuthentication(int authentication) {
+    this.authentication = authentication;
+  }
+
+  //Constructor
 	public User() {  
 	}
 
@@ -123,12 +143,14 @@ public class User {
 		this.subsCount = subsCount;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userNo=" + userNo + ", userName=" + userName + ", email=" + email + ", password=" + password
-				+ ", image=" + image + ", intro=" + intro + ", role=" + role + ", joinDate=" + joinDate + ", recipeUrl="
-				+ recipeUrl + ", recipeCount=" + recipeCount + ", subsCount=" + subsCount + ", likeCount=" + likeCount
-				+ ", rownum=" + rownum + ", totalPoint=" + totalPoint + ", grade=" + grade + ", subscribeUser="
-				+ subscribeUser + "]";
-	}
+  @Override
+  public String toString() {
+    return "User [userNo=" + userNo + ", userName=" + userName + ", email=" + email + ", password=" + password
+        + ", image=" + image + ", intro=" + intro + ", role=" + role + ", joinDate=" + joinDate + ", recipeUrl="
+        + recipeUrl + ", recipeCount=" + recipeCount + ", subsCount=" + subsCount + ", likeCount=" + likeCount
+        + ", rownum=" + rownum + ", totalPoint=" + totalPoint + ", grade=" + grade + ", subscribeUser=" + subscribeUser
+        + ", authenticationKEY=" + authenticationKEY + ", authentication=" + authentication + "]";
+  }
+
+
 }

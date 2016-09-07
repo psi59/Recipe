@@ -1,0 +1,46 @@
+<html>
+<head>
+ 
+    <title></title>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+ 
+</head>
+<body>
+    <b>Send message</b><p>
+    id  <input type="text" id="userid"/><br/>
+    Message  <input type="text" id="msgbox"/>
+    <br>
+    <span id="msgs"></span>
+ 
+    <script type="text/javascript">
+    $(function(){
+    	var socket = io.connect('http://192.168.1.8:8081');
+    	socket.on('connect', function() {
+    	    socket.emit('login', { uid: 'admin' });
+    	});
+    	
+    	$("#userid").keyup(function(event) {
+            if (event.which == 13) {
+                socket.emit('login',{msg:$('#userid').val()});
+                $('#userid').val('');
+            }
+        });
+    	
+    	$("#msgbox").keyup(function(event) {
+            if (event.which == 13) {
+                socket.emit('fromclient',{msg:$('#msgbox').val()});
+                $('#msgbox').val('');
+            }
+        });
+    	
+        socket.on('toclient',function(data){
+            console.log(data.msg);
+            $('#msgs').append(data.msg+'<BR>');
+        });
+    });
+        
+        
+    </script>
+</body>
+</html>

@@ -16,7 +16,7 @@
 #login-pop-up-banner {
   display: none;
   width: 375px;
-  height: 310px;
+  height: 340px;
   border-radius: 7px;
   background: #ffffff;
 }
@@ -31,6 +31,23 @@
 	margin-top: 25px;
 	text-align: center;
 }
+
+
+#signup-addBtn, #signup-resetBtn {
+  margin: 25px;
+  border-style: solid;
+  border-radius: 6px;
+  border-color: #b51515;
+  padding: 7px 30px 7px 30px;
+  cursor: pointer;
+  color: black;
+  font-size: 20px;
+}
+
+#signup-addBtn:hover, #signup-resetBtn:hover {
+  color: white;
+  background: #b51515;
+} 
 
 .rcp-sign-membership #userLogin {
 	margin: 25px;
@@ -131,3 +148,14 @@
 .rcp-info {
 	padding-top: .5rem;
 }
+
+#findPassword{
+	  top: 311px;
+	  left: 136px;
+    position: absolute;
+    
+}
+
+#findPassword:hover{
+  color: #b51515;
+} 

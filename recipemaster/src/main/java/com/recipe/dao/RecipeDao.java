@@ -49,4 +49,6 @@ public interface RecipeDao {
 	void deleteRecipeCategory(int recipeNo);
 	List<Recipe> recipeRecomList(Map<String,Object> params);
 	List<Recipe> recipeRecomCtList(Map<String,Object> params);
+	void insertGrade(Map<String, Object> params); // 이성현 별점매기기
+	int checkDuplicateGrade(Map<String, Object> params); // 이성현 별점등록한 레시피인지 체크
 }

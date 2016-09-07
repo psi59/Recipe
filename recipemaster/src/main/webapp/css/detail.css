@@ -1,4 +1,6 @@
 @CHARSET "UTF-8";
+
+
 .rcp-detail-form{
   width:1024px;
   height:880px;
@@ -69,15 +71,15 @@
 
 .rcp-720{
   width:720px;
-   height:850px;
-   float:left;
+  height:850px;
+  float:left;
   background-color: white;
 }
 
 .rcp-304{
   width:304px;
-   height:850px;
-   float:left;
+  height:850px;
+  float:left;
   background-color: #383838;
   
 }
@@ -86,6 +88,7 @@
 .rcp-detail-form .rcp-header{
    margin-left:35px;
    z-index: 1;
+   position: relative;
 }
 
 .rcp-detail-body{
@@ -307,6 +310,7 @@
 .rcp-title-size {
   width:500px; 
   float:left;
+  position: relative;
 }
 
 .rcp-info-filter a{
@@ -363,4 +367,16 @@
 
 .rcp-explanation p {
 	width:550px;
+}
+
+.timerZone{
+  position: absolute;
+  top: 0;
+  right: 50px;
+  text-align: left;
+}
+
+.timerObj{
+	background-color: transparent;
+	font-size: 13px;
 }

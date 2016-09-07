@@ -21,8 +21,9 @@
 		<result column="rownum" property="rownum" />
 		<result column="grade" property="grade" />
 		<result column="scsuno" property="subscribeUser" />
+		<result column="auth_key" property="authenticationKEY" />
+		<result column="auth" property="authentication" />
 	</resultMap>
-	
 
 	<select id="findUser" resultMap="userMap" parameterType="String">
 		SELECT vt.* FROM(
@@ -125,9 +126,9 @@
 
 	<insert id="insert" parameterType="user">
 		insert into users(name, email,
-		pwd, role, join_dt)
+		pwd, role, join_dt,auth_key,auth)
 		values ( #{userName}, #{email}, #{password},
-		'user', now())
+		'user', now(),#{authenticationKEY},#{authentication})
 	</insert>
 
 	<update id="update" parameterType="user">
@@ -168,6 +169,7 @@
     LIMIT #{startIndex}, #{len}) vt
     ORDER BY vt.total DESC
   </select>
+
   <select id="selectMonthRank" resultMap="userMap" parameterType="Map">
     SELECT @rownum:=@rownum+1 rownum,vt.* FROM(
     SELECT r1.uno,r1.name,r1.img image,r1.email,r1.intro,r1.role,
@@ -275,6 +277,10 @@
   <insert id="addUserInNaver" parameterType="user">
     insert into users(name,email,pwd,img,role,join_dt,auth_key,auth) values (#{userName}, #{email},0,'default.jpg','user',now(),null,0);    
   </insert>
-  
-  
+  	
+	<update id="authUpdate" parameterType="user">
+    UPDATE users
+    SET auth=#{auth}
+    WHERE email = #{inputEmail}
+  </update>
 </mapper>

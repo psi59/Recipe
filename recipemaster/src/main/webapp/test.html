@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<button id="btn">전송전송</button>
+</body>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#btn').on('click', function(){
+		$.ajax({
+		    url : 'http://localhost:9200/_all/_search?pretty/_source?pretty=true',
+		    method : 'get',
+		    /* data : {
+		      recipeNo : recipeNo
+		    }, */
+		    dataType : 'json',
+		    success : function(result) {
+		      console.log(result);
+		    },
+		    error : function() {
+		        alert('에러에러')
+		    }
+	  });
+	});
+});
+</script>
+</html>
