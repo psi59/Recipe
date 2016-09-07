@@ -115,15 +115,18 @@ public class RecipeController {
 
   @RequestMapping(path = "addRecipe")
   @ResponseBody
-  public String addRecipe(Recipe recipe, @RequestParam("materialNo") String[] materialNos,
-      @RequestParam("materialAmount") String[] materialAmounts,
-      @RequestParam("categoryValue") List<Integer> categoryValue,
-      @RequestParam("recipeProduce") String[] recipeProduce,
-      @RequestParam("imageFiles") List<MultipartFile> imageFiles,
-      @RequestParam("representImgNames") List<String> representImgNames,
-      @RequestParam("produceImgNames") List<String> produceImgNames, HttpServletRequest request,
+  public String addRecipe(Recipe recipe, @RequestParam(value="materialNo", defaultValue="") String[] materialNos,
+      @RequestParam(value="materialAmount", defaultValue="") String[] materialAmounts,
+      @RequestParam(value="categoryValue", defaultValue="") List<Integer> categoryValue,
+      @RequestParam(value="timerValues", defaultValue="") List<String> timerValues,
+      @RequestParam(value="recipeProduce", defaultValue="") String[] recipeProduce,
+      @RequestParam(value="imageFiles", defaultValue="") List<MultipartFile> imageFiles,
+      @RequestParam(value="representImgNames", defaultValue="") List<String> representImgNames,
+      @RequestParam(value="produceImgNames", defaultValue="") List<String> produceImgNames, HttpServletRequest request,
       HttpSession session) {
 
+	System.out.println("여기여기 : "+ recipe);  
+	
     Map<String, Object> result = new HashMap<>();
     Map<String, Object> map = new HashMap<>();
     Map<String, Object> recipeDatas = new HashMap<>();
@@ -131,8 +134,6 @@ public class RecipeController {
     JsonArray recipeProduceDatas = new JsonArray();
     JsonArray recipeRepresentImages = new JsonArray();
     
-    System.out.println(categoryValue.toString());
-
     User user = CommonUtil.getSessionUser(session);
 
     for (int i = 0; i < materialNos.length; i++) {
@@ -174,15 +175,30 @@ public class RecipeController {
         String fileName = recipe.getRecipeNo() + "_" + user.getUserNo() + "_" + System.currentTimeMillis() + ".png";
         obj.addProperty("recipeProduceImage", fileName);
         obj.addProperty("recipeProduce", recipeProduce[i]);
+        
+        if(timerValues.size()>0){
+        	for(String value : timerValues){
+        		String[] values = value.split("/");
+        		if(Integer.parseInt(values[0])==i){
+        			obj.addProperty("recipeTime", values[1]);        			
+        		}
+        	}
+        }
+        
         recipeProduceDatas.add(obj);
         FileCopyUtils.copy(CommonUtil.findImageFile(fileInfo, imageFiles).getBytes(),
             new FileOutputStream(CommonUtil.getImageFolderPath("recipeImg", request) + "/" + fileName));
       } // end of for
       recipeDatas.put("recipeProduceDatas", recipeProduceDatas.toString());
       recipeDatas.put("recipeRepresentImages", recipeRepresentImages.toString());
-      recipeService.registyImageAndProduce(recipeDatas);
-      recipeService.addMaterials(recipeDatas);
-      recipeService.addCategory(recipeDatas);
+      if(materialNos.length>0){
+    	  recipeService.addMaterials(recipeDatas);  
+      }
+      if(categoryValue.size()>0){
+    	  recipeService.addCategory(recipeDatas);
+      }
+      recipeService.registyImageAndProduce(recipeDatas);   
+      
       result.put("status", "success");
     } catch (Exception e) {
       e.printStackTrace();

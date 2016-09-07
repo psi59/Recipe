@@ -181,7 +181,7 @@
 		rgst)
 		VALUES(#{user.userNo}, #{recipe.recipeName}, #{recipe.intro},
 		#{recipe.cookTime},
-		#{recipe.portion}, 'rcp_pd', 'rpimg', now(), 1)
+		#{recipe.portion}, 'rcp_pd', 'rpimg', now(), #{recipe.regiStatus})
 		<selectKey keyProperty="recipeNo" resultType="int" order="AFTER">
 			SELECT LAST_INSERT_ID();
 		</selectKey>
@@ -435,7 +435,7 @@
 		rcpno) r3 ON r2.rcpno =
 		r3.rcpno
 		INNER JOIN(select @rownum:=0) t
-		ORDER BY RAND()) vt
+		ORDER BY RAND()) vt 
 		) vt1
 		WHERE
 		rownum=1 and rgst = 0

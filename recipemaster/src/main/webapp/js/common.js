@@ -170,3 +170,31 @@ function Slot_roll(slotName){
 		}
 	}
 }
+
+function isNumber(s) {
+	  s += ''; // 문자열로 변환
+	  s = s.replace(/^\s*|\s*$/g, ''); // 좌우 공백 제거
+	  if (s == '' || isNaN(s)) return false;
+	  return true;
+}
+
+function push(email, message, separation){
+	var socket = io.connect('http://192.168.0.50:8081');
+	
+	if(separation=='login'){
+		data = {
+			uid: email
+		}
+	} else if(separation=='message'){
+		data={
+			uid: email,
+			msg: message
+		}
+	}
+	
+	socket.emit(separation, data);
+	
+	socket.on('message',function(data){
+        alert(data.msg);
+    });
+}

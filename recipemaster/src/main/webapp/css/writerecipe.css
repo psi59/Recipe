@@ -93,7 +93,7 @@ body {
 
 .height_150px{
 	height: 150px !important;
-	width: 430px !important;
+	width: 425px !important;
 	margin-right: 10px; 
 }
 
@@ -303,4 +303,17 @@ input[name="materialAmount"]{
 
 .rcp-category .active{
 	background-color: #ee7272;
+}
+
+.timer {
+    border: 0;
+    background-color: white;
+    padding: 1px;
+    font-size: 19px;
+}
+
+.timerInput {
+    background-color: transparent;
+    border: transparent;
+    box-shadow: none;
 }

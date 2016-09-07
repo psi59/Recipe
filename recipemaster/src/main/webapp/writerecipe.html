@@ -385,6 +385,7 @@
 		
 		<div id="delRpImgs"></div>
 		<div id="delPdImgs"></div>
+		<div id="timerValues"></div>
 	</form>
 	
  <script id="represent-image-template" type="text/x-handlebars-template">
@@ -410,7 +411,13 @@
           <textarea name="recipeProduce" class="height_150px" placeholder="조리과정을 설명해주세요.">{{recipeProduce}}</textarea>
         </div>
         <a href="#">
-          <div class="float_left closeBtn thick pdImgRemove"></div>
+          <div class="float_left closeBtn thick pdImgRemove rigth_position_15px"></div>
+          <div class="dropdown float_left top_position_30px">
+            <button class="timer" type="button"> 
+              <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+            </button>
+            <input type="hidden" name="timerValues" value="{{@index}}/{{recipeTime}}">
+          </div>
           <input type="hidden" name="produceImgNames" value="{{recipeProduceImage}}">
         </a>
       </div>

@@ -493,11 +493,11 @@ body {
 	border-top: 5px solid #b51515;
 }
 
-.fresh-ui:hover .header .social .list {
+.fresh-ui .header:hover .social .list {
 	right: 14px
 }
 
-.fresh-ui:hover .header .social .list a {
+.fresh-ui .header:hover .social .list a {
 	-webkit-transform: translateX(-15px);
 	transform: translateX(-15px);
 	font-size: 10pt;

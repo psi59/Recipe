@@ -1,9 +1,6 @@
 document.write('<script type"text/javascript" src="js/common.js"></script>')
 document.write('<script type"text/javascript" src="js/login.js"></script>')
 
-
-
-
 var detailInfoTemp = $('#recipe-detail-304-info-template').html();
 var comDetailInfoTemp = Handlebars.compile(detailInfoTemp);   
 
@@ -36,6 +33,7 @@ $(function(){
 	recipeScrap();
 	recipeDetailLike();
 	clickDetailInDetailFunction();
+	timerStart();
 
 	var userInfo = getUserInfo();
 })
@@ -55,7 +53,34 @@ Handlebars.registerHelper('x-button', function(options) {
 	}
 	});
 
-
+function timerStart() {
+	$(document).on('click', '.timerBtn', function() {
+		var $this = $(this);
+		var node = $('<div class="timerObj"/>');
+		var clock = $('<div class="float_left"></div>');		
+		clock.countdown(getTimeStamp($this.next().next().val()))
+		.on('update.countdown', function(event) {
+		  var format = '%H:%M:%S';
+		  $(this).html(event.strftime(format));
+		})
+		.on('finish.countdown', function(event) {
+		  $(this).html('00:00:00').parent().css("color", "red")
+		  $this.removeClass('display_none');
+		  $this.next().addClass('display_none');
+		  var audio = document.createElement('audio');
+		  audio.src = 'audio/porori.mp3'
+		  audio.play();
+		});
+		
+		node.append($('<span class="float_left">'+$this.prev().text()+' -&nbsp;<span>'));
+		node.append(clock);
+		
+		$('.timerZone').append(node);
+		$this.addClass('display_none');
+		$this.next().removeClass('display_none');
+		
+	});
+}
 
 
 function clickDetailInDetailFunction(){
@@ -249,7 +274,9 @@ function recipeDetail(){
 											+'<p class="hash"></p>'
 											+'<p class="date"></p>'
 											+'<p class="gpa">평점</p><p class="gpa">몇점</p>'
-											+'<span class="rcp-star-rating">별점주기</span><hr /></div>'
+											+'<span class="rcp-star-rating">별점주기</span>'
+											+'<div class="timerZone"></div>'
+											+'<hr /></div>'
 											+'<div class="rcp-detail-body"></div>');		
 //						$("#detail_pop_up_reload").attr('id','detail_pop_up');
 						
@@ -380,7 +407,8 @@ function addComment(){
 					swal('로그인 부탁염 ^오^');
 					return ;
 				}
-				console.log('커맨트 성공성공')
+				push($('.rcp-hidden-email').val(), "댓글 남김 남김", "message");
+				console.log($('.rcp-hidden-email').val());
 				commentFunction();
 			},
 			error:function(){
@@ -501,4 +529,33 @@ function init_scroll(event, delta, slider) {
       slider.goToPrevSlide();
     }
     lastAnimation = timeNow;
+}
+
+function getTimeStamp(time) {
+	  var d = addMinutes(new Date(), time);
+	  var s =
+	    leadingZeros(d.getFullYear(), 4) + '-' +
+	    leadingZeros(d.getMonth() + 1, 2) + '-' +
+	    leadingZeros(d.getDate(), 2) + ' ' +
+
+	    leadingZeros(d.getHours(), 2) + ':' +
+	    leadingZeros(d.getMinutes(), 2) + ':' +
+	    leadingZeros(d.getSeconds(), 2);
+
+	  return s;
+}
+
+function addMinutes(date, minutes) {
+  return new Date(date.getTime() + minutes*60000);
+}
+
+function leadingZeros(n, digits) {
+	  var zero = '';
+	  n = n.toString();
+
+	  if (n.length < digits) {
+	    for (i = 0; i < digits - n.length; i++)
+	      zero += '0';
+	  }
+	  return zero + n;
 }

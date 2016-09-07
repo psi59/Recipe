@@ -1,4 +1,5 @@
 document.write('<script type"text/javascript" src="js/login.js"></script>')
+document.write('<script type"text/javascript" src="js/common.js"></script>')
 
 var rpImageTemp = $('#represent-image-template').html();
 var rpImageTempImpl = Handlebars.compile(rpImageTemp);
@@ -8,19 +9,19 @@ var imageList = new Array();
 imageList[0] = new File([""], "");
 
 $(function() {
-	
+
 	var userInfo = getUserInfo();
 	if(userInfo==null){
 		loginAlert();
 		return;
 	}
-	
+
 	var recipeNo = location.href.split('?')[1]==null ? 0 : location.href.split('?')[1];
-	
+
 	if(recipeNo!=0){
 		checkMyRecipe(recipeNo);
 	}
-	
+
 	$(document).on('click', '#updateBtn', function() {
 		if ($('input[name="recipeName"]').val().length < 1) {
 			swal('레시피 제목을 입력해주세요.');
@@ -61,7 +62,7 @@ $(function() {
 				}
 			}
 		}
-		
+
 		$("#updateRecipe").submit();
 	});
 
@@ -134,7 +135,7 @@ $(function() {
 	};
 
 	$('input[name="materialName"]').easyAutocomplete(options);
-	
+
 	'use strict';
 
 	$("#representImgs").sortable({
@@ -156,7 +157,7 @@ $(function() {
 				dataType : 'json',
 				autoUpload : false,
 				acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i,
-					dropZone : $('#representImgDropzone')
+				dropZone : $('#representImgDropzone')
 			})
 			.on(
 					'fileuploadadd',
@@ -222,7 +223,12 @@ $(function() {
 										}
 									}
 									var node = $('<div class="row padding_10px" style="position: relative;"/>');
-									var close = $('<a href="#"><div class="float_left closeBtn thick pdImg"></div></a>');
+									var close = $('<a href="#"><div class="float_left closeBtn thick pdImg rigth_position_15px"></div></a>');
+									var alramBtn = $('<div class="dropdown float_left top_position_30px">'
+											+'<button class="timer" type="button">'
+											+' <span class="glyphicon glyphicon-time" aria-hidden="true"></span>'
+											+'</button></div>');
+									
 									var img = $('<img class="preview"/>');
 									img
 									.attr(
@@ -245,6 +251,7 @@ $(function() {
 									imageWrapper.appendTo(node);
 									textarea.appendTo(node);
 									close.appendTo(node);
+									alramBtn.appendTo(node);
 									node.appendTo(data.context);
 									fileNameTag.appendTo(data.context);
 								});
@@ -317,7 +324,7 @@ $(function() {
 		$('#delRpImgs').append($('<input name="deleteRepresentImg" type="hidden" value="'+$(event.target).next().val()+'">'));	
 		$(this).parent().parent('.scroll').remove();
 	});
-	
+
 	$(document).on('click', '.pdImgRemove', function(event) {
 		event.preventDefault();
 		$('#delPdImgs').append($('<input name="deleteProduceImg" type="hidden" value="'+$(event.target).next().val()+'">'));	
@@ -332,6 +339,32 @@ $(function() {
 	$(document).on('click', '.mtClose', function(event) {
 		event.preventDefault();
 		$(this).parent().parent().remove();
+	});
+
+	$(document).on('click', '.timer', function(event) {
+		event.preventDefault();
+		var here = $(this);
+		var index = $(".timer").index(this);
+		swal({   
+			title: "타이머 등록",    
+			type: "input",   
+			showCancelButton: true,   
+			closeOnConfirm: false,   
+			animation: "slide-from-top",   
+			inputPlaceholder: "분 단위로 입력(ex:10)" }, 
+			function(inputValue){   
+				if (inputValue === false) return false;      
+					if (inputValue === "") {     
+						swal.showInputError("타이머를 입력하세요!");     
+						return false   
+					} else if(!isNumber(inputValue)){
+						swal.showInputError("숫자만 입력하세요!");     
+						return false
+					}
+					here.next().remove();
+					here.parent().append($('<input type="hidden" name="timerValues" value="'+index+"/"+inputValue+'">'));
+					swal("등록되었습니다.", (index+1)+"번 조리과정에 대한 타이머가 등록되었습니다.: " + inputValue+"분", "success");
+			});
 	});
 
 	$('#addBtn').on('click', function() {
@@ -375,6 +408,7 @@ $(function() {
 			}
 		}
 
+		$('input[name="regiStatus"]').val("0");
 		$('#addRecipe').submit();
 	});
 
@@ -404,7 +438,7 @@ $(function() {
 	var spinner = $("#portion").spinner({
 		min : 1
 	});
-	
+
 	$('.rcp-category-btn').on('click', function() {
 		if($(this).hasClass('active')){
 			$(this).removeClass('active');
@@ -445,7 +479,7 @@ function getRecipeEditInfo(recipeNo){
 			$('#intro').val(recipeData.intro);
 			$('#representImgs').append(rpImageTempImpl(recipeData));
 			$('#files').append(rcpProduceTempImpl(recipeData));
-			
+
 			$.each(
 					recipeMaterials,
 					function(index) {
@@ -469,7 +503,7 @@ function getRecipeEditInfo(recipeNo){
 						}
 
 					});
-			
+
 			$.each(recipeCategories, function(index) {
 				$.each($('.rcp-ctgno'), function(){
 					if($(this).val()==recipeCategories[index].categoryNo){
@@ -515,12 +549,12 @@ function checkMyRecipe(recipeNo){
 		},
 		dataType : 'json',
 		success : function(result) {
-			
+
 			if (result.status == 'nologin') {
 				loginAlert();
 				return;
 			}
-			
+
 			if (result.status == 'fail') {
 				swal({
 					title : "레시피 권한이 없습니다.",

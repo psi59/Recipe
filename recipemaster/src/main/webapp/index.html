@@ -349,6 +349,7 @@
 					<p class="gpa">평점</p>
 					<p class="gpa">몇점</p>
 					<span class="rcp-star-rating">별점주기</span>
+					<div class="timerZone"></div>
 				  <hr/>
 				</div>
 				
@@ -373,7 +374,6 @@
 
 				<div class="rcp-fifth-info"></div>
 			</div>
-
 		</div>
 	</div>
 	<!-- -------------------------------recipe list-------------------------------- -->
@@ -542,7 +542,18 @@
                 <div class="rcp-title-size">
                     
                   <h6 class="rcp-bodyTitle">STEP{{inc @index}}</h6>
-                    
+                  {{#if recipeTime}}
+                    <button class="timerBtn" type="button"> 
+                      <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                      {{recipeTime}}분 타이머 시작!!
+                    </button>
+                    <div class="timerBtn padding_top_15px display_none"> 
+                      <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                      타이머 실행중!!
+                    </div>
+                    <input type="hidden" value="{{recipeTime}}"/>
+                  {{/if}}
+                  
                 </div>
                 <div>
                
@@ -959,7 +970,8 @@
 	<script src="node_modules/bxslider/dist/jquery.bxslider.min.js"></script>
 	<script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
-
+  <script src="js/template/jquery.countdown.min.js"></script>
+  
 	<!--  사용자 js -->
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/template/main.js"></script>
@@ -981,11 +993,13 @@
 	<script src="js/common/starrating.js"></script>
 
 
+  <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+
 	<script>
 
 		$(function(){
 						
-			getUserInfo();
+			var userInfo = getUserInfo();
 			getWeather();
 			getRealTimeRank();
 			$('#footer').load("../copyright.html");
@@ -1005,6 +1019,9 @@
 			$('.dropdown-trigger--mobile').on('click', function() {
 				dropdownClick('.mobile-menu-dropdown', '.profile-dropdown');
 			});
+			
+			push(userInfo.email, '', 'login');
+			
 		});
 	</script>
 
@@ -1062,5 +1079,6 @@
 		// 네이버 사용자 프로필 조회
 		naver_id_login.get_naver_userprofile("naverSignInCallback()");
 	</script>
+	
 </body>
 </html>

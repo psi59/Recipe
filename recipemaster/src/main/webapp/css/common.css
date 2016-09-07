@@ -524,3 +524,34 @@ header .header-content {
    overflow: hidden;
    display: inline-block;
 }
+
+.rigth_position_15px{
+	right: 15px !important;
+}
+
+.rigth_position_0{
+  right: 0;
+}
+
+.top_position_30px{
+  top: 30px;
+}
+
+.display_none{
+	display: none;
+}
+
+.padding_top_15px{
+	padding-top: 15px;
+}
+
+.timerBtn{
+	position: absolute;
+	top: 0;
+	right: 0;
+  height: 100%;
+  font-size: small;
+  background: transparent;
+  border: transparent;
+  color: #717171;
+}
