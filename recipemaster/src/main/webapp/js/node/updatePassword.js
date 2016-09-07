@@ -56,11 +56,9 @@ app.use(function (req, res, next) {
 	});
 
 
-app.get('/user/authentication.do', function (request, response) {
+app.get('/user/updatePassword.do', function (request, response) {
 	var email = request.query.email;
-	var authKEY = request.query.authKEY;
-	var auth=1;
-	
+	var password = request.query.password;
 	// login 
 	var transporter = nodemailer.createTransport(({
 	    service: 'gmail',
@@ -71,11 +69,11 @@ app.get('/user/authentication.do', function (request, response) {
 	 
 	// send mail 
 	transporter.sendMail({
-		from: "somangily@gmail.com",
+		  from: "somangily@gmail.com",
 		  to: email,
 		  subject: "href",
 		  generateTextFromHTML: true,
-		  html: "<a href='http://127.0.0.1:7979/user/auth.do?authKEY="+authKEY+"&auth="+auth+"&email="+email+"'>"+email+"님 환영합니다."+"</a>"
+		  html: "<a>"+email+"님의 비밀번호는</a>"+"<br>"+"<a>"+password+"로 변경완료 되었습니다.</a>"
 		
 	}, function(error, response) {
 	   if (error) {
@@ -91,6 +89,6 @@ app.get('/user/authentication.do', function (request, response) {
 
 
 
-app.listen(8888, function () {
-	console.log('Example app listening on port 8888!');
+app.listen(2828, function () {
+	console.log('Example app listening on port 2828!');
 });

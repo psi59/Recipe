@@ -5,15 +5,15 @@
 <title>my page</title>
 
 <link rel="stylesheet"
-	href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet"
-	href="/node_modules/sweetalert/dist/sweetalert.css">
+  href="/node_modules/sweetalert/dist/sweetalert.css">
 <link rel="stylesheet" href="/css/subscribe.css">
 <link rel="stylesheet" href="/css/mypage.css">
 <link rel="stylesheet" href="/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/subscribe.css">
 <link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+  href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 
 <!-- Template css -->
 <link rel="stylesheet" href="css/template/animate.css">
@@ -42,113 +42,113 @@
 </style>
 </head>
 <body>
-	<div id="topBtn" class="navbar navbar-inverse navbar-fixed-top open">  
+  <div id="topBtn" class="navbar navbar-inverse navbar-fixed-top open">  
   </div>
-	<!-- 회원정보수정 bpopup -->
-	<div id='editUserInfo-pop-up-banner'>
-		<form action="user/update.json" method="post" id="updateUserForm"
-			enctype="multipart/form-data">
-			<input type="hidden" name="userNo" id="updateFormUserNo"> <input
-				type="hidden" name="email" id="updateFormEmail">
-			<div class="rcp-laytop">
-				<!--유저 이미지 업로드 --용이  !!!!!enctype?????16.08.12-->
-				<div class="rcp-up-preview img-wrapper col-md-1"></div>
-				<div class="file-upload-wrapper">
-					<input id="profileImage" type="file" name="profileImage"
-						class="file-upload-native" accept="image/*" /> <input type="text"
-						disabled placeholder="이미지" class="file-upload-text" />
-				</div>
-				<!--유저 이미지 업로드 끝--용이  -->
-				<div class="col-md-11 rcp-laytext">
-					<h4 id="updateBoxName"></h4>
-					<h5 id="updateBoxGrade">Master Chef</h5>
-					<h5 id="updateBoxEmail"></h5>
-				</div>
-			</div>
-			<div class="rcp-section">
-				<span>회원정보수정</span>
-			</div>
-			<div class="rcp-innnersec">
-				<div id="beforePwd-div"
-					class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
-					<input class="form-control" type="password" id="beforePwd"
-						name="beforePassword" placeholder="이전비밀번호 입력">
-				</div>
+  <!-- 회원정보수정 bpopup -->
+  <div id='editUserInfo-pop-up-banner'>
+    <form action="user/update.json" method="post" id="updateUserForm"
+      enctype="multipart/form-data">
+      <input type="hidden" name="userNo" id="updateFormUserNo"> <input
+        type="hidden" name="email" id="updateFormEmail">
+      <div class="rcp-laytop">
+        <!--유저 이미지 업로드 --용이  !!!!!enctype?????16.08.12-->
+        <div class="rcp-up-preview img-wrapper col-md-1"></div>
+        <div class="file-upload-wrapper">
+          <input id="profileImage" type="file" name="profileImage"
+            class="file-upload-native" accept="image/*" /> <input type="text"
+            disabled placeholder="이미지" class="file-upload-text" />
+        </div>
+        <!--유저 이미지 업로드 끝--용이  -->
+        <div class="col-md-11 rcp-laytext">
+          <h4 id="updateBoxName"></h4>
+          <h5 id="updateBoxGrade">Master Chef</h5>
+          <h5 id="updateBoxEmail"></h5>
+        </div>
+      </div>
+      <div class="rcp-section">
+        <span>회원정보수정</span>
+      </div>
+      <div class="rcp-innnersec">
+        <div id="beforePwd-div"
+          class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
+          <input class="form-control" type="password" id="beforePwd"
+            name="beforePassword" placeholder="이전비밀번호 입력">
+        </div>
 
-				<div id="afterPwd-div"
-					class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
-					<input class="form-control" type="password" id="afterPwd"
-						name="password" placeholder="변경비밀번호 입력">
-				</div>
+        <div id="afterPwd-div"
+          class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
+          <input class="form-control" type="password" id="afterPwd"
+            name="password" placeholder="변경비밀번호 입력">
+        </div>
 
-				<div id="afterPwdcf-div"
-					class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
-					<input class="form-control" type="password" id="afterPwdcf"
-						placeholder="변경비밀번호 확인">
-				</div>
+        <div id="afterPwdcf-div"
+          class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
+          <input class="form-control" type="password" id="afterPwdcf"
+            placeholder="변경비밀번호 확인">
+        </div>
 
-				<div
-					class="rcp-mar rcp-info form-group form-group-md has-success has-feedback">
-					<textarea class="form-control rcp-tara" rows="5rem" cols="30rem"
-						id="introduce" name="intro" placeholder="자기소개를 입력해주세요"></textarea>
-				</div>
-			</div>
-			<div class="rcp-sign-membership">
-				<!-- <button id="updateUserInfo" type="submit">확인</button> -->
-				<a href="#"><span id="updateUserInfo">확인</span></a> <a href="#"><span
-					id="updateUserReset">취소</span></a>
-			</div>
-		</form>
-	</div>
-	<!--  -->
-	
-	<div>
-		<section class="rcp-fullpage">
-			<div class="rcp-profileCover">
-				<section class="rcp-pagetop">
-					<div class="rcp-topimg-position">
-						<a class="rcp-topimg-border"> <img src="img/profileImg/default.jpg"
-							class="rcp-topimg">
-						</a>
-						<div class="rcp-topinfo">
-							<input type="hidden" id="mypage-userNo" value="">
-							<h2 class="rcp-userPage-userName"></h2>
-							<button class="btn btn-default rcp-topbtn">구독하기</button>
-						</div>
-					</div>
-				</section>
-				<div class="rcp-bottomLine-info" style="color: white;"></div>
+        <div
+          class="rcp-mar rcp-info form-group form-group-md has-success has-feedback">
+          <textarea class="form-control rcp-tara" rows="5rem" cols="30rem"
+            id="introduce" name="intro" placeholder="자기소개를 입력해주세요"></textarea>
+        </div>
+      </div>
+      <div class="rcp-sign-membership">
+        <!-- <button id="updateUserInfo" type="submit">확인</button> -->
+        <a href="#"><span id="updateUserInfo">확인</span></a> <a href="#"><span
+          id="updateUserReset">취소</span></a>
+      </div>
+    </form>
+  </div>
+  <!--  -->
+  
+  <div>
+    <section class="rcp-fullpage">
+      <div class="rcp-profileCover">
+        <section class="rcp-pagetop">
+          <div class="rcp-topimg-position">
+            <a class="rcp-topimg-border"> <img src="img/profileImg/default.jpg"
+              class="rcp-topimg">
+            </a>
+            <div class="rcp-topinfo">
+              <input type="hidden" id="mypage-userNo" value="">
+              <h2 class="rcp-userPage-userName"></h2>
+              <button class="btn btn-default rcp-topbtn">구독하기</button>
+            </div>
+          </div>
+        </section>
+        <div class="rcp-bottomLine-info" style="color: white;"></div>
 
-			</div>
+      </div>
 
-			<section class="rcp-pagemiddle1">
+      <section class="rcp-pagemiddle1">
 
-				<div class="rcp-pagemiddle-div1">
-					<img class="rcp-pagemiddle-div-img" src="img/profileImg/users.png">
-					<span class="heading">방문자</span> <span class="value" id="visitNum">명</span>
-				</div>
-				<div class="rcp-pagemiddle-div2">
-					<img class="rcp-pagemiddle-div-img" src="img/profileImg/like-1.png">
-					<span class="heading">좋아요</span> <span class="value" id="likeNum">개</span>
-				</div>
-				<div class="rcp-pagemiddle-div3">
-					<img class="rcp-pagemiddle-div-img"
-						src="img/profileImg/attachment.png"> <span class="heading">스크랩</span>
-					<span class="value" id="scrapNum">개</span>
-				</div>
-				<div class="rcp-pagemiddle-div4">
-					<img class="rcp-pagemiddle-div-img" src="img/profileImg/star-1.png">
-					<span class="heading">평점</span> <span class="value" id="gradeNum">점</span>
-				</div>
-			</section>
+        <div class="rcp-pagemiddle-div1">
+          <img class="rcp-pagemiddle-div-img" src="img/profileImg/users.png">
+          <span class="heading">방문자</span> <span class="value" id="visitNum">명</span>
+        </div>
+        <div class="rcp-pagemiddle-div2">
+          <img class="rcp-pagemiddle-div-img" src="img/profileImg/like-1.png">
+          <span class="heading">좋아요</span> <span class="value" id="likeNum">개</span>
+        </div>
+        <div class="rcp-pagemiddle-div3">
+          <img class="rcp-pagemiddle-div-img"
+            src="img/profileImg/attachment.png"> <span class="heading">스크랩</span>
+          <span class="value" id="scrapNum">개</span>
+        </div>
+        <div class="rcp-pagemiddle-div4">
+          <img class="rcp-pagemiddle-div-img" src="img/profileImg/star-1.png">
+          <span class="heading">평점</span> <span class="value" id="gradeNum">점</span>
+        </div>
+      </section>
 
-			<!-- page hidden -->
-			<input id="rcpList-pageNo" type="hidden" value="1"> <input
-				id="scsRcpList-pageNo" type="hidden" value="1">
+      <!-- page hidden -->
+      <input id="rcpList-pageNo" type="hidden" value="1"> <input
+        id="scsRcpList-pageNo" type="hidden" value="1">
 
-		</section>
+    </section>
 
-		<!--  <section class="rcp-pageleft">
+    <!--  <section class="rcp-pageleft">
       <div>
         <div id="tabs" class="rcp-vst-tabs">
           <ul>
@@ -170,17 +170,17 @@
             
 
 
-		<section class="ht-section hs-recipes grid">
-			<div class="hs-header">
-				<div class="container"></div>
-				<input type="hidden" value="1" id="tabId">
-				<ul class="isotope-filter" >
-					<li class="is-filtered"><a href="#" id="searchRecipe"  >레시피</a></li>
-					<li><a href="#" id="searchScrap" >스크랩</a></li>
-					<li><a href="#" id="searchSubscribe">구독중인 페이지</a></li>
-					<li><a href="#" data-toggle="tab" id="visitorWrite">방명록</a></li>
-				</ul>
-			</div>
+    <section class="ht-section hs-recipes grid">
+      <div class="hs-header">
+        <div class="container"></div>
+        <input type="hidden" value="1" id="tabId">
+        <ul class="isotope-filter" >
+          <li class="is-filtered"><a href="#" id="searchRecipe"  >레시피</a></li>
+          <li><a href="#" id="searchScrap" >스크랩</a></li>
+          <li><a href="#" id="searchSubscribe">구독중인 페이지</a></li>
+          <li><a href="#" data-toggle="tab" id="visitorWrite">방명록</a></li>
+        </ul>
+      </div>
 
       <div id="tabs-1">
         <div class="rcp-main-right">
@@ -228,13 +228,13 @@
 
 
 
-			<div id="tabs-4">
-				<div class="rcp-main-right">
-					<div class="rcp-subscribe"></div>
-					<div class="hs-content hs-content-visit">
-						<div class="container">
-							<div class="row">
-								<div class="rcp-Vst-write" id="quick"
+      <div id="tabs-4">
+        <div class="rcp-main-right">
+          <div class="rcp-subscribe"></div>
+          <div class="hs-content hs-content-visit">
+            <div class="container">
+              <div class="row">
+                <div class="rcp-Vst-write" id="quick"
                     style="margin-left: 2%; position: fixed; background-color: #FCFCFC ; top: 85%; left: 30.5%; border: 1px solid #BDBDBD ; height: 96px; width: 565px; text-align: center; color: #6799FF ;">
                     <div class="inputWrite">
                         <textarea id="rcp-rpcontent" rows="3" cols="50%"
@@ -242,24 +242,24 @@
                         <button id="rcp-rpBtn" class="rcp-Vst-inputBtn btn btn-info">등록</button>
                     </div>
                 </div>
-								<section class="Vst" id="Vst">
-									<!-- 방명록  -->
-								</section>
-							</div>
-						</div>
-					</div>
-				</div>
-				<section class="Vst" id="Vst">
-					<!-- 방명록  -->
-				</section>
-			</div>
-			
-			</section>
-			</div>
-			
-			
-	<!-- ------------------디테일 일시적 추가   - 변경 할 것임 ---------------------- -->		
-			<div id='detail_pop_up'>
+                <section class="Vst" id="Vst">
+                  <!-- 방명록  -->
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+        <section class="Vst" id="Vst">
+          <!-- 방명록  -->
+        </section>
+      </div>
+      
+      </section>
+      </div>
+      
+      
+  <!-- ------------------디테일 일시적 추가   - 변경 할 것임 ---------------------- -->    
+      <div id='detail_pop_up'>
     <div class="rcp-detail-form row">
 
       <div class="rcp-720" id="rcp-720">
@@ -296,33 +296,33 @@
   
   
   
-			<script src="node_modules/jquery/dist/jquery.min.js"></script>
-	<script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
-	<script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
-	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
-	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
+      <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
+  <script src="node_modules/handlebars/dist/handlebars.min.js"></script>
 
-	<script src="node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
-	<script
-		src="node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js"></script>
-	<!-- <script src="js/jquery.iframe-transport.js"></script> -->
-	<script
-		src="node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-	<script src="node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
-	<script
-		src="node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
-	<script
-		src="node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
-	<script
-		src="node_modules/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
+  <script src="node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
+  <script
+    src="node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js"></script>
+  <!-- <script src="js/jquery.iframe-transport.js"></script> -->
+  <script
+    src="node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+  <script src="node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+  <script
+    src="node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
+  <script
+    src="node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
+  <script
+    src="node_modules/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
 
-	<!--  사용자 js -->
-	<script src="js/jquery.bpopup.min.js"></script>
-	<script src="js/common.js"></script>
-	<script src="js/common/signup.js"></script>
-	<script src="js/login.js"></script>
-	<script src="js/updateUser.js"></script>
+  <!--  사용자 js -->
+  <script src="js/jquery.bpopup.min.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/common/signup.js"></script>
+  <script src="js/login.js"></script>
+  <script src="js/updateUser.js"></script>
 
 
 
@@ -377,7 +377,7 @@
 </script>
 
 
-	<script id="visitor-template" type="text/x-handlebars-template">
+  <script id="visitor-template" type="text/x-handlebars-template">
   {{#each data}}
     <div class="rcp-Vst" name="rcp-Vst">
           <div class="rcp-Vst-top">            
@@ -390,7 +390,7 @@
                 <button type="button" class="btn btn-danger btn-xs vstDeleteBtn" name="vstDeleteBtn" data-index="{{visitorNo}}">삭제</button>
             </span>  
               <span class="rcp-Vst-vno"></span><br/>
-              <input type="hidden" class="fromNo" id="fromNo" value={{user.userNo}}>
+              <input type="hidden" class="fromNo" name="fromNo" value={{user.userNo}}>
               <span id="rcp-Vst-id" class="rcp-Vst-id">From. {{user.userName}}
               </span><br/>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
               <span id="rcp-Vst-time">Date. {{visitorDate}}</span>
@@ -408,8 +408,8 @@
         </div>
   {{/each}}
   </script>
-	<script id="subscribe-recipe-template"
-		type="text/x-handlebars-template">
+  <script id="subscribe-recipe-template"
+    type="text/x-handlebars-template">
  {{#each data}}
    <div class="rcp-subscribe-detail">
       <div class="rcp-subscribe-column">
@@ -441,7 +441,7 @@
       </div>
   {{/each}}
 </script>
-	<script id="comRcpList-template" type="text/x-handlebars-template">
+  <script id="comRcpList-template" type="text/x-handlebars-template">
  {{#each data}}
 
 <div class="rcp-subscribe-detail">
@@ -658,80 +658,80 @@
   
   <script>
   $(document).ready(function(){
-	  //상단바 불러오기
-	  $('#topBtn').load("common_topsearchbar.html");
+    //상단바 불러오기
+    $('#topBtn').load("common_topsearchbar.html");
   });
   </script>
   
-	<script>
+  <script>
 $(window).scroll(function() { 
     if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-    	rcpListScrollAppend();
+      rcpListScrollAppend();
     }
       /* 준모3 */
 });
 </script>
 
-	<script>
-		function rcpListScrollAppend() {
-			var userNo = 0;
-			var a = eval(sessionStorage.getItem('data'));
-			if (a != null) {
-				userNo = eval(sessionStorage.getItem('data'))[0].userNo;
-			}
-			if (isNaN(parseInt($('#rcpList-pageNo').val()) + 1)) {
-				return;
-			}
-			var source = $('#comRcpList-template').text();
-			var template = Handlebars.compile(source);
-		}
-	</script>
-	<script>
-		$(function() {
-			loadMyPage();
-		});
+  <script>
+    function rcpListScrollAppend() {
+      var userNo = 0;
+      var a = eval(sessionStorage.getItem('data'));
+      if (a != null) {
+        userNo = eval(sessionStorage.getItem('data'))[0].userNo;
+      }
+      if (isNaN(parseInt($('#rcpList-pageNo').val()) + 1)) {
+        return;
+      }
+      var source = $('#comRcpList-template').text();
+      var template = Handlebars.compile(source);
+    }
+  </script>
+  <script>
+    $(function() {
+      loadMyPage();
+    });
 
-		function loadMyPage() {
+    function loadMyPage() {
 
-			$.ajax({
-				url : 'visitor/loadMyPage.json',
-				method : 'get',
-				dataType : 'json',
-				success : function(result) {
-					if (result.status != 'success') {
-						//swal('로그인 해주시기 바랍니다.');
-						return;
-					}
-					$('#visitNum').text(result.sum + "명");
-					$('#likeNum').text(result.like + "개");
-					$('#scrapNum').text(result.scr + "개");
-					$('#gradeNum').text(result.avg + "점");
+      $.ajax({
+        url : 'visitor/loadMyPage.json',
+        method : 'get',
+        dataType : 'json',
+        success : function(result) {
+          if (result.status != 'success') {
+            //swal('로그인 해주시기 바랍니다.');
+            return;
+          }
+          $('#visitNum').text(result.sum + "명");
+          $('#likeNum').text(result.like + "개");
+          $('#scrapNum').text(result.scr + "개");
+          $('#gradeNum').text(result.avg + "점");
 
-				},
-				error : function() {
-					//swal('더이상 데이터가 없습니다.')
-				}
-			})
-		}
-	</script>
-	<script>
-		$('#visitorWrite').on('click', function() {
-			$('.rcp-Vst').show();
-			$('.rcp-Vst-write').show();
-		})
-	</script>
-	
-	
-	<!-- ------------------디테일 일시적 추가   - 변경 할 것임 ---------------------- -->
-	<script src="node_modules/bxslider/dist/jquery.bxslider.min.js"></script>
-	<!-- ------------------디테일 일시적 추가   - 변경 할 것임 ---------------------- -->
-	
-	
-	
-	<script src="js/subscribe.js"></script>
-	<script src="js/mypage.js"></script>
-	<script src="js/template/plugin.js"></script>
-	<script src="js/template/custom.js"></script>
+        },
+        error : function() {
+          //swal('더이상 데이터가 없습니다.')
+        }
+      })
+    }
+  </script>
+  <script>
+    $('#visitorWrite').on('click', function() {
+      $('.rcp-Vst').show();
+      $('.rcp-Vst-write').show();
+    })
+  </script>
+  
+  
+  <!-- ------------------디테일 일시적 추가   - 변경 할 것임 ---------------------- -->
+  <script src="node_modules/bxslider/dist/jquery.bxslider.min.js"></script>
+  <!-- ------------------디테일 일시적 추가   - 변경 할 것임 ---------------------- -->
+  
+  
+  
+  <script src="js/subscribe.js"></script>
+  <script src="js/mypage.js"></script>
+  <script src="js/template/plugin.js"></script>
+  <script src="js/template/custom.js"></script>
 
 </body>
 </html>
