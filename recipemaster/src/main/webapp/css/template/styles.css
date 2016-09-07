@@ -2061,15 +2061,7 @@ dd {
 
 /* 2.5.1 LAYOUT > RECIPES > Recipes Grid
 ---------------------------------------*/
-.rcp-mypage-section .entry,
-.hs-recipes.grid .we {
-  line-height: 30px;
-  margin-bottom: 30px;
-  width:283px;
-  margin-right:20px;
-  margin-left:20px;
-  float: left;
-   }
+
   .hs-recipes.grid .entry .entry-inner:hover .entry-action,
   .hs-recipes.grid .entry .entry-inner:hover .we-action,
   .hs-recipes.grid .entry .we-inner:hover .entry-action,
@@ -2078,7 +2070,7 @@ dd {
   .hs-recipes.grid .we .entry-inner:hover .we-action,
   .hs-recipes.grid .we .we-inner:hover .entry-action,
   .hs-recipes.grid .we .we-inner:hover .we-action {
-    background: rgba(248, 166, 49, 0.5); }
+    }
     .hs-recipes.grid .entry .entry-inner:hover .entry-action span,
     .hs-recipes.grid .entry .entry-inner:hover .we-action span,
     .hs-recipes.grid .entry .we-inner:hover .entry-action span,
@@ -2088,7 +2080,7 @@ dd {
     .hs-recipes.grid .we .we-inner:hover .entry-action span,
     .hs-recipes.grid .we .we-inner:hover .we-action span {
       opacity: 1;
-      filter: alpha(opacity=100); }
+  }
       .hs-recipes.grid .entry .entry-inner:hover .entry-action span:first-child,
       .hs-recipes.grid .entry .entry-inner:hover .we-action span:first-child,
       .hs-recipes.grid .entry .we-inner:hover .entry-action span:first-child,

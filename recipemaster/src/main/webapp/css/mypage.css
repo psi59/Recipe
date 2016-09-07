@@ -450,3 +450,45 @@ body {
 	left: 1%;
 	top: 79%;
 }
+
+  .hs-recipes .isotope-filter {
+    position: relative;
+    display: block;
+    text-align: center;
+    margin-bottom: 50px;
+    font-weight: 700;
+    right: 16%;
+    font-family: 'Raleway', sans-serif;
+     
+    
+    }
+    .hs-recipes .isotope-filter a{
+    display: block;
+    padding: 12px 24px;
+    color: #999999;
+    
+    }
+          .hs-recipes .isotope-filter li.is-filtered a {
+        color: #2b2b2b; }
+      .hs-recipes .isotope-filter li.is-filtered:before {
+        width: 100%; }
+    .hs-recipes .isotope-filter a {
+      display: block;
+      padding: 12px 24px;
+      color: #999999; }
+      .hs-recipes .isotope-filter a:hover {
+        color: #2b2b2b; }
+        
+        .hs-recipes .isotope-filter li:before {
+    position: absolute;
+    content: '';
+    display: block;
+    height: 1px;
+    width: 0;
+    background: #2b2b2b;
+    left: 0;
+    bottom: -1px;
+    -webkit-transition: width 1s;
+    -o-transition: width 1s;
+    transition: width 1s;
+}
