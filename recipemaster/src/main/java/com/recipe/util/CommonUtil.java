@@ -1,6 +1,8 @@
 package com.recipe.util;
 
 import java.io.File;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -81,6 +83,38 @@ public class CommonUtil {
 		}
 		return recipe;
 	}
+	
+	public static String sha1(String password) throws NoSuchAlgorithmException{
+      ////password SHA1 암호화 시작
+          // Create MD5 Hash
+          MessageDigest digest = MessageDigest.getInstance("SHA-1");
+          digest.update(password.getBytes());
+          byte messageDigest[] = digest.digest();
+      
+          // Create Hex String
+          StringBuffer hexString = new StringBuffer();
+          for (int i = 0; i < messageDigest.length; i++)
+              hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+          password=hexString.toString();
+      //password SHA1 암호화 끝
+          return password;
+	}
+	
+  public static User sha1(User user) throws NoSuchAlgorithmException{
+      ////password SHA1 암호화 시작
+          // Create MD5 Hash
+          MessageDigest digest = MessageDigest.getInstance("SHA-1");
+          digest.update(user.getPassword().getBytes());
+          byte messageDigest[] = digest.digest();
+      
+          // Create Hex String
+          StringBuffer hexString = new StringBuffer();
+          for (int i = 0; i < messageDigest.length; i++)
+              hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+          user.setPassword(hexString.toString());
+      //password SHA1 암호화 끝
+          return user;
+  }
 }
 
 

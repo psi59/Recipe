@@ -195,6 +195,7 @@ var sourceVisitor = $('#visitor-template').html();
 var templateVisitor = Handlebars.compile(sourceVisitor);
 
 function loadVisitor() {
+	
 	$.ajax({
 		url : '/visitor/list.json',
 		dataType : 'json',
@@ -209,6 +210,14 @@ function loadVisitor() {
 			}
 
 			$('#Vst').append(templateVisitor(result));
+            var id = $('#fromNo').val();
+            var toUser = $('#updateFormUserNo').val();
+            if(id!=toUser){
+                $('.editBtn1').hide();
+                $('.editBtn2').hide();    
+            }
+
+				
 		},
 		error : function() {
 			swal('서버 요청 오류!...')
@@ -432,3 +441,5 @@ function loadMyPage(){
 		}
 	})  
 };
+
+

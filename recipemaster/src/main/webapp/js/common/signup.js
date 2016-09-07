@@ -178,6 +178,37 @@ $(document).ready(function(){
 			$('#signup-passwordCheck-label').text('일치하지 않습니다.');              
 		} // end if
     }); // end keyup
+
+	//비밀번호 찾기
+	$(document).on('click', '#findPassword', function(){
+		$('#login-pop-up-name').html("<span>비밀번호 찾기</span>");
+		$('#loginInputBox').html("<input class='form-control' type='text' id='findInputEmail' name='findInputEmail' placeholder='이메일 입력'/>");
+		$('#rcp-sign-button').html("<span id='pushEmail' >확인</span>&nbsp;&nbsp;&nbsp;"+"<span id='cancelPushEmail' >취소</span>");
+		$('#login-pop-up-banner').css('height','200px');
+		$('.rcp-sign-membership').css('margin-top','-35px');
+		$(document).on('click', '#pushEmail', function(){
+			var password;
+			var email=$('#findInputEmail').val();
+			swal(email);
+			$.ajax({
+            	type : 'GET',
+                url : 'http://127.0.0.1:8282/user/pushEmail.do?email='+email,
+                success : function(result) {					
+					swal('이메일 전송완료');
+					$(document).on('click', '.confirm', function(){
+						location.reload();
+					});
+                },error : function() {
+					swal('error');
+					}
+           	 }); // end ajax
+
+		});
+		$(document).on('click', '#cancelPushEmail', function(){
+			$(location).attr('href','/');
+		});
+	});
+
 });
 
 ///// 정규표현식 검사 함수 /////
@@ -185,7 +216,6 @@ function email_check( email ) {
     var regex=/([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     return (email != '' && email != 'undefined' && regex.test(email) === true); 
 }
-
 
 
 

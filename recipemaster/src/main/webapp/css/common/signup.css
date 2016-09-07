@@ -16,7 +16,7 @@
 #login-pop-up-banner {
   display: none;
   width: 375px;
-  height: 310px;
+  height: 340px;
   border-radius: 7px;
   background: #ffffff;
 }
@@ -148,3 +148,14 @@
 .rcp-info {
 	padding-top: .5rem;
 }
+
+#findPassword{
+	  top: 311px;
+	  left: 136px;
+    position: absolute;
+    
+}
+
+#findPassword:hover{
+  color: #b51515;
+} 
