@@ -10,6 +10,7 @@
   href="/node_modules/sweetalert/dist/sweetalert.css">
 <link rel="stylesheet" href="/css/subscribe.css">
 <link rel="stylesheet" href="/css/mypage.css">
+<link rel="stylesheet" href="/css/mainlist.css">
 <link rel="stylesheet" href="/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/subscribe.css">
 <link rel="stylesheet"
@@ -337,13 +338,6 @@
               {{/transientStorage}}
                 <div class="entry-action">
                   <div class="entry-action-inner">
-                    <span>
-                       <div class="rcp-forDelete-xButton"><a class="rcp-x-button" href="#">&#10006;</a></div>
-                    </span>
-                    
-                    <span>
-                      <a href="recipe_single.html">상세보기</a>
-                    </span>
                     
                   </div>
                 </div>
@@ -356,9 +350,11 @@
                 <p class="entry-author">{{user.userName}}</p>
                 <div class="entry-meta">
                   <div class="foo-wrapper">
-                    <span>좋아요 {{countLike}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="meta-time">{{cookTime}}분 소요</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span>스크랩하기</span>
+                    <a href="#"><div class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top"></div>
+                     <span>좋아요 {{countLike}}</span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="glyphicon glyphicon glyphicon-time rcp-i-tag-margin-right-top"></div>
+                    <span >{{cookTime}}분 소요</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="#" class="rcp-scrap"><div class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></div><span>스크랩하기</span></a>
                   </div>
                 </div>
               </div>

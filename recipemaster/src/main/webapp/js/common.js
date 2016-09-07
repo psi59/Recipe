@@ -143,7 +143,9 @@ Handlebars.registerHelper('defaultImage', function(options) {
 function comList(){
 	  $(document).on('click', '.rcp-userName, .rcp-nickname , .rcp-profile',function(event){
 		  event.preventDefault();
-		  $(location).attr('href','/mypage.html?'+$(event.target).parent().children('.rcp-hidden-email').val() ); 	 
+		  console.log( "event target : "+$(event.target).attr('class') )
+		  $(location).attr('href','/mypage.html?'+$(event.target).parent().children('input[type="hidden"]').val() );
+		  console.log("email val()"+$(event.target).parent().children('input[name="email"]').val() );
 	  })
 }
 

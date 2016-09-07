@@ -21,6 +21,7 @@
 	href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
 <link rel="stylesheet"
 	href="node_modules/bxslider/dist/jquery.bxslider.css">
+
 <!-- 사용자 정의 css -->
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/userinfobox.css">
@@ -420,14 +421,11 @@
 							<h2 class="rcp-h2-25px">
 								<a class="More">more</a>
 							</h2>
-
 						</div>
 					</div>
 				</div>
 			</div>
-			
 		</div>
-
 	</section>
 
 	<!------------------------- Rank List ------------------------------>
@@ -470,9 +468,17 @@
                 </a>
                 <div class="entry-meta">
                   <div class="foo-wrapper">
-                    <span>좋아요 {{countLike}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="meta-time">{{cookTime}}분 소요</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span>스크랩하기</span>
+                    <span>
+                    <a href="#" class="rcp-like"><div class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top"></div>
+                    <span>좋아요 {{countLike}}</span></a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            
+                    <div class="glyphicon glyphicon glyphicon-time rcp-i-tag-margin-right-top"></div>
+                    <span class="meta-time">{{cookTime}}분 소요</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+                    <span>
+                     <a href="#" class="rcp-scrap"><div class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></div>
+                    <span>스크랩하기</span></a>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -687,7 +693,7 @@
 
 </script>
 
-<script id="recipe-4-section" type="text/x-handlebars-template">
+	<script id="recipe-4-section" type="text/x-handlebars-template">
  <section name="rcp-custom-list">
     <div class="rcp-list">
       <div class="rcp-1024 list3" >
@@ -711,7 +717,7 @@
               </div>
 
               <p class="form-submit clearfix">
-                <input name="rcp-submit" class="button primary" type="button" value="Post Comment" />                
+                <input name="rcp-submit" class="button primary" type="button"  value="Post Comment" />                
                 <div class="form-allowed-tags" style="display: none;">
                  
                 </div>
@@ -821,25 +827,23 @@
                    <div class="glyphicon glyphicon-time "></div>
                   <b>{{cookTime}}분</b>
                 </div>
-                <div
-                  class="rcp-cookTime col-xs-4 rcp-heart"
-                  align="center">
-
-                 {{#isLike}}          
-                  <div class="glyphicon glyphicon-heart-empty active"></div>
-                   {{else}}
-                    <div class="glyphicon glyphicon-heart-empty"></div>
-                   {{/isLike}}
+             
 
                   <input type="hidden" name="recipeNo" value="{{recipeNo}}">
 
-                  {{#isLike}}                    
-                  <a href="#" class="active">
-                  <b class="rcp-like" name="rcp-like">좋아요 <span>{{countLike}}</span></b>
-                  {{else}}
-                    <a href="#">
-                    <b class="rcp-like" name="rcp-like">좋아요 <span>{{countLike}}</span></b>
+                <div class="rcp-cookTime col-xs-4"
+                  align="center">
+                  {{#isLike}}   
+                        
+                  <a href="#" class="active rcp-like" name="rcp-like">
+                  <div class="glyphicon glyphicon-heart-empty active"></div>          
+                  <b>좋아요 <span>{{countLike}}</span></b></a>
+                  {{else}}                     
+                    <a href="#" class=" rcp-like" name="rcp-like">
+                    <div class="glyphicon glyphicon-heart-empty"></div>
+                    <b >좋아요 <span>{{countLike}}</span></b>
                    </a>{{/isLike}}
+                  </div>
 
                 </div> 
                 <div class="rcp-cookTime col-xs-4"
@@ -971,7 +975,7 @@
 	<script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
   <script src="js/template/jquery.countdown.min.js"></script>
-  
+
 	<!--  사용자 js -->
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/template/main.js"></script>
@@ -992,14 +996,11 @@
 	<script src="js/mouseover.js"></script>
 	<!-- <script src="js/common/starrating1.js"></script> -->
 	<script src="js/common/starrating2.js"></script>
-
-
   <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 
 	<script>
+		$(function() {
 
-		$(function(){
-						
 			var userInfo = getUserInfo();
 			getWeather();
 			getRealTimeRank();
@@ -1080,6 +1081,5 @@
 		// 네이버 사용자 프로필 조회
 		naver_id_login.get_naver_userprofile("naverSignInCallback()");
 	</script>
-	
 </body>
 </html>

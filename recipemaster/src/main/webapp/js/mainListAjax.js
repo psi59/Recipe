@@ -231,20 +231,20 @@ function scroll(){
   
 //--------------------좋아요 등록, 해제 로직-------------------------------  
 function likeLogic(){
-	$(document).on('click',('.rcp-like'),function(event){
+	$(document).on('click','.rcp-like',function(event){
 		  event.preventDefault();
 		  if($(event.target).parent().is('.active') ){
 			  $.ajax({
-				  url:'recipe/likeDown.json?recipeNo=' + $(event.target).parent()
-				  .parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
+				  url:'recipe/likeDown.json?recipeNo=' + $(event.target).parent().parent().parent()
+				  .children('input[name="recipeNo"]').val()+"&userNo="
 				  + userInfo.userNo,
 				  dataType:'json',
 				  method:'get',
 				  success:function(){
 					  console.log("like down 성공성공");
 					  $(event.target).css('color','#231f20');
-					  $(event.target).parent().parent().css('color','#231f20');
-					  $(event.target).parent().parent().children('.glyphicon-heart-empty').attr('class','glyphicon glyphicon-heart-empty')
+					  $(event.target).parent().css('color','#231f20');
+					  $(event.target).parent().children('.glyphicon-heart-empty').attr('class','glyphicon glyphicon-heart-empty')
 					  $(event.target).parent().removeClass('active');
 					  $(event.target).children('span').text( parseInt($(event.target).children('span').text())-1);
 
@@ -256,16 +256,17 @@ function likeLogic(){
 			  });
 		  }
 		  else{
+	
 			  $.ajax({
-				  url:'recipe/likeUp.json?recipeNo=' + $(event.target).parent()
-				  .parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
+				  url:'recipe/likeUp.json?recipeNo=' + $(event.target).parent().parent().parent()
+				 .children('input[name="recipeNo"]').val()+"&userNo="
 				  +  userInfo.userNo,
 				  dataType:'json',
 				  method:'get',
 				  success:function(){
 					  console.log("like up 성공성공");
 					  $(event.target).css('color','#337ab7');
-					  $(event.target).parent().parent().css('color','#337ab7');
+					  $(event.target).parent().css('color','#337ab7');
 					  $(event.target).parent().addClass('active');
 					  $(event.target).children('span').text( parseInt($(event.target).children('span').text())+1 );
 //					  $('[name="rcp-custom-list"]').remove();
@@ -282,7 +283,6 @@ function likeLogic(){
 
 function scrapLogic(){
 	$(document).on('click','.rcp-scrap',function(event){
-		console.log("ddddddd"+$(event.target).parent().attr('class'));
 		  event.preventDefault();
 		  if($(event.target).parent().is('.active') ){
 			  console.log("scrap if")

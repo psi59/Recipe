@@ -275,7 +275,7 @@
   </select>
   
   <insert id="addUserInNaver" parameterType="user">
-    insert into users(name,email,pwd,img,role,join_dt) values (#{userName}, #{email},0,'default.jpg','user',now());    
+    insert into users(name,email,pwd,img,role,join_dt,auth_key,auth) values (#{userName}, #{email},0,'default.jpg','user',now(),null,0);    
   </insert>
   	
 	<update id="authUpdate" parameterType="user">
