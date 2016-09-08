@@ -283,8 +283,7 @@ function recipeDetail(){
 											+'<h2 class="title"></h2>'
 											+'<p class="hash"></p>'
 											+'<p class="date"></p>'
-											+'<p class="gpa">평점</p><p class="gpa">몇점</p>'
-											+'<span class="rcp-star-rating">별점주기</span>'
+											+'</div><hr/>'
 											+'<div class="timerZone"></div>'
 											+'<hr /></div>'
 											+'<div class="rcp-detail-body"></div>');

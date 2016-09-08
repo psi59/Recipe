@@ -119,8 +119,8 @@
   margin-top:40px;
   margin-left:50px;
   margin-right:50px;
-  width: 180px;
-  height: 120px;
+  width: 198px;
+  height: 230px;
 }
 
 .rcp-icons{
@@ -163,6 +163,12 @@
 
 .fa-heart{
   color:#afafaf;
+  width:150%;
+  height: 150%;
+}
+
+.fa-star{
+	color:#afafaf;
   width:150%;
   height: 150%;
 }

@@ -355,11 +355,7 @@
 					<h2 class="title"></h2>
 					<p class="hash"></p>
 					<p class="date"></p>
-					<p class="gpa">평점</p>
-					<p class="gpa">몇점</p>
-					<span class="rcp-star-rating">별점주기</span>
 					<div class="timerZone"></div>
-				  <hr/>
 				</div>
 				<hr/>
 								
@@ -600,18 +596,21 @@
    <i class="fa fa-heart" aria-hidden="true"></i>
    <i class="fa fa-comments" aria-hidden="true"></i>
    <i class="fa fa-external-link" aria-hidden="true"></i>
+   <i class="fa fa-star" aria-hidden="true"></i>
   </div>
   <div class="rcp-icons-names">
     <p>조회수</p>
     <p>좋아요</p>
     <p>댓글</p>
-    <p>스크랩</p>  
+    <p>스크랩</p> 
+    <p>평점</p>
   </div>
   <div class="rcp-icons-info" align="right">
     <p>{{data.hits}}</p>
     <p>{{data.countLike}}</p>
     <p>{{data.countComment}}</p>
-    <p>{{data.countScrap}}</p>  
+    <p>{{data.countScrap}}</p>
+    <p>{{data.gradePoint}}</p>  
   </div>
 </div>
 <div class="rcp-info-filter">
@@ -925,8 +924,8 @@
   
   <!-- 별점주기 -->
   <script id="starrating-template" type="text/x-handlebars-template">
-    {{#if checkDuplicateGrade}}
-      <!------------------------- 별점 주기 --------------------------------->
+  <div id="rcp-starrating" align="left">평가하기</div> 
+  {{#if checkDuplicateGrade}}
       <div class="rcp-rating">
         <input id="star5" name="rating" type="radio" value="5"/>
         <label for="star5" class="full"></label>
@@ -949,9 +948,10 @@
         <input id="star0.5"  name="rating" type="radio" value="0.5"/>
         <label for="star0.5" class="half"></label>
       </div>
-      <span id="rcp-starrating-btn-apply" class="rcp-starrating-btn">등록</span>
+      <div id="rcp-starrating-btn-apply" class="rcp-starrating-btn">
+        <i class="glyphicon glyphicon-ok-sign rcp-i-tag-margin-right-top"></i>등록</div>
     {{else}}
-      <div id="starrating-finish">참여하셨습니다.</div>
+      <div id="starrating-finish" align="left">참여하셨습니다.</div>
     {{/if}}
   </script>
 

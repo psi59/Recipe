@@ -1,9 +1,10 @@
-#gpa-text, #gpa, #starrating-finish {
-  font-size: 15px;
-}
-
 .rcp-starrating-btn {
-	font-size: 15px;
+	font-size: 12px;
+	text-align: center;
+	width: 62px;
+	height: 36px;
+	border-radius: 2em;
+	border: 1px solid white;
 	cursor: pointer;
 }
 
@@ -28,8 +29,8 @@
   float: right;
 }
 .rcp-rating label:before {
-  margin: 4px;
-  font-size: 23px;
+  margin: 2.6px;
+  font-size: 22px;
   font-family: fontAwesome;
   display: inline-block;
   content: "\f005";
