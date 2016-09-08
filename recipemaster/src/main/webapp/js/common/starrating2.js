@@ -17,6 +17,7 @@ function starRatingBtn(){
 					}
 					if (result.loginCheck == true){
 						swal($('input[name="rating"]:checked').val()+'점을 주셨습니다 !');
+						$('#rcp-starrating').remove();
 						$('.rcp-rating').remove();
 						$('#rcp-starrating-btn-apply').remove();
 						checkDuplicateGrade();
@@ -51,7 +52,7 @@ function checkDuplicateGrade(){
 				swal('에러');
 				return;
 			}
-			$('.rcp-header').append(compileStarRating(result));
+			$('.rcp-icons-info').append(compileStarRating(result));			
 		},
 		error : function(request,status,error) {
 			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
