@@ -188,6 +188,10 @@ $(document).ready(function(){
 		$('.rcp-sign-membership').css('margin-top','-35px');
 		$('#findInputEmail').focus();
 		$(document).on('click', '#pushEmail', function(){
+			if($('#findInputEmail').val() == ''){
+				swal('이메일을 입력해주세요.');		
+				return;
+			}
 			var password;
 			var email=$('#findInputEmail').val();
 			swal(email);
