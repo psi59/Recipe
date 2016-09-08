@@ -184,7 +184,7 @@ function isNumber(s) {
 }
 
 function push(email, message, separation){
-	var socket = io.connect('http://192.168.1.8:8081');
+	var socket = io.connect('http://127.0.0.1:8081');
 	
 	if(separation=='login'){
 		data = {

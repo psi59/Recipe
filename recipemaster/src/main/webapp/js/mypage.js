@@ -5,6 +5,7 @@ $(function() {
 	//recipeDetail();
 	var userInfo = getUserInfo();
 
+	//push(userInfo.email, '', 'login');
 	
 	console.log(location.href.split('?')[1]);
 
@@ -240,7 +241,13 @@ $(document).on('click','#rcp-rpBtn', function() {
 				swal('로그인해라.');
 				$('#login-pop-up-banner').bPopup();//20160830 용이 추가
 			}
+			var owner = location.href.split('?')[1];
+			var myEmail = userInfo.email;
+			var myName = userInfo.userName;
+			var myImg = userInfo.image;
 
+			push(owner,("msg"+"/"+myEmail+myName+"/"+myImg), "message");	
+			
 			$('#Vst>').remove();
 			loadVisitor(); // 테이블 데이터를 갱신한다.
 		},
