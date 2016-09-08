@@ -115,6 +115,9 @@ $(function() {
 							+ '<input type="hidden" name="materialNo" value="'
 							+ no
 							+ '">'
+							+ '<input type="hidden" name="materialName" value="'
+							+ name
+							+ '">'
 							+ '<a href="#"><span class="closeBtn mtClose thick"></span></a>'
 							+ '</div>');
 
