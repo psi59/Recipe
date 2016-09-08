@@ -43,7 +43,7 @@
     ON r1.uno=r2.uno
     LEFT OUTER JOIN (SELECT uno,COUNT(uno2) cnt
     FROM SCS GROUP BY uno) r3
-    ON r2.uno=r3.uno
+    ON r1.uno=r3.uno
     WHERE r1.email=#{value}
     GROUP BY r1.uno) vt
     ORDER BY vt.total DESC
@@ -88,7 +88,7 @@
     ON r1.uno=r2.uno
     LEFT OUTER JOIN (SELECT uno,COUNT(uno2) cnt
     FROM SCS GROUP BY uno) r3
-    ON r2.uno=r3.uno
+    ON r1.uno=r3.uno
     INNER JOIN(select @rownum:=0) t
     GROUP BY r1.uno
     LIMIT #{startIndex}, #{len}) vt
@@ -160,7 +160,7 @@
     ON r1.uno=r2.uno
     LEFT OUTER JOIN (SELECT uno,COUNT(uno2) cnt
     FROM SCS GROUP BY uno) r3
-    ON r2.uno=r3.uno
+    ON r1.uno=r3.uno
     LEFT OUTER JOIN (SELECT uno scsuno, uno2 scsUser, sc_dt scsDate
     FROM SCS where uno=#{uno}) vt2
     ON r1.uno=vt2.scsUser
@@ -171,7 +171,8 @@
   </select>
 
   <select id="selectMonthRank" resultMap="userMap" parameterType="Map">
-    SELECT @rownum:=@rownum+1 rownum,vt.* FROM(
+    SELECT * FROM (
+SELECT @rownum:=@rownum+1 rownum,vt.* FROM(
     SELECT r1.uno,r1.name,r1.img image,r1.email,r1.intro,r1.role,
     IFNULL(r2.cnt,0) rcpCount,IFNULL(r3.cnt,0) mrcpCount,
     IFNULL(r4.cnt,0) scnt,
@@ -193,23 +194,26 @@
     LEFT OUTER JOIN ( SELECT uno,COUNT(rcpno) cnt,DATE_FORMAT(rcp_dt,'%y-%m') rcp_dt
     FROM RCPS WHERE DATE_FORMAT(rcp_dt,'%y-%m') = DATE_FORMAT(now(),'%y-%m')
     GROUP BY uno) r3 
-    ON r2.uno = r3.uno
+    ON r1.uno = r3.uno
     LEFT OUTER JOIN (SELECT uno,COUNT(uno2) cnt
     FROM SCS GROUP BY uno) r4
-    ON r3.uno=r4.uno
+    ON r1.uno=r4.uno
     LEFT OUTER JOIN (SELECT uno,COUNT(uno2) cnt,DATE_FORMAT(sc_dt,'%y-%m') sc_dt
     FROM SCS WHERE DATE_FORMAT(sc_dt,'%y-%m') = DATE_FORMAT(now(),'%y-%m')
     GROUP BY uno) r5 
-    ON r4.uno=r5.uno
+    ON r1.uno=r5.uno
     LEFT OUTER JOIN (SELECT uno scsuno, uno2 scsUser, sc_dt scsDate
     FROM SCS where uno=#{uno}) vt2
     ON r1.uno=vt2.scsUser
     INNER JOIN(select @rownum:=0) t
     GROUP BY r1.uno
-    LIMIT 1,3) vt
-    ORDER BY vt.mtotal DESC,name
+    ) vt
+    ORDER BY vt.mtotal DESC,name) vt2
+    WHERE rownum between 1 and 3
+    
   </select>
   <select id="selectTodayRank" resultMap="userMap" parameterType="Map">
+        SELECT * FROM(
     SELECT @rownum:=@rownum+1 rownum,vt.* FROM(
     SELECT r1.uno,r1.name,r1.img image,r1.email,r1.intro,r1.role,
     IFNULL(r2.cnt,0) rcpCount,IFNULL(r3.cnt,0) trcpCount,
@@ -232,21 +236,21 @@
     LEFT OUTER JOIN ( SELECT uno,COUNT(rcpno) cnt,DATE_FORMAT(rcp_dt,'%y-%m-%d') rcp_dt
     FROM RCPS WHERE DATE_FORMAT(rcp_dt,'%y-%m-%d') = DATE_FORMAT(now(),'%y-%m-%d')
     GROUP BY uno) r3 
-    ON r2.uno = r3.uno
+    ON r1.uno = r3.uno
     LEFT OUTER JOIN (SELECT uno,COUNT(uno2) cnt
     FROM SCS GROUP BY uno) r4
-    ON r3.uno=r4.uno
+    ON r1.uno=r4.uno
     LEFT OUTER JOIN (SELECT uno,COUNT(uno2) cnt,DATE_FORMAT(sc_dt,'%y-%m-%d') sc_dt
     FROM SCS WHERE DATE_FORMAT(sc_dt,'%y-%m-%d') = DATE_FORMAT(now(),'%y-%m-%d')
     GROUP BY uno) r5 
-    ON r4.uno=r5.uno
+    ON r1.uno=r5.uno
     LEFT OUTER JOIN (SELECT uno scsuno, uno2 scsUser, sc_dt scsDate
     FROM SCS where uno=#{uno}) vt2
     ON r1.uno=vt2.scsUser
     INNER JOIN(select @rownum:=0) t
-    GROUP BY r1.uno
-    LIMIT 1,3) vt
-    ORDER BY vt.ttotal DESC ,name
+    GROUP BY r1.uno) vt
+    ORDER BY vt.ttotal DESC ,name) vt2
+    WHERE rownum between 1 and 3
   </select>
 	<select id="selectMyRank" resultMap="userMap" parameterType="int">
     SELECT * FROM
@@ -268,7 +272,7 @@
     ON r1.uno=r2.uno
     LEFT OUTER JOIN (SELECT uno,COUNT(uno2) cnt
     FROM SCS GROUP BY uno) r3
-    ON r2.uno=r3.uno
+    ON r1.uno=r3.uno
     INNER JOIN(select @rownum:=0) t
     GROUP BY r1.uno) vt
     ORDER BY vt.total DESC) myrank WHERE uno=#{uno}

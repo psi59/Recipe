@@ -133,7 +133,7 @@ nav {
 }
 
 .nav-container ul {
-	margin-top: 12px;
+	margin-top: 7px;
 	margin-bottom: 0px !important;
 }
 
@@ -340,6 +340,7 @@ footer a:hover {
 
 .rcp-topbar {
 	margin-left: -16%;
+	    height: 48pt;
 }
 
 body {
@@ -687,5 +688,20 @@ h2 {
 	background-color: #e80000;
 	border: none;
 	border-radius: 4px;
+}
+
+.rcp-btn-default-top-rank {
+    border-radius: 0.3em;
+    color: rgba(255, 255, 255, 1);
+    background: rgba(255, 255, 255, 0.0);
+    padding: 0.5em;
+    padding-left: 0.7em;
+    padding-right: 0.7em;
+    font-size: 13pt;
+}
+.rank-btn{
+	position: relative;
+	    top: -29pt;
+    right: -211pt;
 }
 /*  */
