@@ -379,4 +379,6 @@
 .timerObj{
 	background-color: transparent;
 	font-size: 13px;
+	width: 100%;
+	height: 23px;
 }

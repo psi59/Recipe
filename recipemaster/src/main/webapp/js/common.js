@@ -1,3 +1,5 @@
+document.write('<script type"text/javascript" src="js/template/notification.js"></script>')
+
 var source = $('#recipe-card-template').html();
 var template = Handlebars.compile(source);
 function onlyNumber()
@@ -182,7 +184,7 @@ function isNumber(s) {
 }
 
 function push(email, message, separation){
-	var socket = io.connect('http://192.168.0.50:8081');
+	var socket = io.connect('http://192.168.1.8:8081');
 	
 	if(separation=='login'){
 		data = {
@@ -198,6 +200,7 @@ function push(email, message, separation){
 	socket.emit(separation, data);
 	
 	socket.on('message',function(data){
-        alert(data.msg);
+		console.log(data);
+		notifyMe(data);
     });
 }
