@@ -35,37 +35,41 @@
 				<li><a id="s2" href="#2">Chef Ranking</a></li>
 				<li><a id="s3" href="#3">Recipe Ranking</a></li>
 			</ul>
-			<div
-				class="col-md-4 col-sm-4 col-xs-4 signin rcp-signin text-right navbar-nav">
-				<span id="signUpTopBtn" class="rcp-btn-default-2">회원가입</span>&nbsp;
-				&nbsp; <span id="topLoginBtn" class="rcp-btn-default-2">로그인</span>
-				<a href="#" id="loginIcon" class="ranking-barimg"></a>
-			</div>
+			<div>
+              <ul class="nav navbar-nav navbar-right rank-btn">
+                <li><a href="#"><span id="signUpTopBtn"
+                    class="rcp-btn-default-top-rank">회원가입</span></a></li>
+                <li id="topbarUserImg"><a href="#"><span
+                    id="topLoginBtn" class="rcp-btn-default-top-rank">로그인</span></a></li>
+              </ul>
+            </div>
 			<div id="profileView" class="main-nav__dropdown profile-dropdown">
-          <div class="rcp-outline">
-            <div>
-              <a href="#0" class="dropdown__header"><img id="profileImg"
-                class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a
-                id="profileEmail" href="#"
-                class="dropdown__header rcp-infobox-text"></a>
-              <h6 id="profileName" class="rcp-nickname"></h6>
-              <a href="#0" class="dropdown__header"> <span
-                id="profileGrade" class="dropdown__title rcp-infobox-text">
-                  <img src="img/star.png"> Master Chef
-              </span>
-              </a>
-              <div id=Btn align="center">
-                <button id="userInfoEditBtn" type="button"
-                  class="btn btn-default rcp-btn-nav">정보수정</button>
-                <button id="logoutBtn" type="button"
-                  class="btn btn-default rcp-btn-nav">로그아웃</button>
+              <div class="rcp-outline">
+                <div>
+                  <a href="#0" class="dropdown__header"><img id="profileImg"
+                    class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a
+                    id="profileEmail" href="#"
+                    class="dropdown__header rcp-infobox-text"></a>
+                  <h6 id="profileName" class="rcp-nickname"></h6>
+                  <a href="#0" class="dropdown__header"> <span
+                    id="profileGrade" class="dropdown__title rcp-infobox-text">
+                  </span>
+                  </a>
+                  <div id=Btn align="center">
+                    <button id="userInfoEditBtn" type="button"
+                      class="btn btn-default rcp-btn-nav">정보수정</button>
+                    <button id="logoutBtn" type="button"
+                      class="btn btn-default rcp-btn-nav">로그아웃</button>
+                  </div>
+                </div>
+
+                <a href="/mypage.html"><button
+                    class="goMyPageBtn btn btn-default rcp-btn-nav">MyPage</button></a>
+                <a href="/writerecipe.html"><button
+                    class="goWriteRcpBtn btn btn-default rcp-btn-nav">Recipe
+                    작성</button></a>
               </div>
             </div>
-            
-            <a href="/mypage.html"><button class="goMyPageBtn btn btn-default rcp-btn-nav">MyPage</button></a>
-            <a href="/writerecipe.html"><button class="goWriteRcpBtn btn btn-default rcp-btn-nav">Recipe 작성</button></a>
-          </div>
-        </div>
 		</div>
 	</nav>
 	<div id='signup-pop-up-banner'>
@@ -127,7 +131,7 @@
   </div>
   <!--준모_login------------------------------------------------------------------------------- -->
   <div id='login-pop-up-banner'>
-    <div class="rcp-section">
+    <div class="rcp-section" id="login-pop-up-name">
       <span>로그인</span>
     </div>
     <div class="rcp-laytop rcp-laytop2"></div>
@@ -140,10 +144,13 @@
           placeholder="비밀번호 입력" />
       </div>
     </div>
-    <div class="rcp-sign-membership" style="margin-top: 50px;">
-      <a href="#" id="userLogin"><span>로그인</span></a>
+    <div id="rcp-sign-button" class="rcp-sign-membership" style="margin-top: 50px;">
+      <span id="userLogin">로그인</span><span id="naver_id_login"></span>
+      <span id="findPassword" >비밀번호 찾기</span>
     </div>
+
   </div>
+
   <!--  -->
   <div id='editUserInfo-pop-up-banner'>
     <form action="user/update.json" method="post" id="updateUserForm"
@@ -152,16 +159,15 @@
         type="hidden" name="email" id="updateFormEmail">
       <div class="rcp-laytop">
         <!--유저 이미지 업로드 --용이  !!!!!enctype?????16.08.12-->
-        <div class="rcp-up-preview img-wrapper col-md-1"></div>
+        <div class="rcp-up-preview img-wrapper"></div>
         <div class="file-upload-wrapper">
           <input id="profileImage" type="file" name="profileImage"
-            class="file-upload-native" accept="image/*" /> <input type="text"
-            disabled placeholder="이미지" class="file-upload-text" />
+            class="file-upload-native" accept="image/*" />
         </div>
         <!--유저 이미지 업로드 끝--용이  -->
         <div class="col-md-11 rcp-laytext">
           <h4 id="updateBoxName"></h4>
-          <h5 id="updateBoxGrade">Master Chef</h5>
+          <h5 id="updateBoxGrade"></h5>
           <h5 id="updateBoxEmail"></h5>
         </div>
       </div>
@@ -178,7 +184,7 @@
         <div id="afterPwd-div"
           class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
           <input class="form-control" type="password" id="afterPwd"
-            name="password" placeholder="변경비밀번호 입력">
+            name="afterpassword" placeholder="변경비밀번호 입력">
         </div>
 
         <div id="afterPwdcf-div"
@@ -265,6 +271,7 @@
 			<h4 style="color: black;">Total Point : 좋아요 1개 : 3 Point / 스크랩
 				1개 : 3 Point / 조회수 1개 : 1 Point</h4>
 		</div>
+		<div id="naver_id_login"></div>
 	</section>
 	<footer>
 		<h1>Thanks for Viewing!</h1>
@@ -291,6 +298,7 @@
 	<script src="js/updateUser.js"></script>
 	<script src="js/recipeDetail.js"></script>
 	<script src="js/rankingpage.js"></script>
+	<script src="js/template/naverLogin_implicit-1.0.2.js"></script>
   <script id="chef-card-template" type="text/x-handlebars-template">
 {{#each data}}
 <div class="fresh-ui-wrap col-md-3">
@@ -495,6 +503,60 @@
         dropdownClick('.mobile-menu-dropdown', '.profile-dropdown');
       });
     });
+  </script>
+  <script type="text/javascript">
+    var naver_id_login = new naver_id_login("oZ3ZBiNctenY6ix5st7G",
+        "http://127.0.0.1:8080/index.html");
+    var state = naver_id_login.getUniqState();
+    naver_id_login.setButton("green", 2, 40);
+    naver_id_login.setDomain(".service.com");
+    naver_id_login.setState(state);
+    naver_id_login.init_naver_id_login();
+  </script>
+
+  <script type="text/javascript">
+    // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+    function naverSignInCallback() {
+      // naver_id_login.getProfileData('프로파일항목명');
+      // 프로필 항목은 개발가이드를 참고하시기 바랍니다.
+      console.log("nickName : "
+          + naver_id_login.getProfileData('nickname'));
+      console.log("email : " + naver_id_login.getProfileData('email'));
+      $
+          .ajax({
+            url : '/user/loginNaver.json',
+            method : 'post',
+            dataType : 'json',
+            data : {
+              userName : naver_id_login
+                  .getProfileData('nickname'),
+              email : naver_id_login.getProfileData('email')
+            },
+            success : function(result) {
+              if (result.status == 'failure') {
+
+                swal('잘못입력하셨습니다.', '아이디 또는 비밀번호를 다시 확인하여 주세요.',
+                    "error");
+
+                return;
+              }
+
+              if (result.status == 'success') {
+
+              } else {
+                swal('비밀번호를 다시 입력해주세요');
+              }
+
+            },
+            error : function() {
+              swal('서버 요청 오류');
+            }
+          }); /* end of ajax */
+
+    }
+
+    // 네이버 사용자 프로필 조회
+    naver_id_login.get_naver_userprofile("naverSignInCallback()");
   </script>
 </body>
 </html>
