@@ -186,6 +186,7 @@ $(document).ready(function(){
 		$('#rcp-sign-button').html("<span id='pushEmail' >확인</span>&nbsp;&nbsp;&nbsp;"+"<span id='cancelPushEmail' >취소</span>");
 		$('#login-pop-up-banner').css('height','200px');
 		$('.rcp-sign-membership').css('margin-top','-35px');
+		$('#findInputEmail').focus();
 		$(document).on('click', '#pushEmail', function(){
 			var password;
 			var email=$('#findInputEmail').val();
