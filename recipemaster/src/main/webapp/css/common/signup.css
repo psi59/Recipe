@@ -171,6 +171,13 @@
     color: black;
     font-size: 14px;
 }
+  
+#pushBtn{
+    border: none;
+    background-color: #e80000;
+    border-bottom: 5px solid #a91c14;
+    cursor: pointer;
+}
 
 #cancelPushEmail{
     margin: 25px;
