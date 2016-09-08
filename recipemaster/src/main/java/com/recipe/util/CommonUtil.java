@@ -1,8 +1,10 @@
 package com.recipe.util;
 
 import java.io.File;
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -114,6 +116,10 @@ public class CommonUtil {
           user.setPassword(hexString.toString());
       //password SHA1 암호화 끝
           return user;
+  }
+  public static String nextPassword() {
+    SecureRandom random = new SecureRandom();
+    return new BigInteger(130, random).toString(32);
   }
 }
 

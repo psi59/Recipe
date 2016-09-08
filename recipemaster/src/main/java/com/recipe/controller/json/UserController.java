@@ -464,21 +464,22 @@ public class UserController {
       System.out.println(email);
       user=userService.selectFromEmail(email);
       System.out.println("changePassword비번변경전::"+user);
-      String uuid=UUID.randomUUID().toString();
+      
+      String nextPassword=CommonUtil.nextPassword().toString();
       try {
-        user.setPassword(CommonUtil.sha1(uuid));
+        user.setPassword(CommonUtil.sha1(nextPassword));
         userService.updateUser(user);
         System.out.println("changePassword비번변경후::"+user);
         System.out.println("user.getPassword()::"+user.getPassword());
         System.out.println("user.getEmail()::"+user.getEmail());
         result.put("status", "success");
-        result.put("password",uuid);
+        result.put("password",nextPassword);
         result.put("email", user.getEmail());
       } catch (Exception e) {
         e.printStackTrace();
         System.out.println("실패");
         result.put("status", "failure");
       }
-      return "redirect:http://127.0.0.1:2828/user/updatePassword.do?email="+email+"&password="+uuid;
+      return "redirect:http://127.0.0.1:2828/user/updatePassword.do?email="+email+"&password="+nextPassword;
     }
 }

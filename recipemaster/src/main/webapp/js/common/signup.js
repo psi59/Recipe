@@ -207,7 +207,7 @@ $(document).ready(function(){
 					swal('error');
 					}
            	 }); // end ajax
-
+			location.reload();
 		});
 		$(document).on('click', '#cancelPushEmail', function(){
 			$(location).attr('href','/');
