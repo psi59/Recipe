@@ -174,7 +174,7 @@
 		rgst, mts)
 		VALUES(#{user.userNo}, #{recipe.recipeName}, #{recipe.intro},
 		#{recipe.cookTime},
-		#{recipe.portion}, 'rcp_pd', 'rpimg', now(), #{recipe.regiStatus}), #{material}
+		#{recipe.portion}, 'rcp_pd', 'rpimg', now(), #{recipe.regiStatus}, #{material})
 		<selectKey keyProperty="recipeNo" resultType="int" order="AFTER">
 			SELECT LAST_INSERT_ID();
 		</selectKey>
@@ -373,11 +373,12 @@
 		UPDATE rcps set
 		hits=${hits} where rcpno=${recipeNo};
 	</update>
-	<update id="updateRecipe" parameterType="recipe">
+	
+	<update id="updateRecipe" parameterType="map">
 		UPDATE rcps set
-		name=#{recipeName}, intro=#{intro}, c_time=#{cookTime},
-		ptn=#{portion}, rpimg=#{representImages}, rcp_pd=#{recipeProcedure}
-		where rcpno=${recipeNo};
+		name=#{recipe.recipeName}, intro=#{recipe.intro}, c_time=#{recipe.cookTime},
+		ptn=#{recipe.portion}, rpimg=#{recipe.representImages}, rcp_pd=#{recipe.recipeProcedure}, mts=#{material}
+		where rcpno=${recipe.recipeNo};
 	</update>
 
 	<!-- 좋아요 *3 스크랩 *3 조회수 *1 -->

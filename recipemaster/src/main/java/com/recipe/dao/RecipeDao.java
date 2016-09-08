@@ -31,7 +31,7 @@ public interface RecipeDao {
 	List<Recipe> selectSubscribeMypage(int userNo);// mypageScrap리스트  고재현
 	List<Recipe> selectMypageRecipe(Map<String,Object> params);      // mypageScrap리스트  고재현
 	Recipe selectOne(Map<String,Object> params); // Read or Retrieve
-	int updateRecipe(Recipe recipe); // Update
+	int updateRecipe(Map map); // Update
 	int updateHits(Recipe recipe);  //조회수 증가  고재현
 	int delete(int no); // Delete
 	List<Material> selectMaterialName(String materialName); //박상일 - 재료이름으로 재료검색

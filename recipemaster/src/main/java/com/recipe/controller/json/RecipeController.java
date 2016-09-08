@@ -271,7 +271,9 @@ public class RecipeController {
   @ResponseBody
   public String updateRecipe(Recipe recipe, @RequestParam("materialNo") String[] materialNos,
       @RequestParam("materialAmount") String[] materialAmounts,
+      @RequestParam("materialName") List<String> materialNames,
       @RequestParam("recipeProduce") String[] recipeProduce,
+      @RequestParam(value="timerValues", defaultValue="") List<String> timerValues,
       @RequestParam("categoryValue") List<Integer> categoryValue,
       @RequestParam("imageFiles") List<MultipartFile> imageFiles,
       @RequestParam("representImgNames") List<String> representImgNames,
@@ -285,8 +287,10 @@ public class RecipeController {
 
     Map<String, Object> recipeDatas = new HashMap<>();
     List<Map> materialList = new ArrayList<>();
+    Map<String, Object> map = new HashMap<>();
     JsonArray recipeProduceDatas = new JsonArray();
     JsonArray recipeRepresentImages = new JsonArray();
+    JsonArray recipeMaterialNames = new JsonArray();
     
     System.out.println(categoryValue);    
     
@@ -308,6 +312,7 @@ public class RecipeController {
       Map<String, String> matertialInfo = new HashMap<>();      
       matertialInfo.put("materialNo", materialNos[i]);
       matertialInfo.put("materialAmount", materialAmounts[i]);
+      recipeMaterialNames.add(materialNames.get(i));
       materialList.add(matertialInfo);
     }
 
@@ -338,12 +343,26 @@ public class RecipeController {
           obj.addProperty("recipeProduceImage", fileName);
         }					
         obj.addProperty("recipeProduce", recipeProduce[i]);
+        if(timerValues.size()>0){
+        	for(String value : timerValues){
+        		String[] values = value.split("/");
+        		if(Integer.parseInt(values[0])==i){
+        			obj.addProperty("recipeTime", values[1]);        			
+        		}
+        	}
+        }
         recipeProduceDatas.add(obj);
       } // end of for
 
       recipe.setRecipeProcedure(recipeProduceDatas);
-      recipe.setRepresentImages(recipeRepresentImages);				
-      recipeService.updateRecipe(recipe);
+      recipe.setRepresentImages(recipeRepresentImages);		
+      
+      map.put("material", recipeMaterialNames.toString());
+      map.put("recipe", recipe);
+      
+      recipeService.updateRecipe(map);
+      
+      
       recipeService.deleteMaterials(recipe.getRecipeNo());
       recipeService.deleteCategoryList(recipe.getRecipeNo());
 

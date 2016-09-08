@@ -494,6 +494,9 @@ function getRecipeEditInfo(recipeNo){
 								+ '<input type="hidden" name="materialNo" value="'
 								+ recipeMaterials[index].materialNo
 								+ '">'
+								+ '<input type="hidden" name="materialName" value="'
+								+ recipeMaterials[index].materialName
+								+ '">'
 								+ '<a href="#"><span class="closeBtn mtClose thick"></span></a>'
 								+ '</div>');
 
