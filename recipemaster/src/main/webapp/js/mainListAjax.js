@@ -67,12 +67,12 @@ document.write('<script type"text/javascript" src="js/template/naverLogin_implic
 			  
 			  $('#tabs-1 .hs-content .container .row ').append(comMainTemp( result ) );
 			  
-			  for(var i=0; i<result.data.length; i++){
-				  if(result.data[i].length > 1){				  
-					  $('.rcp-main-subscribe-userName0').attr('class','rcp-main-subscribe-userName'+i+1);
-					  $('.rcp-main-subscribe-userName'+i+1).text( (result.data[i] )[0].user.userName+"님의 레시피 정보");
-				  }
-			  }
+//			  for(var i=0; i<result.data.length; i++){
+//				  if(result.data[i].length > 1){				  
+//					  $('.rcp-main-subscribe-userName0').attr('class','rcp-main-subscribe-userName'+i+1);
+//					  $('.rcp-main-subscribe-userName'+i+1).text( (result.data[i] )[0].user.userName+"님의 레시피 정보");
+//				  }
+//			  }
 			  
 			  mouseMoveEventForImage(result);
 			  mouseMoveEventForSubscribeImage(result);
@@ -117,12 +117,12 @@ document.write('<script type"text/javascript" src="js/template/naverLogin_implic
 //			 
 			  $('#tabs-2 .hs-content .container .row ').append(comMainTemp( result ) );
 			  console.log('tab2'+result)
-			  for(var i=0; i<result.data.length; i++){
-//				  for(var j=0; j<result.data[i].representImages.length; j++){
-					  $('.list1 div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');
-
-//				  }
-			  }
+//			  for(var i=0; i<result.data.length; i++){
+////				  for(var j=0; j<result.data[i].representImages.length; j++){
+//					  $('.list1 div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');
+//
+////				  }
+//			  }
 				
 			  methods();
 			  if(userInfo != null)
@@ -152,12 +152,14 @@ document.write('<script type"text/javascript" src="js/template/naverLogin_implic
 			  }
 			  console.log(result.data.length);
 			  if(result.data.length > 1  ){
-				  $('.rcp-h2-25px').text("구독정보");
+				  $('.tabs-5 .rcp-h2-25px').text("구독정보");
 			  }
+			  console.log("dddddd: "+result.data[0]);
 			  
 			  for(var i=0; i<result.data.length; i++){
 				  //console.log(result.data[i])
-				  if(result.data[i].length > 1){					  
+				  if(result.data[i].length > 1){	
+					  console.log("if절 왔나요 ?? ");
 					  $('#tabs-5 .hs-content .container .row ').append(commainSubscribe( (result.data[i]) ) );
 					  $('.rcp-main-subscribe-userName0').attr('class','rcp-main-subscribe-userName'+i+1);
 					  $('.rcp-main-subscribe-userName'+i+1).text( (result.data[i] )[0].user.userName+"님의 레시피 정보");
@@ -386,7 +388,7 @@ function mouseMoveEventForSubscribeImage(result){
 				if( $(event.target).attr('class') == 'entry-action' ){					
 					var imageChange = parseInt( $('.entry-action').width() + 1)  / $(event.target).parent().parent().children('input[type="hidden"]').length;					
 					var image = parseInt(event.offsetX / imageChange);					
-					$(event.target).parent().attr("style", "background-image:url(img/representImg/"
+					$(event.target).attr("style", "background-image:url(img/representImg/"
 						+$(event.target).parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
 					
 					if(image != $(event.target).parent().children('input[type="hidden"]').length + 1){

@@ -12,7 +12,7 @@ window.onload = function () {
 	var userInfo = getUserInfo();
 	
 	$('#signUpBtn').html("<span class='rcp-btn-default-2'>회원가입</span>");
-	$('#loginBtn').html("<span class='rcp-btn-default-2'>로그인</span>");
+	
 	$('#profileView').removeClass().addClass("main-nav__dropdown top-main-nav__dropdown profile-dropdown");
 
 	/*로그아웃 버튼*/
@@ -226,8 +226,8 @@ function getUserInfo(){
 	$('#signUpBtn').remove();
 	$('#loginBtn').remove();
 	$('#signUpTopBtn').remove();
-	$('#loginIcon').html('<img id="loginIconAction1" class="rcp-barimg dropdown-trigger img-circle" src="img/profileImg/'+userInfo.image+'" />');
-	$('#topbarUserImg').html('<img id="loginIconAction2" class="rcp-barimg dropdown-trigger img-circle" src="img/profileImg/'+userInfo.image+'" />');
+//	$('#loginIcon').html('<img id="loginIconAction1" class="rcp-barimg dropdown-trigger img-circle" src="img/profileImg/'+userInfo.image+'" />');
+//	$('#topbarUserImg').html('<img id="loginIconAction2" class="rcp-barimg dropdown-trigger img-circle" src="img/profileImg/'+userInfo.image+'" />');
 	
 	return userInfo;
 }

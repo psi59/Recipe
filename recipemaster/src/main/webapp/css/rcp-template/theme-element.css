@@ -348,10 +348,6 @@ p .alternative-font {
   margin-bottom: -6px;
 }
 
-/* Links */
-a, a:hover, a:focus {
-  color: #CCC;
-}
 
 /* Drop Caps */
 p.drop-caps:first-letter {
