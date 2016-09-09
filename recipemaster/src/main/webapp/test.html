@@ -11,15 +11,34 @@
 <script type="text/javascript">
 $(function(){
 	$('#btn').on('click', function(){
+		var datas = {
+				  query:{
+					    multi_match: {
+					    query:"맛있는 찌개",
+					      fields: ["NAME^3"]
+					    }
+					  }
+					,
+					from: 0,
+					size: 4
+			};  
+		
+		console.log(JSON.stringify(datas));
+		
 		$.ajax({
-		    url : 'http://localhost:9200/_all/_search?pretty/_source?pretty=true',
-		    method : 'get',
-		    /* data : {
-		      recipeNo : recipeNo
-		    }, */
+		    url : 'http://localhost:9200/recipes/_search',
+		    method : 'POST',
+		    data : JSON.stringify(datas),
 		    dataType : 'json',
+		    crossDomain: true,
 		    success : function(result) {
-		      console.log(result);
+		    	console.log(result.hits);
+		    	/* console.log(result);
+		    	
+		    	console.log(result.hits.hits); */
+		    	$.each(result.hits.hits, function(index, data){
+		    		console.log(data._source);
+		    	});
 		    },
 		    error : function() {
 		        alert('에러에러')
