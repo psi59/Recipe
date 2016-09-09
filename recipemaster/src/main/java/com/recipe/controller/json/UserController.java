@@ -473,13 +473,13 @@ public class UserController {
         System.out.println("user.getPassword()::"+user.getPassword());
         System.out.println("user.getEmail()::"+user.getEmail());
         result.put("status", "success");
-        result.put("password",nextPassword);
+        result.put("key",nextPassword);
         result.put("email", user.getEmail());
       } catch (Exception e) {
         e.printStackTrace();
         System.out.println("실패");
         result.put("status", "failure");
       }
-      return "redirect:http://127.0.0.1:2828/user/updatePassword.do?email="+email+"&password="+nextPassword;
+      return "redirect:http://127.0.0.1:2828/user/updatePassword.do?email="+email+"&key="+nextPassword;
     }
 }

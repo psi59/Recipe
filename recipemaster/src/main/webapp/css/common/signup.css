@@ -142,53 +142,12 @@
 	padding-top: .5rem;
 }
 
-#findPassword{
-	  top: 311px;
-	  left: 136px;
-    position: absolute;
-    
-}
 
-#findPassword:hover{
-  color: #b51515;
-  cursor: pointer;
-} 
 
-#pushEmail{
-    margin: 25px;
-    border-style: solid;
-    border-radius: 6px;
-    border-color: #b51515;
-    padding: 7px 30px 7px 30px;
-    cursor: pointer;
-    color: black;
-    font-size: 14px;
-}
   
 #pushBtn{
     border: none;
     background-color: #e80000;
     border-bottom: 5px solid #a91c14;
     cursor: pointer;
-}
-
-#cancelPushEmail{
-    margin: 25px;
-    border-style: solid;
-    border-radius: 6px;
-    border-color: #b51515;
-    padding: 7px 30px 7px 30px;
-    cursor: pointer;
-    color: black;
-    font-size: 14px;
-}
-
-#cancelPushEmail:hover{
-    color: white;
-    background: #b51515;
-}
-
-#pushEmail:hover{
-    color: white;
-    background: #b51515;
 }
