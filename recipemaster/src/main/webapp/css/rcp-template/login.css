@@ -42,6 +42,7 @@
 #findPassword-pop-up-banner{
   width:360px;
   height: 260px;
+  display: none;
 }
 
 .panel h2 {
