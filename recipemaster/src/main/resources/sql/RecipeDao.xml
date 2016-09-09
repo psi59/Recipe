@@ -301,13 +301,13 @@
     FROM rcp_lik WHERE DATE_FORMAT(lc_dt,'%y-%m-%d') = DATE_FORMAT(NOW(),'%y-%m-%d') 
     GROUP BY rcpno) r2 ON r1.rcpno=r2.rcpno 
     LEFT OUTER JOIN (SELECT rcpno,COUNT(uno) cnt FROM rcp_lik 
-    GROUP BY rcpno) r3 ON r2.rcpno = r3.rcpno 
+    GROUP BY rcpno) r3 ON r1.rcpno = r3.rcpno 
     LEFT OUTER JOIN (SELECT rcpno,COUNT(uno) cnt,
     DATE_FORMAT(scc_dt,'%y-%m-%d') scc_dt 
     FROM rcp_scr WHERE DATE_FORMAT(scc_dt,'%y-%m-%d') = DATE_FORMAT(NOW(),'%y-%m-%d')
     GROUP BY rcpno) r4 ON r3.rcpno=r4.rcpno
     LEFT OUTER JOIN (SELECT rcpno,COUNT(uno) cnt FROM rcp_scr 
-    GROUP BY rcpno) r5 ON r4.rcpno = r5.rcpno 
+    GROUP BY rcpno) r5 ON r1.rcpno = r5.rcpno 
     LEFT OUTER JOIN RCP_LIK l ON
     r1.rcpno=l.rcpno and l.uno = #{userNo}
     LEFT OUTER JOIN rcp_scr scr ON

@@ -19,6 +19,10 @@ document.write('<script type"text/javascript" src="js/template/naverLogin_implic
   
   var mainSubscribe = $('#temp').html();
   var commainSubscribe = Handlebars.compile(mainSubscribe);   
+  
+  var mainTemp = $('#mainTemp').html();
+  var comMainTemp = Handlebars.compile(mainTemp);   
+  
   var userInfo;
   $(function(){
 
@@ -34,19 +38,6 @@ document.write('<script type"text/javascript" src="js/template/naverLogin_implic
 	  scrapLogic();
   });
   
-  
-  function naverSignInCallback() {
-	    // naver_id_login.getProfileData('프로파일항목명');
-	    // 프로필 항목은 개발가이드를 참고하시기 바랍니다.
-	    
-	    console.log("id : "+naver_id_login.getProfileData('id'));
-	    console.log("name : "+naver_id_login.getProfileData('name'));
-	    console.log("email : "+naver_id_login.getProfileData('email'));
-	    console.log("nickname : "+naver_id_login.getProfileData('nickname'));    
-	    console.log("profile_image : "+naver_id_login.getProfileData('profile_image'));
-	    
-	  }
-
 
 //--------------------------  인기 레시피 ---------------------------------
   
@@ -71,16 +62,21 @@ document.write('<script type"text/javascript" src="js/template/naverLogin_implic
 				  swal('실행중 오류 발생');
 				  return;
 			  }
-			  $('#main-list > div').append( comMainSection(result) );
-			  $('.list0 > .row').append( template(result) );
+//			  $('#main-list > div').append( comMainSection(result) );
+//			  $('.list0 > .row').append( template(result) );
+			  
+			  $('#tabs-1 .hs-content .container .row ').append(comMainTemp( result ) );
+			  
+			  for(var i=0; i<result.data.length; i++){
+				  if(result.data[i].length > 1){				  
+					  $('.rcp-main-subscribe-userName0').attr('class','rcp-main-subscribe-userName'+i+1);
+					  $('.rcp-main-subscribe-userName'+i+1).text( (result.data[i] )[0].user.userName+"님의 레시피 정보");
+				  }
+			  }
 			  
 			  mouseMoveEventForImage(result);
 			  mouseMoveEventForSubscribeImage(result);
-			  console.log(result);
-				  for(var i=0; i<result.data.length; i++){
-						  $('.list0 div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');		  
-				  }
-					
+			  
 			  
 			  methods();
 			  Main2List();			 
@@ -116,10 +112,11 @@ document.write('<script type"text/javascript" src="js/template/naverLogin_implic
 				  return;
 			  }
 			  var list = result.data;
-			  $('#main-list > div').append( comMain2Section(result) );
-			  $('.list1 > .row').append( template(result) );
-			 
-			  
+//			  $('#main-list > div').append( comMain2Section(result) );
+//			  $('.list1 > .row').append( template(result) );
+//			 
+			  $('#tabs-2 .hs-content .container .row ').append(comMainTemp( result ) );
+			  console.log('tab2'+result)
 			  for(var i=0; i<result.data.length; i++){
 //				  for(var j=0; j<result.data[i].representImages.length; j++){
 					  $('.list1 div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');
@@ -161,7 +158,7 @@ document.write('<script type"text/javascript" src="js/template/naverLogin_implic
 			  for(var i=0; i<result.data.length; i++){
 				  //console.log(result.data[i])
 				  if(result.data[i].length > 1){					  
-					  $('#tabs-1 .hs-content .container .row ').append(commainSubscribe( (result.data[i]) ) );
+					  $('#tabs-5 .hs-content .container .row ').append(commainSubscribe( (result.data[i]) ) );
 					  $('.rcp-main-subscribe-userName0').attr('class','rcp-main-subscribe-userName'+i+1);
 					  $('.rcp-main-subscribe-userName'+i+1).text( (result.data[i] )[0].user.userName+"님의 레시피 정보");
 				  }
@@ -215,13 +212,15 @@ function scroll(){
   
 	Handlebars.registerHelper("countImage", function(value, options){
 		{
-	return "1 / "+value.length;
+			return "1 / "+value.length;
+			//return "1 / ";
 		}
 });
  
 	Handlebars.registerHelper("representImages", function(value, options){
 		{			
-	return value[0];
+			return value[0]
+			//return value;
 		}
 });  
 	
@@ -390,6 +389,11 @@ function mouseMoveEventForSubscribeImage(result){
 					$(event.target).parent().attr("style", "background-image:url(img/representImg/"
 						+$(event.target).parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
 					
+					if(image != $(event.target).parent().children('input[type="hidden"]').length + 1){
+						$(event.target).parent().children('.rcp-count-images').text(image+1+" / "+$(event.target).parent().children('input[type="hidden"]').length);
+						}else{
+							return;
+						}
 					
 					
 				}else{
@@ -398,6 +402,12 @@ function mouseMoveEventForSubscribeImage(result){
 					var image = parseInt(event.offsetX / imageChange);								
 					$(event.target).parent().attr("style", "background-image:url(img/representImg/"
 							+$(event.target).parent().parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
+					
+					if(image != $(event.target).parent().children('input[type="hidden"]').length + 1){
+						$(event.target).parent().children('.rcp-count-images').text(image+1+" / "+$(event.target).parent().children('input[type="hidden"]').length);
+						}else{
+							return;
+						}
 					
 				}
 			})
@@ -449,15 +459,16 @@ function mouseHover(){
 				  return;
 			  }
 			  var list = result.data;
-			  $('#main-list > div').append( comMainRecomSection(result) );
-			  $('.list2 > .row').append( template(result) );
-			 
+//			  $('#main-list > div').append( comMainRecomSection(result) );
+//			  $('.list2 > .row').append( template(result) );
+//			 
+			  $('#tabs-3 .hs-content .container .row ').append(comMainTemp( result ) ); 
 			  
 			  for(var i=0; i<result.data.length; i++){
-//				  for(var j=0; j<result.data[i].representImages.length; j++){
-					  $('.list2 div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');
-
-//				  }
+				  if(result.data[i].length > 1){				  
+					  $('.rcp-main-subscribe-userName0').attr('class','rcp-main-subscribe-userName'+i+1);
+					  $('.rcp-main-subscribe-userName'+i+1).text( (result.data[i] )[0].user.userName+"님의 레시피 정보");
+				  }
 			  }
 			  MainRecomCtList();
 			  methods();
@@ -480,17 +491,18 @@ function MainRecomCtList(){
 				  return;
 			  }
 			  var list = result.data;
-			  $('#main-list > div').append( comMainRecomCtSection(result) );
-			  $('#sss').html('추천 카테고리 : '+result.data[0].ctgName+' <a class="More">more</a>');
-			  $('.list3 > .row').append( template(result) );
-			 
+//			  $('#main-list > div').append( comMainRecomCtSection(result) );
+//			  $('#sss').html('추천 카테고리 : '+result.data[0].ctgName+' <a class="More">more</a>');
+//			  $('.list3 > .row').append( template(result) );
+			  $('#tabs-4 .hs-content .container .row ').append(comMainTemp( result ) );			 
 			  
 			  for(var i=0; i<result.data.length; i++){
-//				  for(var j=0; j<result.data[i].representImages.length; j++){
-					  $('.list3 div[name="recipe-image"]:eq('+i+')').attr('style','background-image:url(img/representImg/'+result.data[i].representImages[0]+')');
-
-//				  }
+				  if(result.data[i].length > 1){				  
+					  $('.rcp-main-subscribe-userName0').attr('class','rcp-main-subscribe-userName'+i+1);
+					  $('.rcp-main-subscribe-userName'+i+1).text( (result.data[i] )[0].user.userName+"님의 레시피 정보");
+				  }
 			  }
+			  
 				
 			  methods();
 		  },

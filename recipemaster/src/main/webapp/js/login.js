@@ -109,7 +109,7 @@ window.onload = function () {
 	
 	
 	function loadUsers() {
-		var source = $('#chef-card-template').text();
+		var source = $('#main-chefRanking').text();
 		var template = Handlebars.compile(source);
 
 		$.ajax({
@@ -130,7 +130,7 @@ window.onload = function () {
 					}
 				}
 				
-				$('#rcp-chef-rank').append(template(result));
+				$('.wrapper-chefs').append(template(result));
 			},
 			error : function() {
 				swal('서버 요청 오류!...')

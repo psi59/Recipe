@@ -144,7 +144,7 @@ function comList(){
 	  $(document).on('click', '.rcp-userName, .rcp-nickname , .rcp-profile',function(event){
 		  event.preventDefault();
 		  console.log( "event target : "+$(event.target).attr('class') )
-		  $(location).attr('href','/mypage.html?'+$(event.target).parent().children('input[type="hidden"]').val() );
+		  $(location).attr('href','/mypage.html?'+$(event.target).parent().children('input[class="rcp-hidden-email"]').val() );
 		  console.log("email val()"+$(event.target).parent().children('input[name="email"]').val() );
 	  })
 }
