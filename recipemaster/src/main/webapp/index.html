@@ -73,26 +73,35 @@
 <body data-spy="scroll"  data-target="#navSecondary" data-offset="170">
 
 <div class="panel" id="login-pop-up-banner">
-  <h2 id="login-pop-up-name">LOGIN</h2>
-  <div id="loginFormset" class="formset">
-    <div id="email-form-group" class="form-group">
+  <h2>LOGIN</h2>
+  <div class="formset">
+    <div class="form-group">
       <lable class="form-label">Email</lable>
       <input type="text" class="form-control" id="userEmail"/>
     </div>
-    <div id="password-form-group" class="form-group">
+    <div class="form-group">
       <lable class="form-label">Password</lable>
       <input type="password" class="form-control" id="userPassword"/>
     </div>
     
-    <div id="userLogin-form"><button class="btn" id="userLogin">Log in</button></div>
+    <button class="btn" id="userLogin">Log in</button>
     <a id="findPassword">Forgot Your Password?</a>
     <hr style="margin: 15px;">
       <p id="other-login-text">소셜아이디로 로그인하기 </p>
      <div id="naver_id_login"></div>
-    
   </div>
+</div>
 
-
+<!-- password 찾기 -->
+<div class="panel" id="findPassword-pop-up-banner">
+  <h2>Find Password</h2>
+  <div class="formset">
+    <div class="form-group">
+      <lable class="form-label">Email</lable>
+      <input type="text" class="form-control" id="findPassword-userEmail"/>
+    </div>
+    <button class="btn" id="pushEmail">push</button>
+  </div>
 </div>
 
 	<!-- <div id="topBtn" class="navbar navbar-inverse navbar-fixed-top">
@@ -113,18 +122,16 @@
 								<option value="recipe" selected="selected">레시피</option>
 								<option value="chef">쉐프</option>
 								<option value="material">재료</option>
-							</select> <input id="searchKeyword" type="text"
-								class="searchKeyword form-control rcp-navbar-searchbar-size"
-								placeholder="검색어를 입력해주세요" aria-describedby="basic-addon1">
+							</select> <input id="searchKeyword" tbtn btn-default rcp-btn-navsearchKeyword form-control rcp-navbar-searchbar-size"
+								placeholder=action-bbtn btn-default rcp-btn-navic-addon1">
 
 							<span id="searchBarKeyword" class="input-group-addon">검색</span>
 
 						</div>
 
-					</div>
-					<div class="col-md-4 col-sm-4 hidden-xs" style="margin-right: 2em;">
+				goMyPageBtn btn btn-default rcp-btn-navsm-4 hidden-xs" style="margin-right: 2em;">
 						<div class="navbar-collapse">
-							<ul class="nav navbar-nav navbar-right">
+			goWriteRcpBtn btn btn-default rcp-btn-navt">
 								<li><a href="#"><span id="signUpTopBtn"
 										class="rcp-btn-default-top">회원가입</span></a></li>
 								<li id="topbarUserImg"><a href="#"><span
@@ -255,8 +262,7 @@
 	<!-- ------------------------------------------------------------------------------- -->
 
 	<div id='signup-pop-up-banner'>
-		<div class="rcp-section">
-			<span>회원 가입</span>
+		<div class="rcpid="login-pop-up-name"원 가입</span>
 		</div>
 		<div class="rcp-laytop rcp-laytop2"></div>
 		<div class="rcp-innnersec">
@@ -267,7 +273,7 @@
 					<input id="signup-e-mail" type="text" class="form-control"
 						placeholder="E-mail 입력"> <span id="signup-e-mail-span"
 						class="glyphicon glyphicon-warning-sign form-control-feedback"
-						aria-hidden="true"></span> <label id="signup-e-mail-label"
+						aria-hidden="true"></ id="rcp-sign-button"up-e-mail-label"
 						class="control-label"></label>
 				</div>
 

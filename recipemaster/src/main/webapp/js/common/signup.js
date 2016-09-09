@@ -180,25 +180,18 @@ $(document).ready(function(){
     }); // end keyup
 
 	//비밀번호 찾기
-	$(document).on('click', '#findPassword', function(){
-		$('#login-pop-up-name').html("<span>FIND PASSWORD</span>");
-		$('#userLogin-form').html("<button class='btn' id='pushEmail'>push</button>");
-		$('#userEmail').focus();
-		$('#password-form-group').remove();
-		/*$('#loginFormset').html("<div class='form-group'><lable class='form-label'>Email</lable><input type='text' class='form-control' id='userEmail'/></div><button class='btn' id='userLogin'>push</button>");*/
-		$('#login-pop-up-banner').css('height','300px');
-		$('#findPassword').remove();
-		$('#other-login-text').remove();
-		$('#naver_id_login').remove();
-		/*$('#loginInputBox').html("<input class='form-control' type='text' id='findInputEmail' name='findInputEmail' placeholder='이메일 입력'/>");*/
-		/*$('#rcp-sign-button').html("<span id='pushEmail' >확인</span>&nbsp;&nbsp;&nbsp;"+"<span id='cancelPushEmail' >취소</span>");*/
+	$(document).on('click', '#findPassword', function(event){
+		event.preventDefault();
+		$('#login-pop-up-banner').bPopup().close();
+		$('#findPassword-pop-up-banner').bPopup();
+		$('#findPassword-userEmail').focus();
 		$(document).on('click', '#pushEmail', function(){
-			if($('#userEmail').val() == ''){
+			if($('#findPassword-userEmail').val() == ''){
 				swal('이메일을 입력해주세요.');		
 				return;
 			}
 			var password;
-			var email=$('#userEmail').val();
+			var email=$('#findPassword-userEmail').val();
 			swal(email);
 			$.ajax({
             	type : 'GET',
@@ -212,11 +205,9 @@ $(document).ready(function(){
 					swal('error');
 					}
            	 }); // end ajax
-			$(location).attr('href','/');
+			$('#findPassword-pop-up-banner').bPopup().close();
 		});
-		$(document).on('click', '#cancelPushEmail', function(){
-			$(location).attr('href','/');
-		});
+		
 	});
 
 });
