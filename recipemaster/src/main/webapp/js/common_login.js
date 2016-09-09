@@ -1,8 +1,6 @@
 window.onload = function () {
 	var userInfo = getUserInfo();
 	
-	$('#signUpBtn').html("<span class='rcp-btn-default-2'>회원가입</span>");
-	$('#loginBtn').html("<span class='rcp-btn-default-2'>로그인</span>");
 	$('#profileView').removeClass().addClass("main-nav__dropdown top-main-nav__dropdown profile-dropdown");
 
 	/*로그아웃 버튼*/

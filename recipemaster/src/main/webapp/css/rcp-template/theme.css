@@ -64,8 +64,16 @@ li {
 #header .header-container {
   position: relative;
   display: table;
+  height:50px;
+  bottom:10px;
 }
-
+.header-body{
+	height: 72px;
+}
+#rcp-top-bar-logo{
+	width:120px;
+	height:40px;
+}
 #header .header-top {
   background-color: #f4f4f4;
   border-bottom: 1px solid #ededed;
