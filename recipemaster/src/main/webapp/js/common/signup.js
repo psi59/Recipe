@@ -207,9 +207,7 @@ $(document).ready(function(){
            	 }); // end ajax
 			$('#findPassword-pop-up-banner').bPopup().close();
 		});
-		
 	});
-
 });
 
 ///// 정규표현식 검사 함수 /////
