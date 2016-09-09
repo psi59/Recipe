@@ -13,13 +13,6 @@
 	font-style: #ff0000;	
 }
 
-#login-pop-up-banner {
-  display: none;
-  width: 375px;
-  height: 340px;
-  border-radius: 7px;
-  background: #ffffff;
-}
 
 .todayMenu{
 	text-align: center;

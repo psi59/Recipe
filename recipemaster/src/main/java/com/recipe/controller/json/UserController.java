@@ -372,7 +372,7 @@ public class UserController {
 	
 	 @RequestMapping(path = "top3", produces = "application/json;charset=UTF-8")
 	  @ResponseBody
-	  public String top3(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "3") int pageSize
+	  public String top3(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "4") int pageSize
 	      , HttpSession session) {
 	    HashMap<String, Object> result = new HashMap<>();
 	    User loginUser = new User();
