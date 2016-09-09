@@ -73,19 +73,19 @@
 <body data-spy="scroll"  data-target="#navSecondary" data-offset="170">
 
 <div class="panel" id="login-pop-up-banner">
-  <h2>LOGIN</h2>
-  <div class="formset">
-    <div class="form-group">
+  <h2 id="login-pop-up-name">LOGIN</h2>
+  <div id="loginFormset" class="formset">
+    <div id="email-form-group" class="form-group">
       <lable class="form-label">Email</lable>
       <input type="text" class="form-control" id="userEmail"/>
     </div>
-    <div class="form-group">
+    <div id="password-form-group" class="form-group">
       <lable class="form-label">Password</lable>
       <input type="password" class="form-control" id="userPassword"/>
     </div>
     
-    <button class="btn" id="userLogin">Log in</button>
-    <a href="#">Forgot Your Password?</a>
+    <div id="userLogin-form"><button class="btn" id="userLogin">Log in</button></div>
+    <a id="findPassword">Forgot Your Password?</a>
     <hr style="margin: 15px;">
       <p id="other-login-text">소셜아이디로 로그인하기 </p>
      <div id="naver_id_login"></div>
