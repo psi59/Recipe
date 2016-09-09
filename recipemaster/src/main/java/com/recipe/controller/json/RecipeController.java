@@ -45,8 +45,8 @@ public class RecipeController {
   @ResponseBody
   public String listSearch(@RequestParam(defaultValue="1") int pageNo,
       @RequestParam(defaultValue="8") int pageSize,
-      Search search, @RequestParam(value="categoryList") List<String> categoryList, HttpSession session){
-
+      Search search, @RequestParam(value="categoryList") List<String> categoryList, String more, HttpSession session){
+    
     HashMap<String,Object> result = new HashMap<>();     
     int recipeCount = 0;    
 
@@ -54,11 +54,16 @@ public class RecipeController {
     if(session.getAttribute("userNo") != null){
       userNo = (Integer)(session.getAttribute("userNo"));
     }
-        
+    
+    List<Recipe> list;
     //카테고리 list를 search 객체에 담는다.    
     search.setCategoryList(categoryList);
-    List<Recipe> list = recipeService.getRecipeSearchList(pageNo, pageSize, search, userNo);
-
+    if(more.equals("popular")){
+      list = recipeService.getRecipeList(userNo, pageNo, pageSize, 1); // 오늘의 인기 레시피
+    } else {
+      list = recipeService.getRecipeSearchList(pageNo, pageSize, search, userNo);
+    }
+    
     // 검색결과 첫페이지를 갱신했을때만 레시피카드들을 카운트 한다.
     if(pageNo == 1){
       recipeCount = recipeService.getRecipeCount(pageNo, pageSize, search, userNo);
@@ -82,7 +87,7 @@ public class RecipeController {
   @RequestMapping(path="starRate",produces="application/json;charset=UTF-8")
   @ResponseBody
   public String starRate(int recipeNo, double grade, HttpSession session){
-
+  
     User user = CommonUtil.getSessionUser(session);
     HashMap<String,Object> result = new HashMap<>();     
     boolean loginCheck = true;
@@ -101,7 +106,7 @@ public class RecipeController {
     return new Gson().toJson(result);
   }
   
-// 이미 별점을 부여한 레시피인지 확인 -이성현
+ // 이미 별점을 부여한 레시피인지 확인 -이성현
  @RequestMapping(path="checkDuplicateGrade",produces="application/json;charset=UTF-8")
  @ResponseBody
  public String checkDuplicateGrade(int recipeNo, HttpSession session){
@@ -127,13 +132,14 @@ public class RecipeController {
    return new Gson().toJson(result);
  }
 
-  // 리스트 페이지 레시피 검색 자동완성 -이성현
+  // 검색창 자동완성 -이성현
   @RequestMapping(path = "recipeSearchAutoComplete", produces = "application/json;charset=UTF-8")
   @ResponseBody
   public String recipeSearchAutoComplete(@RequestParam String searchValue) {
     HashMap<String, Object> result = new HashMap<>();
     List<String> recipeNameList = recipeService.getRecipeNameList(searchValue);
-    for (String recipeName : recipeNameList) {      
+    for (String recipeName : recipeNameList) {
+      System.out.println("");
     }
     try {
       result.put("status", "success");
@@ -366,7 +372,7 @@ public class RecipeController {
   @ResponseBody
   public String list(@RequestParam int userNo, @RequestParam(defaultValue = "4") int pageSize, int request) {
     HashMap<String, Object> result = new HashMap<>();
-    List<Recipe> list = recipeService.getRecipeList(userNo, pageSize, request);
+    List<Recipe> list = recipeService.getRecipeList(userNo, 1, pageSize, request);
     try {
       result.put("status", "success");
       result.put("data", list);

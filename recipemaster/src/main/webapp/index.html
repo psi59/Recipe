@@ -41,8 +41,8 @@
 <link rel="stylesheet" href="css/common/loading.css">
 <link rel="stylesheet" href="css/common/starrating.css">
 <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css'>
-
-
+<link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.min.css">
+<link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.themes.min.css">
 
 <!-- alert css -->
 <link rel="stylesheet"
@@ -411,7 +411,6 @@
 				<div class="hs-content">
 					<div class="container">
 						<div class="row">
-
 							<h2 class="rcp-h2-25px">
 								<a class="More">more</a>
 							</h2>
@@ -653,29 +652,26 @@
 
 	<!--  Main List -->
 
-	<script id="recipe-1-section" type="text/x-handlebars-template">
-
- <section name="rcp-custom-list">
+<script id="recipe-1-section" type="text/x-handlebars-template">
+  <section name="rcp-custom-list">
     <div class="rcp-list">
-      <div class="rcp-1024 list0" >
-        <h3>오늘의 인기 레시피 <a class="More">more</a></h3> 
+      <div class="rcp-1024 list0">
+        <h3>오늘의 인기 레시피 <a id="popular-rcp-more" class="More">more</a></h3>
         <div class="row rcp-order"></div>
       </div>
     </div>
   </section>
-
 </script>
 
-	<script id="recipe-2-section" type="text/x-handlebars-template">
+<script id="recipe-2-section" type="text/x-handlebars-template">
  <section name="rcp-custom-list">
     <div class="rcp-list">
       <div class="rcp-1024 list1" >
-        <h3>최신 레시피 <a class="More">more</a></h3>
+        <h3>최신 레시피 <a id="newest-rcp-more" class="More">more</a></h3>
         <div class="row rcp-order"></div>
       </div>
     </div>
   </section>
-
 </script>
 
 <script id="recipe-3-section" type="text/x-handlebars-template">
@@ -687,10 +683,9 @@
       </div>
     </div>
   </section>
-
 </script>
 
-	<script id="recipe-4-section" type="text/x-handlebars-template">
+<script id="recipe-4-section" type="text/x-handlebars-template">
  <section name="rcp-custom-list">
     <div class="rcp-list">
       <div class="rcp-1024 list3" >
@@ -699,7 +694,6 @@
       </div>
     </div>
   </section>
-
 </script>
 
 	<script id="recipe-comment-addForm" type="text/x-handlebars-template">
@@ -922,8 +916,12 @@
   
   <!-- 별점주기 -->
   <script id="starrating-template" type="text/x-handlebars-template">
-  <div id="rcp-starrating" align="left">평가하기</div> 
-  {{#if checkDuplicateGrade}}
+    <div id="starrating-box">  
+    {{#if checkDuplicateGrade}}
+      <div>    
+        <span id="rcp-starrating" align="left">평가하기</span>
+        <span id="rcp-starrating-grade">&nbsp;</span>
+      </div>
       <div class="rcp-rating">
         <input id="star5" name="rating" type="radio" value="5"/>
         <label for="star5" class="full"></label>
@@ -949,8 +947,10 @@
       <div id="rcp-starrating-btn-apply" class="rcp-starrating-btn">
         <i class="glyphicon glyphicon-ok rcp-i-tag-margin-right-top"></i>등록</div>
     {{else}}
-      <div id="starrating-finish" align="left">참여하셨습니다.</div>
+      <div align="left">평가하기</div>      
+      <div align="left">참여하셨습니다.</div>
     {{/if}}
+    </div>
   </script>
 
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
@@ -994,6 +994,8 @@
 	<script src="js/mouseover.js"></script>
 	<script src="js/common/starrating.js"></script>
   <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+  <script src="js/common/easyautocomplete.js"></script>
+  <script src="node_modules/easy-autocomplete/dist/jquery.easy-autocomplete.min.js"></script>
 
 	<script>
 		$(function() {

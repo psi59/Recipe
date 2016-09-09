@@ -83,8 +83,10 @@ document.write('<script type"text/javascript" src="js/template/naverLogin_implic
 					
 			  
 			  methods();
-			  Main2List();			 
-			  
+			  Main2List();
+			  $('#popular-rcp-more').click(function(){
+				  window.location.href = "list.html?more=popular";
+			  })
 		  },
 		  error : function(){
 			  console.log('ajax list1: 서버 요청 오류');
@@ -131,6 +133,10 @@ document.write('<script type"text/javascript" src="js/template/naverLogin_implic
 			  if(userInfo != null)
 			  main3List();
 			  MainRecomList()
+			  // more 클릭시 리스트 페이지로 이동
+			  $('#newest-rcp-more').click(function(){
+				  window.location.href = "list.html";
+			  })
 		  },
 		  error : function(){
 			  console.log('ajax list2:서버 요청 오류');
@@ -481,9 +487,8 @@ function MainRecomCtList(){
 			  }
 			  var list = result.data;
 			  $('#main-list > div').append( comMainRecomCtSection(result) );
-			  $('#sss').html('추천 카테고리 : '+result.data[0].ctgName+' <a class="More">more</a>');
+			  $('#sss').html('추천 카테고리 : '+result.data[0].ctgName+' <a id="ctg-rcp-more" class="More">more</a>');
 			  $('.list3 > .row').append( template(result) );
-			 
 			  
 			  for(var i=0; i<result.data.length; i++){
 //				  for(var j=0; j<result.data[i].representImages.length; j++){
@@ -491,8 +496,10 @@ function MainRecomCtList(){
 
 //				  }
 			  }
-				
 			  methods();
+			  $('#ctg-rcp-more').click(function(){
+				  window.location.href = "list.html?ctg="+result.data[0].ctgName;
+			  })
 		  },
 		  error : function(){
 			  console.log('ajax list2:서버 요청 오류');

@@ -4,7 +4,6 @@ var email;
 $(document).ready(function(){
 	
 	///// 회원가입 팝업창 가입 버튼 이벤트 /////
-	/*$('#signup-addBtn').click(function() {*/
 	$(document).on('click', '#signup-addBtn', function() {
 		if( $('#signup-e-mail').val() == ""){
 			swal('이메일을 입력해주세요');			
@@ -179,7 +178,7 @@ $(document).ready(function(){
 		} // end if
     }); // end keyup
 
-	//비밀번호 찾기
+	// 비밀번호 찾기
 	$(document).on('click', '#findPassword', function(){
 		$('#login-pop-up-name').html("<span>비밀번호 찾기</span>");
 		$('#loginInputBox').html("<input class='form-control' type='text' id='findInputEmail' name='findInputEmail' placeholder='이메일 입력'/>");

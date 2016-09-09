@@ -8,6 +8,10 @@
 	cursor: pointer;
 }
 
+#rcp-starrating {
+	float: left;
+}
+
 #rcp-star-rating {
   font-size: 15px;
   cursor: pointer;
