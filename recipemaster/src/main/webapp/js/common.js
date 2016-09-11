@@ -1,7 +1,7 @@
 document.write('<script type"text/javascript" src="js/template/notification.js"></script>')
 
-var source = $('#recipe-card-template').html();
-var template = Handlebars.compile(source);
+//var source = $('#recipe-card-template').html();
+//var template = Handlebars.compile(source);
 function onlyNumber()
 {
 	if ((event.keyCode<48)||(event.keyCode>57))

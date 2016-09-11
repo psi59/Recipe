@@ -5,7 +5,7 @@ Name:       theme.css
 Written by:   Okler Themes - (http://www.okler.net)
 Version:    4.9.1
 */
-#header{
+.rcp-bg-point #header{
 	min-height: 600px;
 }
 
@@ -455,6 +455,9 @@ html.sticky-header-active #header .header-body {
   position: fixed;
   border-bottom-color: #e9e9e9;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+}
+.header{
+	min-height:600px;
 }
 
 html:not(.sticky-header-active) #header.header-transparent-sticky-deactive .header-body:before {

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html class="sticky-header-negative sticky-header-active">
 <head>
 <meta charset="UTF-8">
 <title>my page</title>
 
 <link rel="stylesheet" href="css/rcp-template/animate.css">
 <link rel="stylesheet" href="css/rcp-template/theme.css">
+<link rel="stylesheet" href="css/rcp-template/theme-element.css">
 <link rel="stylesheet" href="css/rcp-template/theme-animate.css">
 <link rel="stylesheet" href="css/rcp-template/skin-restaurant.css">
 <link rel="stylesheet"
@@ -32,6 +33,7 @@
 <link rel="stylesheet" href="css/common/signup.css">
 <link rel="stylesheet" href="css/common/popup.css">
 <link rel="stylesheet" href="css/updateImg.css">
+<link rel="stylesheet" href="css/mainlist.css">
 
 <!-- ------------------디테일 일시적 추가   - 변경 할 것임 ---------------------- -->
 <link rel="stylesheet" href="css/detail.css">
@@ -45,10 +47,13 @@
 
 <style>
 </style>
+<style id='theme58872-style-inline-css' type='text/css'>
+
+</style>
 </head>
 <body  data-spy="scroll"  data-target="#navSecondary" data-offset="170">
 
-<header id="header" class="header-narrow" data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": false}'>
+<header id="header" class="header-narrow site-header wide" role="banner" data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": false}'>
  
      <div class="header-body">
          
@@ -70,17 +75,17 @@
                     <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 collapse">
                       <nav>
                         <ul class="nav nav-pills" id="mainNav">
-                          <li class="activedropdown-full-color dropdown-secondary">
+                          <li class="activedropdown-full-color dropdown-secondary rcp-visible">
                             <a href="#">
                               Home
                             </a>
                           </li>
-                          <li class="dropdown-full-color dropdown-secondary">
+                          <li class="dropdown-full-color dropdown-secondary rcp-visible">
                             <a href="#" id="loginBtn">
                               Login
                             </a>
                           </li>
-                          <li class="dropdown-full-color dropdown-secondary">
+                          <li class="dropdown-full-color dropdown-secondary rcp-visible">
                             <a href="#" id="signUpBtn">
                               Sign Up
                             </a>
@@ -94,7 +99,14 @@
             </div>
           </div>
         </div>
+        
+    
+        
+        
 </header>
+
+
+
       
 
   <!-- 회원정보수정 bpopup -->
@@ -160,20 +172,30 @@
       <div class="rcp-profileCover">
         <section class="rcp-pagetop">
           <div class="rcp-topimg-position">
+            
+            <div class="rcp-mypage-container">
             <a class="rcp-topimg-border"> <img src="img/profileImg/default.jpg"
               class="rcp-topimg">
             </a>
-            <div class="rcp-topinfo">
+         
               <input type="hidden" id="mypage-userNo" value="">
               <h2 class="rcp-userPage-userName"></h2>
-              <button class="rcp-topbtn action-button shadow animate">구독하기</button>
-            </div>
+              <hr>
+              <div class="rcp-userInfo">
+              <p class="rcp-count-visit rcp-mypage-userInfo col-sm-3 col-md-3">방문자 <span id="visitNum" >명</span>
+              <p class="rcp-count-like rcp-mypage-userInfo col-sm-3 col-md-3">좋아요 <span id="likeNum" >개</span>
+              <p class="rcp-count-scrap rcp-mypage-userInfo col-sm-3 col-md-3">스크랩 <span id="scrapNum" >개</span>
+              <p class="rcp-count-grade rcp-mypage-userInfo col-sm-3 col-md-3">평점 <span id="gradeNum" >점</span>
+              </div>
+             <!--  <button class="btn btn-default rcp-topbtn">구독하기</button> -->
+       </div>
           </div>
         </section>
-        <div class="rcp-bottomLine-info" style="color: white;"></div>
+        
 
       </div>
-
+      </section>
+<!-- 
       <section class="rcp-pagemiddle1">
 
         <div class="rcp-pagemiddle-div1">
@@ -194,14 +216,14 @@
           <span class="heading">평점</span> <span class="value" id="gradeNum">점</span>
         </div>
       </section>
-
-      <!-- page hidden -->
+ 
+      page hidden
       <input id="rcpList-pageNo" type="hidden" value="1"> <input
         id="scsRcpList-pageNo" type="hidden" value="1">
 
-    </section>
+    </section> -->
 
-    <!--  <section class="rcp-pageleft">
+   <!--   <section class="rcp-pageleft">
       <div>
         <div id="tabs" class="rcp-vst-tabs">
           <ul>
@@ -219,20 +241,37 @@
                   </div>
                   </div>
                   </div>
-                  </section> -->
+                  </section>
             
+ -->
+
+
+<section class="p-xlg rcp-p-xlg-padding">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12 center">
+                <h2 class="mt-lg mb-sm">For your <strong>Page</strong></h2>
+                <p class="font-size-md">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu pulvinar magna.<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+
+                <hr class="custom-divider">
+              </div>
+            </div>
+          </div>
+        </section>
+        
 
 
     <section class="ht-section hs-recipes grid">
       <div class="hs-header">
-        <div class="container"></div>
+        <div class="container">
         <input type="hidden" value="1" id="tabId">
         <ul class="isotope-filter" >
           <li class="is-filtered"><a href="#" id="searchRecipe"  >레시피</a></li>
           <li><a href="#" id="searchScrap" >스크랩</a></li>
           <li><a href="#" id="searchSubscribe">구독중인 페이지</a></li>
           <li><a href="#" data-toggle="tab" id="visitorWrite">방명록</a></li>
-        </ul>
+        </ul></div>
+        
       </div>
 
       <div id="tabs-1">
@@ -375,17 +414,17 @@
 	<script src="js/common/signup.js"></script>
 	<script src="js/login.js"></script>
 	<script src="js/updateUser.js"></script>
-	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 
 <script id="temp" type="text/x-handlebars-template">
 {{#each data}}
 {{#regStatus}}
+
 <div>
 <div class="isotope-grid" id="grid-2">
-          <div class="entry filter-food filter-pudding">
+         <div class="entry col-xs-12 col-sm-4 col-md-3 filter-food filter-pudding">
             <div class="entry-inner">
-              
-              <div class="entry-media" name="recipe-image">
+             
+              <div class="entry-media"  name="recipe-subscribe-image" style="background-image:url(img/representImg/{{representImages}}">
                {{#transientStorage}}{{else}}
                 <p>임시저장됨</p>
               {{/transientStorage}}
@@ -396,18 +435,28 @@
                 </div>
               </div>
               <!-- ./ entry-media -->
+                  <!-- ./ entry-media -->
               <div class="content-wrapper">
-                <h3 class="entry-name detail">
-                  <input type="hidden" name="recipeNo" value="{{recipeNo}}">
-                <a href="#">{{recipeName}}</a></h3>
-                <p class="entry-author">{{user.userName}}</p>
+                <h3 class="entry-name"><a href="#">
+                <input type="hidden" name="recipeNo" value="{{recipeNo}}">
+                <p class="detail">{{recipeName}}</p></a></h3>                
+                <a href="mypage.html?{{user.email}}">
+                <input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
+                <p class="entry-author rcp-userName">{{user.userName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{recipeDate}}</p>
+                </a>
                 <div class="entry-meta">
                   <div class="foo-wrapper">
-                    <a href="#"><div class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top"></div>
-                     <span>좋아요 {{countLike}}</span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span>
+                    <a href="#" class="rcp-like"><div class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top"></div>
+                    <span>좋아요 {{countLike}}</span></a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            
                     <div class="glyphicon glyphicon glyphicon-time rcp-i-tag-margin-right-top"></div>
-                    <span >{{cookTime}}분 소요</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="#" class="rcp-scrap"><div class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></div><span>스크랩하기</span></a>
+                    <span class="meta-time">{{cookTime}}분 소요</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+                    <span>
+                     <a href="#" class="rcp-scrap"><div class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></div>
+                    <span>스크랩 {{countScrap}}</span></a>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -417,7 +466,6 @@
           </div>
         
           </div>
-</div>
 {{/regStatus}}
 {{/each}}
 </script>
@@ -439,7 +487,7 @@
               <input type="hidden" class="fromNo" name="fromNo" value={{user.userNo}}>
               <span id="rcp-Vst-id" class="rcp-Vst-id">From. {{user.userName}}
               </span><br/>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-              <span id="rcp-Vst-time" class="rcp-Vst-time">Date. {{visitorDate}}</span>
+              <span id="rcp-Vst-time">Date. {{visitorDate}}</span>
             </div>
           </div>
           <div class="rcp-Vst-bottom vst-contents" id="vst-contents" data-index="{{visitorNo}}">

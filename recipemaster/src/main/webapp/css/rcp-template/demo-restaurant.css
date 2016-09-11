@@ -12,11 +12,6 @@
   transform: none !important;
 }
 
-/* Custom Divider */
-.custom-divider {
-  height: 56px;
-  background: transparent url(../../img/custom-divider-1.png) no-repeat center center;
-}
 
 /* Custom Thumb Info */
 .thumb-info-custom {
