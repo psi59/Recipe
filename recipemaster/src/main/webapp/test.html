@@ -5,25 +5,24 @@
 <title>Insert title here</title>
 </head>
 <body>
+<input type="text" id="search">
 <button id="btn">전송전송</button>
 </body>
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	$('#btn').on('click', function(){
+	$('#search').on('keyup', function(){
 		var datas = {
 				  query:{
 					    multi_match: {
-					    query:"맛있는 찌개",
-					      fields: ["NAME^3"]
+					    query:$(this).val(),
+					      fields: ["recipeName^3", "Materials", "userName"]
 					    }
 					  }
 					,
 					from: 0,
 					size: 4
 			};  
-		
-		console.log(JSON.stringify(datas));
 		
 		$.ajax({
 		    url : 'http://localhost:9200/recipes/_search',
@@ -32,10 +31,6 @@ $(function(){
 		    dataType : 'json',
 		    crossDomain: true,
 		    success : function(result) {
-		    	console.log(result.hits);
-		    	/* console.log(result);
-		    	
-		    	console.log(result.hits.hits); */
 		    	$.each(result.hits.hits, function(index, data){
 		    		console.log(data._source);
 		    	});

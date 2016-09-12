@@ -67,25 +67,57 @@ function dropdownClick(target, other) {
 //signUpBtn 팝업 , 불투명 배경 띄우기
 $('#signUpBtn').on('click', function(event){
 	event.preventDefault();
-	$('#signup-pop-up-banner').bPopup();
+	$('#signup-pop-up-banner').bPopup({
+		onClose:function(){
+			$('#signup-e-mail').val('');
+			$('#signup-userName').val('');
+			$('#signup-password').val('');
+			$('#signup-passwordCheck').val('');
+			$('#signup-e-mail-label').text('');
+			$('#signup-userName-label').text('');			
+			$('#signup-password-label').text('');
+			$('#signup-passwordCheck-label').text('');
+		}
+	});
 });
 
 //스크롤 내리면 생기는 signUpBtn 팝업 , 불투명 배경 띄우기
 $('#signUpTopBtn').on('click', function(event){
 	event.preventDefault();
-	$('#signup-pop-up-banner').bPopup();
+	$('#signup-pop-up-banner').bPopup({
+		onClose:function(){
+			$('#signup-e-mail').val('');
+			$('#signup-userName').val('');
+			$('#signup-password').val('');
+			$('#signup-passwordCheck').val('');
+			$('#signup-e-mail-label').text('');
+			$('#signup-userName-label').text('');			
+			$('#signup-password-label').text('');
+			$('#signup-passwordCheck-label').text('');
+		}
+	});
 });
 
 //loginBtn 팝업 , 불투명 배경 띄우기
 $('#loginBtn').on('click', function(event){
 	event.preventDefault();
-	$('#login-pop-up-banner').bPopup();
+	$('#login-pop-up-banner').bPopup({
+		onClose:function(){
+			$('#userEmail').val('');
+			$('#userPassword').val('');
+		}
+	});
 });
 
 //스크롤 내리면 생기는 loginBtn 팝업 , 불투명 배경 띄우기
 $('#topLoginBtn').on('click', function(event){
 	event.preventDefault();
-	$('#login-pop-up-banner').bPopup();
+	$('#login-pop-up-banner').bPopup({
+		onClose:function(){
+			$('#userEmail').val('');
+			$('#userPassword').val('');
+		}
+	});
 });
 
 //-----------------------------랜덤 레시피 ---------------------------------
@@ -185,6 +217,10 @@ function isNumber(s) {
 
 function push(email, message, separation){
 	var socket = io.connect('http://127.0.0.1:8081');
+	
+	if(email==null){
+		return;
+	}
 	
 	if(separation=='login'){
 		data = {

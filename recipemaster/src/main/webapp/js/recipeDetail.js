@@ -36,9 +36,8 @@ $(function(){
 	recipeDetailLike();
 	clickDetailInDetailFunction();
 	timerStart();
-
 	var userInfo = getUserInfo();
-	
+	push((userInfo==null ? null:userInfo.email),'','login');
 })
 
 
