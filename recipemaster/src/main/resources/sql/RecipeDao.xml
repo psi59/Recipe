@@ -322,7 +322,7 @@
 		<if test="request == 2">
 			ORDER BY r1.rcp_dt DESC
 		</if>
-		limit #{len}
+		limit #{startIndex}, #{len}
 	</select>
 	
 	<select id="selectMts" resultMap="materialMap" parameterType="INTEGER">

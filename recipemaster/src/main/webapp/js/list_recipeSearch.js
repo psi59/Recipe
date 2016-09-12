@@ -1,12 +1,7 @@
-
-//document.write('<script type"text/javascript" src="js/recipeDetail.js"></script>')
-
-
-
 /* 검색 및 정렬 이벤트 -성현 */
 $(document).ready(function(){
 	
-	// url에 QueryString의 검색어로 검색결과 보여줌
+	// url에 QueryString의 검색어로 검색 결과 로딩
 	urlParams = getUrlParams();	
 	if(urlParams.sk != undefined){		
 		$('#searchKeyword').val(decodeURIComponent(urlParams.sk));
@@ -14,6 +9,14 @@ $(document).ready(function(){
 	if(urlParams.sc != undefined){		
 		$('#searchCondition-select').val(decodeURIComponent(urlParams.sc));
 	}
+	// 오늘의 인기 레시피
+	if(urlParams.more != undefined){
+		$('#more-rcp-list').val(decodeURIComponent(urlParams.more));
+	}
+	// 카테고리
+	if(urlParams.ctg != undefined){
+		$('#rcp-category-section input[type=checkbox][value='+decodeURIComponent(urlParams.ctg)+']').attr('checked',true);
+	}	
 	
 	// 처음화면에 모든 레시피들을 보여준다
 	search('newest', $('#order-latest-btn').val());
@@ -26,6 +29,7 @@ $(document).ready(function(){
 		$("body").scrollTop(0);
 		search('newest', $('#order-latest-btn').val());			    
 	});
+	
 	// 키보드에서 뗐을때의 검색 이벤트	
 	$('#searchKeyword').keyup(function(){
 		$("body").scrollTop(0);
@@ -70,42 +74,6 @@ $(document).ready(function(){
 	    	searchScrollAppend();
 	    }
 	});
-
-	// 자동완성 기능
-	var options = {
-			  url: function(phrase) {
-				  console.log(phrase);
-			    return "recipe/recipeSearchAutoComplete.json?searchValue="+phrase;
-			  },
-
-			  getValue: function(element) {
-				console.log(element);
-			    return element;
-			  },
-
-			  ajaxSettings: {
-			    dataType: "json",
-			    method: "GET"
-			  },
-			  requestDelay: 400,
-			  
-		      list: {
-		          showAnimation: {
-		            type: "slide", //normal|slide|fade
-		            time: 200
-		          },
-
-		          hideAnimation: {
-		            type: "slide", //normal|slide|fade
-		            time: 200
-		          },
-		          onChooseEvent: function() {
-		            
-		          }
-		      }
-		};
-		
-	//$('#searchKeyword').easyAutocomplete(options);
 	
 	// 고재현
 	$(document).on('click',('.rcp-like'),function(event){
@@ -182,7 +150,8 @@ function search(sort,order){
 			searchCondition : $("#searchCondition-select option:selected").val(),
 			sortCondition : sort,
 			orderCondition : order,
-			categoryList : categoryList	
+			categoryList : categoryList,
+			more : $('#more-rcp-list').val()
 		},		
 		dataType : 'json',
 		success : function(result) {
@@ -253,7 +222,8 @@ function searchScrollAppend(){
 				searchCondition : $("#searchCondition-select option:selected").val(),
 				sortCondition : $('#sort-condition').val(),
 				orderCondition : order,
-				categoryList : categoryList	
+				categoryList : categoryList,
+				more : $('#more-rcp-list').val()
 			},
 			dataType : 'json',
 			success : function(result) {

@@ -22,15 +22,12 @@
 <!-- <link rel="stylesheet" href="css/template/main.css"> -->
 
 <link rel="stylesheet" href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
- 
 
 <!-- 사용자 정의 css -->
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/userinfobox.css">
 <link rel="stylesheet" href="css/mainlist.css">
 <link rel="stylesheet" href="css/detail.css">
-
-
 
 <!-- 용이 -->
 <link rel="stylesheet" href="/node_modules/sweetalert/dist/sweetalert.css">
@@ -43,8 +40,6 @@
 <link rel="stylesheet" href="css/list_topbar.css">
 <link rel="stylesheet" href="css/list_categoryCheckbox.css">
 <link rel="stylesheet" href="css/list_countOrder.css">
-<link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.min.css">
-<link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.themes.min.css">
 <link rel="stylesheet" href="css/common/loading.css">
 <link rel="stylesheet"
   href="node_modules/bxslider/dist/jquery.bxslider.css">
@@ -609,7 +604,6 @@
 	<script src="js/common/popup.js"></script>
   <script src="js/common/chefCard.js"></script>
   <!-- <script src="js/common/signup.js"></script> -->
-	<script src="node_modules/easy-autocomplete/dist/jquery.easy-autocomplete.min.js"></script>
 	<script src="node_modules/bxslider/dist/jquery.bxslider.min.js"></script>	
 	<script src="js/common/starrating.js"></script>	
 	
@@ -617,7 +611,7 @@
 	$(document).ready(function(){
 		
 		// 상단바 불러오기
-		$('#topBtn').load("topsearchbar.html");	  		
+		$('#topBtn').load("list_topsearchbar.html");	  		
 		
 		getWeather();
 		getRealTimeRank();			

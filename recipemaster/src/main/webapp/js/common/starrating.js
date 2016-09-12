@@ -1,5 +1,6 @@
 // 별점등록 버튼 이벤트
 function starRatingBtn(){
+    	
 	$(document).on('click','#rcp-starrating-btn-apply',function(){
 		if($('input[name="rating"]:checked').val() != undefined){
 			$.ajax({
@@ -20,6 +21,7 @@ function starRatingBtn(){
 						$('#rcp-starrating').remove();
 						$('.rcp-rating').remove();
 						$('#rcp-starrating-btn-apply').remove();
+						$('#rcp-starrating-grade').remove();
 						checkDuplicateGrade();
 					} else if (result.loginCheck == false){
 						swal('로그인 하셔야 이용하실수 있습니다.');
@@ -52,7 +54,10 @@ function checkDuplicateGrade(){
 				swal('에러');
 				return;
 			}
-			$('.rcp-icons-info').append(compileStarRating(result));			
+			$('.rcp-icons-info').append(compileStarRating(result));
+			$('input[name="rating"]').change(function() {
+				$('#rcp-starrating-grade').html($('input[name="rating"]:checked').val()+' 점');
+			})
 		},
 		error : function(request,status,error) {
 			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);

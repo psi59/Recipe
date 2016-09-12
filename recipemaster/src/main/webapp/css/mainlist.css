@@ -25,6 +25,10 @@
 	font-family: 'Noto Sans KR', sans-serif;
 }
 
+.More {
+	cursor: pointer;
+}
+
 .ht-section {
 	padding-top: 10px;
 	padding-bottom: 10px;

@@ -4,7 +4,6 @@ var email;
 $(document).ready(function(){
 	
 	///// 회원가입 팝업창 가입 버튼 이벤트 /////
-	/*$('#signup-addBtn').click(function() {*/
 	$(document).on('click', '#signup-addBtn', function() {
 		if( $('#signup-e-mail').val() == ""){
 			swal('이메일을 입력해주세요');			

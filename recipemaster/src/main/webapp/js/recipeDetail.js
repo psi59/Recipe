@@ -1,6 +1,6 @@
 document.write('<script type"text/javascript" src="js/common.js"></script>')
 document.write('<script type"text/javascript" src="js/login.js"></script>')
-document.write('<script type"text/javascript" src="js/common/starrating2.js"></script>')
+document.write('<script type"text/javascript" src="js/common/starrating.js"></script>')
 
 var detailInfoTemp = $('#recipe-detail-304-info-template').html();
 var comDetailInfoTemp = Handlebars.compile(detailInfoTemp);   
@@ -109,10 +109,8 @@ function clickDetailInDetailFunction(){
 									+'<h2 class="title"></h2>'
 									+'<p class="hash"></p>'
 									+'<p class="date"></p>'
-									+'<div id="gpa-text">평점</div><div id="gpa">몇점</div>'
-									+'<div id="rcp-star-rating">별점주기</div>'
 									+'<div class="timerZone"></div>'
-									+'</div><hr/>'
+									+'<hr/></div>'
 									+'<div class="rcp-detail-body"></div>');
 				$('.rcp-header > .title').text(result.data.recipeName);
 				$('.rcp-header > .date').text(result.data.recipeDate);
@@ -281,10 +279,9 @@ function recipeDetail(){
 						$(".rcp-720").html('<div class="rcp-header">'
 											+'<h2 class="title"></h2>'
 											+'<p class="hash"></p>'
-											+'<p class="date"></p>'
-											+'</div><hr/>'
+											+'<p class="date"></p></div>'
 											+'<div class="timerZone"></div>'
-											+'<hr /></div>'
+											+'<hr/></div>'
 											+'<div class="rcp-detail-body"></div>');
 						// 별점주기 팝업
 						$('#rcp-star-rating').on('click', function(){
