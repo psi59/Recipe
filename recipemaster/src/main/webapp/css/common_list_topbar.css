@@ -280,15 +280,19 @@ a:hover, a:focus {
 /* ==========================================================================
    Main styles
    ========================================================================== */
-header {
-  background: url(../../img/header-bg.jpg) no-repeat center center;
+.header {
+  background: url(../../img/slide-restaurant-2.jpg);
   width: 100%;
-  height: 100vh;
+  height: 75%;
   overflow: hidden;
-  background-size: cover;
+  background-size: contain;
   -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+  background-repeat: no-repeat;
+}
+@media (min-width: 1200px){
+.header-body .container {
+    width: 1170px ! important;
+  }
 }
 
 .header-info {

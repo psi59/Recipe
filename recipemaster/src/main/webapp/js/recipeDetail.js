@@ -36,8 +36,8 @@ $(function(){
 	recipeDetailLike();
 	clickDetailInDetailFunction();
 	timerStart();
-
 	var userInfo = getUserInfo();
+	push((userInfo==null ? null:userInfo.email),'','login');
 })
 
 
@@ -59,7 +59,7 @@ function timerStart() {
 	$(document).on('click', '.timerBtn', function() {
 		var $this = $(this);
 		var node = $('<div class="timerObj"/>');
-		var clock = $('<div class="float_left"></div>');		
+		var clock = $('<div class="timerClock float_left"></div>');		
 		clock.countdown(getTimeStamp($this.next().next().val()))
 		.on('update.countdown', function(event) {
 		  var format = '%H:%M:%S';
@@ -81,6 +81,10 @@ function timerStart() {
 		$this.addClass('display_none');
 		$this.next().removeClass('display_none');
 		
+//		$(document).on('click', '.timerObj', function() {
+//			console.log($(this).children('.timerClock'));
+//			$($(this).children('.timerClock')).countdown('pause');
+//		});
 	});
 }
 
@@ -406,7 +410,7 @@ function addComment(){
 					swal('로그인 부탁염 ^오^');
 					return ;
 				}
-				push($('.rcp-hidden-email').val(), "댓글 남김 남김", "message");
+				push('bbb@naver.com',("like"+"/"+userInfo.email+"/"+userInfo.name+"/"+userInfo.image+"/"+"13"+"/"+"타이머테스트2"), "message");
 				console.log($('.rcp-hidden-email').val());
 				commentFunction();
 			},
@@ -533,8 +537,8 @@ function init_scroll(event, delta, slider) {
 function getTimeStamp(time) {
 	  var d = addMinutes(new Date(), time);
 	  var s =
-	    leadingZeros(d.getFullYear(), 4) + '-' +
-	    leadingZeros(d.getMonth() + 1, 2) + '-' +
+	    leadingZeros(d.getFullYear(), 4) + '/' +
+	    leadingZeros(d.getMonth() + 1, 2) + '/' +
 	    leadingZeros(d.getDate(), 2) + ' ' +
 
 	    leadingZeros(d.getHours(), 2) + ':' +

@@ -41,7 +41,6 @@ url ('https: //fonts.googleapis.com /css?family=Baloo+Tamma |Nunito');
 .introBox {
 	margin-top: 5%;
 	height: 215px;
-	background-color: #ffffec;
 	border-radius: 20px;
 }
 
@@ -213,6 +212,7 @@ footer a:hover {
 		display: block;
 		position: relative;
 		left: 16%;
+		    cursor: pointer;
 	}
 	.rcp-rankmedal {
 		position: absolute;
@@ -430,5 +430,10 @@ footer a:hover {
 	display: inline-block;
 	text-decoration: none
 }
+.rcp-ranking h4 {
+    width: 100%;
+    font-size: 12pt;
+    font-weight: bold;
+  }
 
 /*  */

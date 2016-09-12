@@ -89,8 +89,8 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public int updateRecipe(Recipe recipe) {
-		return recipeDao.updateRecipe(recipe);
+	public int updateRecipe(Map map) {
+		return recipeDao.updateRecipe(map);
 	}
 
 	@Override

@@ -36,6 +36,7 @@ public class Recipe {
 	private String commentUsers;
 	private int commentNo;
 	private String ctgName;
+	private JsonArray materialName;
 	
 
   public String getCtgName() {

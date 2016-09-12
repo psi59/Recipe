@@ -2,6 +2,25 @@
 /* ----------------styles.css copy------------ */
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
+.bg-text{
+    position: relative;
+    top: 320px;
+    color: white;
+    left: 250px;
+    font-size: 60px;
+}
+
+.rcp-background-text h1{
+	margin-bottom : 11px ! important;
+}
+.bg-p-text{
+    position: relative;
+    top: 320px;
+    color: white;
+    left: 250px;
+    font-size: 20px;
+}
+
 *>#main-list {
 	font-family: 'Noto Sans KR', sans-serif;
 }
@@ -11,8 +30,8 @@
 }
 
 .ht-section {
-	padding-top: 50px;
-	padding-bottom: 50px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	background-size: cover;
 	position: relative;
 }
@@ -20,6 +39,15 @@
 .rcp-h2-25px {
 	color: black;
 	font-size: 25px;
+}
+
+.rcp-mypage-section{
+  height: 310px;
+  margin-bottom : 30px;
+}
+
+.foo-wrapper{
+	font-size : 7.5px;
 }
 
 /* 
@@ -63,11 +91,7 @@
 	bottom: 0;
 }
 
-@media ( min-width : 992px) {
-	.hs-content	.container {
-		width: 1215px;
-	}
-}
+
 
 @media ( min-width : 768px and max-width:991px) {
 	.hs-content .container {
@@ -90,7 +114,7 @@
 
 .hs-recipes.grid .entry .entry-media {
 	position: relative;
-	width: 283px;
+	/* width: 283px; */
 	height: 160px;
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -98,12 +122,12 @@
 }
 
 .rcp-mypage-section .entry {
-	line-height: 30px;
+	/* line-height: 30px; */
 	/* margin-bottom: 30px; */
-	margin-bottom: 30px;
-	width: 283px;
-	margin-right: 10px;
-	margin-left: 10px;
+	/* margin-bottom: 30px; */
+	/* width: 283px; */
+/* 	margin-right: 10px;
+	margin-left: 10px; */
 	float: left;
 }
 

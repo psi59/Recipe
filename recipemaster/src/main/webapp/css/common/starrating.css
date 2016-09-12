@@ -8,6 +8,10 @@
 	cursor: pointer;
 }
 
+#starrating-box {
+  margin-top: -15px;
+}
+
 #rcp-starrating {
 	float: left;
 }

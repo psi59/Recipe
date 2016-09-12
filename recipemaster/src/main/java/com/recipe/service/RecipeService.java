@@ -33,7 +33,7 @@ public interface RecipeService {
 	List<Recipe> selectSubscribeMypage(int userNo);
 	List<Recipe> selectMypageRecipe(String userNumbers, int userNo, int request);
 	Recipe getRecipe(int recipeNo,int userNo);
-	int updateRecipe(Recipe recipe);
+	int updateRecipe(Map map);
 	int updateHits(Recipe recipe);
 	int deleteRecipe(int recipeNo);
 	List<Material> getMaterial(String materialName);

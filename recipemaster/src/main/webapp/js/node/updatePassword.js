@@ -58,7 +58,7 @@ app.use(function (req, res, next) {
 
 app.get('/user/updatePassword.do', function (request, response) {
 	var email = request.query.email;
-	var password = request.query.password;
+	var key = request.query.key;
 	// login 
 	var transporter = nodemailer.createTransport(({
 	    service: 'gmail',
@@ -73,7 +73,7 @@ app.get('/user/updatePassword.do', function (request, response) {
 		  to: email,
 		  subject: "href",
 		  generateTextFromHTML: true,
-		  html: "<a>"+email+"님의 비밀번호는</a>"+"<br>"+"<a>"+password+"로 변경완료 되었습니다.</a>"
+		  html: "<a>"+email+"님의 비밀번호는</a>"+"<br>"+"<a>"+key+"로 변경완료 되었습니다.</a>"
 		
 	}, function(error, response) {
 	   if (error) {
@@ -82,6 +82,24 @@ app.get('/user/updatePassword.do', function (request, response) {
 	        console.log('Message sent');
 	   }
 	});
+	
+	response.writeHead(300, {
+		'Content-Type' : 'text/html;charset=UTF-8' 
+	  });
+	  response.write("<!DOCTYPE html>\n");
+	  response.write("<html>\n");
+	  response.write("<head>\n");
+	  response.write("<meta charset=\"UTF-8\">\n");
+	  response.write("<title>게시판</title>\n");
+	  response.write("<link rel='stylesheet' type='text/css' href='css/style.css'>\n");
+	  response.write("<style>div{position: absolute;width: 500px;height: 500px;background: #ffffff;left: 600px;margin-left: 0px;margin-top: 0px;top: 200px;bottom: 200px;right: 600px;border: 1px solid #e80000;}</style>\n");
+	  response.write("</head>\n");
+	  response.write("<body>\n");
+	  response.write("<div><h1>비밀번호 변경이 완료되었습니다.</h1>\n");
+	  response.write("<a href='http://127.0.0.1:8080'>cookle로 바로가기</a>\n");
+	  response.write("</div>\n");
+	  response.write("</body>\n");
+	  response.write("</html>\n");
 	
 	
 	response.end();

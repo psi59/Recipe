@@ -95,9 +95,21 @@ body {
 }
 
 .rcp-userPage-userName {
-	margin-left: 200px;
-	margin-top: 20px;
-	color: white;
+	position:relative;	
+	bottom:20px;	
+	width:200px;
+	color: white;	
+}
+
+.rcp-topimg-position hr{
+	
+    border-top:1px solid #b9b9b9;
+    position: relative;
+    bottom:30px;
+}
+
+.rcp-pagetop h2{
+	font-size : 30px;
 }
 
 .rcp-pagemiddle-div1 {
@@ -185,17 +197,23 @@ body {
 }
 
 .rcp-fullpage {
-	margin: 19%;
-	margin-top: 6%;
+	
 	margin-bottom: 3%;
 }
 
 .rcp-pagetop {
 	/*  background-color: #D4F4FA; */
-	background-image: URL(../img/header-bg2.jpg);
+/* 	background-image: URL(../img/header-bg2.jpg);
 	width: 100%;
-	height: 315px;
+	height: 315px; */
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+background: url(../../img/slide-restaurant-2.jpg);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-size: contain;
+    -webkit-background-size: cover;
+    background-repeat: no-repeat;
 	/*  background: white !important; */
 }
 
@@ -207,7 +225,54 @@ body {
 	background: rgba(0, 0, 0, .3);
 	border-radius: 3px;
 	padding: 1px;
-	position: absolute;
+	position: relative;
+	
+	bottom:30px;
+}
+
+.rcp-mypage-container{
+    height: 50px;
+    position: relative;
+    margin: auto;
+    width: 850px;
+    text-align: center;
+}
+
+
+.rcp-mypage-userInfo{
+	     position: relative;
+    float: left;
+    color: white;
+}
+.rcp-userInfo{
+	    height: 50px;
+    width:700px;
+    margin:auto;
+    position: relative;
+    bottom:20px;
+}
+
+/* .rcp-count-visit{
+
+    left: 85px;
+}
+
+.rcp-count-like{
+	left: 170px;
+}
+
+.rcp-count-scrap{
+	left:255px;
+}
+.rcp-count-grade{
+	left:340px;
+} */
+
+.rcp-topinfo h2{
+	font-size:30px;
+	  position: relative;
+    left: 12%;
+    top: 10px;
 }
 
 .rcp-bottomLine-info {
@@ -216,11 +281,13 @@ body {
 }
 
 .rcp-topimg {
-	height: 168px;
-	width: 168px;
+	height: 64px;
+	width: 64px;
 	float: left;
 	background-color: #fff;
-	border: 4px solid #fff;
+	border: 3px solid #fff;
+	position : relative;
+	
 }
 
 .rcp-topimg-position {
@@ -240,24 +307,11 @@ body {
 	font-size: 18pt;
 }
 
-.rcp-topbtn {
-	position: relative;
-	top: 16px;
-	right: -87%;
-	border: none;
-	border-radius: 3px;
-	cursor: pointer;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
 .rcp-pagemiddle {
 	width: 100%;
 	height: 10%;
 }
 
-.hs-content>.container {
-	width: 970px;
-}
 
 #tabs {
 	border: 0px;
@@ -295,7 +349,7 @@ body {
 
 .rcp-Vst-id {
 	font-color: #000000;
-	margin-left: 22%;
+	margin-left: 30%;
 }
 
 .rcp-Vst-write {
@@ -374,11 +428,12 @@ body {
 }
 
 .rcp-Vst-img {
-	position: absolute;
-	width: 65px;
-	height: 65px;
-	top: 225px;
-	padding-top: 0;
+	    position: relative;
+    width: 65px;
+    height: 65px;
+    top: 9px;
+    margin-left: 11px;
+    padding-top: 0;
 }
 
 .rcp-Vst-img-rep {
@@ -400,7 +455,7 @@ body {
 .rcp-Vst-common {
 	padding-left: 5px;
 	padding-top: -10px;
-	margin: 5px;
+	margin-top: -70px;
 	color: #8c94a2 font-size: 11pt;
 	/*font-weight: bold;*/
 }
@@ -455,12 +510,12 @@ body {
 }
 
   .hs-recipes .isotope-filter {
-    position: relative;
+    /* position: relative; */
     display: block;
     text-align: center;
     margin-bottom: 50px;
     font-weight: 700;
-    right: 16%;
+    /* right: 16%; */
     font-family: 'Raleway', sans-serif;
      
     
@@ -494,4 +549,58 @@ body {
     -webkit-transition: width 1s;
     -o-transition: width 1s;
     transition: width 1s;
+}
+
+#rcp-Vst-time {
+  font-color: #000000;
+  margin-left: 13%;
+}
+
+.rcp-topbtn {
+  position: relative;
+  top: 16px;
+  right: -85%;
+  border: none;
+  background-color:#e80000;
+  border-bottom: 5px solid #a91c14;
+  cursor: pointer;
+  width: 136px;
+}
+
+.animate
+{
+  transition: all 0.1s;
+  -webkit-transition: all 0.1s;
+}
+
+.action-button
+{
+  position: relative;
+  padding: 10px 40px;
+  margin: 0px 10px 10px 0px;
+  float: left;
+  border-radius: 10px;
+  font-family: 'Jeju Gothic', sans-serif;
+  font-size: 14px;
+  color: #ffffff;
+  text-decoration: none;  
+}
+
+.action-button:active
+{
+  transform: translate(0px,5px);
+  -webkit-transform: translate(0px,5px);
+  border-bottom: 1px solid;
+}
+.rcp-visible{
+	visibility: visible;
+}
+
+.p-xlg h2{
+	color: #44494b;
+}
+
+.rcp-p-xlg-padding{
+	padding-top:0px ! important;
+	padding-bottom:10px ! important;
 }

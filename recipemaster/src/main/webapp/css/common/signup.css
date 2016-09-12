@@ -13,13 +13,6 @@
 	font-style: #ff0000;	
 }
 
-#login-pop-up-banner {
-  display: none;
-  width: 375px;
-  height: 340px;
-  border-radius: 7px;
-  background: #ffffff;
-}
 
 .todayMenu{
 	text-align: center;
@@ -31,23 +24,6 @@
 	margin-top: 25px;
 	text-align: center;
 }
-
-
-#signup-addBtn, #signup-resetBtn {
-  margin: 25px;
-  border-style: solid;
-  border-radius: 6px;
-  border-color: #b51515;
-  padding: 7px 30px 7px 30px;
-  cursor: pointer;
-  color: black;
-  font-size: 20px;
-}
-
-#signup-addBtn:hover, #signup-resetBtn:hover {
-  color: white;
-  background: #b51515;
-} 
 
 .rcp-sign-membership #userLogin {
 	margin: 25px;
@@ -149,13 +125,18 @@
 	padding-top: .5rem;
 }
 
-#findPassword{
-	  top: 311px;
-	  left: 136px;
-    position: absolute;
-    
+  
+#pushBtn{
+    border: none;
+    background-color: #e80000;
+    border-bottom: 5px solid #a91c14;
+    cursor: pointer;
 }
 
-#findPassword:hover{
-  color: #b51515;
-} 
+#signup-addBtn{
+	border: 1px solid #ccc;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 40px;
+  margin-bottom: 2px ! important;
+}

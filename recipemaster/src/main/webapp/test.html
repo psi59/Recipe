@@ -5,21 +5,35 @@
 <title>Insert title here</title>
 </head>
 <body>
+<input type="text" id="search">
 <button id="btn">전송전송</button>
 </body>
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	$('#btn').on('click', function(){
+	$('#search').on('keyup', function(){
+		var datas = {
+				  query:{
+					    multi_match: {
+					    query:$(this).val(),
+					      fields: ["recipeName^3", "Materials", "userName"]
+					    }
+					  }
+					,
+					from: 0,
+					size: 4
+			};  
+		
 		$.ajax({
-		    url : 'http://localhost:9200/_all/_search?pretty/_source?pretty=true',
-		    method : 'get',
-		    /* data : {
-		      recipeNo : recipeNo
-		    }, */
+		    url : 'http://localhost:9200/recipes/_search',
+		    method : 'POST',
+		    data : JSON.stringify(datas),
 		    dataType : 'json',
+		    crossDomain: true,
 		    success : function(result) {
-		      console.log(result);
+		    	$.each(result.hits.hits, function(index, data){
+		    		console.log(data._source);
+		    	});
 		    },
 		    error : function() {
 		        alert('에러에러')

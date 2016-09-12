@@ -115,6 +115,9 @@ $(function() {
 							+ '<input type="hidden" name="materialNo" value="'
 							+ no
 							+ '">'
+							+ '<input type="hidden" name="materialName" value="'
+							+ name
+							+ '">'
 							+ '<a href="#"><span class="closeBtn mtClose thick"></span></a>'
 							+ '</div>');
 
@@ -490,6 +493,9 @@ function getRecipeEditInfo(recipeNo){
 								+ '<div class="float_left mtAmount"><input name="materialAmount" type="text" value="'+recipeMaterials[index].materiaQuantity+'" placeholder="분량 (예:400g)" /></div>'
 								+ '<input type="hidden" name="materialNo" value="'
 								+ recipeMaterials[index].materialNo
+								+ '">'
+								+ '<input type="hidden" name="materialName" value="'
+								+ recipeMaterials[index].materialName
 								+ '">'
 								+ '<a href="#"><span class="closeBtn mtClose thick"></span></a>'
 								+ '</div>');
