@@ -13,6 +13,10 @@ $(document).ready(function(){
 	if(urlParams.more != undefined){
 		$('#more-rcp-list').val(decodeURIComponent(urlParams.more));
 	}
+	// 카테고리
+	if(urlParams.ctg != undefined){
+		$('#rcp-category-section input[type=checkbox][value='+decodeURIComponent(urlParams.ctg)+']').attr('checked',true);
+	}	
 	
 	// 처음화면에 모든 레시피들을 보여준다
 	search('newest', $('#order-latest-btn').val());
