@@ -72,3 +72,28 @@
   -o-transition: .25s all ease;
   transition: .25s all ease;
 }
+
+
+
+.category{	
+	float: left;
+	font-size:9pt;
+	text-align:left;
+	width:120px;
+}
+.rcp-ul-height{
+	height:20px;	
+}
+.rcp-relative-left-75px{
+	position: relative;
+  left: 75px;
+}
+
+.rcp-cursor{
+	cursor: pointer;
+}
+
+.rcp-category-checked{
+	font-weight: 500;
+  color: #e09b23;
+}

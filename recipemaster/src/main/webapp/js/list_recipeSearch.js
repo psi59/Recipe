@@ -122,6 +122,8 @@ $(document).ready(function(){
 		  }
 	  });
 
+	categoryClick();
+	
 });
 
 // 처음 검색했을때의 1페이지 결과 가져오기 -이성현
@@ -341,6 +343,19 @@ function mouseMoveEventForSubscribeImage(result){
 					
 				}
 			})
+}
+
+
+function categoryClick(){
+	$(document).on('click','.rcp-cursor',function(event){		
+		if( $(event.target).hasClass('rcp-category-checked')){			
+			$(event.target).removeClass('rcp-category-checked');
+		}else{			
+			$(event.target).addClass('rcp-category-checked');
+		}
+		
+	})
+	
 }
 
 
