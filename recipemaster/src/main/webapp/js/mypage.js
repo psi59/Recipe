@@ -4,6 +4,8 @@ document.write('<script type"text/javascript" src="js/recipeDetail.js"></script>
 $(function() {
 	//recipeDetail();
 	var userInfo = getUserInfo();
+	
+	$('.header-body').load('topNavBar.html');
 
 	//push(userInfo.email, '', 'login');
 	
@@ -48,6 +50,8 @@ $(function() {
 
 //				}
 			}
+			$('#tabs-2').addClass('display_none');
+			$('#tabs-3').addClass('display_none');
 		},
 		error : function() {
 			// alert('community 서버 요청 오류!...')
@@ -353,19 +357,35 @@ function pageTabs() {
 					request=1;
 					$('.rcp-Vst').hide();
 					$('.rcp-Vst-write').hide();
+					$('#tabs-1').removeClass('display_none');
+					$('#tabs-2').addClass('display_none');
+					$('#tabs-3').addClass('display_none');
+					$('#tabs-4').addClass('display_none');
 				}
 				else if($(event.target).is('#searchScrap')){
 					request=2;
 					$('.rcp-Vst').hide();
 					$('.rcp-Vst-write').hide();
+					$('#tabs-1').addClass('display_none');
+					$('#tabs-2').removeClass('display_none');
+					$('#tabs-3').addClass('display_none');
+					$('#tabs-4').addClass('display_none');
 				}else if($(event.target).is('#searchSubscribe')){
 					request=3;
 					$('.rcp-Vst').hide();
 					$('.rcp-Vst-write').hide();
+					$('#tabs-1').addClass('display_none');
+					$('#tabs-2').addClass('display_none');
+					$('#tabs-3').removeClass('display_none');
+					$('#tabs-4').addClass('display_none');
 				}else{
 					request = 4;
 					$('.rcp-Vst').remove();
 					loadVisitor();
+					$('#tabs-1').addClass('display_none');
+					$('#tabs-2').addClass('display_none');
+					$('#tabs-3').addClass('display_none');
+					$('#tabs-4').removeClass('display_none');
 				}
 
 				$
