@@ -37,7 +37,9 @@ $(document).ready(function(){
 	})
 	
 	// 카테고리 라벨 변경 이벤트
-	$('input[type=checkbox]').change(function(){		
+	/*$('input[type=checkbox]').change(function(){*/
+	$('.category').click(function(){
+		alert('들어왓다 ~');
 		$("body").scrollTop(0);
 		search('newest', $('#order-latest-btn').val());
 	})
@@ -136,7 +138,8 @@ function search(sort,order){
 	var template = Handlebars.compile(source);
 	
 	var categoryList = '';
-	$('#rcp-category-section input[type=checkbox]:checked').each(function(index){
+	/*$('#rcp-category-section input[type=checkbox]:checked').each(function(index){*/
+	$('.rcp-cursor').hasClass('rcp-category-checked').each(function(index){		
 		if(index !== ($('#rcp-category-section input[type=checkbox]:checked').length-1)){
 			categoryList += $(this).val()+','; 
 		} else {
@@ -347,15 +350,13 @@ function mouseMoveEventForSubscribeImage(result){
 
 
 function categoryClick(){
-	$(document).on('click','.rcp-cursor',function(event){		
+	$(document).on('click','.category',function(event){		
 		if( $(event.target).hasClass('rcp-category-checked')){			
 			$(event.target).removeClass('rcp-category-checked');
 		}else{			
 			$(event.target).addClass('rcp-category-checked');
 		}
-		
 	})
-	
 }
 
 
