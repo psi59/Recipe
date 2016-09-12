@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="sticky-header-negative sticky-header-active">
 <head>
 <meta charset="utf-8">
 <title>Recipe List Page</title>
@@ -15,11 +15,15 @@
 
 <!-- Template css -->
 <link rel="stylesheet"
-	href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/rcp-template/theme.css">
+<link rel="stylesheet" href="css/rcp-template/theme-element.css">
+<link rel="stylesheet" href="css/rcp-template/skin-restaurant.css">
 <link rel="stylesheet" href="css/template/font-awesome.min.css">
 <link rel="stylesheet" href="css/template/animate.css">
 <link rel="stylesheet" href="css/template/commentTemp.css">
-<!-- <link rel="stylesheet" href="css/template/main.css"> -->
+<link rel="stylesheet" href="css/template/styles.css">
+<link rel="stylesheet" href="css/template/main.css"> 
 
 <link rel="stylesheet" href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
  
@@ -40,7 +44,7 @@
 <link rel="stylesheet" href="css/common/popup.css">
 <link rel="stylesheet" href="css/common/signup.css">
 <link rel="stylesheet" href="css/index_rankTabs.css">
-<link rel="stylesheet" href="css/list_topbar.css">
+<!-- <link rel="stylesheet" href="css/list_topbar.css"> -->
 <link rel="stylesheet" href="css/list_categoryCheckbox.css">
 <link rel="stylesheet" href="css/list_countOrder.css">
 <link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.min.css">
@@ -48,22 +52,68 @@
 <link rel="stylesheet" href="css/common/loading.css">
 <link rel="stylesheet"
   href="node_modules/bxslider/dist/jquery.bxslider.css">
-<link rel="stylesheet" href="css/common/starrating.css">
+<link rel="stylesheet" href="css/common/starrating1.css">
 <!-- --- 아이콘 CDN ----- -->
 <!-- <script src="js/template/d9e67edb08.js"></script> -->
 
 </head>
-<body>
+<body  data-spy="scroll"  data-target="#navSecondary" data-offset="170">
  
-  <div id="topBtn" class="navbar navbar-inverse navbar-fixed-top open">  
-  </div>
+<header id="header" class="header-narrow site-header wide" role="banner" data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": false}'>
+ 
+     <div class="header-body" style="top:0px;">
+         
+          <div class="header-container container">
+            <div class="header-row">
+              <div class="header-column">
+                <div class="header-logo">
+                  <a href="index.html">
+                    <img id="rcp-top-bar-logo" alt="Porto" width="164" height="55" src="img/logo-restaurant.png">
+                  </a>
+                </div>
+              </div>
+              <div class="header-column">
+                <div class="header-row">
+                  <div class="header-nav">
+                    <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main">
+                      <i class="fa fa-bars"></i>
+                    </button>
+                    <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 collapse">
+                      <nav>
+                        <ul class="nav nav-pills" id="mainNav">
+                          <li class="activedropdown-full-color dropdown-secondary rcp-visible">
+                            <a href="#">
+                              Home
+                            </a>
+                          </li>
+                          <li class="dropdown-full-color dropdown-secondary rcp-visible">
+                            <a href="#" id="loginBtn">
+                              Login
+                            </a>
+                          </li>
+                          <li class="dropdown-full-color dropdown-secondary rcp-visible">
+                            <a href="#" id="signUpBtn">
+                              Sign Up
+                            </a>
+                          </li>
+                        </ul>
+                      </nav>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+</header>
+
   
 	<div class="mouse-icon hidden-xs">
 		<div class="scroll"></div>
 	</div>
 
   <!----------------------- 리스트 카테고리 ----------------------->
-  					
+  					<!-- 
 		<section id="rcp-category-section" class="rcp-category">    
       <div id="rcp-category-div">
 	      <div>
@@ -214,11 +264,11 @@
 	        </span>	        
 	      </div>
       </div>                     
-    </section>
+    </section> -->
 	<!----------------------- /리스트 카테고리 ----------------------->
 	
 	<!----------------------- 리스트 레시피 카운트 및 정렬 ----------------------->
-	<section id="rcp-list-count-order">	
+<!-- 	<section id="rcp-list-count-order">	
 	 <div id="rcp-list-count-order-first-div">
 		<div id="rcp-list-count">		  
 		  <h2 id="recipe-count"></h2>
@@ -236,7 +286,7 @@
 			</button>
 		</div>   
 		</div>
-	</section>
+	</section> -->
 	<!----------------------- /리스트 레시피 카운트 및 정렬 ----------------------->
 
 
@@ -331,11 +381,29 @@
   </div>
 
 
+<section class="p-xlg rcp-p-xlg-padding rcp-list-margin-top">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12 center">
+                <h2 class="mt-lg mb-sm">Get your <strong>Recipe</strong></h2>
+                <p class="font-size-md">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu pulvinar magna.<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+
+                <hr class="custom-divider">
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
   <section class="ht-section hs-recipes grid">
 
     <div id="tabs-1">
       <div class="rcp-main-right">
         <div class="rcp-subscribe"></div>
+          <div id="rcp-list-count">     
+      <h3 id="recipe-count"></h3>
+    </div>
         <div class="hs-content">
           <div class="container">
             <div class="row">
@@ -518,25 +586,23 @@
 </script>
  
  
- <script id="temp" type="text/x-handlebars-template">
-  <div class="rcp-mypage-section">               
-<h4 class="rcp-main-subscribe-userName0"></h4>
+<script id="temp" type="text/x-handlebars-template">
 {{#each data}}
-
+<div>
 <div class="isotope-grid" id="grid-2">
-          <div class="entry filter-food filter-pudding">
+         <div class="entry col-xs-12 col-sm-4 col-md-3 filter-food filter-pudding">
             <div class="entry-inner">
-         {{#each representImages}}  
-              <input type="hidden" class="forBackgroundRepresentImg" value="{{this}}">
-              {{/each}}
-              <div class="entry-media" name="recipe-subscribe-image" style="background-image:url(img/representImg/{{representImages representImages}}">
+             
+              <div class="entry-media"  name="recipe-subscribe-image" style="background-image:url(img/representImg/{{representImages representImages}}">
                
                 <div class="entry-action">
-                  <div class="entry-action-inner">                  
+                  <div class="entry-action-inner">
+                    
                   </div>
                 </div>
               </div>
               <!-- ./ entry-media -->
+                  <!-- ./ entry-media -->
               <div class="content-wrapper">
                 <h3 class="entry-name"><a href="#">
                 <input type="hidden" name="recipeNo" value="{{recipeNo}}">
@@ -547,9 +613,17 @@
                 </a>
                 <div class="entry-meta">
                   <div class="foo-wrapper">
-                    <span>좋아요 {{countLike}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="meta-time">{{cookTime}}분 소요</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span>스크랩하기</span>
+                    <span>
+                    <a href="#" class="rcp-like"><div class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top"></div>
+                    <span>좋아요 {{countLike}}</span></a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            
+                    <div class="glyphicon glyphicon glyphicon-time rcp-i-tag-margin-right-top"></div>
+                    <span class="meta-time">{{cookTime}}분 소요</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+                    <span>
+                     <a href="#" class="rcp-scrap"><div class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></div>
+                    <span>스크랩 {{countScrap}}</span></a>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -559,10 +633,8 @@
           </div>
         
           </div>
-
 {{/each}}
 </script>
-
 
   <script id="recipe-comment-addForm" type="text/x-handlebars-template">
         <!-- <h2>Leave a Reply</h2> -->
@@ -602,6 +674,8 @@
 	<script src="js/common.js"></script>
 		
  <script src="js/recipeDetail.js"></script>
+ <script src="js/list_recipeSearch.js"></script>
+ 
 	<!-- <script src="js/login.js"></script> -->
 	<!-- 용이 userUpdate -->
 	<!-- <script src="js/updateUser.js"></script> -->
@@ -611,13 +685,13 @@
   <!-- <script src="js/common/signup.js"></script> -->
 	<script src="node_modules/easy-autocomplete/dist/jquery.easy-autocomplete.min.js"></script>
 	<script src="node_modules/bxslider/dist/jquery.bxslider.min.js"></script>	
-	<script src="js/common/starrating.js"></script>	
+	<script src="js/common/starrating1.js"></script>	
 	
 	<script>
 	$(document).ready(function(){
 		
 		// 상단바 불러오기
-		$('#topBtn').load("topsearchbar.html");	  		
+		//$('#topBtn').load("topsearchbar.html");	  		
 		
 		getWeather();
 		getRealTimeRank();			

@@ -46,7 +46,7 @@ public class RecipeController {
   public String listSearch(@RequestParam(defaultValue="1") int pageNo,
       @RequestParam(defaultValue="8") int pageSize,
       Search search, @RequestParam(value="categoryList") List<String> categoryList, HttpSession session){
-
+System.out.println("여기옴 ? ");
     HashMap<String,Object> result = new HashMap<>();     
     int recipeCount = 0;    
 

@@ -218,6 +218,17 @@ function search(sort,order){
 	})	
 }
 
+
+
+Handlebars.registerHelper("representImages", function(value, options){
+	{			
+		return value[0]
+		//return value;
+	}
+});  
+
+
+
 // 스크롤 끝까지 내렸을때 추가될 결과 한페이지씩 가져오기 -이성현
 function searchScrollAppend(){ 
 		
@@ -270,8 +281,7 @@ function searchScrollAppend(){
 						$('#search-pageNo').val(result.pageNo);
 					} else {
 						$('#search-pageNo').val('lastPage');
-					}
-					methods();
+					}					
 				}, 500)
 			},
 			// 데이터 조회 중일때 로딩 이미지 보여주기
