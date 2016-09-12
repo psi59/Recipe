@@ -43,7 +43,7 @@
 
 
 <!-- 성현 -->
-<link rel="stylesheet" href="css/common_list_topbar.css">
+<!-- <link rel="stylesheet" href="css/common_list_topbar.css"> -->
 
 <style>
 </style>
@@ -377,7 +377,9 @@
 <div class="isotope-grid" id="grid-2">
          <div class="entry col-xs-12 col-sm-4 col-md-3 filter-food filter-pudding">
             <div class="entry-inner">
-             
+             {{#each representImages}}  
+              <input type="hidden" class="forBackgroundRepresentImg" value="{{this}}">
+              {{/each}}
               <div class="entry-media"  name="recipe-subscribe-image" style="background-image:url(img/representImg/{{representImages}}">
                {{#transientStorage}}{{else}}
                 <p>임시저장됨</p>
@@ -420,6 +422,7 @@
           </div>
         
           </div>
+</div>
 {{/regStatus}}
 {{/each}}
 </script>

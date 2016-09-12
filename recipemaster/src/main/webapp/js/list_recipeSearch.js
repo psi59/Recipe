@@ -151,7 +151,7 @@ function search(sort,order){
 			sortCondition : sort,
 			orderCondition : order,
 			categoryList : categoryList,
-			more : $('#more-rcp-list').val()
+			more : ($('#more-rcp-list').val()==null?0:$('#more-rcp-list').val())
 		},		
 		dataType : 'json',
 		success : function(result) {
@@ -186,6 +186,17 @@ function search(sort,order){
 		}
 	})	
 }
+
+
+
+Handlebars.registerHelper("representImages", function(value, options){
+	{			
+		return value[0]
+		//return value;
+	}
+});  
+
+
 
 // 스크롤 끝까지 내렸을때 추가될 결과 한페이지씩 가져오기 -이성현
 function searchScrollAppend(){ 
@@ -240,8 +251,7 @@ function searchScrollAppend(){
 						$('#search-pageNo').val(result.pageNo);
 					} else {
 						$('#search-pageNo').val('lastPage');
-					}
-					methods();
+					}					
 				}, 500)
 			},
 			// 데이터 조회 중일때 로딩 이미지 보여주기
@@ -302,28 +312,36 @@ $(function(){
 })
 
 function mouseMoveEventForSubscribeImage(result){
-				$(document).on('mousemove','.entry-action',function(event){
-					if( $(event.target).attr('class') == 'entry-action' ){					
-						var imageChange = parseInt( $('.entry-action').width() + 1)  / $(event.target).parent().parent().children('input[type="hidden"]').length;					
-						var image = parseInt(event.offsetX / imageChange);					
-						$(event.target).parent().attr("style", "background-image:url(img/representImg/"
-							+$(event.target).parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
-						
-						
-						
-					}else{
-						console.log('여기옴 ? actioninner');
-						var imageChange = parseInt( $('.entry-action-inner').width() + 1)  / $(event.target).parent().parent().parent().children('input[type="hidden"]').length;
-						var image = parseInt(event.offsetX / imageChange);								
-						$(event.target).parent().attr("style", "background-image:url(img/representImg/"
-								+$(event.target).parent().parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
-						
-					}
-				})
-	}
-
-
-	
+			$(document).on('mousemove','.entry-action, .entry-action-inner',function(event){
+				if( $(event.target).attr('class') == 'entry-action' ){					
+					var imageChange = parseInt( $('.entry-action').width() + 1)  / $(event.target).parent().parent().children('input[type="hidden"]').length;					
+					var image = parseInt(event.offsetX / imageChange);					
+					$(event.target).attr("style", "background-image:url(img/representImg/"
+						+$(event.target).parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
+					
+					if(image != $(event.target).parent().children('input[type="hidden"]').length + 1){
+						$(event.target).parent().children('.rcp-count-images').text(image+1+" / "+$(event.target).parent().children('input[type="hidden"]').length);
+						}else{
+							return;
+						}
+					
+					
+				}else{
+					console.log('여기옴 ? actioninner');
+					var imageChange = parseInt( $('.entry-action-inner').width() + 1)  / $(event.target).parent().parent().parent().children('input[type="hidden"]').length;
+					var image = parseInt(event.offsetX / imageChange);								
+					$(event.target).parent().attr("style", "background-image:url(img/representImg/"
+							+$(event.target).parent().parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
+					
+					if(image != $(event.target).parent().children('input[type="hidden"]').length + 1){
+						$(event.target).parent().children('.rcp-count-images').text(image+1+" / "+$(event.target).parent().children('input[type="hidden"]').length);
+						}else{
+							return;
+						}
+					
+				}
+			})
+}
 
 
 
