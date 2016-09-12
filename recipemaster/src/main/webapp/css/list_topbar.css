@@ -281,7 +281,7 @@ a:hover, a:focus {
    Main styles
    ========================================================================== */
 header {
-  background: url(../../img/header-bg.jpg) no-repeat center center;
+  
   width: 100%;
   height: 100vh;
   overflow: hidden;

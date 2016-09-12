@@ -1,5 +1,8 @@
 /********** main header css 시작 ***********/
-@import 'https://fonts.googleapis.com/css?family=Audiowide|Bungee|Niconne|Sigmar+One';
+@import
+	'https://fonts.googleapis.com/css?family=Audiowide|Bungee|Niconne|Sigmar+One'
+	;
+
 #footer {
 	text-align: center;
 }
@@ -79,7 +82,7 @@ header {
 	width: 10em;
 	margin-left: 1.3em;
 	margin-right: 1em;
-	    margin-top: -5px;
+	margin-top: -5px;
 }
 
 .rcp-navbar-searchbar-size {
@@ -535,43 +538,43 @@ header .header-content {
 	list-style: none;
 }
 
-#slot_box{
-   position: relative;
-   width: 100%;
-   height: 433px;
-   overflow: hidden;
-   display: inline-block;
+#slot_box {
+	position: relative;
+	width: 100%;
+	height: 433px;
+	overflow: hidden;
+	display: inline-block;
 }
 
-.rigth_position_15px{
+.rigth_position_15px {
 	right: 15px !important;
 }
 
-.rigth_position_0{
-  right: 0;
+.rigth_position_0 {
+	right: 0;
 }
 
-.top_position_30px{
-  top: 30px;
+.top_position_30px {
+	top: 30px;
 }
 
-.display_none{
+.display_none {
 	display: none;
 }
 
-.padding_top_15px{
+.padding_top_15px {
 	padding-top: 15px;
 }
 
-.timerBtn{
+.timerBtn {
 	position: absolute;
 	top: 0;
 	right: 0;
-  height: 100%;
-  font-size: small;
-  background: transparent;
-  border: transparent;
-  color: #717171;
+	height: 100%;
+	font-size: small;
+	background: transparent;
+	border: transparent;
+	color: #717171;
 }
 
 #logo-cookleHome {
@@ -586,15 +589,51 @@ header .header-content {
 	margin-right: 5px;
 	margin-top: -5px;
 }
-.rcp-mainlogo{
+
+.rcp-mainlogo {
 	font-family: 'Niconne', cursive;
 	font-size: 150pt;
-	color : white;
+	color: white;
 	cursor: context-menu;
 }
-.rcp-sublogo{
+
+.rcp-sublogo {
 	font-family: 'Niconne', cursive;
-  font-size: 30pt;
-  color : white;
-  cursor: context-menu;
+	font-size: 30pt;
+	color: white;
+	cursor: context-menu;
+}
+
+.padding_6px {
+	padding: 6px !important;
+}
+
+.margin_right_10px {
+	margin-right: 10px;
+}
+
+#searchKeyword{
+	border: none;
+	height: 30px;
+	width: 180px;
+	height: 100%;
+}
+
+#searchKeyword:focus {
+    background-color: #fff;
+    box-shadow: none;
+    color: #4d4d4d;
+    -webkit-box-shadow: none;
+    outline: -webkit-focus-ring-color auto 0px;
+}
+
+
+.searchWrapper{
+	border: 1px solid #acacac;
+	border-radius: 3px; 
+	color: #acacac;
+}
+
+#searcIcon{
+	margin: 10px;
 }

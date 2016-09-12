@@ -670,3 +670,8 @@ footer {
 @media (min-width: 1200px) and (max-width: 3000px) {
 
 }  
+
+#recipe-count{
+	font-size:21px;
+	color:#474747;
+}

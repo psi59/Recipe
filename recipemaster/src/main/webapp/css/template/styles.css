@@ -368,16 +368,9 @@ h6 {
 
 /*** 1.2.2 BASE > TYPOGRAPHY > Links
 ---------------------------------------*/
-a {
-  text-decoration: none !important;
-  -webkit-transition: 0.3s;
-  -o-transition: 0.3s;
-  transition: 0.3s;
-  color: #44494b; }
+
   a:hover {
     color: #f8a631; }
-  a:focus {
-    text-decoration: none; }
 
 a:focus, input:focus, select:focus, textarea:focus {
   outline: none !important; }
@@ -7052,3 +7045,9 @@ table th[class*="col-"] {
   margin-top: -1px;
   border-top-right-radius: 0;
   border-top-left-radius: 0; }
+  
+  
+  .entry{
+  margin-top: 15px;
+    margin-bottom: 15px;
+    }
