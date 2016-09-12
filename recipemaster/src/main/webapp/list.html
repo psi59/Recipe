@@ -587,17 +587,18 @@
  
  
 <script id="temp" type="text/x-handlebars-template">
-{{#each data}}
 <div>
+{{#each data}}
+
 <div class="isotope-grid" id="grid-2">
          <div class="entry col-xs-12 col-sm-4 col-md-3 filter-food filter-pudding">
-            <div class="entry-inner">
-             
-              <div class="entry-media"  name="recipe-subscribe-image" style="background-image:url(img/representImg/{{representImages representImages}}">
-               
+            <div class="entry-inner">      
+            {{#each representImages}}  
+              <input type="hidden" class="forBackgroundRepresentImg" value="{{this}}">
+              {{/each}}       
+              <div class="entry-media"  name="recipe-subscribe-image" style="background-image:url(img/representImg/{{representImages representImages}}">              
                 <div class="entry-action">
-                  <div class="entry-action-inner">
-                    
+                  <div class="entry-action-inner">                    
                   </div>
                 </div>
               </div>
@@ -631,9 +632,9 @@
             </div>
             <!-- /.entry-inner -->
           </div>
-        
-          </div>
+       </div>
 {{/each}}
+</div>
 </script>
 
   <script id="recipe-comment-addForm" type="text/x-handlebars-template">

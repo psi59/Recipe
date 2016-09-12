@@ -342,28 +342,36 @@ $(function(){
 })
 
 function mouseMoveEventForSubscribeImage(result){
-				$(document).on('mousemove','.entry-action',function(event){
-					if( $(event.target).attr('class') == 'entry-action' ){					
-						var imageChange = parseInt( $('.entry-action').width() + 1)  / $(event.target).parent().parent().children('input[type="hidden"]').length;					
-						var image = parseInt(event.offsetX / imageChange);					
-						$(event.target).parent().attr("style", "background-image:url(img/representImg/"
-							+$(event.target).parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
-						
-						
-						
-					}else{
-						console.log('여기옴 ? actioninner');
-						var imageChange = parseInt( $('.entry-action-inner').width() + 1)  / $(event.target).parent().parent().parent().children('input[type="hidden"]').length;
-						var image = parseInt(event.offsetX / imageChange);								
-						$(event.target).parent().attr("style", "background-image:url(img/representImg/"
-								+$(event.target).parent().parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
-						
-					}
-				})
-	}
-
-
-	
+			$(document).on('mousemove','.entry-action, .entry-action-inner',function(event){
+				if( $(event.target).attr('class') == 'entry-action' ){					
+					var imageChange = parseInt( $('.entry-action').width() + 1)  / $(event.target).parent().parent().children('input[type="hidden"]').length;					
+					var image = parseInt(event.offsetX / imageChange);					
+					$(event.target).attr("style", "background-image:url(img/representImg/"
+						+$(event.target).parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
+					
+					if(image != $(event.target).parent().children('input[type="hidden"]').length + 1){
+						$(event.target).parent().children('.rcp-count-images').text(image+1+" / "+$(event.target).parent().children('input[type="hidden"]').length);
+						}else{
+							return;
+						}
+					
+					
+				}else{
+					console.log('여기옴 ? actioninner');
+					var imageChange = parseInt( $('.entry-action-inner').width() + 1)  / $(event.target).parent().parent().parent().children('input[type="hidden"]').length;
+					var image = parseInt(event.offsetX / imageChange);								
+					$(event.target).parent().attr("style", "background-image:url(img/representImg/"
+							+$(event.target).parent().parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
+					
+					if(image != $(event.target).parent().children('input[type="hidden"]').length + 1){
+						$(event.target).parent().children('.rcp-count-images').text(image+1+" / "+$(event.target).parent().children('input[type="hidden"]').length);
+						}else{
+							return;
+						}
+					
+				}
+			})
+}
 
 
 
