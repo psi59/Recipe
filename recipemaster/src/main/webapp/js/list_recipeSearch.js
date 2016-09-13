@@ -6,9 +6,9 @@ $(document).ready(function(){
 	if(urlParams.sk != undefined){		
 		$('#searchKeyword').val(decodeURIComponent(urlParams.sk));
 	}	
-	if(urlParams.sc != undefined){		
+	/*if(urlParams.sc != undefined){		
 		$('#searchCondition-select').val(decodeURIComponent(urlParams.sc));
-	}
+	}*/
 	// 오늘의 인기 레시피
 	if(urlParams.more != undefined){
 		$('#more-rcp-list').val(decodeURIComponent(urlParams.more));
@@ -16,7 +16,7 @@ $(document).ready(function(){
 	// 카테고리
 	if(urlParams.ctg != undefined){
 		$('#rcp-category-section input[type=checkbox][value='+decodeURIComponent(urlParams.ctg)+']').attr('checked',true);
-	}	
+	}
 	
 	// 처음화면에 모든 레시피들을 보여준다
 	search('newest', $('#order-latest-btn').val());
@@ -30,10 +30,10 @@ $(document).ready(function(){
 		search('newest', $('#order-latest-btn').val());			    
 	});
 	
-	// 키보드에서 뗐을때의 검색 이벤트	
+	// 키보드에서 뗐을때의 검색 이벤트
 	$('#searchKeyword').keyup(function(){
 		$("body").scrollTop(0);
-		search('newest', $('#order-latest-btn').val());		
+		search('newest', $('#order-latest-btn').val());
 	})
 	
 	// 카테고리 라벨 변경 이벤트
@@ -45,12 +45,12 @@ $(document).ready(function(){
 	})*/
 		
 	// 최신순 정렬
-	$('#order-latest-btn').click(function(){		
+	$('#order-latest-btn-text').click(function(){		
 		if($('#order-latest-btn').val() == 'DESC'){
-			$('#order-latest-btn h2').text('최신순▲');
+			$('#order-latest-btn-text').text('최신순▲');
 			$('#order-latest-btn').val('ASC')
 		} else if($('#order-latest-btn').val() == 'ASC'){
-			$('#order-latest-btn h2').text('최신순▼');
+			$('#order-latest-btn-text').text('최신순▼');
 			$('#order-latest-btn').val('DESC')
 		}
 		$('#sort-condition').val('newest');
@@ -58,12 +58,12 @@ $(document).ready(function(){
 	});
 	
 	// 평점순 정렬
-	$('#order-grade-btn').click(function(){
+	$('#order-grade-btn-text').click(function(){
 		if($('#order-grade-btn').val() == 'DESC'){
-			$('#order-grade-btn h2').text('평점순▲');
+			$('#order-grade-btn-text').text('평점순▲');
 			$('#order-grade-btn').val('ASC')
 		} else if($('#order-grade-btn').val() == 'ASC'){
-			$('#order-grade-btn h2').text('평점순▼');
+			$('#order-grade-btn-text').text('평점순▼');
 			$('#order-grade-btn').val('DESC')
 		}
 		$('#sort-condition').val('grade');
@@ -71,9 +71,9 @@ $(document).ready(function(){
 	});
 	
 	// 스크롤을 끝까지 내렸을때 레시피 카드 생성
-	$(window).scroll(function() { 
-	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-	    	alert('스크롤 끝까지 내림');
+	$(window).on('scroll', function() { 
+	    if (Math.round($(window).scrollTop()) == $(document).height() - $(window).height()) {
+	    	/*alert('스크롤 끝까지 내림');*/
 	    	searchScrollAppend();
 	    }
 	});
@@ -154,7 +154,7 @@ function search(sort,order){
 		method : 'post',
 		data : {
 			searchKeyword : $('#searchKeyword').val(),
-			searchCondition : $("#searchCondition-select option:selected").val(),
+			/*searchCondition : $("#searchCondition-select option:selected").val(),*/
 			sortCondition : sort,
 			orderCondition : order,
 			categoryList : categoryList,
@@ -174,7 +174,7 @@ function search(sort,order){
 				mouseMoveEventForSubscribeImage(result);
 				$('#recipe-count').text('총 '+result.recipeCount+'개의 레시피가 검색되었습니다.');
 				$('#search-pageNo').attr('value', '1');	
-			}, 800)
+			}, 500)
 		},
 		// 데이터 조회 중일때 로딩 이미지 보여주기
 		beforeSend:function(){			  
@@ -186,7 +186,7 @@ function search(sort,order){
 			setTimeout(function() {
 				$('.wrap-loading').addClass('display-none');
 				$('html').css("cursor","auto");
-			}, 800)
+			}, 500)
 		},
 		error : function() {
 			swal('서버 요청 오류 !')
@@ -239,11 +239,11 @@ function searchScrollAppend(){
 			data : {					
 				pageNo : pageNo,
 				searchKeyword : $('#searchKeyword').val(),
-				searchCondition : $("#searchCondition-select option:selected").val(),
+				/*searchCondition : $("#searchCondition-select option:selected").val(),*/
 				sortCondition : $('#sort-condition').val(),
 				orderCondition : order,
 				categoryList : categoryList,
-				more : $('#more-rcp-list').val()
+				more : ($('#more-rcp-list').val()==null?0:$('#more-rcp-list').val())
 			},
 			dataType : 'json',
 			success : function(result) {
