@@ -154,7 +154,7 @@ Handlebars.registerHelper("countImage", function(value, options){
 		//return "1 / ";
 	}
 });
-});
+
 /* 탑바 js(common.js 에 공통적으로 들어갈부분 일단 넣음 */
 $(function() {
 	// getWeather();
@@ -474,5 +474,7 @@ function loadMyPage(){
 		}
 	})  
 };
+
+});
 
 

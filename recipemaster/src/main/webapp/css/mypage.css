@@ -366,11 +366,11 @@ background: url(../../img/slide-restaurant-2.jpg);
 }
 
 .rcp-Vst-inputBtn {
-	position: relative;
-	top: -25pt;
-	left: 19pt;
-	height: 53pt;
-	width: 74pt;
+	position: relative !important;
+	top: -25pt !important;
+	left: 19pt !important;
+	height: 53pt !important;
+	width: 74pt !important;
 }
 
 .rcp-Vst-contents-rep>hr {
