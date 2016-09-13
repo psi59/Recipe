@@ -15,7 +15,8 @@ $(document).ready(function(){
 	}
 	// 카테고리
 	if(urlParams.ctg != undefined){
-		$('#rcp-category-section input[type=checkbox][value='+decodeURIComponent(urlParams.ctg)+']').attr('checked',true);
+		/*$('#rcp-category-section input[type=checkbox][value='+decodeURIComponent(urlParams.ctg)+']').attr('checked',true);*/
+		$('.rcp-cursor[value='+decodeURIComponent(urlParams.ctg)+'').addClass('rcp-category-checked');
 	}
 	
 	// 처음화면에 모든 레시피들을 보여준다
@@ -354,13 +355,13 @@ function mouseMoveEventForSubscribeImage(result){
 
 
 function categoryClick(){
-	$(document).on('click','.category',function(event){		
-		if( $(event.target).hasClass('rcp-category-checked')){			
-			$(event.target).removeClass('rcp-category-checked');
+	$(document).on('click','.rcp-cursor',function(){		
+		if( $(this).hasClass('rcp-category-checked')){			
+			$(this).removeClass('rcp-category-checked');
 			$("body").scrollTop(0);
 			search('newest', $('#order-latest-btn').val());
 		}else{			
-			$(event.target).addClass('rcp-category-checked');
+			$(this).addClass('rcp-category-checked');
 			$("body").scrollTop(0);
 			search('newest', $('#order-latest-btn').val());
 		}
