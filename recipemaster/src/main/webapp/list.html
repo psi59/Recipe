@@ -55,82 +55,12 @@
 <body  data-spy="scroll"  data-target="#navSecondary" data-offset="170">
  
 <header id="header" class="header-narrow site-header wide" role="banner" data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": false}'>
- 
-     <div class="header-body" style="top:0px;">
-         
-         <!--  <div class="header-container container">
-            <div class="header-row">
-              <div class="header-column">
-                <div class="header-logo">
-                  <a href="index.html">
-                    <img id="rcp-top-bar-logo" alt="Porto" width="164" height="55" src="img/logo-restaurant.png">
-                  </a>
-                </div>
-              </div>
-              <div class="header-column">
-                <div class="header-row">
-                  <div class="header-nav">
-                    <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main">
-                      <i class="fa fa-bars"></i>
-                    </button>
-                    <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 collapse">
-                      <nav>
-                        <ul class="nav nav-pills" id="mainNav">
-                          <li class="activedropdown-full-color dropdown-secondary rcp-visible">
-                            <a href="#">
-                              Home
-                            </a>
-                          </li>
-                          <li class="dropdown-full-color dropdown-secondary rcp-visible">
-                            <a href="#" id="loginBtn">
-                              Login
-                            </a>
-                          </li>
-                          <li class="dropdown-full-color dropdown-secondary rcp-visible">
-                            <a href="#" id="signUpBtn">
-                              Sign Up
-                            </a>
-                          </li>
-                        </ul>
-                      </nav>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
-        </div>
+     <div class="header-body" style="top:0px;"></div>
 </header>
-
   
 	<div class="mouse-icon hidden-xs">
 		<div class="scroll"></div>
 	</div>
-
-	
-	<!----------------------- 리스트 레시피 카운트 및 정렬 ----------------------->
-<!-- 	<section id="rcp-list-count-order">	
-	 <div id="rcp-list-count-order-first-div">
-		<div id="rcp-list-count">		  
-		  <h2 id="recipe-count"></h2>
-		</div>
-
-		<div id="order-btn">
-			<button id="order-latest-btn" value="DESC">
-				<h2>최신순▼</h2>
-				<div class="btn-color"></div>
-			</button>
-
-			<button id="order-grade-btn" value="DESC">
-				<h2>평점순▼</h2>
-				<div class="btn-color"></div>
-			</button>
-		</div>   
-		</div>
-	</section> -->
-	<!----------------------- /리스트 레시피 카운트 및 정렬 ----------------------->
-
-
 
 	<div id='editUserInfo-pop-up-banner'>
 		<div class="rcp-laytop">
@@ -222,21 +152,30 @@
   </div>
 
 
-<section class="p-xlg rcp-p-xlg-padding rcp-list-margin-top">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12 center">
-                <h2 class="mt-lg mb-sm">Get your <strong>Recipe</strong></h2>
-                <p class="font-size-md">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu pulvinar magna.<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+	<section class="p-xlg rcp-p-xlg-padding rcp-list-margin-top">
+	  <div class="container">
+	    <div class="row">
+	      <div class="col-md-12 center">
+	        <h2 class="mt-lg mb-sm">Get your <strong>Recipe</strong></h2>
+	        <p class="font-size-md">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu pulvinar magna.<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+	        <hr class="custom-divider" style="margin: 0;">
+	      </div>
+	    </div>
+	  </div>
+	</section>
+  
+  <section>
+    <div class="container">
+      <div class="row">
+        <div id="category-filter">
+          <span id="category-filter-cancel">모두취소</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-                <hr class="custom-divider">
-              </div>
-            </div>
-          </div>
-        </section>
-
-
-	<section class="p-xlg rcp-p-xlg-padding rcp-list-margin-bottom">
+	<!-- <section class="p-xlg rcp-p-xlg-padding rcp-list-margin-bottom"> -->
+	<section class="rcp-p-xlg-padding rcp-list-margin-bottom">
 		<div class="container rcp-relative-left-75px">
 			<div class="row">
         <ul class="rcp-ul-height">
@@ -247,9 +186,7 @@
           <li class="category"><span class="rcp-cursor" value="멕시칸">멕시칸</span><li>
           <li class="category"><span class="rcp-cursor" value="양식">양식</span></li>
           <li class="category"><span class="rcp-cursor" value="퓨전">퓨전</span></li>
-          
         </ul>
-
         <ul class="rcp-ul-height">
           <li class="category"><span class="rcp-cursor" value="간식/야식">간식/야식</span></li>
           <li class="category"><span class="rcp-cursor" value="술안주">술안주</span></li>
@@ -293,18 +230,32 @@
         밥 면 국물 찜/조림/구이 볶음/튀김/부침 나물/샐러드 김장/절임 베이킹/디저트 양념/소스/잼
  -->
 
+  <section>
+    <div class="container">
+      <div class="row">
+        <div id="rcp-list-count">
+          <span id="recipe-count"></span>
+          <span id="order-grade-btn-text" class="order-btn">평점순▼</span> 
+          <input id="order-grade-btn" type="hidden" value="DESC">
+          <span id="order-latest-btn-text" class="order-btn">최신순▼</span> 
+          <input id="order-latest-btn" type="hidden" value="DESC">
+        </div>
+      </div>
+    </div>
+  </section>
+
 	<section class="ht-section hs-recipes grid">
 
 		<div id="tabs-1">
 			<div class="rcp-main-right">
 				<div class="rcp-subscribe"></div>
-				<div id="rcp-list-count">
-					<span id="recipe-count"></span> 
+				<!-- <div id="rcp-list-count">
+					<span id="recipe-count"></span>
+					<span id="order-grade-btn-text" class="order-btn">평점순▼</span> 
+          <input id="order-grade-btn" type="hidden" value="DESC">
 					<span id="order-latest-btn-text" class="order-btn">최신순▼</span> 
 					<input id="order-latest-btn" type="hidden" value="DESC">
-					<span id="order-grade-btn-text" class="order-btn">평점순▼</span> 
-					<input id="order-grade-btn" type="hidden" value="DESC">
-				</div>
+				</div> -->
 				<div class="hs-content">
 					<div class="container">
 						<div class="row">

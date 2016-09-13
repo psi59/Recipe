@@ -128,6 +128,26 @@ $(document).ready(function(){
 
 	categoryClick();
 	
+	// 필터박스 클릭시 리무브
+	$(document).on('click','.category-filter-box', function(){
+		$(this).remove();
+		$('.rcp-cursor[value="'+$(this).attr('value')+'"]').removeClass('rcp-category-checked');
+		if($('.rcp-category-checked').length == 0){
+			$('#category-filter').css('display','none')
+		}
+		$("body").scrollTop(0);
+		search('newest', $('#order-latest-btn').val());
+	})
+	
+	// 필터박스 모두 취소
+	$(document).on('click', '#category-filter-cancel', function(){
+		$('.category-filter-box').remove();
+		$('.rcp-cursor').removeClass('rcp-category-checked');
+		$('#category-filter').css('display','none')
+		$("body").scrollTop(0);
+		search('newest', $('#order-latest-btn').val());
+	})
+	
 });
 
 // 처음 검색했을때의 1페이지 결과 가져오기 -이성현
@@ -262,7 +282,7 @@ function searchScrollAppend(){
 					} else {
 						$('#search-pageNo').val('lastPage');
 					}					
-				}, 500)
+				}, 350)
 			},
 			// 데이터 조회 중일때 로딩 이미지 보여주기
 			beforeSend:function(){			  
@@ -274,7 +294,7 @@ function searchScrollAppend(){
 				setTimeout(function() {
 					$('.wrap-loading').addClass('display-none');
 					$('html').css("cursor","auto");
-				}, 500)
+				}, 350)
 			},
 			error : function() {
 				swal('서버 요청 오류 !')
@@ -356,12 +376,20 @@ function mouseMoveEventForSubscribeImage(result){
 
 function categoryClick(){
 	$(document).on('click','.rcp-cursor',function(){		
+		$('#category-filter').css('display','block')
 		if( $(this).hasClass('rcp-category-checked')){			
 			$(this).removeClass('rcp-category-checked');
+			$('.category-filter-box[value="'+$(this).html()+'"]').remove();
+			if($('.rcp-category-checked').length == 0){
+				$('#category-filter').css('display','none')
+			}
 			$("body").scrollTop(0);
 			search('newest', $('#order-latest-btn').val());
 		}else{			
 			$(this).addClass('rcp-category-checked');
+			$('#category-filter').append('<span class="category-filter-box" value="'+$(this).html()+'">'+$(this).html()+'&nbsp;'
+									    +'<span class="glyphicon glyphicon-remove" aria-hidden="true">'
+									    +'</span></span>');
 			$("body").scrollTop(0);
 			search('newest', $('#order-latest-btn').val());
 		}
