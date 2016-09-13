@@ -42,10 +42,9 @@ $main: #7b7de5;
 
 
 #editUserInfo-pop-up-banner {
-	z-index:99999;
   display: none;
   width: 375px;
-  height: 575px;
+  height: 600px;
   background: #ffffff;
 }
 

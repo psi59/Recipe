@@ -113,11 +113,10 @@ $(document).ready(function(){
 							checkLable('signup-e-mail-label', '중복된 이메일입니다.', 'red');
 							$(this).focus();
 	                    }
-						
 	                } // end success
 	            }); // end ajax
 			} else {
-				$('#signup-e-mail-label').text('');
+				$('#signup-e-mail-label').val('');
 			} // end if        	
         }
     });	

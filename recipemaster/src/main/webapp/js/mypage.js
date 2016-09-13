@@ -4,12 +4,18 @@ document.write('<script type"text/javascript" src="js/recipeDetail.js"></script>
 $(function() {
 	//recipeDetail();
 	var userInfo = getUserInfo();
-	
+
 	$('.header-body').load('topNavBar.html');
 
 	//push(userInfo.email, '', 'login');
-	
+
 	console.log(location.href.split('?')[1]);
+
+	$('#userInfoEditBtn').addClass('display_none');
+
+	if((userInfo==null?null:userInfo.email)==location.href.split('?')[1]){
+		$('#userInfoEditBtn').removeClass('display_none');
+	}
 
 	$.ajax({
 		url : 'recipe/userPage.json',
@@ -33,11 +39,11 @@ $(function() {
 
 			$('.rcp-userPage-userName').text(result.user.userName);
 			console.log("userProfile : "+result.user.image);
-			
+
 			if(result.user.image != null && result.user.image !=''){
-			$('.rcp-topimg').attr('src','img/profileImg/'+result.user.image);
+				$('.rcp-topimg').attr('src','img/profileImg/'+result.user.image);
 			}
-			
+
 			$('#tabs-1 .hs-content .container .row .rcp-mypage-section')
 			.append(templateCRList(result));
 			console.log(result.data);
@@ -127,33 +133,33 @@ $(function() {
 
 	pageTabs();
 	loadMyPage();
-		
-Handlebars.registerHelper('transientStorage', function(options) {
-		  if (this.regiStatus == 0) {
-		    return options.fn(this);
-		  } else {
-		    return options.inverse(this);
-		  }
-});
 
-Handlebars.registerHelper('regStatus', function(options) {
-	  if ( userInfo == null || location.href.split('?')[1] != userInfo.email ) {
-		if(this.regiStatus == 0){
+	Handlebars.registerHelper('transientStorage', function(options) {
+		if (this.regiStatus == 0) {
 			return options.fn(this);
-		}		  
-	  }else{
-		  return options.fn(this);
-	  }
-});
+		} else {
+			return options.inverse(this);
+		}
+	});
+
+	Handlebars.registerHelper('regStatus', function(options) {
+		if ( userInfo == null || location.href.split('?')[1] != userInfo.email ) {
+			if(this.regiStatus == 0){
+				return options.fn(this);
+			}		  
+		}else{
+			return options.fn(this);
+		}
+	});
 
 
 
-Handlebars.registerHelper("countImage", function(value, options){
-	{
-		return "1 / "+value.length;
-		//return "1 / ";
-	}
-});
+	Handlebars.registerHelper("countImage", function(value, options){
+		{
+			return "1 / "+value.length;
+			//return "1 / ";
+		}
+	});
 });
 /* 탑바 js(common.js 에 공통적으로 들어갈부분 일단 넣음 */
 $(function() {
@@ -206,7 +212,7 @@ var sourceVisitor = $('#visitor-template').html();
 var templateVisitor = Handlebars.compile(sourceVisitor);
 
 function loadVisitor() {
-	
+
 	$.ajax({
 		url : '/visitor/list.json',
 		dataType : 'json',
@@ -221,14 +227,14 @@ function loadVisitor() {
 			}
 
 			$('#Vst').append(templateVisitor(result));
-            var id = $('#fromNo').val();
-            var toUser = $('#updateFormUserNo').val();
-            if(id!=toUser){
-                $('.editBtn1').hide();
-                $('.editBtn2').hide();    
-            }
+			var id = $('#fromNo').val();
+			var toUser = $('#updateFormUserNo').val();
+			if(id!=toUser){
+				$('.editBtn1').hide();
+				$('.editBtn2').hide();    
+			}
 
-				
+
 		},
 		error : function() {
 			swal('서버 요청 오류!...')
@@ -257,7 +263,7 @@ $(document).on('click','#rcp-rpBtn', function() {
 			var myImg = userInfo.image;
 
 			push(owner,("msg"+"/"+myEmail+myName+"/"+myImg), "message");	
-			
+
 			$('#Vst>').remove();
 			loadVisitor(); // 테이블 데이터를 갱신한다.
 		},
