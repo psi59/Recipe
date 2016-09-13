@@ -58,26 +58,23 @@
      <div class="header-body"></div>    
         
 </header>
-
-
-
       
-
-  <!-- 회원정보수정 bpopup -->
+<!-- 
+  회원정보수정 bpopup
   <div id='editUserInfo-pop-up-banner'>
     <form action="user/update.json" method="post" id="updateUserForm"
       enctype="multipart/form-data">
       <input type="hidden" name="userNo" id="updateFormUserNo"> <input
         type="hidden" name="email" id="updateFormEmail">
       <div class="rcp-laytop">
-        <!--유저 이미지 업로드 --용이  !!!!!enctype?????16.08.12-->
+        유저 이미지 업로드 --용이  !!!!!enctype?????16.08.12
         <div class="rcp-up-preview img-wrapper col-md-1"></div>
         <div class="file-upload-wrapper">
           <input id="profileImage" type="file" name="profileImage"
             class="file-upload-native" accept="image/*" /> <input type="text"
             disabled placeholder="이미지" class="file-upload-text" />
         </div>
-        <!--유저 이미지 업로드 끝--용이  -->
+        유저 이미지 업로드 끝--용이 
         <div class="col-md-11 rcp-laytext">
           <h4 id="updateBoxName"></h4>
           <h5 id="updateBoxGrade">Master Chef</h5>
@@ -113,14 +110,14 @@
         </div>
       </div>
       <div class="rcp-sign-membership">
-        <!-- <button id="updateUserInfo" type="submit">확인</button> -->
+        <button id="updateUserInfo" type="submit">확인</button>
         <a href="#"><span id="updateUserInfo">확인</span></a> <a href="#"><span
           id="updateUserReset">취소</span></a>
       </div>
     </form>
   </div>
-  <!--  -->
   
+  --> 
   <div>
     <section class="rcp-fullpage">
       <div class="rcp-profileCover">
@@ -128,18 +125,20 @@
           <div class="rcp-topimg-position">
             
             <div class="rcp-mypage-container">
+            <div>
             <a class="rcp-topimg-border"> <img src="img/profileImg/default.jpg"
               class="rcp-topimg">
             </a>
-         
               <input type="hidden" id="mypage-userNo" value="">
-              <h2 class="rcp-userPage-userName"></h2>
-              <hr>
+                <div class="float_left"><h2 class="rcp-userPage-userName"></h2></div> 
+	              <div id="userInfoEditBtn" class="float_left display_none" style="color: white; padding-top: 19px;"><a href="#"><div class="glyphicon glyphicon-pencil" aria-hidden="true"></div></a></div> 
+              </div>
+              <div style="height: 45px; border-top: 1px solid #b9b9b9; margin-top: 40px;"></div>
               <div class="rcp-userInfo">
-              <p class="rcp-count-visit rcp-mypage-userInfo col-sm-3 col-md-3">방문자 <span id="visitNum" >명</span>
-              <p class="rcp-count-like rcp-mypage-userInfo col-sm-3 col-md-3">좋아요 <span id="likeNum" >개</span>
-              <p class="rcp-count-scrap rcp-mypage-userInfo col-sm-3 col-md-3">스크랩 <span id="scrapNum" >개</span>
-              <p class="rcp-count-grade rcp-mypage-userInfo col-sm-3 col-md-3">평점 <span id="gradeNum" >점</span>
+	              <p class="rcp-count-visit rcp-mypage-userInfo col-sm-3 col-md-3">방문자 <span id="visitNum" >명</span>
+	              <p class="rcp-count-like rcp-mypage-userInfo col-sm-3 col-md-3">좋아요 <span id="likeNum" >개</span>
+	              <p class="rcp-count-scrap rcp-mypage-userInfo col-sm-3 col-md-3">스크랩 <span id="scrapNum" >개</span>
+	              <p class="rcp-count-grade rcp-mypage-userInfo col-sm-3 col-md-3">평점 <span id="gradeNum" >점</span>
               </div>
              <!--  <button class="btn btn-default rcp-topbtn">구독하기</button> -->
        </div>
@@ -361,6 +360,7 @@
 		src="node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
 	<script
 		src="node_modules/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
+		<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 
 	<!--  사용자 js -->
 	<script src="js/jquery.bpopup.min.js"></script>
@@ -368,6 +368,8 @@
 	<script src="js/common/signup.js"></script>
 	<script src="js/login.js"></script>
 	<script src="js/updateUser.js"></script>
+	
+	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 
 <script id="temp" type="text/x-handlebars-template">
 {{#each data}}

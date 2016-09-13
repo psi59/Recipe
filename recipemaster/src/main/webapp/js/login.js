@@ -195,7 +195,6 @@ window.onload = function() {
 			}
 		});
 	}// end of 쉐프카드
-
 };
 
 function getUserInfo() {
