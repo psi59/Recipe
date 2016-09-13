@@ -38,11 +38,11 @@ $(document).ready(function(){
 	
 	// 카테고리 라벨 변경 이벤트
 	/*$('input[type=checkbox]').change(function(){*/
-	$('.category').click(function(){
+	/*$('.category').change(function(){
 		alert('들어왓다 ~');
 		$("body").scrollTop(0);
 		search('newest', $('#order-latest-btn').val());
-	})
+	})*/
 		
 	// 최신순 정렬
 	$('#order-latest-btn').click(function(){		
@@ -73,6 +73,7 @@ $(document).ready(function(){
 	// 스크롤을 끝까지 내렸을때 레시피 카드 생성
 	$(window).scroll(function() { 
 	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+	    	alert('스크롤 끝까지 내림');
 	    	searchScrollAppend();
 	    }
 	});
@@ -139,11 +140,12 @@ function search(sort,order){
 	
 	var categoryList = '';
 	/*$('#rcp-category-section input[type=checkbox]:checked').each(function(index){*/
-	$('.rcp-cursor').hasClass('rcp-category-checked').each(function(index){		
-		if(index !== ($('#rcp-category-section input[type=checkbox]:checked').length-1)){
-			categoryList += $(this).val()+','; 
+	$('.rcp-category-checked').each(function(index){		
+		/*if(index !== ($('#rcp-category-section input[type=checkbox]:checked').length-1)){*/
+		if(index !== ($('.rcp-category-checked').length-1)){
+			categoryList += $(this).text()+',';
 		} else {
-			categoryList += $(this).val();
+			categoryList += $(this).text();
 		}				
 	})	
 	
@@ -172,7 +174,7 @@ function search(sort,order){
 				mouseMoveEventForSubscribeImage(result);
 				$('#recipe-count').text('총 '+result.recipeCount+'개의 레시피가 검색되었습니다.');
 				$('#search-pageNo').attr('value', '1');	
-			}, 1100)
+			}, 800)
 		},
 		// 데이터 조회 중일때 로딩 이미지 보여주기
 		beforeSend:function(){			  
@@ -184,7 +186,7 @@ function search(sort,order){
 			setTimeout(function() {
 				$('.wrap-loading').addClass('display-none');
 				$('html').css("cursor","auto");
-			}, 1100)
+			}, 800)
 		},
 		error : function() {
 			swal('서버 요청 오류 !')
@@ -219,11 +221,13 @@ function searchScrollAppend(){
 	}
 	
 	var categoryList = '';
-	$('#rcp-category-section input[type=checkbox]:checked').each(function(index){
-		if(index !== ($('#rcp-category-section input[type=checkbox]:checked').length-1)){
-			categoryList += $(this).val()+','; 
+	/*$('#rcp-category-section input[type=checkbox]:checked').each(function(index){*/
+	$('.rcp-category-checked').each(function(index){		
+		/*if(index !== ($('#rcp-category-section input[type=checkbox]:checked').length-1)){*/
+		if(index !== ($('.rcp-category-checked').length-1)){
+			categoryList += $(this).text()+',';
 		} else {
-			categoryList += $(this).val();
+			categoryList += $(this).text();
 		}				
 	})	
 	
@@ -332,7 +336,7 @@ function mouseMoveEventForSubscribeImage(result){
 					
 					
 				}else{
-					console.log('여기옴 ? actioninner');
+					/*console.log('여기옴 ? actioninner');*/
 					var imageChange = parseInt( $('.entry-action-inner').width() + 1)  / $(event.target).parent().parent().parent().children('input[type="hidden"]').length;
 					var image = parseInt(event.offsetX / imageChange);								
 					$(event.target).parent().attr("style", "background-image:url(img/representImg/"
@@ -353,8 +357,12 @@ function categoryClick(){
 	$(document).on('click','.category',function(event){		
 		if( $(event.target).hasClass('rcp-category-checked')){			
 			$(event.target).removeClass('rcp-category-checked');
+			$("body").scrollTop(0);
+			search('newest', $('#order-latest-btn').val());
 		}else{			
 			$(event.target).addClass('rcp-category-checked');
+			$("body").scrollTop(0);
+			search('newest', $('#order-latest-btn').val());
 		}
 	})
 }
