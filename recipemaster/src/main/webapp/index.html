@@ -19,7 +19,6 @@
 	href="/node_modules/sweetalert/dist/sweetalert.css">
 <link rel="stylesheet"
 	href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/rcp-template/login.css">
 	<link rel="stylesheet" href="css/template/main.css">
 	<link rel="stylesheet" href="css/common_list_topbar.css">
 	<link rel="stylesheet" href="css/rcp-template/main.css">
@@ -53,11 +52,10 @@
 <link rel="stylesheet" href="css/index_rankTabs.css">
 
 <link rel="stylesheet" href="css/common/loading.css">
-<!-- <link rel="stylesheet" href="css/common/starrating1.css"> -->
-<link rel="stylesheet" href="css/common/starrating2.css">
+<link rel="stylesheet" href="css/common/starrating.css">
 <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css'>
-
-
+<link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.min.css">
+<link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.themes.min.css">
 
 <!-- alert css -->
 <link rel="stylesheet"
@@ -68,79 +66,6 @@
 
 </head>
 <body data-spy="scroll"  data-target="#navSecondary" data-offset="170">
-
-<div class="panel" id="login-pop-up-banner">
-  <h2>LOGIN</h2>
-  <div class="formset">
-    <div class="form-group">
-      <lable class="form-label">Email</lable>
-      <input type="text" class="form-control" id="userEmail"/>
-    </div>
-    <div class="form-group">
-      <lable class="form-label">Password</lable>
-      <input type="password" class="form-control" id="userPassword"/>
-    </div>
-    
-    <button class="btn" id="userLogin">Log in</button>
-    <a id="findPassword">Forgot Your Password?</a>
-    <hr style="margin: 15px;">
-      <p id="other-login-text">소셜아이디로 로그인하기 </p>
-     <div id="naver_id_login"></div>
-  </div>
-</div>
-
-<!-- password 찾기 -->
-<div class="panel" id="findPassword-pop-up-banner">
-  <h2>Find Password</h2>
-  <div class="formset">
-    <div class="form-group">
-      <lable class="form-label">Email</lable>
-      <input type="text" class="form-control" id="findPassword-userEmail"/>
-    </div>
-    <button class="btn" id="findPassword">push</button>
-  </div>
-</div>
-
-<div class="panel" id="signup-pop-up-banner">
-  <h2>SIGN UP</h2>
-  <div class="formset">
-    <div class="form-group">
-      <lable class="form-label">Email</lable>
-      <input type="text" class="form-control" id="signup-e-mail"/>
-    </div>
-    
-    <label id="signup-e-mail-label"
-            class="control-label"></label>
-            
-    <div class="form-group">
-      <lable class="form-label">NickName</lable>
-      <input type="text" class="form-control" id="signup-userName"/>
-    </div>
-    
-    <label id="signup-userName-label"
-            class="control-label"></label>
-    
-    <div class="form-group">
-      <lable class="form-label">Password</lable>
-      <input type="password" class="form-control" id="signup-password"/>
-    </div>
-    
-    <label id="signup-password-label"
-            class="control-label"></label>
-    
-    <div class="form-group">
-      <lable class="form-label">Password Confirm</lable>
-      <input type="password" class="form-control" id="signup-passwordCheck"/>
-    </div>
-    
-    <label id="signup-passwordCheck-label"
-            class="control-label"></label>
-        
-    <button class="btn" id="signup-addBtn">Sign up</button>
-    <a href="#" id="signup-resetBtn">Cancel</a>
-  </div>
-</div>
-
 	<!-- <div id="topBtn" class="navbar navbar-inverse navbar-fixed-top">
 
 		<div class="container rcp-container-top">
@@ -175,45 +100,48 @@
 										id="topLoginBtn" class="rcp-btn-default-top">로그인</span></a></li>
 							</ul>
 						</div>
+			
 						준모2
-						<div id="profileView" class="main-nav__dropdown profile-dropdown">
-							<div class="rcp-outline">
-								<div>
-									<a href="#0" class="dropdown__header"><img id="profileImg"
-										class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a
-										id="profileEmail" href="#"
-										class="dropdown__header rcp-infobox-text"></a>
-									<h6 id="profileName" class="rcp-nickname"></h6>
-									<a href="#0" class="dropdown__header"> <span
-										id="profileGrade" class="dropdown__title rcp-infobox-text">
-									</span>
-									</a>
-									<div id=Btn align="center">
-										<button id="userInfoEditBtn" type="button"
-											class="btn btn-default rcp-btn-nav">정보수정</button>
-										<button id="logoutBtn" type="button"
-											class="btn btn-default rcp-btn-nav">로그아웃</button>
-									</div>
-								</div>
-
-								<a href="/mypage.html"><button
-										class="goMyPageBtn btn btn-default rcp-btn-nav">MyPage</button></a>
-								<a href="/writerecipe.html"><button
-										class="goWriteRcpBtn btn btn-default rcp-btn-nav">Recipe
-										작성</button></a>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 
-	</div> -->
+	</div>-->
+	<!-- 
+	<div id="profileView" class="main-nav__dropdown profile-dropdown">
+      <div class="rcp-outline">
+        <div>
+          <a href="#0" class="dropdown__header"><img id="profileImg"
+            class="rcp-img img-circle" src="img/Chef3.jpg" /></a> <a
+            id="profileEmail" href="#"
+            class="dropdown__header rcp-infobox-text"></a>
+          <h6 id="profileName" class="rcp-nickname"></h6>
+          <a href="#0" class="dropdown__header"> <span
+            id="profileGrade" class="dropdown__title rcp-infobox-text">
+          </span>
+          </a>
+          <div id=Btn align="center">
+            <button id="userInfoEditBtn" type="button"
+              class="btn btn-default rcp-btn-nav">정보수정</button>
+            <button id="logoutBtn" type="button"
+              class="btn btn-default rcp-btn-nav">로그아웃</button>
+          </div>
+        </div>
+
+        <a href="/mypage.html"><button
+            class="goMyPageBtn btn btn-default rcp-btn-nav">MyPage</button></a>
+        <a href="/writerecipe.html"><button
+            class="goWriteRcpBtn btn btn-default rcp-btn-nav">Recipe
+            작성</button></a>
+      </div>
+    </div>
+     -->
 <div id="rcp-bg-point">
 <header id="header" class="header-narrow header" data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": false}'>
         <div class="header-body">
          
-          <div class="header-container container">
+          <!-- <div class="header-container container">
             <div class="header-row">
               <div class="header-column">
                 <div class="header-logo">
@@ -221,25 +149,31 @@
                     <img id="rcp-top-bar-logo" alt="Porto" width="164" height="55" src="img/logo-restaurant.png">
                   </a>
                 </div>
+                <div class="float_left" style="height: 100%; vertical-align: middle; margin: 15px">
+	                <div class="searchWrapper">
+	                <span id="searcIcon" class="glyphicon glyphicon-search" aria-hidden="true"></span>
+	                  <input type="text" id="searchKeyword" placeholder="recipe 이름, 쉐프명, 재료">
+	                </div>
+                </div>
               </div>
               <div class="header-column">
                 <div class="header-row">
-                  <div class="header-nav">
+                  <div class="header-nav">             
                     <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 collapse">
                       <nav>
                         <ul class="nav nav-pills" id="mainNav">
-                          <!-- <li class="activedropdown-full-color dropdown-secondary">
+                          <li class="activedropdown-full-color dropdown-secondary">
                             <a href="#">
                               Home
                             </a>
-                          </li> -->
-                          <li class="dropdown-full-color dropdown-secondary">
-                            <a href="#" id="loginBtn">
-                              Login
+                          </li>
+                          <li  id="loginBtn" class="activedropdown-full-color dropdown-secondary">
+                            <a href="#">
+                              Sign In
                             </a>
                           </li>                          
-                          <li class="dropdown-full-color dropdown-secondary">
-                            <a href="#" id="signUpBtn">
+                          <li id="signUpBtn" class="dropdown-full-color dropdown-secondary">
+                            <a href="#">
                               Sign Up
                             </a>
                           </li>
@@ -250,7 +184,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="rcp-background-text">        
         <h1 class="bg-text">GET COOKLE</h1>
@@ -470,8 +404,7 @@
 					<p class="date"></p>
 					<div class="timerZone"></div>
 				</div>
-				<hr/>
-								
+				<hr/>								
 				<div class="rcp-detail-body"></div>
 			</div>
 
@@ -508,7 +441,7 @@
             <div class="row">
 
               <h2 class="rcp-h2-25px">
-                오늘의 인기 레시피  <a class="More">more</a>
+                오늘의 인기 레시피  <a id="popular-rcp-more" class="More">more</a>
               </h2>
             </div>
           </div>
@@ -554,7 +487,7 @@
             <div class="row">
 
               <h2 class="rcp-h2-25px">
-                추천  ㅋ ?  <a class="More">more</a>
+                추천 레시피  <a class="More">more</a>
               </h2>
             </div>
           </div>
@@ -576,9 +509,7 @@
         <div class="hs-content">
           <div class="container">
             <div class="row">
-
-              <h2 class="rcp-h2-25px">
-                추천 카테고리   <a class="More">more</a>
+              <h2 id="ctg-more" class="rcp-h2-25px">
               </h2>
             </div>
           </div>
@@ -620,7 +551,6 @@
 				<div class="hs-content">
 					<div class="container">
 						<div class="row">
-
 							<h2 class="rcp-h2-25px">
 							<a class="More">more</a>
 							</h2>
@@ -940,29 +870,26 @@
 
 	<!--  Main List -->
 
-	<script id="recipe-1-section" type="text/x-handlebars-template">
-
- <section name="rcp-custom-list">
+<script id="recipe-1-section" type="text/x-handlebars-template">
+  <section name="rcp-custom-list">
     <div class="rcp-list">
-      <div class="rcp-1024 list0" >
-        <h3>오늘의 인기 레시피 <a class="More">more</a></h3> 
+      <div class="rcp-1024 list0">
+        <h3>오늘의 인기 레시피 <a id="popular-rcp-more" class="More">more</a></h3>
         <div class="row rcp-order"></div>
       </div>
     </div>
   </section>
-
 </script>
 
-	<script id="recipe-2-section" type="text/x-handlebars-template">
+<script id="recipe-2-section" type="text/x-handlebars-template">
  <section name="rcp-custom-list">
     <div class="rcp-list">
       <div class="rcp-1024 list1" >
-        <h3>최신 레시피 <a class="More">more</a></h3>
+        <h3>최신 레시피 <a id="newest-rcp-more" class="More">more</a></h3>
         <div class="row rcp-order"></div>
       </div>
     </div>
   </section>
-
 </script>
 
 <script id="recipe-3-section" type="text/x-handlebars-template">
@@ -974,19 +901,17 @@
       </div>
     </div>
   </section>
-
 </script>
 
-	<script id="recipe-4-section" type="text/x-handlebars-template">
+<script id="recipe-4-section" type="text/x-handlebars-template">
  <section name="rcp-custom-list">
     <div class="rcp-list">
       <div class="rcp-1024 list3" >
-        <h3 id="sss"></h3>
+        <h3 id="ctg-more"></h3>
         <div class="row rcp-order"></div>
       </div>
     </div>
   </section>
-
 </script>
 
 	<script id="recipe-comment-addForm" type="text/x-handlebars-template">
@@ -1209,8 +1134,13 @@
   
   <!-- 별점주기 -->
   <script id="starrating-template" type="text/x-handlebars-template">
-  <div id="rcp-starrating" align="left">평가하기</div> 
-  {{#if checkDuplicateGrade}}
+    <div id="starrating-box">
+    <br/>  
+    {{#if checkDuplicateGrade}}
+      <div>
+        <span id="rcp-starrating" align="left">평가하기</span>
+        <span id="rcp-starrating-grade">&nbsp;</span>
+      </div>
       <div class="rcp-rating">
         <input id="star5" name="rating" type="radio" value="5"/>
         <label for="star5" class="full"></label>
@@ -1234,10 +1164,12 @@
         <label for="star0.5" class="half"></label>
       </div>
       <div id="rcp-starrating-btn-apply" class="rcp-starrating-btn">
-        <i class="glyphicon glyphicon-ok-sign rcp-i-tag-margin-right-top"></i>등록</div>
+        <i class="glyphicon glyphicon-ok rcp-i-tag-margin-right-top"></i>등록</div>
     {{else}}
-      <div id="starrating-finish" align="left">참여하셨습니다.</div>
+      <div align="left">평가하기</div>      
+      <div align="left">참여하셨습니다.</div>
     {{/if}}
+    </div>
   </script>
 
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
@@ -1268,7 +1200,6 @@
 	<script src="js/template/plugin.js"></script>
 	<script src="js/template/custom.js"></script>	
 	<script src="js/template/jquery-slider-rolling.js"></script>
-	<script src="js/template/naverLogin_implicit-1.0.2.js"></script>
 	<script src="js/common.js"></script>
 	<script src="js/login.js"></script>
 	<script src="js/recipeDetail.js"></script>
@@ -1279,18 +1210,20 @@
 	<script src="js/listPageMove.js"></script>
 	<script src="js/mainListAjax.js"></script>
 	<script src="js/mouseover.js"></script>
+	<script src="js/common/starrating.js"></script>
 	<script src="js/rcp-template/theme.js"></script>
 	<script src="js/rcp-template/login-form.js"></script>
-	<!-- <script src="js/common/starrating1.js"></script> -->
-	<script src="js/common/starrating2.js"></script>
   <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-
+  <script src="js/common/easyautocomplete.js"></script>
+  <script src="node_modules/easy-autocomplete/dist/jquery.easy-autocomplete.min.js"></script>
+  
 	<script>
 		$(function() {
 
-			var userInfo = getUserInfo();
 			getWeather();
-			getRealTimeRank();
+			
+			$('.header-body').load('topNavBar.html');
+			
 			$('#footer').load("../copyright.html");
 
 			$('.profile-dropdown:has(.active)').bind('click', function() {
@@ -1308,64 +1241,8 @@
 			$('.dropdown-trigger--mobile').on('click', function() {
 				dropdownClick('.mobile-menu-dropdown', '.profile-dropdown');
 			});
-			
- 			/* push(userInfo.email, '', 'login'); */ 
-			
 		});
 	</script>
 
-	<script type="text/javascript">
-		var naver_id_login = new naver_id_login("oZ3ZBiNctenY6ix5st7G",
-				"http://127.0.0.1:8080/index.html");
-		var state = naver_id_login.getUniqState();
-		naver_id_login.setButton("green", 3, 40);
-		naver_id_login.setDomain(".service.com");
-		naver_id_login.setState(state);
-		naver_id_login.init_naver_id_login();
-	</script>
-
-	<script type="text/javascript">
-		// 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-		function naverSignInCallback() {
-			// naver_id_login.getProfileData('프로파일항목명');
-			// 프로필 항목은 개발가이드를 참고하시기 바랍니다.
-			console.log("nickName : "
-					+ naver_id_login.getProfileData('nickname'));
-			console.log("email : " + naver_id_login.getProfileData('email'));
-			$
-					.ajax({
-						url : '/user/loginNaver.json',
-						method : 'post',
-						dataType : 'json',
-						data : {
-							userName : naver_id_login
-									.getProfileData('nickname'),
-							email : naver_id_login.getProfileData('email')
-						},
-						success : function(result) {
-							if (result.status == 'failure') {
-
-								swal('잘못입력하셨습니다.', '아이디 또는 비밀번호를 다시 확인하여 주세요.',
-										"error");
-
-								return;
-							}
-
-							if (result.status == 'success') {
-
-							} else {
-								swal('비밀번호를 다시 입력해주세요');
-							}
-
-						},
-						error : function() {
-							swal('서버 요청 오류');
-						}
-					}); /* end of ajax */
-		}
-
-		// 네이버 사용자 프로필 조회
-		naver_id_login.get_naver_userprofile("naverSignInCallback()");
-	</script>
 </body>
 </html>

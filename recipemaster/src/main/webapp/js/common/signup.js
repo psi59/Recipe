@@ -4,7 +4,6 @@ var email;
 $(document).ready(function(){
 	
 	///// 회원가입 팝업창 가입 버튼 이벤트 /////
-	/*$('#signup-addBtn').click(function() {*/
 	$(document).on('click', '#signup-addBtn', function() {
 		if( $('#signup-e-mail').val() == ""){
 			swal('이메일을 입력해주세요');			
@@ -114,11 +113,10 @@ $(document).ready(function(){
 							checkLable('signup-e-mail-label', '중복된 이메일입니다.', 'red');
 							$(this).focus();
 	                    }
-						
 	                } // end success
 	            }); // end ajax
 			} else {
-				$('#signup-e-mail-label').text('');
+				$('#signup-e-mail-label').val('');
 			} // end if        	
         }
     });	

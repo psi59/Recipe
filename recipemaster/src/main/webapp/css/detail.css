@@ -138,6 +138,11 @@
 }
 .rcp-icons-names p{
   font-size:15px;
+  margin: 0 0 7px;
+}
+
+.rcp-icons-info p{
+	margin: 0 0 7px;
 }
 
 .rcp-icons-info{
@@ -174,8 +179,9 @@
 }
 
 .rcp-info-next{
-  width:80%;
+  width:100%;
   border-top: 0.1px solid #afafaf;
+  margin-top: 30px;
   margin-bottom:5px;
 }
 

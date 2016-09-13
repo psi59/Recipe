@@ -6,7 +6,8 @@ $(function(){
 	var profileImage = new Array();
 	profileImage[0] = new File([""], "");
 	
-	$('#userInfoEditBtn').on('click', function() {
+	$('#userInfoEditBtn').on('click', function(event) {
+		event.preventDefault();
 		console.log(userInfo);
 		$('#editUserInfo-pop-up-banner').bPopup();
 		if (userInfo.userNo != null) {
@@ -16,7 +17,7 @@ $(function(){
 			$('#profileGrade').text(userInfo.grade);
 			$('#updateFormUserNo').val(userInfo.userNo);
 			$('#updateFormEmail').val(userInfo.email);
-			$('.rcp-up-preview').append($('<img class="rcp-up-preview" src="img/profileImg/'+userInfo.image+'">'));
+			$('.rcp-up-preview').append($('<img style="width: 80px; height: 80px;" src="img/profileImg/'+userInfo.image+'">'));
 		}
 	});
 
