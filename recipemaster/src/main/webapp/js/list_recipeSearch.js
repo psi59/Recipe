@@ -16,7 +16,12 @@ $(document).ready(function(){
 	// 카테고리
 	if(urlParams.ctg != undefined){
 		/*$('#rcp-category-section input[type=checkbox][value='+decodeURIComponent(urlParams.ctg)+']').attr('checked',true);*/
-		$('.rcp-cursor[value='+decodeURIComponent(urlParams.ctg)+'').addClass('rcp-category-checked');
+		$('.rcp-cursor[value="'+decodeURIComponent(urlParams.ctg)+'"').addClass('rcp-category-checked');
+		$('#category-filter').css('display','block')
+		$('#category-filter').append('<span class="category-filter-box" value="'+decodeURIComponent(urlParams.ctg)+'">'
+									+ decodeURIComponent(urlParams.ctg)+'&nbsp;'
+								    +'<span class="glyphicon glyphicon-remove" aria-hidden="true">'
+								    +'</span></span>');
 	}
 	
 	// 처음화면에 모든 레시피들을 보여준다
@@ -335,42 +340,42 @@ $(function(){
 	
 	Handlebars.registerHelper("representImages", function(value, options){
 		{			
-	return value[0];
+			return value[0];
 		}
-});  	
+	});  	
 	
 })
 
 function mouseMoveEventForSubscribeImage(result){
-			$(document).on('mousemove','.entry-action, .entry-action-inner',function(event){
-				if( $(event.target).attr('class') == 'entry-action' ){					
-					var imageChange = parseInt( $('.entry-action').width() + 1)  / $(event.target).parent().parent().children('input[type="hidden"]').length;					
-					var image = parseInt(event.offsetX / imageChange);					
-					$(event.target).attr("style", "background-image:url(img/representImg/"
-						+$(event.target).parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
-					
-					if(image != $(event.target).parent().children('input[type="hidden"]').length + 1){
-						$(event.target).parent().children('.rcp-count-images').text(image+1+" / "+$(event.target).parent().children('input[type="hidden"]').length);
-						}else{
-							return;
-						}
-					
-					
+	$(document).on('mousemove','.entry-action, .entry-action-inner',function(event){
+		if( $(event.target).attr('class') == 'entry-action' ){					
+			var imageChange = parseInt( $('.entry-action').width() + 1)  / $(event.target).parent().parent().children('input[type="hidden"]').length;					
+			var image = parseInt(event.offsetX / imageChange);					
+			$(event.target).attr("style", "background-image:url(img/representImg/"
+				+$(event.target).parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
+			
+			if(image != $(event.target).parent().children('input[type="hidden"]').length + 1){
+				$(event.target).parent().children('.rcp-count-images').text(image+1+" / "+$(event.target).parent().children('input[type="hidden"]').length);
 				}else{
-					/*console.log('여기옴 ? actioninner');*/
-					var imageChange = parseInt( $('.entry-action-inner').width() + 1)  / $(event.target).parent().parent().parent().children('input[type="hidden"]').length;
-					var image = parseInt(event.offsetX / imageChange);								
-					$(event.target).parent().attr("style", "background-image:url(img/representImg/"
-							+$(event.target).parent().parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
-					
-					if(image != $(event.target).parent().children('input[type="hidden"]').length + 1){
-						$(event.target).parent().children('.rcp-count-images').text(image+1+" / "+$(event.target).parent().children('input[type="hidden"]').length);
-						}else{
-							return;
-						}
-					
+					return;
 				}
-			})
+			
+			
+		}else{
+			/*console.log('여기옴 ? actioninner');*/
+			var imageChange = parseInt( $('.entry-action-inner').width() + 1)  / $(event.target).parent().parent().parent().children('input[type="hidden"]').length;
+			var image = parseInt(event.offsetX / imageChange);								
+			$(event.target).parent().attr("style", "background-image:url(img/representImg/"
+					+$(event.target).parent().parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
+			
+			if(image != $(event.target).parent().children('input[type="hidden"]').length + 1){
+				$(event.target).parent().children('.rcp-count-images').text(image+1+" / "+$(event.target).parent().children('input[type="hidden"]').length);
+				}else{
+					return;
+				}
+			
+		}
+	})
 }
 
 
