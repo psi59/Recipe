@@ -913,4 +913,10 @@ span a{
 }
 .rcp-list-margin-top{
 	margin-top:30px;
+	padding-bottom : 0px ! important;
+}
+
+.rcp-list-margin-bottom{
+	margin-bottom:30px;
+	padding-top:15px ! important;
 }

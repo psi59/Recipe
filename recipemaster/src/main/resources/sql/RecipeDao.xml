@@ -86,13 +86,17 @@
       </foreach>
       )) a GROUP BY rcpno) d WHERE r.rcpno = d.rcpno AND vc = #{categorySize}
     </if>
-    <if test="search.searchCondition == 'recipe' and categorySize eq 0">
+    <!-- <if test="search.searchCondition == 'recipe' and categorySize eq 0">
      WHERE r.name LIKE '%${search.searchKeyword}%' </if>
     <if test="search.searchCondition == 'recipe' and !categorySize eq 0">
      AND r.name LIKE '%${search.searchKeyword}%' </if>
     <if test="search.searchCondition == 'chef' and categorySize eq 0"> 
      WHERE u.name LIKE '%${search.searchKeyword}%' </if>
     <if test="search.searchCondition == 'recipe' and !categorySize eq 0"> 
+     AND r.name LIKE '%${search.searchKeyword}%' </if> -->
+    <if test="categorySize eq 0">
+     WHERE r.name LIKE '%${search.searchKeyword}%' </if>
+    <if test="!categorySize eq 0">
      AND r.name LIKE '%${search.searchKeyword}%' </if>
      GROUP BY r.rcpno
     <if test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'"> 
@@ -117,14 +121,18 @@
 			)) a GROUP BY rcpno) d WHERE r.rcpno = d.rcpno AND vc =
 			#{categorySize}
 		</if>
-		<if test="search.searchCondition == 'recipe' and categorySize eq 0">
+		<!-- <if test="search.searchCondition == 'recipe' and categorySize eq 0">
 			WHERE r.name LIKE '%${search.searchKeyword}%' </if>
 		<if test="search.searchCondition == 'recipe' and !categorySize eq 0">
 			AND r.name LIKE '%${search.searchKeyword}%' </if>
 		<if test="search.searchCondition == 'chef' and categorySize eq 0">
 			WHERE u.name LIKE '%${search.searchKeyword}%' </if>
 		<if test="search.searchCondition == 'recipe' and !categorySize eq 0">
-			AND r.name LIKE '%${search.searchKeyword}%' </if>
+			AND r.name LIKE '%${search.searchKeyword}%' </if> -->
+		<if test="categorySize eq 0">
+     WHERE r.name LIKE '%${search.searchKeyword}%' </if>
+    <if test="!categorySize eq 0">
+     AND r.name LIKE '%${search.searchKeyword}%' </if>
 		<if test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'">
 			ORDER BY r.rcpno DESC </if>
 		<if	test="search.sortCondition == 'newest' and search.orderCondition == 'ASC'">

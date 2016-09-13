@@ -63,6 +63,11 @@ public class RecipeController {
       list = recipeService.getRecipeSearchList(pageNo, pageSize, search, userNo);
     }
     
+    // 카테고리 데이터 잘 받아오는지 테스트 
+    /*for (String ctg : categoryList) {
+      System.out.println("카테고리 : "+ctg);
+    }*/
+    
     // 검색결과 첫페이지를 갱신했을때만 레시피카드들을 카운트 한다.
     if(pageNo == 1){
       recipeCount = recipeService.getRecipeCount(pageNo, pageSize, search, userNo);

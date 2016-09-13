@@ -77,7 +77,6 @@ document.write('<script type"text/javascript" src="js/template/naverLogin_implic
 			  mouseMoveEventForImage(result);
 			  mouseMoveEventForSubscribeImage(result);
 			  
-			  
 			  methods();
 			  Main2List();
 			  $('#popular-rcp-more').click(function(){
