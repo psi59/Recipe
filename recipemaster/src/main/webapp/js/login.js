@@ -1,11 +1,11 @@
 $(function() {
 	loadUsers();
-	$('.rankingWrapper').bxSlider({
-		startSlide : 0,
-		pager : false,
-		moveSlides : 1,
-		infiniteLoop : true
-	});
+//	$('.rankingWrapper').bxSlider({
+//		startSlide : 0,
+//		pager : false,
+//		moveSlides : 1,
+//		infiniteLoop : true
+//	});
 	loadMonthRank();
 	loadTodayRank();
 
@@ -221,11 +221,11 @@ function getUserInfo() {
 	$('#signUpTopBtn').remove();
 	$('#mainNav')
 			.append(
-					$('<li id="writeRecipe" class="margin_right_10px activedropdown-full-color dropdown-secondary"><a href='+contextRoot+'mypage.html?'+(userInfo==null?null:userInfo.email)+'" class="padding_6px dropdown__header"><img id="profileImg"'
+					$('<li id="writeRecipe" class="margin_right_10px activedropdown-full-color dropdown-secondary"><a href='+contextRoot+'mypage.html?'+(userInfo==null?null:userInfo.email)+' class="padding_6px dropdown__header"><img id="profileImg"'
 							+'class="rcp-img img-circle" src="img/profileImg/'+(userInfo==null?null:userInfo.image)+'"/>'+(userInfo==null?null:userInfo.userName)+'</a></li>'));
 	$('#mainNav')
 			.append(
-					$('<li id="writeRecipe" class="dropdown-full-color dropdown-secondary"><a href='+contextRoot+'writerecipe.html">레시피 등록</a></li> '));
+					$('<li id="writeRecipe" class="dropdown-full-color dropdown-secondary"><a href='+contextRoot+'writerecipe.html>레시피 등록</a></li> '));
 	$('#mainNav')
 	.append(
 			$('<li id="logoutBtn" class="dropdown-full-color dropdown-secondary"><a href="#">로그아웃</a></li> '));

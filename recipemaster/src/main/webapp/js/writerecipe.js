@@ -9,8 +9,10 @@ var imageList = new Array();
 imageList[0] = new File([""], "");
 
 $(function() {
-
 	var userInfo = getUserInfo();
+	
+	$('.header-body').load('topNavBar.html');
+	
 	if(userInfo==null){
 		loginAlert();
 		return;
