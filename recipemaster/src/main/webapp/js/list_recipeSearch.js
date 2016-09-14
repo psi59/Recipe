@@ -15,7 +15,13 @@ $(document).ready(function(){
 	}
 	// 카테고리
 	if(urlParams.ctg != undefined){
-		$('#rcp-category-section input[type=checkbox][value='+decodeURIComponent(urlParams.ctg)+']').attr('checked',true);
+		/*$('#rcp-category-section input[type=checkbox][value='+decodeURIComponent(urlParams.ctg)+']').attr('checked',true);*/
+		$('.rcp-cursor[value="'+decodeURIComponent(urlParams.ctg)+'"').addClass('rcp-category-checked');
+		$('#category-filter').css('display','block')
+		$('#category-filter').append('<span class="category-filter-box" value="'+decodeURIComponent(urlParams.ctg)+'">'
+									+ decodeURIComponent(urlParams.ctg)+'&nbsp;'
+								    +'<span class="glyphicon glyphicon-remove" aria-hidden="true">'
+								    +'</span></span>');
 	}
 	
 	// 처음화면에 모든 레시피들을 보여준다
@@ -126,6 +132,26 @@ $(document).ready(function(){
 	  });
 
 	categoryClick();
+	
+	// 필터박스 클릭시 리무브
+	$(document).on('click','.category-filter-box', function(){
+		$(this).remove();
+		$('.rcp-cursor[value="'+$(this).attr('value')+'"]').removeClass('rcp-category-checked');
+		if($('.rcp-category-checked').length == 0){
+			$('#category-filter').css('display','none')
+		}
+		$("body").scrollTop(0);
+		search('newest', $('#order-latest-btn').val());
+	})
+	
+	// 필터박스 모두 취소
+	$(document).on('click', '#category-filter-cancel', function(){
+		$('.category-filter-box').remove();
+		$('.rcp-cursor').removeClass('rcp-category-checked');
+		$('#category-filter').css('display','none')
+		$("body").scrollTop(0);
+		search('newest', $('#order-latest-btn').val());
+	})
 	
 });
 
@@ -261,7 +287,7 @@ function searchScrollAppend(){
 					} else {
 						$('#search-pageNo').val('lastPage');
 					}					
-				}, 500)
+				}, 350)
 			},
 			// 데이터 조회 중일때 로딩 이미지 보여주기
 			beforeSend:function(){			  
@@ -273,7 +299,7 @@ function searchScrollAppend(){
 				setTimeout(function() {
 					$('.wrap-loading').addClass('display-none');
 					$('html').css("cursor","auto");
-				}, 500)
+				}, 350)
 			},
 			error : function() {
 				swal('서버 요청 오류 !')
@@ -314,53 +340,61 @@ $(function(){
 	
 	Handlebars.registerHelper("representImages", function(value, options){
 		{			
-	return value[0];
+			return value[0];
 		}
-});  	
+	});  	
 	
 })
 
 function mouseMoveEventForSubscribeImage(result){
-			$(document).on('mousemove','.entry-action, .entry-action-inner',function(event){
-				if( $(event.target).attr('class') == 'entry-action' ){					
-					var imageChange = parseInt( $('.entry-action').width() + 1)  / $(event.target).parent().parent().children('input[type="hidden"]').length;					
-					var image = parseInt(event.offsetX / imageChange);					
-					$(event.target).attr("style", "background-image:url(img/representImg/"
-						+$(event.target).parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
-					
-					if(image != $(event.target).parent().children('input[type="hidden"]').length + 1){
-						$(event.target).parent().children('.rcp-count-images').text(image+1+" / "+$(event.target).parent().children('input[type="hidden"]').length);
-						}else{
-							return;
-						}
-					
-					
+	$(document).on('mousemove','.entry-action, .entry-action-inner',function(event){
+		if( $(event.target).attr('class') == 'entry-action' ){					
+			var imageChange = parseInt( $('.entry-action').width() + 1)  / $(event.target).parent().parent().children('input[type="hidden"]').length;					
+			var image = parseInt(event.offsetX / imageChange);					
+			$(event.target).attr("style", "background-image:url(img/representImg/"
+				+$(event.target).parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
+			
+			if(image != $(event.target).parent().children('input[type="hidden"]').length + 1){
+				$(event.target).parent().children('.rcp-count-images').text(image+1+" / "+$(event.target).parent().children('input[type="hidden"]').length);
 				}else{
-					/*console.log('여기옴 ? actioninner');*/
-					var imageChange = parseInt( $('.entry-action-inner').width() + 1)  / $(event.target).parent().parent().parent().children('input[type="hidden"]').length;
-					var image = parseInt(event.offsetX / imageChange);								
-					$(event.target).parent().attr("style", "background-image:url(img/representImg/"
-							+$(event.target).parent().parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
-					
-					if(image != $(event.target).parent().children('input[type="hidden"]').length + 1){
-						$(event.target).parent().children('.rcp-count-images').text(image+1+" / "+$(event.target).parent().children('input[type="hidden"]').length);
-						}else{
-							return;
-						}
-					
+					return;
 				}
-			})
+			
+			
+		}else{
+			/*console.log('여기옴 ? actioninner');*/
+			var imageChange = parseInt( $('.entry-action-inner').width() + 1)  / $(event.target).parent().parent().parent().children('input[type="hidden"]').length;
+			var image = parseInt(event.offsetX / imageChange);								
+			$(event.target).parent().attr("style", "background-image:url(img/representImg/"
+					+$(event.target).parent().parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
+			
+			if(image != $(event.target).parent().children('input[type="hidden"]').length + 1){
+				$(event.target).parent().children('.rcp-count-images').text(image+1+" / "+$(event.target).parent().children('input[type="hidden"]').length);
+				}else{
+					return;
+				}
+			
+		}
+	})
 }
 
 
 function categoryClick(){
-	$(document).on('click','.category',function(event){		
-		if( $(event.target).hasClass('rcp-category-checked')){			
-			$(event.target).removeClass('rcp-category-checked');
+	$(document).on('click','.rcp-cursor',function(){		
+		$('#category-filter').css('display','block')
+		if( $(this).hasClass('rcp-category-checked')){			
+			$(this).removeClass('rcp-category-checked');
+			$('.category-filter-box[value="'+$(this).html()+'"]').remove();
+			if($('.rcp-category-checked').length == 0){
+				$('#category-filter').css('display','none')
+			}
 			$("body").scrollTop(0);
 			search('newest', $('#order-latest-btn').val());
 		}else{			
-			$(event.target).addClass('rcp-category-checked');
+			$(this).addClass('rcp-category-checked');
+			$('#category-filter').append('<span class="category-filter-box" value="'+$(this).html()+'">'+$(this).html()+'&nbsp;'
+									    +'<span class="glyphicon glyphicon-remove" aria-hidden="true">'
+									    +'</span></span>');
 			$("body").scrollTop(0);
 			search('newest', $('#order-latest-btn').val());
 		}
