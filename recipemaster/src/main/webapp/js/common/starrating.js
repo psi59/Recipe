@@ -4,7 +4,7 @@ function starRatingBtn(){
 	$(document).on('click','#rcp-starrating-btn-apply',function(){
 		if($('input[name="rating"]:checked').val() != undefined){
 			$.ajax({
-				url : 'recipe/starRate.json',
+				url : contextRoot+'recipe/starRate.json',
 				method : 'post',
 				data : {
 					grade : $('input[name="rating"]:checked').val(),
@@ -43,7 +43,7 @@ function checkDuplicateGrade(){
 	var compileStarRating = Handlebars.compile(starRating);
 	
 	$.ajax({
-		url : 'recipe/checkDuplicateGrade.json',
+		url : contextRoot+'recipe/checkDuplicateGrade.json',
 		method : 'post',
 		data : {
 			recipeNo : $('#detail-recipeNo').val()

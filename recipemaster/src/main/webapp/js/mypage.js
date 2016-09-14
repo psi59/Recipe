@@ -18,7 +18,7 @@ $(function() {
 	}
 
 	$.ajax({
-		url : 'recipe/userPage.json',
+		url : contextRoot+'recipe/userPage.json',
 		dataType : 'json',
 		method : 'post',
 		data : {
@@ -66,7 +66,7 @@ $(function() {
 
 	// checkSubscribe
 	$.ajax({
-		url : 'recipe/checkSubscribe.json',
+		url : contextRoot+'recipe/checkSubscribe.json',
 		datatype : 'json',
 		data : {
 			email : location.href.split('?')[1]
@@ -88,7 +88,7 @@ $(function() {
 	$('.rcp-topbtn').on('click', function(evnet) {
 		if ($(event.target).is('#subscribeComplete')) {
 			$.ajax({
-				url : 'recipe/deleteSubscribe.json',
+				url : contextRoot+'recipe/deleteSubscribe.json',
 				datatype : 'json',
 				data : {
 					email : location.href.split('?')[1]
@@ -106,7 +106,7 @@ $(function() {
 			});
 		} else {
 			$.ajax({
-				url : 'recipe/addSubscribe.json',
+				url : contextRoot+'recipe/addSubscribe.json',
 				datatype : 'json',
 				data : {
 					email : location.href.split('?')[1]
@@ -213,7 +213,7 @@ $(function() {
 	function loadVisitor() {
 
 		$.ajax({
-			url : '/visitor/list.json',
+			url : contextRoot+'/visitor/list.json',
 			dataType : 'json',
 			method : 'get',
 			data : {
@@ -244,7 +244,7 @@ $(function() {
 	/* Add */
 	$(document).on('click','#rcp-rpBtn', function() {
 		$.ajax({
-			url : 'visitor/add.json',
+			url : contextRoot+'visitor/add.json',
 			method : 'post',
 			data : {
 				visitorContent : $('#rcp-rpcontent').val(),
@@ -356,7 +356,7 @@ $(function() {
 				function(event) {
 					event.preventDefault();
 					var request;
-					var url = 'recipe/userPage.json';
+					var url = contextRoot+'recipe/userPage.json';
 
 					if($(event.target).is('#searchRecipe')){
 						request=1;
@@ -457,7 +457,7 @@ $(function() {
 
 
 		$.ajax({
-			url : '/visitor/loadMyPage.json',
+			url : contextRoot+'/visitor/loadMyPage.json',
 			datatype:'json',
 			data:{
 				email:location.href.split('?')[1]

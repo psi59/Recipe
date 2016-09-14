@@ -1,4 +1,4 @@
-window.onload = function() {
+$(function() {
 	loadUsers();
 	$('.rankingWrapper').bxSlider({
 		startSlide : 0,
@@ -17,7 +17,7 @@ window.onload = function() {
 	/* 로그아웃 버튼 */
 	$(document).on('click', '#logoutBtn', function() {
 		logout(event);
-		$(location).attr('href', '/');
+		$(location).attr('href', contextRoot);
 	});
 
 	$(window)
@@ -106,7 +106,7 @@ window.onload = function() {
 		var template = Handlebars.compile(source);
 
 		$.ajax({
-			url : 'user/top3.json',
+			url : contextRoot+'user/top3.json',
 			dataType : 'json',
 			method : 'get',
 			async : false,
@@ -137,7 +137,7 @@ window.onload = function() {
 		var template = Handlebars.compile(source);
 
 		$.ajax({
-			url : 'user/monthtop3.json',
+			url : contextRoot+'user/monthtop3.json',
 			dataType : 'json',
 			method : 'get',
 			success : function(result) {
@@ -169,7 +169,7 @@ window.onload = function() {
 		var template = Handlebars.compile(source);
 
 		$.ajax({
-			url : 'user/todaytop3.json',
+			url : contextRoot+'user/todaytop3.json',
 			dataType : 'json',
 			method : 'get',
 			success : function(result) {
@@ -195,7 +195,7 @@ window.onload = function() {
 			}
 		});
 	}// end of 쉐프카드
-};
+});
 
 function getUserInfo() {
 	var obj = loginCheck().responseJSON;
@@ -221,11 +221,11 @@ function getUserInfo() {
 	$('#signUpTopBtn').remove();
 	$('#mainNav')
 			.append(
-					$('<li id="writeRecipe" class="margin_right_10px activedropdown-full-color dropdown-secondary"><a href="/mypage.html?'+(userInfo==null?null:userInfo.email)+'" class="padding_6px dropdown__header"><img id="profileImg"'
+					$('<li id="writeRecipe" class="margin_right_10px activedropdown-full-color dropdown-secondary"><a href='+contextRoot+'mypage.html?'+(userInfo==null?null:userInfo.email)+'" class="padding_6px dropdown__header"><img id="profileImg"'
 							+'class="rcp-img img-circle" src="img/profileImg/'+(userInfo==null?null:userInfo.image)+'"/>'+(userInfo==null?null:userInfo.userName)+'</a></li>'));
 	$('#mainNav')
 			.append(
-					$('<li id="writeRecipe" class="dropdown-full-color dropdown-secondary"><a href="/writerecipe.html">레시피 등록</a></li> '));
+					$('<li id="writeRecipe" class="dropdown-full-color dropdown-secondary"><a href='+contextRoot+'writerecipe.html">레시피 등록</a></li> '));
 	$('#mainNav')
 	.append(
 			$('<li id="logoutBtn" class="dropdown-full-color dropdown-secondary"><a href="#">로그아웃</a></li> '));
@@ -241,7 +241,7 @@ function getUserInfo() {
 
 function loginCheck() {
 	return $.ajax({
-		url : '/user/loginCheck.json',
+		url : contextRoot+'user/loginCheck.json',
 		method : 'get',
 		dataType : 'json',
 		async : false
@@ -252,7 +252,7 @@ function loginCheck() {
 function logout(event) {
 	event.preventDefault();
 	$.ajax({
-		url : '/user/logout.json',
+		url : contextRoot+'/user/logout.json',
 		method : 'get',
 		dataType : 'json',
 		success : function(result) {
@@ -277,7 +277,7 @@ function login(event) {
 	event.preventDefault();
 
 	$.ajax({
-		url : '/user/login.json',
+		url : contextRoot+'/user/login.json',
 		method : 'post',
 		dataType : 'json',
 		data : {

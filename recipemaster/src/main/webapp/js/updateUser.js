@@ -17,7 +17,8 @@ $(function(){
 			$('#profileGrade').text(userInfo.grade);
 			$('#updateFormUserNo').val(userInfo.userNo);
 			$('#updateFormEmail').val(userInfo.email);
-			$('.rcp-up-preview').append($('<img style="width: 80px; height: 80px;" src="img/profileImg/'+userInfo.image+'">'));
+			$('.rcp-up-preview').html('');
+			$('.rcp-up-preview').append($('<img style="width: 70%;" src="img/profileImg/'+userInfo.image+'">'));
 		}
 	});
 

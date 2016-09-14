@@ -69,7 +69,7 @@ $(function() {
 	var options = {
 			url : function(phrase) {
 				console.log(phrase);
-				return "recipe/materialSearch.json?searchValue=" + phrase;
+				return contextRoot+"recipe/materialSearch.json?searchValue=" + phrase;
 			},
 
 			getValue : function(element) {
@@ -459,7 +459,7 @@ function getImageURL(imageFile) {
 
 function getRecipeEditInfo(recipeNo){
 	$.ajax({
-		url : 'recipe/recipeDetail.json',
+		url : contextRoot+'recipe/recipeDetail.json',
 		method : 'post',
 		data : {
 			recipeNo : recipeNo
@@ -548,7 +548,7 @@ function getRecipeEditInfo(recipeNo){
 
 function checkMyRecipe(recipeNo){
 	$.ajax({
-		url : 'recipe/checkMyRecipe.json',
+		url : contextRoot+'recipe/checkMyRecipe.json',
 		method : 'post',
 		data : {
 			recipeNo : recipeNo
@@ -606,6 +606,6 @@ function loginAlert(){
 		confirmButtonText : "확인",
 		closeOnConfirm : false
 	}, function(isConfirm) {
-		location.href = "index.html"
+		location.href = contextRoot
 	});
 }

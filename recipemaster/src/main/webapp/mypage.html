@@ -39,17 +39,11 @@
 <link rel="stylesheet" href="css/detail.css">
 <!-- ------------------디테일 일시적 추가   - 변경 할 것임 ---------------------- -->
 
-
-
-
 <!-- 성현 -->
 <!-- <link rel="stylesheet" href="css/common_list_topbar.css"> -->
 
-<style>
-</style>
-<style id='theme58872-style-inline-css' type='text/css'>
-
-</style>
+<style id='theme58872-style-inline-css' type='text/css'></style>
+<script src="js/common/app-context.js"></script>
 </head>
 <body  data-spy="scroll"  data-target="#navSecondary" data-offset="170">
 
@@ -741,7 +735,7 @@ $(window).scroll(function() {
     function loadMyPage() {
 
       $.ajax({
-        url : 'visitor/loadMyPage.json',
+        url : contextRoot+'visitor/loadMyPage.json',
         method : 'get',
         dataType : 'json',
         success : function(result) {

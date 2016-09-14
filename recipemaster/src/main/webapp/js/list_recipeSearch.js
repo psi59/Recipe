@@ -83,7 +83,7 @@ $(document).ready(function(){
 		  event.preventDefault();
 		  if($(event.target).is('.active') ){
 			  $.ajax({
-				  url:'recipe/likeDown.json?recipeNo=' + $(event.target).parent()
+				  url:contextRoot+'recipe/likeDown.json?recipeNo=' + $(event.target).parent()
 				  .parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
 				  + eval(sessionStorage.getItem('data'))[0].userNo,
 				  dataType:'json',
@@ -105,7 +105,7 @@ $(document).ready(function(){
 		  }
 		  else{
 			  $.ajax({
-				  url:'recipe/likeUp.json?recipeNo=' + $(event.target).parent()
+				  url:contextRoot+'recipe/likeUp.json?recipeNo=' + $(event.target).parent()
 				  .parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
 				  +  eval(sessionStorage.getItem('data'))[0].userNo,
 				  dataType:'json',
@@ -150,7 +150,7 @@ function search(sort,order){
 	})	
 	
 	$.ajax({
-		url : 'recipe/listSearch.json',
+		url : contextRoot+'recipe/listSearch.json',
 		method : 'post',
 		data : {
 			searchKeyword : $('#searchKeyword').val(),
@@ -234,7 +234,7 @@ function searchScrollAppend(){
 	if($('#search-pageNo').val() != 'lastPage'){
 		var pageNo = parseInt($('#search-pageNo').val())+1;
 		$.ajax({
-			url : 'recipe/listSearch.json',
+			url : contextRoot+'recipe/listSearch.json',
 			method : 'post',
 			data : {					
 				pageNo : pageNo,

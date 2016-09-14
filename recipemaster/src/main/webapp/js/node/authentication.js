@@ -75,7 +75,7 @@ app.get('/user/authentication.do', function (request, response) {
 		  to: email,
 		  subject: "href",
 		  generateTextFromHTML: true,
-		  html: "<a href='http://127.0.0.1:7979/user/auth.do?authKEY="+authKEY+"&auth="+auth+"&email="+email+"'>"+email+"님 환영합니다."+"</a>"
+		  html: "<a href="+getContextRoot('7979')+"user/auth.do?authKEY="+authKEY+"&auth="+auth+"&email="+email+"'>"+email+"님 환영합니다."+"</a>"
 		
 	}, function(error, response) {
 	   if (error) {

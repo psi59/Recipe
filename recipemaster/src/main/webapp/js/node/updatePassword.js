@@ -96,7 +96,7 @@ app.get('/user/updatePassword.do', function (request, response) {
 	  response.write("</head>\n");
 	  response.write("<body>\n");
 	  response.write("<div><h1>비밀번호 변경이 완료되었습니다.</h1>\n");
-	  response.write("<a href='http://127.0.0.1:8080'>cookle로 바로가기</a>\n");
+	  response.write("<a href='"+contextRoot+"'>cookle로 바로가기</a>\n");
 	  response.write("</div>\n");
 	  response.write("</body>\n");
 	  response.write("</html>\n");

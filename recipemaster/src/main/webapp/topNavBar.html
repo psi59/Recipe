@@ -14,206 +14,190 @@
 <link rel="stylesheet" href="css/rcp-template/form-template.css">
 </head>
 <body data-spy="scroll" data-target="#navSecondary" data-offset="170">
-<div  id="login-pop-up-banner" style="display: none;">
-	<div class="inset">
-        <!-----start-main---->
-     <form class="template-form">
-          <div>
-       <span><label>Email</label></span>
-       <span><input type="text" class="form-template userEmail" id="userEmail"></span>
-      </div>
-      <div>
-       <span><label>Password</label></span>
-         <span><input id="userPassword"  type="password" class="form-template"></span>
-      </div>
-     <div class="sign">
-       <div class="submit">
-         <input id="userLogin" type="submit" value="LOGIN">
-       </div>
-       <span class="forget-pass">
-         <a id="findPassword" href="#">Forgot Password?</a>
-       </span>
-         <div class="clear"> </div>
-     </div>
-     </form>
-     <div id="naver_id_login" class="display_none"></div>
-   </div>
-</div>   
-  <!--  
-	<div class="panel" id="login-pop-up-banner" style="display: none;">
-		<h2>SIGN IN</h2>
-		<div class="formset">
-			<div class="form-group">
-				<lable class="form-label">Email</lable>
-				<input type="text" class="form-control" id="userEmail" />
-			</div>
-			<div class="form-group">
-				<lable class="form-label">Password</lable>
-				<input type="password" class="form-control" id="userPassword" />
-			</div>
-
-			<button class="btn" id="userLogin">Log in</button>
-			<a id="findPassword">Forgot Your Password?</a>
-			<hr style="margin: 15px;">
-			<p id="other-login-text">소셜아이디로 로그인하기</p>
-			<div id="naver_id_login"></div>
+	<div id="login-pop-up-banner" style="display: none;">
+		<div class="inset">
+			<!-----start-main---->
+			<form class="template-form">
+				<div>
+					<span><label>Email</label></span> <span><input type="text"
+						class="form-template userEmail" id="userEmail"></span>
+				</div>
+				<div>
+					<span><label>Password</label></span> <span><input
+						id="userPassword" type="password" class="form-template"></span>
+				</div>
+				<div class="sign">
+					<div class="submit">
+						<input id="userLogin" type="submit" value="LOGIN">
+					</div>
+					<span class="forget-pass"> <a id="findPassword" href="#">Forgot
+							Password?</a>
+					</span>
+					<div class="clear"></div>
+				</div>
+			</form>
+			<div id="naver_id_login" class="display_none"></div>
 		</div>
 	</div>
-	 -->
-	 
-	<div  id="findPassword-pop-up-banner" style="display: none;">
-	  <div class="inset">
-	        <!-----start-main---->
-	     <form class="template-form">
-	          <div>
-	       <span><label>Email</label></span>
-	       <span><input type="text" class="form-template userEmail" id="findPassword-userEmail"></span>
-	      </div>
-	     <div class="sign">
-	       <div class="submit find-password-btn-position">
-	         <input id="pushEmail" class="find-password-btn" type="submit" value="Email 전송">
-	       </div>
-	         <div class="clear"> </div>
-	     </div>
-	     </form>
-	     <div id="naver_id_login" class="display_none"></div>
-	   </div>
-	</div> 
-	<!-- password 찾기 -->
-<!-- 	<div class="panel" id="findPassword-pop-up-banner"
+
+	<div id="findPassword-pop-up-banner" style="display: none;">
+		<div class="inset">
+			<!-----start-main---->
+			<form class="template-form">
+				<div>
+					<span><label>Email</label></span> <span><input type="text"
+						class="form-template userEmail" id="findPassword-userEmail"></span>
+				</div>
+				<div class="sign">
+					<div class="submit find-password-btn-position">
+						<input id="pushEmail" class="find-password-btn" type="submit"
+							value="Email 전송">
+					</div>
+					<div class="clear"></div>
+				</div>
+			</form>
+			<div id="naver_id_login" class="display_none"></div>
+		</div>
+	</div>
+
+	<div id="signup-pop-up-banner" style="display: none;">
+		<div class="inset">
+			<!-----start-main---->
+			<form class="template-form">
+				<div>
+					<span><label>Email</label></span> <span><input type="text"
+						class="form-template userEmail" id="signup-e-mail"></span>
+				</div>
+				<label id="signup-e-mail-label" class="control-label sign-label"></label>
+				<div>
+					<span><label>Name</label></span> <span><input
+						id="signup-userName" type="text" class="form-template"></span>
+				</div>
+				<label id="signup-userName-label" class="control-label sign-label"></label>
+				<div>
+					<span><label>Password</label></span> <span><input
+						id="signup-password" type="password" class="form-template"></span>
+				</div>
+				<label id="signup-password-label" class="control-label sign-label"></label>
+				<div>
+					<span><label>Password Confirm</label></span> <span><input
+						id="signup-passwordCheck" type="password" class="form-template"></span>
+				</div>
+				<label id="signup-passwordCheck-label"
+					class="control-label sign-label"></label>
+				<div class="sign">
+					<div class="submit find-password-btn-position">
+						<input id="signup-addBtn" class="find-password-btn" type="submit"
+							value="Sign up">
+					</div>
+				</div>
+			</form>
+			<div id="naver_id_login" class="display_none"></div>
+		</div>
+	</div>
+
+	<div id="editUserInfo-pop-up-banner" style="display: none;">
+		<div class="inset">
+			<!-----start-main---->
+			<form action="user/update.json" method="post" id="updateUserForm"
+				class="template-form" enctype="multipart/form-data">
+				<input type="hidden" name="userNo" id="updateFormUserNo"> <input
+					type="hidden" name="email" id="updateFormEmail">
+				<div class="float_left"
+					style="width: 40%; height: 100%; position: relative;">
+					<div class="rcp-up-preview img-wrapper"></div>
+	        <div class="file-upload-wrapper">
+	          <input id="profileImage" type="file" name="profileImage"
+	            class="file-upload-native" accept="image/*" />
+	        </div>
+					
+          <div class="rcp-laytext">
+	          <div id="updateBoxName"></div>
+	          <div id="updateBoxGrade"></div>
+	          <div id="updateBoxEmail"></div>
+	          <div class="submit rcp-userinfo-save-btn">
+	            <input id="signup-addBtn" class="find-password-btn" type="submit"
+	              value="저장">
+	          </div>
+          </div>
+				</div>
+
+				<div class="float_left"
+					style="width: 60%; height: 100%;">
+					<div>
+            <span><label>이전 비밀번호</label></span> <span><input
+              id="beforePwd" type="password" class="form-template"></span>
+          </div>
+				  <div>
+	          <span><label>변경 비밀번호</label></span> <span><input
+	            id="afterPwd" type="password" class="form-template"></span>
+	        </div>
+	        <div>
+	          <span><label>변경 비밀번호 확인</label></span> <span><input
+	            id="afterPwdcf" type="password" class="form-template"></span>
+	        </div>
+				  <div>
+            <span><label>자기소개</label></span> <span><textarea
+              id="afterPwdcf" type="text" class="form-template"></textarea></span>
+          </div>
+				</div>
+			</form>
+			<div id="naver_id_login" class="display_none"></div>
+		</div>
+	</div>
+
+	<!-- 
+	<div class="panel" id="editUserInfo-pop-up-banner"
 		style="display: none;">
-		<h2>Find Password</h2>
-		<div class="formset">
-			<div class="form-group">
-				<lable class="form-label">Email</lable>
-				<input type="text" class="form-control" id="findPassword-userEmail" />
-			</div>
-			<button class="btn" id="findPassword">push</button>
-		</div>
-	</div>
- -->
- 
- 
-<div  id="signup-pop-up-banner" style="display: none;">
-  <div class="inset">
-        <!-----start-main---->
-     <form class="template-form">
-      <div>
-       <span><label>Email</label></span>
-       <span><input type="text" class="form-template userEmail" id="signup-e-mail"></span>
-      </div>
-      <label id="signup-e-mail-label" class="control-label sign-label"></label>
-      <div>
-        <span><label>Name</label></span>
-        <span><input id="signup-userName"  type="text" class="form-template"></span>
-      </div>
-      <label id="signup-userName-label" class="control-label sign-label"></label>
-      <div>
-        <span><label>Password</label></span>
-        <span><input id="signup-password"  type="password" class="form-template"></span>
-      </div>
-      <label id="signup-password-label" class="control-label sign-label"></label>
-      <div>
-       <span><label>Password Confirm</label></span>
-       <span><input id="signup-passwordCheck"  type="password" class="form-template"></span>
-      </div>
-      <label id="signup-passwordCheck-label" class="control-label sign-label"></label>
-     <div class="sign">
-       <div class="submit find-password-btn-position">
-         <input id="signup-addBtn" class="find-password-btn" type="submit" value="Sign up">
-       </div>
-     </div>
-     </form>
-     <div id="naver_id_login" class="display_none"></div>
-   </div>
-</div>   
- 
-	<!-- <div class="panel" id="signup-pop-up-banner" style="display: none;">
-		<h2>SIGN UP</h2>
-		<div class="formset">
-			<div class="form-group">
-				<lable class="form-label">Email</lable>
-				<input type="text" class="form-control" id="signup-e-mail" />
-			</div>
-
-			<label id="signup-e-mail-label" class="control-label"></label>
-
-			<div class="form-group">
-				<lable class="form-label">NickName</lable>
-				<input type="text" class="form-control" id="signup-userName" />
-			</div>
-
-			<label id="signup-userName-label" class="control-label"></label>
-
-			<div class="form-group">
-				<lable class="form-label">Password</lable>
-				<input type="password" class="form-control" id="signup-password" />
-			</div>
-
-			<label id="signup-password-label" class="control-label"></label>
-
-			<div class="form-group">
-				<lable class="form-label">Password Confirm</lable>
-				<input type="password" class="form-control"
-					id="signup-passwordCheck" />
-			</div>
-
-			<label id="signup-passwordCheck-label" class="control-label"></label>
-
-			<button class="btn" id="signup-addBtn">Sign up</button>
-			<a href="#" id="signup-resetBtn">Cancel</a>
-		</div>
-	</div> -->
-
-
-	<div class="panel" id="editUserInfo-pop-up-banner" style="display: none;">
 		<form action="user/update.json" method="post" id="updateUserForm"
 			enctype="multipart/form-data">
 			<input type="hidden" name="userNo" id="updateFormUserNo"> <input
 				type="hidden" name="email" id="updateFormEmail">
-				
+
 			<div style="width: 100%; height: 225px;">
 				<div class="rcp-up-preview img-wrapper"></div>
-        <div class="file-upload-wrapper">
-          <input id="profileImage" type="file" name="profileImage"
-            class="file-upload-native" accept="image/*" />
-        </div>
-        
-        <div class="rcp-laytext">
-          <div id="updateBoxName"></div>
-          <div id="updateBoxGrade"></div>
-          <div id="updateBoxEmail"></div>
-        </div>
+				<div class="file-upload-wrapper">
+					<input id="profileImage" type="file" name="profileImage"
+						class="file-upload-native" accept="image/*" />
+				</div>
+
+				<div class="rcp-laytext">
+					<div id="updateBoxName"></div>
+					<div id="updateBoxGrade"></div>
+					<div id="updateBoxEmail"></div>
+				</div>
 			</div>
-			
+
 			<div class="formset">
 				<div class="form-group">
 					<lable class="form-label">이전비밀번호</lable>
-					<input class="form-control" type="password" id="beforePwd" name="beforePassword">
+					<input class="form-control" type="password" id="beforePwd"
+						name="beforePassword">
 				</div>
-				
+
 				<div class="form-group">
-          <lable class="form-label">변경비밀번호 입력</lable>
-          <input class="form-control" type="password" id="afterPwd" name="afterpassword">
-        </div>
-        
-        <div class="form-group">
-          <lable class="form-label">변경비밀번호 확인</lable>
-          <input class="form-control" type="password" id="afterPwdcf">
-        </div>
-        
-        <div class="form-group">
-          <lable class="form-label">자기소개</lable>
-          <textarea class="form-control rcp-tara" rows="5rem" cols="30rem"
-            id="introduce" name="intro"></textarea>
-        </div>
+					<lable class="form-label">변경비밀번호 입력</lable>
+					<input class="form-control" type="password" id="afterPwd"
+						name="afterpassword">
+				</div>
+
+				<div class="form-group">
+					<lable class="form-label">변경비밀번호 확인</lable>
+					<input class="form-control" type="password" id="afterPwdcf">
+				</div>
+
+				<div class="form-group">
+					<lable class="form-label">자기소개</lable>
+					<textarea class="form-control rcp-tara" rows="5rem" cols="30rem"
+						id="introduce" name="intro"></textarea>
+				</div>
 
 				<button class="btn" id="userLogin">수정</button>
 				<a id="findPassword">취소</a>
 			</div>
 		</form>
 	</div>
-
+ -->
 
 
 
@@ -263,7 +247,6 @@
 		</div>
 	</div>
 
-
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="node_modules/bxslider/dist/jquery.bxslider.min.js"></script>
@@ -276,6 +259,9 @@
 	<script type="text/javascript">
 
 		$(function(){
+			
+			console.log(contextRoot);
+			
 			var userInfo = getUserInfo();
 			
 			//loginBtn 팝업 , 불투명 배경 띄우기
@@ -370,7 +356,7 @@
 		    console.log("email : " + naver_id_login.getProfileData('email'));
 		    $
 		        .ajax({
-		          url : '/user/loginNaver.json',
+		          url : contextRoot+'/user/loginNaver.json',
 		          method : 'post',
 		          dataType : 'json',
 		          data : {
