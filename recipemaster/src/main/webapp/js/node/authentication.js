@@ -56,7 +56,7 @@ app.use(function (req, res, next) {
 	});
 
 
-app.get('/user/authentication.do', function (request, response) {
+app.get('http://52.78.163.78:8888/user/authentication.do', function (request, response) {
 	var email = request.query.email;
 	var authKEY = request.query.authKEY;
 	var auth=1;
@@ -75,7 +75,7 @@ app.get('/user/authentication.do', function (request, response) {
 		  to: email,
 		  subject: "href",
 		  generateTextFromHTML: true,
-		  html: "<a href="+getContextRoot('7979')+"user/auth.do?authKEY="+authKEY+"&auth="+auth+"&email="+email+"'>"+email+"님 환영합니다."+"</a>"
+		  html: "<a href=http://52.78.163.78:7979/user/auth.do?authKEY="+authKEY+"&auth="+auth+"&email="+email+"'>"+email+"님 환영합니다."+"</a>"
 		
 	}, function(error, response) {
 	   if (error) {

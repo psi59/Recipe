@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -189,6 +190,7 @@ public class RecipeController {
     map.put("recipe", recipe);
     map.put("material", recipeMaterialNames);
     int recipeNo = recipeService.addRecipe(map);
+    recipe.setRecipeNo(recipeNo);
     recipeDatas.put("recipeNo", recipeNo);
     recipeDatas.put("materialList", materialList);
     recipeDatas.put("categoryValue", categoryValue);
@@ -393,7 +395,7 @@ public class RecipeController {
   }
 
   // ---------------------고재현 -------------------------
-  @RequestMapping(path = "list", produces = "application/json;charset=UTF-8")
+  @RequestMapping(path = "list", produces = "application/json;charset=UTF-8", method=RequestMethod.POST)
   @ResponseBody
   public String list(@RequestParam int userNo, @RequestParam(defaultValue = "4") int pageSize, int request) {
     HashMap<String, Object> result = new HashMap<>();

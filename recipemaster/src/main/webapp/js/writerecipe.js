@@ -9,14 +9,13 @@ var imageList = new Array();
 imageList[0] = new File([""], "");
 
 $(function() {
+
 	var userInfo = getUserInfo();
-	
-	$('.header-body').load('topNavBar.html');
-	
 	if(userInfo==null){
 		loginAlert();
 		return;
 	}
+//	$('.header-body').load('topNavBar.html');
 
 	var recipeNo = location.href.split('?')[1]==null ? 0 : location.href.split('?')[1];
 
@@ -64,7 +63,7 @@ $(function() {
 				}
 			}
 		}
-
+		
 		$("#updateRecipe").submit();
 	});
 
@@ -414,11 +413,13 @@ $(function() {
 		}
 
 		$('input[name="regiStatus"]').val("0");
+		$('#addRecipe').attr('action', contextRoot+'recipe/addRecipe.json');
 		$('#addRecipe').submit();
 	});
 
 	$('#imAddBtn').on('click', function() {
 		$('input[name="regiStatus"]').val("1");
+		$('#addRecipe').attr('action', contextRoot+'recipe/addRecipe.json');
 		$('#addRecipe').submit();
 	});
 
@@ -525,7 +526,7 @@ function getRecipeEditInfo(recipeNo){
 			$('#addBtn')
 			.attr('id', 'updateBtn');
 			$('#addRecipe').attr('action',
-			'recipe/updateRecipe.json');
+			contextRoot+'recipe/updateRecipe.json');
 			$('#addRecipe').attr('id',
 			'updateRecipe');
 

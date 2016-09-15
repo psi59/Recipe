@@ -31,8 +31,8 @@ app.use(function (req, res, next) {
 var pool  = mysql.createPool({
   connectionLimit : 10,
   host     : 'localhost',
-  port     : '4000',
-  user     : 'java83',
+  port     : '3306',
+  user     : 'root',
   password : '1111',
   database : 'recipe'
 });
@@ -45,13 +45,13 @@ app.get('/', function (request, response) {
 	response.send('Express 적용 예제');
 });
 
-app.get('/user/auth.do', function (request, response) {
+app.get('http://52.78.163.78:7979/user/auth.do', function (request, response) {
 	pool.query("update users set auth=? where email =?",
 		  [request.query.auth,request.query.email],
 		  function(err, rows, fields) { 
 		  if (err) throw err;
 		  response.writeHead(302, {
-			  'Location' : 'http://127.0.0.1:8080/index.html' 
+			  'Location' : 'http://52.78.163.78:8080/' 
 		  });
 		  
 		  var check = 'true';
