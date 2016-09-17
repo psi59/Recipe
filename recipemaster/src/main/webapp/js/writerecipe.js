@@ -208,7 +208,7 @@ $(function() {
 				dataType : 'json',
 				autoUpload : false,
 				acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i,
-				dropZone : $('#dropzone')
+				dropZone : $('#files')
 			})
 			.on(
 					'fileuploadadd',
@@ -449,9 +449,11 @@ $(function() {
 		if($(this).hasClass('active')){
 			$(this).removeClass('active');
 			$(this).next().attr("name", "");
+			$(this).next().next().attr("name", "");
 		} else {
 			$(this).addClass('active')
 			$(this).next().attr("name", "categoryValue");
+			$(this).next().next().attr("name", "ctgName");
 		}		
 	});
 });
@@ -518,6 +520,7 @@ function getRecipeEditInfo(recipeNo){
 					if($(this).val()==recipeCategories[index].categoryNo){
 						$(this).prev().addClass('active');
 						$(this).attr("name", "categoryValue");
+						$(this).next().attr("name", "ctgName");
 					}
 				});
 			});

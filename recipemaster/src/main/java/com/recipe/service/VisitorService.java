@@ -4,6 +4,7 @@ package com.recipe.service;
 import java.util.HashMap;
 import java.util.List;
 
+import com.recipe.domain.User;
 import com.recipe.domain.Visitor;
 
 public interface VisitorService {
@@ -12,6 +13,5 @@ public interface VisitorService {
   Visitor getVisitor(int no);
   void updateVisitor(Visitor visitor); 
   int deleteVisitor(int no);
-  
-  HashMap<String,Object> loadMyPage(int userNo);//준모 mypage
+  User getVisitorInfo(int no);
 }

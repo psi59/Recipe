@@ -77,16 +77,21 @@ $(function() {
 				// swal('실행 중 오류 발생');
 				return;
 			}
-			$('.rcp-topbtn').text('구독중');
-			$('.rcp-topbtn').attr('id', 'subscribeComplete');
+			$('.subscribeBtn-text').text('구독중');
+			$('.subscribeBtn').addClass('subsactive');
+			if((userInfo==null?null:userInfo.email)!=location.href.split('?')[1]){
+				$('#subsWrapper').removeClass('display_none');
+			}
+			
+//			$('.rcp-topbtn').attr('id', 'subscribeComplete');
 		},
 		error : function() {
 			swal('서버 요청 오류!...')
 		}
 	});
 
-	$('.rcp-topbtn').on('click', function(evnet) {
-		if ($(event.target).is('#subscribeComplete')) {
+	$('.subscribeBtn').on('click', function(evnet) {
+		if ($(this).hasClass('subsactive')) {
 			$.ajax({
 				url : contextRoot+'recipe/deleteSubscribe.json',
 				datatype : 'json',
@@ -95,10 +100,11 @@ $(function() {
 				},
 				method : 'post',
 				success : (function() {
-
 					console.log('구독하기 해제 성공성공')
-					$('.rcp-topbtn').text('구독하기');
-					$('.rcp-topbtn').attr('id', '');
+					$('.subscribeBtn-text').text('구독하기');
+					$('.subscribeBtn').removeClass('subsactive');
+//					$('.rcp-topbtn').text('구독하기');
+//					$('.rcp-topbtn').attr('id', '');
 				}),
 				error : (function() {
 					console.log('구독하기 서버요청 error');
@@ -119,8 +125,10 @@ $(function() {
 						return;
 					} else {
 						console.log('구독하기 성공성')
-						$('.rcp-topbtn').text('구독중');
-						$('.rcp-topbtn').attr('id', 'subscribeComplete');
+						$('.subscribeBtn-text').text('구독중');
+						$('.subscribeBtn').addClass('subsactive');
+//						$('.rcp-topbtn').text('구독중');
+//						$('.rcp-topbtn').attr('id', 'subscribeComplete');
 					}
 				}),
 				error : (function(result) {
@@ -468,10 +476,11 @@ $(function() {
 					//swal('로그인 해주시기 바랍니다.');
 					return;
 				}
-				$('#visitNum').text(result.sum+"명");
-				$('#likeNum').text(result.like+"개");
-				$('#scrapNum').text(result.scr+"개");
-				$('#gradeNum').text(result.avg+"점");
+				console.log(result.data);
+				$('#visitNum').text(result.data.hits+"명");
+				$('#likeNum').text(result.data.likeCount+"개");
+				$('#scrapNum').text(result.data.scrapCount+"개");
+				$('#subsNum').text(result.data.subsCount+"명");
 
 			},
 			error : function() {

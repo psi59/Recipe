@@ -43,8 +43,8 @@ $main: #7b7de5;
 
 #editUserInfo-pop-up-banner {
   display: none;
-  width: 50%;
-  height: 33%;
+  width: 582px;
+  height: 400px !important;
   background: #ffffff;
 }
 

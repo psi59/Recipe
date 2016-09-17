@@ -17,8 +17,9 @@ $(function(){
 			$('#profileGrade').text(userInfo.grade);
 			$('#updateFormUserNo').val(userInfo.userNo);
 			$('#updateFormEmail').val(userInfo.email);
+			$('#introduce').val(userInfo.intro);
 			$('.rcp-up-preview').html('');
-			$('.rcp-up-preview').append($('<img style="width: 70%;" src="img/profileImg/'+userInfo.image+'">'));
+			$('.rcp-up-preview').append($('<img style="width: 111.44px; height:111.44px;" src="img/profileImg/'+userInfo.image+'">'));
 		}
 	});
 
@@ -33,7 +34,7 @@ $(function(){
 	}).on('fileuploadadd', function (e, data) {
 		profileImage[0] = data.files[0];
 		$('.rcp-up-preview').html('');
-		$('.rcp-up-preview').append($('<img class="rcp-up-preview" src="'+URL.createObjectURL(profileImage[0])+'">'));
+		$('.rcp-up-preview').append($('<img style="width: 111.44px; height:111.44px;" src="'+URL.createObjectURL(profileImage[0])+'">'));
 	}).on('fileuploaddone', function (e, data) {
 		if (data.result.status == 'pwdFail'){
 			$('#beforePwd-div').removeClass().addClass("rcp-mar rcp-info form-group form-group-md has-error has-feedback");
@@ -87,7 +88,7 @@ $(function(){
 				return;
 			}
 		}
-		
+		$('#updateUserForm').attr('action', contextRoot+'user/update.json');
 		$('#updateUserForm').submit();
 
 //		$.post('/user/update.json', {
