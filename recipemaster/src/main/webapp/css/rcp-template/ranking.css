@@ -36,6 +36,12 @@
 	height:800px;
 }
 
+.custom-divider{
+	   width: 100%;
+    visibility: visible;
+    position: relative;
+    
+}
 .rcp-ranking-form{
 	margin-top:60px;
 }
