@@ -1,31 +1,28 @@
 .rcp-up-preview {
-	  position: absolute;
-    left: 38%;
+    margin-top: 55px;
     display: block;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+    width: 100%;
     overflow: hidden;
-    top: 53px;
+    padding-left: 40px;
 } 
 
 .file-upload-wrapper {
-    position: relative;
+    position: absolute;
+    top: 0px;
     z-index: 20;
     display: block;
     width: 100%;
-    height: 146px;
+    height: 160px;
 }
 
-.file-upload-native,
-.file-upload-text {
-    position: absolute;
-    left: 43%;
-    top: 44%;
+.file-upload-native, .file-upload-text {
     display: block;
-    width: 50px;
-    height: 50px;
+    width: 100%;
+    height: 166px;
     cursor: pointer;
+    padding-top: 54px;
+    padding-left: 40px;
+    padding-right: 46px;
 }
 
 input[type="file"]::-webkit-file-upload-button {
@@ -54,4 +51,18 @@ input[type="file"]::-webkit-file-upload-button {
 .file-upload-native {
     z-index: 15;
     opacity: 0;
+}
+
+.rcp-laytext {
+  padding-top: 7%;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  height: 100%;
+}
+
+.rcp-userinfo-save-btn{
+	float: none !important;
+  margin-top: 7%;
 }

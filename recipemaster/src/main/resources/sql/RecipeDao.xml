@@ -179,10 +179,10 @@
 
 	<insert id="insert" parameterType="map">
 		INSERT INTO rcps(uno, name, intro, c_time, ptn, rcp_pd, rpimg, rcp_dt,
-		rgst, mts)
+		rgst, mts, ctgs)
 		VALUES(#{user.userNo}, #{recipe.recipeName}, #{recipe.intro},
 		#{recipe.cookTime},
-		#{recipe.portion}, 'rcp_pd', 'rpimg', now(), #{recipe.regiStatus}, #{material})
+		#{recipe.portion}, 'rcp_pd', 'rpimg', now(), #{recipe.regiStatus}, #{material}, #{ctgName})
 		<selectKey keyProperty="recipeNo" resultType="int" order="AFTER">
 			SELECT LAST_INSERT_ID();
 		</selectKey>
@@ -387,7 +387,7 @@
 	<update id="updateRecipe" parameterType="map">
 		UPDATE rcps set
 		name=#{recipe.recipeName}, intro=#{recipe.intro}, c_time=#{recipe.cookTime},
-		ptn=#{recipe.portion}, rpimg=#{recipe.representImages}, rcp_pd=#{recipe.recipeProcedure}, mts=#{material}
+		ptn=#{recipe.portion}, rpimg=#{recipe.representImages}, rcp_pd=#{recipe.recipeProcedure}, mts=#{material}, ctgs=#{ctgName}
 		where rcpno=${recipe.recipeNo};
 	</update>
 

@@ -1,8 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html  class="sticky-header-negative sticky-header-active">
 <head>
 <meta charset="UTF-8">
 <title>ranking</title>
+
+
+
+<link rel="stylesheet" href="css/rcp-template/naver-kin_default_margin.css">
+<link rel="stylesheet" href="css/rcp-template/naver-hall.css">
+
+<link rel="stylesheet" href="css/rcp-template/animate.css">
+<link rel="stylesheet" href="css/rcp-template/theme.css">
+<link rel="stylesheet" href="css/rcp-template/theme-element.css">
+<link rel="stylesheet" href="css/rcp-template/theme-animate.css">
+<link rel="stylesheet" href="css/rcp-template/skin-restaurant.css">
 
 <link rel="stylesheet"
 	href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
@@ -13,20 +24,404 @@
 <link rel="stylesheet"
   href="node_modules/bxslider/dist/jquery.bxslider.css">
 <!-- 사용자 정의 css -->
-<!-- <link rel="stylesheet" href="css/rank.css"> -->
+<!-- <link rel="stylesheet" href="css/rank.css"> --><!-- 
 <link rel="stylesheet" href="css/rankingpage.css">
-<link rel="stylesheet" href="css/userinfobox.css">
+<link rel="stylesheet" href="css/userinfobox.css"> -->
 <link rel="stylesheet" href="css/common/signup.css">
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="css/updateImg.css">
+<!-- <link rel="stylesheet" href="css/updateImg.css"> -->
+
+
+<link rel="stylesheet" href="css/template/animate.css">
+<link rel="stylesheet" href="css/template/main.css"> 
+<link rel="stylesheet" href="css/template/styles.css">
+<link rel="stylesheet" href="css/template/plugins.css">
+<link rel="stylesheet" href="css/rcp-template/ranking.css">
+
 <style>
 </style>
 </head>
-<body>
-	<nav>
+<body data-spy="scroll"  data-target="#navSecondary" data-offset="170">
+
+<header id="header" class="header-narrow site-header wide" role="banner" data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": false}'>
+ 
+     <div class="header-body"></div>    
+        
+</header>
+
+
+<section class="p-xlg rcp-p-xlg-padding">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12 center">
+                <h2 class="mt-lg mb-sm">For People <strong>Ranking</strong></h2>
+                <p class="font-size-md">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu pulvinar magna.<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+
+                <hr class="custom-divider">
+              </div>
+            </div>
+          </div>
+        </section>
+        
+<div class="content"> 
+<div class="section_ranking grid_inner _cheerUpArea">
+  <div class="uio_top">
+    
+    <ul class="tab_area_sub">
+      <li class="on"><a href="#"  class="_eliteUserBtn"  onclick="nhn.Kin.Utility.nClicks('hfh.kgtab', '', '', event);"><h4 class="tit"><span>인기쉐프</span></h4></a></li>
+      
+    </ul>
+  </div>
+  <!-- 채택왕 -->
+  <div class="section_adoption _eliteUserArea">
+    <h5 class="blind">연도별 채택왕 프로필</h5>
+    <div class="article_list">
+      <ul class="top_list">
+        
+        <li class="list_divide first">
+          <div class="list_item top_item1">
+            <a href="/profile/longzhe1983" class="inner" onclick="nhn.Kin.Utility.nClicks('hfh.kgname', '', '', event);">
+              <span class="rank"><em>1</em></span>
+              <div class="thmb_profile">
+                <div class="thmb">
+                  <img src="img/profileImg/userprofile_2.jpg" alt="">
+                  <span class="mask"></span>
+                </div>
+              </div>
+              <div class="list_body">
+                
+                <div class="writer_sec">
+                  <span class="writer no_badge"><em class="ellipsis">박상일</em></span>
+                  
+                  
+                </div>
+                <p class="desc ellipsis">방가방가여</p>
+                
+              </div>
+            </a>
+          </div>
+          <div class="list_side">
+            
+            <div class="recommend ">
+              <button class="_cheerUp _param('longzhe1983')" onclick="nhn.Kin.Utility.nClicks('hfh.kglike', '', '', event);">
+                <span class="num _count">페이지로이동</span>
+              </button>
+            </div>
+          </div>
+        </li>
+        
+        <li class="list_divide ">
+          <div class="list_item top_item2">
+            <a href="/profile/doctoramor" class="inner" onclick="nhn.Kin.Utility.nClicks('hfh.kgname', '', '', event);">
+              <span class="rank"><em>2</em></span>
+              <div class="thmb_profile">
+                <div class="thmb">
+                  <img src="img/profileImg/userprofile_3.jpg" alt="">
+                  <span class="mask"></span>
+                </div>
+              </div>
+              <div class="list_body">
+                
+                <div class="writer_sec">
+                  <span class="writer no_badge"><em class="ellipsis">길용이</em></span>
+                  
+                  
+                </div>
+                <p class="desc ellipsis">하이하이여</p>
+             
+              </div>
+            </a>
+          </div>
+          <div class="list_side">
+            
+            <div class="recommend ">
+              <button class="_cheerUp _param('doctoramor')" onclick="nhn.Kin.Utility.nClicks('hfh.kglike', '', '', event);">                
+                <span class="num _count">페이지로이동</span>
+              </button>
+            </div>
+          </div>
+        </li>
+        
+        <li class="list_divide last">
+          <div class="list_item top_item3">
+            <a href="/profile/winsosong" class="inner" onclick="nhn.Kin.Utility.nClicks('hfh.kgname', '', '', event);">
+              <span class="rank"><em>3</em></span>
+              <div class="thmb_profile">
+                <div class="thmb">
+                  <img src="img/profileImg/userprofile_5.jpg" alt="">
+                  <span class="mask"></span>
+                </div>
+              </div>
+              <div class="list_body">
+                
+                <div class="writer_sec">
+                  <span class="writer no_badge"><em class="ellipsis">고재현</em></span>
+                  
+                  
+                </div>
+                <p class="desc ellipsis">고재짱짱맨</p>
+              
+              </div>
+            </a>
+          </div>
+          <div class="list_side">
+            
+            <div class="recommend ">
+              <button class="_cheerUp _param('winsosong')" onclick="nhn.Kin.Utility.nClicks('hfh.kglike', '', '', event);">                
+                <span class="num _count">페이지로이동</span>
+              </button>
+            </div>
+          </div>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+  <!-- //채택왕 -->
+  <!-- 기부왕 --> 
+  
+</div>
+</div>
+
+
+ <section class="rcp-ranking-middle-background">
+      <div class="rcp-profileCover">
+        <h2 class="rcp-ranking-middle-background-comment">당신만의 독창성을 남들에게 뽐내고 최고 쉐프가 되보세요 !</h2>
+      </div>
+ </section>
+
+<section class="rcp-ranking">
+
+  <div class="content">
+    <div class="rcp-ranking-form">
+    
+      <div class="rcp-user-ranking-content">
+        <div class="col-sm-1 rcp-ranking-position">
+          <p class="rcp-ranking-text-left">순위</p>
+        </div>          
+          <div class="col-sm-3 rcp-ranking-position">
+            <!--   <div class="rcp-ranking-image">
+          </div> -->
+          <p class="rcp-ranking-text-left">쉐프</p>
+          
+          
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2 rcp-ranking-position"><p class="rcp-ranking-text-center">레시피 수</p></div>
+         <div class="col-sm-2 rcp-ranking-position"><p class="rcp-ranking-text-center">구독자 수</p></div>
+          <div class="col-sm-2 rcp-ranking-position "> <p class="rcp-ranking-text-center">토탈포인트</p></div>
+           <div class="col-sm-1"></div>
+         
+      </div>
+      
+      <!-- 핸들바스 만들 소스 시작부분 --> 
+      
+        <div class="rcp-user-ranking rcp-ranking-position">
+        <div class="col-sm-1">
+          <p class="rcp-ranking-num">1</p>
+        </div>          
+          <div class="col-sm-3">
+            <!--   <div class="rcp-ranking-image">
+          </div> -->
+          <img src="img/profileImg/userprofile_3.jpg" class="rcp-ranking-image">
+          <h5 class="rcp-ranking-userName">고재현</h5>
+          <h5 class="rcp-ranking-chef-rank">MASTER CHEF</h5>
+        </div>
+            <div class="col-sm-2"></div>
+        <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">15 개</div>
+         <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">63명</div>
+          <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9"><p>12003point</p></div>
+           <div class="col-sm-1"></div>
+         
+      </div>
+      
+      <!-- 핸들바스 만들 소스 끝부분  -->
+      
+          <div class="rcp-user-ranking rcp-ranking-position">
+        <div class="col-sm-1">
+          <p class="rcp-ranking-num">2</p>
+        </div>          
+          <div class="col-sm-3">
+            <!--   <div class="rcp-ranking-image">
+          </div> -->
+          <img src="img/profileImg/userprofile_1.jpg" class="rcp-ranking-image">
+          <h5 class="rcp-ranking-userName">박상일</h5>
+          <h5 class="rcp-ranking-chef-rank">MASTER CHEF</h5>
+        </div>
+            <div class="col-sm-2"></div>
+        <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">14 개</div>
+         <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">53명</div>
+          <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9"><p>11203point</p></div>
+           <div class="col-sm-1"></div>
+         
+      </div>
+      
+                <div class="rcp-user-ranking rcp-ranking-position">
+        <div class="col-sm-1">
+          <p class="rcp-ranking-num">2</p>
+        </div>          
+          <div class="col-sm-3">
+            <!--   <div class="rcp-ranking-image">
+          </div> -->
+          <img src="img/profileImg/userprofile_2.jpg" class="rcp-ranking-image">
+          <h5 class="rcp-ranking-userName">박상일</h5>
+          <h5 class="rcp-ranking-chef-rank">MASTER CHEF</h5>
+        </div>
+            <div class="col-sm-2"></div>
+        <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">14 개</div>
+         <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">53명</div>
+          <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9"><p>11203point</p></div>
+           <div class="col-sm-1"></div>
+         
+      </div>
+      
+                <div class="rcp-user-ranking rcp-ranking-position">
+        <div class="col-sm-1">
+          <p class="rcp-ranking-num">2</p>
+        </div>          
+          <div class="col-sm-3">
+            <!--   <div class="rcp-ranking-image">
+          </div> -->
+          <img src="img/profileImg/userprofile_4.jpg" class="rcp-ranking-image">
+          <h5 class="rcp-ranking-userName">박상일</h5>
+          <h5 class="rcp-ranking-chef-rank">MASTER CHEF</h5>
+        </div>
+            <div class="col-sm-2"></div>
+        <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">14 개</div>
+         <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">53명</div>
+          <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9"><p>11203point</p></div>
+           <div class="col-sm-1"></div>
+         
+      </div>
+      
+                <div class="rcp-user-ranking rcp-ranking-position">
+        <div class="col-sm-1">
+          <p class="rcp-ranking-num">2</p>
+        </div>          
+          <div class="col-sm-3">
+            <!--   <div class="rcp-ranking-image">
+          </div> -->
+          <img src="img/profileImg/userprofile_5.jpg" class="rcp-ranking-image">
+          <h5 class="rcp-ranking-userName">박상일</h5>
+          <h5 class="rcp-ranking-chef-rank">MASTER CHEF</h5>
+        </div>
+            <div class="col-sm-2"></div>
+        <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">14 개</div>
+         <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">53명</div>
+          <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9"><p>11203point</p></div>
+           <div class="col-sm-1"></div>
+         
+      </div>
+      
+                <div class="rcp-user-ranking rcp-ranking-position">
+        <div class="col-sm-1">
+          <p class="rcp-ranking-num">2</p>
+        </div>          
+          <div class="col-sm-3">
+            <!--   <div class="rcp-ranking-image">
+          </div> -->
+          <img src="img/profileImg/userprofile_1.jpg" class="rcp-ranking-image">
+          <h5 class="rcp-ranking-userName">박상일</h5>
+          <h5 class="rcp-ranking-chef-rank">MASTER CHEF</h5>
+        </div>
+            <div class="col-sm-2"></div>
+        <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">14 개</div>
+         <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">53명</div>
+          <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9"><p>11203point</p></div>
+           <div class="col-sm-1"></div>
+         
+      </div>
+      
+                <div class="rcp-user-ranking rcp-ranking-position">
+        <div class="col-sm-1">
+          <p class="rcp-ranking-num">2</p>
+        </div>          
+          <div class="col-sm-3">
+            <!--   <div class="rcp-ranking-image">
+          </div> -->
+          <img src="img/profileImg/userprofile_2.jpg" class="rcp-ranking-image">
+          <h5 class="rcp-ranking-userName">박상일</h5>
+          <h5 class="rcp-ranking-chef-rank">MASTER CHEF</h5>
+        </div>
+            <div class="col-sm-2"></div>
+        <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">14 개</div>
+         <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">53명</div>
+          <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9"><p>11203point</p></div>
+           <div class="col-sm-1"></div>
+         
+      </div>
+      
+                <div class="rcp-user-ranking rcp-ranking-position">
+        <div class="col-sm-1">
+          <p class="rcp-ranking-num">2</p>
+        </div>          
+          <div class="col-sm-3">
+            <!--   <div class="rcp-ranking-image">
+          </div> -->
+          <img src="img/profileImg/userprofile_3.jpg" class="rcp-ranking-image">
+          <h5 class="rcp-ranking-userName">박상일</h5>
+          <h5 class="rcp-ranking-chef-rank">MASTER CHEF</h5>
+        </div>
+            <div class="col-sm-2"></div>
+        <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">14 개</div>
+         <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">53명</div>
+          <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9"><p>11203point</p></div>
+           <div class="col-sm-1"></div>
+         
+      </div>
+      
+                <div class="rcp-user-ranking rcp-ranking-position">
+        <div class="col-sm-1">
+          <p class="rcp-ranking-num">2</p>
+        </div>          
+          <div class="col-sm-3">
+            <!--   <div class="rcp-ranking-image">
+          </div> -->
+          <img src="img/profileImg/userprofile_4.jpg" class="rcp-ranking-image">
+          <h5 class="rcp-ranking-userName">박상일</h5>
+          <h5 class="rcp-ranking-chef-rank">MASTER CHEF</h5>
+        </div>
+            <div class="col-sm-2"></div>
+        <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">14 개</div>
+         <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">53명</div>
+          <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9"><p>11203point</p></div>
+           <div class="col-sm-1"></div>
+         
+      </div>
+      
+                <div class="rcp-user-ranking rcp-ranking-position">
+        <div class="col-sm-1">
+          <p class="rcp-ranking-num">2</p>
+        </div>          
+          <div class="col-sm-3">
+            <!--   <div class="rcp-ranking-image">
+          </div> -->
+          <img src="img/profileImg/userprofile_5.jpg" class="rcp-ranking-image">
+          <h5 class="rcp-ranking-userName">박상일</h5>
+          <h5 class="rcp-ranking-chef-rank">MASTER CHEF</h5>
+        </div>
+            <div class="col-sm-2"></div>
+        <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">14 개</div>
+         <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">53명</div>
+          <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9"><p>11203point</p></div>
+           <div class="col-sm-1"></div>
+         
+      </div>
+      
+      
+      
+      
+      
+      
+    </div>
+  </div>
+
+</section>
+
+	<!-- <nav>
 		<div class="row">
-			<!-- <div class="col-md-1"><a href="index.html"><img class="rcp-gomain" src="img/gohome.png"></a> -->
+			<div class="col-md-1"><a href="index.html"><img class="rcp-gomain" src="img/gohome.png"></a>
 		</div>
 		<div class="nav-container col-md-11 rcp-topbar ranking-bar-infobox">
 			<ul>
@@ -102,8 +497,7 @@
           class="form-group has-error has-feedback">
           <input id="signup-password" type="password" class="form-control"
             placeholder="비밀번호 입력"> <span id="signup-password-span"
-            class="glyphicon glyphicon-remove form-control-feedback"
-            aria-hidden="true"></span> <label id="signup-password-label"
+            class="glyphicon glyphicon-remove form-control-feedback"            aria-hidden="true"></span> <label id="signup-password-label"
             class="control-label"></label>
         </div>
 
@@ -129,7 +523,7 @@
       <span id="signup-addBtn">가입</span> <span id="signup-resetBtn">취소</span>
     </div>
   </div>
-  <!--준모_login------------------------------------------------------------------------------- -->
+  준모_login-------------------------------------------------------------------------------
   <div id='login-pop-up-banner'>
     <div class="rcp-section" id="login-pop-up-name">
       <span>로그인</span>
@@ -151,20 +545,20 @@
 
   </div>
 
-  <!--  -->
+  
   <div id='editUserInfo-pop-up-banner'>
     <form action="user/update.json" method="post" id="updateUserForm"
       enctype="multipart/form-data">
       <input type="hidden" name="userNo" id="updateFormUserNo"> <input
         type="hidden" name="email" id="updateFormEmail">
       <div class="rcp-laytop">
-        <!--유저 이미지 업로드 --용이  !!!!!enctype?????16.08.12-->
+        유저 이미지 업로드 --용이  !!!!!enctype?????16.08.12
         <div class="rcp-up-preview img-wrapper"></div>
         <div class="file-upload-wrapper">
           <input id="profileImage" type="file" name="profileImage"
             class="file-upload-native" accept="image/*" />
         </div>
-        <!--유저 이미지 업로드 끝--용이  -->
+        유저 이미지 업로드 끝--용이 
         <div class="col-md-11 rcp-laytext">
           <h4 id="updateBoxName"></h4>
           <h5 id="updateBoxGrade"></h5>
@@ -200,13 +594,13 @@
         </div>
       </div>
       <div class="rcp-sign-membership">
-        <!-- <button id="updateUserInfo" type="submit">확인</button> -->
+        <button id="updateUserInfo" type="submit">확인</button>
         <a href="#"><span id="updateUserInfo">확인</span></a> <a href="#"><span
           id="updateUserReset">취소</span></a>
       </div>
     </form>
   </div>
-	<!-------------------------------- Rank List --------------------------------->
+	------------------------------ Rank List -------------------------------
 	<section id="1" class="home">
 		<h1>Best Of Chef</h1>
 		<div class="rankingWrapper">
@@ -214,7 +608,7 @@
 			<div id="rcp-chef-rank-today"><h2>Today Ranking</h2></div>
 			<div id="rcp-chef-rank-month"><h2>Month Ranking</h2></div>
 		</div>
-		<!------------------------- Rank List ------------------------------>
+		----------------------- Rank List ----------------------------
 	</section>
 	<section id="2">
 		<h1>Chef Ranking</h1>
@@ -233,9 +627,9 @@
 			</div>
 			<div id="chefMyRanking" class="rcp-myranking"></div>
 			<div id="chefRanking"></div>
-			<!-- <img class="rcp-rankmedal-small1" src="/img/medal1.png"/>
+			<img class="rcp-rankmedal-small1" src="/img/medal1.png"/>
       <img class="rcp-rankmedal-small2" src="/img/medal2.png"/>
-      <img class="rcp-rankmedal-small3" src="/img/medal3.png"/> -->
+      <img class="rcp-rankmedal-small3" src="/img/medal3.png"/>
 		</div>
 		<div>
 			<br />
@@ -278,285 +672,34 @@
 		<h3>yongyi1587@naver.com</h3>
 		<p>Cookle</p>
 		<p>Cookle.com</p>
-	</footer>
-	<a id="toTop" href="#1"><div class="to-top"></div></a>
+	</footer> -->
+	<!-- <a id="toTop" href="#1"><div class="to-top"></div></a> -->
 	<!-- js -->
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
 	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
-  <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+  <!-- <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
   <script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
   <script src="node_modules/bxslider/dist/jquery.bxslider.min.js"></script>
-	<!--yongyi  -->
+	yongyi 
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/common/chefCard.js"></script>
 	<script src="js/waypoints.min.js"></script>
 	<script src="js/login.js"></script>
-	<!-- <script src="js/common.js"></script> -->
+	<script src="js/common.js"></script>
 	<script src="js/common_topsearchbar.js"></script>
 	<script src="js/updateUser.js"></script>
 	<script src="js/recipeDetail.js"></script>
 	<script src="js/rankingpage.js"></script>
-	<script src="js/template/naverLogin_implicit-1.0.2.js"></script>
-  <script id="chef-card-template" type="text/x-handlebars-template">
-{{#each data}}
-<div class="fresh-ui-wrap col-md-3">
- {{#if @first}}    
-    <img class="rcp-rankmedal" src="/img/medal1.png"/>
-  {{else if @last}}    
-    <img class="rcp-rankmedal" src="/img/medal3.png"/>
-  {{else}}   
-    <img class="rcp-rankmedal" src="/img/medal2.png"/>
-  {{/if}}
-  
-  <div class="fresh-ui">
-    <div class="header">
-      <div class="photo">     
-      <input type="hidden" class="rcp-hidden-email" value="{{email}}">
-             <img src="img/profileImg/{{image}}" class="img-circle rcp-profile">
-      </div>
-      <div class="social">
-        <div class="list">
-          <a data-title="Recipe">{{recipeCount}}</a>
-          <a data-title="구독자">{{subsCount}}</a>
-          <!--<a data-title="좋아요">{{likeCount}}</a>-->
-          <a data-title="Total">{{totalPoint}}</a>
-        </div>
-      </div>
-    </div>
-        <div class="content introBox">
-          <div class="name">
-                   <p class="rcp-userName1">{{userName}}</p></div>
-                    <p class="text">{{email}}</p>      
-                  <div class="rcp-ranking"><h4>{{grade}}</h4></div>
-          <div class="list clearfix">
-        <p class="introfont">{{intro}}</p>
-        </div>
-        <div class="cardbtn">
-         <button type="button" class="btn btn-default rcp-imp">
-              <a href="/mypage.html?{{email}}" class="visitbtn">방문하기</a></button>
-              {{#if status}}
-              <button type="button" name="subscribeComplete" class="btn btn-default rcp-imp rank-scs" data-email="{{email}}" >구독중</button>
-              {{else}}
-              <button type="button" class="btn btn-default rcp-imp rank-scs" data-email="{{email}}" >구독하기</button>
-               {{/if}}
-      </div>
-    </div>
-  </div>
-</div>
-  {{/each}} 
-  </script>
-
-	<script id="chef-rank-template" type="text/x-handlebars-template">
-  {{#each data}}
-      <div class="row rcp-font hover effect8">
-        <div class="col-md-2">{{rownum}}
-      </div>
-        <div class="col-md-2">
-          <div class="name"><input type="hidden" value="{{email}}">
-                   <a href="#" class="rcp-userName">{{userName}}</a></div>
-        </div>
-        <div class="col-md-2">{{recipeCount}} 개</div>
-        <div class="col-md-2">{{subsCount}} 명</div>
-        <div class="col-md-2">{{totalPoint}} 점</div>
-        <div class="col-md-2 ">{{grade}}</div>
-</div>
-  {{/each}}
-  </script>
-  <script id="chef-myrank-template" type="text/x-handlebars-template">
-  {{#each data}}
-      <div class="row rcp-font hover effect8">
-        <div class="col-md-2">{{rownum}}
-      </div>
-      <div class="col-md-2">
-        <div class="name"><input type="hidden" value="{{email}}">
-                   <a href="#" class="rcp-userName">{{userName}}</a></div>
-        </div>
-        <div class="col-md-2">{{recipeCount}} 개</div>
-        <div class="col-md-2">{{subsCount}} 명</div>
-        <div class="col-md-2">{{totalPoint}} 점</div>
-        <div class="col-md-2 ">{{grade}}</div>
-      </div>
-  {{/each}}
-  </script>
+	<script src="js/template/naverLogin_implicit-1.0.2.js"></script>-->
+	
 	<script>
-    var sourceChef = $('#chef-rank-template').text();
-    var templateChef = Handlebars.compile(sourceChef);
-    loadChefRanking();
+	$(function(){
+		  $('.header-body').load('topNavBar.html');
+		})
 
-    function loadChefRanking() {
-      $.ajax({
-        url : 'user/rank.json',
-        dataType : 'json',
-        method : 'get',
-        success : function(result) {
-          if (result.status != 'success') {
-            alert('실행중 오류 발생');
-            return;
-          }
-          var list = result.data;
-          $('#chefRanking').append(templateChef(result));
-          console.log(result.data);
-        },
-        error : function() {
-          alert('서버 요청 오류');
-        }
-      });
-    }
-  </script>
-	<script id="recipe-rank-template" type="text/x-handlebars-template">
-    {{#each data}}
-      <div class="row rcp-font hover effect8">
-        <div class="col-md-2">{{rownum}}</div>
-        <div class="col-md-2">
-          <a href="#" class="detail rcp-rcpName" style="z-index:9999">{{recipeName}} </a> 
-          <input type="hidden" name="recipeNo" value="{{recipeNo}}"></div>
-        <div class="col-md-2">{{countLike}} 개</div>
-        <div class="col-md-2">{{countScrap}} 개</div>
-        <div class="col-md-2">{{hits}} 개</div>
-        <div class="col-md-2">{{totalPoint}} 점</div>
-      </div>
-  {{/each}}
-  </script>
-	<script>
-    var sourceRcp = $('#recipe-rank-template').text();
-    var templateRcp = Handlebars.compile(sourceRcp);
-    loadRcpRanking();
+	</script>
 
-    function loadRcpRanking() {
-      $.ajax({
-        url : 'recipe/rank.json',
-        dataType : 'json',
-        method : 'get',
-        success : function(result) {
-          if (result.status != 'success') {
-             alert('실행중 오류 발생');
-            return;
-          }
-          var list = result.data;
-          $('#recipeRanking').append(templateRcp(result));
-        },
-        error : function() {
-           alert('서버 요청 오류');
-        }
-      });
-    }
-  </script>
-    <script>
-    var sourceMy = $('#chef-myrank-template').text();
-    var template1 = Handlebars.compile(sourceMy);
-    loadMyRanking();
-
-    function loadMyRanking() {
-      $.ajax({
-        url : 'user/myrank.json',
-        dataType : 'json',
-        method : 'get',
-        success : function(result) {
-          if (result.status != 'success') {
-        	  alert('실패');
-            return;
-          }
-          var list = result.data;
-          if(list!=null){
-        	  var appendData = '<div class="row rcp-font hover effect8">'
-                  +'<div class="col-md-2">My Ranking : '+list.rownum+'</div>'
-                  +'<div class="col-md-2"><div class="name">'
-                  +'<input type="hidden" value="'+list.email+'">'
-                  +'<a href="#" class="rcp-userName">'+list.userName+'</a></div>'
-                  +'</div><div class="col-md-2">'+list.recipeCount+' 개</div>'
-                  +'<div class="col-md-2">'+list.subsCount+' 명</div>'
-                  +'<div class="col-md-2">'+list.totalPoint+' 점</div>'
-                  +'<div class="col-md-2 ">'+list.grade+'</div></div>'
-                  
-                  $('#chefMyRanking').append($(appendData));
-          }
-          
-          console.log(result);
-        },
-        error : function() {
-          alert('서버 요청 오류');
-        }
-      });
-    }
-  </script>
-	<script>
-    $(function() {
-      getWeather();
-      getRealTimeRank();
-      $('#footer').load("../copyright.html");
-      
-      $('.profile-dropdown:has(.active)').bind('click', function() {
-
-      });
-
-      $(window).bind('scroll', function(e) {
-        $('.main-nav__dropdown').removeClass('active');
-      });
-
-      $('.dropdown-trigger').on('scroll', function() {
-        dropdownClick('.profile-dropdown', '.mobile-menu-dropdown');
-      });
-
-      $('.dropdown-trigger--mobile').on('click', function() {
-        dropdownClick('.mobile-menu-dropdown', '.profile-dropdown');
-      });
-    });
-  </script>
-  <script type="text/javascript">
-    var naver_id_login = new naver_id_login("oZ3ZBiNctenY6ix5st7G",
-        "http://127.0.0.1:8080/index.html");
-    var state = naver_id_login.getUniqState();
-    naver_id_login.setButton("green", 2, 40);
-    naver_id_login.setDomain(".service.com");
-    naver_id_login.setState(state);
-    naver_id_login.init_naver_id_login();
-  </script>
-
-  <script type="text/javascript">
-    // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-    function naverSignInCallback() {
-      // naver_id_login.getProfileData('프로파일항목명');
-      // 프로필 항목은 개발가이드를 참고하시기 바랍니다.
-      console.log("nickName : "
-          + naver_id_login.getProfileData('nickname'));
-      console.log("email : " + naver_id_login.getProfileData('email'));
-      $
-          .ajax({
-            url : '/user/loginNaver.json',
-            method : 'post',
-            dataType : 'json',
-            data : {
-              userName : naver_id_login
-                  .getProfileData('nickname'),
-              email : naver_id_login.getProfileData('email')
-            },
-            success : function(result) {
-              if (result.status == 'failure') {
-
-                swal('잘못입력하셨습니다.', '아이디 또는 비밀번호를 다시 확인하여 주세요.',
-                    "error");
-
-                return;
-              }
-
-              if (result.status == 'success') {
-
-              } else {
-                swal('비밀번호를 다시 입력해주세요');
-              }
-
-            },
-            error : function() {
-              swal('서버 요청 오류');
-            }
-          }); /* end of ajax */
-
-    }
-
-    // 네이버 사용자 프로필 조회
-    naver_id_login.get_naver_userprofile("naverSignInCallback()");
-  </script>
 </body>
 </html>

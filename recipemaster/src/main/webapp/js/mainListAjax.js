@@ -50,7 +50,7 @@ document.write('<script type"text/javascript" src="js/template/naverLogin_implic
 	  }	  
 	  
 	  $.ajax({	  		  
-		  url:'recipe/list.json',
+		  url:contextRoot+'recipe/list.json',
 		  dataType:'json',
 		  data:{
 			userNo : userNo,  
@@ -80,7 +80,7 @@ document.write('<script type"text/javascript" src="js/template/naverLogin_implic
 			  methods();
 			  Main2List();
 			  $('#popular-rcp-more').click(function(){
-				  window.location.href = "list.html?more=popular";
+				  window.location.href = contextRoot+"list.html?more=popular";
 			  })
 		  },
 		  error : function(){
@@ -100,7 +100,7 @@ document.write('<script type"text/javascript" src="js/template/naverLogin_implic
 	  }	  
 	  
 	  $.ajax({
-		  url:'recipe/list.json',
+		  url:contextRoot+'recipe/list.json',
 		  dataType:'json',
 		  data:{
 				userNo : userNo,  
@@ -131,7 +131,7 @@ document.write('<script type"text/javascript" src="js/template/naverLogin_implic
 			  MainRecomList()
 			  // more 클릭시 리스트 페이지로 이동
 			  $('#newest-rcp-more').click(function(){
-				  window.location.href = "list.html";
+				  window.location.href = contextRoot+"list.html";
 			  })
 		  },
 		  error : function(){
@@ -142,7 +142,7 @@ document.write('<script type"text/javascript" src="js/template/naverLogin_implic
   
   function main3List(){	  
 	  $.ajax({
-		  url :'recipe/userPage.json',
+		  url :contextRoot+'recipe/userPage.json',
 		  dataType : 'json',
 		  method : 'post',
 		  data:{
@@ -241,7 +241,7 @@ function likeLogic(){
 		  event.preventDefault();
 		  if($(event.target).parent().is('.active') ){
 			  $.ajax({
-				  url:'recipe/likeDown.json?recipeNo=' + $(event.target).parent().parent().parent()
+				  url:contextRoot+'recipe/likeDown.json?recipeNo=' + $(event.target).parent().parent().parent()
 				  .children('input[name="recipeNo"]').val()+"&userNo="
 				  + userInfo.userNo,
 				  dataType:'json',
@@ -264,7 +264,7 @@ function likeLogic(){
 		  else{
 	
 			  $.ajax({
-				  url:'recipe/likeUp.json?recipeNo=' + $(event.target).parent().parent().parent()
+				  url:contextRoot+'recipe/likeUp.json?recipeNo=' + $(event.target).parent().parent().parent()
 				 .children('input[name="recipeNo"]').val()+"&userNo="
 				  +  userInfo.userNo,
 				  dataType:'json',
@@ -293,7 +293,7 @@ function scrapLogic(){
 		  if($(event.target).parent().is('.active') ){
 			  console.log("scrap if")
 			  $.ajax({
-				  url:'recipe/deleteScrap.json',
+				  url:contextRoot+'recipe/deleteScrap.json',
 				  dataType:'json',
 				  data:{
 					recipeNo:$(event.target).parent().children('input[name="recipeNo"]').val() 
@@ -317,7 +317,7 @@ function scrapLogic(){
 		  else{
 			  console.log("scrap else")
 			  $.ajax({
-				  url:'recipe/scrap.json',
+				  url:contextRoot+'recipe/scrap.json',
 				  dataType:'json',
 				  data:{
 					  recipeNo:$(event.target).parent().children('input[name="recipeNo"]').val() 
@@ -445,7 +445,7 @@ function mouseHover(){
 		  event.preventDefault();
 		  if(userInfo != null){
 			 
-			  $(location).attr('href','/mypage.html?'+ userInfo.email);
+			  $(location).attr('href',contextRoot+'/mypage.html?'+ userInfo.email);
 		  }
 		  
 	  })
@@ -457,7 +457,7 @@ function mouseHover(){
   function MainRecomList(){
 	  
 	  $.ajax({
-		  url:'recipe/recomList.json',
+		  url:contextRoot+'recipe/recomList.json',
 		  dataType:'json',
 		  method:'post',
 		  success:function(result){
@@ -489,7 +489,7 @@ function mouseHover(){
 function MainRecomCtList(){
 	  
 	  $.ajax({
-		  url:'recipe/recomCtList.json',
+		  url:contextRoot+'recipe/recomCtList.json',
 		  dataType:'json',
 		  method:'post',
 		  success:function(result){
@@ -510,7 +510,7 @@ function MainRecomCtList(){
 			  }
 			  methods();
 			  $('#ctg-rcp-more').click(function(){
-				  window.location.href = "list.html?ctg="+result.data[0].ctgName;
+				  window.location.href = contextRoot+"list.html?ctg="+result.data[0].ctgName;
 			  })
 		  },
 		  error : function(){

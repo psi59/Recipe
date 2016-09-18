@@ -28,7 +28,7 @@ import com.recipe.util.CommonUtil;
 @Controller
 @RequestMapping("/user/")
 public class UserController {
-	
+
 	@Autowired
 	UserService userService;
 
@@ -51,33 +51,33 @@ public class UserController {
 	@RequestMapping(path = "add", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String add(User user, String passwordCheck) {
-	 
+
 		HashMap<String, Object> result = new HashMap<>();
 		try {
-		  User addUser=user;
-		  //unique key 생성
-		  addUser.setAuthenticationKEY(UUID.randomUUID().toString());
-		  addUser.setAuthentication(0);
-		  
+			User addUser=user;
+			//unique key 생성
+			addUser.setAuthenticationKEY(UUID.randomUUID().toString());
+			addUser.setAuthentication(0);
+
 			// 이메일 중복 확인
 			if (userService.checkDuplication(user.getEmail()) && user.getPassword().equals(passwordCheck)) {
-  			 ////password SHA1 암호화 끝
-  	      try {
-  	        // Create MD5 Hash
-  	        MessageDigest digest = MessageDigest.getInstance("SHA-1");
-  	        digest.update(user.getPassword().getBytes());
-  	        byte messageDigest[] = digest.digest();
-  	  
-  	        // Create Hex String
-  	        StringBuffer hexString = new StringBuffer();
-  	        for (int i = 0; i < messageDigest.length; i++)
-  	            hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
-  	        user.setPassword(hexString.toString());
-  	  
-  	    } catch (NoSuchAlgorithmException e) {
-  	        e.printStackTrace();
-  	    }
-  	    //password SHA1 암호화 끝
+				////password SHA1 암호화 끝
+				try {
+					// Create MD5 Hash
+					MessageDigest digest = MessageDigest.getInstance("SHA-1");
+					digest.update(user.getPassword().getBytes());
+					byte messageDigest[] = digest.digest();
+
+					// Create Hex String
+					StringBuffer hexString = new StringBuffer();
+					for (int i = 0; i < messageDigest.length; i++)
+						hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+					user.setPassword(hexString.toString());
+
+				} catch (NoSuchAlgorithmException e) {
+					e.printStackTrace();
+				}
+				//password SHA1 암호화 끝
 				userService.addUser(addUser);
 				result.put("status", "success");
 				result.put("authKEY", addUser.getAuthenticationKEY());
@@ -133,7 +133,7 @@ public class UserController {
 	@RequestMapping(path = "update")
 	@ResponseBody
 	public String update(
-	    //value="name"
+			//value="name"
 			@RequestParam(value="userNo", defaultValue="0") int userNo,
 			@RequestParam(value="email", defaultValue="") String email,
 			@RequestParam(value="beforePassword", defaultValue="") String beforePassword,
@@ -141,27 +141,18 @@ public class UserController {
 			@RequestParam(value="intro", defaultValue="") String intro,
 			@RequestParam(value="profileImage") List<MultipartFile> profileImage,
 			HttpSession session, HttpServletRequest request) {
-		
-	 
-	  
-	  System.out.println("::userNo::"+userNo+"::email::"+email+"::beforePassword::"+beforePassword+"::afterpassword::"+afterpassword+"::intro::"+intro);
-	  
+
 		User user = CommonUtil.getSessionUser(session);
 		HashMap<String, Object> result = new HashMap<>();
-		System.out.println("session에 있는 user 정보::"+user);
-		
 		try {
-		  System.out.println(CommonUtil.sha1(beforePassword).toString().trim().equals(user.getPassword().toString().trim()));
-		  System.out.println("CommonUtil.sha1(beforePassword)"+CommonUtil.sha1(beforePassword));
-		  System.out.println("user.getPassword()::"+user.getPassword());
-		  if (!(CommonUtil.sha1(beforePassword).toString().trim().equals(user.getPassword().toString().trim()))) {
-		    result.put("status", "pwdFail");    
-        System.out.println("비밀번호 오류");
-        return new Gson().toJson(result);
-	    }
-		  
-		  beforePassword=CommonUtil.sha1(beforePassword);
-		  
+			if (!(CommonUtil.sha1(beforePassword).toString().trim().equals(user.getPassword().toString().trim()))) {
+				result.put("status", "pwdFail");    
+				System.out.println("비밀번호 오류");
+				return new Gson().toJson(result);
+			}
+
+			beforePassword=CommonUtil.sha1(beforePassword);
+
 			if(user.getUserNo()!=0){			
 				if(user.getUserNo()==userNo){
 					String fileName = "userprofile_"+user.getUserNo()+".png";
@@ -170,23 +161,18 @@ public class UserController {
 						profileImage.get(0).transferTo(recipeUrl);
 					}
 					afterpassword=CommonUtil.sha1(afterpassword);
-			    
-          System.out.println("beforePassword.toString()::"+beforePassword.toString());
-          System.out.println("afterpassword::"+afterpassword);
-          System.out.println("user.getPassword().toString()::"+user.getPassword().toString());
-          System.out.println("beforePassword.equals(user.getPassword().toString())::"+beforePassword.toString().trim().equals(user.getPassword().toString().trim()));
+
 					if(beforePassword.toString().trim().equals(user.getPassword().toString().trim())){
-					                /*user=CommonUtil.sha1(user);*/
-					                user.setIntro(intro);
-                          user.setImage(fileName);
-                          user.setPassword(afterpassword);
-                          System.out.println("update User::"+user);
-                          userService.updateUser(user);
-                          result.put("status", "success");       
+						/*user=CommonUtil.sha1(user);*/
+						user.setIntro(intro);
+						user.setImage(fileName);
+						user.setPassword(afterpassword);
+						userService.updateUser(user);
+						result.put("status", "success");       
 					}else{
-					  result.put("status", "fail");    
-					  
-					  return new Gson().toJson(result);
+						result.put("status", "fail");    
+
+						return new Gson().toJson(result);
 					}
 				}
 			}
@@ -248,111 +234,111 @@ public class UserController {
 		User loginUser=new User();
 		loginUser = userService.selectFromEmail(user.getEmail()); 
 		try {
-		System.out.println("로그인 한 정보::"+loginUser);
-		if(loginUser.getEmail()==null) {
-      result.put("status", "null");
-      System.out.println("loginUser.getEmail()==null");
-      
-      return new Gson().toJson(result);
-    }else if (loginUser.getAuthentication()==0) {
-		  result.put("status", "authError");
-		  System.out.println("getAuthentication==0");
-		  
-		  return new Gson().toJson(result);
-    }
-      user=CommonUtil.sha1(user);      
-            
-      System.out.println(user.getPassword().toString().trim());
-      System.out.println(loginUser.getPassword().toString().trim());
-      System.out.println("password SHA1 암호화::"+user.getPassword().toString().trim().equals(loginUser.getPassword().toString().trim()));
-      if(user.getPassword().toString().trim().equals(loginUser.getPassword().toString().trim())){
-        loginUser = userService.loginUser(user); 
-        result.put("status", "success");
-        result.put("data", loginUser);
-        
-     // server sessionStorage에 유저 정보 저장 ------------------
-        session.setAttribute("loginUser", loginUser);
-      }
+			System.out.println("로그인 한 정보::"+loginUser);
+			if(loginUser.getEmail()==null) {
+				result.put("status", "null");
+				System.out.println("loginUser.getEmail()==null");
+
+				return new Gson().toJson(result);
+			}else if (loginUser.getAuthentication()==0) {
+				result.put("status", "authError");
+				System.out.println("getAuthentication==0");
+
+				return new Gson().toJson(result);
+			}
+			user=CommonUtil.sha1(user);      
+
+			System.out.println(user.getPassword().toString().trim());
+			System.out.println(loginUser.getPassword().toString().trim());
+			System.out.println("password SHA1 암호화::"+user.getPassword().toString().trim().equals(loginUser.getPassword().toString().trim()));
+			if(user.getPassword().toString().trim().equals(loginUser.getPassword().toString().trim())){
+				loginUser = userService.loginUser(user); 
+				result.put("status", "success");
+				result.put("data", loginUser);
+
+				// server sessionStorage에 유저 정보 저장 ------------------
+				session.setAttribute("loginUser", loginUser);
+			}
 		} catch (Exception e) {
 			result.put("status", "failure");
 		}
 		return new Gson().toJson(result);
 		// result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
 	}
-	
+
 	@RequestMapping(path = "loginNaver", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-  @ResponseBody // URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
-  public String loginNaver(User user, HttpSession session) {
-    // index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
-    HashMap<String, Object> result = new HashMap<>();
-    
-    User loginUser = new User(); 
-    System.out.println();
-    loginUser = userService.loginUser(user);   
-    
-    System.out.println("loginUser : "+loginUser);
-    System.out.println("컨트롤러 오는건가 : user 정보 :: "+ user);
-    if(loginUser == null){
-      System.out.println("설마 if문까지 ?? 확인");
-      userService.addUserInNaver(user);
-      loginUser = userService.loginUser(user);
-    }
-    try {
-      if (loginUser!=null ) {
-        result.put("status", "success");
-        result.put("data", loginUser);
-        // server sessionStorage에 유저 정보 저장 ------------------
-        session.setAttribute("loginUser", loginUser);
-        // ----------------------------------------------------------
-        System.out.println("session : "+session.getAttribute("loginUser"));
-      }else{
-        
-        result.put("status", "failure");
-      }
-      
-    } catch (Exception e) {
-      result.put("status", "failure");
-    }
-    return new Gson().toJson(result);
-    // result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
-  }
-	
-	
-	 @RequestMapping(path = "loginCheck", produces = "application/json;charset=UTF-8")
-	  @ResponseBody // URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
-	  public String loginCheck(HttpSession session) {
-	    // index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
-	    HashMap<String, Object> result = new HashMap<>();
-	    User loginUser=(User) session.getAttribute("loginUser");
-      if(session.isNew()){
-        result.put("status", "failure");        
-      } else {
-        if(loginUser!=null){	        
-	        result.put("status", "success");
-	        result.put("data", loginUser);	        
-	      } else {
-	        result.put("status", "failure");
-	      }
-      }
-	    return new Gson().toJson(result);
-	    // result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
-	  }
-	 
-   @RequestMapping(path = "logout", produces = "application/json;charset=UTF-8")
-   @ResponseBody // URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
-   public String logout(HttpSession session) {
-     // index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
-     HashMap<String, Object> result = new HashMap<>();
-     
-     try {
-       session.removeAttribute("loginUser");       
-       result.put("status", "success");
-     } catch (Exception e) {
-       result.put("status", "failure");
-     }
-     return new Gson().toJson(result);
-     // result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
-   }
+	@ResponseBody // URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
+	public String loginNaver(User user, HttpSession session) {
+		// index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
+		HashMap<String, Object> result = new HashMap<>();
+
+		User loginUser = new User(); 
+		System.out.println();
+		loginUser = userService.loginUser(user);   
+
+		System.out.println("loginUser : "+loginUser);
+		System.out.println("컨트롤러 오는건가 : user 정보 :: "+ user);
+		if(loginUser == null){
+			System.out.println("설마 if문까지 ?? 확인");
+			userService.addUserInNaver(user);
+			loginUser = userService.loginUser(user);
+		}
+		try {
+			if (loginUser!=null ) {
+				result.put("status", "success");
+				result.put("data", loginUser);
+				// server sessionStorage에 유저 정보 저장 ------------------
+				session.setAttribute("loginUser", loginUser);
+				// ----------------------------------------------------------
+				System.out.println("session : "+session.getAttribute("loginUser"));
+			}else{
+
+				result.put("status", "failure");
+			}
+
+		} catch (Exception e) {
+			result.put("status", "failure");
+		}
+		return new Gson().toJson(result);
+		// result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
+	}
+
+
+	@RequestMapping(path = "loginCheck", produces = "application/json;charset=UTF-8")
+	@ResponseBody // URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
+	public String loginCheck(HttpSession session) {
+		// index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
+		HashMap<String, Object> result = new HashMap<>();
+		User loginUser=(User) session.getAttribute("loginUser");
+		if(session.isNew()){
+			result.put("status", "failure");        
+		} else {
+			if(loginUser!=null){	        
+				result.put("status", "success");
+				result.put("data", loginUser);	        
+			} else {
+				result.put("status", "failure");
+			}
+		}
+		return new Gson().toJson(result);
+		// result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
+	}
+
+	@RequestMapping(path = "logout", produces = "application/json;charset=UTF-8")
+	@ResponseBody // URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
+	public String logout(HttpSession session) {
+		// index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
+		HashMap<String, Object> result = new HashMap<>();
+
+		try {
+			session.removeAttribute("loginUser");       
+			result.put("status", "success");
+		} catch (Exception e) {
+			result.put("status", "failure");
+		}
+		return new Gson().toJson(result);
+		// result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
+	}
 
 	@RequestMapping(path = "getUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody // URL에 넣지 않고 바디에 넣어 데이터만 보내겠다는 것
@@ -369,117 +355,117 @@ public class UserController {
 		return new Gson().toJson(result);
 		// result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
 	}
-	
-	 @RequestMapping(path = "top3", produces = "application/json;charset=UTF-8")
-	  @ResponseBody
-	  public String top3(@RequestParam(defaultValue = "0") int pageNo, @RequestParam(defaultValue = "4") int pageSize
-	      , HttpSession session) {
-	    HashMap<String, Object> result = new HashMap<>();
-	    User loginUser = new User();
-	    if(session.getAttribute("loginUser")!=null){
-	      loginUser=(User) session.getAttribute("loginUser");  
-	    }else{
-	      loginUser.setUserNo(0);
-	    }
-	    
-	    try {
-	      int uno=loginUser.getUserNo();
-	      List<User> list = userService.selectRankListSCS(pageNo, pageSize, uno);
-	      result.put("status", "success");
-	      result.put("data", list);
-	    } catch (Exception e) {
-	      result.put("status", "failure");
-	    }
-	    return new Gson().toJson(result);
-	  }
-	 
-	 @RequestMapping(path = "monthtop3", produces = "application/json;charset=UTF-8")
-   @ResponseBody
-   public String monthtop3(HttpSession session) {
-     HashMap<String, Object> result = new HashMap<>();
-     User loginUser = new User();
-     if(session.getAttribute("loginUser")!=null){
-       loginUser=(User) session.getAttribute("loginUser");  
-     }else{
-       loginUser.setUserNo(0);
-     }
-     
-     try {
-       int uno=loginUser.getUserNo();
-       List<User> list = userService.selectMonthRank(uno);
-       result.put("status", "success");
-       result.put("data", list);
-     } catch (Exception e) {
-       result.put("status", "failure");
-     }
-     return new Gson().toJson(result);
-   }
-	 @RequestMapping(path = "todaytop3", produces = "application/json;charset=UTF-8")
-   @ResponseBody
-   public String todaytop3(HttpSession session) {
-     HashMap<String, Object> result = new HashMap<>();
-     User loginUser = new User();
-     if(session.getAttribute("loginUser")!=null){
-       loginUser=(User) session.getAttribute("loginUser");  
-     }else{
-       loginUser.setUserNo(0);
-     }
-     
-     try {
-       int uno=loginUser.getUserNo();
-       List<User> list = userService.selectTodayRank(uno);
-       result.put("status", "success");
-       result.put("data", list);
-     } catch (Exception e) {
-       result.put("status", "failure");
-     }
-     return new Gson().toJson(result);
-   }
-	 
-	 @RequestMapping(path = "myrank", produces = "application/json;charset=UTF-8")
-	  @ResponseBody//html을 보내지 않고 data 몸체(body만 보낸다는 것)
-	  public String selectMyRank(HttpSession session) {
-	    HashMap<String, Object> result = new HashMap<>();
-	    User loginUser = new User();
-      if(session.getAttribute("loginUser")!=null){
-        loginUser=(User) session.getAttribute("loginUser");  
-      }else{
-        loginUser.setUserNo(0);
-      }
-	    try {
-	      int uno=loginUser.getUserNo();
-	      System.out.println("uno:"+uno);
-	      result.put("data", userService.selectMyRank(uno));
-	      result.put("status", "success");
-	    } catch (Exception e) {
-	      result.put("status", "failure");
-	    }
-	    return new Gson().toJson(result);
-	 }
-	 
-	 @RequestMapping(path = "changePassword")
-   public String changePassword(String email){   
-      HashMap<String, Object> result = new HashMap<>();
-      User user = new User();
-      System.out.println(email);
-      user=userService.selectFromEmail(email);
-      System.out.println("changePassword비번변경전::"+user);
-      
-      String nextPassword=CommonUtil.nextPassword().toString();
-      try {
-        user.setPassword(CommonUtil.sha1(nextPassword));
-        userService.updateUser(user);
-        System.out.println("changePassword비번변경후::"+user);
-        System.out.println("user.getPassword()::"+user.getPassword());
-        System.out.println("user.getEmail()::"+user.getEmail());
-        result.put("status", "success");
-        result.put("key",nextPassword);
-        result.put("email", user.getEmail());
-      } catch (Exception e) {
-        e.printStackTrace();
-        System.out.println("실패");
-        result.put("status", "failure");
-      }
-      return "redirect:http://127.0.0.1:2828/user/updatePassword.do?email="+email+"&key="+nextPassword;
-    }
+
+	@RequestMapping(path = "top3", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String top3(@RequestParam(defaultValue = "0") int pageNo, @RequestParam(defaultValue = "4") int pageSize
+			, HttpSession session) {
+		HashMap<String, Object> result = new HashMap<>();
+		User loginUser = new User();
+		if(session.getAttribute("loginUser")!=null){
+			loginUser=(User) session.getAttribute("loginUser");  
+		}else{
+			loginUser.setUserNo(0);
+		}
+
+		try {
+			int uno=loginUser.getUserNo();
+			List<User> list = userService.selectRankListSCS(pageNo, pageSize, uno);
+			result.put("status", "success");
+			result.put("data", list);
+		} catch (Exception e) {
+			result.put("status", "failure");
+		}
+		return new Gson().toJson(result);
+	}
+
+	@RequestMapping(path = "monthtop3", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String monthtop3(HttpSession session) {
+		HashMap<String, Object> result = new HashMap<>();
+		User loginUser = new User();
+		if(session.getAttribute("loginUser")!=null){
+			loginUser=(User) session.getAttribute("loginUser");  
+		}else{
+			loginUser.setUserNo(0);
+		}
+
+		try {
+			int uno=loginUser.getUserNo();
+			List<User> list = userService.selectMonthRank(uno);
+			result.put("status", "success");
+			result.put("data", list);
+		} catch (Exception e) {
+			result.put("status", "failure");
+		}
+		return new Gson().toJson(result);
+	}
+	@RequestMapping(path = "todaytop3", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String todaytop3(HttpSession session) {
+		HashMap<String, Object> result = new HashMap<>();
+		User loginUser = new User();
+		if(session.getAttribute("loginUser")!=null){
+			loginUser=(User) session.getAttribute("loginUser");  
+		}else{
+			loginUser.setUserNo(0);
+		}
+
+		try {
+			int uno=loginUser.getUserNo();
+			List<User> list = userService.selectTodayRank(uno);
+			result.put("status", "success");
+			result.put("data", list);
+		} catch (Exception e) {
+			result.put("status", "failure");
+		}
+		return new Gson().toJson(result);
+	}
+
+	@RequestMapping(path = "myrank", produces = "application/json;charset=UTF-8")
+	@ResponseBody//html을 보내지 않고 data 몸체(body만 보낸다는 것)
+	public String selectMyRank(HttpSession session) {
+		HashMap<String, Object> result = new HashMap<>();
+		User loginUser = new User();
+		if(session.getAttribute("loginUser")!=null){
+			loginUser=(User) session.getAttribute("loginUser");  
+		}else{
+			loginUser.setUserNo(0);
+		}
+		try {
+			int uno=loginUser.getUserNo();
+			System.out.println("uno:"+uno);
+			result.put("data", userService.selectMyRank(uno));
+			result.put("status", "success");
+		} catch (Exception e) {
+			result.put("status", "failure");
+		}
+		return new Gson().toJson(result);
+	}
+
+	@RequestMapping(path = "changePassword")
+	public String changePassword(String email){   
+		HashMap<String, Object> result = new HashMap<>();
+		User user = new User();
+		System.out.println(email);
+		user=userService.selectFromEmail(email);
+		System.out.println("changePassword비번변경전::"+user);
+
+		String nextPassword=CommonUtil.nextPassword().toString();
+		try {
+			user.setPassword(CommonUtil.sha1(nextPassword));
+			userService.updateUser(user);
+			System.out.println("changePassword비번변경후::"+user);
+			System.out.println("user.getPassword()::"+user.getPassword());
+			System.out.println("user.getEmail()::"+user.getEmail());
+			result.put("status", "success");
+			result.put("key",nextPassword);
+			result.put("email", user.getEmail());
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("실패");
+			result.put("status", "failure");
+		}
+		return "redirect:http://127.0.0.1:2828/user/updatePassword.do?email="+email+"&key="+nextPassword;
+	}
 }

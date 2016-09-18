@@ -22,4 +22,5 @@ public interface UserService {
   User selectMyRank(int uno);
   int addUserInNaver(User user);
   void authUpdate(String authKEY, int auth, String inputEmail);//인증update
+  void addHits(int userNo); //방문자수 증가
 }

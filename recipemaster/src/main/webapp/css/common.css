@@ -637,3 +637,10 @@ header .header-content {
 #searcIcon{
 	margin: 10px;
 }
+
+.text_deco_none:link {
+	text-decoration: none;
+}
+.text_deco_none:hover {
+  text-decoration: none;
+}
