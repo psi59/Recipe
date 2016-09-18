@@ -44,9 +44,9 @@ public class RecipeController {
   // 리스트 검색 -이성현
   @RequestMapping(path="listSearch",produces="application/json;charset=UTF-8")
   @ResponseBody
-  public String listSearch(@RequestParam(defaultValue="1") int pageNo,
-      @RequestParam(defaultValue="8") int pageSize,
-      Search search, @RequestParam(value="categoryList") List<String> categoryList, String more, HttpSession session){
+  public String listSearch(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="8") int pageSize,
+                           Search search, @RequestParam(value="categoryList") List<String> categoryList, 
+                           String more, HttpSession session){
     HashMap<String,Object> result = new HashMap<>();     
     int recipeCount = 0;    
 
