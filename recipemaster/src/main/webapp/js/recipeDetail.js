@@ -24,6 +24,7 @@ var recipeAddComment = $('#recipe-comment-addForm').html();
 var comRecipeAddComment = Handlebars.compile(recipeAddComment); 
 
 var slider;
+var userInfo = getUserInfo();
 
 $(function(){
 	recipeDetail();
@@ -35,7 +36,6 @@ $(function(){
 	recipeDetailLike();
 	clickDetailInDetailFunction();
 	timerStart();
-	var userInfo = getUserInfo();
 	push((userInfo==null ? null:userInfo.email),'','login');
 })
 
@@ -165,6 +165,7 @@ function clickDetailInDetailFunction(){
 function recipeDetail(){
 	$(document).on('click','.detail',function(event) {		
 		event.preventDefault();
+		console.log(event.target);
 		$.ajax({
 			url : contextRoot+'recipe/recipeDetail.json',
 			method : 'post',

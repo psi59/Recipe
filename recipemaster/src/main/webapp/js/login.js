@@ -148,14 +148,11 @@ $(function() {
 
 				for (var i = 0; i < result.data.length; i++) {
 					if (result.data[i].subscribeUser == 0) {
-						result.data[i].status = null;
-						console.log('unlogin::' + result.data[i].status);
+						result.data[i].status = null;						
 					} else {
-						result.data[i].status = Boolean(true);
-						console.log('login::' + result.data[i].status);
+						result.data[i].status = Boolean(true);				
 					}
-				}
-				console.log("month rank : " + result.data);
+				}				
 				$('#rcp-chef-rank-month').append(template(result));
 			},
 			error : function() {
@@ -180,14 +177,11 @@ $(function() {
 
 				for (var i = 0; i < result.data.length; i++) {
 					if (result.data[i].subscribeUser == 0) {
-						result.data[i].status = null;
-						console.log('unlogin::' + result.data[i].status);
+						result.data[i].status = null;						
 					} else {
-						result.data[i].status = Boolean(true);
-						console.log('login::' + result.data[i].status);
+						result.data[i].status = Boolean(true);						
 					}
-				}
-				console.log("today rank : " + result);
+				}				
 				$('#rcp-chef-rank-today').append(template(result));
 			},
 			error : function() {

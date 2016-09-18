@@ -644,3 +644,12 @@ header .header-content {
 .text_deco_none:hover {
   text-decoration: none;
 }
+.active{
+	color : #e09b23
+}
+.rcp-p-black{
+	color:#acacac ! important;
+}
+a{
+	text-decoration: none ! important;
+}

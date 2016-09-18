@@ -614,16 +614,17 @@
                 </a>
                 <div class="entry-meta">
                   <div class="foo-wrapper">
-                    <span>
-                    <a href="#" class="rcp-like"><div class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top"></div>
-                    <span>좋아요 {{countLike}}</span></a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="hidden" name="recipeNo" value="{{recipeNo}}">
+                    <span>                    
+                    <a href="#" class="rcp-like {{#isLike}}active{{/isLike}}"><div class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top"></div>
+                    <span>좋아요 <span>{{countLike}}</span></span></a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             
                     <div class="glyphicon glyphicon glyphicon-time rcp-i-tag-margin-right-top"></div>
                     <span class="meta-time">{{cookTime}}분 소요</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 
                     <span>
-                     <a href="#" class="rcp-scrap"><div class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></div>
-                    <span>스크랩 {{countScrap}}</span></a>
+                     <a href="#" class="rcp-scrap {{#isScrap}}active{{/isScrap}}"><div class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></div>
+                    <span>스크랩 <span>{{countScrap}}</span></span></a>
                     </span>
                   </div>
                 </div>
@@ -644,7 +645,7 @@
 	<script id="temp" type="text/x-handlebars-template">
 {{#sessionUser}}
   
-  <div class="rcp-mypage-section">               
+  <div class="rcp-mypage-section rcp-margin-bottom-70px">               
 <h4 class="rcp-main-subscribe-userName0"></h4>
 {{#each this}}
 
@@ -668,23 +669,24 @@
               <div class="content-wrapper">
                 <h3 class="entry-name"><a href="#">
                 <input type="hidden" name="recipeNo" value="{{recipeNo}}">
-                <p class="detail">{{recipeName}}</p></a></h3>                
+                <p class="detail rcp-p-black">{{recipeName}}</p></a></h3>                
                 <a href="mypage.html?{{user.email}}">
                 <input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
                 <p class="entry-author rcp-userName">{{user.userName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{recipeDate}}</p>
                 </a>
                 <div class="entry-meta">
                   <div class="foo-wrapper">
+                     <input type="hidden" name="recipeNo" value="{{recipeNo}}">
                     <span>
-                    <a href="#" class="rcp-like"><div class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top"></div>
-                    <span>좋아요 {{countLike}}</span></a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="#" class="rcp-like {{#isLike}}active{{/isLike}}"><div class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top"></div>
+                    <span>좋아요 <span>{{countLike}}<span></span></a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             
                     <div class="glyphicon glyphicon glyphicon-time rcp-i-tag-margin-right-top"></div>
                     <span class="meta-time">{{cookTime}}분 소요</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 
                     <span>
-                     <a href="#" class="rcp-scrap"><div class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></div>
-                    <span>스크랩 {{countScrap}}</span></a>
+                     <a href="#" class="rcp-scrap {{#isScrap}}active{{/isScrap}}"><div class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></div>
+                    <span>스크랩 <span>{{countScrap}}</span></span></a>
                     </span>
                   </div>
                 </div>
