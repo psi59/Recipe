@@ -770,11 +770,13 @@ public class RecipeController {
           //System.out.println("request 5 : "+recipeList);
           mainSubscribe.add(recipeList);  
           
-        }        
+        } 
+        
         result.put("data", mainSubscribe);        
       }else{
       result.put("data",recipeList);
       }
+      System.out.println("visit d옴 ?");
       result.put("status","success");
       result.put("user", user);
     }catch (Exception e){

@@ -206,13 +206,15 @@
 }
 
 .rcp-count-images {
-	color: white;
-	z-index: 1;
+	color: white ! important;
+	z-index: 2;
 	position: absolute;
 	left: 28px;
 }
 
 .rcp-count-images-bg {
+	position:relative;
+	z-index:1;	
 	float: left;
 	background-color: black;
 	opacity: 0.5;
@@ -919,4 +921,7 @@ span a{
 .rcp-list-margin-bottom{
 	margin-bottom:30px;
 	padding-top:15px ! important;
+}
+.rcp-margin-bottom-70px{
+	margin-bottom:70px;
 }

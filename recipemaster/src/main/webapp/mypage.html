@@ -4,13 +4,14 @@
 <meta charset="UTF-8">
 <title>my page</title>
 
+<link rel="stylesheet"
+  href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/rcp-template/animate.css">
 <link rel="stylesheet" href="css/rcp-template/theme.css">
 <link rel="stylesheet" href="css/rcp-template/theme-element.css">
 <link rel="stylesheet" href="css/rcp-template/theme-animate.css">
 <link rel="stylesheet" href="css/rcp-template/skin-restaurant.css">
-<link rel="stylesheet"
-  href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+
 <link rel="stylesheet"
   href="/node_modules/sweetalert/dist/sweetalert.css">
 <link rel="stylesheet" href="/css/subscribe.css">
@@ -350,26 +351,26 @@
             </div>
           </div>
         </div>
-        <section class="Vst" id="Vst">
-          <!-- 방명록  -->
-        </section>
       </div>
       
       </section>
       </div>
       
       
-  <!-- ------------------디테일 일시적 추가   - 변경 할 것임 ---------------------- -->    
-      <div id='detail_pop_up'>
+  
+<!-- -------------------------------recipe detail-------------------------------- -->
+
+  <div id='detail_pop_up'>
     <div class="rcp-detail-form row">
 
       <div class="rcp-720" id="rcp-720">
         <div class="rcp-header">
-          <h2 class="title">매콤 대패삼겹살 볶음</h2>
-          <p class="hash">#돼지고기 #대패삼겹살 #야식 #간단고기요리 #매콤고기</p>
-          <p class="date">2016.07.21</p>
-          <hr />
+          <h2 class="title"></h2>
+          <p class="hash"></p>
+          <p class="date"></p>
+          <div class="timerZone"></div>
         </div>
+        <hr/>               
         <div class="rcp-detail-body"></div>
       </div>
 
@@ -377,7 +378,7 @@
 
       <div class="rcp-taps">
         <div class="rcp-first-info">
-        <input type="hidden" value="" name="recipeNo">
+          <input id="detail-recipeNo" type="hidden" value="" name="recipeNo">
         </div>
 
         <div class="rcp-seconde-info">
@@ -390,9 +391,10 @@
 
         <div class="rcp-fifth-info"></div>
       </div>
-
     </div>
   </div>
+
+
 <!-- ------------------디테일 일시적 추가   - 변경 할 것임 ---------------------- -->  
   
  
@@ -433,18 +435,21 @@
 
 <div>
 <div class="isotope-grid" id="grid-2">
-         <div class="entry col-xs-12 col-sm-4 col-md-3 filter-food filter-pudding">
+          <div class="entry col-xs-12 col-sm-4 col-md-3 filter-food filter-pudding">
             <div class="entry-inner">
-             {{#each representImages}}  
+              {{#each representImages}}  
               <input type="hidden" class="forBackgroundRepresentImg" value="{{this}}">
               {{/each}}
-              <div class="entry-media"  name="recipe-subscribe-image" style="background-image:url(img/representImg/{{representImages representImages}}">
                {{#transientStorage}}{{else}}
                 <p>임시저장됨</p>
               {{/transientStorage}}
+              <p class="rcp-count-images">{{countImage representImages}}</p>
+              <div class="rcp-count-images-bg">
+              </div>
+              <div class="entry-media" name="recipe-subscribe-image" style="background-image:url(img/representImg/{{representImages representImages}}">
+               
                 <div class="entry-action">
-                  <div class="entry-action-inner">
-                    
+                  <div class="entry-action-inner">                  
                   </div>
                 </div>
               </div>
@@ -454,21 +459,24 @@
                 <h3 class="entry-name">
                 <a href="#">
                 <input type="hidden" name="recipeNo" value="{{recipeNo}}">
-                <p class="detail">{{recipeName}}</p></a></h3>                
+                <p class="detail rcp-p-black">{{recipeName}}</p></a></h3>                
                 <a href="mypage.html?{{user.email}}">
                 <input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
                 <p class="entry-author rcp-userName">{{user.userName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{recipeDate}}</p>
                 </a>
                 <div class="entry-meta">
                   <div class="foo-wrapper">
+                     <input type="hidden" name="recipeNo" value="{{recipeNo}}">
                     <span>
-                    <a href="#" class="rcp-like"><div class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top"></div>
-                    <span>좋아요 {{countLike}}</span></a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    
+                    <a href="#" class="rcp-like {{#isLike}}active{{/isLike}}">
+                    <span>좋아요 <span>{{countLike}}<span></span></a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            
+                    
                     <span class="meta-time">{{cookTime}}분 소요</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 
                     <span>
-                     <a href="#" class="rcp-scrap"><div class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></div>
-                    <span>스크랩 {{countScrap}}</span></a>
+                     <a href="#" class="rcp-scrap {{#isScrap}}active{{/isScrap}}"><div class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></div>
+                    <span>스크랩 <span>{{countScrap}}</span></span></a>
                     </span>
                   </div>
                 </div>
@@ -815,12 +823,6 @@ $(window).scroll(function() {
         }
       })
     }
-  </script>
-  <script>
-    $('#visitorWrite').on('click', function() {
-      $('.rcp-Vst').show();
-      $('.rcp-Vst-write').show();
-    })
   </script>
   
   
