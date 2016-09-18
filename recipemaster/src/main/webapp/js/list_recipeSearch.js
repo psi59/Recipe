@@ -1,6 +1,6 @@
 /* 검색 및 정렬 이벤트 -성현 */
 $(document).ready(function(){
-	
+
 	// url에 QueryString의 검색어로 검색 결과 로딩
 	urlParams = getUrlParams();	
 	if(urlParams.sk != undefined){		
@@ -19,29 +19,29 @@ $(document).ready(function(){
 		$('.rcp-cursor[value="'+decodeURIComponent(urlParams.ctg)+'"').addClass('rcp-category-checked');
 		$('#category-filter').css('display','block')
 		$('#category-filter').append('<span class="category-filter-box" value="'+decodeURIComponent(urlParams.ctg)+'">'
-									+ decodeURIComponent(urlParams.ctg)+'&nbsp;'
-								    +'<span class="glyphicon glyphicon-remove" aria-hidden="true">'
-								    +'</span></span>');
+				+ decodeURIComponent(urlParams.ctg)+'&nbsp;'
+				+'<span class="glyphicon glyphicon-remove" aria-hidden="true">'
+				+'</span></span>');
 	}
-	
+
 	// 처음화면에 모든 레시피들을 보여준다
 	search('newest', $('#order-latest-btn').val());
-	
+
 	// 검색창에 포커스
 	$('#searchKeyword').focus();
-	
+
 	// 검색버튼 클릭 검색 이벤트
 	$('#searchBtn').click(function() {
 		$("body").scrollTop(0);
 		search('newest', $('#order-latest-btn').val());			    
 	});
-	
+
 	// 키보드에서 뗐을때의 검색 이벤트
 	$('#searchKeyword').keyup(function(){
 		$("body").scrollTop(0);
-		search('newest', $('#order-latest-btn').val());
+		esearch('newest', $('#order-latest-btn').val());
 	})
-	
+
 	// 카테고리 라벨 변경 이벤트
 	/*$('input[type=checkbox]').change(function(){*/
 	/*$('.category').change(function(){
@@ -49,7 +49,7 @@ $(document).ready(function(){
 		$("body").scrollTop(0);
 		search('newest', $('#order-latest-btn').val());
 	})*/
-		
+
 	// 최신순 정렬
 	$('#order-latest-btn-text').click(function(){		
 		if($('#order-latest-btn').val() == 'DESC'){
@@ -62,7 +62,7 @@ $(document).ready(function(){
 		$('#sort-condition').val('newest');
 		search($('#sort-condition').val(), $('#order-latest-btn').val());
 	});
-	
+
 	// 평점순 정렬
 	$('#order-grade-btn-text').click(function(){
 		if($('#order-grade-btn').val() == 'DESC'){
@@ -75,64 +75,64 @@ $(document).ready(function(){
 		$('#sort-condition').val('grade');
 		search($('#sort-condition').val(), $('#order-grade-btn').val());
 	});
-	
+
 	// 스크롤을 끝까지 내렸을때 레시피 카드 생성
 	$(window).on('scroll', function() { 
-	    if (Math.round($(window).scrollTop()) == $(document).height() - $(window).height()) {
-	    	/*alert('스크롤 끝까지 내림');*/
-	    	searchScrollAppend();
-	    }
+		if (Math.round($(window).scrollTop()) == $(document).height() - $(window).height()) {
+			/*alert('스크롤 끝까지 내림');*/
+			searchScrollAppend();
+		}
 	});
-	
+
 	// 고재현
 	$(document).on('click',('.rcp-like'),function(event){
-		  event.preventDefault();
-		  if($(event.target).is('.active') ){
-			  $.ajax({
-				  url:'recipe/likeDown.json?recipeNo=' + $(event.target).parent()
-				  .parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
-				  + eval(sessionStorage.getItem('data'))[0].userNo,
-				  dataType:'json',
-				  method:'get',
-				  success:function(){
-					  console.log("like down 성공성공");
-					  $(event.target).css('color','#231f20');
-					  $(event.target).parent().parent().css('color','#231f20');
-					  $(event.target).parent().parent().children('.glyphicon-heart-empty').attr('class','glyphicon glyphicon-heart-empty')
-					  $(event.target).parent().append('<b class="rcp-like" name="rcp-like">좋아요</b>');
-					  $(event.target).remove();
-					  
-				  },
-				  error:function(){
-					  alert('like : 서버 요청 오류');
-					  
-				  }
-			  });
-		  }
-		  else{
-			  $.ajax({
-				  url:'recipe/likeUp.json?recipeNo=' + $(event.target).parent()
-				  .parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
-				  +  eval(sessionStorage.getItem('data'))[0].userNo,
-				  dataType:'json',
-				  method:'get',
-				  success:function(){
-					  console.log("like up 성공성공");
-					  $(event.target).css('color','#337ab7');
-					  $(event.target).parent().parent().css('color','#337ab7');
-					  $(event.target).parent().append('<b class="rcp-like active" name="rcp-like">좋아요</b>');
-					  $(event.target).remove();
-					  
-				  },
-				  error:function(){
-					  alert('ajax likeclick: 서버 요청 오류');
-				  }
-			  });
-		  }
-	  });
+		event.preventDefault();
+		if($(event.target).is('.active') ){
+			$.ajax({
+				url:contextRoot+'recipe/likeDown.json?recipeNo=' + $(event.target).parent()
+				.parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
+				+ eval(sessionStorage.getItem('data'))[0].userNo,
+				dataType:'json',
+				method:'get',
+				success:function(){
+					console.log("like down 성공성공");
+					$(event.target).css('color','#231f20');
+					$(event.target).parent().parent().css('color','#231f20');
+					$(event.target).parent().parent().children('.glyphicon-heart-empty').attr('class','glyphicon glyphicon-heart-empty')
+					$(event.target).parent().append('<b class="rcp-like" name="rcp-like">좋아요</b>');
+					$(event.target).remove();
+
+				},
+				error:function(){
+					alert('like : 서버 요청 오류');
+
+				}
+			});
+		}
+		else{
+			$.ajax({
+				url:contextRoot+'recipe/likeUp.json?recipeNo=' + $(event.target).parent()
+				.parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
+				+  eval(sessionStorage.getItem('data'))[0].userNo,
+				dataType:'json',
+				method:'get',
+				success:function(){
+					console.log("like up 성공성공");
+					$(event.target).css('color','#337ab7');
+					$(event.target).parent().parent().css('color','#337ab7');
+					$(event.target).parent().append('<b class="rcp-like active" name="rcp-like">좋아요</b>');
+					$(event.target).remove();
+
+				},
+				error:function(){
+					alert('ajax likeclick: 서버 요청 오류');
+				}
+			});
+		}
+	});
 
 	categoryClick();
-	
+
 	// 필터박스 클릭시 리무브
 	$(document).on('click','.category-filter-box', function(){
 		$(this).remove();
@@ -143,7 +143,7 @@ $(document).ready(function(){
 		$("body").scrollTop(0);
 		search('newest', $('#order-latest-btn').val());
 	})
-	
+
 	// 필터박스 모두 취소
 	$(document).on('click', '#category-filter-cancel', function(){
 		$('.category-filter-box').remove();
@@ -152,18 +152,18 @@ $(document).ready(function(){
 		$("body").scrollTop(0);
 		search('newest', $('#order-latest-btn').val());
 	})
-	
+
 });
 
-// 처음 검색했을때의 1페이지 결과 가져오기 -이성현
+//처음 검색했을때의 1페이지 결과 가져오기 -이성현
 function search(sort,order){ 
-			
+
 	var page = $('#recipe-card-searchPage-template').text();
 	var compilePage = Handlebars.compile(page);
-	
+
 	var source = $('#temp').text();
 	var template = Handlebars.compile(source);
-	
+
 	var categoryList = '';
 	/*$('#rcp-category-section input[type=checkbox]:checked').each(function(index){*/
 	$('.rcp-category-checked').each(function(index){		
@@ -174,9 +174,9 @@ function search(sort,order){
 			categoryList += $(this).text();
 		}				
 	})	
-	
+
 	$.ajax({
-		url : 'recipe/listSearch.json',
+		url : contextRoot+'recipe/listSearch.json',
 		method : 'post',
 		data : {
 			searchKeyword : $('#searchKeyword').val(),
@@ -196,7 +196,7 @@ function search(sort,order){
 				$('.wrap-loading').removeClass('display-none');
 				$('#tabs-1 .hs-content .container .row div').remove();			
 				$('#tabs-1 .hs-content .container .row').append(template(result));
-	
+
 				mouseMoveEventForSubscribeImage(result);
 				$('#recipe-count').text('총 '+result.recipeCount+'개의 레시피가 검색되었습니다.');
 				$('#search-pageNo').attr('value', '1');	
@@ -231,21 +231,21 @@ Handlebars.registerHelper("representImages", function(value, options){
 
 
 
-// 스크롤 끝까지 내렸을때 추가될 결과 한페이지씩 가져오기 -이성현
+//스크롤 끝까지 내렸을때 추가될 결과 한페이지씩 가져오기 -이성현
 function searchScrollAppend(){ 
-		
+
 	var page = $('#recipe-card-searchPage-template').text();
 	var compilePage = Handlebars.compile(page);
-	
+
 	var source = $('#temp').text();
 	var template = Handlebars.compile(source);
-		
+
 	if($('#sort-condition').val() == 'newest'){
 		var order = $('#order-latest-btn').val();		
 	} else {
 		var order = $('#order-grade-btn').val();
 	}
-	
+
 	var categoryList = '';
 	/*$('#rcp-category-section input[type=checkbox]:checked').each(function(index){*/
 	$('.rcp-category-checked').each(function(index){		
@@ -256,11 +256,11 @@ function searchScrollAppend(){
 			categoryList += $(this).text();
 		}				
 	})	
-	
+
 	if($('#search-pageNo').val() != 'lastPage'){
 		var pageNo = parseInt($('#search-pageNo').val())+1;
 		$.ajax({
-			url : 'recipe/listSearch.json',
+			url : contextRoot+'recipe/listSearch.json',
 			method : 'post',
 			data : {					
 				pageNo : pageNo,
@@ -279,9 +279,9 @@ function searchScrollAppend(){
 						return;
 					}
 					$('#tabs-1 .hs-content .container .row').append(template(result));
-					
+
 					mouseMoveEventForSubscribeImage(result);
-					
+
 					if(result.data != 'lastPage'){
 						$('#search-pageNo').val(result.pageNo);
 					} else {
@@ -309,41 +309,37 @@ function searchScrollAppend(){
 	}
 }
 
-// url QueryString 가져오는 function
+//url QueryString 가져오는 function
 function getUrlParams() {
-    var params = {};
-    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
-    return params;
+	var params = {};
+	window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
+	return params;
 } 
-
-
-
-
 
 
 //----------------------------------------고재현 부분--------------------------------------------//
  
 
 Handlebars.registerHelper('isLike', function(options) {
-	 
-	  if (this.likeUser!=0) {
-	    return options.fn(this);
-	  } else {
-	    return options.inverse(this);
-	  }
+
+	if (this.likeUser!=0) {
+		return options.fn(this);
+	} else {
+		return options.inverse(this);
+	}
 });
-	  
+
 
 
 //-------------고재현 09-05 수정-----------------------
 $(function(){
-	
+
 	Handlebars.registerHelper("representImages", function(value, options){
 		{			
 			return value[0];
 		}
 	});  	
-	
+
 })
 
 function mouseMoveEventForSubscribeImage(result){
@@ -352,28 +348,28 @@ function mouseMoveEventForSubscribeImage(result){
 			var imageChange = parseInt( $('.entry-action').width() + 1)  / $(event.target).parent().parent().children('input[type="hidden"]').length;					
 			var image = parseInt(event.offsetX / imageChange);					
 			$(event.target).attr("style", "background-image:url(img/representImg/"
-				+$(event.target).parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
-			
+					+$(event.target).parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
+
 			if(image != $(event.target).parent().children('input[type="hidden"]').length + 1){
 				$(event.target).parent().children('.rcp-count-images').text(image+1+" / "+$(event.target).parent().children('input[type="hidden"]').length);
-				}else{
-					return;
-				}
-			
-			
+			}else{
+				return;
+			}
+
+
 		}else{
 			/*console.log('여기옴 ? actioninner');*/
 			var imageChange = parseInt( $('.entry-action-inner').width() + 1)  / $(event.target).parent().parent().parent().children('input[type="hidden"]').length;
 			var image = parseInt(event.offsetX / imageChange);								
 			$(event.target).parent().attr("style", "background-image:url(img/representImg/"
 					+$(event.target).parent().parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");
-			
+
 			if(image != $(event.target).parent().children('input[type="hidden"]').length + 1){
 				$(event.target).parent().children('.rcp-count-images').text(image+1+" / "+$(event.target).parent().children('input[type="hidden"]').length);
-				}else{
-					return;
-				}
-			
+			}else{
+				return;
+			}
+
 		}
 	})
 }
@@ -393,8 +389,8 @@ function categoryClick(){
 		}else{			
 			$(this).addClass('rcp-category-checked');
 			$('#category-filter').append('<span class="category-filter-box" value="'+$(this).html()+'">'+$(this).html()+'&nbsp;'
-									    +'<span class="glyphicon glyphicon-remove" aria-hidden="true">'
-									    +'</span></span>');
+					+'<span class="glyphicon glyphicon-remove" aria-hidden="true">'
+					+'</span></span>');
 			$("body").scrollTop(0);
 			search('newest', $('#order-latest-btn').val());
 		}
@@ -403,6 +399,72 @@ function categoryClick(){
 
 
 
+function esearch(sort,order){ 
 
+	var page = $('#recipe-card-searchPage-template').text();
+	var compilePage = Handlebars.compile(page);
+
+	var source = $('#temp').text();
+	var template = Handlebars.compile(source);
+
+	var categoryList = '';
+	/*$('#rcp-category-section input[type=checkbox]:checked').each(function(index){*/
+
+	var datas = {
+			query:{
+				multi_match: {
+					query:$('#searchKeyword').val(),
+					fields: ["recipeName", "Materials", "userName"]
+				}
+			}
+	,
+	from: 0,
+	size: 4
+	};
+
+	$.ajax({
+		url : 'http://localhost:9200/recipes/_search',
+		method : 'post',
+		data : JSON.stringify(datas),
+	    dataType : 'json',
+	    crossDomain: true,
+		success : function(result) {
+			setTimeout(function() {
+				$('.wrap-loading').removeClass('display-none');
+				$('#tabs-1 .hs-content .container .row div').remove();			
+				
+				var dataArray = new Array();
+		    	$.each(result.hits.hits, function(index, data){
+		    		data._source.representImages = JSON.parse(data._source.representImages);
+		    		dataArray.push(data._source);
+		    	});
+		    	
+		    	var resultData = {
+		                data:dataArray
+	            }
+				$('#tabs-1 .hs-content .container .row').append(template(resultData));
+
+				mouseMoveEventForSubscribeImage(result);
+				$('#recipe-count').text('총 '+result.recipeCount+'개의 레시피가 검색되었습니다.');
+				$('#search-pageNo').attr('value', '1');	
+			}, 500)
+		},
+		// 데이터 조회 중일때 로딩 이미지 보여주기
+		beforeSend:function(){			  
+			$('.wrap-loading').removeClass('display-none');
+			$('html').css("cursor","wait");
+		},
+		// 데이터 받아왔을때 로딩 이미지 감추기
+		complete:function(){
+			setTimeout(function() {
+				$('.wrap-loading').addClass('display-none');
+				$('html').css("cursor","auto");
+			}, 500)
+		},
+		error : function() {
+			swal('서버 요청 오류 !')
+		}
+	})	
+}
 
 

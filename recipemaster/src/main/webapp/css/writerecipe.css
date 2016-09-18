@@ -39,7 +39,6 @@ body {
 	background-color: #ffffff;
   width: 900px;
   margin: 0 auto;
-  margin-top: 70px;
   margin-bottom: 70px;
   padding-left: 130px;
   padding-right: 130px;
@@ -78,7 +77,7 @@ body {
 .rcp-subtitle {
   font-weight: bold;
   font-size: 12pt;
-  color: #ee7272;
+  color: #DE9A33;
   margin-top: 20pt;
   margin-bottom: 10pt;
   padding: 0px;
@@ -163,7 +162,7 @@ body {
 }
 
 label{
-	color: #ee7272 !important;
+	color: #DE9A33 !important;
 	font-size: 12pt;
 	margin-bottom: 14px;
 }
@@ -302,7 +301,8 @@ input[name="materialAmount"]{
 }
 
 .rcp-category .active{
-	background-color: #ee7272;
+	background-color: #DE9A33;
+	color: white;
 }
 
 .timer {

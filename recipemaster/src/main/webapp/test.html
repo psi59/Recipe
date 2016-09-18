@@ -16,7 +16,7 @@ $(function(){
 				  query:{
 					    multi_match: {
 					    query:$(this).val(),
-					      fields: ["recipeName^3", "Materials", "userName"]
+					      fields: ["recipeName", "Materials", "userName"]
 					    }
 					  }
 					,
@@ -31,9 +31,14 @@ $(function(){
 		    dataType : 'json',
 		    crossDomain: true,
 		    success : function(result) {
+		    	var dataArray = new Array();
 		    	$.each(result.hits.hits, function(index, data){
-		    		console.log(data._source);
+		    		dataArray.push(data._source);
 		    	});
+		    	var resultData = {
+		                data:dataArray
+		            }
+		    	console.log(test);
 		    },
 		    error : function() {
 		        alert('에러에러')

@@ -288,4 +288,10 @@ SELECT @rownum:=@rownum+1 rownum,vt.* FROM(
     SET auth=#{auth}
     WHERE email = #{inputEmail}
   </update>
+  
+  <update id="updateHits" parameterType="int">
+    UPDATE users
+    SET hits=hits+1
+    WHERE uno = #{value}
+  </update>
 </mapper>

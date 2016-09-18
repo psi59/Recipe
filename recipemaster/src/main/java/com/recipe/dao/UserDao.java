@@ -22,4 +22,5 @@ public interface UserDao {
   User selectMyRank(int uno);
   int addUserInNaver(User user);
   void authUpdate(Map<String,Object> params); //인증update
+  void updateHits(int userNo);
 }

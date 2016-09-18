@@ -106,20 +106,17 @@ public class VisitorController {
   @RequestMapping(path="loadMyPage",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
   @ResponseBody 
   public String loadMyPage(String email){
-    System.out.println("나와ㅅㅂ"+email);
     HashMap<String,Object> result = new HashMap<>();
     //참조하고 있는 사람 userNo
     User user=userService.selectFromEmail(email);
-    System.out.println("ㅋㅋㅋㅋㅋㅋㅋㅋuser::"+user.getUserNo());
-    int userNo=user.getUserNo();
+    int userNo = user.getUserNo();
     try{
-      result = visitorService.loadMyPage(userNo);
+      userService.addHits(userNo);
       result.put("status","success");
+      result.put("data",visitorService.getVisitorInfo(userNo));
     }catch (Exception e){ 
       result.put("status", "false");
     }
-    System.out.println("loadMyPage 중::"+result);
     return new Gson().toJson(result);
   }
-  
 }

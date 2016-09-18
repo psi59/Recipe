@@ -1,3 +1,4 @@
+
 //Default active on home
     $('#s1').addClass("active");
 
@@ -87,6 +88,6 @@
     $(document).on('click', '.rcp-userName, .rcp-nickname , .rcp-profile',function(event){
 		  event.preventDefault();
 		  console.log( "event target : "+$(event.target).attr('class') )
-		  $(location).attr('href','/mypage.html?'+$(event.target).parent().children('input[type="hidden"]').val() );
+		  $(location).attr('href',contextRoot+'/mypage.html?'+$(event.target).parent().children('input[type="hidden"]').val() );
 		  console.log("email val()"+$(event.target).parent().children('input[name="email"]').val() );
 	  })

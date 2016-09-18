@@ -19,7 +19,7 @@ $(document).ready(function(){
 		if($('#signup-e-mail').val() != "" && $('#signup-userName').val() != "" &&
 		   $('#signup-password').val() != "" && $('#signup-passwordCheck').val() != "" && $('#signup-password').val().length > 5){
 			$.ajax({
-				url : 'user/add.json',
+				url : contextRoot+'user/add.json',
 				method : 'post',
 				data : {
 					email : $('#signup-e-mail').val(),
@@ -44,7 +44,7 @@ $(document).ready(function(){
 					if (authKEY!=null) {
 						$.ajax({
 				            	type : 'GET',
-				                url : 'http://127.0.0.1:8888/user/authentication.do?email='+email+'&authKEY='+authKEY,
+				                url : getContextRoot('8888')+'user/authentication.do?email='+email+'&authKEY='+authKEY,
 				                success : function(result) {					
 									swal('이메일 전송완료');
 				                } // end success
@@ -103,7 +103,7 @@ $(document).ready(function(){
 	          var email = $(this).val();
 	            $.ajax({
 	            	type : 'GET',
-	                url : 'http://127.0.0.1:9999/user/checkDuplication.do?email='+email,
+	                url : getContextRoot('9999')+'user/checkDuplication.do?email='+email,
 	                success : function(result) {					
 	                    if (result == 'true') {
 							// 사용가능한 이메일
@@ -127,7 +127,7 @@ $(document).ready(function(){
           var userName = $(this).val();
             $.ajax({
             	type : 'POST',
-                url : 'user/checkDuplicationUserName.json',
+                url : contextRoot+'user/checkDuplicationUserName.json',
                 data:
                 {
                     userName : userName
@@ -181,7 +181,7 @@ $(document).ready(function(){
 			swal(email);
 			$.ajax({
             	type : 'GET',
-                url : 'http://127.0.0.1:8282/user/pushEmail.do?email='+email,
+                url : getContextRoot('8282')+'user/pushEmail.do?email='+email,
                 success : function(result) {					
 					swal('이메일 전송완료');
 					$(document).on('click', '.confirm', function(){

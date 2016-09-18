@@ -56,7 +56,7 @@ app.use(function (req, res, next) {
 	});
 
 
-app.get('/user/updatePassword.do', function (request, response) {
+app.get('http://52.78.163.78:2828/user/updatePassword.do', function (request, response) {
 	var email = request.query.email;
 	var key = request.query.key;
 	// login 
@@ -96,7 +96,7 @@ app.get('/user/updatePassword.do', function (request, response) {
 	  response.write("</head>\n");
 	  response.write("<body>\n");
 	  response.write("<div><h1>비밀번호 변경이 완료되었습니다.</h1>\n");
-	  response.write("<a href='http://127.0.0.1:8080'>cookle로 바로가기</a>\n");
+	  response.write("<a href='http://52.78.163.78:8080/'>cookle로 바로가기</a>\n");
 	  response.write("</div>\n");
 	  response.write("</body>\n");
 	  response.write("</html>\n");
