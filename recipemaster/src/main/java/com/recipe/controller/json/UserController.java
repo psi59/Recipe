@@ -466,6 +466,6 @@ public class UserController {
 			System.out.println("실패");
 			result.put("status", "failure");
 		}
-		return "redirect:http://127.0.0.1:2828/user/updatePassword.do?email="+email+"&key="+nextPassword;
+		return "redirect:http://52.78.74.162:2828/user/updatePassword.do?email="+email+"&key="+nextPassword;
 	}
 }

@@ -438,7 +438,7 @@
              {{#each representImages}}  
               <input type="hidden" class="forBackgroundRepresentImg" value="{{this}}">
               {{/each}}
-              <div class="entry-media"  name="recipe-subscribe-image" style="background-image:url(img/representImg/{{representImages}}">
+              <div class="entry-media"  name="recipe-subscribe-image" style="background-image:url(img/representImg/{{#representImage representImages}}">
                {{#transientStorage}}{{else}}
                 <p>임시저장됨</p>
               {{/transientStorage}}
@@ -787,34 +787,6 @@ $(window).scroll(function() {
       }
       var source = $('#comRcpList-template').text();
       var template = Handlebars.compile(source);
-    }
-  </script>
-  <script>
-    $(function() {
-      loadMyPage();
-    });
-
-    function loadMyPage() {
-
-      $.ajax({
-        url : contextRoot+'visitor/loadMyPage.json',
-        method : 'get',
-        dataType : 'json',
-        success : function(result) {
-          if (result.status != 'success') {
-            //swal('로그인 해주시기 바랍니다.');
-            return;
-          }
-          $('#visitNum').text(result.sum + "명");
-          $('#likeNum').text(result.like + "개");
-          $('#scrapNum').text(result.scr + "개");
-          $('#gradeNum').text(result.avg + "점");
-
-        },
-        error : function() {
-          //swal('더이상 데이터가 없습니다.')
-        }
-      })
     }
   </script>
   <script>

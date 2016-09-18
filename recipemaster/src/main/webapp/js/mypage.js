@@ -15,6 +15,34 @@ $(function() {
 
 	if((userInfo==null?null:userInfo.email)==location.href.split('?')[1]){
 		$('#userInfoEditBtn').removeClass('display_none');
+	} else {
+		// checkSubscribe
+		$.ajax({
+			url : contextRoot+'recipe/checkSubscribe.json',
+			datatype : 'json',
+			data : {
+				email : location.href.split('?')[1]
+			},
+			method : 'post',
+			success : function(result) {
+
+				if (result.status == 'false') {
+					$('#subsWrapper').removeClass('display_none');
+					// swal('실행 중 오류 발생');
+					return;
+				}
+				$('.subscribeBtn-text').text('구독중');
+				$('.subscribeBtn').addClass('subsactive');
+				if((userInfo==null?null:userInfo.email)!=location.href.split('?')[1]){
+					$('#subsWrapper').removeClass('display_none');
+				}
+				
+//				$('.rcp-topbtn').attr('id', 'subscribeComplete');
+			},
+			error : function() {
+				swal('서버 요청 오류!...')
+			}
+		});
 	}
 
 	$.ajax({
@@ -61,32 +89,6 @@ $(function() {
 		},
 		error : function() {
 			// alert('community 서버 요청 오류!...')
-		}
-	});
-
-	// checkSubscribe
-	$.ajax({
-		url : contextRoot+'recipe/checkSubscribe.json',
-		datatype : 'json',
-		data : {
-			email : location.href.split('?')[1]
-		},
-		method : 'post',
-		success : function(result) {
-			if (result.status == 'false') {
-				// swal('실행 중 오류 발생');
-				return;
-			}
-			$('.subscribeBtn-text').text('구독중');
-			$('.subscribeBtn').addClass('subsactive');
-			if((userInfo==null?null:userInfo.email)!=location.href.split('?')[1]){
-				$('#subsWrapper').removeClass('display_none');
-			}
-			
-//			$('.rcp-topbtn').attr('id', 'subscribeComplete');
-		},
-		error : function() {
-			swal('서버 요청 오류!...')
 		}
 	});
 
@@ -164,6 +166,12 @@ $(function() {
 	Handlebars.registerHelper("countImage", function(value, options){
 		{
 			return "1 / "+value.length;
+			//return "1 / ";
+		}
+	});
+	Handlebars.registerHelper("representImage", function(value, options){
+		{
+			return value[0];
 			//return "1 / ";
 		}
 	});
