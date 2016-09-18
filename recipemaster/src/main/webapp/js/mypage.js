@@ -18,6 +18,8 @@ $(function() {
 
 	pageLoadFunction();
 	mouseMoveEventForSubscribeImage();
+	likeLogic();
+	scrapLogic();
 	checkSubScribeFunction();
 	subScribeFunction();
 	pageTabs();
