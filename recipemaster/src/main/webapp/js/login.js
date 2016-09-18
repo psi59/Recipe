@@ -1,15 +1,15 @@
 $(function() {
-	loadUsers();
+//	loadUsers();
 //	$('.rankingWrapper').bxSlider({
 //		startSlide : 0,
 //		pager : false,
 //		moveSlides : 1,
 //		infiniteLoop : true
 //	});
-	loadMonthRank();
-	loadTodayRank();
+//	loadMonthRank();
+//	loadTodayRank();
 
-	var userInfo = getUserInfo();
+//	var userInfo = getUserInfo();
 
 	$('#profileView').removeClass().addClass(
 			"main-nav__dropdown top-main-nav__dropdown profile-dropdown");
