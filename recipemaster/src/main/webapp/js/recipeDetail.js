@@ -24,9 +24,9 @@ var recipeAddComment = $('#recipe-comment-addForm').html();
 var comRecipeAddComment = Handlebars.compile(recipeAddComment); 
 
 var slider;
+var userInfo = getUserInfo();
 
 $(function(){
-
 	recipeDetail();
 	starRatingBtn();
 	comment();
@@ -36,7 +36,6 @@ $(function(){
 	recipeDetailLike();
 	clickDetailInDetailFunction();
 	timerStart();
-	var userInfo = getUserInfo();
 	push((userInfo==null ? null:userInfo.email),'','login');
 })
 
@@ -93,7 +92,7 @@ function clickDetailInDetailFunction(){
 	$(document).on('click','.rcp-first-info',function(event){
 		event.preventDefault();
 		$.ajax({
-			url : 'recipe/recipeDetail.json',
+			url : contextRoot+'recipe/recipeDetail.json',
 			method : 'post',
 			data:{
 				recipeNo:$(event.target).children('input[name="recipeNo"]').val()
@@ -169,8 +168,9 @@ function clickDetailInDetailFunction(){
 function recipeDetail(){
 	$(document).on('click','.detail',function(event) {		
 		event.preventDefault();
+		console.log(event.target);
 		$.ajax({
-			url : 'recipe/recipeDetail.json',
+			url : contextRoot+'recipe/recipeDetail.json',
 			method : 'post',
 			data:{
 				recipeNo:$(event.target).parent().children('input[name="recipeNo"]').val()
@@ -310,7 +310,7 @@ console.log('button 시점 recipeNo : ' +$(event.target).parent().parent().child
 		event.preventDefault();
 		if($(event.target).is('[name="like"]')){
 			  $.ajax({
-				  url:'recipe/likeDown.json?recipeNo=' + $(event.target).parent().parent().
+				  url:contextRoot+'recipe/likeDown.json?recipeNo=' + $(event.target).parent().parent().
 				  children('input[class="rcp-hidden-recipeNo"]').val()+"&userNo="
 				  + userInfo.userNo,
 				  dataType:'json',
@@ -331,7 +331,7 @@ console.log('button 시점 recipeNo : ' +$(event.target).parent().parent().child
 		  }
 		  else{
 			  $.ajax({
-				  url:'recipe/likeUp.json?recipeNo=' + $(event.target).parent().parent().
+				  url:contextRoot+'recipe/likeUp.json?recipeNo=' + $(event.target).parent().parent().
 				  children('input[class="rcp-hidden-recipeNo"]').val()+"&userNo="
 				  + userInfo.userNo,
 				  dataType:'json',
@@ -364,7 +364,7 @@ function comment(){
 
 function commentFunction(){
 	$.ajax({
-		url : 'recipe/recipeComment.json',
+		url : contextRoot+'recipe/recipeComment.json',
 		method : 'post',
 		data:{
 			recipeNo:$('.rcp-hidden-recipeNo').val()
@@ -398,7 +398,7 @@ function commentFunction(){
 function addComment(){
 	$(document).on('click','input[name="rcp-submit"]',function(){
 		$.ajax({
-			url:'recipe/addComment.json',
+			url:contextRoot+'recipe/addComment.json',
 			dataType:'json',
 			method:'post',
 			data:{
@@ -431,7 +431,7 @@ function deleteComment(){
 function deleteCommentFunction(event){
 	console.log('펑션왔나요 ')
 		$.ajax({
-			url:'recipe/deleteComment.json',
+			url:contextRoot+'recipe/deleteComment.json',
 			dataType:'json',
 			method:'post',		
 			data:{
@@ -457,7 +457,7 @@ function recipeScrap(){
 		if($(event.target).is('[name="scrap"]')){
 			console.log(' 딜리트 여기옴?');			
 			$.ajax({
-				url:'recipe/deleteScrap.json',
+				url:contextRoot+'recipe/deleteScrap.json',
 				method:'post',
 				dataType:'json',
 				data: {
@@ -486,7 +486,7 @@ function recipeScrap(){
 			console.log($(event.target).parent().parent().parent().children('input[class="rcp-hidden-recipeNo"]').val());
 			event.preventDefault();	
 			$.ajax({
-				url:'recipe/scrap.json',
+				url:contextRoot+'recipe/scrap.json',
 				method:'post',
 				dataType:'json',
 				data: {

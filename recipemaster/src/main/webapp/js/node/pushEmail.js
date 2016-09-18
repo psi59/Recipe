@@ -56,7 +56,7 @@ app.use(function (req, res, next) {
 	});
 
 
-app.get('/user/pushEmail.do', function (request, response) {
+app.get('http://52.78.163.78:8282/user/pushEmail.do', function (request, response) {
 	var email = request.query.email;
 	// login 
 	var transporter = nodemailer.createTransport(({
@@ -72,7 +72,7 @@ app.get('/user/pushEmail.do', function (request, response) {
 		  to: email,
 		  subject: "href",
 		  generateTextFromHTML: true,
-		  html: "<a id='sendMail' href='http://127.0.0.1:8080/user/changePassword.json?email="+email+"'>"+"비밀번호 변경"+"</a>"+"<br>"
+		  html: "<a id='sendMail' href='http://52.78.163.78:8080/user/changePassword.json?email="+email+"'>"+"비밀번호 변경"+"</a>"+"<br>"
 		  		+"<a>"+email+"링크 버튼을 누르면 비밀번호가 변경되며, 변경된 비밀번호가 다시 전송됩니다."+"</a>"
 		  		+"<script>document.getElementById('sendMail').onclick=function(event){alert('먹히냐??'); event.preventDefault()};</script>"
 	}, function(error, response) {

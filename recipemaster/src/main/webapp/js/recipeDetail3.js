@@ -61,7 +61,7 @@ function clickDetailInDetailFunction(){
 	$(document).on('click','.rcp-first-info',function(event){
 		event.preventDefault();
 		$.ajax({
-			url : 'recipe/recipeDetail.json',
+			url : contextRoot+'recipe/recipeDetail.json',
 			method : 'post',
 			data:{
 				recipeNo:$(event.target).children('input[name="recipeNo"]').val()
@@ -150,7 +150,7 @@ function recipeDetail(){
 	$(document).on('click','.detail',function(event) {		
 		event.preventDefault();
 		$.ajax({
-			url : 'recipe/recipeDetail.json',
+			url : contextRoot+'recipe/recipeDetail.json',
 			method : 'post',
 			data:{
 				recipeNo:$(event.target).parent().children('input[name="recipeNo"]').val()
@@ -339,7 +339,7 @@ function comment(){
 
 function commentFunction(){
 	$.ajax({
-		url : 'recipe/recipeComment.json',
+		url : contextRoot+'recipe/recipeComment.json',
 		method : 'post',
 		data:{
 			recipeNo:$('.rcp-hidden-recipeNo').val()

@@ -63,7 +63,7 @@
 
 <!-- --- 아이콘 CDN ----- -->
 <!-- <script src="js/template/d9e67edb08.js"></script> -->
-
+<script src="js/common/app-context.js"></script>
 </head>
 <body data-spy="scroll"  data-target="#navSecondary" data-offset="170">
 	<!-- <div id="topBtn" class="navbar navbar-inverse navbar-fixed-top">
@@ -336,20 +336,20 @@
 
 	</div> -->
 
-	<!--  -->
+	<!-- 
 	<div id='editUserInfo-pop-up-banner'>
 		<form action="user/update.json" method="post" id="updateUserForm"
 			enctype="multipart/form-data">
 			<input type="hidden" name="userNo" id="updateFormUserNo"> <input
 				type="hidden" name="email" id="updateFormEmail">
 			<div class="rcp-laytop">
-				<!--유저 이미지 업로드 --용이  !!!!!enctype?????16.08.12-->
+				유저 이미지 업로드 --용이  !!!!!enctype?????16.08.12
 				<div class="rcp-up-preview img-wrapper"></div>
 				<div class="file-upload-wrapper">
 					<input id="profileImage" type="file" name="profileImage"
 						class="file-upload-native" accept="image/*" />
 				</div>
-				<!--유저 이미지 업로드 끝--용이  -->
+				유저 이미지 업로드 끝--용이 
 				<div class="col-md-11 rcp-laytext">
 					<h4 id="updateBoxName"></h4>
 					<h5 id="updateBoxGrade"></h5>
@@ -385,13 +385,13 @@
 				</div>
 			</div>
 			<div class="rcp-sign-membership">
-				<!-- <button id="updateUserInfo" type="submit">확인</button> -->
+				<button id="updateUserInfo" type="submit">확인</button>
 				<a href="#"><span id="updateUserInfo">확인</span></a> <a href="#"><span
 					id="updateUserReset">취소</span></a>
 			</div>
 		</form>
 	</div>
-
+ -->
 	<!-- -------------------------------recipe detail-------------------------------- -->
 
 	<div id='detail_pop_up'>
@@ -441,7 +441,7 @@
             <div class="row">
 
               <h2 class="rcp-h2-25px">
-                오늘의 인기 레시피  <a class="More">more</a>
+                오늘의 인기 레시피  <a id="popular-rcp-more" class="More">more</a>
               </h2>
             </div>
           </div>
@@ -463,7 +463,7 @@
             <div class="row">
 
               <h2 class="rcp-h2-25px">
-              최신 레시피  <a class="More">more</a>
+              최신 레시피  <a id="newest-rcp-more" class="More">more</a>
               </h2>
             </div>
           </div>
@@ -487,7 +487,7 @@
             <div class="row">
 
               <h2 class="rcp-h2-25px">
-                추천 레시피  <a class="More">more</a>
+                추천 레시피  <a id="recommendation-rcp-more" class="More">more</a>
               </h2>
             </div>
           </div>
@@ -1216,13 +1216,15 @@
   <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
   <script src="js/common/easyautocomplete.js"></script>
   <script src="node_modules/easy-autocomplete/dist/jquery.easy-autocomplete.min.js"></script>
-
+  <script src="js/common/signup.js"></script>
+  
 	<script>
 		$(function() {
 
-			getWeather();
+			/* getWeather(); */
 			
 			$('.header-body').load('topNavBar.html');
+			
 			$('#footer').load("../copyright.html");
 
 			$('.profile-dropdown:has(.active)').bind('click', function() {

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html class="sticky-header-negative sticky-header-active ">
+<head>
+<meta charset="utf-8">
+<title>Recipe Master</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+
+<!-- Template css -->
+
+<link rel="stylesheet" href="css/rcp-template/animate.css">
+<link rel="stylesheet" href="css/rcp-template/theme.css">
+<link rel="stylesheet" href="css/rcp-template/theme-animate.css">
+<link rel="stylesheet" href="css/rcp-template/layer.css">
+<link rel="stylesheet"
+	href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/rcp-template/mobile_login.css">
+<link rel="stylesheet" href="css/common_list_topbar.css">
+<link rel="stylesheet" href="css/template/font-awesome.min.css">
+<link rel="stylesheet" href="css/template/commentTemp.css">
+<link rel="stylesheet"
+	href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
+<!-- 사용자 정의 css -->
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet"
+	href="node_modules/sweetalert/dist/sweetalert.css">
+
+</head>
+<body>
+
+<div class="panel">
+  <!-- <h2>LOGIN</h2> -->
+  <p id="rcp-top-lgoin">LOGIN</p>
+  <div class="formset">
+    <div class="form-group">
+      <lable class="form-label">Email</lable>
+      <input type="text" class="form-control" id="userEmail"/>
+    </div>
+    <div class="form-group">
+      <lable class="form-label">Password</lable>
+      <input type="password" class="form-control" id="userPassword"/>
+    </div>
+    
+    <button class="btn" id="userLogin">Log in</button>
+    <a id="findPassword">Forgot Your Password?</a>
+    <hr style="margin: 15px;">
+      <p id="other-login-text">소셜아이디로 로그인하기 </p>
+     <div id="naver_id_login"></div>
+  </div>
+</div>
+
+<!-- password 찾기 -->
+<div class="panel" id="findPassword-pop-up-banner">
+  <h2>Find Password</h2>
+  <div class="formset">
+    <div class="form-group">
+      <lable class="form-label">Email</lable>
+      <input type="text" class="form-control" id="findPassword-userEmail"/>
+    </div>
+    <button class="btn" id="findPassword">push</button>
+  </div>
+</div>
+
+
+	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script
+		src="node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+	<script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
+  <script src="js/template/jquery.countdown.min.js"></script>
+	<!--  사용자 js -->
+	<script src="js/jquery.bpopup.min.js"></script>
+	<script src="js/template/naverLogin_implicit-1.0.2.js"></script>
+	<script src="js/login.js"></script>
+	<script src="js/rcp-template/theme.js"></script>
+	<script src="js/rcp-template/login-form.js"></script>
+  <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+	
+	<script type="text/javascript">
+		var naver_id_login = new naver_id_login("oZ3ZBiNctenY6ix5st7G",
+				"http://127.0.0.1:8080/index.html");
+		var state = naver_id_login.getUniqState();
+		naver_id_login.setButton("green", 3, 40);
+		naver_id_login.setDomain(".service.com");
+		naver_id_login.setState(state);
+		naver_id_login.init_naver_id_login();
+	</script>
+
+	<script type="text/javascript">
+		// 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+		function naverSignInCallback() {
+			// naver_id_login.getProfileData('프로파일항목명');
+			// 프로필 항목은 개발가이드를 참고하시기 바랍니다.
+			console.log("nickName : "
+					+ naver_id_login.getProfileData('nickname'));
+			console.log("email : " + naver_id_login.getProfileData('email'));
+			$
+					.ajax({
+						url : contextRoot+'/user/loginNaver.json',
+						method : 'post',
+						dataType : 'json',
+						data : {
+							userName : naver_id_login
+									.getProfileData('nickname'),
+							email : naver_id_login.getProfileData('email')
+						},
+						success : function(result) {
+							if (result.status == 'failure') {
+
+								swal('잘못입력하셨습니다.', '아이디 또는 비밀번호를 다시 확인하여 주세요.',
+										"error");
+
+								return;
+							}
+
+							if (result.status == 'success') {
+
+							} else {
+								swal('비밀번호를 다시 입력해주세요');
+							}
+
+						},
+						error : function() {
+							swal('서버 요청 오류');
+						}
+					}); /* end of ajax */
+
+		}
+
+		// 네이버 사용자 프로필 조회
+		naver_id_login.get_naver_userprofile("naverSignInCallback()");
+	</script>
+</body>
+</html>

@@ -86,13 +86,17 @@
       </foreach>
       )) a GROUP BY rcpno) d WHERE r.rcpno = d.rcpno AND vc = #{categorySize}
     </if>
-    <if test="search.searchCondition == 'recipe' and categorySize eq 0">
+    <!-- <if test="search.searchCondition == 'recipe' and categorySize eq 0">
      WHERE r.name LIKE '%${search.searchKeyword}%' </if>
     <if test="search.searchCondition == 'recipe' and !categorySize eq 0">
      AND r.name LIKE '%${search.searchKeyword}%' </if>
     <if test="search.searchCondition == 'chef' and categorySize eq 0"> 
      WHERE u.name LIKE '%${search.searchKeyword}%' </if>
     <if test="search.searchCondition == 'recipe' and !categorySize eq 0"> 
+     AND r.name LIKE '%${search.searchKeyword}%' </if> -->
+    <if test="categorySize eq 0">
+     WHERE r.name LIKE '%${search.searchKeyword}%' </if>
+    <if test="!categorySize eq 0">
      AND r.name LIKE '%${search.searchKeyword}%' </if>
      GROUP BY r.rcpno
     <if test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'"> 
@@ -117,14 +121,18 @@
 			)) a GROUP BY rcpno) d WHERE r.rcpno = d.rcpno AND vc =
 			#{categorySize}
 		</if>
-		<if test="search.searchCondition == 'recipe' and categorySize eq 0">
+		<!-- <if test="search.searchCondition == 'recipe' and categorySize eq 0">
 			WHERE r.name LIKE '%${search.searchKeyword}%' </if>
 		<if test="search.searchCondition == 'recipe' and !categorySize eq 0">
 			AND r.name LIKE '%${search.searchKeyword}%' </if>
 		<if test="search.searchCondition == 'chef' and categorySize eq 0">
 			WHERE u.name LIKE '%${search.searchKeyword}%' </if>
 		<if test="search.searchCondition == 'recipe' and !categorySize eq 0">
-			AND r.name LIKE '%${search.searchKeyword}%' </if>
+			AND r.name LIKE '%${search.searchKeyword}%' </if> -->
+		<if test="categorySize eq 0">
+     WHERE r.name LIKE '%${search.searchKeyword}%' </if>
+    <if test="!categorySize eq 0">
+     AND r.name LIKE '%${search.searchKeyword}%' </if>
 		<if test="search.sortCondition == 'newest' and search.orderCondition == 'DESC'">
 			ORDER BY r.rcpno DESC </if>
 		<if	test="search.sortCondition == 'newest' and search.orderCondition == 'ASC'">
@@ -171,10 +179,10 @@
 
 	<insert id="insert" parameterType="map">
 		INSERT INTO rcps(uno, name, intro, c_time, ptn, rcp_pd, rpimg, rcp_dt,
-		rgst, mts)
+		rgst, mts, ctgs)
 		VALUES(#{user.userNo}, #{recipe.recipeName}, #{recipe.intro},
 		#{recipe.cookTime},
-		#{recipe.portion}, 'rcp_pd', 'rpimg', now(), #{recipe.regiStatus}, #{material})
+		#{recipe.portion}, 'rcp_pd', 'rpimg', now(), #{recipe.regiStatus}, #{material}, #{ctgName})
 		<selectKey keyProperty="recipeNo" resultType="int" order="AFTER">
 			SELECT LAST_INSERT_ID();
 		</selectKey>
@@ -379,7 +387,7 @@
 	<update id="updateRecipe" parameterType="map">
 		UPDATE rcps set
 		name=#{recipe.recipeName}, intro=#{recipe.intro}, c_time=#{recipe.cookTime},
-		ptn=#{recipe.portion}, rpimg=#{recipe.representImages}, rcp_pd=#{recipe.recipeProcedure}, mts=#{material}
+		ptn=#{recipe.portion}, rpimg=#{recipe.representImages}, rcp_pd=#{recipe.recipeProcedure}, mts=#{material}, ctgs=#{ctgName}
 		where rcpno=${recipe.recipeNo};
 	</update>
 

@@ -95,16 +95,12 @@ body {
 }
 
 .rcp-userPage-userName {
-	position:relative;	
-	bottom:20px;	
-	width:200px;
-	color: white;	
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .rcp-topimg-position hr{
-	
     border-top:1px solid #b9b9b9;
-    position: relative;
     bottom:30px;
 }
 
@@ -232,7 +228,6 @@ background: url(../../img/slide-restaurant-2.jpg);
 
 .rcp-mypage-container{
     height: 50px;
-    position: relative;
     margin: auto;
     width: 850px;
     text-align: center;
@@ -366,11 +361,11 @@ background: url(../../img/slide-restaurant-2.jpg);
 }
 
 .rcp-Vst-inputBtn {
-	position: relative;
-	top: -25pt;
-	left: 19pt;
-	height: 53pt;
-	width: 74pt;
+	position: relative !important;
+	top: -25pt !important;
+	left: 19pt !important;
+	height: 53pt !important;
+	width: 74pt !important;
 }
 
 .rcp-Vst-contents-rep>hr {
@@ -603,4 +598,20 @@ background: url(../../img/slide-restaurant-2.jpg);
 .rcp-p-xlg-padding{
 	padding-top:0px ! important;
 	padding-bottom:10px ! important;
+}
+
+.subscribeBtn{
+	color: white;
+}
+
+.subscribeBtn:HOVER{
+  color: #EFAB42;
+}
+
+.subsactive{
+	color: #EFAB42 !important;
+}
+
+.subsactive:HOVER{
+  color: white !important;
 }

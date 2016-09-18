@@ -15,6 +15,7 @@ $(function() {
 		loginAlert();
 		return;
 	}
+//	$('.header-body').load('topNavBar.html');
 
 	var recipeNo = location.href.split('?')[1]==null ? 0 : location.href.split('?')[1];
 
@@ -62,14 +63,14 @@ $(function() {
 				}
 			}
 		}
-
+		
 		$("#updateRecipe").submit();
 	});
 
 	var options = {
 			url : function(phrase) {
 				console.log(phrase);
-				return "recipe/materialSearch.json?searchValue=" + phrase;
+				return contextRoot+"recipe/materialSearch.json?searchValue=" + phrase;
 			},
 
 			getValue : function(element) {
@@ -207,7 +208,7 @@ $(function() {
 				dataType : 'json',
 				autoUpload : false,
 				acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i,
-				dropZone : $('#dropzone')
+				dropZone : $('#files')
 			})
 			.on(
 					'fileuploadadd',
@@ -412,11 +413,13 @@ $(function() {
 		}
 
 		$('input[name="regiStatus"]').val("0");
+		$('#addRecipe').attr('action', contextRoot+'recipe/addRecipe.json');
 		$('#addRecipe').submit();
 	});
 
 	$('#imAddBtn').on('click', function() {
 		$('input[name="regiStatus"]').val("1");
+		$('#addRecipe').attr('action', contextRoot+'recipe/addRecipe.json');
 		$('#addRecipe').submit();
 	});
 
@@ -446,9 +449,11 @@ $(function() {
 		if($(this).hasClass('active')){
 			$(this).removeClass('active');
 			$(this).next().attr("name", "");
+			$(this).next().next().attr("name", "");
 		} else {
 			$(this).addClass('active')
 			$(this).next().attr("name", "categoryValue");
+			$(this).next().next().attr("name", "ctgName");
 		}		
 	});
 });
@@ -459,7 +464,7 @@ function getImageURL(imageFile) {
 
 function getRecipeEditInfo(recipeNo){
 	$.ajax({
-		url : 'recipe/recipeDetail.json',
+		url : contextRoot+'recipe/recipeDetail.json',
 		method : 'post',
 		data : {
 			recipeNo : recipeNo
@@ -515,6 +520,7 @@ function getRecipeEditInfo(recipeNo){
 					if($(this).val()==recipeCategories[index].categoryNo){
 						$(this).prev().addClass('active');
 						$(this).attr("name", "categoryValue");
+						$(this).next().attr("name", "ctgName");
 					}
 				});
 			});
@@ -523,7 +529,7 @@ function getRecipeEditInfo(recipeNo){
 			$('#addBtn')
 			.attr('id', 'updateBtn');
 			$('#addRecipe').attr('action',
-			'recipe/updateRecipe.json');
+			contextRoot+'recipe/updateRecipe.json');
 			$('#addRecipe').attr('id',
 			'updateRecipe');
 
@@ -548,7 +554,7 @@ function getRecipeEditInfo(recipeNo){
 
 function checkMyRecipe(recipeNo){
 	$.ajax({
-		url : 'recipe/checkMyRecipe.json',
+		url : contextRoot+'recipe/checkMyRecipe.json',
 		method : 'post',
 		data : {
 			recipeNo : recipeNo
@@ -606,6 +612,6 @@ function loginAlert(){
 		confirmButtonText : "확인",
 		closeOnConfirm : false
 	}, function(isConfirm) {
-		location.href = "index.html"
+		location.href = contextRoot
 	});
 }

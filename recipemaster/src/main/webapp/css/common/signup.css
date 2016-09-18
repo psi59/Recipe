@@ -86,10 +86,6 @@
 	padding-left: 12rem;
 }
 
-.rcp-laytext {
-	text-align: left;
-}
-
 .rcp-section {
 	font-weight: bold;
 	font-size: 2rem;
@@ -139,4 +135,12 @@
   padding-bottom: 10px;
   height: 40px;
   margin-bottom: 2px ! important;
+}
+
+.sign-label{
+	  margin-bottom: 20px !important;
+    width: 100%;
+    text-align: right;
+    padding-right: 15px;
+    height: 21px;
 }

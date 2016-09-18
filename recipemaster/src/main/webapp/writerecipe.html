@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="css/common/popup.css">
 <link rel="stylesheet" href="css/updateImg.css">
 <link rel="stylesheet" href="css/writerecipe.css">
-
+<script src="js/common/app-context.js"></script>
 <style type="text/css">
 .scroll {
 	overflow: scroll;
@@ -64,63 +64,9 @@
 </style>
 </head>
 <body>
-	
-	<!-- 회원정보수정 bpopup -->
-	<div id='editUserInfo-pop-up-banner'>
-		<form action="user/update.json" method="post" id="updateUserForm"
-			enctype="multipart/form-data">
-			<input type="hidden" name="userNo" id="updateFormUserNo"> <input
-				type="hidden" name="email" id="updateFormEmail">
-			<div class="rcp-laytop">
-				<!--유저 이미지 업로드 --용이  !!!!!enctype?????16.08.12-->
-				<div class="rcp-up-preview img-wrapper col-md-1"></div>
-				<div class="file-upload-wrapper">
-					<input id="profileImage" type="file" name="profileImage"
-						class="file-upload-native" accept="image/*" /> <input type="text"
-						disabled placeholder="이미지" class="file-upload-text" />
-				</div>
-				<!--유저 이미지 업로드 끝--용이  -->
-				<div class="col-md-11 rcp-laytext">
-					<h4 id="updateBoxName"></h4>
-					<h5 id="updateBoxGrade">Master Chef</h5>
-					<h5 id="updateBoxEmail"></h5>
-				</div>
-			</div>
-			<div class="rcp-section">
-				<span>회원정보수정</span>
-			</div>
-			<div class="rcp-innnersec">
-				<div id="beforePwd-div"
-					class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
-					<input class="form-control" type="password" id="beforePwd"
-						name="beforePassword" placeholder="이전비밀번호 입력">
-				</div>
-
-				<div id="afterPwd-div"
-					class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
-					<input class="form-control" type="password" id="afterPwd"
-						name="password" placeholder="변경비밀번호 입력">
-				</div>
-
-				<div id="afterPwdcf-div"
-					class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
-					<input class="form-control" type="password" id="afterPwdcf"
-						placeholder="변경비밀번호 확인">
-				</div>
-
-				<div
-					class="rcp-mar rcp-info form-group form-group-md has-success has-feedback">
-					<textarea class="form-control rcp-tara" rows="5rem" cols="30rem"
-						id="introduce" name="intro" placeholder="자기소개를 입력해주세요"></textarea>
-				</div>
-			</div>
-			<div class="rcp-sign-membership">
-				<a href="#"><span id="updateUserInfo">확인</span></a> <a href="#"><span
-					id="updateUserReset">취소</span></a>
-			</div>
-		</form>
-	</div>
-
+<header id="header" class="header-narrow site-header wide" role="banner" data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": false}'>
+     <div class="header-body"></div>    
+</header>
 	<form id="addRecipe" action="recipe/addRecipe.json" method="post"
 		enctype="multipart/form-data">
     <input type="hidden" value="0" name="recipeNo" />
@@ -143,7 +89,7 @@
           </div>
 				</div>
 				<div class="form-group">
-					<p>
+					<p style="width: 30%;">
 					  <label for="cookTime">조리시간(min) : </label>
 					  <input type="text" id="cookTime" name="cookTime" OnKeypress="onlyNumber();" style="border: 1px solid #ccc; color: #f6931f; font-weight: bold; width: 50px; text-align: center;">
 					</p>
@@ -216,30 +162,37 @@
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">한식</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="1">
+                    <input name="" type="hidden" value="한식">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">일식</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="2">
+                    <input name="" type="hidden" value="일식">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">중식</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="3">
+                    <input name="" type="hidden" value="중식">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">동남아/인도</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="4">
+                    <input name="" type="hidden" value="동남아/인도">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">멕시칸</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="5">
+                    <input name="" type="hidden" value="멕시칸">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">양식</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="6">
+                    <input name="" type="hidden" value="양식">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">퓨전</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="7">
+                    <input name="" type="hidden" value="퓨전">
                   </span>                  
                 </div>
                </div>
@@ -250,26 +203,32 @@
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">간식/야식</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="8">
+                    <input name="" type="hidden" value="간식/야식">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">술안주</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="9">
+                    <input name="" type="hidden" value="술안주">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">해장</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="10">
+                    <input name="" type="hidden" value="해장">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">손님접대</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="11">
+                    <input name="" type="hidden" value="손님접대">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">나들이</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="12">
+                    <input name="" type="hidden" value="나들이">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">파티/명절</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="13">
+                    <input name="" type="hidden" value="파티/명절">
                   </span>
                 </div>
                </div>
@@ -280,42 +239,52 @@
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">육류</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="14">
+                    <input name="" type="hidden" value="육류">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">채소류</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="15">
+                    <input name="" type="hidden" value="채소류">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">해산물</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="16">
+                    <input name="" type="hidden" value="해산물">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">콩/두부</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="17">
+                    <input name="" type="hidden" value="콩/두부">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">과일</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="18">
+                    <input name="" type="hidden" value="과일">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">달걀/유제품</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="19">
+                    <input name="" type="hidden" value="달걀/유제품">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">면/만두</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="20">
+                    <input name="" type="hidden" value="면/만두">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">김치</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="21">
+                    <input name="" type="hidden" value="김치">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">제철재료</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="22">
+                    <input name="" type="hidden" value="제철재료">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">가공식품</a> 
                     <input class="rcp-ctgno" name="" type="hidden" value="23">
+                    <input name="" type="hidden" value="가공식품">
                   </span>                                     
                 </div>
                </div>
@@ -326,38 +295,47 @@
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">밥</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="24">
+                    <input name="" type="hidden" value="밥">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">면</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="25">
+                    <input name="" type="hidden" value="">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">국물</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="26">
+                    <input name="" type="hidden" value="국물">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">찜/조림/구이</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="27">
+                    <input name="" type="hidden" value="찜/조림/구이">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">볶음/튀김/부침</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="28">
+                    <input name="" type="hidden" value="볶음/튀김/부침">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">나물/샐러드</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="29">
+                    <input name="" type="hidden" value="나물/샐러드">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">김장/절임</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="30">
+                    <input name="" type="hidden" value="김장/절임">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">베이킹/디저트</a>
                     <input class="rcp-ctgno" name="" type="hidden" value="31">
+                    <input name="" type="hidden" value="베이킹/디저트">
                   </span>
                   <span>
                     <a href="javascript:;" class="rcp-category-btn">양념/소스/잼</a>  
                     <input class="rcp-ctgno" name="" type="hidden" value="32">
+                    <input name="" type="hidden" value="양념/소스/잼">
                   </span>                  
                 </div>
                </div>
@@ -416,7 +394,10 @@
             <button class="timer" type="button"> 
               <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
             </button>
-            <input type="hidden" name="timerValues" value="{{@index}}/{{recipeTime}}">
+            {{#if recipeTime}}
+              <input type="hidden" name="timerValues" value="{{@index}}/{{recipeTime}}">
+            {{/if}}
+            
           </div>
           <input type="hidden" name="produceImgNames" value="{{recipeProduceImage}}">
         </a>

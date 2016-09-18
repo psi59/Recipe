@@ -31,8 +31,8 @@ app.use(function (req, res, next) {
 var pool  = mysql.createPool({
   connectionLimit : 10,
   host     : 'localhost',
-  port     : '4000',
-  user     : 'java83',
+  port     : '3306',
+  user     : 'root',
   password : '1111',
   database : 'recipe'
 });
@@ -45,7 +45,7 @@ app.get('/', function (request, response) {
 	response.send('Express 적용 예제');
 });
 
-app.get('/user/checkDuplication.do', function (request, response) {
+app.get('http://52.78.163.78:9999/user/checkDuplication.do', function (request, response) {
 	pool.query('SELECT * FROM users WHERE email = ?',
 		  [request.query.email],
 		  function(err, rows, fields) { 

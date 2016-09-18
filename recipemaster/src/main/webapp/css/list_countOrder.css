@@ -1,3 +1,20 @@
+.order-btn {
+  float: right;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.order-btn:HOVER {
+	background-color: #f8a631;
+  color: white;
+}
+
+#rcp-list-count {
+	/* width: 69%; */
+	margin: 0 auto;
+}
+
 #searchBtn {
 	cursor: pointer;
 }
@@ -19,7 +36,6 @@
 	margin: 0 auto; 
 	font-size: 25px;
 } 
-
 
 #rcp-list-count-order #order-btn{
   float: right;  

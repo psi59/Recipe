@@ -108,7 +108,7 @@ $(document).ready(function(){
 		var target =$(this); 
 		if ($(event.target).is('[name=subscribeComplete]')) {
 			$.ajax({
-				url : 'recipe/deleteSubscribe.json',
+				url : contextRoot+'recipe/deleteSubscribe.json',
 				datatype : 'json',
 				data : {
 					email : target.attr('data-email')
@@ -126,7 +126,7 @@ $(document).ready(function(){
 			});
 		} else {
 			$.ajax({
-				url : 'recipe/addSubscribe.json',
+				url : contextRoot+'recipe/addSubscribe.json',
 				datatype : 'json',
 				data : {
 					email : target.attr('data-email')

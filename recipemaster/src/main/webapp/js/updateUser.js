@@ -6,7 +6,8 @@ $(function(){
 	var profileImage = new Array();
 	profileImage[0] = new File([""], "");
 	
-	$('#userInfoEditBtn').on('click', function() {
+	$('#userInfoEditBtn').on('click', function(event) {
+		event.preventDefault();
 		console.log(userInfo);
 		$('#editUserInfo-pop-up-banner').bPopup();
 		if (userInfo.userNo != null) {
@@ -16,7 +17,9 @@ $(function(){
 			$('#profileGrade').text(userInfo.grade);
 			$('#updateFormUserNo').val(userInfo.userNo);
 			$('#updateFormEmail').val(userInfo.email);
-			$('.rcp-up-preview').append($('<img class="rcp-up-preview" src="img/profileImg/'+userInfo.image+'">'));
+			$('#introduce').val(userInfo.intro);
+			$('.rcp-up-preview').html('');
+			$('.rcp-up-preview').append($('<img style="width: 111.44px; height:111.44px;" src="img/profileImg/'+userInfo.image+'">'));
 		}
 	});
 
@@ -31,7 +34,7 @@ $(function(){
 	}).on('fileuploadadd', function (e, data) {
 		profileImage[0] = data.files[0];
 		$('.rcp-up-preview').html('');
-		$('.rcp-up-preview').append($('<img class="rcp-up-preview" src="'+URL.createObjectURL(profileImage[0])+'">'));
+		$('.rcp-up-preview').append($('<img style="width: 111.44px; height:111.44px;" src="'+URL.createObjectURL(profileImage[0])+'">'));
 	}).on('fileuploaddone', function (e, data) {
 		if (data.result.status == 'pwdFail'){
 			$('#beforePwd-div').removeClass().addClass("rcp-mar rcp-info form-group form-group-md has-error has-feedback");
@@ -85,7 +88,7 @@ $(function(){
 				return;
 			}
 		}
-		
+		$('#updateUserForm').attr('action', contextRoot+'user/update.json');
 		$('#updateUserForm').submit();
 
 //		$.post('/user/update.json', {

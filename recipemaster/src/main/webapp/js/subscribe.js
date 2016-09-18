@@ -28,7 +28,7 @@ function scsRcpListScroll(){
 	
 	$.ajax({
 
-		url:'/recipe/subscribe.json',
+		url:contextRoot+'/recipe/subscribe.json',
 		data:{
 			userNo : userNo
 		},
@@ -58,7 +58,7 @@ function scsRcpListScrollAppend(){
 	  var comOddSubscribe = Handlebars.compile(oddSubscribe); 
 	   
 	  $.ajax({
-	    url:'/recipe/subscribe.json',
+	    url:contextRoot+'/recipe/subscribe.json',
 	    method : 'post',
 	    data : {
 	      userNo : userNo,

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -62,6 +63,11 @@ public class RecipeController {
     } else {
       list = recipeService.getRecipeSearchList(pageNo, pageSize, search, userNo);
     }
+    
+    // 카테고리 데이터 잘 받아오는지 테스트 
+    /*for (String ctg : categoryList) {
+      System.out.println("카테고리 : "+ctg);
+    }*/
     
     // 검색결과 첫페이지를 갱신했을때만 레시피카드들을 카운트 한다.
     if(pageNo == 1){
@@ -159,9 +165,10 @@ public class RecipeController {
       @RequestParam(value="recipeProduce", defaultValue="") String[] recipeProduce,
       @RequestParam(value="imageFiles", defaultValue="") List<MultipartFile> imageFiles,
       @RequestParam(value="representImgNames", defaultValue="") List<String> representImgNames,
-      @RequestParam(value="produceImgNames", defaultValue="") List<String> produceImgNames, HttpServletRequest request,
+      @RequestParam(value="produceImgNames", defaultValue="") List<String> produceImgNames, 
+      @RequestParam(value="ctgName", defaultValue="") List<String> ctgName,HttpServletRequest request,
       HttpSession session) {
-	
+	  
     Map<String, Object> result = new HashMap<>();
     Map<String, Object> map = new HashMap<>();
     Map<String, Object> recipeDatas = new HashMap<>();
@@ -183,10 +190,13 @@ public class RecipeController {
     map.put("user", user);
     map.put("recipe", recipe);
     map.put("material", recipeMaterialNames);
+    map.put("ctgName", ctgName.toString());
     int recipeNo = recipeService.addRecipe(map);
+    recipe.setRecipeNo(recipeNo);
     recipeDatas.put("recipeNo", recipeNo);
     recipeDatas.put("materialList", materialList);
     recipeDatas.put("categoryValue", categoryValue);
+
 
     try {
       for (int i = 0; i < representImgNames.size(); i++) {
@@ -284,7 +294,8 @@ public class RecipeController {
       @RequestParam("representImgNames") List<String> representImgNames,
       @RequestParam(value="deleteRepresentImg", defaultValue="") List<String> deleteRepresentImg,
       @RequestParam(value="deleteProduceImg", defaultValue="") List<String> deleteProduceImg,
-      @RequestParam("produceImgNames") List<String> produceImgNames, HttpServletRequest request,
+      @RequestParam("produceImgNames") List<String> produceImgNames,
+      @RequestParam("ctgName") List<String> ctgName,HttpServletRequest request,
       HttpSession session) {
 
     Map<String, Object> result = new HashMap<>();
@@ -363,6 +374,7 @@ public class RecipeController {
       recipe.setRepresentImages(recipeRepresentImages);		
       
       map.put("material", recipeMaterialNames.toString());
+      map.put("ctgName", ctgName.toString());
       map.put("recipe", recipe);
       
       recipeService.updateRecipe(map);
@@ -381,14 +393,14 @@ public class RecipeController {
       //recipeService.addMaterials(recipeDatas);
       result.put("status", "success");
     } catch (Exception e) {
-      e.printStackTrace();
+//      e.printStackTrace();
       result.put("status", "false");
     } 
     return new Gson().toJson(result);
   }
 
   // ---------------------고재현 -------------------------
-  @RequestMapping(path = "list", produces = "application/json;charset=UTF-8")
+  @RequestMapping(path = "list", produces = "application/json;charset=UTF-8", method=RequestMethod.POST)
   @ResponseBody
   public String list(@RequestParam int userNo, @RequestParam(defaultValue = "4") int pageSize, int request) {
     HashMap<String, Object> result = new HashMap<>();

@@ -6,7 +6,7 @@ window.onload = function () {
 	/*로그아웃 버튼*/
 	$(document).on('click', '#logoutBtn', function(){
 		logout(event);
-		$(location).attr('href','/');
+		$(location).attr('href',contextRoot);
 	});
 	
 	// 회원정보창 위치 고정
@@ -114,7 +114,7 @@ function getUserInfo(){
 
 function loginCheck() {
 	return $.ajax({
-		url : '/user/loginCheck.json', 
+		url : contextRoot+'/user/loginCheck.json', 
 		method : 'get',
 		dataType : 'json',
         async: false
@@ -126,7 +126,7 @@ function loginCheck() {
 function logout(event) {
 	event.preventDefault();
 	$.ajax({
-		url : '/user/logout.json', 
+		url : contextRoot+'/user/logout.json', 
 		method : 'get',
 		dataType : 'json',
 		success : function(result) {
@@ -149,7 +149,7 @@ function logout(event) {
 function login(event) {
 	event.preventDefault();
 	$.ajax({
-		url : '/user/login.json', 
+		url : contextRoot+'/user/login.json', 
 		method : 'post',
 		dataType : 'json',
 		data : {
