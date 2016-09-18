@@ -41,31 +41,31 @@ public class RecipeController {
 	@Autowired
 	UserService userService;
 
-	// 리스트 검색 -이성현
-	@RequestMapping(path="listSearch",produces="application/json;charset=UTF-8")
-	@ResponseBody
-	public String listSearch(@RequestParam(defaultValue="1") int pageNo,
-			@RequestParam(defaultValue="8") int pageSize,
-			Search search, @RequestParam(value="categoryList") List<String> categoryList, String more, HttpSession session){
-		HashMap<String,Object> result = new HashMap<>();     
-		int recipeCount = 0;    
+  // 리스트 검색 -이성현
+  @RequestMapping(path="listSearch",produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String listSearch(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue="8") int pageSize,
+                           Search search, @RequestParam(value="categoryList") List<String> categoryList, 
+                           String more, HttpSession session){
+    HashMap<String,Object> result = new HashMap<>();     
+    int recipeCount = 0;    
 
-		int userNo = 0;    
-		if(session.getAttribute("userNo") != null){
-			userNo = (Integer)(session.getAttribute("userNo"));
-		}
-
-		List<Recipe> list;
-		//카테고리 list를 search 객체에 담는다.    
-		search.setCategoryList(categoryList);
-		if(more.equals("popular")){
-			list = recipeService.getRecipeList(userNo, pageNo, pageSize, 1); // 오늘의 인기 레시피
-		} else {
-			list = recipeService.getRecipeSearchList(pageNo, pageSize, search, userNo);
-		}
-
-		// 카테고리 데이터 잘 받아오는지 테스트 
-		/*for (String ctg : categoryList) {
+    int userNo = 0;    
+    if(session.getAttribute("userNo") != null){
+      userNo = (Integer)(session.getAttribute("userNo"));
+    }
+    
+    List<Recipe> list;
+    //카테고리 list를 search 객체에 담는다.    
+    search.setCategoryList(categoryList);
+    if(more.equals("popular")){
+      list = recipeService.getRecipeList(userNo, pageNo, pageSize, 1); // 오늘의 인기 레시피
+    } else {
+      list = recipeService.getRecipeSearchList(pageNo, pageSize, search, userNo);
+    }
+    
+    // 카테고리 데이터 잘 받아오는지 테스트 
+    /*for (String ctg : categoryList) {
       System.out.println("카테고리 : "+ctg);
     }*/
 

@@ -468,7 +468,7 @@ function mouseHover(){
 			  var list = result.data;
 //			  $('#main-list > div').append( comMainRecomSection(result) );
 //			  $('.list2 > .row').append( template(result) );
-//			 
+			 
 			  $('#tabs-3 .hs-content .container .row ').append(comMainTemp( result ) ); 
 			  
 			  for(var i=0; i<result.data.length; i++){
@@ -479,6 +479,10 @@ function mouseHover(){
 			  }
 			  MainRecomCtList();
 			  methods();
+			  
+			  $('#recommendation-rcp-more').click(function(){
+				  window.location.href = contextRoot+"list.html";
+			  })
 		  },
 		  error : function(){
 			  console.log('ajax list2:서버 요청 오류');

@@ -33,5 +33,5 @@ $(document).ready(function(){
 		      }
 		};
 		
-	/*$('.searchKeyword').easyAutocomplete(options);*/
+	/*$('#searchKeyword').easyAutocomplete(options);*/
 })

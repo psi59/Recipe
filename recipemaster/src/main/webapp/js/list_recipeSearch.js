@@ -30,25 +30,11 @@ $(document).ready(function(){
 	// 검색창에 포커스
 	$('#searchKeyword').focus();
 
-	// 검색버튼 클릭 검색 이벤트
-	$('#searchBtn').click(function() {
-		$("body").scrollTop(0);
-		search('newest', $('#order-latest-btn').val());			    
-	});
-
 	// 키보드에서 뗐을때의 검색 이벤트
 	$('#searchKeyword').keyup(function(){
 		$("body").scrollTop(0);
-		esearch('newest', $('#order-latest-btn').val());
-	})
-
-	// 카테고리 라벨 변경 이벤트
-	/*$('input[type=checkbox]').change(function(){*/
-	/*$('.category').change(function(){
-		alert('들어왓다 ~');
-		$("body").scrollTop(0);
 		search('newest', $('#order-latest-btn').val());
-	})*/
+	})
 
 	// 최신순 정렬
 	$('#order-latest-btn-text').click(function(){		
@@ -174,7 +160,7 @@ function search(sort,order){
 			categoryList += $(this).text();
 		}				
 	})	
-
+	
 	$.ajax({
 		url : contextRoot+'recipe/listSearch.json',
 		method : 'post',
@@ -318,7 +304,7 @@ function getUrlParams() {
 
 
 //----------------------------------------고재현 부분--------------------------------------------//
-
+ 
 
 Handlebars.registerHelper('isLike', function(options) {
 
