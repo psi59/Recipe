@@ -216,6 +216,7 @@
   height: 25px;
   vertical-align: middle;
   position: absolute;
+  z-index: 100;
 }
 
 .rcp-count-images-bg {
@@ -942,6 +943,7 @@ span a{
     height: 25px;
     vertical-align: middle;
     position: absolute;
+    z-index: 100;
 }
 
 .main_chef_container{
