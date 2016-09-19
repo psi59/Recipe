@@ -24,9 +24,10 @@ var recipeAddComment = $('#recipe-comment-addForm').html();
 var comRecipeAddComment = Handlebars.compile(recipeAddComment); 
 
 var slider;
-var userInfo = getUserInfo();
 
 $(function(){
+	var userInfo = getUserInfo();
+	
 	recipeDetail();
 	starRatingBtn();
 	comment();
@@ -38,6 +39,16 @@ $(function(){
 	timerStart();
 	push((userInfo==null ? null:userInfo.email),'','login');
 })
+
+
+Handlebars.registerHelper("representImages", function(value, options){
+		{			
+			console.log("밸"+value);
+			console.log("이미지 : "+value.representImage[0]);
+			return value.representImage[0];
+			//return value;
+		}
+}); 
 
 
 	Handlebars.registerHelper("inc", function(value, options){
@@ -182,8 +193,18 @@ function recipeDetail(){
 					swal('게시물 조회 오류');
 					return;
 				}
+				
+				var addSpan = '';
+				
+				if(userInfo != null){
+					if(userInfo.userNo == result.data.userNo){
+						console.log('여기옴 ? ');
+					addSpan = "<span class='glyphicon glyphicon-pencil rcp-recipe-edit-button'></span>";
+						}
+					}
+				
 				$('.rcp-first-info').children('input[name="recipeNo"]').val(result.data.recipeNo);
-				$('.rcp-header > .title').text(result.data.recipeName);
+				$('.rcp-header > .title').html(result.data.recipeName+addSpan);
 				$('.rcp-header > .date').text(result.data.recipeDate);
 				$('.hash').text(result.data.intro);
 				$('div[name="rcp-explanation"]:eq(1)').text(result.data.intro);
@@ -192,10 +213,10 @@ function recipeDetail(){
 					position: (['auto','auto']),
 					positionStyle :[('fixed')],
 					onOpen:function(){
-						$('body').css('overflow','hidden');
+						$('html').css('overflow','hidden');
 						checkDuplicateGrade();					
 						$('.rcp-304').append( comDetailInfoTemp(result) );
-						$('.rcp-info-images').append( comDetailImageMain(result.data) );
+						$('.rcp-info-images').append( comDetailImageMain(result.data.representImages[0]) );
 						$('.rcp-detail-body').append( comDetailMainTemp(result.data) );
 						$('.rcp-detail-body').append( comDetailTemp(result.data) );
 						$('.rcp-info-images').append( comDetailImageStep(result.data) );
@@ -264,7 +285,7 @@ function recipeDetail(){
 					}
 						},
 					onClose:function(){ 
-						$("body").css("overflow", "auto");
+						$("html").css("overflow", "auto");
 						$(".detail-images").remove();
 						$(".rcp-body").remove();
 						$(".rcp-main").remove();
