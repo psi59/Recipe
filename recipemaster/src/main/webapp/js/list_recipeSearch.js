@@ -110,7 +110,8 @@ $(document).ready(function(){
 //		search('newest', $('#order-latest-btn').val());
 		esearch($('#sort-condition').val());
 	})
-
+	likeLogic();
+	scrapLogic();
 });
 
 //처음 검색했을때의 1페이지 결과 가져오기 -이성현

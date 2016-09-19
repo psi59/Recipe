@@ -422,7 +422,7 @@ function addComment(){
 			},
 			success:function(result){
 				if(userInfo == null){
-					swal('로그인 부탁염 ^오^');
+					swal('로그인이 필요한 서비스입니다.');
 					return ;
 				}
 				push('bbb@naver.com',("like"+"/"+userInfo.email+"/"+userInfo.name+"/"+userInfo.image+"/"+"13"+"/"+"타이머테스트2"), "message");
