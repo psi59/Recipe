@@ -61,48 +61,6 @@
 	<div class="mouse-icon hidden-xs">
 		<div class="scroll"></div>
 	</div>
-
-	<div id='editUserInfo-pop-up-banner'>
-		<div class="rcp-laytop">
-			<div class="col-md-1">
-				<img class="chefimg img-circle" src="img/Chef3.jpg">
-			</div>
-			<div class="col-md-11 rcp-laytext">
-				<h4 id="updateBoxName"></h4>
-				<h5 id="updateBoxGrade">Master Chef</h5>
-				<h5 id="updateBoxEmail"></h5>
-			</div>
-		</div>
-		<div class="rcp-section">
-			<span>회원정보수정</span>
-		</div>
-		<div class="rcp-innnersec">
-			<div id="beforePwd-div" class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
-				<input class="form-control" type="text" id="beforePwd"
-					placeholder="이전비밀번호 입력">
-      </div>
-
-      <div id="afterPwd-div" class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
-				<input class="form-control"
-					type="text" id="afterPwd" placeholder="변경비밀번호 입력">
-			</div>	
-			
-			<div id="afterPwdcf-div" class="rcp-mar rcp-info form-group form-group-md has-warning has-feedback">
-				<input
-					class="form-control" type="text" id="afterPwdcf"
-					placeholder="변경비밀번호 확인">
-			</div>
-
-			<div class="rcp-mar rcp-info form-group form-group-md has-success has-feedback">
-				<textarea class="form-control rcp-tara" rows="5rem" cols="30rem"
-					id="introduce" placeholder="자기소개를 입력해주세요"></textarea>
-			</div>
-		</div>
-		<div class="rcp-sign-membership" >
-			<span id="updateUserInfo">확인</span> <span id="updateUserReset">취소</span>
-		</div>
-	</div>
-	
 	<!-- -------------------------------recipe list-------------------------------- -->
  <section id="main-list">
     <div>
@@ -234,10 +192,10 @@
       <div class="row">
         <div id="rcp-list-count">
           <span id="recipe-count"></span>
-          <span id="order-grade-btn-text" class="order-btn">평점순▼</span> 
-          <input id="order-grade-btn" type="hidden" value="DESC">
-          <span id="order-latest-btn-text" class="order-btn">최신순▼</span> 
-          <input id="order-latest-btn" type="hidden" value="DESC">
+          <span id="order-grade-btn-text" class="order-btn">평점순</span> 
+          <input id="order-grade-btn" type="hidden" value="">
+          <span id="order-latest-btn-text" class="order-btn">최신순</span> 
+          <input id="order-latest-btn" type="hidden" value="">
         </div>
       </div>
     </div>
@@ -536,6 +494,7 @@
 	<script src="node_modules/bxslider/dist/jquery.bxslider.min.js"></script>	
 	<script src="js/common/starrating.js"></script>	
 	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+	<!-- <script src="js/list_recipeSearch.js"></script> -->
 	
 	<script>
 	$(document).ready(function(){

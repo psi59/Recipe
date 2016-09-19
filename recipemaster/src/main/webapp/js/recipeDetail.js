@@ -24,9 +24,10 @@ var recipeAddComment = $('#recipe-comment-addForm').html();
 var comRecipeAddComment = Handlebars.compile(recipeAddComment); 
 
 var slider;
-var userInfo = getUserInfo();
 
 $(function(){
+	var userInfo = getUserInfo();
+	
 	recipeDetail();
 	starRatingBtn();
 	comment();

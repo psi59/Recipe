@@ -25,7 +25,8 @@ $(document).ready(function(){
 	}
 
 	// 처음화면에 모든 레시피들을 보여준다
-	search('newest', $('#order-latest-btn').val());
+//	search('newest', $('#order-latest-btn').val());
+	esearch($('#sort-condition').val());
 
 	// 검색창에 포커스
 	$('#searchKeyword').focus();
@@ -33,33 +34,48 @@ $(document).ready(function(){
 	// 키보드에서 뗐을때의 검색 이벤트
 	$('#searchKeyword').keyup(function(){
 		$("body").scrollTop(0);
-		search('newest', $('#order-latest-btn').val());
+		esearch($('#sort-condition').val());
 	})
 
 	// 최신순 정렬
-	$('#order-latest-btn-text').click(function(){		
-		if($('#order-latest-btn').val() == 'DESC'){
-			$('#order-latest-btn-text').text('최신순▲');
-			$('#order-latest-btn').val('ASC')
-		} else if($('#order-latest-btn').val() == 'ASC'){
-			$('#order-latest-btn-text').text('최신순▼');
+	$('#order-latest-btn-text').click(function(){	
+		if($('#order-latest-btn-text').hasClass('active')){
+			$('#order-latest-btn-text').removeClass('active');
+			$('#order-latest-btn').val('');
+			$('#sort-condition').val('');
+		} else {
+			$('#order-grade-btn-text').removeClass('active');
+			$('#order-grade-btn-text').val('')
+			$('#order-latest-btn-text').addClass('active');
 			$('#order-latest-btn').val('DESC')
+			$('#sort-condition').val('newest');
 		}
-		$('#sort-condition').val('newest');
-		search($('#sort-condition').val(), $('#order-latest-btn').val());
+		esearch($('#sort-condition').val());
 	});
 
 	// 평점순 정렬
 	$('#order-grade-btn-text').click(function(){
-		if($('#order-grade-btn').val() == 'DESC'){
-			$('#order-grade-btn-text').text('평점순▲');
-			$('#order-grade-btn').val('ASC')
-		} else if($('#order-grade-btn').val() == 'ASC'){
-			$('#order-grade-btn-text').text('평점순▼');
-			$('#order-grade-btn').val('DESC')
+		if($('#order-grade-btn-text').hasClass('active')){
+			$('#order-grade-btn-text').removeClass('active');
+			$('#order-grade-btn-text').val('')
+			$('#sort-condition').val('');
+		} else {
+			$('#order-latest-btn-text').removeClass('active');
+			$('#order-latest-btn').val('')
+			$('#order-grade-btn-text').addClass('active');
+			$('#order-grade-btn-text').val('DESC')
+			$('#sort-condition').val('grade');
 		}
-		$('#sort-condition').val('grade');
-		search($('#sort-condition').val(), $('#order-grade-btn').val());
+//		
+//		
+//		if($('#order-grade-btn').val() == 'DESC'){
+//			$('#order-grade-btn-text').text('평점순▲');
+//			$('#order-grade-btn').val('ASC')
+//		} else if($('#order-grade-btn').val() == 'ASC'){
+//			$('#order-grade-btn-text').text('평점순▼');
+//			$('#order-grade-btn').val('DESC')
+//		}
+		esearch($('#sort-condition').val());
 	});
 
 	// 스크롤을 끝까지 내렸을때 레시피 카드 생성
@@ -67,53 +83,6 @@ $(document).ready(function(){
 		if (Math.round($(window).scrollTop()) == $(document).height() - $(window).height()) {
 			/*alert('스크롤 끝까지 내림');*/
 			searchScrollAppend();
-		}
-	});
-
-	// 고재현
-	$(document).on('click',('.rcp-like'),function(event){
-		event.preventDefault();
-		if($(event.target).is('.active') ){
-			$.ajax({
-				url:contextRoot+'recipe/likeDown.json?recipeNo=' + $(event.target).parent()
-				.parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
-				+ eval(sessionStorage.getItem('data'))[0].userNo,
-				dataType:'json',
-				method:'get',
-				success:function(){
-					console.log("like down 성공성공");
-					$(event.target).css('color','#231f20');
-					$(event.target).parent().parent().css('color','#231f20');
-					$(event.target).parent().parent().children('.glyphicon-heart-empty').attr('class','glyphicon glyphicon-heart-empty')
-					$(event.target).parent().append('<b class="rcp-like" name="rcp-like">좋아요</b>');
-					$(event.target).remove();
-
-				},
-				error:function(){
-					alert('like : 서버 요청 오류');
-
-				}
-			});
-		}
-		else{
-			$.ajax({
-				url:contextRoot+'recipe/likeUp.json?recipeNo=' + $(event.target).parent()
-				.parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
-				+  eval(sessionStorage.getItem('data'))[0].userNo,
-				dataType:'json',
-				method:'get',
-				success:function(){
-					console.log("like up 성공성공");
-					$(event.target).css('color','#337ab7');
-					$(event.target).parent().parent().css('color','#337ab7');
-					$(event.target).parent().append('<b class="rcp-like active" name="rcp-like">좋아요</b>');
-					$(event.target).remove();
-
-				},
-				error:function(){
-					alert('ajax likeclick: 서버 요청 오류');
-				}
-			});
 		}
 	});
 
@@ -127,7 +96,7 @@ $(document).ready(function(){
 			$('#category-filter').css('display','none')
 		}
 		$("body").scrollTop(0);
-		search('newest', $('#order-latest-btn').val());
+		esearch($('#sort-condition').val());
 	})
 
 	// 필터박스 모두 취소
@@ -136,75 +105,76 @@ $(document).ready(function(){
 		$('.rcp-cursor').removeClass('rcp-category-checked');
 		$('#category-filter').css('display','none')
 		$("body").scrollTop(0);
-		search('newest', $('#order-latest-btn').val());
+//		search('newest', $('#order-latest-btn').val());
+		esearch($('#sort-condition').val());
 	})
 
 });
 
 //처음 검색했을때의 1페이지 결과 가져오기 -이성현
-function search(sort,order){ 
-
-	var page = $('#recipe-card-searchPage-template').text();
-	var compilePage = Handlebars.compile(page);
-
-	var source = $('#temp').text();
-	var template = Handlebars.compile(source);
-
-	var categoryList = '';
-	/*$('#rcp-category-section input[type=checkbox]:checked').each(function(index){*/
-	$('.rcp-category-checked').each(function(index){		
-		/*if(index !== ($('#rcp-category-section input[type=checkbox]:checked').length-1)){*/
-		if(index !== ($('.rcp-category-checked').length-1)){
-			categoryList += $(this).text()+',';
-		} else {
-			categoryList += $(this).text();
-		}				
-	})	
-	
-	$.ajax({
-		url : contextRoot+'recipe/listSearch.json',
-		method : 'post',
-		data : {
-			searchKeyword : $('#searchKeyword').val(),
-			/*searchCondition : $("#searchCondition-select option:selected").val(),*/
-			sortCondition : sort,
-			orderCondition : order,
-			categoryList : categoryList,
-			more : ($('#more-rcp-list').val()==null?0:$('#more-rcp-list').val())
-		},		
-		dataType : 'json',
-		success : function(result) {
-			setTimeout(function() {
-				if (result.status != 'success') {
-					swal('실패 ~');
-					return;
-				}
-				$('.wrap-loading').removeClass('display-none');
-				$('#tabs-1 .hs-content .container .row div').remove();			
-				$('#tabs-1 .hs-content .container .row').append(template(result));
-
-				mouseMoveEventForSubscribeImage(result);
-				$('#recipe-count').text('총 '+result.recipeCount+'개의 레시피가 검색되었습니다.');
-				$('#search-pageNo').attr('value', '1');	
-			}, 500)
-		},
-		// 데이터 조회 중일때 로딩 이미지 보여주기
-		beforeSend:function(){			  
-			$('.wrap-loading').removeClass('display-none');
-			$('html').css("cursor","wait");
-		},
-		// 데이터 받아왔을때 로딩 이미지 감추기
-		complete:function(){
-			setTimeout(function() {
-				$('.wrap-loading').addClass('display-none');
-				$('html').css("cursor","auto");
-			}, 500)
-		},
-		error : function() {
-			swal('서버 요청 오류 !')
-		}
-	})	
-}
+//function search(sort,order){ 
+//
+//	var page = $('#recipe-card-searchPage-template').text();
+//	var compilePage = Handlebars.compile(page);
+//
+//	var source = $('#temp').text();
+//	var template = Handlebars.compile(source);
+//
+//	var categoryList = '';
+//	/*$('#rcp-category-section input[type=checkbox]:checked').each(function(index){*/
+//	$('.rcp-category-checked').each(function(index){		
+//		/*if(index !== ($('#rcp-category-section input[type=checkbox]:checked').length-1)){*/
+//		if(index !== ($('.rcp-category-checked').length-1)){
+//			categoryList += $(this).text()+',';
+//		} else {
+//			categoryList += $(this).text();
+//		}				
+//	})	
+//	
+//	$.ajax({
+//		url : contextRoot+'recipe/listSearch.json',
+//		method : 'post',
+//		data : {
+//			searchKeyword : $('#searchKeyword').val(),
+//			/*searchCondition : $("#searchCondition-select option:selected").val(),*/
+//			sortCondition : sort,
+//			orderCondition : order,
+//			categoryList : categoryList,
+//			more : ($('#more-rcp-list').val()==null?0:$('#more-rcp-list').val())
+//		},		
+//		dataType : 'json',
+//		success : function(result) {
+//			setTimeout(function() {
+//				if (result.status != 'success') {
+//					swal('실패 ~');
+//					return;
+//				}
+//				$('.wrap-loading').removeClass('display-none');
+//				$('#tabs-1 .hs-content .container .row div').remove();			
+//				$('#tabs-1 .hs-content .container .row').append(template(result));
+//
+//				mouseMoveEventForSubscribeImage(result);
+//				$('#recipe-count').text('총 '+result.recipeCount+'개의 레시피가 검색되었습니다.');
+//				$('#search-pageNo').attr('value', '1');	
+//			}, 500)
+//		},
+//		// 데이터 조회 중일때 로딩 이미지 보여주기
+//		beforeSend:function(){			  
+//			$('.wrap-loading').removeClass('display-none');
+//			$('html').css("cursor","wait");
+//		},
+//		// 데이터 받아왔을때 로딩 이미지 감추기
+//		complete:function(){
+//			setTimeout(function() {
+//				$('.wrap-loading').addClass('display-none');
+//				$('html').css("cursor","auto");
+//			}, 500)
+//		},
+//		error : function() {
+//			swal('서버 요청 오류 !')
+//		}
+//	})	
+//}
 
 
 
@@ -371,45 +341,79 @@ function categoryClick(){
 				$('#category-filter').css('display','none')
 			}
 			$("body").scrollTop(0);
-			search('newest', $('#order-latest-btn').val());
+			esearch($('#sort-condition').val());
+//			search('newest', $('#order-latest-btn').val());
 		}else{			
 			$(this).addClass('rcp-category-checked');
 			$('#category-filter').append('<span class="category-filter-box" value="'+$(this).html()+'">'+$(this).html()+'&nbsp;'
 					+'<span class="glyphicon glyphicon-remove" aria-hidden="true">'
 					+'</span></span>');
 			$("body").scrollTop(0);
-			search('newest', $('#order-latest-btn').val());
+//			search('newest', $('#order-latest-btn').val());
+			esearch($('#sort-condition').val());
 		}
 	})
 }
 
 
 
-function esearch(sort,order){ 
-
-	var page = $('#recipe-card-searchPage-template').text();
-	var compilePage = Handlebars.compile(page);
-
+function esearch(sort){ 
 	var source = $('#temp').text();
 	var template = Handlebars.compile(source);
 
 	var categoryList = '';
 	/*$('#rcp-category-section input[type=checkbox]:checked').each(function(index){*/
+	$('.rcp-category-checked').each(function(index){		
+		/*if(index !== ($('#rcp-category-section input[type=checkbox]:checked').length-1)){*/
+		if(index !== ($('.rcp-category-checked').length-1)){
+			categoryList += $(this).text()+' ';
+		} else {
+			categoryList += $(this).text();
+		}				
+	});	
+	
+	var sortArray = new Array();
+	var score = {_score : {order : "desc"}};
+	var sortList;
+	
+	if(sort=='newest'){
+		sortList = {recipeDate : {order : "desc"}};
+		sortArray.push(sortList);
+	} else if(sort=='grade'){
+		sortList = {grade : {order : "desc"}}
+		sortArray.push(sortList);
+	}
+	
+	console.log(sortList);
+	
+	sortArray.push(score);
+//	sort.push(sortList);
+	var should = new Array();
+	if($('#searchKeyword').val().length>0){
+		var searchKeyword = {multi_match: {query:$('#searchKeyword').val(),  fields: ["recipeName", "Materials", "userName"]}};
+		should.push(searchKeyword);
+	}
+
+	if(categoryList.length>0){
+		var category = { match: { ctgName: categoryList}};
+		should.push(category);
+	}
 
 	var datas = {
-			query:{
-				multi_match: {
-					query:$('#searchKeyword').val(),
-					fields: ["recipeName", "Materials", "userName"]
-				}
-			}
-	,
-	from: 0,
-	size: 4
-	};
+			  sort : sortArray,
+			         query: {
+			           bool: {
+			             should: should
+			           }
+			         },
+			         from: 0,
+			         size: 8
+			       };
+	
+	console.log(JSON.stringify(datas));
 
 	$.ajax({
-		url : 'http://localhost:9200/recipes/_search',
+		url : getContextRoot('9200')+'recipes/_search',
 		method : 'post',
 		data : JSON.stringify(datas),
 	    dataType : 'json',
@@ -429,9 +433,9 @@ function esearch(sort,order){
 		                data:dataArray
 	            }
 				$('#tabs-1 .hs-content .container .row').append(template(resultData));
-
+		    	console.log(resultData);
 				mouseMoveEventForSubscribeImage(result);
-				$('#recipe-count').text('총 '+result.recipeCount+'개의 레시피가 검색되었습니다.');
+				$('#recipe-count').text('총 '+result.hits.total+'개의 레시피가 검색되었습니다.');
 				$('#search-pageNo').attr('value', '1');	
 			}, 500)
 		},
@@ -452,5 +456,3 @@ function esearch(sort,order){
 		}
 	})	
 }
-
-
