@@ -37,7 +37,7 @@
     <property name="typeAliasesPackage" value="com/recipe/domain" />
     <property name="configLocation" value="classpath:sql/mybatis-config.xml"/>
   </bean>
-  <!-- 
+  
   <bean id="pojoAspectJ" class="com.recipe.service.PojoAspectJ"/>
   
   <aop:config>
@@ -45,7 +45,7 @@
       <aop:around method="invoke" pointcut="execution(* com.recipe.service.impl.*ServiceImpl*.*(..))"/>
     </aop:aspect>
   </aop:config>
-   -->
+  
   <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
     <property name="dataSource" ref="dataSource"/>
   </bean>

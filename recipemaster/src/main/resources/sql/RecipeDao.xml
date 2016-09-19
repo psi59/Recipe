@@ -263,7 +263,9 @@
 
 	<select id="selectMypageRecipe" resultMap="recipeMap"
 		parameterType="map">
-		select *, u.name userName,likecnt.countLike from rcps r
+		select *, u.name userName,likecnt.countLike, 
+    IFNULL(l.uno,0) likeUser, scr.uno scrapUser,
+    countScrap.countScrap from rcps r
 		INNER JOIN
 		users u on r.uno=u.uno and
 		<if test="request == 1 or request == 3 or request == 5">u.uno </if>
@@ -271,10 +273,16 @@
 		in ( ${userNumbers} )
 		LEFT OUTER JOIN rcp_scr scr on r.rcpno=scr.rcpno
 		and scr.uno = ${userNo}
-		LEFT OUTER JOIN(select rcpno rno, count(*)
-		countLike from rcp_lik		
-		group by rcpno) likecnt
-		ON r.rcpno=likecnt.rno
+	 LEFT OUTER JOIN(select rcpno rno, count(*)
+    countLike from rcp_lik    
+    group by rcpno) likecnt
+    ON r.rcpno=likecnt.rno    
+    LEFT OUTER JOIN(select rcpno rno, count(*)
+    countScrap from rcp_scr    
+    group by rcpno) countScrap
+    ON r.rcpno=countScrap.rno        
+		LEFT OUTER JOIN RCP_LIK l ON
+    r.rcpno=l.rcpno and l.uno = #{userNo}
 		where r.rgst = 0
 		ORDER BY r.rcp_dt desc
 		<if test="request == 5"> limit 4</if>

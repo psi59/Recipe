@@ -50,12 +50,9 @@
 <link rel="stylesheet" href="css/common/popup.css">
 <link rel="stylesheet" href="css/common/signup.css">
 <link rel="stylesheet" href="css/index_rankTabs.css">
-
 <link rel="stylesheet" href="css/common/loading.css">
 <link rel="stylesheet" href="css/common/starrating.css">
 <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css'>
-<link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.min.css">
-<link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.themes.min.css">
 
 <!-- alert css -->
 <link rel="stylesheet"
@@ -617,16 +614,17 @@
                 </a>
                 <div class="entry-meta">
                   <div class="foo-wrapper">
-                    <span>
-                    <a href="#" class="rcp-like"><div class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top"></div>
-                    <span>좋아요 {{countLike}}</span></a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="hidden" name="recipeNo" value="{{recipeNo}}">
+                    <span>                    
+                    <a href="#" class="rcp-like {{#isLike}}active{{/isLike}}"><div class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top"></div>
+                    <span>좋아요 <span>{{countLike}}</span></span></a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             
                     <div class="glyphicon glyphicon glyphicon-time rcp-i-tag-margin-right-top"></div>
                     <span class="meta-time">{{cookTime}}분 소요</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 
                     <span>
-                     <a href="#" class="rcp-scrap"><div class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></div>
-                    <span>스크랩 {{countScrap}}</span></a>
+                     <a href="#" class="rcp-scrap {{#isScrap}}active{{/isScrap}}"><div class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></div>
+                    <span>스크랩 <span>{{countScrap}}</span></span></a>
                     </span>
                   </div>
                 </div>
@@ -647,7 +645,7 @@
 	<script id="temp" type="text/x-handlebars-template">
 {{#sessionUser}}
   
-  <div class="rcp-mypage-section">               
+  <div class="rcp-mypage-section rcp-margin-bottom-70px">               
 <h4 class="rcp-main-subscribe-userName0"></h4>
 {{#each this}}
 
@@ -671,23 +669,24 @@
               <div class="content-wrapper">
                 <h3 class="entry-name"><a href="#">
                 <input type="hidden" name="recipeNo" value="{{recipeNo}}">
-                <p class="detail">{{recipeName}}</p></a></h3>                
+                <p class="detail rcp-p-black">{{recipeName}}</p></a></h3>                
                 <a href="mypage.html?{{user.email}}">
                 <input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
                 <p class="entry-author rcp-userName">{{user.userName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{recipeDate}}</p>
                 </a>
                 <div class="entry-meta">
                   <div class="foo-wrapper">
+                     <input type="hidden" name="recipeNo" value="{{recipeNo}}">
                     <span>
-                    <a href="#" class="rcp-like"><div class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top"></div>
-                    <span>좋아요 {{countLike}}</span></a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="#" class="rcp-like {{#isLike}}active{{/isLike}}"><div class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top"></div>
+                    <span>좋아요 <span>{{countLike}}<span></span></a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             
                     <div class="glyphicon glyphicon glyphicon-time rcp-i-tag-margin-right-top"></div>
                     <span class="meta-time">{{cookTime}}분 소요</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 
                     <span>
-                     <a href="#" class="rcp-scrap"><div class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></div>
-                    <span>스크랩 {{countScrap}}</span></a>
+                     <a href="#" class="rcp-scrap {{#isScrap}}active{{/isScrap}}"><div class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></div>
+                    <span>스크랩 <span>{{countScrap}}</span></span></a>
                     </span>
                   </div>
                 </div>
@@ -833,6 +832,7 @@
     <a href="#">모아보기</a>
 </div>
 <div class="rcp-info-images">
+
 </div>
 <div class="rcp-detail-step">
   </div>
@@ -849,8 +849,6 @@
          <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
       </div>
     <a href="#" name="rcp-nav-bgImages-button" role="button" ><div style= background-image:url("img/representImg/{{this}}") class="rcp-info-images-emts"></div></a>
-    
-  
 {{/each}}
 </script>
 
@@ -1207,16 +1205,14 @@
 	<script src="js/common/popup.js"></script>
 	<script src="js/common/chefCard.js"></script>
 	<script src="js/common/signup.js"></script>
-	<script src="js/listPageMove.js"></script>
 	<script src="js/mainListAjax.js"></script>
 	<script src="js/mouseover.js"></script>
 	<script src="js/common/starrating.js"></script>
 	<script src="js/rcp-template/theme.js"></script>
 	<script src="js/rcp-template/login-form.js"></script>
   <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-  <script src="js/common/easyautocomplete.js"></script>
-  <script src="node_modules/easy-autocomplete/dist/jquery.easy-autocomplete.min.js"></script>
   <script src="js/common/signup.js"></script>
+  
   
 	<script>
 		$(function() {
@@ -1242,6 +1238,7 @@
 			$('.dropdown-trigger--mobile').on('click', function() {
 				dropdownClick('.mobile-menu-dropdown', '.profile-dropdown');
 			});
+			
 		});
 	</script>
 

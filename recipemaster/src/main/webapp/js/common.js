@@ -150,3 +150,159 @@ function push(email, message, separation){
 		notifyMe(data);
     });
 }
+
+
+//--------------------좋아요 등록, 해제 로직-------------------------------  
+function likeLogic(){
+	$(document).on('click','.rcp-like',function(event){
+		  event.preventDefault();
+		  console.log(event.target);
+		  if($(event.target).parent().is('.active') ){
+			  $.ajax({
+				  url:contextRoot+'recipe/likeDown.json?recipeNo=' + $(event.target).parent().parent().parent()
+				  .children('input[name="recipeNo"]').val()+"&userNo="
+				  + userInfo.userNo,
+				  dataType:'json',
+				  method:'get',
+				  success:function(){
+					  console.log("like down 성공성공");
+					  $(event.target).css('color','#acacac');
+					  $(event.target).parent().css('color','#acacac');
+					  $(event.target).parent().children('.glyphicon-heart-empty').attr('class','glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top')
+					  $(event.target).parent().removeClass('active');
+					  $(event.target).children('span').text( parseInt($(event.target).children('span').text())-1);
+
+				  },
+				  error:function(){
+					  swal('like : 서버 요청 오류');
+				
+				  }
+			  });
+		  }
+		  else{
+	
+			  $.ajax({
+				  url:contextRoot+'recipe/likeUp.json?recipeNo=' + $(event.target).parent().parent().parent()
+				 .children('input[name="recipeNo"]').val()+"&userNo="
+				  +  userInfo.userNo,
+				  dataType:'json',
+				  method:'get',
+				  success:function(){
+					  console.log("like up 성공성공");
+					  $(event.target).css('color','#e09b23');
+					  $(event.target).parent().css('color','#e09b23');
+					  $(event.target).parent().addClass('active');
+					  $(event.target).children('span').text( parseInt($(event.target).children('span').text())+1 );
+//					  $('[name="rcp-custom-list"]').remove();
+//					  Main1List();
+//					  
+				  },
+				  error:function(){
+					  swal('ajax likeclick: 서버 요청 오류');
+				  }
+			  });
+		  }
+	  });
+}
+
+
+//스크랩 등록,해제 로직
+
+function scrapLogic(){
+	$(document).on('click','.rcp-scrap',function(event){
+		  event.preventDefault();
+		  if($(event.target).parent().is('.active') ){
+			  console.log("scrap if")
+			  $.ajax({
+				  url:contextRoot+'recipe/deleteScrap.json',
+				  dataType:'json',
+				  data:{
+					recipeNo:$(event.target).parent().parent().parent().children('input[name="recipeNo"]').val() 
+				  },
+				  method:'post',
+				  success:function(){
+					  console.log("scrap down 성공성공");
+					  $(event.target).css('color','#acacac');
+					  $(event.target).parent().css('color','#acacac');
+					//  $(event.target).parent().parent().children('.glyphicon-heart-empty').attr('class','glyphicon glyphicon-heart-empty')
+					  $(event.target).parent().removeClass('active');
+					  $(event.target).children('span').text( parseInt($(event.target).children('span').text())-1);
+
+				  },
+				  error:function(){
+					  swal('like : 서버 요청 오류');
+				
+				  }
+			  });
+		  }
+		  else{
+
+			  $.ajax({
+				  url:contextRoot+'recipe/scrap.json',
+				  dataType:'json',
+				  data:{
+					  recipeNo:$(event.target).parent().parent().parent().children('input[name="recipeNo"]').val() 
+				  },
+				  method:'post',
+				  success:function(){
+					  console.log("scrap up 성공성공");
+					  $(event.target).css('color','#e09b23');
+					  $(event.target).parent().css('color','#e09b23');
+					  $(event.target).parent().addClass('active');
+					  $(event.target).children('span').text( parseInt($(event.target).children('span').text())+1 );
+//					  $('[name="rcp-custom-list"]').remove();
+//					  Main1List();
+//					  
+				  },
+				  error:function(){
+					  swal('ajax likeclick: 서버 요청 오류');
+				  }
+			  });
+		  }
+	  });
+}
+
+
+function mouseMoveEventForSubscribeImage(result){	
+			$(document).on('mousemove','.entry-action, .entry-action-inner',function(event){				
+				if( $(event.target).attr('class') == 'entry-action' ){					
+					var imageChange = parseInt( $('.entry-action').width() + 1)  / $(event.target).parent().parent().children('input[type="hidden"]').length;					
+					var image = parseInt(event.offsetX / imageChange);					
+					$(event.target).attr("style", "background-image:url(img/representImg/"
+						+$(event.target).parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");					
+					if(image != $(event.target).parent().parent().children('input[type="hidden"]').length + 1){
+						$(event.target).parent().parent().children('.rcp-count-images').text(image+1+" / "+$(event.target).parent().parent().children('input[type="hidden"]').length);
+						}else{
+							return;
+						}
+					
+					
+				}else{					
+					var imageChange = parseInt( $('.entry-action-inner').width() + 1)  / $(event.target).parent().parent().parent().children('input[type="hidden"]').length;
+					var image = parseInt(event.offsetX / imageChange);								
+					$(event.target).parent().attr("style", "background-image:url(img/representImg/"
+							+$(event.target).parent().parent().parent().children('input[type="hidden"]:eq('+image+')').val()+"); background-size : cover;");					
+					if(image != $(event.target).parent().parent().parent().children('input[type="hidden"]').length + 1){						
+						$(event.target).parent().parent().parent().children('.rcp-count-images').text(image+1+" / "+$(event.target).parent().parent().parent().children('input[type="hidden"]').length);
+						}else{
+							return;
+						}
+					
+				}
+			})
+}
+
+//---------------핸들바스 헬퍼클래스 ----------------------------
+
+Handlebars.registerHelper('isLike', function(options) {
+	  if (this.likeUser!=0) {
+	    return options.fn(this);
+	  } 
+});
+
+Handlebars.registerHelper('isScrap', function(options) {
+	  if (this.scrapUser!=0) {
+	    return options.fn(this);
+	  }
+});
+

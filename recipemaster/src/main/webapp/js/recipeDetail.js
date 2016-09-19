@@ -24,6 +24,7 @@ var recipeAddComment = $('#recipe-comment-addForm').html();
 var comRecipeAddComment = Handlebars.compile(recipeAddComment); 
 
 var slider;
+var userInfo = getUserInfo();
 
 $(function(){
 	recipeDetail();
@@ -35,7 +36,6 @@ $(function(){
 	recipeDetailLike();
 	clickDetailInDetailFunction();
 	timerStart();
-	var userInfo = getUserInfo();
 	push((userInfo==null ? null:userInfo.email),'','login');
 })
 
@@ -119,7 +119,6 @@ function clickDetailInDetailFunction(){
 				$('.rcp-detail-body').append( comDetailMainTemp(result.data) );
 				$('.rcp-detail-body').append( comDetailTemp(result.data) );
 				
-				
 				// 별점주기 팝업
 				$('#rcp-star-rating').on('click', function(){
 					$('.rcp-starrating').bPopup();
@@ -145,8 +144,6 @@ function clickDetailInDetailFunction(){
 					init_scroll(event, delta, slider)
 				});
 				
-				console.log("result data ll : "+result.data);
-				
 				$('.rcp-detail-body').css('transform', 'translate3d(0px, 0px, 0px)');
 				
 				for(var i=0; i<$('.rcp-body').length; i++){
@@ -168,6 +165,7 @@ function clickDetailInDetailFunction(){
 function recipeDetail(){
 	$(document).on('click','.detail',function(event) {		
 		event.preventDefault();
+		console.log(event.target);
 		$.ajax({
 			url : contextRoot+'recipe/recipeDetail.json',
 			method : 'post',
@@ -197,7 +195,8 @@ function recipeDetail(){
 						$('.rcp-info-images').append( comDetailImageMain(result.data) );
 						$('.rcp-detail-body').append( comDetailMainTemp(result.data) );
 						$('.rcp-detail-body').append( comDetailTemp(result.data) );
-						$('.rcp-info-images').append( comDetailImageStep(result.data) );		
+						$('.rcp-info-images').append( comDetailImageStep(result.data) );
+						
 						slider = $('.rcp-detail-body').bxSlider({
 							startSlide:0,
 							mode:'vertical',
@@ -206,7 +205,6 @@ function recipeDetail(){
 							infiniteLoop:false,
 							controls:false
 						});
-						console.log("result data ll : "+result.data);
 						
 						$('.rcp-detail-body').css('transform', 'translate3d(0px, 0px, 0px)');
 						
@@ -263,7 +261,6 @@ function recipeDetail(){
 								$('.rcp-detail-like').css('color','white');
 								$('.rcp-detail-like i').css('color','white');	
 							}
-							
 							
 					}
 						},

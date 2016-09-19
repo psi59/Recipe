@@ -12,6 +12,8 @@
 <!-- <link rel="stylesheet" href="css/rcp-template/login.css"> -->
 <link rel="stylesheet" href="css/rcp-template/skin-restaurant.css">
 <link rel="stylesheet" href="css/rcp-template/form-template.css">
+<link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.min.css">
+<link rel="stylesheet" href="node_modules/easy-autocomplete/dist/easy-autocomplete.themes.min.css">
 </head>
 <body data-spy="scroll" data-target="#navSecondary" data-offset="170">
 	<div id="login-pop-up-banner" style="display: none; width: 393px;
@@ -214,9 +216,8 @@
 				<div class="float_left"
 					style="height: 100%; vertical-align: middle; margin: 15px">
 					<div class="searchWrapper">
-						<span id="searcIcon" class="glyphicon glyphicon-search"
-							aria-hidden="true"></span> <input type="text" id="searchKeyword"
-							placeholder="레시피, 쉐프, 재료">
+						<span id="searcIcon" class="glyphicon glyphicon-search" aria-hidden="true"></span> 
+						<input type="text" id="searchKeyword" placeholder="레시피, 쉐프, 재료">
 					</div>
 				</div>
 			</div>
@@ -255,6 +256,8 @@
 	<script src="js/login.js"></script>
 	<script src="js/common/signup.js"></script>
 	<script src="js/rcp-template/login-form.js"></script>
+	<script src="js/common/easyautocomplete.js"></script>
+	<script src="node_modules/easy-autocomplete/dist/jquery.easy-autocomplete.min.js"></script>
 	<script src="js/listPageMove.js"></script>
 
 	<script type="text/javascript">
@@ -338,7 +341,7 @@
 			  });
 		});	
 	</script>
-
+<!-- 
 	<script type="text/javascript">
 		var naver_id_login = new naver_id_login("oZ3ZBiNctenY6ix5st7G",
 	    "http://52.78.163.78:8080/index.html");
@@ -389,6 +392,6 @@
 		
 		  // 네이버 사용자 프로필 조회
 		  naver_id_login.get_naver_userprofile("naverSignInCallback()"); 	
-	</script>
+	</script> -->
 </body>
 </html>
