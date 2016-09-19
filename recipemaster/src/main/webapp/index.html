@@ -394,7 +394,8 @@
 
 			<div class="rcp-720" id="rcp-720">
 				<div class="rcp-header">
-					<h2 class="title"></h2>
+					<h2 class="title"></h2> 
+					
 					<p class="hash"></p>
 					<p class="date"></p>
 					<div class="timerZone"></div>
@@ -414,11 +415,6 @@
 					
 				</div>
 
-				<div class="rcp-third-info"></div>
-
-				<div class="rcp-fourth-info"></div>
-
-				<div class="rcp-fifth-info"></div>
 			</div>
 		</div>
 	</div>
@@ -755,7 +751,7 @@
                 </div>
                 <ul class="rcp-mainSlider">
                   {{#each representImages}}
-                <li class="rcp-mainImg"><img class="rcp-images rcp-mainImg1" src="img/representImg/{{this}}" class="rcp-images" name="rcp-images-position" id="rcp-images-position"></li>
+                <li class="rcp-mainImg"><img class="rcp-images rcp-images-main rcp-mainImg1" src="img/representImg/{{this}}" class="rcp-images" name="rcp-images-position" id="rcp-images-position"></li>
                     {{/each}}
                 </ul>
                </div>
@@ -832,9 +828,10 @@
 <input type="hidden" class="rcp-hidden-userNo" value="{{data.userNo}}">
 <input type="hidden" class="rcp-hidden-recipeNo" value="{{data.recipeNo}}">
 <input type="hidden" class="rcp-hidden-email" value="{{data.user.email}}">
+
 <a href="#"><img src="img/profileImg/{{data.user.image}}" class="rcp-right-profile  rcp-profile img-circle"></a>
 <a class="rcp-nickname" href="#">{{data.user.userName}}</a>
-<h4 class="rcp-detail-title">{{data.recipeName}}</h4>
+<h4 class="rcp-detail-title"></h4>
 <div align="center">
 <a href="#" class="rcp-detail-scrap">
 <div class="rcp-scrap-button-text rcp-scrap-button-text-margin" >
@@ -882,11 +879,9 @@
 
 	<script id="recipe-detail-main-images-template"
 		type="text/x-handlebars-template">
-{{#each representImages}}
     <div class="rcp-main"> 
-      <a href="#" name="rcp-nav-images">MAIN {{inc @index}}</a>      
-    <a href="#" name="rcp-nav-bgImages-button" role="button" ><div style= background-image:url("img/representImg/{{this}}") class="rcp-info-images-emts"></div></a>
-{{/each}}
+      <a href="#" name="rcp-nav-images">MAIN</a>      
+    <a href="#" name="rcp-nav-bgImages-button" role="button" ><div style= "background-image:url('img/representImg/{{this}}')" class="rcp-info-images-emts"></div></a>
 </script>
 
 	<script id="recipe-detail-step-images-template"
@@ -894,8 +889,7 @@
 {{#recipeProcedure}}
      <div class="rcp-main"> 
       <a href="#" name="rcp-nav-images">STEP {{inc @index}}</a>
-      <div style="float:right">
-         <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+      <div style="float:right">         
       </div>
      <a href="#" name="rcp-nav-bgImages-button" role="button" >
       <div style= background-image:url("img/recipeImg/{{recipeProduceImage}}") class="rcp-info-images-emts"></div></a> 

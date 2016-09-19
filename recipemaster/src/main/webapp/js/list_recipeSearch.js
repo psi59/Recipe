@@ -1,3 +1,5 @@
+
+
 /* 검색 및 정렬 이벤트 -성현 */
 $(document).ready(function(){
 
@@ -186,6 +188,12 @@ Handlebars.registerHelper("representImages", function(value, options){
 });  
 
 
+Handlebars.registerHelper("countImage", function(value, options){
+	{
+		return "1 / "+value.length;
+		//return "1 / ";
+	}
+});
 
 //스크롤 끝까지 내렸을때 추가될 결과 한페이지씩 가져오기 -이성현
 function searchScrollAppend(){ 

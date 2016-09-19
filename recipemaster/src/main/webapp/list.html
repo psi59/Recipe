@@ -22,9 +22,8 @@
 <link rel="stylesheet" href="css/template/font-awesome.min.css">
 <link rel="stylesheet" href="css/template/animate.css">
 <link rel="stylesheet" href="css/template/commentTemp.css">
-<link rel="stylesheet" href="css/template/styles.css">
 <link rel="stylesheet" href="css/template/main.css"> 
-
+<link rel="stylesheet" href="css/template/styles.css">
 <link rel="stylesheet" href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
 
 <!-- 사용자 정의 css -->
@@ -216,7 +215,10 @@
 				<div class="hs-content">
 					<div class="container">
 						<div class="row">
-							<div></div>
+						<div class="rcp-mypage-section">
+						<div></div>
+						</div>
+						
 
 						</div>
 					</div>
@@ -322,7 +324,7 @@
 <input type="hidden" class="rcp-hidden-email" value="{{data.user.email}}">
 <a href="#"><img src="img/profileImg/{{data.user.image}}" class="rcp-right-profile  rcp-profile img-circle"></a>
 <a class="rcp-nickname" href="#">{{data.user.userName}}</a>
-<h4 class="rcp-detail-title">{{data.recipeName}}</h4>
+<h4 class="rcp-detail-title"></h4>
 <div align="center">
 <a href="#" class="rcp-detail-scrap">
 <div class="rcp-scrap-button-text rcp-scrap-button-text-margin" >
@@ -394,43 +396,48 @@
  
  
 <script id="temp" type="text/x-handlebars-template">
-<div>
+
+                
+
 {{#each data}}
 
+<div>
 <div class="isotope-grid" id="grid-2">
-         <div class="entry col-xs-12 col-sm-4 col-md-3 filter-food filter-pudding">
-            <div class="entry-inner">      
-            {{#each representImages}}  
+          <div class="entry col-xs-12 col-sm-4 col-md-3 filter-food filter-pudding">
+            <div class="entry-inner">
+              {{#each representImages}}  
               <input type="hidden" class="forBackgroundRepresentImg" value="{{this}}">
-              {{/each}}       
-              <div class="entry-media"  name="recipe-subscribe-image" style="background-image:url(img/representImg/{{representImages representImages}}">              
+              {{/each}}
+             <p class="rcp-count-images">{{countImage representImages}}</p>
+              <div class="rcp-count-images-bg">
+              </div>
+              <div class="entry-media" name="recipe-subscribe-image" style="background-image:url(img/representImg/{{representImages representImages}}">
+               
                 <div class="entry-action">
-                  <div class="entry-action-inner">                    
+                  <div class="entry-action-inner">                  
                   </div>
                 </div>
               </div>
               <!-- ./ entry-media -->
-                  <!-- ./ entry-media -->
               <div class="content-wrapper">
                 <h3 class="entry-name"><a href="#">
                 <input type="hidden" name="recipeNo" value="{{recipeNo}}">
-                <p class="detail">{{recipeName}}</p></a></h3>                
+                <p class="detail rcp-p-black">{{recipeName}}</p></a></h3>                
                 <a href="mypage.html?{{user.email}}">
                 <input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
                 <p class="entry-author rcp-userName">{{user.userName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{recipeDate}}</p>
                 </a>
                 <div class="entry-meta">
                   <div class="foo-wrapper">
+                     <input type="hidden" name="recipeNo" value="{{recipeNo}}">
                     <span>
-                    <a href="#" class="rcp-like"><div class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top"></div>
-                    <span>좋아요 {{countLike}}</span></a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            
-                    <div class="glyphicon glyphicon glyphicon-time rcp-i-tag-margin-right-top"></div>
+                    <a href="#" class="rcp-like {{#isLike}}active{{/isLike}}"><div class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top"></div>
+                    <span>좋아요 <span>{{countLike}}<span></span></a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="meta-time">{{cookTime}}분 소요</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 
                     <span>
-                     <a href="#" class="rcp-scrap"><div class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></div>
-                    <span>스크랩 {{countScrap}}</span></a>
+                     <a href="#" class="rcp-scrap {{#isScrap}}active{{/isScrap}}"><div class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></div>
+                    <span>스크랩 <span>{{countScrap}}</span></span></a>
                     </span>
                   </div>
                 </div>
@@ -439,7 +446,9 @@
             </div>
             <!-- /.entry-inner -->
           </div>
-       </div>
+        
+          </div>
+</div>
 {{/each}}
 </div>
 </script>
@@ -476,15 +485,13 @@
 	<script src="js/mouseover.js"></script>
 	<script src="js/template/jquery-ui-1.12.0/jquery-ui.min.js"></script>
 	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
-
+  
 	<!--  사용자 js -->
 	<script src="js/jquery.bpopup.min.js"></script>
-	<script src="js/common.js"></script>
-		
- <script src="js/recipeDetail.js"></script>
+ 
  <!-- <script src="js/list_recipeSearch.js"></script> -->
  
-	<!-- <script src="js/login.js"></script> -->
+	<script src="js/login.js"></script>
 	<!-- 용이 userUpdate -->
 	<!-- <script src="js/updateUser.js"></script> -->
 	<!-- 성현 -->	
@@ -496,6 +503,9 @@
 	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 	<!-- <script src="js/list_recipeSearch.js"></script> -->
 	
+	<script src="js/recipeDetail.js"></script>    
+	<script src="js/common/starrating.js"></script>    
+	
 	<script>
 	$(document).ready(function(){
 		
@@ -503,8 +513,6 @@
 		//$('#topBtn').load("topsearchbar.html");	  		
 		$('.header-body').load('list_topNavBar.html');
 		
-		getWeather();
-
 	  /* 준모3 */				  
 		if(eval(sessionStorage.getItem('data'))!=null){		 
 		  $('#topbarUserImg').html("<img class='rcp-barimg dropdown-trigger img-circle' src='img/Chef3.jpg' />");		  
@@ -547,4 +555,5 @@
 		});
 	});
 	</script>
+	
 </body>

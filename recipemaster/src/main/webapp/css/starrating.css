@@ -4,7 +4,7 @@
     text-align: center;
     width: 62px;
     cursor: pointer;
-    left: 10px;
+    left: 20px;
     top: 5px;
 }
 
@@ -15,7 +15,7 @@
 #rcp-starrating {
 	float: left;
 	position: relative;
-	right:15px;
+	right:0px;
 	top:5px;
 	
 }
@@ -29,6 +29,7 @@
   position: relative;
     float: left;
     top:2px;
+    right:-12px;
 }
 
 .rcp-rating label.full, .rcp-rating label:before{
