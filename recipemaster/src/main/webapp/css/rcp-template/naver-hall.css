@@ -68,12 +68,12 @@
 .section_keyword_qa .article_list .top_list .list_divide:hover:after{content:'';display:block;position:absolute;right:-1px;top:0;width:1px;height:100%;background:#ededed;}
 .section_keyword_qa .article_list .top_list .list_divide:hover.first:before{content:none;}.section_keyword_qa .article_list .top_list .list_divide:hover.last:after{content:none;}
 .section_keyword_qa .article_list.graph_data .statistics_area{display:none;}.section_ranking .tab_area_sub{margin-left:-10px;}
-.section_ranking .article_list>ul{overflow:hidden;width:100%;table-layout:fixed;}.section_ranking .article_list .top_list .list_divide{position:relative;float:left;width:320px;padding-top:30px;padding-bottom:30px;}
+.section_ranking .article_list>ul{overflow:hidden;width:100%;table-layout:fixed;}.section_ranking .article_list .top_list .list_divide{position:relative;float:left;width:316px;padding-top:30px;padding-bottom:30px;}
 .section_ranking .article_list .top_list .list_item{padding:0 30px;border-left:1px solid #ededed;text-align:center;}
-.section_ranking .article_list .top_list .list_divide.first,.section_ranking .article_list .top_list .list_divide.last{width:329px;}
+.section_ranking .article_list .top_list .list_divide.first,.section_ranking .article_list .top_list .list_divide.last{width:326px;}
 .section_ranking .article_list .top_list .list_divide.first .list_item{padding-left:40px;}.section_ranking .article_list .top_list .list_divide.last .list_item{padding-right:40px;}
 .section_ranking .article_list .top_list .list_divide .list_side{border-left:1px solid #ededed;}.section_ranking .article_list .top_list .list_divide:first-child .list_item,.section_ranking .article_list .top_list .list_divide:first-child .list_side{border-left:0;}
-.section_ranking .article_list .inner{position:relative;display:block;}.section_ranking .article_list .top_list .rank{position:absolute;left:0;top:0;display:block;width:36px;color:#00c73c;font-size:24px;line-height:24px;text-align:center;}
+.section_ranking .article_list .inner{position:relative;display:block;}.section_ranking .article_list .top_list .rank{position:absolute;left:0;top:0;display:block;width:36px;color:#000000;font-size:20px;line-height:24px;text-align:center;}
 .section_ranking .article_list .list_body{padding:0 17px;}.section_ranking .list_body .writer_sec{display:block;width:100%;padding:2px 0;text-align:center;}
 .section_ranking .list_body .writer{display:inline-block;vertical-align:top;}.section_ranking .list_body .badge_sec{display:inline-block;margin-left:2px;vertical-align:top;}
 .section_ranking .list_body .writer .ellipsis{display:block;max-width:108px;font-size:16px;color:#000;font-weight:600;line-height:22px;text-align:left;}
@@ -93,7 +93,7 @@
 .section_ranking .recommend.on button{border:1px solid #00c73c;background-color:#fff;}.section_ranking .recommend.on button .sp_like{background-position:-28px -157px;}
 .section_ranking .recommend.on button .num{color:#00c73c;}.section_adoption .article_list .top_list .list_body{height:50px;}
 .section_adoption .article_list .top_list .thmb_profile{overflow:hidden;padding-top:5px;padding-bottom:20px;}
-.section_adoption .article_list .thmb{position:relative;height:101px;}.section_adoption .article_list .thmb img{width:97px;height:97px;}
+.section_adoption .article_list .thmb{position:relative;height:101px;}.section_adoption .article_list .thmb img{width:97px;height:97px;    margin: auto;}
 .section_adoption .article_list .mask{position:absolute;left:50%;top:0;width:115px;height:100px;margin-left:-57.5px;}
 .section_adoption .article_list .top_item1 .mask{height:101px;background:url(http://static.naver.net/kin/09renewal/hall/bg_adoption_mask_gold_160603.png) no-repeat left top;}
 .section_adoption .article_list .top_item2 .mask{background:url(http://static.naver.net/kin/09renewal/hall/bg_adoption_mask_silver_160603.png) no-repeat left top;}

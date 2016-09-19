@@ -33,7 +33,6 @@
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/userinfobox.css">
 <link rel="stylesheet" href="css/common/signup.css">
-<link rel="stylesheet" href="css/mainlist.css">
 <link rel="stylesheet" href="css/detail.css">
 <link rel="stylesheet" href="css/updateImg.css">
 
@@ -53,7 +52,7 @@
 <!-- alert css -->
 <link rel="stylesheet"
 	href="node_modules/sweetalert/dist/sweetalert.css">
-
+<link rel="stylesheet" href="css/mainlist.css">
 <!-- --- 아이콘 CDN ----- -->
 <!-- <script src="js/template/d9e67edb08.js"></script> -->
 <script src="js/common/app-context.js"></script>
@@ -181,7 +180,8 @@
         </div>
         <div class="rcp-background-text">        
         <h1 class="bg-text">GET COOKLE</h1>
-        <p class="bg-p-text">The best place to eat in downtown Porto!</p>
+        <p class="bg-p-text">오늘 뭘 먹어야 할지 모르겠다면?!</p><br/>
+        <button type="button" class="btn btn-default" id="rcp-random-recipe">랜덤레시피 뽑기</button>
         </div>
       </header>
       </div>
@@ -204,21 +204,23 @@
 		<div id="slot_box">
 			<div id="rcp-randomRacipeCardWrapper-slot">
 				<div class="slotCard">
-					<img src="img/randomRcp/randomrecipe2.png">
+					<img src="img/randomRcp/random1.JPG">
 				</div>
-				<div id="rcp-randomRacipeCardWrapper" class="slotCard"></div>
-				<div class="slotCard">
-					<img src="img/randomRcp/randomrecipe2.png">
+				<div id="rcp-randomRacipeCardWrapper">
 				</div>
 				<div class="slotCard">
-					<img src="img/randomRcp/randomrecipe3.png">
+					<img src="img/randomRcp/random2.JPG">
 				</div>
+				<div class="slotCard">
+					<img src="img/randomRcp/random3.JPG">
+				</div>
+        <div>
+        <button type="button" class="btn btn-danger rcp-re-recipe"
+        id="rcp-re-recipe">다시 뽑기</button>
+        </div>
 			</div>
 		</div>
-		<div>
-			<button type="button" class="btn btn-danger rcp-re-recipe"
-				id="rcp-re-recipe">다시 뽑기</button>
-		</div>
+		
 	</div>
 	<!-- ------------------------------------------------------------------------------- -->
 <!-- 
@@ -582,7 +584,7 @@
          <li class="list_divide">
           <div class="list_item top_item2">
        {{/if}}
-              <span class="rank"><em>{{rownum}}</em></span>
+              <span class="rank"><em></em></span>
               <div class="thmb_profile">
                 <div class="thmb">
                   <img src="img/profileImg/{{image}}" alt="">
@@ -602,7 +604,8 @@
             
             <div class="recommend ">
               <button class="_cheerUp _param('longzhe1983')" onclick="nhn.Kin.Utility.nClicks('hfh.kglike', '', '', event);">
-                <span class="num _count">페이지로이동</span>
+                <input type="hidden" class="rcp-hidden-email" value="{{email}}">  
+              <span class="num _count rcp-userName">페이지로이동</span>
               </button>
             </div>
           </div>
@@ -973,197 +976,64 @@
 	<!------------------------- Rank List ------------------------------>
 
 	<script id="recipe-card-template" type="text/x-handlebars-template"> 
+<div class="ht-section hs-recipes grid">
+ <div class="rcp-mypage-section rcp-margin-bottom-70px"> 
 {{#each data}}
-          <div
-            class="col-xs-3 col-sm-3 col-md-3 rcp-listSize rcp-list-margin">
-            <div class="thumbnail row relative">
-              <div class="rcp-profile-position">
-                  {{#defaultImage}}
-              <a href="#" class="rcp-userName"><input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
-              <img src="img/profileImg/{{user.image}}" class="img-circle rcp-profile"></a>
-                    {{else}}
-                <a href="#" class="rcp-userName"><input type="hidden" name="email" value="{{user.email}}">
-                <img src="img/profileImg/default.jpg" class="img-circle rcp-profile"></a>
-                    {{/defaultImage}}
-              </div>
-             {{#each representImages}}  
+          <div class="isotope-grid" id="grid-2">
+          <div class="entry col-xs-12 col-sm-12 col-md-12 filter-food filter-pudding">
+            <div class="entry-inner">
+              {{#each representImages}}  
               <input type="hidden" class="forBackgroundRepresentImg" value="{{this}}">
               {{/each}}
               <p class="rcp-count-images">{{countImage representImages}}</p>
               <div class="rcp-count-images-bg">
               </div>
-              <div class="rcp-recipeGradePointDiv">
-                 <span class="pull-right rcp-recipeGrade">★  {{gradePoint}}</span>
-              </div>
-            <div class="rcp-image-scale" name="recipe-image" > 
-              <p class="rcp-preview-images-count"></p>
-             </div>
-              <div class="rcp-caption">
-                <div class="rcp-relative rcp-height30">
-                  <h4 class="pull-left rcp-left_position">
-                    <span><a href="#" class="detail" style="z-index:9999">{{recipeName}} </a> 
-                      <input type="hidden" name="recipeNo" value="{{recipeNo}}">
-                  </h4>
-                  <div class="rcp-profileNameDiv">
-                  <!--<span class="pluu-left rcp-relative rcp-profileName">
-                    <input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
-                    <a href="#" class="rcp-userName">Chef : {{user.userName}}</a>
-                  </span>-->
-                  </div>
-                  <div class="rcp-rcpDateDiv">
-                     <span class="pluu-left rcp-relative rcp-profileName rcp-regdt">
-                    {{recipeDate}}<br/>
-                  </span>
-                  <span class="pluu-left rcp-relative rcp-profileName rcp-see">
-                   {{hits}} 명이 봄 ⊙.⊙
-                  </span>
+              <div class="entry-media" name="recipe-subscribe-image" style="background-image:url(img/representImg/{{representImages representImages}}">
+               
+                <div class="entry-action">
+                  <div class="entry-action-inner">                  
                   </div>
                 </div>
               </div>
-              <div name="myCarousel" class="carousel slide rcp-relative">
-                <a href="div[name='myCarousel']" role="button" data-slide="prev"
-                  class="rcp-left-slideButton"> <span
-                  class="glyphicon glyphicon-chevron-left" aria-hidden="false"></span>
+              <!-- ./ entry-media -->
+              <div class="content-wrapper">
+                <h3 class="entry-name"><a href="#">
+                <input type="hidden" name="recipeNo" value="{{recipeNo}}">
+                <p class="detail rcp-p-black">{{recipeName}}</p></a></h3>                
+                <a href="mypage.html?{{user.email}}">
+                <input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
+                <p class="entry-author rcp-userName">{{user.userName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{recipeDate}}</p>
                 </a>
-                <a href="div[name='myCarousel']" role="button" data-slide="next"
-                  class="rcp-right-slideButton"> <span
-                  class="glyphicon glyphicon-chevron-right" aria-hidden="false"></span>
-                </a>
-                <div class="carousel-inner" role="listbox">
-                  <div class="item active">
-                    <div class="rcp-comment">
-                      <p>{{intro}}</p>
-                    </div>
-                    <div class="col-md-1"></div>
-                  </div>
+                <div class="entry-meta">
+                  <div class="foo-wrapper">
+                     <input type="hidden" name="recipeNo" value="{{recipeNo}}">
+                    <span>
+                    <a href="#" class="rcp-like {{#isLike}}active{{/isLike}}"><div class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top"></div>
+                    <span>좋아요 <span>{{countLike}}<span></span></a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            
+                    <div class="glyphicon glyphicon glyphicon-time rcp-i-tag-margin-right-top"></div>
+                    <span class="meta-time">{{cookTime}}분 소요</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 
-
-                  <div class="item">
-                    <div class="rcp-comment col-md-offset-1 col-md-10">
-                      <div class="col-md-6 col-xs-6">
-                        <p class="rcp-left-condiment">떡볶이</p>
-                        <p class="rcp-left-condiment">떡볶이</p>
-                        <p class="rcp-left-condiment">떡볶이</p>
-                      </div>
-
-                      <div class="col-md-6 col-xs-6">
-                        <p class="rcp-right-condiment">간장</p>
-                        <p class="rcp-right-condiment">간장</p>
-                        <p class="rcp-right-condiment">간장</p>
-                      </div>
-                      <div class="col-md-1"></div>
-                    </div>
+                    <span>
+                     <a href="#" class="rcp-scrap {{#isScrap}}active{{/isScrap}}"><div class="glyphicon glyphicon-paperclip rcp-i-tag-margin-right-top"></div>
+                    <span>스크랩 <span>{{countScrap}}</span></span></a>
+                    </span>
                   </div>
                 </div>
-                <!--  레시피 내용 끝  -->
-
               </div>
-
-              <!-- 하단 버튼들 시작 (요리시간, 좋아요, 스크랩) -->
-              <div class="rcp-240">
-              <input type="hidden" name="recipeNo" value="{{recipeNo}}">
-              <input type="hidden" name="userNo" value="{{userNo}}">
-                <div class="rcp-cookTime col-xs-4"
-                  align="center">
-                   <div class="glyphicon glyphicon-time "></div>
-                  <b>{{cookTime}}분</b>
-                </div>
-             
-
-                  <input type="hidden" name="recipeNo" value="{{recipeNo}}">
-
-                <div class="rcp-cookTime col-xs-4"
-                  align="center">
-                  {{#isLike}}   
-                        
-                  <a href="#" class="active rcp-like" name="rcp-like">
-                  <div class="glyphicon glyphicon-heart-empty active"></div>          
-                  <b>좋아요 <span>{{countLike}}</span></b></a>
-                  {{else}}                     
-                    <a href="#" class=" rcp-like" name="rcp-like">
-                    <div class="glyphicon glyphicon-heart-empty"></div>
-                    <b >좋아요 <span>{{countLike}}</span></b>
-                   </a>{{/isLike}}
-                  </div>
-
-                </div> 
-                <div class="rcp-cookTime col-xs-4"
-                  align="center">
-                   {{#isScrap}}
-                  <a href="#" class="rcp-scrap active">
-                    {{else}}
-                  <a href="#" class="rcp-scrap">
-                    {{/isScrap}}
-                  <div class="glyphicon glyphicon-pushpin rcp-scrap"></div>
-                  <input type="hidden" name="recipeNo" value="{{recipeNo}}"><b>스크랩 <span>{{countScrap}}</span></b>
-                </div></a>
-          
-              </div>
-              <!--  버튼 끝  -->
+              <!-- ./ entry-content -->
             </div>
-            <!--  col-md-3 row div태그  -->
+            <!-- /.entry-inner -->
           </div>
-          <!-- col-md-3 div태그 끝  -->
-    </div>
-  </div>
-  </div>
+        
+          </div>
 
 {{/each}}
-</script>
-	<!--쉐프 랭킹카드 수정  -->
-	<script id="chef-card-template" type="text/x-handlebars-template">
-{{#each data}}
-<div class="fresh-ui-wrap col-md-3">
- {{#if @first}}    
-    <img class="rcp-rankmedal" src="/img/medal1.png"/>
-  {{else if @last}}    
-    <img class="rcp-rankmedal" src="/img/medal3.png"/>
-  {{else}}   
-    <img class="rcp-rankmedal" src="/img/medal2.png"/>
-  {{/if}}
-  
-  <div class="fresh-ui">
-    <div class="header">
-      <div class="photo">     
-         <input type="hidden" class="rcp-hidden-email" value="{{email}}">
-         <img src="img/profileImg/{{image}}" class="img-circle rcp-profile">
-      </div>
-      <div class="social">
-        <div class="list">
-          <a data-title="Recipe">{{recipeCount}}</a>
-          <a data-title="구독자">{{subsCount}}</a>
-          <!--<a data-title="좋아요">{{likeCount}}</a>-->
-          <a data-title="Total">{{totalPoint}}</a>
-        </div>
-      </div>
-    </div>
-        <div class="content introBox">
-          <div class="name">
-                   <p class="rcp-userName2">{{userName}}</p></div>
-                    <p class="text">{{email}}</p>      
-                  <div class="rcp-ranking"><h4>{{grade}}</h4></div>
-          <div class="list clearfix">
-        <p class="introfont">{{intro}}</p>
-        </div>
-        <div class="cardbtn">
-         <button type="button" class="btn btn-default rcp-imp">
-              <a href="/mypage.html?{{email}}" class="rcp-userName1 visitbtn">방문하기</a></button>
-
-              
-      
-              {{#if status}}
-              <button type="button" name="subscribeComplete" class="btn btn-default rcp-imp rank-scs" data-email="{{email}}" >구독중</button>
-              {{else}}
-              <button type="button" class="btn btn-default rcp-imp rank-scs" data-email="{{email}}" >구독하기</button>
-               {{/if}}
-  
-      </div>
-    </div>
-  </div>
 </div>
-  {{/each}} 
-  </script>
-  
+</div>
+</script>
+	
+	 
   <!-- 별점주기 -->
   <script id="starrating-template" type="text/x-handlebars-template">
     <div id="starrating-box">
