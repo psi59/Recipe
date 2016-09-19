@@ -192,7 +192,7 @@ function recipeDetail(){
 					position: (['auto','auto']),
 					positionStyle :[('fixed')],
 					onOpen:function(){
-						$('body').css('overflow','hidden');
+						$('html').css('overflow','hidden');
 						checkDuplicateGrade();					
 						$('.rcp-304').append( comDetailInfoTemp(result) );
 						$('.rcp-info-images').append( comDetailImageMain(result.data) );
@@ -264,7 +264,7 @@ function recipeDetail(){
 					}
 						},
 					onClose:function(){ 
-						$("body").css("overflow", "auto");
+						$("html").css("overflow", "auto");
 						$(".detail-images").remove();
 						$(".rcp-body").remove();
 						$(".rcp-main").remove();
