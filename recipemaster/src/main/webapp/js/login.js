@@ -1,16 +1,4 @@
 $(function() {
-	loadUsers();
-//	$('.rankingWrapper').bxSlider({
-//		startSlide : 0,
-//		pager : false,
-//		moveSlides : 1,
-//		infiniteLoop : true
-//	});
-	loadMonthRank();
-	loadTodayRank();
-
-	var userInfo = getUserInfo();
-
 	$('#profileView').removeClass().addClass(
 			"main-nav__dropdown top-main-nav__dropdown profile-dropdown");
 
@@ -50,7 +38,6 @@ $(function() {
 			return;
 		}
 		login(event);
-		loadUsers();
 	});
 
 	// 로그인 버튼 누를시 포커스
@@ -100,95 +87,6 @@ $(function() {
 	});
 
 	// start of 쉐프카드
-
-	function loadUsers() {
-		var source = $('#main-chefRanking').text();
-		var template = Handlebars.compile(source);
-
-		$.ajax({
-			url : contextRoot+'user/top3.json',
-			dataType : 'json',
-			method : 'get',
-			async : false,
-			success : function(result) {
-				if (result.status != 'success') {
-					swal('chefCard.js 오류');
-					return;
-				}
-
-				for (var i = 0; i < result.data.length; i++) {
-					if (result.data[i].subscribeUser == 0) {
-						result.data[i].status = null;
-					} else {
-						result.data[i].status = Boolean(true);
-					}
-				}
-
-				$('.wrapper-chefs').append(template(result));
-			},
-			error : function() {
-				swal('서버 요청 오류!...')
-			}
-		});
-	}// end of 쉐프카드
-
-	function loadMonthRank() {
-		var source = $('#chef-card-template').text();
-		var template = Handlebars.compile(source);
-
-		$.ajax({
-			url : contextRoot+'user/monthtop3.json',
-			dataType : 'json',
-			method : 'get',
-			success : function(result) {
-				if (result.status != 'success') {
-					swal('chefCard.js 오류');
-					return;
-				}
-
-				for (var i = 0; i < result.data.length; i++) {
-					if (result.data[i].subscribeUser == 0) {
-						result.data[i].status = null;						
-					} else {
-						result.data[i].status = Boolean(true);				
-					}
-				}				
-				$('#rcp-chef-rank-month').append(template(result));
-			},
-			error : function() {
-				swal('서버 요청 오류!...')
-			}
-		});
-	}// end of 쉐프카드
-
-	function loadTodayRank() {
-		var source = $('#chef-card-template').text();
-		var template = Handlebars.compile(source);
-
-		$.ajax({
-			url : contextRoot+'user/todaytop3.json',
-			dataType : 'json',
-			method : 'get',
-			success : function(result) {
-				if (result.status != 'success') {
-					swal('chefCard.js 오류');
-					return;
-				}
-
-				for (var i = 0; i < result.data.length; i++) {
-					if (result.data[i].subscribeUser == 0) {
-						result.data[i].status = null;						
-					} else {
-						result.data[i].status = Boolean(true);						
-					}
-				}				
-				$('#rcp-chef-rank-today').append(template(result));
-			},
-			error : function() {
-				swal('서버 요청 오류!...')
-			}
-		});
-	}// end of 쉐프카드
 });
 
 function getUserInfo() {

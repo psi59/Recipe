@@ -283,7 +283,6 @@
     ON r.rcpno=countScrap.rno        
 		LEFT OUTER JOIN RCP_LIK l ON
     r.rcpno=l.rcpno and l.uno = #{userNo}
-		where r.rgst = 0
 		ORDER BY r.rcp_dt desc
 		<if test="request == 5"> limit 4</if>
 	</select>

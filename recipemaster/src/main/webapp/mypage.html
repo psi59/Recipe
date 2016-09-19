@@ -440,12 +440,10 @@
               {{#each representImages}}  
               <input type="hidden" class="forBackgroundRepresentImg" value="{{this}}">
               {{/each}}
-               {{#transientStorage}}{{else}}
-                <p>임시저장됨</p>
+               {{#transientStorage}}
+                <p class="transientStorage">임시저장</p>
               {{/transientStorage}}
               <p class="rcp-count-images">{{countImage representImages}}</p>
-              <div class="rcp-count-images-bg">
-              </div>
               <div class="entry-media" name="recipe-subscribe-image" style="background-image:url(img/representImg/{{representImages representImages}}">
                
                 <div class="entry-action">
@@ -457,7 +455,7 @@
                   <!-- ./ entry-media -->
               <div class="content-wrapper">
                 <h3 class="entry-name">
-                <a href="#">
+                <a href="{{#transientStorage}}http://localhost:8080/writerecipe.html?{{recipeNo}}{{else}}#{{/transientStorage}}">
                 <input type="hidden" name="recipeNo" value="{{recipeNo}}">
                 <p class="detail rcp-p-black">{{recipeName}}</p></a></h3>                
                 <a href="mypage.html?{{user.email}}">
@@ -468,7 +466,7 @@
                   <div class="foo-wrapper">
                      <input type="hidden" name="recipeNo" value="{{recipeNo}}">
                     <span>
-                    <a href="#" class="rcp-like {{#isLike}}active{{/isLike}}">
+                    <a href="#" class="rcp-like {{#isLike}}active{{/isLike}}"><div class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top"></div>
                     <span>좋아요 <span>{{countLike}}<span></span></a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             
                     
@@ -772,7 +770,7 @@
   <!-- ------------------디테일 일시적 추가   - 변경 할 것임 ---------------------- -->
   
   
-  
+  <!-- 
   <script>
 $(window).scroll(function() { 
     if ($(window).scrollTop() == $(document).height() - $(window).height()) {
@@ -796,43 +794,11 @@ $(window).scroll(function() {
       var template = Handlebars.compile(source);
     }
   </script>
-  <script>
-    $(function() {
-      loadMyPage();
-    });
-
-    function loadMyPage() {
-
-      $.ajax({
-        url : contextRoot+'visitor/loadMyPage.json',
-        method : 'get',
-        dataType : 'json',
-        success : function(result) {
-          if (result.status != 'success') {
-            //swal('로그인 해주시기 바랍니다.');
-            return;
-          }
-          $('#visitNum').text(result.sum + "명");
-          $('#likeNum').text(result.like + "개");
-          $('#scrapNum').text(result.scr + "개");
-          $('#gradeNum').text(result.avg + "점");
-
-        },
-        error : function() {
-          //swal('더이상 데이터가 없습니다.')
-        }
-      })
-    }
-  </script>
-  
-  
+ -->  
   <!-- ------------------디테일 일시적 추가   - 변경 할 것임 ---------------------- -->
   <script src="node_modules/bxslider/dist/jquery.bxslider.min.js"></script>
   <!-- ------------------디테일 일시적 추가   - 변경 할 것임 ---------------------- -->
-  
-  
-  
-  <script src="js/subscribe.js"></script>
+    
   <script src="js/mypage.js"></script>
   <script src="js/template/plugin.js"></script>
   <script src="js/template/custom.js"></script>

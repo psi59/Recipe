@@ -28,6 +28,8 @@ $(function() {
 	visitFunction();
 	handlebarsFunction();
 	visitWriteFormFunction();
+	likeLogic();
+	scrapLogic();
 });
 
 
@@ -36,6 +38,34 @@ function pageLoadFunction(){
 
 	if((userInfo==null?null:userInfo.email)==location.href.split('?')[1]){
 		$('#userInfoEditBtn').removeClass('display_none');
+	} else {
+		// checkSubscribe
+		$.ajax({
+			url : contextRoot+'recipe/checkSubscribe.json',
+			datatype : 'json',
+			data : {
+				email : location.href.split('?')[1]
+			},
+			method : 'post',
+			success : function(result) {
+
+				if (result.status == 'false') {
+					$('#subsWrapper').removeClass('display_none');
+					// swal('실행 중 오류 발생');
+					return;
+				}
+				$('.subscribeBtn-text').text('구독중');
+				$('.subscribeBtn').addClass('subsactive');
+				if((userInfo==null?null:userInfo.email)!=location.href.split('?')[1]){
+					$('#subsWrapper').removeClass('display_none');
+				}
+				
+//				$('.rcp-topbtn').attr('id', 'subscribeComplete');
+			},
+			error : function() {
+				swal('서버 요청 오류!...')
+			}
+		});
 	}
 
 	$.ajax({
@@ -205,6 +235,12 @@ function topBarFunction(){
 
 	$('.dropdown-trigger--mobile').on('click', function() {
 		dropdownClick('.mobile-menu-dropdown', '.profile-dropdown');
+	});
+	Handlebars.registerHelper("representImage", function(value, options){
+		{
+			return value[0];
+			//return "1 / ";
+		}
 	});
 
 
@@ -398,7 +434,7 @@ function pageTabs() {
 						.compile(sourceCRList);
 
 						console.log(result.data);
-
+						
 						$('#tabs-'+ $('#tabId').val()+ ' .hs-content .container .row .rcp-mypage-section div').remove();
 						$('#tabs-'+ request+ ' .hs-content .container .row .rcp-mypage-section').append(templateCRList(result));
 						$('#tabId').val(request);
@@ -453,7 +489,7 @@ function loadMyPage(){
 
 function handlebarsFunction(){
 	Handlebars.registerHelper('transientStorage', function(options) {
-		if (this.regiStatus == 0) {
+		if (this.regiStatus != 0) {
 			return options.fn(this);
 		} else {
 			return options.inverse(this);
@@ -462,10 +498,15 @@ function handlebarsFunction(){
 
 	Handlebars.registerHelper('regStatus', function(options) {
 		if ( userInfo == null || location.href.split('?')[1] != userInfo.email ) {
-			if(this.regiStatus == 0){
+			if(this.regiStatus != 0){
+				console.log("다른사람이 접속함 : "+options.inverse(this));
+				return options.inverse(this);
+			} else {
+				console.log("다른사람이 접속함 : "+options.fn(this));
 				return options.fn(this);
 			}		  
 		}else{
+			console.log("내가 접속함 : "+options.fn(this));
 			return options.fn(this);
 		}
 	});
