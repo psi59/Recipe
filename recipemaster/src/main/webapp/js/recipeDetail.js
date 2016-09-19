@@ -238,28 +238,24 @@ function recipeDetail(){
 
 						if( userInfo != null ){										
 							if(result.data.scrapUser == userInfo.userNo){
-								$('.rcp-scrap-button-text').attr('name','scrap');
-								$('.rcp-scrap-button-text').css('border','1px solid #ffce6e');
+								$('.rcp-scrap-button-text').attr('name','scrap');								
 								$('.rcp-scrap-button-text').css('color',' #ffce6e');
 								$('.rcp-detail-scrap').attr('style','color:#ffce6e');
 								$('.rcp-detail-scrap i').attr('style','color:#ffce63');
 							}else{									
-								$('.rcp-scrap-button-text').attr('name','');
-								$('.rcp-scrap-button-text').css('border','1px solid white');
+								$('.rcp-scrap-button-text').attr('name','');								
 								$('.rcp-scrap-button-text').css('color','white');
 								$('.rcp-detail-scrap').css('color','white');
 								$('.rcp-detail-scrap i').css('color','white');	
 							}
 							
 							if(result.data.likeUser != 0 ){
-								$('.rcp-scrap-button-text-like').attr('name','like');
-								$('.rcp-scrap-button-text-like').css('border','1px solid #ffce6e');
+								$('.rcp-scrap-button-text-like').attr('name','like');								
 								$('.rcp-scrap-button-text-like').css('color',' #ffce6e');
 								$('.rcp-detail-like').attr('style','color:#ffce6e');
 								$('.rcp-detail-like i').attr('style','color:#ffce63');
 							}else{									
-								$('.rcp-scrap-button-text-like').attr('name','');
-								$('.rcp-scrap-button-text-like').css('border','1px solid white');
+								$('.rcp-scrap-button-text-like').attr('name','');								
 								$('.rcp-scrap-button-text-like').css('color','white');
 								$('.rcp-detail-like').css('color','white');
 								$('.rcp-detail-like i').css('color','white');	
@@ -317,7 +313,7 @@ console.log('button 시점 recipeNo : ' +$(event.target).parent().parent().child
 				  success:function(){
 					  console.log("like down 성공성공");
 						$('.rcp-scrap-button-text-like').attr('name','');
-						$('.rcp-scrap-button-text-like').css('border','1px solid white');
+						
 						$('.rcp-scrap-button-text-like').css('color','white');
 						$('.rcp-detail-like').attr('style','color:white');
 						$('.rcp-detail-like i').attr('style','color:white');					  
@@ -338,7 +334,6 @@ console.log('button 시점 recipeNo : ' +$(event.target).parent().parent().child
 				  success:function(){
 					  console.log("like up 성공성공");
 						$('.rcp-scrap-button-text-like').attr('name','like');
-						$('.rcp-scrap-button-text-like').css('border','1px solid #ffce6e');
 						$('.rcp-scrap-button-text-like').css('color',' #ffce6e');
 						$('.rcp-detail-like').attr('style','color:#ffce6e');
 						$('.rcp-detail-like i').attr('style','color:#ffce63');					  
@@ -468,7 +463,6 @@ function recipeScrap(){
 						return;
 					}
 					$('.rcp-scrap-button-text').attr('name','');
-					$('.rcp-scrap-button-text').css('border','1px solid white');
 					$('.rcp-scrap-button-text').css('color','white');
 					$('.rcp-detail-scrap').attr('style','color:white');
 					$('.rcp-detail-scrap i').attr('style','color:white');
@@ -499,8 +493,7 @@ function recipeScrap(){
 						return;
 					}
 
-					$('.rcp-scrap-button-text').attr('name','scrap');
-					$('.rcp-scrap-button-text').css('border','1px solid #ffce6e');
+					$('.rcp-scrap-button-text').attr('name','scrap');					
 					$('.rcp-scrap-button-text').css('color',' #ffce6e');
 					$('.rcp-detail-scrap').attr('style','color:#ffce6e');
 					$('.rcp-detail-scrap i').attr('style','color:#ffce63');
