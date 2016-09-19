@@ -191,10 +191,9 @@ function recipeDetail(){
 				$('#detail_pop_up').bPopup({
 					position: (['auto','auto']),
 					positionStyle :[('fixed')],
-					follow: [false, false], //x, y
 					onOpen:function(){
-						checkDuplicateGrade();
-						$("body").css("overflow", "hidden");						
+						$('body').css('overflow','hidden');
+						checkDuplicateGrade();					
 						$('.rcp-304').append( comDetailInfoTemp(result) );
 						$('.rcp-info-images').append( comDetailImageMain(result.data) );
 						$('.rcp-detail-body').append( comDetailMainTemp(result.data) );

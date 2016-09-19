@@ -866,7 +866,7 @@
 </div>
 <div class="rcp-info-filter">
     <hr class="rcp-info-next"/>
-    <a href="#">모아보기</a>
+    
 </div>
 <div class="rcp-info-images">
 
@@ -881,10 +881,7 @@
 		type="text/x-handlebars-template">
 {{#each representImages}}
     <div class="rcp-main"> 
-      <a href="#" name="rcp-nav-images">MAIN {{inc @index}}</a>
-      <div style="float:right">
-         <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-      </div>
+      <a href="#" name="rcp-nav-images">MAIN {{inc @index}}</a>      
     <a href="#" name="rcp-nav-bgImages-button" role="button" ><div style= background-image:url("img/representImg/{{this}}") class="rcp-info-images-emts"></div></a>
 {{/each}}
 </script>
@@ -1174,7 +1171,7 @@
     {{#if checkDuplicateGrade}}
       <div>
         <span id="rcp-starrating" align="left">평가하기</span>
-        <span id="rcp-starrating-grade">&nbsp;</span>
+        
       </div>
       <div class="rcp-rating">
         <input id="star5" name="rating" type="radio" value="5"/>
@@ -1199,7 +1196,7 @@
         <label for="star0.5" class="half"></label>
       </div>
       <div id="rcp-starrating-btn-apply" class="rcp-starrating-btn">
-        <i class="glyphicon glyphicon-ok rcp-i-tag-margin-right-top"></i>등록</div>
+        등록 </div>
     {{else}}
       <div align="left">평가하기</div>      
       <div align="left">참여하셨습니다.</div>
