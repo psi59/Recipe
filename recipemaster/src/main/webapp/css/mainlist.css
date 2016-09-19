@@ -925,3 +925,10 @@ span a{
 .rcp-margin-bottom-70px{
 	margin-bottom:70px;
 }
+.main_chef_container{
+  width:978px !important;
+  margin:auto;
+}
+.rcp-BoC{
+	cursor: pointer;
+}
