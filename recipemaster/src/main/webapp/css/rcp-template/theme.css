@@ -39,11 +39,6 @@ li {
   }
 }
 /* Header */
-#header {
-  position: relative;
-  z-index: 100;
-}
-
 #header .header-body {
   background: #FFF;
   border-top: 5px solid #EDEDED;

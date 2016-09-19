@@ -163,7 +163,11 @@ function clickDetailInDetailFunction(){
 }
 
 function recipeDetail(){
-	$(document).on('click','.detail',function(event) {		
+	$(document).on('click','.detail',function(event) {
+		if($(this).parent().attr('href')!='#'){
+			location.href=contextRoot+'writerecipe.html?'+$(this).prev().val();
+			return;
+		}
 		event.preventDefault();
 		console.log(event.target);
 		$.ajax({
@@ -187,10 +191,9 @@ function recipeDetail(){
 				$('#detail_pop_up').bPopup({
 					position: (['auto','auto']),
 					positionStyle :[('fixed')],
-					follow: [false, false], //x, y
 					onOpen:function(){
-						checkDuplicateGrade();
-						$("body").css("overflow", "hidden");						
+						$('body').css('overflow','hidden');
+						checkDuplicateGrade();					
 						$('.rcp-304').append( comDetailInfoTemp(result) );
 						$('.rcp-info-images').append( comDetailImageMain(result.data) );
 						$('.rcp-detail-body').append( comDetailMainTemp(result.data) );
@@ -206,7 +209,7 @@ function recipeDetail(){
 							controls:false
 						});
 						
-						$('.rcp-detail-body').css('transform', 'translate3d(0px, 0px, 0px)');
+					$('.rcp-detail-body').css('transform', 'translate3d(0px, 0px, 0px)');
 						
 						for(var i=0; i<$('.rcp-body').length; i++){
 							$('div[name="rcp-body"]:eq('+i+')').attr('id',"div"+i);
@@ -235,28 +238,24 @@ function recipeDetail(){
 
 						if( userInfo != null ){										
 							if(result.data.scrapUser == userInfo.userNo){
-								$('.rcp-scrap-button-text').attr('name','scrap');
-								$('.rcp-scrap-button-text').css('border','1px solid #ffce6e');
+								$('.rcp-scrap-button-text').attr('name','scrap');								
 								$('.rcp-scrap-button-text').css('color',' #ffce6e');
 								$('.rcp-detail-scrap').attr('style','color:#ffce6e');
 								$('.rcp-detail-scrap i').attr('style','color:#ffce63');
 							}else{									
-								$('.rcp-scrap-button-text').attr('name','');
-								$('.rcp-scrap-button-text').css('border','1px solid white');
+								$('.rcp-scrap-button-text').attr('name','');								
 								$('.rcp-scrap-button-text').css('color','white');
 								$('.rcp-detail-scrap').css('color','white');
 								$('.rcp-detail-scrap i').css('color','white');	
 							}
 							
 							if(result.data.likeUser != 0 ){
-								$('.rcp-scrap-button-text-like').attr('name','like');
-								$('.rcp-scrap-button-text-like').css('border','1px solid #ffce6e');
+								$('.rcp-scrap-button-text-like').attr('name','like');								
 								$('.rcp-scrap-button-text-like').css('color',' #ffce6e');
 								$('.rcp-detail-like').attr('style','color:#ffce6e');
 								$('.rcp-detail-like i').attr('style','color:#ffce63');
 							}else{									
-								$('.rcp-scrap-button-text-like').attr('name','');
-								$('.rcp-scrap-button-text-like').css('border','1px solid white');
+								$('.rcp-scrap-button-text-like').attr('name','');								
 								$('.rcp-scrap-button-text-like').css('color','white');
 								$('.rcp-detail-like').css('color','white');
 								$('.rcp-detail-like i').css('color','white');	
@@ -314,7 +313,7 @@ console.log('button 시점 recipeNo : ' +$(event.target).parent().parent().child
 				  success:function(){
 					  console.log("like down 성공성공");
 						$('.rcp-scrap-button-text-like').attr('name','');
-						$('.rcp-scrap-button-text-like').css('border','1px solid white');
+						
 						$('.rcp-scrap-button-text-like').css('color','white');
 						$('.rcp-detail-like').attr('style','color:white');
 						$('.rcp-detail-like i').attr('style','color:white');					  
@@ -335,7 +334,6 @@ console.log('button 시점 recipeNo : ' +$(event.target).parent().parent().child
 				  success:function(){
 					  console.log("like up 성공성공");
 						$('.rcp-scrap-button-text-like').attr('name','like');
-						$('.rcp-scrap-button-text-like').css('border','1px solid #ffce6e');
 						$('.rcp-scrap-button-text-like').css('color',' #ffce6e');
 						$('.rcp-detail-like').attr('style','color:#ffce6e');
 						$('.rcp-detail-like i').attr('style','color:#ffce63');					  
@@ -465,7 +463,6 @@ function recipeScrap(){
 						return;
 					}
 					$('.rcp-scrap-button-text').attr('name','');
-					$('.rcp-scrap-button-text').css('border','1px solid white');
 					$('.rcp-scrap-button-text').css('color','white');
 					$('.rcp-detail-scrap').attr('style','color:white');
 					$('.rcp-detail-scrap i').attr('style','color:white');
@@ -496,8 +493,7 @@ function recipeScrap(){
 						return;
 					}
 
-					$('.rcp-scrap-button-text').attr('name','scrap');
-					$('.rcp-scrap-button-text').css('border','1px solid #ffce6e');
+					$('.rcp-scrap-button-text').attr('name','scrap');					
 					$('.rcp-scrap-button-text').css('color',' #ffce6e');
 					$('.rcp-detail-scrap').attr('style','color:#ffce6e');
 					$('.rcp-detail-scrap i').attr('style','color:#ffce63');

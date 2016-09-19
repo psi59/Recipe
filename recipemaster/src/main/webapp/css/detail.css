@@ -23,37 +23,22 @@
 	width: 50px;
 	height:50px;	
 }
-.rcp-scrap-button-text-margin{
-	margin-left:60px ! important;
-}
 .rcp-scrap-button-text-like{
-	color:white;
-	font-size:12px;
-  text-align:center;
-  width: 90px;
-   float: left;
-   height: 40px;
-   border-radius: 2em;
-   border: 1px solid white;
-   margin-left:10px;
-   margin-bottom: 20px;
-  
+    color: white;
+    position: relative;
+    width: 100px;
+    left: 170px;
+    bottom: 21px;
+    
 }
 
-.rcp-scrap-button-text{
-	font-size:12px;
-	text-align:center;
-	width: 90px;
-   float: left;
-   height: 40px;
-   border-radius: 2em;
-   border: 1px solid white;
-   margin-left:10px;
-   margin-bottom: 20px;
-	
-}
-.rcp-scrap-button-text{
-	color:white;
+.rcp-scrap-button-text{	
+  position:relative;
+  width:90px; 
+  color:white;
+  right:50px;
+  margin:0px;
+  top:8px;
 }
 .rcp-i-tag-margin-right-top{
 	margin-right: 5px;
@@ -71,14 +56,14 @@
 
 .rcp-720{
   width:720px;
-  height:850px;
+  height:650px;
   float:left;
   background-color: white;
 }
 
 .rcp-304{
   width:304px;
-  height:850px;
+  height:650px;
   float:left;
   background-color: #383838;
   
@@ -114,13 +99,15 @@
   height:283px;
   border-radius: 15px;
 }
-
-.rcp-info-items{
-  margin-top:40px;
-  margin-left:50px;
-  margin-right:50px;
-  width: 198px;
-  height: 230px;
+.rcp-comment-count{
+	font-size:16px ! important;
+}
+.rcp-info-items{ 
+	position: relative;
+    width: 198px;
+    height: 230px;
+    left: 65px;
+    bottom: 5px;
 }
 
 .rcp-icons{
@@ -128,7 +115,7 @@
   width: 25px;
 }
 .rcp-icons .fa{
-  margin-bottom:15px;
+  margin-bottom:13px;
 }
 
 .rcp-icons-names {
@@ -179,9 +166,11 @@
 }
 
 .rcp-info-next{
+	position:relative;
+	visibility:visible;
   width:100%;
   border-top: 0.1px solid #afafaf;
-  margin-top: 30px;
+  margin-top: 0px;
   margin-bottom:5px;
 }
 
@@ -189,7 +178,7 @@
   margin-top:10px;
   margin-left:60px;
   margin-right:60px;
-  height: 395px;
+  height: 260px;
   overflow-y: auto; 
   overflow-x:hidden; 
   
@@ -332,25 +321,27 @@
 
 
 .rcp-right-profile{
-   margin-top:40px;
-   margin-left:117px;
-   margin-right:117px;
-   width:70px;
-   height:70px;
+   position:relative;
+   width:60px;
+   height:60px;
    text-align:center;
-   
+   top:30px;
+   left:60px;
 }
 
 .rcp-304 .rcp-nickname{
-	 margin-left: 135px ! important;
-  font-size:12px;
+	position:relative;	
+  font-size:16px;
   text-align: center;
   color: white;
+  left : 75px;
+  top:20px;
 }
 
 .rcp-304 .rcp-detail-title{
-  
-  text-align: center;
+ position:relative;
+ left:140px;
+ font-size:0.9em ! important;
   color: white;
   }
 

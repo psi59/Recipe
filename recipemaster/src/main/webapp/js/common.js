@@ -1,5 +1,8 @@
 document.write('<script type"text/javascript" src="js/template/notification.js"></script>')
 
+$(function(){
+	console.log('여기옴1 ?');
+})
 //var source = $('#recipe-card-template').html();
 //var template = Handlebars.compile(source);
 function onlyNumber()
@@ -210,6 +213,7 @@ function likeLogic(){
 
 function scrapLogic(){
 	$(document).on('click','.rcp-scrap',function(event){
+		console.log('약;엄 ?');
 		  event.preventDefault();
 		  if($(event.target).parent().is('.active') ){
 			  console.log("scrap if")

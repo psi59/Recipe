@@ -18,6 +18,8 @@ $(function() {
 
 	pageLoadFunction();
 	mouseMoveEventForSubscribeImage();
+	likeLogic();
+	scrapLogic();
 	checkSubScribeFunction();
 	subScribeFunction();
 	pageTabs();
@@ -432,7 +434,7 @@ function pageTabs() {
 						.compile(sourceCRList);
 
 						console.log(result.data);
-
+						
 						$('#tabs-'+ $('#tabId').val()+ ' .hs-content .container .row .rcp-mypage-section div').remove();
 						$('#tabs-'+ request+ ' .hs-content .container .row .rcp-mypage-section').append(templateCRList(result));
 						$('#tabId').val(request);
@@ -487,7 +489,7 @@ function loadMyPage(){
 
 function handlebarsFunction(){
 	Handlebars.registerHelper('transientStorage', function(options) {
-		if (this.regiStatus == 0) {
+		if (this.regiStatus != 0) {
 			return options.fn(this);
 		} else {
 			return options.inverse(this);
@@ -496,10 +498,15 @@ function handlebarsFunction(){
 
 	Handlebars.registerHelper('regStatus', function(options) {
 		if ( userInfo == null || location.href.split('?')[1] != userInfo.email ) {
-			if(this.regiStatus == 0){
+			if(this.regiStatus != 0){
+				console.log("다른사람이 접속함 : "+options.inverse(this));
+				return options.inverse(this);
+			} else {
+				console.log("다른사람이 접속함 : "+options.fn(this));
 				return options.fn(this);
 			}		  
 		}else{
+			console.log("내가 접속함 : "+options.fn(this));
 			return options.fn(this);
 		}
 	});
