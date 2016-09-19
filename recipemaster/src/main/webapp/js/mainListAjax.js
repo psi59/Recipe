@@ -257,6 +257,7 @@ function mouseMoveEventForImage(result){
 			  for(var i=0; i<result.data.length; i++){
 				  if(result.data[i].length > 1){				  
 					  $('.rcp-main-subscribe-userName0').attr('class','rcp-main-subscribe-userName'+i+1);
+					  $('.rcp-main-subscribe-userName'+i+1).attr('style','float:left');
 					  $('.rcp-main-subscribe-userName'+i+1).text( (result.data[i] )[0].user.userName+"님의 레시피 정보");
 				  }
 			  }

@@ -28,7 +28,8 @@
     position: relative;
     width: 100px;
     left: 170px;
-    bottom: 30px;
+    bottom: 21px;
+    
 }
 
 .rcp-scrap-button-text{	
@@ -37,6 +38,7 @@
   color:white;
   right:50px;
   margin:0px;
+  top:8px;
 }
 .rcp-i-tag-margin-right-top{
 	margin-right: 5px;
@@ -164,6 +166,8 @@
 }
 
 .rcp-info-next{
+	position:relative;
+	visibility:visible;
   width:100%;
   border-top: 0.1px solid #afafaf;
   margin-top: 0px;
@@ -174,7 +178,7 @@
   margin-top:10px;
   margin-left:60px;
   margin-right:60px;
-  height: 247px;
+  height: 260px;
   overflow-y: auto; 
   overflow-x:hidden; 
   

@@ -954,3 +954,8 @@ span a{
 .rcp-BoC{
 	cursor: pointer;
 }
+
+.rcp-more-user-Page{
+	position: relative;
+    left: 10px;
+}
