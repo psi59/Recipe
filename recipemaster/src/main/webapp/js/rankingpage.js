@@ -1,93 +1,113 @@
+$(function() {
+	loadUsers();
+//	$('.rankingWrapper').bxSlider({
+//	startSlide : 0,
+//	pager : false,
+//	moveSlides : 1,
+//	infiniteLoop : true
+//	});
+	loadMonthRank();
+	loadTodayRank();
 
-//Default active on home
-    $('#s1').addClass("active");
+	function loadUsers() {
+		var source = $('#main-chefRanking').text();
+		var template = Handlebars.compile(source);
 
-    /*
-    Smooth scrolling
-     */
-    $("#s1").click(function() {
-      $('html, body').animate({
-        scrollTop : $("#1").offset().top - 65
-      }, 1000);
-      return false;
-    });
+		$.ajax({
+			url : contextRoot+'user/top3.json',
+			dataType : 'json',
+			method : 'get',
+			async : false,
+			success : function(result) {
+				if (result.status != 'success') {
+					swal('chefCard.js 오류');
+					return;
+				}
+				console.log("result : " +result)
+				console.log("result.data : " +result.data)
+				for (var i = 0; i < result.data.length; i++) {
+					if (result.data[i].subscribeUser == 0) {
+						result.data[i].status = null;
+					} else {
+						result.data[i].status = Boolean(true);
+					}
+				}
 
-    $("#s2").click(function() {
-      $('html, body').animate({
-        scrollTop : $("#2").offset().top - 100
-      }, 1000);
-      return false;
-    });
+				$('.wrapper-chefs').append(template(result));
+			},
+			error : function() {
+				swal('서버 요청 오류!...')
+			}
+		});
+	}// end of 쉐프카드
 
-    $("#s3").click(function() {
-      $('html, body').animate({
-        scrollTop : $("#3").offset().top - 100
-      }, 1000);
-      return false;
-    });
+	function loadMonthRank() {
+		var source = $('#chef-card-template').text();
+		var template = Handlebars.compile(source);
 
+		$.ajax({
+			url : contextRoot+'user/monthtop3.json',
+			dataType : 'json',
+			method : 'get',
+			success : function(result) {
+				if (result.status != 'success') {
+					swal('chefCard.js 오류');
+					return;
+				}
 
-    $("#toTop").click(function() {
-      $('html, body').animate({
-        scrollTop : $("#1").offset().top - 65
-      }, 1000);
-      return false;
-    });
-    /*$('#2').waypoint(function(event, direction) {
+				for (var i = 0; i < result.data.length; i++) {
+					if (result.data[i].subscribeUser == 0) {
+						result.data[i].status = null;						
+					} else {
+						result.data[i].status = Boolean(true);				
+					}
+				}				
+				$('#rcp-chef-rank-month').append(template(result));
+			},
+			error : function() {
+				swal('서버 요청 오류!...')
+			}
+		});
+	}// end of 쉐프카드
 
-      $(".nav-container ul li").children().removeClass("active");
-      $("#s2").addClass("active");
-      
-      if (direction === 'down') {
-        offset = 90;
-      } 
-      else {
-        offset = 20;
-      }
-    });*/
+	function loadTodayRank() {
+		var source = $('#chef-card-template').text();
+		var template = Handlebars.compile(source);
 
-    /*
-    Using jquery waypoints to change active on scroll
-     */
-    $('#2').waypoint(function() {
+		$.ajax({
+			url : contextRoot+'user/todaytop3.json',
+			dataType : 'json',
+			method : 'get',
+			success : function(result) {
+				if (result.status != 'success') {
+					swal('chefCard.js 오류');
+					return;
+				}
 
-      $(".nav-container ul li").children().removeClass("active");
-      $("#s2").addClass("active");
+				for (var i = 0; i < result.data.length; i++) {
+					if (result.data[i].subscribeUser == 0) {
+						result.data[i].status = null;						
+					} else {
+						result.data[i].status = Boolean(true);						
+					}
+				}				
+				$('#rcp-chef-rank-today').append(template(result));
+			},
+			error : function() {
+				swal('서버 요청 오류!...')
+			}
+		});
+	}// end of 쉐프카드
+});
 
-    }, {
-      offset : 101
-    });
+$(document).on('click', '.rcp-userName, .rcp-nickname , .rcp-profile',function(event){
+	event.preventDefault();
+	console.log( "event target : "+$(event.target).attr('class') )
+	$(location).attr('href',contextRoot+'/mypage.html?'+$(event.target).parent().children('input[type="hidden"]').val() );
+	console.log("email val()"+$(event.target).parent().children('input[name="email"]').val() );
+})
 
-    $('#3').waypoint(function() {
-      $(".nav-container ul li").children().removeClass("active");
-      $("#s3").addClass("active");
-    }, {
-      offset : 101
-    });
+$('.rcp-BoC').on('click',function(){
+	$(location).attr('href',contextRoot+'ranking.html');
+})
 
-
-    $('#1').waypoint(function() {
-      $(".nav-container ul li").children().removeClass("active");
-      $("#s1").addClass("active");
-    }, {
-      offset : 0
-    });
-
-    $('#2').waypoint(function() {
-      $(".to-top").addClass("visible");
-    }, {
-      offset : 100
-    });
-
-    $('#1').waypoint(function(event, direction) {
-      $(".to-top").removeClass("visible");
-    }, {
-      offset : 30
-    });
-    
-    $(document).on('click', '.rcp-userName, .rcp-nickname , .rcp-profile',function(event){
-		  event.preventDefault();
-		  console.log( "event target : "+$(event.target).attr('class') )
-		  $(location).attr('href',contextRoot+'/mypage.html?'+$(event.target).parent().children('input[type="hidden"]').val() );
-		  console.log("email val()"+$(event.target).parent().children('input[name="email"]').val() );
-	  })

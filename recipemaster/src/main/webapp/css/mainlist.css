@@ -943,3 +943,12 @@ span a{
     vertical-align: middle;
     position: absolute;
 }
+
+.main_chef_container{
+  width:978px !important;
+  margin:auto;
+}
+
+.rcp-BoC{
+	cursor: pointer;
+}
