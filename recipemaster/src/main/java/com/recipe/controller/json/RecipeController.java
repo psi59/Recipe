@@ -773,9 +773,7 @@ public class RecipeController {
 							userNo, request);
 					// System.out.println("request 5 : "+recipeList);
 					mainSubscribe.add(recipeList);
-
 				}
-
 				result.put("data", mainSubscribe);
 			} else {
 				result.put("data", recipeList);

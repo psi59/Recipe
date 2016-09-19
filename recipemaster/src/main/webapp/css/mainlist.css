@@ -197,19 +197,25 @@
 }
 
 /* --------------------styles.css copy end------------------ */
-#detail_pop_up {
+/* #detail_pop_up {
 	top: 25px ! important;
-}
+} */
 
 .rcp-cookTime .active {
 	color: #337ab7;
 }
 
 .rcp-count-images {
-	color: white ! important;
-	z-index: 2;
-	position: absolute;
-	left: 28px;
+	background-color: rgba(0, 0, 0, 0.5);
+  width: 50px;
+  text-align: center;
+  color: white !important;
+  float: left;
+  margin-right: 10px;
+  padding-top: 4px;
+  height: 25px;
+  vertical-align: middle;
+  position: absolute;
 }
 
 .rcp-count-images-bg {
@@ -924,4 +930,16 @@ span a{
 }
 .rcp-margin-bottom-70px{
 	margin-bottom:70px;
+}
+
+.transientStorage {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 69px;
+    text-align: center;
+    color: white !important;
+    right: 10px;
+    padding-top: 4px;
+    height: 25px;
+    vertical-align: middle;
+    position: absolute;
 }

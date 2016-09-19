@@ -163,7 +163,11 @@ function clickDetailInDetailFunction(){
 }
 
 function recipeDetail(){
-	$(document).on('click','.detail',function(event) {		
+	$(document).on('click','.detail',function(event) {
+		if($(this).parent().attr('href')!='#'){
+			location.href=contextRoot+'writerecipe.html?'+$(this).prev().val();
+			return;
+		}
 		event.preventDefault();
 		console.log(event.target);
 		$.ajax({
@@ -206,7 +210,7 @@ function recipeDetail(){
 							controls:false
 						});
 						
-						$('.rcp-detail-body').css('transform', 'translate3d(0px, 0px, 0px)');
+					$('.rcp-detail-body').css('transform', 'translate3d(0px, 0px, 0px)');
 						
 						for(var i=0; i<$('.rcp-body').length; i++){
 							$('div[name="rcp-body"]:eq('+i+')').attr('id',"div"+i);
