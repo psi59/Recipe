@@ -1,7 +1,7 @@
 /* GET/POST 파라미터 처리 => body-parser 모듈 사용! */
 function getContextRoot(port){
-	return "http://52.78.170.190:"+port+"/";
-//	return "http://localhost:"+port+"/";
+//	return "http://52.78.170.190:"+port+"/";
+	return "http://192.168.0.23:"+port+"/";
 }
 
 var mysql = require('mysql');
@@ -36,10 +36,10 @@ app.use(function (req, res, next) {
 var pool  = mysql.createPool({
   connectionLimit : 10,
   host     : 'localhost',
-  port     : '3306',
-  user     : 'root',
-//  port     : '4000',
-//  user     : 'java83',
+//  port     : '3306',
+//  user     : 'root',
+  port     : '4000',
+  user     : 'java83',
   password : '1111',
   database : 'recipe'
 });

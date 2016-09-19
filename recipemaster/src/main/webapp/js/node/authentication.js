@@ -1,7 +1,7 @@
 ///////////////////////////////////////////
 function getContextRoot(port){
-	return "http://52.78.170.190:"+port+"/";
-//	return "http://localhost:"+port+"/";
+//	return "http://52.78.170.190:"+port+"/";
+	return "http://192.168.0.23:"+port+"/";
 }
 var nodemailer = require("nodemailer");
 
@@ -61,6 +61,8 @@ app.get('/', function (request, response) {
 
 
 app.get('/user/authentication.do', function (request, response) {
+	console.log('email : '+request.query.email);
+	console.log('authKEY : '+request.query.authKEY);
 	var email = request.query.email;
 	var authKEY = request.query.authKEY;
 	var auth=1;
@@ -79,7 +81,7 @@ app.get('/user/authentication.do', function (request, response) {
 		to: email,
 		subject: "href",
 		generateTextFromHTML: true,
-		html: "<a href="+getContextRoot('7979')+"user/auth.do?authKEY="+authKEY+"&auth="+auth+"&email="+email+"'>"+email+"님 환영합니다."+"</a>"
+		html: "<a href="+getContextRoot('7979')+"user/auth.do?authKEY="+authKEY+"&auth="+auth+"&email="+email+">"+email+"님 환영합니다."+"</a>"
 
 	}, function(error, response) {
 		if (error) {

@@ -1,9 +1,9 @@
 /* GET/POST 파라미터 처리 => body-parser 모듈 사용! */
 function getContextRoot(port){
-	return "http://52.78.170.190:"+port+"/";
-//	return "http://localhost:"+port+"/";
+//	return "http://52.78.170.190:"+port+"/";
+	return "http://localhost:"+port+"/";
 }
-require('daemon')();
+/*require('daemon')();*/
 var mysql = require('mysql');
 var dateFormat = require('dateformat');
 var express = require('express');
