@@ -21,6 +21,7 @@ $(document).ready(function(){
 			$.ajax({
 				url : contextRoot+'user/add.json',
 				method : 'post',
+				async:false,
 				data : {
 					email : $('#signup-e-mail').val(),
 					userName : $('#signup-userName').val(),
