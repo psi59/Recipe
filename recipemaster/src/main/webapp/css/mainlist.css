@@ -7,7 +7,8 @@
     top: 320px;
     color: white;
     left: 250px;
-    font-size: 60px;
+    font-size: 6em;
+    font-family: 'Niconne', cursive;
 }
 
 .rcp-background-text h1{
@@ -140,6 +141,9 @@
 	-webkit-transition: 0.5s;
 	-o-transition: 0.5s;
 	transition: 0.5s;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .hs-recipes.grid .entry .entry-action .entry-action-inner {
