@@ -161,6 +161,8 @@ document.write('<script type"text/javascript" src="js/template/naverLogin_implic
 					  $('#tabs-5 .hs-content .container .row ').append(commainSubscribe( (result.data[i]) ) );
 					  $('.rcp-main-subscribe-userName0').attr('class','rcp-main-subscribe-userName'+i+1);
 					  $('.rcp-main-subscribe-userName'+i+1).text( (result.data[i] )[0].user.userName+"님의 레시피 정보");
+					  $('.rcp-main-subscribe-userName'+i+1).attr('style','float:left');					  
+					  $('.rcp-main-subscribe-userName'+i+1).next().attr('href','mypage.html?'+(result.data[i] )[0].user.email);
 				  }
 			  }
 		  },
@@ -256,9 +258,9 @@ function mouseMoveEventForImage(result){
 			  
 			  for(var i=0; i<result.data.length; i++){
 				  if(result.data[i].length > 1){				  
-					  $('.rcp-main-subscribe-userName0').attr('class','rcp-main-subscribe-userName'+i+1);
-					  $('.rcp-main-subscribe-userName'+i+1).attr('style','float:left');
+					  $('.rcp-main-subscribe-userName0').attr('class','rcp-main-subscribe-userName'+i+1);					  
 					  $('.rcp-main-subscribe-userName'+i+1).text( (result.data[i] )[0].user.userName+"님의 레시피 정보");
+					  
 				  }
 			  }
 			  MainRecomCtList();
