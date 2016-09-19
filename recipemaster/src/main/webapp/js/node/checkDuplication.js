@@ -3,6 +3,7 @@ function getContextRoot(port){
 	return "http://52.78.170.190:"+port+"/";
 //	return "http://localhost:"+port+"/";
 }
+
 /*require('daemon')();*/
 var mysql = require('mysql');
 var dateFormat = require('dateformat');
