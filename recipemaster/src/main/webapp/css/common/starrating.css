@@ -1,11 +1,11 @@
 .rcp-starrating-btn {
-	font-size: 12px;
-	text-align: center;
-	width: 62px;
-	height: 36px;
-	border-radius: 2em;
-	border: 1px solid white;
-	cursor: pointer;
+	position: relative;
+    font-size: 14px;
+    text-align: center;
+    width: 62px;
+    cursor: pointer;
+    left: 10px;
+    top: 5px;
 }
 
 #starrating-box {
@@ -14,6 +14,10 @@
 
 #rcp-starrating {
 	float: left;
+	position: relative;
+	right:15px;
+	top:5px;
+	
 }
 
 #rcp-star-rating {
@@ -22,7 +26,9 @@
 }
 
 .rcp-rating {
-  float: left;
+  position: relative;
+    float: left;
+    top:2px;
 }
 
 .rcp-rating label.full, .rcp-rating label:before{
@@ -38,7 +44,7 @@
 }
 .rcp-rating label:before {
   margin: 2.6px;
-  font-size: 22px;
+  font-size: 15px;
   font-family: fontAwesome;
   display: inline-block;
   content: "\f005";

@@ -190,10 +190,9 @@ function recipeDetail(){
 				$('#detail_pop_up').bPopup({
 					position: (['auto','auto']),
 					positionStyle :[('fixed')],
-					follow: [false, false], //x, y
 					onOpen:function(){
-						checkDuplicateGrade();
-						$("body").css("overflow", "hidden");						
+						$('body').css('overflow','hidden');
+						checkDuplicateGrade();					
 						$('.rcp-304').append( comDetailInfoTemp(result) );
 						$('.rcp-info-images').append( comDetailImageMain(result.data) );
 						$('.rcp-detail-body').append( comDetailMainTemp(result.data) );
@@ -264,7 +263,12 @@ function recipeDetail(){
 								$('.rcp-detail-like').css('color','white');
 								$('.rcp-detail-like i').css('color','white');	
 							}
-							
+							var $layerPopupObj = $('#detail_pop_up');
+							var left = ( $(window).scrollLeft() + ($(window).width() - $layerPopupObj.width()) / 2 );
+							var top = ( $(window).scrollTop() + ($(window).height() - $layerPopupObj.height()) / 2 );
+							$layerPopupObj.css({'left':left,'top':top, 'position':'absolute'});
+							$('.b-modal').css('position','relative').append($layerPopupObj);
+							$(".b-modal").css("overflow", "hidden");		
 							
 					}
 						},
