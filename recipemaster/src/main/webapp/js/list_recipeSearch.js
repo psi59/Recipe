@@ -72,53 +72,6 @@ $(document).ready(function(){
 		}
 	});
 
-	// 고재현
-	$(document).on('click',('.rcp-like'),function(event){
-		event.preventDefault();
-		if($(event.target).is('.active') ){
-			$.ajax({
-				url:contextRoot+'recipe/likeDown.json?recipeNo=' + $(event.target).parent()
-				.parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
-				+ eval(sessionStorage.getItem('data'))[0].userNo,
-				dataType:'json',
-				method:'get',
-				success:function(){
-					console.log("like down 성공성공");
-					$(event.target).css('color','#231f20');
-					$(event.target).parent().parent().css('color','#231f20');
-					$(event.target).parent().parent().children('.glyphicon-heart-empty').attr('class','glyphicon glyphicon-heart-empty')
-					$(event.target).parent().append('<b class="rcp-like" name="rcp-like">좋아요</b>');
-					$(event.target).remove();
-
-				},
-				error:function(){
-					alert('like : 서버 요청 오류');
-
-				}
-			});
-		}
-		else{
-			$.ajax({
-				url:contextRoot+'recipe/likeUp.json?recipeNo=' + $(event.target).parent()
-				.parent().parent().children('input[name="recipeNo"]').val()+"&userNo="
-				+  eval(sessionStorage.getItem('data'))[0].userNo,
-				dataType:'json',
-				method:'get',
-				success:function(){
-					console.log("like up 성공성공");
-					$(event.target).css('color','#337ab7');
-					$(event.target).parent().parent().css('color','#337ab7');
-					$(event.target).parent().append('<b class="rcp-like active" name="rcp-like">좋아요</b>');
-					$(event.target).remove();
-
-				},
-				error:function(){
-					alert('ajax likeclick: 서버 요청 오류');
-				}
-			});
-		}
-	});
-
 	categoryClick();
 
 	// 필터박스 클릭시 리무브
@@ -140,7 +93,8 @@ $(document).ready(function(){
 		$("body").scrollTop(0);
 		search('newest', $('#order-latest-btn').val());
 	})
-
+	likeLogic();
+	scrapLogic();
 });
 
 //처음 검색했을때의 1페이지 결과 가져오기 -이성현
