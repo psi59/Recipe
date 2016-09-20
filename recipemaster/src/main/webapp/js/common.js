@@ -296,6 +296,221 @@ function mouseMoveEventForSubscribeImage(result){
 			})
 }
 
+
+
+function recipeDetailLike(){	
+	$(document).on('click','.rcp-scrap-button-text-like ',function(event){		
+		console.log('event.target'+$(event.target).attr('class'));
+console.log('button 시점 recipeNo : ' +$(event.target).parent().parent().children('input[class="rcp-hidden-recipeNo"]').val())
+
+
+		event.preventDefault();
+		if($(event.target).is('[name="like"]')){
+			  $.ajax({
+				  url:contextRoot+'recipe/likeDown.json?recipeNo=' + $(event.target).parent().parent().
+				  children('input[class="rcp-hidden-recipeNo"]').val()+"&userNo="
+				  + userInfo.userNo,
+				  dataType:'json',
+				  method:'get',
+				  success:function(){
+					  console.log("like down 성공성공");
+						$('.rcp-scrap-button-text-like').attr('name','');
+						
+						$('.rcp-scrap-button-text-like').css('color','white');
+						$('.rcp-detail-like').attr('style','color:white');
+						$('.rcp-detail-like i').attr('style','color:white');					  
+				  },
+				  error:function(){
+					  swal('like : 서버 요청 오류');
+				
+				  }
+			  });
+		  }
+		  else{
+			  $.ajax({
+				  url:contextRoot+'recipe/likeUp.json?recipeNo=' + $(event.target).parent().parent().
+				  children('input[class="rcp-hidden-recipeNo"]').val()+"&userNo="
+				  + userInfo.userNo,
+				  dataType:'json',
+				  method:'get',
+				  success:function(){
+					  console.log("like up 성공성공");
+						$('.rcp-scrap-button-text-like').attr('name','like');
+						$('.rcp-scrap-button-text-like').css('color',' #ffce6e');
+						$('.rcp-detail-like').attr('style','color:#ffce6e');
+						$('.rcp-detail-like i').attr('style','color:#ffce63');					  
+				  },
+				  error:function(){
+					  swal('ajax likeclick: 서버 요청 오류');
+				  }
+			  });
+		  }
+	  });
+	
+}
+
+
+function comment(){
+	$(document).on('click','.rcp-seconde-info',function(evnet){
+		evnet.preventDefault();
+		commentFunction();
+		
+	})
+}
+
+function commentFunction(){
+	$.ajax({
+		url : contextRoot+'recipe/recipeComment.json',
+		method : 'post',
+		data:{
+			recipeNo:$('.rcp-hidden-recipeNo').val()
+		},
+		dataType : 'json',
+		success : function(result) {
+			$(".rcp-detail-body").remove();
+			$('.rcp-720').attr('style','overflow:auto');
+			$(".rcp-720").html('<div class="rcp-header">'
+					+'<h2 class="title">댓글</h2>'
+					+'<h3 class="rcp-comment-count"></h3>'
+					+'</div>'
+					+'<div class="rcp-detail-body"></div>');
+		
+			if(result.data.length <1) {
+				$('.rcp-comment-count').text("등록된 댓글이 아직 없습니다.");
+			}else{					
+				$('.rcp-comment-count').text(result.data[0].countComment+" Comments");
+				
+			}		
+		
+			$('.rcp-detail-body').append( comRecipeComment(result) );				
+			$('.rcp-detail-body').append( comRecipeAddComment(result) );
+			$('#forCommentRecipeNumber').val( $('.rcp-hidden-recipeNo').val());
+			
+		},error : function(){
+			swal('서버 요청 오류');
+		}		
+	})
+}
+
+function addComment(){
+	$(document).on('click','input[name="rcp-submit"]',function(){
+		$.ajax({
+			url:contextRoot+'recipe/addComment.json',
+			dataType:'json',
+			method:'post',
+			data:{
+				recipeNo:$('#forCommentRecipeNumber').val(),
+				recipeComment:$('textarea[name="recipeComment"').val()
+			},
+			success:function(result){
+				if(userInfo == null){
+					swal('로그인이 필요한 서비스입니다.');
+					return ;
+				}
+				push('bbb@naver.com',("like"+"/"+userInfo.email+"/"+userInfo.name+"/"+userInfo.image+"/"+"13"+"/"+"타이머테스트2"), "message");
+				console.log($('.rcp-hidden-email').val());
+				commentFunction();
+			},
+			error:function(){
+				alert('addComment 에러욤 !!')
+			}
+		})
+	})
+}
+
+function deleteComment(){
+	$(document).on('click','#deleteComment',function(event){
+	event.preventDefault();
+	deleteCommentFunction(event);
+	})
+}
+
+function deleteCommentFunction(event){
+	console.log('펑션왔나요 ')
+		$.ajax({
+			url:contextRoot+'recipe/deleteComment.json',
+			dataType:'json',
+			method:'post',		
+			data:{
+				commentNo : $(event.target).parent().children('#commentNo').val()
+			},
+			success:function(result){
+				console.log('comment delete 성공성공 ^^');
+				commentFunction();
+			},
+			error:function(){
+				console.log('comment delete 실패실패 ㅠㅠ');
+			}
+		
+		})	
+}
+
+
+//----------------------Like function 끝--------------------
+
+function recipeScrap(){
+	$(document).on('click','.rcp-scrap-button-text',function(event){		
+		event.preventDefault();		
+		if($(event.target).is('[name="scrap"]')){
+			console.log(' 딜리트 여기옴?');			
+			$.ajax({
+				url:contextRoot+'recipe/deleteScrap.json',
+				method:'post',
+				dataType:'json',
+				data: {
+					recipeNo : $(event.target).parent().parent().parent().children('input[class="rcp-hidden-recipeNo"]').val()
+				},
+				success:function(result){
+					if (result.status != 'success') {
+						swal('게시물 조회 오류');
+						return;
+					}
+					$('.rcp-scrap-button-text').attr('name','');
+					$('.rcp-scrap-button-text').css('color','white');
+					$('.rcp-detail-scrap').attr('style','color:white');
+					$('.rcp-detail-scrap i').attr('style','color:white');
+				},
+				error : function(){
+					swal('서버 요청 오류');
+
+				}
+			})
+
+		}else{
+//			-------------------------------스크랩 등록 --------------------------------
+			console.log('여기옴? else문 ');
+			console.log($(event.target).parent().parent().parent().children('input[class="rcp-hidden-recipeNo"]').val());
+			event.preventDefault();	
+			$.ajax({
+				url:contextRoot+'recipe/scrap.json',
+				method:'post',
+				dataType:'json',
+				data: {
+					recipeNo : $(event.target).parent().parent().parent().children('input[class="rcp-hidden-recipeNo"]').val()
+				},
+				success:function(result){
+
+
+					if(result.status == 'notLogin'){
+						swal('로그인 부탁염 ^^*');
+						return;
+					}
+
+					$('.rcp-scrap-button-text').attr('name','scrap');					
+					$('.rcp-scrap-button-text').css('color',' #ffce6e');
+					$('.rcp-detail-scrap').attr('style','color:#ffce6e');
+					$('.rcp-detail-scrap i').attr('style','color:#ffce63');
+				},
+				error : function(){
+					swal('서버 요청 오류');
+				}
+			})
+		}
+//		----------------------스크랩 요청 AJAX 끝--------------------
+	})
+};
+
+
 //---------------핸들바스 헬퍼클래스 ----------------------------
 
 Handlebars.registerHelper('isLike', function(options) {
@@ -309,4 +524,6 @@ Handlebars.registerHelper('isScrap', function(options) {
 	    return options.fn(this);
 	  }
 });
+
+
 
