@@ -351,7 +351,7 @@ console.log('button 시점 recipeNo : ' +$(event.target).parent().parent().child
 
 
 function comment(){
-	$(document).on('click','.rcp-seconde-info',function(evnet){
+	$(document).on('click','.rcp-seconde-info',function(evnet){		
 		evnet.preventDefault();
 		commentFunction();
 		
@@ -374,6 +374,8 @@ function commentFunction(){
 					+'<h3 class="rcp-comment-count"></h3>'
 					+'</div>'
 					+'<div class="rcp-detail-body"></div>');
+			console.log('dfdf : '+$('#aaaa').val());
+			
 		
 			if(result.data.length <1) {
 				$('.rcp-comment-count').text("등록된 댓글이 아직 없습니다.");
@@ -393,7 +395,8 @@ function commentFunction(){
 }
 
 function addComment(){
-	$(document).on('click','input[name="rcp-submit"]',function(){
+	$(document).on('click','input[name="rcp-submit"]',function(){		
+		console.log('dfdf : '+$('#aaaa').val());
 		$.ajax({
 			url:contextRoot+'recipe/addComment.json',
 			dataType:'json',
@@ -407,8 +410,7 @@ function addComment(){
 					swal('로그인이 필요한 서비스입니다.');
 					return ;
 				}
-				push('bbb@naver.com',("like"+"/"+userInfo.email+"/"+userInfo.name+"/"+userInfo.image+"/"+"13"+"/"+"타이머테스트2"), "message");
-				console.log($('.rcp-hidden-email').val());
+				push('bbb@naver.com',("like"+"/"+userInfo.email+"/"+userInfo.name+"/"+userInfo.image+"/"+"13"+"/"+"타이머테스트2"), "message");				
 				commentFunction();
 			},
 			error:function(){

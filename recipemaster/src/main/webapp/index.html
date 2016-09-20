@@ -825,6 +825,7 @@
 <input type="hidden" class="rcp-hidden-userNo" value="{{data.userNo}}">
 <input type="hidden" class="rcp-hidden-recipeNo" value="{{data.recipeNo}}">
 <input type="hidden" class="rcp-hidden-email" value="{{data.user.email}}">
+<input type="hidden" id="aaaa" value="{{data.user.email}}">
 
 <a href="#"><img src="img/profileImg/{{data.user.image}}" class="rcp-right-profile  rcp-profile img-circle"></a>
 <a class="rcp-nickname" href="#">{{data.user.userName}}</a>
@@ -951,8 +952,9 @@
                 <textarea name="recipeComment"></textarea>
               </div>
 
-              <p class="form-submit clearfix">
-                <input name="rcp-submit" class="button primary" type="button"  value="Post Comment" />                
+              <p class="form-submit clearfix">                
+                <input name="rcp-submit" class="button primary" type="button"  value="Post Comment" />
+                <input type="hidden" class="rcp-comment-recipeNo" value="">               
                 <div class="form-allowed-tags" style="display: none;">
                  
                 </div>
