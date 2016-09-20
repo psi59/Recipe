@@ -312,8 +312,7 @@ console.log('button 시점 recipeNo : ' +$(event.target).parent().parent().child
 				  + userInfo.userNo,
 				  dataType:'json',
 				  method:'get',
-				  success:function(){
-					  console.log("like down 성공성공");
+				  success:function(){					  
 						$('.rcp-scrap-button-text-like').attr('name','');
 						
 						$('.rcp-scrap-button-text-like').css('color','white');
