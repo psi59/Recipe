@@ -4,17 +4,14 @@ document.write('<script type"text/javascript" src="js/recipeDetail.js"></script>
 
 var sourceVisitor = $('#visitor-template').html();
 var templateVisitor = Handlebars.compile(sourceVisitor);
-
+var userInfo = getUserInfo();
 $(function() {
 
 	//recipeDetail();
-	var userInfo = getUserInfo();
-
-
-
+	
 	$('.header-body').load('topNavBar.html');
 
-	//push(userInfo.email, '', 'login');
+	push((userInfo==null ? null:userInfo.email),'','login');
 
 	pageLoadFunction();
 	mouseMoveEventForSubscribeImage();
@@ -300,7 +297,7 @@ function visitFunction(){
 			dataType : 'json',
 			success : function(result) {
 				if (result.status != 'success') {
-					swal('로그인해라.');
+					swal('로그인 해주세요.');
 					$('#login-pop-up-banner').bPopup();//20160830 용이 추가
 				}
 				var owner = location.href.split('?')[1];
@@ -308,7 +305,7 @@ function visitFunction(){
 				var myName = userInfo.userName;
 				var myImg = userInfo.image;
 
-				push(owner,("msg"+"/"+myEmail+myName+"/"+myImg), "message");	
+				push(owner,("msg"+"/"+myEmail+"/"+myName+"/"+myImg), "message");	
 				loadVisitor(); // 테이블 데이터를 갱신한다.
 			},
 			error : function() {

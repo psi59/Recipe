@@ -1,6 +1,6 @@
 ///////////////////////////////////////////
 function getContextRoot(port){
-	return "http://52.78.170.190:"+port+"/";
+	return "http://tkddlf59.dlinkddns.com:"+port+"/";
 //	return "http://localhost:"+port+"/";
 }
 var nodemailer = require("nodemailer");
@@ -22,7 +22,6 @@ generator.on('token', function(token){
 ///////////////////////////////////////////
 
 /* GET/POST 파라미터 처리 => body-parser 모듈 사용! */
-var mysql = require('mysql');
 var dateFormat = require('dateformat');
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -79,7 +78,7 @@ app.get('/user/authentication.do', function (request, response) {
 		to: email,
 		subject: "href",
 		generateTextFromHTML: true,
-		html: "<a href="+getContextRoot('7979')+"user/auth.do?authKEY="+authKEY+"&auth="+auth+"&email="+email+"'>"+email+"님 환영합니다."+"</a>"
+		html: "<a href="+getContextRoot('7979')+"user/auth.do?authKEY="+authKEY+"&auth="+auth+"&email="+email+">"+email+"님 환영합니다."+"</a>"
 
 	}, function(error, response) {
 		if (error) {

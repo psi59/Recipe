@@ -16,10 +16,18 @@ header {
 }
 
 .rcp-re-recipe {
-	margin: 2%;
-	margin-left: 38%;
-	margin-top: -4%;
-	bottom: 1%;
+	position: absolute !important;
+	top: 85%;
+}
+
+.rcp-re-recipe:hover {
+	color: #000000 !important;
+	box-shadow: 0 -100px 0 0 #DBDBDB inset !important;
+}
+
+#rcp-random-recipe:hover {
+	color: #000000 !important;
+	box-shadow: 0 -100px 0 0 #DBDBDB inset !important;
 }
 
 .rcp-roulette {
@@ -500,9 +508,9 @@ header .header-content {
 #random-pop-up-banner {
 	display: none;
 	padding-top: 0.1%;
-	background: lemonchiffon;
-	width: 22%;
-	height: 56%;
+	background: white;
+	width: 19%;
+	height: 44%;
 }
 
 #random-pop-up-banner .rcp-list-margin {
@@ -534,8 +542,11 @@ header .header-content {
 /* 슬라이더 기본 위치 */
 #rcp-randomRacipeCardWrapper-slot .slotCard {
 	width: 100%;
-	height: 435px;
+	height: 455px;
 	list-style: none;
+}
+.slotCard{
+	margin-left: 10pt !important;
 }
 
 #slot_box {
@@ -612,7 +623,7 @@ header .header-content {
 	margin-right: 10px;
 }
 
-#searchKeyword{
+#searchKeyword {
 	border: none;
 	height: 30px;
 	width: 180px;
@@ -620,36 +631,39 @@ header .header-content {
 }
 
 #searchKeyword:focus {
-    background-color: #fff;
-    box-shadow: none;
-    color: #4d4d4d;
-    -webkit-box-shadow: none;
-    outline: -webkit-focus-ring-color auto 0px;
+	background-color: #fff;
+	box-shadow: none;
+	color: #4d4d4d;
+	-webkit-box-shadow: none;
+	outline: -webkit-focus-ring-color auto 0px;
 }
 
-
-.searchWrapper{
+.searchWrapper {
 	border: 1px solid #acacac;
-	border-radius: 3px; 
+	border-radius: 3px;
 	color: #acacac;
 }
 
-#searcIcon{
+#searcIcon {
 	margin: 10px;
 }
 
 .text_deco_none:link {
 	text-decoration: none;
 }
+
 .text_deco_none:hover {
-  text-decoration: none;
+	text-decoration: none;
 }
-.active{
-	color : #e09b23
+
+.active {
+	color: #e09b23
 }
-.rcp-p-black{
-	color:#acacac ! important;
+
+.rcp-p-black {
+	color: #acacac ! important;
 }
-a{
+
+a {
 	text-decoration: none ! important;
 }

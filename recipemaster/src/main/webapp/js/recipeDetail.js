@@ -24,9 +24,9 @@ var recipeAddComment = $('#recipe-comment-addForm').html();
 var comRecipeAddComment = Handlebars.compile(recipeAddComment); 
 
 var slider;
-var userInfo = getUserInfo();
 
 $(function(){
+	var userInfo = getUserInfo();
 	recipeDetail();
 	starRatingBtn();
 	comment();
@@ -181,142 +181,9 @@ function recipeDetail(){
 		}
 		event.preventDefault();
 		console.log(event.target);
-		$.ajax({
-			url : contextRoot+'recipe/recipeDetail.json',
-			method : 'post',
-			data:{
-				recipeNo:$(event.target).parent().children('input[name="recipeNo"]').val()
-			},
-			dataType : 'json',
-			success : function(result) {
-				if (result.status != 'success') {
-					swal('게시물 조회 오류');
-					return;
-				}
-				
-				var addSpan = '';
-				
-				if(userInfo != null){
-					if(userInfo.userNo == result.data.userNo){
-						console.log('여기옴 ? ');
-					addSpan = "<span class='glyphicon glyphicon-pencil rcp-recipe-edit-button'></span>";
-						}
-					}
-				
-				$('.rcp-first-info').children('input[name="recipeNo"]').val(result.data.recipeNo);
-				$('.rcp-header > .title').html(result.data.recipeName+addSpan);
-				$('.rcp-header > .date').text(result.data.recipeDate);
-				$('.hash').text(result.data.intro);
-				$('div[name="rcp-explanation"]:eq(1)').text(result.data.intro);
-				
-				$('#detail_pop_up').bPopup({
-					position: (['auto','auto']),
-					positionStyle :[('fixed')],
-					onOpen:function(){
-						$('html').css('overflow','hidden');
-						checkDuplicateGrade();					
-						$('.rcp-304').append( comDetailInfoTemp(result) );
-						$('.rcp-info-images').append( comDetailImageMain(result.data.representImages[0]) );
-						$('.rcp-detail-body').append( comDetailMainTemp(result.data) );
-						$('.rcp-detail-body').append( comDetailTemp(result.data) );
-						$('.rcp-info-images').append( comDetailImageStep(result.data) );
-						
-						slider = $('.rcp-detail-body').bxSlider({
-							startSlide:0,
-							mode:'vertical',
-							pager: false,
-							moveSlides: 1,
-							infiniteLoop:false,
-							controls:false
-						});
-						
-					$('.rcp-detail-body').css('transform', 'translate3d(0px, 0px, 0px)');
-						
-						for(var i=0; i<$('.rcp-body').length; i++){
-							$('div[name="rcp-body"]:eq('+i+')').attr('id',"div"+i);
-							$('a[name="rcp-nav-images"]:eq('+i+')').attr('href','#div'+i);
-							$('a[name="rcp-nav-bgImages-button"]:eq('+i+')').attr('href','#div'+i);
-						}
-						
-					$('.rcp-mainSlider').bxSlider({
-						startSlide:0,
-						pager: false,
-						moveSlides: 1,
-						infiniteLoop:false, 
-					});
-
-					$('.rcp-detail-body').on("mousewheel", function (event) {
-						var delta = event.originalEvent.wheelDelta || -event.originalEvent.detail;
-						init_scroll(event, delta, slider)
-					});
-//						$(document).on('click','.rcp-info-images-emts',function(event){
-//							event.preventDefault();
-//							var div = $(event.target).parent().attr('href');
-//							console.log(div);
-//							$(location).attr('href',div);
-//						})
-
-
-						if( userInfo != null ){										
-							if(result.data.scrapUser == userInfo.userNo){
-								$('.rcp-scrap-button-text').attr('name','scrap');								
-								$('.rcp-scrap-button-text').css('color',' #ffce6e');
-								$('.rcp-detail-scrap').attr('style','color:#ffce6e');
-								$('.rcp-detail-scrap i').attr('style','color:#ffce63');
-							}else{									
-								$('.rcp-scrap-button-text').attr('name','');								
-								$('.rcp-scrap-button-text').css('color','white');
-								$('.rcp-detail-scrap').css('color','white');
-								$('.rcp-detail-scrap i').css('color','white');	
-							}
-							
-							if(result.data.likeUser != 0 ){
-								$('.rcp-scrap-button-text-like').attr('name','like');								
-								$('.rcp-scrap-button-text-like').css('color',' #ffce6e');
-								$('.rcp-detail-like').attr('style','color:#ffce6e');
-								$('.rcp-detail-like i').attr('style','color:#ffce63');
-							}else{									
-								$('.rcp-scrap-button-text-like').attr('name','');								
-								$('.rcp-scrap-button-text-like').css('color','white');
-								$('.rcp-detail-like').css('color','white');
-								$('.rcp-detail-like i').css('color','white');	
-							}
-							
-					}
-						},
-					onClose:function(){ 
-						$("html").css("overflow", "auto");
-						$(".detail-images").remove();
-						$(".rcp-body").remove();
-						$(".rcp-main").remove();
-						$(".rcp-detail-step").remove();
-						$(".rcp-detail-body").remove()
-						$(".bx-wrapper").remove();
-						$(".rcp-720").html('<div class="rcp-header">'
-											+'<h2 class="title"></h2>'
-											+'<p class="hash"></p>'
-											+'<p class="date"></p></div>'
-											+'<div class="timerZone"></div>'
-											+'<hr/></div>'
-											+'<div class="rcp-detail-body"></div>');
-						// 별점주기 팝업
-						$('#rcp-star-rating').on('click', function(){
-							$('.rcp-starrating').bPopup();
-						})
-					}
-
-				});
-
-			} 
-			,
-			error : function(){
-				swal('서버 요청 오류');
-			}
-		});
+		recipeDetailPopup($(event.target).parent().children('input[name="recipeNo"]').val());
 	});
 }
-
-
 
 var lastAnimation =0;
 

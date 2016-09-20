@@ -6,3 +6,7 @@ function getContextRoot(port){
 	return "http://localhost:"+port+"/";
 }
 
+function getNodeContextRoot(port){
+	return "http://tkddlf59.dlinkddns.com:"+port+"/";
+}
+
