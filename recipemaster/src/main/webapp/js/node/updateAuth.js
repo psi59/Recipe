@@ -35,7 +35,7 @@ app.use(function (req, res, next) {
 
 var pool  = mysql.createPool({
   connectionLimit : 10,
-  host     : 'localhost',
+  host     : '52.78.170.190',
   port     : '3306',
   user     : 'root',
 //  port     : '4000',

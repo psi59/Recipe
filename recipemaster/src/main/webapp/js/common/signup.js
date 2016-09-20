@@ -21,6 +21,7 @@ $(document).ready(function(){
 			$.ajax({
 				url : contextRoot+'user/add.json',
 				method : 'post',
+				async:false,
 				data : {
 					email : $('#signup-e-mail').val(),
 					userName : $('#signup-userName').val(),
@@ -44,7 +45,7 @@ $(document).ready(function(){
 					if (authKEY!=null) {
 						$.ajax({
 				            	type : 'GET',
-				                url : getContextRoot('8888')+'user/authentication.do?email='+email+'&authKEY='+authKEY,
+				                url : getNodeContextRoot('8888')+'user/authentication.do?email='+email+'&authKEY='+authKEY,
 				                success : function(result) {					
 									swal('이메일 전송완료');
 				                } // end success
@@ -65,7 +66,7 @@ $(document).ready(function(){
 				error : function() {
 					alert('서버 요청 오류 !')
 				}
-			})	
+			});	
 			            
 		}
 		
@@ -103,7 +104,7 @@ $(document).ready(function(){
 	          var email = $(this).val();
 	            $.ajax({
 	            	type : 'GET',
-	                url : getContextRoot('9999')+'user/checkDuplication.do?email='+email,
+	                url : getNodeContextRoot('9999')+'user/checkDuplication.do?email='+email,
 	                success : function(result) {					
 	                    if (result == 'true') {
 							// 사용가능한 이메일
@@ -181,7 +182,7 @@ $(document).ready(function(){
 			swal(email);
 			$.ajax({
             	type : 'GET',
-                url : getContextRoot('8282')+'user/pushEmail.do?email='+email,
+                url : getNodeContextRoot('8282')+'user/pushEmail.do?email='+email,
                 success : function(result) {					
 					swal('이메일 전송완료');
 					$(document).on('click', '.confirm', function(){

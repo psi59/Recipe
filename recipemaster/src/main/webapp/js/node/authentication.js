@@ -1,6 +1,6 @@
 ///////////////////////////////////////////
 function getContextRoot(port){
-	return "http://52.78.170.190:"+port+"/";
+	return "http://tkddlf59.dlinkddns.com:"+port+"/";
 //	return "http://localhost:"+port+"/";
 }
 var nodemailer = require("nodemailer");

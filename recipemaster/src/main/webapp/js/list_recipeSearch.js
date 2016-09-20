@@ -384,6 +384,8 @@ function esearch(sort){
 	var sortArray = new Array();
 	var score = {_score : {order : "desc"}};
 	var sortList;
+
+	sortArray.push(score);
 	
 	if(sort=='newest'){
 		sortList = {recipeDate : {order : "desc"}};
@@ -392,14 +394,12 @@ function esearch(sort){
 		sortList = {grade : {order : "desc"}}
 		sortArray.push(sortList);
 	}
-	
+
 	console.log(sortList);
-	
-	sortArray.push(score);
 //	sort.push(sortList);
 	var should = new Array();
 	if($('#searchKeyword').val().length>0){
-		var searchKeyword = {multi_match: {query:$('#searchKeyword').val(),  fields: ["recipeName", "Materials", "userName"]}};
+		var searchKeyword = {multi_match: {query:$('#searchKeyword').val(),  fields: ["recipeName^3", "Materials^2", "userName"]}};
 		should.push(searchKeyword);
 	}
 
@@ -422,7 +422,7 @@ function esearch(sort){
 	console.log(JSON.stringify(datas));
 
 	$.ajax({
-		url : getContextRoot('9200')+'recipes/_search',
+		url : 'http://112.169.38.69:9200/recipes/_search',
 		method : 'post',
 		data : JSON.stringify(datas),
 	    dataType : 'json',
