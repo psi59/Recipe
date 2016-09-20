@@ -1,7 +1,7 @@
 ///////////////////////////////////////////
 function getContextRoot(port){
 //	return "http://52.78.170.190:"+port+"/";
-	return "http://192.168.0.23:"+port+"/";
+	return "http://127.0.0.1:"+port+"/";
 }
 
 var nodemailer = require("nodemailer");

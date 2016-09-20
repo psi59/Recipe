@@ -1,7 +1,7 @@
 ///////////////////////////////////////////
 function getContextRoot(port){
 //	return "http://52.78.170.190:"+port+"/";
-	return "http://192.168.0.23:"+port+"/";
+	return "http://127.0.0.1:"+port+"/";
 }
 var nodemailer = require("nodemailer");
 
@@ -22,7 +22,6 @@ generator.on('token', function(token){
 ///////////////////////////////////////////
 
 /* GET/POST 파라미터 처리 => body-parser 모듈 사용! */
-var mysql = require('mysql');
 var dateFormat = require('dateformat');
 var express = require('express');
 var bodyParser = require('body-parser');

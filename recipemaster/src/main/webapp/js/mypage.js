@@ -28,8 +28,7 @@ $(function() {
 	visitFunction();
 	handlebarsFunction();
 	visitWriteFormFunction();
-	likeLogic();
-	scrapLogic();
+
 });
 
 

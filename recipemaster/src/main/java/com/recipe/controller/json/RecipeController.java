@@ -51,8 +51,8 @@ public class RecipeController {
 		int recipeCount = 0;
 
 		int userNo = 0;
-		if (session.getAttribute("userNo") != null) {
-			userNo = (Integer) (session.getAttribute("userNo"));
+		if (CommonUtil.getSessionUser(session) != null) {
+		  userNo = CommonUtil.getSessionUser(session).getUserNo();
 		}
 
 		List<Recipe> list;

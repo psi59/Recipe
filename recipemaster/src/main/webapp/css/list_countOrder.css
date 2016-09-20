@@ -5,6 +5,11 @@
   border-radius: 5px;
 }
 
+.active {
+  background-color: #f8a631;
+  color: white;
+}
+
 .order-btn:HOVER {
 	background-color: #f8a631;
   color: white;

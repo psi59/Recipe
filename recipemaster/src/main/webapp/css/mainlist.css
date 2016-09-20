@@ -7,18 +7,20 @@
     top: 320px;
     color: white;
     left: 250px;
-    font-size: 60px;
+    font-size: 6em;
+    font-family: 'Niconne', cursive;
 }
 
-.rcp-background-text h1{
-	margin-bottom : 11px ! important;
+.rcp-background-text h1 {
+	margin-bottom: 11px ! important;
 }
-.bg-p-text{
-    position: relative;
-    top: 320px;
-    color: white;
-    left: 250px;
-    font-size: 20px;
+
+.bg-p-text {
+	position: relative;
+	top: 320px;
+	color: white;
+	left: 250px;
+	font-size: 20px;
 }
 
 *>#main-list {
@@ -38,16 +40,17 @@
 
 .rcp-h2-25px {
 	color: black;
-	font-size: 25px;
+	    margin-bottom: 5px;
+    font-size: 20px;
 }
 
-.rcp-mypage-section{
-  height: 310px;
-  margin-bottom : 30px;
+.rcp-mypage-section {
+	height: 310px;
+	margin-bottom: 30px;
 }
 
-.foo-wrapper{
-	font-size : 7.5px;
+.foo-wrapper {
+	font-size: 7.5px;
 }
 
 /* 
@@ -91,8 +94,6 @@
 	bottom: 0;
 }
 
-
-
 @media ( min-width : 768px and max-width:991px) {
 	.hs-content .container {
 		width: 750px;
@@ -126,7 +127,7 @@
 	/* margin-bottom: 30px; */
 	/* margin-bottom: 30px; */
 	/* width: 283px; */
-/* 	margin-right: 10px;
+	/* 	margin-right: 10px;
 	margin-left: 10px; */
 	float: left;
 }
@@ -140,6 +141,9 @@
 	-webkit-transition: 0.5s;
 	-o-transition: 0.5s;
 	transition: 0.5s;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .hs-recipes.grid .entry .entry-action .entry-action-inner {
@@ -197,7 +201,7 @@
 }
 
 /* --------------------styles.css copy end------------------ */
- #detail_pop_up {
+#detail_pop_up {
 	top: 2% ! important;
 }
 
@@ -207,20 +211,21 @@
 
 .rcp-count-images {
 	background-color: rgba(0, 0, 0, 0.5);
-  width: 50px;
-  text-align: center;
-  color: white !important;
-  float: left;
-  margin-right: 10px;
-  padding-top: 4px;
-  height: 25px;
-  vertical-align: middle;
-  position: absolute;
+	width: 50px;
+	text-align: center;
+	color: white !important;
+	float: left;
+	margin-right: 10px;
+	padding-top: 4px;
+	height: 25px;
+	vertical-align: middle;
+	position: absolute;
+	z-index: 100;
 }
 
 .rcp-count-images-bg {
-	position:relative;
-	z-index:1;	
+	position: relative;
+	z-index: 1;
 	float: left;
 	background-color: black;
 	opacity: 0.5;
@@ -771,29 +776,23 @@
 }
 
 /* ------------------ min 1024px defalut font size --------------- */
-@media
-(
-min-width
-:1401px)
-{
-.rcp-relative {
-	width: 100% ! important;
+@media ( min-width :1401px) {
+	.rcp-relative {
+		width: 100% ! important;
+	}
+	.rcp-list h3 {
+		font-size: 19pt;
+	}
+	.rcp-list h4 {
+		font-size: 13pt;
+		font-weight: bold;
+		padding-bottom: 5px;
+		margin-bottom: 6%;
+		width: 87%;
+		font-weight: bold;
+	}
 }
 
-.rcp-list h3 {
-	font-size: 19pt;
-}
-
-.rcp-list h4 {
-	font-size: 13pt;
-	font-weight: bold;
-	padding-bottom: 5px;
-	margin-bottom: 6%;
-	width: 87%;
-	font-weight: bold;
-}
-
-}
 .rcp-list p {
 	font-size: 9pt;
 	margin: 0%;
@@ -885,11 +884,11 @@ min-width
 }
 
 @media ( max-width :1023px) {
-  .thumbnail a .rcp-profile {
-    height: 48px ! important;
-    position: relative;
-    top: 42px;
-  }
+	.thumbnail a .rcp-profile {
+		height: 48px ! important;
+		position: relative;
+		top: 42px;
+	}
 }
 
 @media ( min-width :1024px) {
@@ -901,59 +900,70 @@ min-width
 }
 
 @media ( min-width :1400px) {
-  .thumbnail a .rcp-profile {
-    height: 48px ! important;
-    position: relative;
-    top: 25px;
-  }
+	.thumbnail a .rcp-profile {
+		height: 48px ! important;
+		position: relative;
+		top: 25px;
+	}
 }
 
 @media ( min-width :1600px) {
-  .thumbnail a .rcp-profile {
-    height: 48px ! important;
-    position: relative;
-    top: 0px;
-  }
+	.thumbnail a .rcp-profile {
+		height: 48px ! important;
+		position: relative;
+		top: 0px;
+	}
 }
 
-span a{
-	color:#acacac;
-}
-.rcp-list-margin-top{
-	margin-top:30px;
-	padding-bottom : 0px ! important;
+span a {
+	color: #acacac;
 }
 
-.rcp-list-margin-bottom{
-	margin-bottom:30px;
-	padding-top:15px ! important;
+.rcp-list-margin-top {
+	margin-top: 30px;
+	padding-bottom: 0px ! important;
 }
-.rcp-margin-bottom-70px{
-	margin-bottom:70px;
+
+.rcp-list-margin-bottom {
+	margin-bottom: 30px;
+	padding-top: 15px ! important;
+}
+
+.rcp-margin-bottom-70px {
+	margin-bottom: 70px;
 }
 
 .transientStorage {
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 69px;
-    text-align: center;
-    color: white !important;
-    right: 10px;
-    padding-top: 4px;
-    height: 25px;
-    vertical-align: middle;
-    position: absolute;
+	background-color: rgba(0, 0, 0, 0.5);
+	width: 69px;
+	text-align: center;
+	color: white !important;
+	right: 10px;
+	padding-top: 4px;
+	height: 25px;
+	vertical-align: middle;
+	position: absolute;
+	z-index: 100;
 }
 
-.main_chef_container{
-  width:978px !important;
-  margin:auto;
+.main_chef_container {
+	width: 978px !important;
+	margin: auto;
 }
 
-.rcp-BoC{
+.rcp-BoC {
 	cursor: pointer;
 }
 
-.rcp-more-user-Page{
+.rcp-more-user-Page {
 	position: relative;
-    left: 10px;
+	left: 10px;
+}
+
+#rcp-random-recipe {
+	width: 124px;
+	font-size: 14px;
+	position: relative;
+	top: 300px;
+	left: 250px;
 }
