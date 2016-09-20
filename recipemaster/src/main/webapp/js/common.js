@@ -403,7 +403,7 @@ function addComment(){
 					return ;
 				}
 				
-				push($('#rcp-hidden-email').val(),("like"+"/"+userInfo.email+"/"+userInfo.userName+"/"+userInfo.image+"/"+$('.rcp-hidden-recipeNo').val()+"/"+$('#rcp-hidden-recipeTitle').val()), "message");
+				push($('#rcp-hidden-email').val(),("rp"+"/"+userInfo.email+"/"+userInfo.userName+"/"+userInfo.image+"/"+$('.rcp-hidden-recipeNo').val()+"/"+$('#rcp-hidden-recipeTitle').val()), "message");
 				commentFunction();
 			},
 			error:function(){
