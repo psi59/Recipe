@@ -27,7 +27,6 @@ var slider;
 
 $(function(){
 	var userInfo = getUserInfo();
-	
 	recipeDetail();
 	starRatingBtn();
 	comment();
@@ -425,7 +424,7 @@ function addComment(){
 					swal('로그인이 필요한 서비스입니다.');
 					return ;
 				}
-				push('bbb@naver.com',("like"+"/"+userInfo.email+"/"+userInfo.name+"/"+userInfo.image+"/"+"13"+"/"+"타이머테스트2"), "message");
+				push($('#rcp-hidden-email').val(),("rp"+"/"+userInfo.email+"/"+userInfo.userName+"/"+userInfo.image+"/"+"13"+"/"+"타이머테스트2"), "message");
 				console.log($('.rcp-hidden-email').val());
 				commentFunction();
 			},

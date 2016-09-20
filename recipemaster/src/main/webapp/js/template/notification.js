@@ -28,7 +28,7 @@ function notifyMe(data) {
 			});
 
 			notification.onclick = function () {
-				window.open("http://localhost:8080/mypage.html?"+value[1]);      
+				window.open(contextRoot+"mypage.html?"+value[1]);      
 			};
 
 			setTimeout(notification.close.bind(notification), 4000);
@@ -39,7 +39,7 @@ function notifyMe(data) {
 			});
 
 			notification.onclick = function () {
-				window.open("http://localhost:8080/mypage.html?"+value[1]);      
+				window.open(contextRoot+"mypage.html?"+value[1]);      
 			};
 
 			setTimeout(notification.close.bind(notification), 4000);
@@ -50,7 +50,7 @@ function notifyMe(data) {
 			});
 
 			notification.onclick = function () {
-				window.open("http://localhost:8080/mypage.html?"+value[1]);      
+				window.open(contextRoot+"mypage.html?"+value[1]);      
 			};
 
 			setTimeout(notification.close.bind(notification), 4000);
@@ -61,7 +61,7 @@ function notifyMe(data) {
 			});
 
 			notification.onclick = function () {
-				window.open("http://localhost:8080/mypage.html?"+value[1]);      
+				window.open(contextRoot+"mypage.html?"+value[1]);      
 			};
 
 			setTimeout(notification.close.bind(notification), 4000);
