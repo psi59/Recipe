@@ -343,7 +343,7 @@ console.log('button 시점 recipeNo : ' +$(event.target).parent().parent().child
 
 
 function comment(){
-	$(document).on('click','.rcp-seconde-info',function(evnet){
+	$(document).on('click','.rcp-seconde-info',function(evnet){		
 		evnet.preventDefault();
 		commentFunction();
 		
@@ -366,6 +366,8 @@ function commentFunction(){
 					+'<h3 class="rcp-comment-count"></h3>'
 					+'</div>'
 					+'<div class="rcp-detail-body"></div>');
+			console.log('dfdf : '+$('#aaaa').val());
+			
 		
 			if(result.data.length <1) {
 				$('.rcp-comment-count').text("등록된 댓글이 아직 없습니다.");
@@ -385,7 +387,8 @@ function commentFunction(){
 }
 
 function addComment(){
-	$(document).on('click','input[name="rcp-submit"]',function(){
+	$(document).on('click','input[name="rcp-submit"]',function(){		
+		console.log('dfdf : '+$('#aaaa').val());
 		$.ajax({
 			url:contextRoot+'recipe/addComment.json',
 			dataType:'json',
@@ -399,6 +402,7 @@ function addComment(){
 					swal('로그인이 필요한 서비스입니다.');
 					return ;
 				}
+				
 				push($('#rcp-hidden-email').val(),("like"+"/"+userInfo.email+"/"+userInfo.userName+"/"+userInfo.image+"/"+$('.rcp-hidden-recipeNo').val()+"/"+$('#rcp-hidden-recipeTitle').val()), "message");
 				commentFunction();
 			},
