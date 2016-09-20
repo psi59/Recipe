@@ -33,6 +33,8 @@
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/userinfobox.css">
 <link rel="stylesheet" href="css/common/signup.css">
+
+<link rel="stylesheet" href="css/mainlist.css">
 <link rel="stylesheet" href="css/detail.css">
 <link rel="stylesheet" href="css/updateImg.css">
 
@@ -52,7 +54,6 @@
 <!-- alert css -->
 <link rel="stylesheet"
 	href="node_modules/sweetalert/dist/sweetalert.css">
-<link rel="stylesheet" href="css/mainlist.css">
 <!-- --- 아이콘 CDN ----- -->
 <!-- <script src="js/template/d9e67edb08.js"></script> -->
 <script src="js/common/app-context.js"></script>
@@ -406,7 +407,7 @@
               <div class="content-wrapper">
                 <h3 class="entry-name"><a href="#">
                 <input type="hidden" name="recipeNo" value="{{recipeNo}}">
-                <p class="detail">{{recipeName}}</p></a></h3>                
+                <p class="detail rcp-index-p-margin">{{recipeName}}</p></a></h3>                
                 <a href="mypage.html?{{user.email}}">
                 <input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
                 <p class="entry-author rcp-userName">{{user.userName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{recipeDate}}</p>
@@ -468,7 +469,7 @@
               <div class="content-wrapper">
                 <h3 class="entry-name"><a href="#">
                 <input type="hidden" name="recipeNo" value="{{recipeNo}}">
-                <p class="detail rcp-p-black">{{recipeName}}</p></a></h3>                
+                <p class="ƒ">{{recipeName}}</p></a></h3>                
                 <a href="mypage.html?{{user.email}}">
                 <input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
                 <p class="entry-author rcp-userName">{{user.userName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{recipeDate}}</p>
@@ -622,9 +623,9 @@
   </div>
   <div class="rcp-icons-info" align="right">
     <p>{{data.hits}}</p>
-    <p>{{data.countLike}}</p>
-    <p>{{data.countComment}}</p>
-    <p>{{data.countScrap}}</p>
+    <p class="rcp-countLike">{{data.countLike}}</p>
+    <p class="rcp-countComment">{{data.countComment}}</p>
+    <p class="rcp-countScrap">{{data.countScrap}}</p>
     <p>{{data.gradePoint}}</p>  
   </div>
 </div>

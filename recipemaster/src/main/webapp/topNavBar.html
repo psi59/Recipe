@@ -36,6 +36,9 @@
 					</span>
 					<div class="clear"></div>
 				</div>
+				 <hr style="margin: 15px;">
+      <p id="other-login-text">소셜아이디로 로그인하기 </p>
+     <div id="naver_id_login"></div>
 			</form>
 			<div id="naver_id_login" class="display_none"></div>
 		</div>
@@ -255,6 +258,7 @@
 	<script src="node_modules/easy-autocomplete/dist/jquery.easy-autocomplete.min.js"></script>
 	<script src="js/listPageMove.js"></script>
 
+  <script src="js/template/naverLogin_implicit-1.0.2.js"></script>
 	<script type="text/javascript">
 
 		$(function(){
@@ -336,6 +340,58 @@
 			  });
 		});	
 	</script>
+	
+	 <script type="text/javascript">
+    var naver_id_login = new naver_id_login("oZ3ZBiNctenY6ix5st7G",
+      contextRoot+"index.html");
+    var state = naver_id_login.getUniqState();
+    naver_id_login.setButton("green", 3, 40);
+    naver_id_login.setDomain(".service.com");
+    naver_id_login.setState(state);
+    naver_id_login.init_naver_id_login();
+    
+      // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+      function naverSignInCallback() {
+        // naver_id_login.getProfileData('프로파일항목명');
+        // 프로필 항목은 개발가이드를 참고하시기 바랍니다.
+        console.log("nickName : "
+            + naver_id_login.getProfileData('nickname'));
+        console.log("email : " + naver_id_login.getProfileData('email'));
+        $
+            .ajax({
+              url : '/user/loginNaver.json',
+              method : 'post',
+              dataType : 'json',
+              data : {
+                userName : naver_id_login
+                    .getProfileData('nickname'),
+                email : naver_id_login.getProfileData('email')
+              },
+              success : function(result) {
+                if (result.status == 'failure') {
+    
+                  swal('잘못입력하셨습니다.', '아이디 또는 비밀번호를 다시 확인하여 주세요.',
+                      "error");
+    
+                  return;
+                }
+    
+                if (result.status == 'success') {
+    
+                } else {
+                  swal('비밀번호를 다시 입력해주세요');
+                }
+    
+              },
+              error : function() {
+                swal('서버 요청 오류');
+              }
+            }); /* end of ajax */
+      }
+    
+      // 네이버 사용자 프로필 조회
+      naver_id_login.get_naver_userprofile("naverSignInCallback()");  
+  </script>
 <!-- 
 	<script type="text/javascript">
 		var naver_id_login = new naver_id_login("oZ3ZBiNctenY6ix5st7G",

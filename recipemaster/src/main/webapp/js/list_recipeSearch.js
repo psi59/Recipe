@@ -28,7 +28,7 @@ $(document).ready(function(){
 
 	// 처음화면에 모든 레시피들을 보여준다
 //	search('newest', $('#order-latest-btn').val());
-	esearch($('#sort-condition').val());
+	esearch($('#sort-condition').val(),1);
 
 	// 검색창에 포커스
 	$('#searchKeyword').focus();
@@ -36,7 +36,7 @@ $(document).ready(function(){
 	// 키보드에서 뗐을때의 검색 이벤트
 	$('#searchKeyword').keyup(function(){
 		$("body").scrollTop(0);
-		esearch($('#sort-condition').val());
+		esearch($('#sort-condition').val(),1);
 	})
 
 	// 최신순 정렬
@@ -52,7 +52,7 @@ $(document).ready(function(){
 			$('#order-latest-btn').val('DESC')
 			$('#sort-condition').val('newest');
 		}
-		esearch($('#sort-condition').val());
+		esearch($('#sort-condition').val(),1);
 	});
 
 	// 평점순 정렬
@@ -77,7 +77,7 @@ $(document).ready(function(){
 //			$('#order-grade-btn-text').text('평점순▼');
 //			$('#order-grade-btn').val('DESC')
 //		}
-		esearch($('#sort-condition').val());
+		esearch($('#sort-condition').val(),1);
 	});
 
 	// 스크롤을 끝까지 내렸을때 레시피 카드 생성
@@ -98,7 +98,7 @@ $(document).ready(function(){
 			$('#category-filter').css('display','none')
 		}
 		$("body").scrollTop(0);
-		esearch($('#sort-condition').val());
+		esearch($('#sort-condition').val(),1);
 	})
 
 	// 필터박스 모두 취소
@@ -108,7 +108,7 @@ $(document).ready(function(){
 		$('#category-filter').css('display','none')
 		$("body").scrollTop(0);
 //		search('newest', $('#order-latest-btn').val());
-		esearch($('#sort-condition').val());
+		esearch($('#sort-condition').val(),1);
 	})
 	likeLogic();
 	scrapLogic();
@@ -205,74 +205,95 @@ function searchScrollAppend(){
 	var source = $('#temp').text();
 	var template = Handlebars.compile(source);
 
+	var order;
 	if($('#sort-condition').val() == 'newest'){
-		var order = $('#order-latest-btn').val();		
+		order = $('#order-latest-btn').val();		
 	} else {
-		var order = $('#order-grade-btn').val();
+		order = $('#order-grade-btn').val();
 	}
-
-	var categoryList = '';
-	/*$('#rcp-category-section input[type=checkbox]:checked').each(function(index){*/
-	$('.rcp-category-checked').each(function(index){		
-		/*if(index !== ($('#rcp-category-section input[type=checkbox]:checked').length-1)){*/
-		if(index !== ($('.rcp-category-checked').length-1)){
-			categoryList += $(this).text()+',';
-		} else {
-			categoryList += $(this).text();
-		}				
-	})	
-
+	
 	if($('#search-pageNo').val() != 'lastPage'){
 		var pageNo = parseInt($('#search-pageNo').val())+1;
-		$.ajax({
-			url : contextRoot+'recipe/listSearch.json',
-			method : 'post',
-			data : {					
-				pageNo : pageNo,
-				searchKeyword : $('#searchKeyword').val(),
-				/*searchCondition : $("#searchCondition-select option:selected").val(),*/
-				sortCondition : $('#sort-condition').val(),
-				orderCondition : order,
-				categoryList : categoryList,
-				more : ($('#more-rcp-list').val()==null?0:$('#more-rcp-list').val())
-			},
-			dataType : 'json',
-			success : function(result) {
-				setTimeout(function() {
-					if (result.status != 'success') {
-						swal('실패 ~');
-						return;
-					}
-					$('#tabs-1 .hs-content .container .row').append(template(result));
-
-					mouseMoveEventForSubscribeImage(result);
-
-					if(result.data != 'lastPage'){
-						$('#search-pageNo').val(result.pageNo);
-					} else {
-						$('#search-pageNo').val('lastPage');
-					}					
-				}, 350)
-			},
-			// 데이터 조회 중일때 로딩 이미지 보여주기
-			beforeSend:function(){			  
-				$('.wrap-loading').removeClass('display-none');
-				$('html').css("cursor","wait");
-			},
-			// 데이터 받아왔을때 로딩 이미지 감추기
-			complete:function(){
-				setTimeout(function() {
-					$('.wrap-loading').addClass('display-none');
-					$('html').css("cursor","auto");
-				}, 350)
-			},
-			error : function() {
-				swal('서버 요청 오류 !')
-			}
-
-		})
+		esearch(order, pageNo);
 	}
 }
+//
+//function searchScrollAppend(){ 
+//
+//	var page = $('#recipe-card-searchPage-template').text();
+//	var compilePage = Handlebars.compile(page);
+//
+//	var source = $('#temp').text();
+//	var template = Handlebars.compile(source);
+//
+//	if($('#sort-condition').val() == 'newest'){
+//		var order = $('#order-latest-btn').val();		
+//	} else {
+//		var order = $('#order-grade-btn').val();
+//	}
+//
+//	var categoryList = '';
+//	/*$('#rcp-category-section input[type=checkbox]:checked').each(function(index){*/
+//	$('.rcp-category-checked').each(function(index){		
+//		/*if(index !== ($('#rcp-category-section input[type=checkbox]:checked').length-1)){*/
+//		if(index !== ($('.rcp-category-checked').length-1)){
+//			categoryList += $(this).text()+',';
+//		} else {
+//			categoryList += $(this).text();
+//		}				
+//	})	
+//
+//	if($('#search-pageNo').val() != 'lastPage'){
+//		var pageNo = parseInt($('#search-pageNo').val())+1;
+//		$.ajax({
+//			url : contextRoot+'recipe/listSearch.json',
+//			method : 'post',
+//			data : {					
+//				pageNo : pageNo,
+//				searchKeyword : $('#searchKeyword').val(),
+//				/*searchCondition : $("#searchCondition-select option:selected").val(),*/
+//				sortCondition : $('#sort-condition').val(),
+//				orderCondition : order,
+//				categoryList : categoryList,
+//				more : ($('#more-rcp-list').val()==null?0:$('#more-rcp-list').val())
+//			},
+//			dataType : 'json',
+//			success : function(result) {
+//				setTimeout(function() {
+//					if (result.status != 'success') {
+//						swal('실패 ~');
+//						return;
+//					}
+//					$('#tabs-1 .hs-content .container .row').append(template(result));
+//
+//					mouseMoveEventForSubscribeImage(result);
+//
+//					if(result.data != 'lastPage'){
+//						$('#search-pageNo').val(result.pageNo);
+//					} else {
+//						$('#search-pageNo').val('lastPage');
+//					}					
+//				}, 350)
+//			},
+//			// 데이터 조회 중일때 로딩 이미지 보여주기
+//			beforeSend:function(){			  
+//				$('.wrap-loading').removeClass('display-none');
+//				$('html').css("cursor","wait");
+//			},
+//			// 데이터 받아왔을때 로딩 이미지 감추기
+//			complete:function(){
+//				setTimeout(function() {
+//					$('.wrap-loading').addClass('display-none');
+//					$('html').css("cursor","auto");
+//				}, 350)
+//			},
+//			error : function() {
+//				swal('서버 요청 오류 !')
+//			}
+//
+//		})
+//	}
+//}
 
 //url QueryString 가져오는 function
 function getUrlParams() {
@@ -350,7 +371,7 @@ function categoryClick(){
 				$('#category-filter').css('display','none')
 			}
 			$("body").scrollTop(0);
-			esearch($('#sort-condition').val());
+			esearch($('#sort-condition').val(),1);
 //			search('newest', $('#order-latest-btn').val());
 		}else{			
 			$(this).addClass('rcp-category-checked');
@@ -359,16 +380,19 @@ function categoryClick(){
 					+'</span></span>');
 			$("body").scrollTop(0);
 //			search('newest', $('#order-latest-btn').val());
-			esearch($('#sort-condition').val());
+			esearch($('#sort-condition').val(),1);
 		}
 	})
 }
 
 
 
-function esearch(sort){ 
+function esearch(sort, pageNo){ 
 	var source = $('#temp').text();
 	var template = Handlebars.compile(source);
+	
+//	pageNo=(pageNo==null)?0:pageNo;
+	
 
 	var categoryList = '';
 	/*$('#rcp-category-section input[type=checkbox]:checked').each(function(index){*/
@@ -383,6 +407,10 @@ function esearch(sort){
 	
 	var sortArray = new Array();
 	var score = {_score : {order : "desc"}};
+	
+	var startIndex = (pageNo-1)*8;
+	var endIndex = startIndex+8;
+	
 	var sortList;
 
 	sortArray.push(score);
@@ -415,8 +443,8 @@ function esearch(sort){
 			             should: should
 			           }
 			         },
-			         from: 0,
-			         size: 8
+			         from: startIndex,
+			         size: endIndex
 			       };
 	
 	console.log(JSON.stringify(datas));

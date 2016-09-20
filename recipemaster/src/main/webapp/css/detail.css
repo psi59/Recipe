@@ -96,10 +96,10 @@
   
 } */
 
-.rcp-detail-form .rcp-images{
+.rcp-body .rcp-images{
     margin: auto;
-    width: 400px;
-    height: 230px;
+    width: 400px ! important ;
+    height: 230px ! important ;
     border-radius: 15px;
     position: relative;
     right:10px;    
@@ -329,11 +329,11 @@
 
 .rcp-right-profile{
    position:relative;
-   width:55px;
-   height:55px;
+   width:55px ! important;
+   height:55px ! important;
    text-align:center;
    top:30px;
-   left:80px;
+   left:90px ! important;
 }
 
 .rcp-304 .rcp-nickname{
@@ -341,7 +341,7 @@
   font-size:15pt;
   text-align: center;
   color: white;
-  left : 100px;
+  left : 100px ;
   top:36px;
 }
 
