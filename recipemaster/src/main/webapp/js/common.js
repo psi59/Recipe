@@ -306,7 +306,7 @@ console.log('button 시점 recipeNo : ' +$(event.target).parent().parent().child
 				  method:'get',
 				  success:function(){					  
 						$('.rcp-scrap-button-text-like').attr('name','');
-						
+						$('.rcp-countLike').text( Number( $('.rcp-countLike').text() ) -1 );
 						$('.rcp-scrap-button-text-like').css('color','white');
 						$('.rcp-detail-like').attr('style','color:white');
 						$('.rcp-detail-like i').attr('style','color:white');					  
@@ -326,6 +326,8 @@ console.log('button 시점 recipeNo : ' +$(event.target).parent().parent().child
 				  method:'get',
 				  success:function(){
 					  console.log("like up 성공성공");
+					  console.log( Number( $('.rcp-countLike').text() ) +1  );
+					  $('.rcp-countLike').text( Number( $('.rcp-countLike').text() ) +1 );
 						$('.rcp-scrap-button-text-like').attr('name','like');
 						$('.rcp-scrap-button-text-like').css('color',' #ffce6e');
 						$('.rcp-detail-like').attr('style','color:#ffce6e');
@@ -401,7 +403,7 @@ function addComment(){
 					swal('로그인이 필요한 서비스입니다.');
 					return ;
 				}
-				
+				$('.rcp-countComment').text( Number( $('.rcp-countComment').text() ) +1 );
 				push($('#rcp-hidden-email').val(),("like"+"/"+userInfo.email+"/"+userInfo.userName+"/"+userInfo.image+"/"+$('.rcp-hidden-recipeNo').val()+"/"+$('#rcp-hidden-recipeTitle').val()), "message");
 				commentFunction();
 			},
@@ -420,7 +422,6 @@ function deleteComment(){
 }
 
 function deleteCommentFunction(event){
-	console.log('펑션왔나요 ')
 		$.ajax({
 			url:contextRoot+'recipe/deleteComment.json',
 			dataType:'json',
@@ -430,6 +431,7 @@ function deleteCommentFunction(event){
 			},
 			success:function(result){
 				console.log('comment delete 성공성공 ^^');
+				$('.rcp-countComment').text( Number( $('.rcp-countComment').text() ) -1 );
 				commentFunction();
 			},
 			error:function(){
@@ -460,6 +462,7 @@ function recipeScrap(){
 						return;
 					}
 					$('.rcp-scrap-button-text').attr('name','');
+					$('.rcp-countScrap').text( Number( $('.rcp-countScrap').text() ) -1 );
 					$('.rcp-scrap-button-text').css('color','white');
 					$('.rcp-detail-scrap').attr('style','color:white');
 					$('.rcp-detail-scrap i').attr('style','color:white');
@@ -472,8 +475,6 @@ function recipeScrap(){
 
 		}else{
 //			-------------------------------스크랩 등록 --------------------------------
-			console.log('여기옴? else문 ');
-			console.log($(event.target).parent().parent().parent().children('input[class="rcp-hidden-recipeNo"]').val());
 			event.preventDefault();	
 			$.ajax({
 				url:contextRoot+'recipe/scrap.json',
@@ -490,7 +491,8 @@ function recipeScrap(){
 						return;
 					}
 
-					$('.rcp-scrap-button-text').attr('name','scrap');					
+					$('.rcp-scrap-button-text').attr('name','scrap');		
+					$('.rcp-countScrap').text( Number( $('.rcp-countScrap').text() ) +1 );
 					$('.rcp-scrap-button-text').css('color',' #ffce6e');
 					$('.rcp-detail-scrap').attr('style','color:#ffce6e');
 					$('.rcp-detail-scrap i').attr('style','color:#ffce63');
@@ -675,3 +677,4 @@ function recipeDetailPopup(recipeNo){
 		}
 	});
 }
+

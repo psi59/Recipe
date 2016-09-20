@@ -25,7 +25,6 @@ $(function() {
 	visitFunction();
 	handlebarsFunction();
 	visitWriteFormFunction();
-
 });
 
 
