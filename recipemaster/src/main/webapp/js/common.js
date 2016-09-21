@@ -344,7 +344,7 @@ console.log('button 시점 recipeNo : ' +$(event.target).parent().parent().child
 
 
 function comment(){
-	$(document).on('click','.rcp-seconde-info',function(evnet){		
+	$(document).on('click','.rcp-view-comment',function(evnet){		
 		evnet.preventDefault();
 		commentFunction();
 		
@@ -365,6 +365,7 @@ function commentFunction(){
 			$(".rcp-720").html('<div class="rcp-header">'
 					+'<h2 class="title">댓글</h2>'
 					+'<h3 class="rcp-comment-count"></h3>'
+					+'<p class="rcp-view-recipe">레시피보기</p></div>'
 					+'</div>'
 					+'<div class="rcp-detail-body"></div>');
 			console.log('dfdf : '+$('#aaaa').val());
@@ -522,6 +523,16 @@ Handlebars.registerHelper('isScrap', function(options) {
 	  }
 });
 
+Handlebars.registerHelper('isImage', function(options) {
+	  if (this.image=='' || this.image == null) {		  
+	    return 'default.jpg';
+	  }
+//	  }else{
+//		  return options.inverse(this);
+//	  }
+});
+
+
 
 
 function recipeDetailPopup(recipeNo){
@@ -536,6 +547,7 @@ function recipeDetailPopup(recipeNo){
 						+'<h2 class="title"></h2>'
 						+'<p class="hash"></p>'
 						+'<p class="date"></p>'
+						+'<p class="rcp-view-comment">댓글보기</p></div>'
 						+'<div class="timerZone"></div>'
 						+'<hr/></div>'
 						+'<div class="rcp-detail-body"></div>');
@@ -567,7 +579,7 @@ function recipeDetailPopup(recipeNo){
 					}
 				}
 			
-			$('.rcp-first-info').children('input[name="recipeNo"]').val(result.data.recipeNo);
+			$('.rcp-taps').children('input[name="recipeNo"]').val(result.data.recipeNo);
 			$('.rcp-header > .title').html(result.data.recipeName+addSpan);
 			$('.rcp-header > .date').text(result.data.recipeDate);
 			$('.hash').text(result.data.intro);
@@ -679,3 +691,55 @@ function recipeDetailPopup(recipeNo){
 	});
 }
 
+
+function loginCheck() {
+	return $.ajax({
+		url : contextRoot+'user/loginCheck.json',
+		method : 'get',
+		dataType : 'json',
+		async : false
+	});
+}; /* end of jquery */
+
+
+function getUserInfo() {
+	var obj = loginCheck().responseJSON;
+	if (obj.status != 'success') {
+		return;
+	}
+
+	var userInfo = {
+		userNo : obj.data.userNo,
+		userName : obj.data.userName,
+		email : obj.data.email,
+		image : obj.data.image,
+		intro : obj.data.intro,
+		role : obj.data.role,
+		joinDate : obj.data.joinDate,
+		recipeUrl : obj.data.recipeUrl,
+		recipeCount : obj.data.recipeCount,
+		subsCount : obj.data.subsCount,
+		grade : obj.data.grade
+	};
+
+	$('#mainNav').html('');
+	$('#signUpTopBtn').remove();
+	$('#mainNav')
+			.append(
+					$('<li id="writeRecipe" class="margin_right_10px activedropdown-full-color dropdown-secondary"><a href='+contextRoot+'mypage.html?'+(userInfo==null?null:userInfo.email)+' class="padding_6px dropdown__header"><img id="profileImg"'
+							+'class="rcp-img img-circle" src="img/profileImg/'+(userInfo.image==null || userInfo.image == '' ?'default.jpg':userInfo.image)+'"/>'+(userInfo==null?null:userInfo.userName)+'</a></li>'));
+	$('#mainNav')
+			.append(
+					$('<li id="writeRecipe" class="dropdown-full-color dropdown-secondary"><a href='+contextRoot+'writerecipe.html>레시피 등록</a></li> '));
+	$('#mainNav')
+	.append(
+			$('<li id="logoutBtn" class="dropdown-full-color dropdown-secondary"><a href="#">로그아웃</a></li> '));
+	// $('#loginIcon').html('<img id="loginIconAction1" class="rcp-barimg
+	// dropdown-trigger img-circle" src="img/profileImg/'+userInfo.image+'"
+	// />');
+	// $('#topbarUserImg').html('<img id="loginIconAction2" class="rcp-barimg
+	// dropdown-trigger img-circle" src="img/profileImg/'+userInfo.image+'"
+	// />');
+
+	return userInfo;
+}

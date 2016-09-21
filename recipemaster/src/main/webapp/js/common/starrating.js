@@ -22,7 +22,7 @@ function starRatingBtn(){
 						$('.rcp-rating').remove();
 						$('#rcp-starrating-btn-apply').remove();
 						
-						checkDuplicateGrade();
+						checkDuplicateGrade();						
 					} else if (result.loginCheck == false){
 						swal('로그인 하셔야 이용하실수 있습니다.');
 					}

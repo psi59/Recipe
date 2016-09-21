@@ -378,13 +378,8 @@
       <div class="rcp-304"></div>
 
       <div class="rcp-taps">
-        <div class="rcp-first-info">
           <input id="detail-recipeNo" type="hidden" value="" name="recipeNo">
-        </div>
-
-        <div class="rcp-seconde-info">
-          
-        </div>
+       
 
       </div>
     </div>
@@ -648,7 +643,7 @@
                 <article>
                   
                   <div class="cs-comment-author">
-                   <img class="avatar" src="img/profileImg/{{user.image}}" alt=""> 
+                   <img class="avatar" src="img/profileImg/{{isImage image}}{{user.image}}" alt=""> 
                       <b><a href="#">{{user.userName}}</a></b> 
                           <a class="cs-comment-metadata" href="#"> 
                          <span class="rcp-comment-date">{{recipeCommentDate}}</span>
@@ -670,8 +665,8 @@
 
 <div class="detail-images">
 <input type="hidden" class="rcp-hidden-userNo" value="{{data.userNo}}">
-<input type="hidden" class="rcp-hidden-recipeNo" value="{{data.recipeNo}}">
-<input type="hidden" class="rcp-hidden-email" value="{{data.user.email}}">
+<input type="hidden" id="rcp-hidden-recipeNo" class="rcp-hidden-recipeNo" value="{{data.recipeNo}}">
+<input type="hidden" class="rcp-hidden-email" id="rcp-hidden-email" value="{{data.user.email}}">
 
 <a href="#"><img src="img/profileImg/{{data.user.image}}" class="rcp-right-profile  rcp-profile img-circle"></a>
 <a class="rcp-nickname" href="#">{{data.user.userName}}</a>

@@ -6,8 +6,8 @@
 <title>Recipe Master</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
-<!-- <script src="node_modules/jquery/dist/jquery.min.js"></script> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script> -->
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="js/template/jquery.countdown.min.js"></script>
 
 <!-- Template css -->
@@ -906,41 +906,39 @@
 			$('.dropdown-trigger--mobile').on('click', function() {
 				dropdownClick('.mobile-menu-dropdown', '.profile-dropdown');
 			});
-			
-			$(document).on('click', '.timerBtn', function() {
-	            var $this = $(this);
-	            var node = $('<div class="timerObj"/>');
-	            var clock = $('<div class="timerClock float_left"></div>'); 
-	            
-	            clock.countdown(getTimeStamp($this.next().next().val()))
-	            .on('update.countdown', function(event) {
-	              var format = '%H:%M:%S';
-	              $(this).html(event.strftime(format));
-	            })
-	            .on('finish.countdown', function(event) {
-	              $(this).html('00:00:00').parent().css("color", "red")
-	              $this.removeClass('display_none');
-	              $this.next().addClass('display_none');
-	              var audio = document.createElement('audio');
-	              audio.src = 'audio/porori.mp3'
-	                audio.play();
-	            });
-
-	            node.append($('<span class="float_left">'+$this.prev().text()+' -&nbsp;<span>'));
-	            node.append(clock);
-
-	            $('.timerZone').append(node);
-	            $this.addClass('display_none');
-	            $this.next().removeClass('display_none');
-
-//	            $(document).on('click', '.timerObj', function() {
-//	            console.log($(this).children('.timerClock'));
-//	            $($(this).children('.timerClock')).countdown('pause');
-//	            });
-	          });
 		});
 		
-		
+		$(document).on('click', '.timerBtn', function() {
+            var $this = $(this);
+            var node = $('<div class="timerObj"/>');
+            var clock = $('<div class="timerClock float_left"></div>'); 
+            
+            clock.countdown(getTimeStamp($this.next().next().val()))
+            .on('update.countdown', function(event) {
+              var format = '%H:%M:%S';
+              $(this).html(event.strftime(format));
+            })
+            .on('finish.countdown', function(event) {
+              $(this).html('00:00:00').parent().css("color", "red")
+              $this.removeClass('display_none');
+              $this.next().addClass('display_none');
+              var audio = document.createElement('audio');
+              audio.src = 'audio/porori.mp3'
+                audio.play();
+            });
+
+            node.append($('<span class="float_left">'+$this.prev().text()+' -&nbsp;<span>'));
+            node.append(clock);
+
+            $('.timerZone').append(node);
+            $this.addClass('display_none');
+            $this.next().removeClass('display_none');
+
+//            $(document).on('click', '.timerObj', function() {
+//            console.log($(this).children('.timerClock'));
+//            $($(this).children('.timerClock')).countdown('pause');
+//            });
+          });
 	</script>
 
 </body>

@@ -15,6 +15,7 @@ $(document).ready(function(){
 	if(urlParams.order != undefined){	
 		$('#sort-condition').val(decodeURIComponent(urlParams.order));
 		$('#order-latest-btn-text').addClass('order-active');
+		$('#sort-condition').val('newest')
 	}	
 	/*if(urlParams.sc != undefined){		
 		$('#searchCondition-select').val(decodeURIComponent(urlParams.sc));
@@ -34,9 +35,10 @@ $(document).ready(function(){
 				+'</span></span>');
 	}
 
+	console.log($('#sort-condition').val());
 	// 처음화면에 모든 레시피들을 보여준다
 //	search('newest', $('#order-latest-btn').val());
-	if($('#more-rcp-list').val()!=null){
+	if($('#more-rcp-list').val().length>0){
 		search($('#sort-condition').val(),'desc')
 	} else {
 		esearch($('#sort-condition').val(),1, false);

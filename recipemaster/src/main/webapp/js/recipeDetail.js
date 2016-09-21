@@ -27,7 +27,7 @@ var slider;
 
 $(function(){
 	var userInfo = getUserInfo();
-//	recipeDetail();
+	recipeDetail();
 	starRatingBtn();
 	comment();
 	addComment();
@@ -63,50 +63,50 @@ Handlebars.registerHelper('x-button', function(options) {
 		return options.fn(this); 
 	}
 });
-//
+
 //function timerStart() {
-//	$(document).on('click', '.timerBtn', function() {
-//		var $this = $(this);
-//		var node = $('<div class="timerObj"/>');
-//		var clock = $('<div class="timerClock float_left"></div>');	
-//		
-//		clock.countdown(getTimeStamp($this.next().next().val()))
-//		.on('update.countdown', function(event) {
-//			var format = '%H:%M:%S';
-//			$(this).html(event.strftime(format));
-//		})
-//		.on('finish.countdown', function(event) {
-//			$(this).html('00:00:00').parent().css("color", "red")
-//			$this.removeClass('display_none');
-//			$this.next().addClass('display_none');
-//			var audio = document.createElement('audio');
-//			audio.src = 'audio/porori.mp3'
-//				audio.play();
-//		});
-//
-//		node.append($('<span class="float_left">'+$this.prev().text()+' -&nbsp;<span>'));
-//		node.append(clock);
-//
-//		$('.timerZone').append(node);
-//		$this.addClass('display_none');
-//		$this.next().removeClass('display_none');
-//
-////		$(document).on('click', '.timerObj', function() {
-////		console.log($(this).children('.timerClock'));
-////		$($(this).children('.timerClock')).countdown('pause');
-////		});
-//	});
+//$(document).on('click', '.timerBtn', function() {
+//var $this = $(this);
+//var node = $('<div class="timerObj"/>');
+//var clock = $('<div class="timerClock float_left"></div>');	
+
+//clock.countdown(getTimeStamp($this.next().next().val()))
+//.on('update.countdown', function(event) {
+//var format = '%H:%M:%S';
+//$(this).html(event.strftime(format));
+//})
+//.on('finish.countdown', function(event) {
+//$(this).html('00:00:00').parent().css("color", "red")
+//$this.removeClass('display_none');
+//$this.next().addClass('display_none');
+//var audio = document.createElement('audio');
+//audio.src = 'audio/porori.mp3'
+//audio.play();
+//});
+
+//node.append($('<span class="float_left">'+$this.prev().text()+' -&nbsp;<span>'));
+//node.append(clock);
+
+//$('.timerZone').append(node);
+//$this.addClass('display_none');
+//$this.next().removeClass('display_none');
+
+////$(document).on('click', '.timerObj', function() {
+////console.log($(this).children('.timerClock'));
+////$($(this).children('.timerClock')).countdown('pause');
+////});
+//});
 //}
 
 
 function clickDetailInDetailFunction(){
-	$(document).on('click','.rcp-first-info',function(event){
+	$(document).on('click','.rcp-view-recipe',function(event){
 		event.preventDefault();
 		$.ajax({
 			url : contextRoot+'recipe/recipeDetail.json',
 			method : 'post',
 			data:{
-				recipeNo:$(event.target).children('input[name="recipeNo"]').val()
+				recipeNo:$('.rcp-hidden-recipeNo').val()
 			},
 			dataType : 'json',
 			success : function(result) {
@@ -120,6 +120,7 @@ function clickDetailInDetailFunction(){
 						+'<h2 class="title"></h2>'
 						+'<p class="hash"></p>'
 						+'<p class="date"></p>'
+						+'<p class="rcp-view-comment">댓글보기</p>'
 						+'<div class="timerZone"></div>'
 						+'<hr/></div>'
 						+'<div class="rcp-detail-body"></div>');
@@ -184,7 +185,7 @@ function recipeDetail(){
 		console.log(event.target);
 		recipeDetailPopup($(event.target).parent().children('input[name="recipeNo"]').val());
 	});
-	
+
 	$(document).on('click', '.rcp-recipe-edit-button', function(event) {
 		event.preventDefault();
 		location.href=contextRoot+"writerecipe.html?"+$('#rcp-hidden-recipeNo').val();

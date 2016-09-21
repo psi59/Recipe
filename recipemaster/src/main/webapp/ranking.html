@@ -69,7 +69,6 @@
 		<div class="section_ranking grid_inner _cheerUpArea">
 			<div class="uio_top"></div>
 			<div class="section_adoption _eliteUserArea">
-				<h5 class="blind">연도별 채택왕 프로필</h5>
 				<div class="article_list">
 					<div class="rankingWrapper">
 					  <div><h3 class="bxrank">전체 인기 Chef</h3><ul class="top_list wrapper-chefs"></ul></div>
@@ -294,7 +293,7 @@
     <p class="rcp-ranking-num">{{rownum}}</p>
   </div>          
     <div class="col-sm-3">
-    <img src="img/profileImg/{{image}}" class="rcp-ranking-image">
+    <img src="img/profileImg/{{isImage image}}{{image}}" class="rcp-ranking-image">
      <input type="hidden" class="rcp-hidden-email" value="{{email}}">
     <h5 class="rcp-ranking-userName rcp-userName">{{userName}}</h5>
     <h5 class="rcp-ranking-chef-rank">{{grade}}</h5>
