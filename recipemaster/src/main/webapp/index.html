@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html class="sticky-header-negative sticky-header-active ">
 <head>
+
 <meta charset="utf-8">
 <title>Recipe Master</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<!-- <script src="node_modules/jquery/dist/jquery.min.js"></script> -->
+  <script src="js/template/jquery.countdown.min.js"></script>
 
 <!-- Template css -->
 <link rel="stylesheet" href="css/rcp-template/animate.css">
@@ -57,6 +61,7 @@
 <!-- --- 아이콘 CDN ----- -->
 <!-- <script src="js/template/d9e67edb08.js"></script> -->
 <script src="js/common/app-context.js"></script>
+
 </head>
 <body data-spy="scroll"  data-target="#navSecondary" data-offset="170">
 <div id="rcp-bg-point">
@@ -590,7 +595,7 @@
 
 <div class="detail-images">
 <input type="hidden" class="rcp-hidden-userNo" value="{{data.userNo}}">
-<input type="hidden" class="rcp-hidden-recipeNo" value="{{data.recipeNo}}">
+<input type="hidden" id="rcp-hidden-recipeNo" class="rcp-hidden-recipeNo" value="{{data.recipeNo}}">
 <input type="hidden" id="rcp-hidden-recipeTitle" value="{{data.recipeName}}">
 <input type="hidden" class="rcp-hidden-email" id="rcp-hidden-email" value="{{data.user.email}}">
 
@@ -834,7 +839,7 @@
     </div>
   </script>
 
-	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+	
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
 	<script src="node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
@@ -848,17 +853,14 @@
 	<script
 		src="node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
 	<script
-		src="node_modules/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
-
+		src="node_modules/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>  
 	<script src="node_modules/bxslider/dist/jquery.bxslider.min.js"></script>
 	<script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
-  <script src="js/template/jquery.countdown.min.js"></script>
-  <script src="node_modules/magnific-popup/dist/jquery.magnific-popup.js"></script>
 
 	<!--  사용자 js -->
 	<script src="js/jquery.bpopup.min.js"></script>
-	
+	<script src="js/recipeDetail.js"></script>
 	<script src="js/template/main.js"></script>
 	<script src="js/template/wow.min.js"></script>
 	<script src="js/template/plugin.js"></script>
@@ -866,7 +868,6 @@
 	<script src="js/template/jquery-slider-rolling.js"></script>
 	<script src="js/common.js"></script>
 	<script src="js/login.js"></script>
-	<script src="js/recipeDetail.js"></script>
 	<script src="js/updateUser.js"></script>
 	<script src="js/common/popup.js"></script>
 	<script src="js/common/chefCard.js"></script>
@@ -882,7 +883,7 @@
   
   
 	<script>
-		$(function() {
+	jQuery(document).ready(function($) {
 
 			/* getWeather(); */
 			
@@ -906,7 +907,40 @@
 				dropdownClick('.mobile-menu-dropdown', '.profile-dropdown');
 			});
 			
+			$(document).on('click', '.timerBtn', function() {
+	            var $this = $(this);
+	            var node = $('<div class="timerObj"/>');
+	            var clock = $('<div class="timerClock float_left"></div>'); 
+	            
+	            clock.countdown(getTimeStamp($this.next().next().val()))
+	            .on('update.countdown', function(event) {
+	              var format = '%H:%M:%S';
+	              $(this).html(event.strftime(format));
+	            })
+	            .on('finish.countdown', function(event) {
+	              $(this).html('00:00:00').parent().css("color", "red")
+	              $this.removeClass('display_none');
+	              $this.next().addClass('display_none');
+	              var audio = document.createElement('audio');
+	              audio.src = 'audio/porori.mp3'
+	                audio.play();
+	            });
+
+	            node.append($('<span class="float_left">'+$this.prev().text()+' -&nbsp;<span>'));
+	            node.append(clock);
+
+	            $('.timerZone').append(node);
+	            $this.addClass('display_none');
+	            $this.next().removeClass('display_none');
+
+//	            $(document).on('click', '.timerObj', function() {
+//	            console.log($(this).children('.timerClock'));
+//	            $($(this).children('.timerClock')).countdown('pause');
+//	            });
+	          });
 		});
+		
+		
 	</script>
 
 </body>

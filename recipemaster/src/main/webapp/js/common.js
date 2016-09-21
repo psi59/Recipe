@@ -511,13 +511,13 @@ function recipeScrap(){
 //---------------핸들바스 헬퍼클래스 ----------------------------
 
 Handlebars.registerHelper('isLike', function(options) {
-	  if (this.likeUser!=0) {
+	  if (this.likeUser!=0 && this.likeUser!=null) {
 	    return options.fn(this);
-	  } 
+	  }
 });
 
 Handlebars.registerHelper('isScrap', function(options) {
-	  if (this.scrapUser!=0) {
+	  if (this.scrapUser!=0 && this.scrapUser!=null) {
 	    return options.fn(this);
 	  }
 });
@@ -535,7 +535,7 @@ function recipeDetailPopup(recipeNo){
 	$(".rcp-720").html('<div class="rcp-header">'
 						+'<h2 class="title"></h2>'
 						+'<p class="hash"></p>'
-						+'<p class="date"></p></div>'
+						+'<p class="date"></p>'
 						+'<div class="timerZone"></div>'
 						+'<hr/></div>'
 						+'<div class="rcp-detail-body"></div>');
@@ -563,7 +563,7 @@ function recipeDetailPopup(recipeNo){
 			if(userInfo != null){
 				if(userInfo.userNo == result.data.userNo){
 					console.log('여기옴 ? ');
-				addSpan = "<span class='glyphicon glyphicon-pencil rcp-recipe-edit-button'></span>";
+				addSpan = "<a href='#'><span class='glyphicon glyphicon-pencil rcp-recipe-edit-button'></span></a>";
 					}
 				}
 			
@@ -659,7 +659,7 @@ function recipeDetailPopup(recipeNo){
 					$(".rcp-720").html('<div class="rcp-header">'
 										+'<h2 class="title"></h2>'
 										+'<p class="hash"></p>'
-										+'<p class="date"></p></div>'
+										+'<p class="date"></p>'
 										+'<div class="timerZone"></div>'
 										+'<hr/></div>'
 										+'<div class="rcp-detail-body"></div>');

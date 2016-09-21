@@ -57,7 +57,7 @@
 
 </head>
 <body  data-spy="scroll"  data-target="#navSecondary" data-offset="170">
- 
+<input type="hidden" id="more-rcp-list">
 <header id="header" class="header-narrow site-header wide" role="banner" data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": false}'>
      <div class="header-body" style="top:0px;"></div>
 </header>
@@ -539,8 +539,6 @@
 	<script src="node_modules/bxslider/dist/jquery.bxslider.min.js"></script>	
 	<script src="js/common/starrating.js"></script>	
 	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-	<!-- <script src="js/list_recipeSearch.js"></script> -->
-	
 	<script src="js/recipeDetail.js"></script>    
 	<script src="js/common/starrating.js"></script>    
 	
@@ -552,7 +550,7 @@
 		
 		// 상단바 불러오기
 		//$('#topBtn').load("topsearchbar.html");	  		
-		$('.header-body').load('topNavBar.html');
+		$('.header-body').load('list_topNavBar.html');
 		
 	  /* 준모3 */				  
 		if(eval(sessionStorage.getItem('data'))!=null){		 
@@ -596,5 +594,5 @@
 		});
 	});
 	</script>
-	
+<script src="js/list_recipeSearch.js"></script>	
 </body>

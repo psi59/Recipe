@@ -15,7 +15,7 @@ $(function() {
 		loginAlert();
 		return;
 	}
-//	$('.header-body').load('topNavBar.html');
+// $('.header-body').load('topNavBar.html');
 
 	var recipeNo = location.href.split('?')[1]==null ? 0 : location.href.split('?')[1];
 
@@ -262,7 +262,7 @@ $(function() {
 					}).on('fileuploaddone', function(e, data) {
 
 						if (data.result.status == 'success') {
-							history.go(-1)();
+							location.href = document.referrer;
 						} else {
 							swal('레시피 등록 실패');
 						}
@@ -422,6 +422,10 @@ $(function() {
 		$('#addRecipe').attr('action', contextRoot+'recipe/addRecipe.json');
 		$('#addRecipe').submit();
 	});
+	
+	$('#resetBtn').on('click', function() {
+		location.href = document.referrer;
+	});
 
 	var cookTimeSlider = $("#cookTime-slider").slider({
 		range : "max",
@@ -575,7 +579,7 @@ function checkMyRecipe(recipeNo){
 					confirmButtonText : "확인",
 					closeOnConfirm : false
 				}, function(isConfirm) {
-					history.go(-1)();
+					location.href = contextRoot;
 				});
 				return;
 			} else if(result.status == 'success') {

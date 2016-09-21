@@ -532,4 +532,15 @@
 		FROM rcp_gpa
 		WHERE uno=#{uno} AND rcpno=#{rcpno}
 	</select>
+	
+	<select id="selectMyLikeList" parameterType="int" resultType="int">
+	  SELECT rcpno 
+	  FROM RCP_LIK 
+	  WHERE uno=#{value}
+  </select>
+  <select id="selectMyScrapList" parameterType="int" resultType="int">
+    SELECT rcpno 
+    FROM RCP_SCR 
+    WHERE uno=#{value}
+  </select>
 </mapper>
