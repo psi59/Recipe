@@ -521,6 +521,16 @@ Handlebars.registerHelper('isScrap', function(options) {
 	  }
 });
 
+Handlebars.registerHelper('isImage', function(options) {
+	  if (this.image=='' || this.image == null) {		  
+	    return 'default.jpg';
+	  }
+//	  }else{
+//		  return options.inverse(this);
+//	  }
+});
+
+
 
 
 function recipeDetailPopup(recipeNo){
