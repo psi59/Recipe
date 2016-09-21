@@ -99,13 +99,13 @@ function timerStart() {
 
 
 function clickDetailInDetailFunction(){
-	$(document).on('click','.rcp-first-info',function(event){
+	$(document).on('click','.rcp-view-recipe',function(event){
 		event.preventDefault();
 		$.ajax({
 			url : contextRoot+'recipe/recipeDetail.json',
 			method : 'post',
 			data:{
-				recipeNo:$(event.target).children('input[name="recipeNo"]').val()
+			recipeNo:$('.rcp-hidden-recipeNo').val()
 			},
 			dataType : 'json',
 			success : function(result) {
@@ -119,6 +119,7 @@ function clickDetailInDetailFunction(){
 									+'<h2 class="title"></h2>'
 									+'<p class="hash"></p>'
 									+'<p class="date"></p>'
+									+'<p class="rcp-view-comment">댓글보기</p></div>'
 									+'<div class="timerZone"></div>'
 									+'<hr/></div>'
 									+'<div class="rcp-detail-body"></div>');
