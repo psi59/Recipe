@@ -8122,3 +8122,15 @@ ul.history li .featured-box .box-content {
   height: 56px;
   background: transparent url(../../img/custom-divider-1.png) no-repeat center center;
 }
+
+#other-login-text{
+      margin: 0px ! important;
+    color: #bfbfbf ! important ;
+    font-size: 9pt ! important ;
+    text-align: center ! important;
+        margin-bottom: 10px ! important;
+    
+}
+#naver_id_login{
+  text-align: center;
+}

@@ -510,7 +510,7 @@ header .header-content {
 	padding-top: 0.1%;
 	background: white;
 	width: 19%;
-	height: 43%;
+	height: 44%;
 }
 
 #random-pop-up-banner .rcp-list-margin {
@@ -550,8 +550,9 @@ header .header-content {
 }
 
 #slot_box {
+	background-color:white;
 	position: relative;
-	width: 100%;
+	width: 283px;
 	height: 433px;
 	overflow: hidden;
 	display: inline-block;
@@ -666,4 +667,8 @@ header .header-content {
 
 a {
 	text-decoration: none ! important;
+}
+
+#random-pop-up-banner{
+	width:283px;
 }

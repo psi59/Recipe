@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -23,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import com.recipe.domain.Category;
 import com.recipe.domain.Material;
 import com.recipe.domain.Recipe;
@@ -51,8 +49,8 @@ public class RecipeController {
 		int recipeCount = 0;
 
 		int userNo = 0;
-		if (session.getAttribute("userNo") != null) {
-			userNo = (Integer) (session.getAttribute("userNo"));
+		if (CommonUtil.getSessionUser(session) != null) {
+		  userNo = CommonUtil.getSessionUser(session).getUserNo();
 		}
 
 		List<Recipe> list;
@@ -146,9 +144,6 @@ public class RecipeController {
 	public String recipeSearchAutoComplete(@RequestParam String searchValue) {
 		HashMap<String, Object> result = new HashMap<>();
 		List<String> recipeNameList = recipeService.getRecipeNameList(searchValue);
-		for (String recipeName : recipeNameList) {
-			System.out.println("");
-		}
 		try {
 			result.put("status", "success");
 			result.put("data", recipeNameList);
@@ -312,8 +307,6 @@ public class RecipeController {
 		JsonArray recipeProduceDatas = new JsonArray();
 		JsonArray recipeRepresentImages = new JsonArray();
 		JsonArray recipeMaterialNames = new JsonArray();
-
-		System.out.println(categoryValue);
 
 		for (String imageName : deleteRepresentImg) {
 			if (!CommonUtil.imageDelete(CommonUtil.getImageFolderPath("representImg", request), imageName)) {
@@ -892,6 +885,23 @@ public class RecipeController {
 			result.put("status", "success");
 			result.put("data", list);
 			System.out.println(list);
+		} catch (Exception e) {
+			result.put("status", "false");
+		}
+
+		return new Gson().toJson(result);
+	}
+	
+	@RequestMapping(path = "getMyLikeList", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getMyLikeList(@RequestParam(defaultValue = "0") int userNo) {
+		HashMap<String, Object> result = new HashMap<>();
+		List<Integer> likelist = recipeService.getMyLikeList(userNo);
+		List<Integer> scraplist = recipeService.getMyScrapList(userNo);
+		try {
+			result.put("status", "success");
+			result.put("like", likelist);
+			result.put("scrap", scraplist);
 		} catch (Exception e) {
 			result.put("status", "false");
 		}

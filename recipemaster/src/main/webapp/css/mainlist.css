@@ -40,7 +40,8 @@
 
 .rcp-h2-25px {
 	color: black;
-	font-size: 25px;
+	    margin-bottom: 5px;
+    font-size: 20px;
 }
 
 .rcp-mypage-section {
@@ -965,4 +966,9 @@ span a {
 	position: relative;
 	top: 300px;
 	left: 250px;
+	color:black;
+}
+
+.rcp-index-p-margin{
+	margin-bottom:15px;
 }

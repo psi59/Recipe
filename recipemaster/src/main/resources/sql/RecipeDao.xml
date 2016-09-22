@@ -74,10 +74,14 @@
 	
 	<select id="recipeSearch" parameterType="Map" resultMap="recipeMap">
     SELECT r.rcpno, r.uno, r.name, r.intro, r.c_time, r.ptn, r.rcp_dt, r.rpimg rpimg,
-    r.hits, r.rgst, truncate(avg(g.gpa),1) gpa, u.email email, u.uno, u.name userName, l.rcpno,
+    r.hits, r.rgst, truncate(avg(g.gpa),1) gpa, u.email email, u.uno, u.name userName, l.rcpno,r2.cnt countLike,r3.cnt countScrap,
     l.lc_dt, l.uno likeUser FROM users u INNER JOIN rcps r on u.uno=r.uno
     LEFT OUTER JOIN rcp_gpa g ON r.rcpno=g.rcpno
     LEFT OUTER JOIN rcp_lik l ON r.rcpno=l.rcpno and l.uno=#{userNo}
+    LEFT OUTER JOIN (SELECT rcpno,COUNT(uno) cnt FROM rcp_lik 
+    GROUP BY rcpno) r2 ON r.rcpno = r2.rcpno 
+    LEFT OUTER JOIN (SELECT rcpno,COUNT(uno) cnt FROM rcp_scr 
+    GROUP BY rcpno) r3 ON r.rcpno = r3.rcpno 
     <if test="!categorySize eq 0">
       ,(SELECT rcpno , count(*) vc FROM (SELECT c.ctgno, c.name, cn.rcpno
       from ctg c, ctg_no cn where c.ctgno = cn.ctgno and c.name IN (
@@ -283,6 +287,9 @@
     ON r.rcpno=countScrap.rno        
 		LEFT OUTER JOIN RCP_LIK l ON
     r.rcpno=l.rcpno and l.uno = #{userNo}
+    <if test="request == 2 or request == 3" >
+    WHERE r.rgst = 0
+    </if>
 		ORDER BY r.rcp_dt desc
 		<if test="request == 5"> limit 4</if>
 	</select>
@@ -528,4 +535,15 @@
 		FROM rcp_gpa
 		WHERE uno=#{uno} AND rcpno=#{rcpno}
 	</select>
+	
+	<select id="selectMyLikeList" parameterType="int" resultType="int">
+	  SELECT rcpno 
+	  FROM RCP_LIK 
+	  WHERE uno=#{value}
+  </select>
+  <select id="selectMyScrapList" parameterType="int" resultType="int">
+    SELECT rcpno 
+    FROM RCP_SCR 
+    WHERE uno=#{value}
+  </select>
 </mapper>

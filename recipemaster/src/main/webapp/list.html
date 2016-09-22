@@ -16,27 +16,33 @@
 <!-- Template css -->
 <link rel="stylesheet"
   href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  
+<link rel="stylesheet"
+  href="node_modules/bxslider/dist/jquery.bxslider.css">
+   <link rel="stylesheet" href="css/mainlist.css"> 
 <link rel="stylesheet" href="css/rcp-template/theme.css">
+<link rel="stylesheet" href="css/template/styles.css">
 <link rel="stylesheet" href="css/rcp-template/theme-element.css">
 <link rel="stylesheet" href="css/rcp-template/skin-restaurant.css">
-<link rel="stylesheet" href="css/template/font-awesome.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/template/animate.css">
 <link rel="stylesheet" href="css/template/commentTemp.css">
 <link rel="stylesheet" href="css/template/main.css"> 
-<link rel="stylesheet" href="css/template/styles.css">
+<link rel="stylesheet" href="css/common/starrating.css">
+
+<!-- <link rel="stylesheet" href="css/template/styles.css"> -->
 <link rel="stylesheet" href="js/template/jquery-ui-1.12.0/jquery-ui.min.css">
 
 <!-- 사용자 정의 css -->
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/userinfobox.css">
-<link rel="stylesheet" href="css/mainlist.css">
-<link rel="stylesheet" href="css/detail.css">
+
+<link rel="stylesheet" href="css/detail2.css">
 
 <!-- 용이 -->
 <link rel="stylesheet" href="/node_modules/sweetalert/dist/sweetalert.css">
 
 <!-- 성현 -->
-<link rel="stylesheet" href="css/common/chefCard.css">
 <link rel="stylesheet" href="css/common/popup.css">
 <link rel="stylesheet" href="css/common/signup.css">
 <link rel="stylesheet" href="css/index_rankTabs.css">
@@ -44,15 +50,14 @@
 <link rel="stylesheet" href="css/list_categoryCheckbox.css">
 <link rel="stylesheet" href="css/list_countOrder.css">
 <link rel="stylesheet" href="css/common/loading.css">
-<link rel="stylesheet"
-  href="node_modules/bxslider/dist/jquery.bxslider.css">
-<link rel="stylesheet" href="css/common/starrating.css">
+
+ 
 <!-- --- 아이콘 CDN ----- -->
 <!-- <script src="js/template/d9e67edb08.js"></script> -->
 
 </head>
 <body  data-spy="scroll"  data-target="#navSecondary" data-offset="170">
- 
+<input type="hidden" id="more-rcp-list">
 <header id="header" class="header-narrow site-header wide" role="banner" data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": false}'>
      <div class="header-body" style="top:0px;"></div>
 </header>
@@ -73,38 +78,28 @@
       </section>
     </div>
   </section>
-
 <div id='detail_pop_up'>
     <div class="rcp-detail-form row">
 
       <div class="rcp-720" id="rcp-720">
         <div class="rcp-header">
-          <h2 class="title">매콤 대패삼겹살 볶음</h2>
-          <p class="hash">#돼지고기 #대패삼겹살 #야식 #간단고기요리 #매콤고기</p>
-          <p class="date">2016.07.21</p>
-          <hr />
+          <h2 class="title"></h2> 
+          
+          <p class="hash"></p>
+          <p class="date"></p>
+          <div class="timerZone"></div>
         </div>
+        <hr/>               
         <div class="rcp-detail-body"></div>
       </div>
 
       <div class="rcp-304"></div>
 
       <div class="rcp-taps">
-        <div class="rcp-first-info">
-        <input type="hidden" value="" name="recipeNo">
-        </div>
+          <input id="detail-recipeNo" type="hidden" value="" name="recipeNo">
+      
 
-        <div class="rcp-seconde-info">
-          <a href="#">댓글</a>
-        </div>
-
-        <div class="rcp-third-info"></div>
-
-        <div class="rcp-fourth-info"></div>
-
-        <div class="rcp-fifth-info"></div>
       </div>
-
     </div>
   </div>
 
@@ -114,7 +109,7 @@
 	    <div class="row">
 	      <div class="col-md-12 center">
 	        <h2 class="mt-lg mb-sm">Get your <strong>Recipe</strong></h2>
-	        <p class="font-size-md">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu pulvinar magna.<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+	        <p class="font-size-md">레시피, 쉐프, 재료에 대한 키워드로 검색이 가능합니다.<br>원하는 카테고리를 선택해주시면, 더 정확한 레시피 결과를 보실 수 있습니다.</p>
 	        <hr class="custom-divider" style="margin: 0;">
 	      </div>
 	    </div>
@@ -235,7 +230,7 @@
   </div> 
 
   <input id="search-pageNo" type="hidden" value="1">
-  <input id="sort-condition" type="hidden" value="newest">
+  <input id="sort-condition" type="hidden" value="">
 <!-- {{#each representImages}}  
 <input type="hidden" class="forBackgroundRepresentImg" value="{{this}}">
 {{/each}}
@@ -244,7 +239,7 @@
   <script id="recipe-detail-main-template"
     type="text/x-handlebars-template">
     
-              <div class="rcp-body" name="rcp-body" >
+               <div class="rcp-body" name="rcp-body" >
               <div>
                 <div class="rcp-title-size">
                    
@@ -253,7 +248,7 @@
                 </div>
                 <ul class="rcp-mainSlider">
                   {{#each representImages}}
-                <li class="rcp-mainImg"><img class="rcp-images rcp-mainImg1" src="img/representImg/{{this}}" class="rcp-images" name="rcp-images-position" id="rcp-images-position"></li>
+                <li class="rcp-mainImg"><img class="rcp-images rcp-images-main rcp-mainImg1" src="img/representImg/{{this}}" class="rcp-images" name="rcp-images-position" id="rcp-images-position"></li>
                     {{/each}}
                 </ul>
                </div>
@@ -274,7 +269,18 @@
                 <div class="rcp-title-size">
                     
                   <h6 class="rcp-bodyTitle">STEP{{inc @index}}</h6>
-                    
+                  {{#if recipeTime}}
+                    <button class="timerBtn" type="button"> 
+                      <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                      {{recipeTime}}분 타이머 시작!!
+                    </button>
+                    <div class="timerBtn padding_top_15px display_none"> 
+                      <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                      타이머 실행중!!
+                    </div>
+                    <input type="hidden" value="{{recipeTime}}"/>
+                  {{/if}}
+                  
                 </div>
                 <div>
                
@@ -322,6 +328,7 @@
 <input type="hidden" class="rcp-hidden-userNo" value="{{data.userNo}}">
 <input type="hidden" class="rcp-hidden-recipeNo" value="{{data.recipeNo}}">
 <input type="hidden" class="rcp-hidden-email" value="{{data.user.email}}">
+
 <a href="#"><img src="img/profileImg/{{data.user.image}}" class="rcp-right-profile  rcp-profile img-circle"></a>
 <a class="rcp-nickname" href="#">{{data.user.userName}}</a>
 <h4 class="rcp-detail-title"></h4>
@@ -340,25 +347,29 @@
    <i class="fa fa-heart" aria-hidden="true"></i>
    <i class="fa fa-comments" aria-hidden="true"></i>
    <i class="fa fa-external-link" aria-hidden="true"></i>
+   <i class="fa fa-star" aria-hidden="true"></i>
   </div>
   <div class="rcp-icons-names">
     <p>조회수</p>
     <p>좋아요</p>
     <p>댓글</p>
-    <p>스크랩</p>  
+    <p>스크랩</p> 
+    <p>평점</p>
   </div>
   <div class="rcp-icons-info" align="right">
     <p>{{data.hits}}</p>
     <p>{{data.countLike}}</p>
     <p>{{data.countComment}}</p>
-    <p>{{data.countScrap}}</p>  
+    <p>{{data.countScrap}}</p>
+    <p>{{data.gradePoint}}</p>  
   </div>
 </div>
 <div class="rcp-info-filter">
     <hr class="rcp-info-next"/>
-    <a href="#">모아보기</a>
+    
 </div>
 <div class="rcp-info-images">
+
 </div>
 <div class="rcp-detail-step">
   </div>
@@ -368,16 +379,9 @@
 
   <script id="recipe-detail-main-images-template"
     type="text/x-handlebars-template">
-{{#each representImages}}
-    <div class="rcp-main"> 
-      <a href="#" name="rcp-nav-images">MAIN {{inc @index}}</a>
-      <div style="float:right">
-         <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-      </div>
-    <a href="#" name="rcp-nav-bgImages-button" role="button" ><div style= background-image:url("img/representImg/{{this}}") class="rcp-info-images-emts"></div></a>
-    
-  
-{{/each}}
+ <div class="rcp-main"> 
+      <a href="#" name="rcp-nav-images">MAIN</a>      
+    <a href="#" name="rcp-nav-bgImages-button" role="button" ><div style= "background-image:url('img/representImg/{{this}}')" class="rcp-info-images-emts"></div></a>
 </script>
 
   <script id="recipe-detail-step-images-template"
@@ -385,8 +389,7 @@
 {{#recipeProcedure}}
      <div class="rcp-main"> 
       <a href="#" name="rcp-nav-images">STEP {{inc @index}}</a>
-      <div style="float:right">
-         <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+      <div style="float:right">         
       </div>
      <a href="#" name="rcp-nav-bgImages-button" role="button" >
       <div style= background-image:url("img/recipeImg/{{recipeProduceImage}}") class="rcp-info-images-emts"></div></a> 
@@ -432,7 +435,7 @@
                      <input type="hidden" name="recipeNo" value="{{recipeNo}}">
                     <span>
                     <a href="#" class="rcp-like {{#isLike}}active{{/isLike}}"><div class="glyphicon glyphicon-heart-empty rcp-i-tag-margin-right-top"></div>
-                    <span>좋아요 <span>{{countLike}}<span></span></a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span>좋아요 <span>{{countLike}}<span></span></a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    
                     <span class="meta-time">{{cookTime}}분 소요</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 
                     <span>
@@ -476,6 +479,47 @@
         </div><!-- #respond -->
 </script>
 
+
+
+  <!-- 별점주기 -->
+  <script id="starrating-template" type="text/x-handlebars-template">
+    <div id="starrating-box">
+    <br/>  
+    {{#if checkDuplicateGrade}}
+      <div>
+        <span id="rcp-starrating" align="left">평가하기</span>
+        
+      </div>
+      <div class="rcp-rating">
+        <input id="star5" name="rating" type="radio" value="5"/>
+        <label for="star5" class="full"></label>
+        <input id="star4.5" name="rating" type="radio" value="4.5"/>
+        <label for="star4.5" class="half"></label>
+        <input id="star4" name="rating" type="radio" value="4"/>
+        <label for="star4" class="full"></label>
+        <input id="star3.5" name="rating" type="radio" value="3.5"/>
+        <label for="star3.5" class="half"></label>
+        <input id="star3" name="rating" type="radio" value="3"/>
+        <label for="star3" class="full"></label>
+        <input id="star2.5" name="rating" type="radio" value="2.5"/>
+        <label for="star2.5" class="half"></label>
+        <input id="star2" name="rating" type="radio" value="2"/>
+        <label for="star2" class="full"></label>
+        <input id="star1.5"  name="rating" type="radio" value="1.5"/>
+        <label for="star1.5" class="half"></label>
+        <input id="star1"  name="rating" type="radio" value="1"/>
+        <label for="star1" class="full"></label>
+        <input id="star0.5"  name="rating" type="radio" value="0.5"/>
+        <label for="star0.5" class="half"></label>
+      </div>
+      <div id="rcp-starrating-btn-apply" class="rcp-starrating-btn">
+        등록 </div>
+    {{else}}
+      <div align="left">평가하기</div>      
+      <div align="left">참여하셨습니다.</div>
+    {{/if}}
+    </div>
+  </script>
   
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -501,10 +545,11 @@
 	<script src="node_modules/bxslider/dist/jquery.bxslider.min.js"></script>	
 	<script src="js/common/starrating.js"></script>	
 	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-	<!-- <script src="js/list_recipeSearch.js"></script> -->
-	
 	<script src="js/recipeDetail.js"></script>    
 	<script src="js/common/starrating.js"></script>    
+	
+  <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="node_modules/sweetalert/dist/sweetalert-dev.js"></script>
 	
 	<script>
 	$(document).ready(function(){
@@ -555,5 +600,5 @@
 		});
 	});
 	</script>
-	
+<script src="js/list_recipeSearch.js"></script>	
 </body>

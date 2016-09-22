@@ -21,6 +21,7 @@ $(document).ready(function(){
 			$.ajax({
 				url : contextRoot+'user/add.json',
 				method : 'post',
+				async:false,
 				data : {
 					email : $('#signup-e-mail').val(),
 					userName : $('#signup-userName').val(),
@@ -31,20 +32,16 @@ $(document).ready(function(){
 				success : function(result) {				
 					// 중복된 이메일이거나 형식 오류일 경우
 					if (result.status != 'success') {
-						swal('이메일과 비밀번호를 확인해주세요.');
 						return;
 					} 				
 					authKEY=result.authKEY;
-					swal($('#signup-userName').val()+'님 환영합니다 !')						
-					
 					
 					//인증추가
 					 email = $('#signup-e-mail').val();
-					swal(email+'에 이메일 전송ajax실행 시작');
 					if (authKEY!=null) {
 						$.ajax({
 				            	type : 'GET',
-				                url : getContextRoot('8888')+'user/authentication.do?email='+email+'&authKEY='+authKEY,
+				                url : getNodeContextRoot('8888')+'user/authentication.do?email='+email+'&authKEY='+authKEY,
 				                success : function(result) {					
 									swal('이메일 전송완료');
 				                } // end success
@@ -61,11 +58,8 @@ $(document).ready(function(){
 					$('#signup-userName-label').text('');			
 					$('#signup-password-label').text('');
 					$('#signup-passwordCheck-label').text('');
-				},
-				error : function() {
-					alert('서버 요청 오류 !')
 				}
-			})	
+			});	
 			            
 		}
 		
@@ -103,7 +97,7 @@ $(document).ready(function(){
 	          var email = $(this).val();
 	            $.ajax({
 	            	type : 'GET',
-	                url : getContextRoot('9999')+'user/checkDuplication.do?email='+email,
+	                url : getNodeContextRoot('9999')+'user/checkDuplication.do?email='+email,
 	                success : function(result) {					
 	                    if (result == 'true') {
 							// 사용가능한 이메일
@@ -181,7 +175,7 @@ $(document).ready(function(){
 			swal(email);
 			$.ajax({
             	type : 'GET',
-                url : getContextRoot('8282')+'user/pushEmail.do?email='+email,
+                url : getNodeContextRoot('8282')+'user/pushEmail.do?email='+email,
                 success : function(result) {					
 					swal('이메일 전송완료');
 					$(document).on('click', '.confirm', function(){

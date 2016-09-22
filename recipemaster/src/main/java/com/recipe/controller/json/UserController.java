@@ -54,6 +54,7 @@ public class UserController {
 
 		HashMap<String, Object> result = new HashMap<>();
 		try {
+			user.setImage("default.jpg");
 			User addUser=user;
 			//unique key 생성
 			addUser.setAuthenticationKEY(UUID.randomUUID().toString());
@@ -273,11 +274,8 @@ public class UserController {
 		HashMap<String, Object> result = new HashMap<>();
 
 		User loginUser = new User(); 
-		System.out.println();
 		loginUser = userService.loginUser(user);   
 
-		System.out.println("loginUser : "+loginUser);
-		System.out.println("컨트롤러 오는건가 : user 정보 :: "+ user);
 		if(loginUser == null){
 			System.out.println("설마 if문까지 ?? 확인");
 			userService.addUserInNaver(user);
@@ -466,6 +464,6 @@ public class UserController {
 			System.out.println("실패");
 			result.put("status", "failure");
 		}
-		return "redirect:http://52.78.74.162:2828/user/updatePassword.do?email="+email+"&key="+nextPassword;
+		return "redirect:http://tkddlf59.dlinkddns.com:2828/user/updatePassword.do?email="+email+"&key="+nextPassword;
 	}
 }

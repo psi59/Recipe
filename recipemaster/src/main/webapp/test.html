@@ -9,8 +9,14 @@
 <button id="btn">전송전송</button>
 </body>
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
+<!-- <script src="js/template/elasticsearch-js/elasticsearch.min.js"></script> -->
+<script src="js/template/elasticsearch-js/elasticsearch.jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
+	var client = new $.es.Client({
+		  hosts: 'localhost:9200'
+		});
+	
 	$('#search').on('keyup', function(){
 		var datas = {
 				  query:{
@@ -25,7 +31,7 @@ $(function(){
 			};  
 		
 		$.ajax({
-		    url : 'http://localhost:9200/recipes/_search',
+		    url : 'http://localhost:9200/_msearch',
 		    method : 'POST',
 		    data : JSON.stringify(datas),
 		    dataType : 'json',

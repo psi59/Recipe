@@ -114,7 +114,7 @@ function getUserInfo() {
 	$('#mainNav')
 			.append(
 					$('<li id="writeRecipe" class="margin_right_10px activedropdown-full-color dropdown-secondary"><a href='+contextRoot+'mypage.html?'+(userInfo==null?null:userInfo.email)+' class="padding_6px dropdown__header"><img id="profileImg"'
-							+'class="rcp-img img-circle" src="img/profileImg/'+(userInfo==null?null:userInfo.image)+'"/>'+(userInfo==null?null:userInfo.userName)+'</a></li>'));
+							+'class="rcp-img img-circle" src="img/profileImg/'+(userInfo.image==null || userInfo.image == '' ?'default.jpg':userInfo.image)+'"/>'+(userInfo==null?null:userInfo.userName)+'</a></li>'));
 	$('#mainNav')
 			.append(
 					$('<li id="writeRecipe" class="dropdown-full-color dropdown-secondary"><a href='+contextRoot+'writerecipe.html>레시피 등록</a></li> '));

@@ -128,7 +128,7 @@ document.write('<script type"text/javascript" src="js/template/naverLogin_implic
 			  MainRecomList()
 			  // more 클릭시 리스트 페이지로 이동
 			  $('#newest-rcp-more').click(function(){
-				  window.location.href = contextRoot+"list.html";
+				  window.location.href = contextRoot+"list.html?order=newest";
 			  })
 		  },
 		  error : function(){

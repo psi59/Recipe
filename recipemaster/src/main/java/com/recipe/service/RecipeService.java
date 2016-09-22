@@ -51,4 +51,6 @@ public interface RecipeService {
 	List<Recipe> getRecipeRecomCtList(int pageSize);
 	void addGrade(int userNo, int recipeNo, double grade);
 	boolean getDuplicateGrade(int userNo, int recipeNo);
+	List<Integer> getMyLikeList(int userNo);
+	List<Integer> getMyScrapList(int userNo);
 }
