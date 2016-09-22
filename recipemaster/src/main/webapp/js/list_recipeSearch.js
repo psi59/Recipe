@@ -6,10 +6,10 @@ var userInfo = (tValue==null?"":tValue);
 $(document).ready(function(){
 	// url에 QueryString의 검색어로 검색 결과 로딩
 	urlParams = getUrlParams();	
-	if(urlParams.sk != undefined){		
-		$('#searchKeyword').val(decodeURIComponent(urlParams.sk));
-		$('#more-rcp-list').val('');
-	}	
+//	if(urlParams.sk != undefined){		
+//		$('#searchKeyword').val(decodeURIComponent(urlParams.sk));
+//		$('#more-rcp-list').val('');
+//	}	
 	
 	// 최신 레시피	
 	if(urlParams.order != undefined){	

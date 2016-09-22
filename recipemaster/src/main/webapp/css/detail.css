@@ -307,12 +307,24 @@
 
 }
 .rcp-detail-form .date{
-  
+  float:left;
   font-size:10px;
 }
 
 .rcp-detail-form .hr{ 
   border-top:1px solid #eaeaea;
+}
+
+.rcp-view-comment{
+    margin-right: 50px;
+    float: right;
+    cursor:pointer;
+}
+
+.rcp-view-recipe{
+    margin-right: 50px;
+    float: right;
+    cursor:pointer;
 }
 
 .rcp-title-size {

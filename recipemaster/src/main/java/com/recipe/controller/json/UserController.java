@@ -273,11 +273,8 @@ public class UserController {
 		HashMap<String, Object> result = new HashMap<>();
 
 		User loginUser = new User(); 
-		System.out.println();
 		loginUser = userService.loginUser(user);   
 
-		System.out.println("loginUser : "+loginUser);
-		System.out.println("컨트롤러 오는건가 : user 정보 :: "+ user);
 		if(loginUser == null){
 			System.out.println("설마 if문까지 ?? 확인");
 			userService.addUserInNaver(user);

@@ -153,6 +153,12 @@
 		$(function(){
 			var userInfo = getUserInfo();
 			
+			urlParams = getUrlParams();  
+			  if(urlParams.sk != undefined){    
+			    $('#searchKeyword').val(decodeURIComponent(urlParams.sk));
+			    $('#more-rcp-list').val('');
+			  } 
+			
 			//loginBtn 팝업 , 불투명 배경 띄우기
 			$('#loginBtn').on('click', function(event){
 			  event.preventDefault();

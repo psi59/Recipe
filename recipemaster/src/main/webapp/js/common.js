@@ -344,7 +344,7 @@ console.log('button 시점 recipeNo : ' +$(event.target).parent().parent().child
 
 
 function comment(){
-	$(document).on('click','.rcp-seconde-info',function(evnet){		
+	$(document).on('click','.rcp-view-comment',function(evnet){		
 		evnet.preventDefault();
 		commentFunction();
 		
@@ -365,6 +365,7 @@ function commentFunction(){
 			$(".rcp-720").html('<div class="rcp-header">'
 					+'<h2 class="title">댓글</h2>'
 					+'<h3 class="rcp-comment-count"></h3>'
+					+'<p class="rcp-view-recipe">레시피보기</p></div>'
 					+'</div>'
 					+'<div class="rcp-detail-body"></div>');
 			console.log('dfdf : '+$('#aaaa').val());
@@ -522,6 +523,16 @@ Handlebars.registerHelper('isScrap', function(options) {
 	  }
 });
 
+Handlebars.registerHelper('isImage', function(options) {
+	  if (this.image=='' || this.image == null) {		  
+	    return 'default.jpg';
+	  }
+//	  }else{
+//		  return options.inverse(this);
+//	  }
+});
+
+
 
 
 function recipeDetailPopup(recipeNo){
@@ -536,6 +547,7 @@ function recipeDetailPopup(recipeNo){
 						+'<h2 class="title"></h2>'
 						+'<p class="hash"></p>'
 						+'<p class="date"></p>'
+						+'<p class="rcp-view-comment">댓글보기</p>'
 						+'<div class="timerZone"></div>'
 						+'<hr/></div>'
 						+'<div class="rcp-detail-body"></div>');
@@ -567,7 +579,7 @@ function recipeDetailPopup(recipeNo){
 					}
 				}
 			
-			$('.rcp-first-info').children('input[name="recipeNo"]').val(result.data.recipeNo);
+			$('.rcp-taps').children('input[name="recipeNo"]').val(result.data.recipeNo);
 			$('.rcp-header > .title').html(result.data.recipeName+addSpan);
 			$('.rcp-header > .date').text(result.data.recipeDate);
 			$('.hash').text(result.data.intro);
