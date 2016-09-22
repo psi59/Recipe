@@ -54,6 +54,7 @@ public class UserController {
 
 		HashMap<String, Object> result = new HashMap<>();
 		try {
+			user.setImage("default.jpg");
 			User addUser=user;
 			//unique key 생성
 			addUser.setAuthenticationKEY(UUID.randomUUID().toString());

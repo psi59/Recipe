@@ -36,11 +36,11 @@ $(document).ready(function(){
 
 	// 처음화면에 모든 레시피들을 보여준다
 //	search('newest', $('#order-latest-btn').val());
-	if($('#more-rcp-list').val()!=null){
-		search($('#sort-condition').val(),'desc')
-	} else {
-		esearch($('#sort-condition').val(),1, false);
-	}
+//	if($('#more-rcp-list').val().length>0){
+//		search($('#sort-condition').val(),'desc')
+//	} else {
+//		esearch($('#sort-condition').val(), 1, false);
+//	}
 	
 
 	// 검색창에 포커스

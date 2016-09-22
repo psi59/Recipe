@@ -32,16 +32,12 @@ $(document).ready(function(){
 				success : function(result) {				
 					// 중복된 이메일이거나 형식 오류일 경우
 					if (result.status != 'success') {
-						swal('이메일과 비밀번호를 확인해주세요.');
 						return;
 					} 				
 					authKEY=result.authKEY;
-					swal($('#signup-userName').val()+'님 환영합니다 !')						
-					
 					
 					//인증추가
 					 email = $('#signup-e-mail').val();
-					swal(email+'에 이메일 전송ajax실행 시작');
 					if (authKEY!=null) {
 						$.ajax({
 				            	type : 'GET',
@@ -62,9 +58,6 @@ $(document).ready(function(){
 					$('#signup-userName-label').text('');			
 					$('#signup-password-label').text('');
 					$('#signup-passwordCheck-label').text('');
-				},
-				error : function() {
-					alert('서버 요청 오류 !')
 				}
 			});	
 			            

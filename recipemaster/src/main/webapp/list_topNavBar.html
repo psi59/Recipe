@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="css/rcp-template/login.css">
 <link rel="stylesheet" href="css/rcp-template/skin-restaurant.css">
 <link rel="stylesheet" href="css/rcp-template/form-template.css">
-
 </head>
 <body data-spy="scroll" data-target="#navSecondary" data-offset="170">
 
@@ -146,6 +145,7 @@
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/template/naverLogin_implicit-1.0.2.js"></script>
+	<script src="node_modules/bxslider/dist/jquery.bxslider.min.js"></script>
 	<!-- <script src="js/list_recipeSearch.js"></script> -->
 	
 	<script type="text/javascript">
@@ -158,6 +158,12 @@
 			    $('#searchKeyword').val(decodeURIComponent(urlParams.sk));
 			    $('#more-rcp-list').val('');
 			  } 
+			  
+			  if($('#more-rcp-list').val().length>0){
+				    search($('#sort-condition').val(),'desc')
+				  } else {
+				    esearch($('#sort-condition').val(), 1, false);
+				  }
 			
 			//loginBtn 팝업 , 불투명 배경 띄우기
 			$('#loginBtn').on('click', function(event){

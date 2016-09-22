@@ -522,15 +522,15 @@ Handlebars.registerHelper('isScrap', function(options) {
 	    return options.fn(this);
 	  }
 });
-
-Handlebars.registerHelper('isImage', function(options) {
-	  if (this.image=='' || this.image == null) {		  
-	    return 'default.jpg';
-	  }
-//	  }else{
-//		  return options.inverse(this);
+//
+//Handlebars.registerHelper('isImage', function(options) {
+//	  if (this.image=='' || this.image == null || this.image.length<1) {		  
+//	    return 'default.jpg';
 //	  }
-});
+////	  }else{
+////		  return options.inverse(this);
+////	  }
+//});
 
 
 

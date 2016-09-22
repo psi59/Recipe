@@ -37,7 +37,7 @@
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/userinfobox.css">
 
-<link rel="stylesheet" href="css/detail.css">
+<link rel="stylesheet" href="css/detail2.css">
 
 <!-- 용이 -->
 <link rel="stylesheet" href="/node_modules/sweetalert/dist/sweetalert.css">
@@ -109,7 +109,7 @@
 	    <div class="row">
 	      <div class="col-md-12 center">
 	        <h2 class="mt-lg mb-sm">Get your <strong>Recipe</strong></h2>
-	        <p class="font-size-md">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu pulvinar magna.<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+	        <p class="font-size-md">레시피, 쉐프, 재료에 대한 키워드로 검색이 가능합니다.<br>원하는 카테고리를 선택해주시면, 더 정확한 레시피 결과를 보실 수 있습니다.</p>
 	        <hr class="custom-divider" style="margin: 0;">
 	      </div>
 	    </div>
@@ -269,7 +269,18 @@
                 <div class="rcp-title-size">
                     
                   <h6 class="rcp-bodyTitle">STEP{{inc @index}}</h6>
-                    
+                  {{#if recipeTime}}
+                    <button class="timerBtn" type="button"> 
+                      <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                      {{recipeTime}}분 타이머 시작!!
+                    </button>
+                    <div class="timerBtn padding_top_15px display_none"> 
+                      <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                      타이머 실행중!!
+                    </div>
+                    <input type="hidden" value="{{recipeTime}}"/>
+                  {{/if}}
+                  
                 </div>
                 <div>
                
@@ -293,7 +304,7 @@
                 <article>
                   
                   <div class="cs-comment-author">
-                   <img class="avatar" src="img/profileImg/{{isImage image}}{{user.image}}" alt=""> 
+                   <img class="avatar" src="img/profileImg/{{user.image}}" alt=""> 
                       <b><a href="#">{{user.userName}}</a></b> 
                           <a class="cs-comment-metadata" href="#"> 
                          <span class="rcp-comment-date">{{recipeCommentDate}}</span>
