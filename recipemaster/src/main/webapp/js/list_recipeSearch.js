@@ -9,12 +9,12 @@ $(document).ready(function(){
 //	if(urlParams.sk != undefined){		
 //		$('#searchKeyword').val(decodeURIComponent(urlParams.sk));
 //		$('#more-rcp-list').val('');
-//	}	
-	
+//	}		
 	// 최신 레시피	
 	if(urlParams.order != undefined){	
 		$('#sort-condition').val(decodeURIComponent(urlParams.order));
 		$('#order-latest-btn-text').addClass('order-active');
+		$('#sort-condition').val('neweast')
 	}	
 	/*if(urlParams.sc != undefined){		
 		$('#searchCondition-select').val(decodeURIComponent(urlParams.sc));
