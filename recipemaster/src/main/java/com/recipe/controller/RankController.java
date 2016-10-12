@@ -97,6 +97,7 @@ public class RankController {
 			result.put("status", "success");
 			result.put("data", list);
 		} catch (Exception e) {
+			e.printStackTrace();
 			result.put("status", "failure");
 		}
 		return new Gson().toJson(result);

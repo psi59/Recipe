@@ -63,23 +63,40 @@
 	<select id="selectRankList" resultMap="userMap" parameterType="Map">
 		SELECT @rownum:=@rownum+1 rownum,vt.* FROM(
 		SELECT
-		r1.uno,r1.name,r1.email,r1.intro,r1.role,r1.img image,
-		IFNULL(r2.cnt,0)
-		rcpCount,IFNULL(r3.cnt,0) scnt,
-		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) total,
-		<include refid="grade"/>
-		FROM USERS r1
+		usr.uno,usr.name,usr.email,usr.intro,usr.role,usr.img image,
+		IFNULL(rcp.cnt,0)
+		rcpCount,IFNULL(scs.cnt,0) scnt,
+		SUM((IFNULL(rcp.cnt,0)*10)+(IFNULL(scs.cnt,0)*5)) total,
+		(CASE
+		WHEN
+		SUM((IFNULL(rcp.cnt,0)*10)+(IFNULL(scs.cnt,0)*5)) >= 50 THEN '1. Head
+		Chef'
+		WHEN SUM((IFNULL(rcp.cnt,0)*10)+(IFNULL(scs.cnt,0)*5)) >= 40 THEN
+		'2. Sous
+		Chef'
+		WHEN SUM((IFNULL(rcp.cnt,0)*10)+(IFNULL(scs.cnt,0)*5)) >=
+		30 THEN '3. Chef
+		of Partie'
+		WHEN
+		SUM((IFNULL(rcp.cnt,0)*10)+(IFNULL(scs.cnt,0)*5)) >= 20 THEN '4. Demi
+		Chef'
+		WHEN SUM((IFNULL(rcp.cnt,0)*10)+(IFNULL(scs.cnt,0)*5)) >= 10 THEN
+		'5. Commis
+		Chef'
+		ELSE '6. kitchen Hand'
+		END) as grade
+		FROM USERS usr
 		LEFT
 		OUTER JOIN (SELECT uno,COUNT(rcpno) cnt
-		FROM RCPS GROUP BY uno) r2
+		FROM RCPS GROUP BY uno) rcp
 		ON
-		r1.uno=r2.uno
+		usr.uno=rcp.uno
 		LEFT OUTER JOIN (SELECT uno2,uno uno,COUNT(uno) cnt
 		FROM
-		SCS GROUP BY uno2) r3
-		ON r1.uno=r3.uno2
+		SCS GROUP BY uno2) scs
+		ON usr.uno=scs.uno2
 		INNER JOIN(select @rownum:=0) t
-		GROUP BY r1.uno
+		GROUP BY usr.uno
 		LIMIT 0, #{len}) vt
 		ORDER BY vt.total DESC
 	</select>
@@ -88,34 +105,51 @@
 	<select id="selectRankListSCS" resultMap="userMap"
 		parameterType="Map">
 		SELECT * FROM (
-		SELECT @rownum:=@rownum+1 rownum, vt.*
-		FROM(
-		SELECT r1.uno,r1.name,r1.img
-		image,r1.email,r1.intro,IFNULL(r2.cnt,0)
-		rcpCount,IFNULL(r3.cnt,0)
-		scnt,
-		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) total,
-		IFNULL(vt2.scsuno,0) scsuno,
-		<include refid="grade"/>
-		FROM USERS r1
-		LEFT
-		OUTER JOIN (SELECT uno,COUNT(rcpno) cnt
-		FROM RCPS GROUP BY uno) r2
-		ON
-		r1.uno=r2.uno
-		LEFT OUTER JOIN (SELECT uno,COUNT(uno2) cnt
-		FROM SCS GROUP
-		BY uno) r3
-		ON r1.uno=r3.uno
-		LEFT OUTER JOIN (SELECT uno scsuno, uno2
-		scsUser, sc_dt scsDate
-		FROM SCS where uno=#{uno}) vt2
-		ON
-		r1.uno=vt2.scsUser
-		INNER JOIN(select @rownum:=0) t
-		GROUP BY r1.uno) vt
-		ORDER BY vt.total DESC) vt3
-		WHERE rownum between 1 and 3
+        SELECT @rownum:=@rownum+1 rownum, vt.*
+        FROM(
+        SELECT usr.uno,usr.name,usr.img
+        image,usr.email,usr.intro,IFNULL(rcp.cnt,0)
+        rcpCount,IFNULL(scs.cnt,0)
+        scnt,
+        SUM((IFNULL(rcp.cnt,0)*10)+(IFNULL(scs.cnt,0)*5)) total,
+        IFNULL(vt2.scsuno,0) scsuno,
+        (CASE
+        WHEN
+        SUM((IFNULL(rcp.cnt,0)*10)+(IFNULL(scs.cnt,0)*5)) >= 50 THEN '1. Head
+        Chef'
+        WHEN SUM((IFNULL(rcp.cnt,0)*10)+(IFNULL(scs.cnt,0)*5)) >= 40 THEN
+        '2. Sous
+        Chef'
+        WHEN SUM((IFNULL(rcp.cnt,0)*10)+(IFNULL(scs.cnt,0)*5)) >=
+        30 THEN '3. Chef
+        of Partie'
+        WHEN
+        SUM((IFNULL(rcp.cnt,0)*10)+(IFNULL(scs.cnt,0)*5)) >= 20 THEN '4. Demi
+        Chef'
+        WHEN SUM((IFNULL(rcp.cnt,0)*10)+(IFNULL(scs.cnt,0)*5)) >= 10 THEN
+        '5. Commis
+        Chef'
+        ELSE '6. kitchen Hand'
+        END) as grade
+        FROM USERS usr
+        LEFT
+        OUTER JOIN (SELECT uno,COUNT(rcpno) cnt
+        FROM RCPS GROUP BY uno) rcp
+        ON
+        usr.uno=rcp.uno
+        LEFT OUTER JOIN (SELECT uno,COUNT(uno2) cnt
+        FROM SCS GROUP
+        BY uno) scs
+        ON usr.uno=scs.uno
+        LEFT OUTER JOIN (SELECT uno scsuno, uno2
+        scsUser, sc_dt scsDate
+        FROM SCS where uno=#{uno}) vt2
+        ON
+        usr.uno=vt2.scsUser
+        INNER JOIN(select @rownum:=0) t
+        GROUP BY usr.uno) vt
+        ORDER BY vt.total DESC) vt3
+        WHERE rownum between 1 and 3
 	</select>
 
 	<select id="selectMonthRank" resultMap="userMap" parameterType="Map">
@@ -129,7 +163,24 @@
 		IFNULL(r5.cnt,0) mscnt,
 		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) total,
 		SUM((IFNULL(r3.cnt,0)*10)+(IFNULL(r5.cnt,0)*5)) mtotal,
-		<include refid="grade"/>
+		(CASE
+		WHEN
+		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) >= 50 THEN '1. Head
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) >= 40 THEN
+		'2. Sous
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) >=
+		30 THEN '3. Chef
+		of Partie'
+		WHEN
+		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) >= 20 THEN '4. Demi
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) >= 10 THEN
+		'5. Commis
+		Chef'
+		ELSE '6. kitchen Hand'
+		END) as grade
 		FROM USERS r1
 		LEFT
 		OUTER JOIN (SELECT uno,COUNT(rcpno) cnt
@@ -169,7 +220,7 @@
 		WHERE rownum between 1 and 3
 
 	</select>
-	
+
 	<select id="selectTodayRank" resultMap="userMap" parameterType="Map">
 		SELECT * FROM(
 		SELECT @rownum:=@rownum+1 rownum,vt.* FROM(
@@ -181,7 +232,24 @@
 		IFNULL(r5.cnt,0) tscnt,
 		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) total,
 		SUM((IFNULL(r3.cnt,0)*10)+(IFNULL(r5.cnt,0)*5)) ttotal,
-		<include refid="grade"/>
+		(CASE
+		WHEN
+		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) >= 50 THEN '1. Head
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) >= 40 THEN
+		'2. Sous
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) >=
+		30 THEN '3. Chef
+		of Partie'
+		WHEN
+		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) >= 20 THEN '4. Demi
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) >= 10 THEN
+		'5. Commis
+		Chef'
+		ELSE '6. kitchen Hand'
+		END) as grade
 		FROM USERS r1
 		LEFT
 		OUTER JOIN (SELECT uno,COUNT(rcpno) cnt
@@ -225,27 +293,32 @@
 		r1.uno,r1.name,r1.email,r1.intro,r1.role,IFNULL(r2.cnt,0)
 		rcpCount,IFNULL(r3.cnt,0) scnt,
 		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) total,
-		<include refid="grade"/>
+		<include refid="grade" />
 		FROM USERS r1
 		LEFT
 		OUTER JOIN (SELECT uno,COUNT(rcpno) cnt
-		FROM RCPS GROUP BY uno) r2
+		FROM RCPS
+		GROUP BY uno) r2
 		ON
 		r1.uno=r2.uno
-		LEFT OUTER JOIN (SELECT uno,COUNT(uno2) cnt
+		LEFT OUTER JOIN (SELECT uno,COUNT(uno2)
+		cnt
 		FROM SCS GROUP
 		BY uno) r3
 		ON r1.uno=r3.uno
-		INNER JOIN(select @rownum:=0) t
+		INNER JOIN(select
+		@rownum:=0) t
 		GROUP BY
 		r1.uno) vt
-		ORDER BY vt.total DESC) myrank WHERE uno=#{uno}
+		ORDER BY vt.total DESC) myrank WHERE
+		uno=#{uno}
 	</select>
 
 	<!-- 좋아요 *3 스크랩 *3 조회수 *1 -->
 	<select id="recipeRankList" resultMap="recipeMap" parameterType="Map">
 		SELECT @rownum:=@rownum+1 rownum,vt.*
-		FROM (SELECT r1.rcpno,r1.name,r1.hits,r1.rgst,IFNULL(r2.cnt,0) countLike,
+		FROM (SELECT
+		r1.rcpno,r1.name,r1.hits,r1.rgst,IFNULL(r2.cnt,0) countLike,
 		IFNULL(r3.cnt,0) countScrap,
 		SUM((IFNULL(hits,0)*1)+(IFNULL(r2.cnt,0)*3)+(IFNULL(r3.cnt,0)*3))
 		totalPoint
@@ -253,31 +326,33 @@
 		FROM RCP_LIK GROUP BY rcpno) r2
 		ON r1.rcpno=r2.rcpno LEFT OUTER JOIN
 		(SELECT rcpno,COUNT(uno) cnt FROM RCP_SCR GROUP BY rcpno) r3
-		ON r1.rcpno=r3.rcpno
+		ON
+		r1.rcpno=r3.rcpno
 		INNER JOIN(select @rownum:=0) t WHERE rgst = 0
-		GROUP BY r1.rcpno
+		GROUP
+		BY r1.rcpno
 		limit #{len}) vt
 		ORDER BY vt.totalPoint DESC
 	</select>
-	
+
 	<sql id="grade">
-	(CASE
-        WHEN
-        SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 50 THEN '1. Head
-        Chef'
-        WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 40 THEN
-        '2. Sous
-        Chef'
-        WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >=
-        30 THEN '3. Chef
-        of Partie'
-        WHEN
-        SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 20 THEN '4. Demi
-        Chef'
-        WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 10 THEN
-        '5. Commis
-        Chef'
-        ELSE '6. kitchen Hand'
-        END) as grade	
+		(CASE
+		WHEN
+		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 50 THEN '1. Head
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 40 THEN
+		'2. Sous
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >=
+		30 THEN '3. Chef
+		of Partie'
+		WHEN
+		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 20 THEN '4. Demi
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 10 THEN
+		'5. Commis
+		Chef'
+		ELSE '6. kitchen Hand'
+		END) as grade
 	</sql>
 </mapper>
