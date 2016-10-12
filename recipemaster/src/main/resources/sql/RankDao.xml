@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.recipe.dao.RankDao">
+
+	<resultMap type="user" id="userMap">
+		<id column="uno" property="userNo" />
+		<result column="name" property="userName" />
+		<result column="email" property="email" />
+		<result column="pwd" property="password" />
+		<result column="img" property="image" />
+		<result column="intro" property="intro" />
+		<result column="role" property="role" />
+		<result column="join_dt" property="joinDate" />
+		<result column="rcp_url" property="recipeUrl" />
+		<result column="rcpCount" property="recipeCount" />
+		<result column="scnt" property="subsCount" />
+		<result column="lcnt" property="likeCount" />
+		<result column="total" property="totalPoint" />
+		<result column="rownum" property="rownum" />
+		<result column="grade" property="grade" />
+		<result column="scsuno" property="subscribeUser" />
+		<result column="auth_key" property="authenticationKEY" />
+		<result column="auth" property="authentication" />
+	</resultMap>
+
+	<resultMap type="recipe" id="recipeMap">
+		<id column="rcpno" property="recipeNo" />
+		<result column="uno" property="userNo" />
+		<result column="name" property="recipeName" />
+		<result column="intro" property="intro" />
+		<result column="rcp_pd" property="recipeProcedure"
+			typeHandler="com.github.javaplugs.mybatis.JsonElementTypeHandler" />
+		<result column="c_time" property="cookTime" />
+		<result column="ptn" property="portion" />
+		<result column="rcp_dt" property="recipeDate" />
+		<result column="hits" property="hits" />
+		<result column="rgst" property="regiStatus" />
+		<result column="gpa" property="gradePoint" />
+		<result column="userName" property="user.userName" />
+		<result column="lc_dt" property="likeDate" />
+		<result column="likeUser" property="likeUser" />
+		<result column="countLike" property="countLike" />
+		<result column="uno2" property="subscribeNum" />
+		<result column="countComment" property="countComment" />
+		<result column="countScrap" property="countScrap" />
+		<result column="scrapUser" property="scrapUser" />
+		<result column="email" property="user.email" />
+		<result column="rownum" property="rownum" />
+		<result column="totalPoint" property="totalPoint" />
+		<result column="rpimg" property="representImages"
+			typeHandler="com.github.javaplugs.mybatis.JsonElementTypeHandler" />
+		<result column="img" property="user.image" />
+		<result column="userName" property="user.userName" />
+		<result column="rrpct" property="recipeComment" />
+		<result column="rrpc_dt" property="recipeCommentDate" />
+		<result column="rrpno" property="commentNo" />
+		<result column="ctgname" property="ctgName" />
+	</resultMap>
+
+	<!-- 레시피 *10, 구독자 * 5 -->
+	<select id="selectRankList" resultMap="userMap" parameterType="Map">
+		SELECT @rownum:=@rownum+1 rownum,vt.* FROM(
+		SELECT
+		r1.uno,r1.name,r1.email,r1.intro,r1.role,r1.img image,
+		IFNULL(r2.cnt,0)
+		rcpCount,IFNULL(r3.cnt,0) scnt,
+		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) total,
+		(CASE
+		WHEN
+		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 50 THEN '1. Head
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 40 THEN
+		'2. Sous
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >=
+		30 THEN '3. Chef
+		of Partie'
+		WHEN
+		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 20 THEN '4. Demi
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 10 THEN
+		'5. Commis
+		Chef'
+		ELSE '6. kitchen Hand'
+		END) as grade
+		FROM USERS r1
+		LEFT
+		OUTER JOIN (SELECT uno,COUNT(rcpno) cnt
+		FROM RCPS GROUP BY uno) r2
+		ON
+		r1.uno=r2.uno
+		LEFT OUTER JOIN (SELECT uno2,uno uno,COUNT(uno) cnt
+		FROM
+		SCS GROUP BY uno2) r3
+		ON r1.uno=r3.uno2
+		INNER JOIN(select @rownum:=0) t
+		GROUP BY r1.uno
+		LIMIT 0, #{len}) vt
+		ORDER BY vt.total DESC
+	</select>
+
+	<!-- 레시피 *10, 구독자 * 5 -->
+	<select id="selectRankListSCS" resultMap="userMap"
+		parameterType="Map">
+		SELECT * FROM (
+		SELECT @rownum:=@rownum+1 rownum, vt.*
+		FROM(
+		SELECT r1.uno,r1.name,r1.img
+		image,r1.email,r1.intro,IFNULL(r2.cnt,0)
+		rcpCount,IFNULL(r3.cnt,0)
+		scnt,
+		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) total,
+		IFNULL(vt2.scsuno,0) scsuno,
+		(CASE
+		WHEN
+		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 50 THEN '1. Head
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 40 THEN
+		'2. Sous
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >=
+		30 THEN '3. Chef
+		of Partie'
+		WHEN
+		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 20 THEN '4. Demi
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 10 THEN
+		'5. Commis
+		Chef'
+		ELSE '6. kitchen Hand'
+		END) as grade
+		FROM USERS r1
+		LEFT
+		OUTER JOIN (SELECT uno,COUNT(rcpno) cnt
+		FROM RCPS GROUP BY uno) r2
+		ON
+		r1.uno=r2.uno
+		LEFT OUTER JOIN (SELECT uno,COUNT(uno2) cnt
+		FROM SCS GROUP
+		BY uno) r3
+		ON r1.uno=r3.uno
+		LEFT OUTER JOIN (SELECT uno scsuno, uno2
+		scsUser, sc_dt scsDate
+		FROM SCS where uno=#{uno}) vt2
+		ON
+		r1.uno=vt2.scsUser
+		INNER JOIN(select @rownum:=0) t
+		GROUP BY r1.uno) vt
+		ORDER BY vt.total DESC) vt3
+		WHERE rownum between 1 and 3
+	</select>
+
+	<select id="selectMonthRank" resultMap="userMap" parameterType="Map">
+		SELECT * FROM (
+		SELECT @rownum:=@rownum+1 rownum,vt.* FROM(
+		SELECT
+		r1.uno,r1.name,r1.img image,r1.email,r1.intro,r1.role,
+		IFNULL(r2.cnt,0) rcpCount,IFNULL(r3.cnt,0) mrcpCount,
+		IFNULL(r4.cnt,0)
+		scnt,
+		IFNULL(r5.cnt,0) mscnt,
+		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) total,
+		SUM((IFNULL(r3.cnt,0)*10)+(IFNULL(r5.cnt,0)*5)) mtotal,
+		(CASE
+		WHEN
+		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) >= 50 THEN '1. Head
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) >= 40 THEN
+		'2. Sous
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) >=
+		30 THEN '3. Chef
+		of Partie'
+		WHEN
+		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) >= 20 THEN '4. Demi
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) >= 10 THEN
+		'5. Commis
+		Chef'
+		ELSE '6. kitchen Hand'
+		END) as grade
+		FROM USERS r1
+		LEFT
+		OUTER JOIN (SELECT uno,COUNT(rcpno) cnt
+		FROM RCPS GROUP BY uno) r2
+		ON
+		r1.uno=r2.uno
+		LEFT OUTER JOIN ( SELECT uno,COUNT(rcpno)
+		cnt,DATE_FORMAT(rcp_dt,'%y-%m')
+		rcp_dt
+		FROM RCPS WHERE
+		DATE_FORMAT(rcp_dt,'%y-%m') = DATE_FORMAT(now(),'%y-%m')
+		GROUP BY uno)
+		r3
+		ON r1.uno = r3.uno
+		LEFT OUTER JOIN (SELECT uno,COUNT(uno2) cnt
+		FROM
+		SCS GROUP BY uno) r4
+		ON r1.uno=r4.uno
+		LEFT OUTER JOIN (SELECT
+		uno,COUNT(uno2) cnt,DATE_FORMAT(sc_dt,'%y-%m')
+		sc_dt
+		FROM SCS WHERE
+		DATE_FORMAT(sc_dt,'%y-%m') = DATE_FORMAT(now(),'%y-%m')
+		GROUP BY uno)
+		r5
+		ON r1.uno=r5.uno
+		LEFT OUTER JOIN (SELECT uno scsuno, uno2 scsUser,
+		sc_dt scsDate
+		FROM SCS where uno=#{uno}) vt2
+		ON r1.uno=vt2.scsUser
+		INNER
+		JOIN(select @rownum:=0) t
+		GROUP BY r1.uno
+		) vt
+		ORDER BY vt.mtotal
+		DESC,name) vt2
+		WHERE rownum between 1 and 3
+
+	</select>
+	
+	<select id="selectTodayRank" resultMap="userMap" parameterType="Map">
+		SELECT * FROM(
+		SELECT @rownum:=@rownum+1 rownum,vt.* FROM(
+		SELECT
+		r1.uno,r1.name,r1.img image,r1.email,r1.intro,r1.role,
+		IFNULL(r2.cnt,0) rcpCount,IFNULL(r3.cnt,0) trcpCount,
+		IFNULL(r4.cnt,0)
+		scnt,
+		IFNULL(r5.cnt,0) tscnt,
+		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) total,
+		SUM((IFNULL(r3.cnt,0)*10)+(IFNULL(r5.cnt,0)*5)) ttotal,
+		(CASE
+		WHEN
+		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) >= 50 THEN '1. Head
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) >= 40 THEN
+		'2. Sous
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) >=
+		30 THEN '3. Chef
+		of Partie'
+		WHEN
+		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) >= 20 THEN '4. Demi
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r4.cnt,0)*5)) >= 10 THEN
+		'5. Commis
+		Chef'
+		ELSE '6. kitchen Hand'
+		END) as grade
+		FROM USERS r1
+		LEFT
+		OUTER JOIN (SELECT uno,COUNT(rcpno) cnt
+		FROM RCPS GROUP BY uno) r2
+		ON
+		r1.uno=r2.uno
+		LEFT OUTER JOIN ( SELECT uno,COUNT(rcpno)
+		cnt,DATE_FORMAT(rcp_dt,'%y-%m-%d') rcp_dt
+		FROM RCPS WHERE
+		DATE_FORMAT(rcp_dt,'%y-%m-%d') =
+		DATE_FORMAT(now(),'%y-%m-%d')
+		GROUP BY
+		uno) r3
+		ON r1.uno = r3.uno
+		LEFT OUTER JOIN (SELECT uno,COUNT(uno2) cnt
+		FROM SCS GROUP BY uno) r4
+		ON r1.uno=r4.uno
+		LEFT OUTER JOIN (SELECT
+		uno,COUNT(uno2) cnt,DATE_FORMAT(sc_dt,'%y-%m-%d')
+		sc_dt
+		FROM SCS WHERE
+		DATE_FORMAT(sc_dt,'%y-%m-%d') =
+		DATE_FORMAT(now(),'%y-%m-%d')
+		GROUP BY
+		uno) r5
+		ON r1.uno=r5.uno
+		LEFT OUTER JOIN (SELECT uno scsuno, uno2
+		scsUser, sc_dt scsDate
+		FROM SCS where uno=#{uno}) vt2
+		ON
+		r1.uno=vt2.scsUser
+		INNER JOIN(select @rownum:=0) t
+		GROUP BY r1.uno) vt
+		ORDER BY vt.ttotal DESC ,name) vt2
+		WHERE rownum between 1 and 3
+	</select>
+	<select id="selectMyRank" resultMap="userMap" parameterType="int">
+		SELECT * FROM
+		(SELECT @rownum:=@rownum+1 rownum,vt.* FROM(
+		SELECT
+		r1.uno,r1.name,r1.email,r1.intro,r1.role,IFNULL(r2.cnt,0)
+		rcpCount,IFNULL(r3.cnt,0) scnt,
+		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) total,
+		(CASE
+		WHEN
+		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 50 THEN '1. Head
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 40 THEN
+		'2. Sous
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >=
+		30 THEN '3. Chef
+		of Partie'
+		WHEN
+		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 20 THEN '4. Demi
+		Chef'
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 10 THEN
+		'5. Commis
+		Chef'
+		ELSE '6. kitchen Hand'
+		END) as grade
+		FROM USERS r1
+		LEFT
+		OUTER JOIN (SELECT uno,COUNT(rcpno) cnt
+		FROM RCPS GROUP BY uno) r2
+		ON
+		r1.uno=r2.uno
+		LEFT OUTER JOIN (SELECT uno,COUNT(uno2) cnt
+		FROM SCS GROUP
+		BY uno) r3
+		ON r1.uno=r3.uno
+		INNER JOIN(select @rownum:=0) t
+		GROUP BY
+		r1.uno) vt
+		ORDER BY vt.total DESC) myrank WHERE uno=#{uno}
+	</select>
+
+	<!-- 좋아요 *3 스크랩 *3 조회수 *1 -->
+	<select id="recipeRankList" resultMap="recipeMap" parameterType="Map">
+		SELECT @rownum:=@rownum+1 rownum,vt.*
+		FROM (SELECT r1.rcpno,r1.name,r1.hits,r1.rgst,IFNULL(r2.cnt,0) countLike,
+		IFNULL(r3.cnt,0) countScrap,
+		SUM((IFNULL(hits,0)*1)+(IFNULL(r2.cnt,0)*3)+(IFNULL(r3.cnt,0)*3))
+		totalPoint
+		FROM RCPS r1 LEFT OUTER JOIN (SELECT rcpno,COUNT(uno) cnt
+		FROM RCP_LIK GROUP BY rcpno) r2
+		ON r1.rcpno=r2.rcpno LEFT OUTER JOIN
+		(SELECT rcpno,COUNT(uno) cnt FROM RCP_SCR GROUP BY rcpno) r3
+		ON r1.rcpno=r3.rcpno
+		INNER JOIN(select @rownum:=0) t WHERE rgst = 0
+		GROUP BY r1.rcpno
+		limit #{len}) vt
+		ORDER BY vt.totalPoint DESC
+	</select>
+</mapper>

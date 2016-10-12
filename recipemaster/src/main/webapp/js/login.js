@@ -144,7 +144,7 @@ function loginCheck() {
 function logout(event) {
 	event.preventDefault();
 	$.ajax({
-		url : contextRoot+'/user/logout.json',
+		url : contextRoot+'user/logout.json',
 		method : 'get',
 		dataType : 'json',
 		success : function(result) {

@@ -19,7 +19,6 @@ public interface RecipeService {
 	List<Recipe> getRecipeRandomList(int pageSize);
 	List<Recipe> recipeComment(int recipeNo);
 	List<Recipe> recipeCommentUserInfo(String userNums);
-	List<Recipe> getRecipeRankList(int pageNo, int pageSize);
 	List<Recipe> getRecipeSearchList(int pageNo, int pageSize, Search search, int userNo); //레시피 페이지 검색 -이성현
 	int getRecipeCount(int pageNo, int pageSize, Search search, int userNo);
 	List<Recipe> selectSbuscribe2(String userNo, int pageNo, int pageSize); //준모,용이형

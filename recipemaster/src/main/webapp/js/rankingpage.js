@@ -14,7 +14,7 @@ $(function() {
 		var template = Handlebars.compile(source);
 
 		$.ajax({
-			url : contextRoot+'user/top3.json',
+			url : contextRoot+'rank/top3.json',
 			dataType : 'json',
 			method : 'get',
 			async : false,
@@ -44,7 +44,7 @@ $(function() {
 		var template = Handlebars.compile(source);
 
 		$.ajax({
-			url : contextRoot+'user/monthtop3.json',
+			url : contextRoot+'rank/monthtop3.json',
 			dataType : 'json',
 			method : 'get',
 			success : function(result) {
@@ -73,7 +73,7 @@ $(function() {
 		var template = Handlebars.compile(source);
 
 		$.ajax({
-			url : contextRoot+'user/todaytop3.json',
+			url : contextRoot+'rank/todaytop3.json',
 			dataType : 'json',
 			method : 'get',
 			success : function(result) {
@@ -103,7 +103,7 @@ $(function() {
 
     function loadChefRanking() {
       $.ajax({
-        url : 'user/rank.json',
+        url : 'rank/userRank.json',
         dataType : 'json',
         method : 'get',
         success : function(result) {
@@ -126,7 +126,7 @@ $(function() {
 
     function loadRcpRanking() {
       $.ajax({
-        url : 'recipe/rank.json',
+        url : 'rank/recipeRank.json',
         dataType : 'json',
         method : 'get',
         success : function(result) {
@@ -149,7 +149,7 @@ $(function() {
 
     function loadMyRanking() {
       $.ajax({
-        url : 'user/myrank.json',
+        url : 'rank/myrank.json',
         dataType : 'json',
         method : 'get',
         success : function(result) {
@@ -174,9 +174,7 @@ $(function() {
           alert('서버 요청 오류');
         }
       });
-    }
-    
-    
+    }    
 });
 
 $(document).on('click', '.rcp-userName, .rcp-nickname , .rcp-profile',function(event){
@@ -189,4 +187,3 @@ $(document).on('click', '.rcp-userName, .rcp-nickname , .rcp-profile',function(e
 $('.rcp-BoC').on('click',function(){
 	$(location).attr('href',contextRoot+'ranking.html');
 })
-

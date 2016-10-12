@@ -16,32 +16,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void addUser(User user) {
-		userDao.insert(user);
+		userDao.insertUser(user);
 	}
-
-	@Override
-	public List<User> getUserList(int pageNo, int pageSize) {
-		HashMap<String,Object> params= new HashMap<>();    
-		params.put("startIndex", (pageNo - 1) * pageSize);
-		params.put("len", pageSize);   
-
-		return userDao.selectList(params);
-	}
-
-	@Override
-	public List<User> getUserRankList(int pageNo, int pageSize) {
-		HashMap<String,Object> params= new HashMap<>();    
-		params.put("startIndex", (pageNo - 1) * pageSize);
-		params.put("len", pageSize);   
-
-		return userDao.selectRankList(params);
-	}
-
-	@Override
-	public User getUser(int no) {    
-		return userDao.selectOne(no);
-	}
-
+	
 	// 이메일 중복 검사
 	@Override
 	public boolean checkDuplication(String email) {  
@@ -73,21 +50,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User loginUser(User user) {
-		User dbUser=userDao.findUser(user.getEmail());
-		System.out.println("dbUser"+dbUser);
-		if (dbUser==null) {
-			System.out.println("ID가 부적합합니다.");
-			dbUser=null;
-			return dbUser;
-		}else if(! dbUser.getPassword().equals(user.getPassword())&&dbUser.getPassword()!=null && dbUser.getPassword() == "0"){
-			System.out.println("비밀번호가 부적합합니다.");
-			dbUser=null;
-			return dbUser;
-		}else{
-			System.out.println(dbUser.getEmail()+"님이 login 시도 하였습니다.");
-		}
-		return dbUser;
-
+		return userDao.selectLoginUser(user);
 	}
 
 	@Override
@@ -96,38 +59,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User selectFromEmail(String email) {
+	public User getFromEmail(String email) {
 		return userDao.selectFromEmail(email);
-	}
-
-	@Override
-	public List<User> selectRankListSCS(int pageNo, int pageSize, int uno) {
-		HashMap<String,Object> params= new HashMap<>();
-		params.put("startIndex", (pageNo - 1) * pageSize);
-		params.put("len", pageSize);
-		params.put("uno", uno);
-
-		return userDao.selectRankListSCS(params);
-	}
-
-	@Override
-	public List<User> selectMonthRank(int uno) {
-		HashMap<String,Object> params= new HashMap<>();  
-		params.put("uno", uno);
-
-		return userDao.selectMonthRank(params);
-	}
-
-	@Override
-	public List<User> selectTodayRank(int uno) {
-		HashMap<String,Object> params= new HashMap<>();
-		params.put("uno", uno);
-		return userDao.selectTodayRank(params);
-	}
-
-	@Override
-	public User selectMyRank(int uno) {    
-		return userDao.selectMyRank(uno);
 	}
 
 	@Override
