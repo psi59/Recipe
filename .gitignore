@@ -1,1 +1,5 @@
 *.rej
+.DS_Store
+*.zip
+bin
+build
