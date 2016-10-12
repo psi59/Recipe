@@ -36,6 +36,7 @@ import com.recipe.util.CommonUtil;
 public class RecipeController {
 	@Autowired
 	RecipeService recipeService;
+	
 	@Autowired
 	UserService userService;
 
