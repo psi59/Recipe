@@ -1,19 +1,14 @@
 package com.recipe.controller;
 
 import java.io.File;
-import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,23 +30,12 @@ public class UserController {
 	@RequestMapping(path = "add", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String add(User user, String passwordCheck) {
-
 		HashMap<String, Object> result = new HashMap<>();
-		try {
-			
-			user.setImage("default.jpg");
-			
-			//unique key 생성
-			user.setAuthenticationKEY(UUID.randomUUID().toString());
-			user.setAuthentication(0);
-
-			// 이메일 중복 확인
-			if (user.getPassword().equals(passwordCheck)) {
-				user = CommonUtil.sha1(user);	
-				userService.addUser(user);
-				result.put("status", "success");
-				result.put("authKEY", user.getAuthenticationKEY());
-			}
+		
+		try {	
+			userService.addUser(user);
+			result.put("status", "success");
+			result.put("authKEY", user.getAuthenticationKEY());
 		} catch (Exception e) {
 			result.put("status", "failure");
 		}
@@ -75,13 +59,12 @@ public class UserController {
 	@RequestMapping(path = "update")
 	@ResponseBody
 	public String update(
-			//value="name"
 			@RequestParam(value="userNo", defaultValue="0") int userNo,
 			@RequestParam(value="email", defaultValue="") String email,
 			@RequestParam(value="beforePassword", defaultValue="") String beforePassword,
 			@RequestParam(value="afterpassword", defaultValue="") String afterpassword,
 			@RequestParam(value="intro", defaultValue="") String intro,
-			@RequestParam(value="profileImage") List<MultipartFile> profileImage,
+			@RequestParam(value="profileImage") MultipartFile profileImage,
 			HttpSession session, HttpServletRequest request) {
 
 		User user = CommonUtil.getSessionUser(session);
@@ -98,9 +81,9 @@ public class UserController {
 			if(user.getUserNo()!=0){			
 				if(user.getUserNo()==userNo){
 					String fileName = "userprofile_"+user.getUserNo()+".png";
-					if(!profileImage.get(0).getOriginalFilename().equals("")){						
+					if(!profileImage.getOriginalFilename().equals("")){						
 						File recipeUrl= new File(CommonUtil.getImageFolderPath("profileImg", request)+"/"+fileName);
-						profileImage.get(0).transferTo(recipeUrl);
+						profileImage.transferTo(recipeUrl);
 					}
 					afterpassword=CommonUtil.sha1(afterpassword);
 
@@ -145,10 +128,7 @@ public class UserController {
 		HashMap<String, Object> result = new HashMap<>(); 
 		
 		try {
-			
-			user=CommonUtil.sha1(user);
 			User loginUser = userService.loginUser(user);
-			
 			if(loginUser.getEmail()==null) {
 				// 가입되지 않았거나 비밀번호가 다른 계정
 				result.put("status", "failure");
@@ -173,23 +153,19 @@ public class UserController {
 	public String loginNaver(User user, HttpSession session) {
 		// index.html에서 name으로 되어있는 RequestParam이 넘어 온다.
 		HashMap<String, Object> result = new HashMap<>();
-
-		User loginUser = new User(); 
-		loginUser = userService.loginUser(user);   
-
-		if(loginUser == null){
-			System.out.println("설마 if문까지 ?? 확인");
-			userService.addUserInNaver(user);
-			loginUser = userService.loginUser(user);
-		}
 		try {
+			User loginUser = new User(); 
+			loginUser = userService.loginUser(user);   
+	
+			if(loginUser == null){
+				userService.addUserInNaver(user);
+				loginUser = userService.loginUser(user);
+			}
+		
 			if (loginUser!=null ) {
 				result.put("status", "success");
 				result.put("data", loginUser);
-				// server sessionStorage에 유저 정보 저장 ------------------
 				session.setAttribute("loginUser", loginUser);
-				// ----------------------------------------------------------
-				System.out.println("session : "+session.getAttribute("loginUser"));
 			}else{
 
 				result.put("status", "failure");
@@ -199,7 +175,6 @@ public class UserController {
 			result.put("status", "failure");
 		}
 		return new Gson().toJson(result);
-		// result.data로 하면 logUser의 도메인 값을 가져 올 수 있다.
 	}
 
 
@@ -242,22 +217,18 @@ public class UserController {
 	@RequestMapping(path = "changePassword")
 	public String changePassword(String email){   
 		HashMap<String, Object> result = new HashMap<>();
-		User user = new User();
-		user=userService.getFromEmail(email);
-
-		String nextPassword=CommonUtil.nextPassword().toString();
-		
+		User user=userService.getFromEmail(email);
+		String key = "";
 		try {
-			user.setPassword(CommonUtil.sha1(nextPassword));
-			userService.updateUser(user);
+			key = userService.updateUser(user);
 			result.put("status", "success");
-			result.put("key",nextPassword);
+			result.put("key",key);
 			result.put("email", user.getEmail());
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("실패");
 			result.put("status", "failure");
 		}
-		return "redirect:http://tkddlf59.dlinkddns.com:2828/user/updatePassword.do?email="+email+"&key="+nextPassword;
+		return "redirect:http://tkddlf59.dlinkddns.com:2828/user/updatePassword.do?email="+email+"&key="+key;
 	}
 }

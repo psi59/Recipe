@@ -31,17 +31,17 @@
 		SELECT r1.*,IFNULL(r2.cnt,0) rcpCount,IFNULL(r3.cnt,0) scnt,
 		SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) total,
 		(CASE
-		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 50 THEN '1. Head
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 50 THEN 'Head
 		Chef'
-		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 40 THEN '2. Sous
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 40 THEN 'Sous
 		Chef'
-		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 30 THEN '3. Chef
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 30 THEN 'Chef
 		of Partie'
-		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 20 THEN '4. Demi
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 20 THEN 'Demi
 		Chef'
-		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 10 THEN '5. Commis
+		WHEN SUM((IFNULL(r2.cnt,0)*10)+(IFNULL(r3.cnt,0)*5)) >= 10 THEN 'Commis
 		Chef'
-		ELSE '6. kitchen Hand'
+		ELSE 'kitchen Hand'
 		END) as grade
 		FROM USERS r1
 		LEFT OUTER JOIN (SELECT uno,COUNT(rcpno) cnt

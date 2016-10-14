@@ -1,0 +1,18 @@
+ {{#each data}}
+  <div class="rcp-user-ranking rcp-ranking-position">
+    <div class="col-sm-1">
+      <p class="rcp-ranking-num">{{rownum}}</p>
+    </div>          
+    <div class="col-sm-3">
+      <img src="img/profileImg/{{user.image}}" class="rcp-ranking-image">
+      <input type="hidden" class="rcp-hidden-email" value="{{user.email}}">
+      <h5 class="rcp-ranking-userName rcp-userName">{{user.userName}}</h5>
+      <h5 class="rcp-ranking-chef-rank">{{grade}}</h5>
+    </div>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">{{recipeCount}}</div>
+    <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">{{subsCount}}</div>
+    <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9"><p>{{totalPoint}}</p></div>
+    <div class="col-sm-1"></div>
+  </div>
+{{/each}}

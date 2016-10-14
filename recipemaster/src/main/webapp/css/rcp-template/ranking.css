@@ -131,3 +131,7 @@
 	font-family: 'Raleway', sans-serif;
 	color: gray;
 }
+
+.article_list .bx-viewport{
+	height: 360px !important;
+}

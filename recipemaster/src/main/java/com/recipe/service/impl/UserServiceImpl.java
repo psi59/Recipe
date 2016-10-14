@@ -1,7 +1,8 @@
 package com.recipe.service.impl;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
-import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,13 +10,19 @@ import org.springframework.stereotype.Service;
 import com.recipe.dao.UserDao;
 import com.recipe.domain.User;
 import com.recipe.service.UserService;
+import com.recipe.util.CommonUtil;
 
 @Service
 public class UserServiceImpl implements UserService {
 	@Autowired UserDao userDao;
 
 	@Override
-	public void addUser(User user) {
+	public void addUser(User user) throws Exception {
+		user.setImage("default.jpg");
+		//unique key 생성
+		user.setAuthenticationKEY(UUID.randomUUID().toString());
+		user.setAuthentication(0);
+		user = CommonUtil.sha1(user);
 		userDao.insertUser(user);
 	}
 	
@@ -49,13 +56,17 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
-	public User loginUser(User user) {
+	public User loginUser(User user) throws Exception {
+		user=CommonUtil.sha1(user);
 		return userDao.selectLoginUser(user);
 	}
 
 	@Override
-	public void updateUser(User user) {
+	public String updateUser(User user) throws Exception {
+		String nextPassword=CommonUtil.nextPassword().toString();
+		user.setPassword(CommonUtil.sha1(nextPassword));
 		userDao.update(user);
+		return nextPassword;
 	}
 
 	@Override

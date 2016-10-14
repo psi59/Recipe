@@ -103,7 +103,7 @@ public class VisitorController {
     return new Gson().toJson(result);
   }
   
-  @RequestMapping(path="loadMyPage",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+  @RequestMapping(path="loadMyPage", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
   @ResponseBody 
   public String loadMyPage(String email){
     HashMap<String,Object> result = new HashMap<>();
@@ -113,7 +113,7 @@ public class VisitorController {
     try{
       userService.addHits(userNo);
       result.put("status","success");
-      result.put("data",visitorService.getVisitorInfo(userNo));
+      result.put("data", visitorService.getVisitorInfo(userNo));
     }catch (Exception e){ 
       result.put("status", "false");
     }

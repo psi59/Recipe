@@ -13,20 +13,6 @@ function getWeather(){
 //			swal(result.weather[0].main);
     });
 }
-//날씨 정보 받는 function 종료 - 박상일
-
-//실시간 랭크 function 시작
-//실시간 랭크 function 종료	- 박상일
-
-//userInfoBox 드롭다운 function 시작
-function dropdownClick(target, other) {
-	if ($(other).hasClass('active')) {
-		$(other).removeClass('active');
-	}
-	$(target).toggleClass('active');
-}
-//userInfoBox 드롭다운 function 종료 - 박상일
-
 
 //-----------------------------랜덤 레시피 ---------------------------------
   $('#rcp-random-recipe').on('click',function(event){
@@ -690,4 +676,3 @@ function recipeDetailPopup(recipeNo){
 		}
 	});
 }
-

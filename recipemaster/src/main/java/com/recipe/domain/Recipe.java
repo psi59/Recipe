@@ -23,11 +23,9 @@ public class Recipe {
 	private User user;
 	private Date likeDate;
 	private int likeUser;
-	private int countLike;
 	private int subscribeNum;
 	private String subscribe;
 	private int countComment;
-	private int countScrap;
 	private int scrapUser;
 	private String scrap;
 	private String rpimg;
@@ -37,8 +35,10 @@ public class Recipe {
 	private int commentNo;
 	private String ctgName;
 	private JsonArray materialName;
-	
-
+	private int countLike;
+	private int countScrap;
+	private int rownum;
+	private int totalPoint;
   public String getCtgName() {
     return ctgName;
   }
@@ -71,12 +71,7 @@ public class Recipe {
     this.recipeCommentDate = recipeCommentDate;
   }
 
-  // ranking
-	private int rownum;
-	private int totalPoint;
-	// ranking end
-	
-	public String getCommentUsers() {
+  public String getCommentUsers() {
     return commentUsers;
   }
 
@@ -139,15 +134,6 @@ public class Recipe {
 	public void setCountComment(int countComment) {
 		this.countComment = countComment;
 	}
-
-	public int getCountScrap() {
-		return countScrap;
-	}
-
-	public void setCountScrap(int countScrap) {
-		this.countScrap = countScrap;
-	}
-
 	public String getSubscribe() {
 		return subscribe;
 	}
@@ -292,6 +278,14 @@ public class Recipe {
 	public void setLikeUser(int likeUser) {
 		this.likeUser = likeUser;
 	}
+	
+	public JsonArray getMaterialName() {
+		return materialName;
+	}
+
+	public void setMaterialName(JsonArray materialName) {
+		this.materialName = materialName;
+	}
 
 	public int getCountLike() {
 		return countLike;
@@ -301,17 +295,26 @@ public class Recipe {
 		this.countLike = countLike;
 	}
 
-  @Override
-  public String toString() {
-    return "Recipe [recipeNo=" + recipeNo + ", userNo=" + userNo + ", recipeName=" + recipeName + ", intro=" + intro
-        + ", recipeDetail=" + recipeDetail + ", representImages=" + representImages + ", materials=" + materials
-        + ", recipeProcedure=" + recipeProcedure + ", cookTime=" + cookTime + ", portion=" + portion + ", recipeDate="
-        + recipeDate + ", hits=" + hits + ", regiStatus=" + regiStatus + ", gradePoint=" + gradePoint + ", user=" + user
-        + ", likeDate=" + likeDate + ", likeUser=" + likeUser + ", countLike=" + countLike + ", subscribeNum="
-        + subscribeNum + ", subscribe=" + subscribe + ", countComment=" + countComment + ", countScrap=" + countScrap
-        + ", scrapUser=" + scrapUser + ", scrap=" + scrap + ", rpimg=" + rpimg + ", recipeComment=" + recipeComment
-        + ", recipeCommentDate=" + recipeCommentDate + ", commentUsers=" + commentUsers + ", commentNo=" + commentNo
-        + ", ctgName=" + ctgName + ", rownum=" + rownum + ", totalPoint=" + totalPoint + "]";
-  }
+	public int getCountScrap() {
+		return countScrap;
+	}
 
+	public void setCountScrap(int countScrap) {
+		this.countScrap = countScrap;
+	}
+
+	@Override
+	public String toString() {
+		return "Recipe [recipeNo=" + recipeNo + ", userNo=" + userNo + ", recipeName=" + recipeName + ", intro=" + intro
+				+ ", recipeDetail=" + recipeDetail + ", representImages=" + representImages + ", materials=" + materials
+				+ ", recipeProcedure=" + recipeProcedure + ", cookTime=" + cookTime + ", portion=" + portion
+				+ ", recipeDate=" + recipeDate + ", hits=" + hits + ", regiStatus=" + regiStatus + ", gradePoint="
+				+ gradePoint + ", user=" + user + ", likeDate=" + likeDate + ", likeUser=" + likeUser
+				+ ", subscribeNum=" + subscribeNum + ", subscribe=" + subscribe + ", countComment=" + countComment
+				+ ", scrapUser=" + scrapUser + ", scrap=" + scrap + ", rpimg=" + rpimg + ", recipeComment="
+				+ recipeComment + ", recipeCommentDate=" + recipeCommentDate + ", commentUsers=" + commentUsers
+				+ ", commentNo=" + commentNo + ", ctgName=" + ctgName + ", materialName=" + materialName
+				+ ", countLike=" + countLike + ", countScrap=" + countScrap + ", rownum=" + rownum + ", totalPoint="
+				+ totalPoint + "]";
+	}
 }

@@ -454,9 +454,6 @@ function pageTabs() {
 
 
 function loadMyPage(){
-
-
-
 	$.ajax({
 		url : contextRoot+'/visitor/loadMyPage.json',
 		datatype:'json',

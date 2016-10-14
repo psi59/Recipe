@@ -1,0 +1,15 @@
+{{#each data}}
+  <div class="rcp-recipe-ranking rcp-ranking-position">
+    <div class="col-sm-1">
+      <p class="rcp-ranking-num">{{rownum}}</p>
+    </div>          
+    <div class="col-sm-2">
+      <h5 class="rcp-ranking-recipeName">{{recipe.recipeName}}</h5>
+    </div>
+    <div class="col-sm-1"></div>
+    <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">{{countLike}}</div>
+    <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9">{{countScrap}}</div>
+    <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9"><p>{{recipe.hits}}</p></div>
+    <div class="col-sm-2 rcp-ranking-text-center rcp-rcnking-top-9"><p>{{totalPoint}}</p></div>   
+  </div>
+{{/each}}

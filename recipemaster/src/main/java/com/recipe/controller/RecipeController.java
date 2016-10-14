@@ -644,6 +644,7 @@ public class RecipeController {
 			}
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			result.put("status", "false");
 		}
 		return new Gson().toJson(result);

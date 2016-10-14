@@ -3,8 +3,7 @@ $(function(){
 	
 	var userInfo = getUserInfo();
 	
-	var profileImage = new Array();
-	profileImage[0] = new File([""], "");
+	var profileImage = new File([""], "");
 	
 	$('#userInfoEditBtn').on('click', function(event) {
 		event.preventDefault();
@@ -32,9 +31,9 @@ $(function(){
 		// which actually support image resizing, but fail to
 		// send Blob objects via XHR requests:
 	}).on('fileuploadadd', function (e, data) {
-		profileImage[0] = data.files[0];
+		profileImage = data.files[0];
 		$('.rcp-up-preview').html('');
-		$('.rcp-up-preview').append($('<img style="width: 111.44px; height:111.44px;" src="'+URL.createObjectURL(profileImage[0])+'">'));
+		$('.rcp-up-preview').append($('<img style="width: 111.44px; height:111.44px;" src="'+URL.createObjectURL(profileImage)+'">'));
 	}).on('fileuploaddone', function (e, data) {
 		if (data.result.status == 'pwdFail'){
 			$('#beforePwd-div').removeClass().addClass("rcp-mar rcp-info form-group form-group-md has-error has-feedback");
